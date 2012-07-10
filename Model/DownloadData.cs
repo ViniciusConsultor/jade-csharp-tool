@@ -22,6 +22,8 @@ namespace HFBBS.Model
             _source = "";
             _createtime = "";
             _other = "";
+            _keywords = "";
+            _subtitle = "";
         }
       
 
@@ -31,7 +33,7 @@ namespace HFBBS.Model
         public DownloadData(string url)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
+            strSql.Append("select ID,TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish,SubTitle,Keywords ");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where Url=@Url ");
             OleDbParameter[] parameters = {
@@ -48,6 +50,14 @@ namespace HFBBS.Model
                 if (ds.Tables[0].Rows[0]["TaskId"] != null && ds.Tables[0].Rows[0]["TaskId"].ToString() != "")
                 {
                     this.TaskId = int.Parse(ds.Tables[0].Rows[0]["TaskId"].ToString());
+                } 
+                if (ds.Tables[0].Rows[0]["SubTitle"] != null && ds.Tables[0].Rows[0]["SubTitle"].ToString() != "")
+                {
+                    this.SubTitle = ds.Tables[0].Rows[0]["SubTitle"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
+                {
+                    this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["Title"] != null && ds.Tables[0].Rows[0]["Title"].ToString() != "")
                 {

@@ -54,14 +54,7 @@ namespace HFBBS
                 if (editForm == null || editForm.IsDisposed)
                 {
                     editForm = new ContentEditForm();
-                    MainForm.AddDock(editForm, DockState.Document);
                 }
-
-                if (editForm.DockPanel == null)
-                {
-                    MainForm.AddDock(editForm, DockState.Document);
-                }
-
                 return editForm;
             }
         }

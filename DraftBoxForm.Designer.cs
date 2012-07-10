@@ -85,6 +85,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 47);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(921, 399);
             this.dataGridView1.TabIndex = 3;
@@ -96,6 +97,7 @@
             this.IsPublish.FalseValue = "0";
             this.IsPublish.HeaderText = "已发";
             this.IsPublish.Name = "IsPublish";
+            this.IsPublish.ReadOnly = true;
             this.IsPublish.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.IsPublish.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.IsPublish.TrueValue = "1";
@@ -107,13 +109,15 @@
             this.Title.DataPropertyName = "Title";
             this.Title.HeaderText = "标题";
             this.Title.Name = "Title";
-            this.Title.Width = 51;
+            this.Title.ReadOnly = true;
+            this.Title.Width = 54;
             // 
             // Content
             // 
             this.Content.DataPropertyName = "Content";
             this.Content.HeaderText = "内容";
             this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
             this.Content.Width = 200;
             // 
             // Summary
@@ -121,24 +125,28 @@
             this.Summary.DataPropertyName = "Summary";
             this.Summary.HeaderText = "摘要";
             this.Summary.Name = "Summary";
+            this.Summary.ReadOnly = true;
             // 
             // Source
             // 
             this.Source.DataPropertyName = "Source";
             this.Source.HeaderText = "来源";
             this.Source.Name = "Source";
+            this.Source.ReadOnly = true;
             // 
             // CreateTime
             // 
             this.CreateTime.DataPropertyName = "CreateTime";
             this.CreateTime.HeaderText = "时间";
             this.CreateTime.Name = "CreateTime";
+            this.CreateTime.ReadOnly = true;
             // 
             // Url
             // 
             this.Url.DataPropertyName = "Url";
             this.Url.HeaderText = "网址";
             this.Url.Name = "Url";
+            this.Url.ReadOnly = true;
             this.Url.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Url.Width = 200;

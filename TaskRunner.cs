@@ -171,7 +171,12 @@ namespace HFBBS
                         case "Source":
                             data.Source = result;
                             break;
-
+                        case "SubTitle":
+                            data.SubTitle = result;
+                            break;
+                        case "Keywords":
+                            data.Keywords = result;
+                            break;
                     }
                     //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                 }

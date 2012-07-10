@@ -25,6 +25,26 @@ namespace HFBBS.Model
         private string _url;
         private bool _isdownload;
         private bool _ispublish;
+        private string _subtitle;
+        private string _keywords;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SubTitle
+        {
+            set { _subtitle = value; }
+            get { return _subtitle; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Keywords
+        {
+            set { _keywords = value; }
+            get { return _keywords; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -124,7 +144,7 @@ namespace HFBBS.Model
         public DownloadData(int ID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
+            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where ID=@ID ");
             OleDbParameter[] parameters = {
@@ -145,6 +165,14 @@ namespace HFBBS.Model
                 if (ds.Tables[0].Rows[0]["Title"] != null && ds.Tables[0].Rows[0]["Title"].ToString() != "")
                 {
                     this.Title = ds.Tables[0].Rows[0]["Title"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["SubTitle"] != null && ds.Tables[0].Rows[0]["SubTitle"].ToString() != "")
+                {
+                    this.SubTitle = ds.Tables[0].Rows[0]["SubTitle"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
+                {
+                    this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["Content"] != null && ds.Tables[0].Rows[0]["Content"].ToString() != "")
                 {
@@ -218,12 +246,14 @@ namespace HFBBS.Model
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into [DownloadData] (");
-            strSql.Append("TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish)");
+            strSql.Append("TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish)");
             strSql.Append(" values (");
-            strSql.Append("@TaskId,@Title,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@IsDownload,@IsPublish)");
+            strSql.Append("@TaskId,@Title,@SubTitle,@Keywords,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@IsDownload,@IsPublish)");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@TaskId", OleDbType.Integer,4),
 					new OleDbParameter("@Title", OleDbType.VarChar,0),
+					new OleDbParameter("@SubTitle", OleDbType.VarChar,0),
+					new OleDbParameter("@Keywords", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
 					new OleDbParameter("@Summary", OleDbType.VarChar,0),
 					new OleDbParameter("@Source", OleDbType.VarChar,0),
@@ -234,14 +264,16 @@ namespace HFBBS.Model
 					new OleDbParameter("@IsPublish", OleDbType.Boolean,1)};
             parameters[0].Value = TaskId;
             parameters[1].Value = Title;
-            parameters[2].Value = Content;
-            parameters[3].Value = Summary;
-            parameters[4].Value = Source;
-            parameters[5].Value = CreateTime;
-            parameters[6].Value = Other;
-            parameters[7].Value = Url;
-            parameters[8].Value = IsDownload;
-            parameters[9].Value = IsPublish;
+            parameters[2].Value = SubTitle;
+            parameters[3].Value = Keywords;
+            parameters[4].Value = Content;
+            parameters[5].Value = Summary;
+            parameters[6].Value = Source;
+            parameters[7].Value = CreateTime;
+            parameters[8].Value = Other;
+            parameters[9].Value = Url;
+            parameters[10].Value = IsDownload;
+            parameters[11].Value = IsPublish;
 
             DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -254,6 +286,8 @@ namespace HFBBS.Model
             strSql.Append("update [DownloadData] set ");
             strSql.Append("TaskId=@TaskId,");
             strSql.Append("Title=@Title,");
+            strSql.Append("SubTitle=@SubTitle,");
+            strSql.Append("Keywords=@Keywords,");
             strSql.Append("Content=@Content,");
             strSql.Append("Summary=@Summary,");
             strSql.Append("Source=@Source,");
@@ -266,6 +300,8 @@ namespace HFBBS.Model
             OleDbParameter[] parameters = {
 					new OleDbParameter("@TaskId", OleDbType.Integer,4),
 					new OleDbParameter("@Title", OleDbType.VarChar,0),
+					new OleDbParameter("@SubTitle", OleDbType.VarChar,0),
+					new OleDbParameter("@Keywords", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
 					new OleDbParameter("@Summary", OleDbType.VarChar,0),
 					new OleDbParameter("@Source", OleDbType.VarChar,0),
@@ -277,15 +313,17 @@ namespace HFBBS.Model
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
             parameters[0].Value = TaskId;
             parameters[1].Value = Title;
-            parameters[2].Value = Content;
-            parameters[3].Value = Summary;
-            parameters[4].Value = Source;
-            parameters[5].Value = CreateTime;
-            parameters[6].Value = Other;
-            parameters[7].Value = Url;
-            parameters[8].Value = IsDownload;
-            parameters[9].Value = IsPublish;
-            parameters[10].Value = ID;
+            parameters[2].Value = SubTitle;
+            parameters[3].Value = Keywords;
+            parameters[4].Value = Content;
+            parameters[5].Value = Summary;
+            parameters[6].Value = Source;
+            parameters[7].Value = CreateTime;
+            parameters[8].Value = Other;
+            parameters[9].Value = Url;
+            parameters[10].Value = IsDownload;
+            parameters[11].Value = IsPublish;
+            parameters[12].Value = ID;
 
             int rows = DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -328,7 +366,7 @@ namespace HFBBS.Model
         public void GetModel(int ID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
+            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where ID=@ID ");
             OleDbParameter[] parameters = {
@@ -349,6 +387,14 @@ namespace HFBBS.Model
                 if (ds.Tables[0].Rows[0]["Title"] != null && ds.Tables[0].Rows[0]["Title"].ToString() != "")
                 {
                     this.Title = ds.Tables[0].Rows[0]["Title"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["SubTitle"] != null && ds.Tables[0].Rows[0]["SubTitle"].ToString() != "")
+                {
+                    this.SubTitle = ds.Tables[0].Rows[0]["SubTitle"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
+                {
+                    this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["Content"] != null && ds.Tables[0].Rows[0]["Content"].ToString() != "")
                 {

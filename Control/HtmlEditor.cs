@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Threading;
 
 namespace HFBBS
 {
@@ -36,6 +37,8 @@ namespace HFBBS
 
         #region 扩展属性
 
+        bool isLoad = false;
+
         /// <summary>
         /// 获取和设置当前的Html文本
         /// </summary>
@@ -49,6 +52,19 @@ namespace HFBBS
             {
                 //webBrowserBody.DocumentText = value.Replace("\r\n", "<br>");
                 webBrowserBody.Document.InvokeScript("InitPages", new string[] { value });
+            }
+        }
+
+        public string Html
+        {
+            get
+            {
+                return webBrowserBody.Document.InvokeScript("GetHtml").ToString();
+            }
+            set
+            {
+                var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
+                webBrowserBody.Document.InvokeScript("InitPages", new string[] { html });
             }
         }
 
@@ -506,8 +522,6 @@ namespace HFBBS
         private void btnInsetPage_Click(object sender, EventArgs e)
         {
             this.webBrowserBody.Document.InvokeScript("addPage");
-            webBrowserBody.Document.InvokeScript("InitPages", new string[] { "hello world！" });
-
         }
     }
 }

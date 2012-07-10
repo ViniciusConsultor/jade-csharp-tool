@@ -34,29 +34,29 @@ namespace HFBBS
             this.toolStripToolBar = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBoxName = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparatorFont = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparatorFormat = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparatorAlign = new System.Windows.Forms.ToolStripSeparator();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.设为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设为XXXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonColor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorFont = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonNumbers = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBullets = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOutdent = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonIndent = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorFormat = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonLeft = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCenter = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRight = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonFull = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorAlign = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonLine = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
-            this.webBrowserBody = new System.Windows.Forms.WebBrowser();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.设为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设为XXXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.toolStripToolBar.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -109,41 +109,6 @@ namespace HFBBS
             this.toolStripComboBoxSize.Size = new System.Drawing.Size(75, 25);
             this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSize_SelectedIndexChanged);
             // 
-            // toolStripSeparatorFont
-            // 
-            this.toolStripSeparatorFont.Name = "toolStripSeparatorFont";
-            this.toolStripSeparatorFont.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparatorFormat
-            // 
-            this.toolStripSeparatorFormat.Name = "toolStripSeparatorFormat";
-            this.toolStripSeparatorFormat.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparatorAlign
-            // 
-            this.toolStripSeparatorAlign.Name = "toolStripSeparatorAlign";
-            this.toolStripSeparatorAlign.Size = new System.Drawing.Size(6, 25);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设为ToolStripMenuItem,
-            this.设为XXXToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
-            // 
-            // 设为ToolStripMenuItem
-            // 
-            this.设为ToolStripMenuItem.Name = "设为ToolStripMenuItem";
-            this.设为ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.设为ToolStripMenuItem.Text = "设为";
-            // 
-            // 设为XXXToolStripMenuItem
-            // 
-            this.设为XXXToolStripMenuItem.Name = "设为XXXToolStripMenuItem";
-            this.设为XXXToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.设为XXXToolStripMenuItem.Text = "设为XXX";
-            // 
             // toolStripButtonBold
             // 
             this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -183,6 +148,11 @@ namespace HFBBS
             this.toolStripButtonColor.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonColor.Text = "Font Color";
             this.toolStripButtonColor.Click += new System.EventHandler(this.toolStripButtonColor_Click);
+            // 
+            // toolStripSeparatorFont
+            // 
+            this.toolStripSeparatorFont.Name = "toolStripSeparatorFont";
+            this.toolStripSeparatorFont.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButtonNumbers
             // 
@@ -224,6 +194,11 @@ namespace HFBBS
             this.toolStripButtonIndent.Text = "Increase Indentation";
             this.toolStripButtonIndent.Click += new System.EventHandler(this.toolStripButtonIndent_Click);
             // 
+            // toolStripSeparatorFormat
+            // 
+            this.toolStripSeparatorFormat.Name = "toolStripSeparatorFormat";
+            this.toolStripSeparatorFormat.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonLeft
             // 
             this.toolStripButtonLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -263,6 +238,11 @@ namespace HFBBS
             this.toolStripButtonFull.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonFull.Text = "Justify";
             this.toolStripButtonFull.Click += new System.EventHandler(this.toolStripButtonFull_Click);
+            // 
+            // toolStripSeparatorAlign
+            // 
+            this.toolStripSeparatorAlign.Name = "toolStripSeparatorAlign";
+            this.toolStripSeparatorAlign.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButtonLine
             // 
@@ -304,15 +284,35 @@ namespace HFBBS
             this.btnInsetPage.Text = "插入分页";
             this.btnInsetPage.Click += new System.EventHandler(this.btnInsetPage_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.设为ToolStripMenuItem,
+            this.设为XXXToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
+            // 
+            // 设为ToolStripMenuItem
+            // 
+            this.设为ToolStripMenuItem.Name = "设为ToolStripMenuItem";
+            this.设为ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.设为ToolStripMenuItem.Text = "设为";
+            // 
+            // 设为XXXToolStripMenuItem
+            // 
+            this.设为XXXToolStripMenuItem.Name = "设为XXXToolStripMenuItem";
+            this.设为XXXToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.设为XXXToolStripMenuItem.Text = "设为XXX";
+            // 
             // webBrowserBody
             // 
             this.webBrowserBody.AllowWebBrowserDrop = false;
-            this.webBrowserBody.ContextMenuStrip = this.contextMenuStrip1;
             this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
             this.webBrowserBody.Location = new System.Drawing.Point(0, 25);
             this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserBody.Name = "webBrowserBody";
+            this.webBrowserBody.ScriptErrorsSuppressed = true;
             this.webBrowserBody.Size = new System.Drawing.Size(600, 425);
             this.webBrowserBody.TabIndex = 0;
             this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
@@ -336,7 +336,7 @@ namespace HFBBS
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStripToolBar;
-        private System.Windows.Forms.WebBrowser webBrowserBody;
+        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser webBrowserBody;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxName;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxSize;
         private System.Windows.Forms.ToolStripButton toolStripButtonBold;

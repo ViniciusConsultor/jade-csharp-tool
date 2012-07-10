@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using HFBBS.Model;
 using System.Security.Permissions;
+using System.Threading;
 
 namespace HFBBS
 {
@@ -26,13 +27,13 @@ namespace HFBBS
         }
 
         public void InitDownloadData(DownloadData data)
-        {
+        {       
             this.txtContent.Text = data.Content;
         }
 
         private void ContentEditForm_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

@@ -573,6 +573,11 @@ namespace HFBBS
 
             CurrentItemRule = CurrentSiteRule.ItemRules.SingleOrDefault(r => r.ItemName == tabTitle.SelectedTab.Text);
 
+            if (CurrentItemRule == null)
+            {
+                CurrentItemRule = new ItemRule { };
+            }
+
             this.InitializeItemRuleDetail(CurrentItemRule);
         }
 

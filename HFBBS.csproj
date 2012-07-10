@@ -72,11 +72,15 @@
     <Compile Include="CategoryForm.Designer.cs">
       <DependentUpon>CategoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContentEditForm.cs" />
+    <Compile Include="ContentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ContentEditForm.Designer.cs">
       <DependentUpon>ContentEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContentManageForm.cs" />
+    <Compile Include="ContentManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ContentManageForm.Designer.cs">
       <DependentUpon>ContentManageForm.cs</DependentUpon>
     </Compile>
@@ -86,10 +90,13 @@
     <Compile Include="Control\HtmlEditor.designer.cs">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="DraftBoxForm.cs" />
+    <Compile Include="DraftBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DraftBoxForm.Designer.cs">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IRemoteWebService.cs" />
     <Compile Include="IWorkingThread.cs" />
     <Compile Include="Model\DownloadData.part.cs" />
     <Compile Include="TaskWizardForm.cs">
@@ -98,7 +105,9 @@
     <Compile Include="TaskWizardForm.Designer.cs">
       <DependentUpon>TaskWizardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WelcomeForm.cs" />
+    <Compile Include="WelcomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
@@ -177,15 +186,21 @@
     <Compile Include="SiteRuleEditForm.Designer.cs">
       <DependentUpon>SiteRuleEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SiteRuleForm.cs" />
+    <Compile Include="SiteRuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SiteRuleForm.Designer.cs">
       <DependentUpon>SiteRuleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskQueqeForm.cs" />
+    <Compile Include="TaskQueqeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TaskQueqeForm.Designer.cs">
       <DependentUpon>TaskQueqeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskRunForm.cs" />
+    <Compile Include="TaskRunForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TaskRunForm.Designer.cs">
       <DependentUpon>TaskRunForm.cs</DependentUpon>
     </Compile>
