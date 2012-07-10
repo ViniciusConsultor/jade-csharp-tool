@@ -17,7 +17,7 @@ namespace HFBBS
             InitializeComponent();
             this.m_RowStyleNormal = new DataGridViewCellStyle();
             this.m_RowStyleNormal.BackColor = Color.LightBlue;
-            this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue;
+            this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue; CacheObject.ContentForm.InitDownloadData(new DownloadData());
 
             this.m_RowStyleAlternate = new DataGridViewCellStyle();
             this.m_RowStyleAlternate.BackColor = Color.LightGray;
@@ -34,7 +34,7 @@ namespace HFBBS
         private void DraftBoxForm_Load(object sender, EventArgs e)
         {
 
-
+            CacheObject.ContentForm.InitDownloadData(new DownloadData());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace HFBBS
         { 
             var dataTable = (DataTable)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(new DownloadData((int)dataTable.Rows[e.RowIndex]["ID"]));
-            CacheObject.ContentForm.Activate();
+            CacheObject.ContentForm.ShowDialog();
         }
 
         //定义两种行样式

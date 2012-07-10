@@ -28,6 +28,18 @@ namespace HFBBS.Model
                 XMLPathType = XMLPathType.InnerText,
                 XPath="//h1",
                 XMLPathSelectType = XMLPathSelectType.OnlyOne      
+                },  new ItemRule() {
+                CloumnName = "SubTitle",
+                ItemName="副标题",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XPath="",
+                },  new ItemRule() {
+                CloumnName = "Keywords",
+                ItemName="关键字",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XPath="",  
                 }, 
               new ItemRule() {
                 CloumnName = "Source",

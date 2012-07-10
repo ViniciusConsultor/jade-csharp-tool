@@ -165,6 +165,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabSetting.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -246,10 +248,10 @@
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.gbxHeaderPattern);
             this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(881, 524);
+            this.tabPage1.Size = new System.Drawing.Size(881, 523);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "第一步:设置采集网址";
             // 
@@ -699,10 +701,10 @@
             this.tabPage2.Controls.Add(this.tbxItemUrl);
             this.tabPage2.Controls.Add(this.lblItemUrl);
             this.tabPage2.Controls.Add(this.tabTitle);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(881, 524);
+            this.tabPage2.Size = new System.Drawing.Size(881, 523);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "第二步:设置采集内容";
             // 
@@ -781,6 +783,8 @@
             // tabTitle
             // 
             this.tabTitle.Controls.Add(this.tabPage4);
+            this.tabTitle.Controls.Add(this.tabPage8);
+            this.tabTitle.Controls.Add(this.tabPage9);
             this.tabTitle.Controls.Add(this.tabPage5);
             this.tabTitle.Controls.Add(this.tabTime);
             this.tabTitle.Controls.Add(this.tabSummary);
@@ -796,10 +800,10 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panelItemRule);
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(867, 193);
+            this.tabPage4.Size = new System.Drawing.Size(867, 192);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "标题";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -819,7 +823,7 @@
             this.panelItemRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemRule.Location = new System.Drawing.Point(3, 3);
             this.panelItemRule.Name = "panelItemRule";
-            this.panelItemRule.Size = new System.Drawing.Size(861, 187);
+            this.panelItemRule.Size = new System.Drawing.Size(861, 186);
             this.panelItemRule.TabIndex = 6;
             // 
             // groupBox5
@@ -1295,50 +1299,50 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 21);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(867, 193);
+            this.tabPage5.Size = new System.Drawing.Size(867, 192);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabTime
             // 
-            this.tabTime.Location = new System.Drawing.Point(4, 21);
+            this.tabTime.Location = new System.Drawing.Point(4, 22);
             this.tabTime.Name = "tabTime";
             this.tabTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTime.Size = new System.Drawing.Size(867, 193);
+            this.tabTime.Size = new System.Drawing.Size(867, 192);
             this.tabTime.TabIndex = 2;
             this.tabTime.Text = "时间";
             this.tabTime.UseVisualStyleBackColor = true;
             // 
             // tabSummary
             // 
-            this.tabSummary.Location = new System.Drawing.Point(4, 21);
+            this.tabSummary.Location = new System.Drawing.Point(4, 22);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(867, 193);
+            this.tabSummary.Size = new System.Drawing.Size(867, 192);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
             // 
             // tabContent
             // 
-            this.tabContent.Location = new System.Drawing.Point(4, 21);
+            this.tabContent.Location = new System.Drawing.Point(4, 22);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(867, 193);
+            this.tabContent.Size = new System.Drawing.Size(867, 192);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 21);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(867, 193);
+            this.tabPage6.Size = new System.Drawing.Size(867, 192);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1355,10 +1359,10 @@
             this.tabPage3.Controls.Add(this.chkIntervalTask);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(881, 524);
+            this.tabPage3.Size = new System.Drawing.Size(881, 523);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "第三步：采集任务执行设置";
             // 
@@ -1454,10 +1458,10 @@
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.groupBox6);
-            this.tabPage7.Location = new System.Drawing.Point(4, 21);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(881, 524);
+            this.tabPage7.Size = new System.Drawing.Size(881, 523);
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "网址设置";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1635,6 +1639,26 @@
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(867, 192);
+            this.tabPage8.TabIndex = 6;
+            this.tabPage8.Text = "副标题";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(867, 192);
+            this.tabPage9.TabIndex = 7;
+            this.tabPage9.Text = "关键字";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // SiteRuleEditForm
             // 
@@ -1835,5 +1859,7 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtInterval;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage9;
     }
 }

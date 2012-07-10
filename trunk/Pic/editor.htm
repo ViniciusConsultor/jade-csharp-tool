@@ -29,6 +29,7 @@
         {
             margin: 0px;
             padding: 0px;
+            text-indent: 28px;
         }
         .crarr
         {
@@ -125,7 +126,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         }
 
         function InitPages() {
-            alert(arguments[0]);
+            clear();
             $("#page1").find(".content").html(arguments[0]);
             for (var i = 1; i < arguments.length; i++) {
                 addPage(arguments[i]);
@@ -164,6 +165,32 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         onload = function () {
             bindEvent("#page1");
         };
+
+        // 插入分页
+        function insertPage() {
+            var range = document.selection.createRange();
+            var str1 = "{{pageBar}}";
+            range.pasteHTML(str1);
+
+            var html = currentPage.find(".content").html();
+            var fist = html.substr(0, html.indexOf(str1));
+            var second = html.replace(fist, "").replace(str1, "");
+            currentPage.find(".content").html(fist);
+
+            var template = $($("#template").html());
+            template.attr("id", "page" + pageInex);
+            template.find(".content").html(second);
+            template.after(currentPage);
+            window.scrollTo(0, template.scrollTop());
+            template.find(".content").click().focus();
+            bindEvent(template);
+            pageInex++;
+        }
+
+        function getSelectText() {
+            var range = document.selection.createRange();
+            return range.text;
+        }
 
     </script>
 </head>

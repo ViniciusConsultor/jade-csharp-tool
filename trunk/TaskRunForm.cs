@@ -19,6 +19,7 @@ namespace HFBBS
 
         public TaskRunForm(SiteRule rule)
         {
+            this.DoubleBuffered = true;
             Task = rule;
             InitializeComponent();
             this.Text = rule.Name + "[运行]";

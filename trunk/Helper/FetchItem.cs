@@ -76,8 +76,15 @@ namespace HFBBS
             this.PageEnd = rule.PageEnd;
             this.ReplaceString = rule.ReplaceString;
 
-            this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
-            this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            if (this.StartTag != null)
+            {
+                this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            if (this.endTags != null)
+            {
+                this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            }
         }
 
         public FetchItem(string itemName, string startTag, string endTag, bool isUseRegex, string regexText, bool trim, bool identifyPage, string pageStart, string pageEnd, List<HtmlTagType> htmlTagCleanerList, string replaceString)

@@ -53,11 +53,13 @@
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看代码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.lblStartUrlLog = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.stepContentUrl = new WizardBase.IntermediateStep();
+            this.button4 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.lblContentTips = new System.Windows.Forms.Label();
@@ -67,6 +69,7 @@
             this.radioHref = new System.Windows.Forms.RadioButton();
             this.radionInnerLinks = new System.Windows.Forms.RadioButton();
             this.txtUrlResult = new System.Windows.Forms.RichTextBox();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.stepTestUrl = new WizardBase.IntermediateStep();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.trvUrlTree = new System.Windows.Forms.TreeView();
@@ -75,6 +78,7 @@
             this.btnCopyUrlToClipboard = new System.Windows.Forms.Button();
             this.btnFetchUrl = new System.Windows.Forms.Button();
             this.stepItemRule = new WizardBase.IntermediateStep();
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.tabTitle = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panelItemRule = new System.Windows.Forms.Panel();
@@ -87,6 +91,7 @@
             this.chkIdentifyPage = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panelxPath = new System.Windows.Forms.Panel();
+            this.lblItemContentLog = new System.Windows.Forms.Label();
             this.lblItemLog = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioMulti = new System.Windows.Forms.RadioButton();
@@ -107,16 +112,13 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tbxItemUrl = new System.Windows.Forms.TextBox();
             this.lblItemUrl = new System.Windows.Forms.Label();
-            this.finish = new WizardBase.FinishStep();
-            this.button4 = new System.Windows.Forms.Button();
             this.intermediateStep1 = new WizardBase.IntermediateStep();
-            this.tbxResult = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.tbxResult = new System.Windows.Forms.TextBox();
+            this.finish = new WizardBase.FinishStep();
             this.label11 = new System.Windows.Forms.Label();
-            this.lblItemContentLog = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.start.SuspendLayout();
             this.stepTaskName.SuspendLayout();
             this.stepStartUrl.SuspendLayout();
@@ -133,8 +135,8 @@
             this.panelxPath.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.finish.SuspendLayout();
             this.intermediateStep1.SuspendLayout();
+            this.finish.SuspendLayout();
             this.SuspendLayout();
             // 
             // taskWizard
@@ -386,6 +388,15 @@
             this.查看代码ToolStripMenuItem.Text = "查看代码";
             this.查看代码ToolStripMenuItem.Click += new System.EventHandler(this.查看代码ToolStripMenuItem_Click);
             // 
+            // startUrlWebBrowser
+            // 
+            this.startUrlWebBrowser.Location = new System.Drawing.Point(9, 101);
+            this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.startUrlWebBrowser.Name = "startUrlWebBrowser";
+            this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(949, 306);
+            this.startUrlWebBrowser.TabIndex = 5;
+            // 
             // lblStartUrlLog
             // 
             this.lblStartUrlLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -443,6 +454,16 @@
             this.stepContentUrl.SubtitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.stepContentUrl.Title = "内容网址设置";
             this.stepContentUrl.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(623, 470);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 94;
+            this.button4.Text = "测试";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label8
             // 
@@ -531,6 +552,15 @@
             this.txtUrlResult.Size = new System.Drawing.Size(821, 65);
             this.txtUrlResult.TabIndex = 7;
             this.txtUrlResult.Text = "";
+            // 
+            // contentBrowser
+            // 
+            this.contentBrowser.Location = new System.Drawing.Point(3, 66);
+            this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.contentBrowser.Name = "contentBrowser";
+            this.contentBrowser.ScriptErrorsSuppressed = true;
+            this.contentBrowser.Size = new System.Drawing.Size(949, 372);
+            this.contentBrowser.TabIndex = 6;
             // 
             // stepTestUrl
             // 
@@ -630,12 +660,23 @@
             this.stepItemRule.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.stepItemRule.Click += new System.EventHandler(this.stepItemRule_Click);
             // 
+            // itemWebBrowser
+            // 
+            this.itemWebBrowser.Location = new System.Drawing.Point(5, 97);
+            this.itemWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.itemWebBrowser.Name = "itemWebBrowser";
+            this.itemWebBrowser.ScriptErrorsSuppressed = true;
+            this.itemWebBrowser.Size = new System.Drawing.Size(949, 300);
+            this.itemWebBrowser.TabIndex = 11;
+            // 
             // tabTitle
             // 
             this.tabTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabTitle.Controls.Add(this.tabPage4);
+            this.tabTitle.Controls.Add(this.tabPage1);
+            this.tabTitle.Controls.Add(this.tabPage2);
             this.tabTitle.Controls.Add(this.tabPage5);
             this.tabTitle.Controls.Add(this.tabTime);
             this.tabTitle.Controls.Add(this.tabSummary);
@@ -644,7 +685,7 @@
             this.tabTitle.Location = new System.Drawing.Point(6, 403);
             this.tabTitle.Name = "tabTitle";
             this.tabTitle.SelectedIndex = 0;
-            this.tabTitle.Size = new System.Drawing.Size(3814, 1888);
+            this.tabTitle.Size = new System.Drawing.Size(940, 173);
             this.tabTitle.TabIndex = 10;
             this.tabTitle.SelectedIndexChanged += new System.EventHandler(this.tabTitle_SelectedIndexChanged);
             // 
@@ -654,7 +695,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(3806, 1862);
+            this.tabPage4.Size = new System.Drawing.Size(932, 147);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "标题";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -667,7 +708,7 @@
             this.panelItemRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemRule.Location = new System.Drawing.Point(3, 3);
             this.panelItemRule.Name = "panelItemRule";
-            this.panelItemRule.Size = new System.Drawing.Size(3800, 1856);
+            this.panelItemRule.Size = new System.Drawing.Size(926, 141);
             this.panelItemRule.TabIndex = 6;
             // 
             // groupBox5
@@ -763,6 +804,15 @@
             this.panelxPath.Name = "panelxPath";
             this.panelxPath.Size = new System.Drawing.Size(854, 104);
             this.panelxPath.TabIndex = 6;
+            // 
+            // lblItemContentLog
+            // 
+            this.lblItemContentLog.AutoSize = true;
+            this.lblItemContentLog.Location = new System.Drawing.Point(489, 10);
+            this.lblItemContentLog.Name = "lblItemContentLog";
+            this.lblItemContentLog.Size = new System.Drawing.Size(17, 12);
+            this.lblItemContentLog.TabIndex = 98;
+            this.lblItemContentLog.Text = "  ";
             // 
             // lblItemLog
             // 
@@ -907,7 +957,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(3806, 1862);
+            this.tabPage5.Size = new System.Drawing.Size(932, 147);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -917,7 +967,7 @@
             this.tabTime.Location = new System.Drawing.Point(4, 22);
             this.tabTime.Name = "tabTime";
             this.tabTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTime.Size = new System.Drawing.Size(3806, 1862);
+            this.tabTime.Size = new System.Drawing.Size(932, 147);
             this.tabTime.TabIndex = 2;
             this.tabTime.Text = "时间";
             this.tabTime.UseVisualStyleBackColor = true;
@@ -927,7 +977,7 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 22);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(3806, 1862);
+            this.tabSummary.Size = new System.Drawing.Size(932, 147);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
@@ -937,7 +987,7 @@
             this.tabContent.Location = new System.Drawing.Point(4, 22);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(3806, 1862);
+            this.tabContent.Size = new System.Drawing.Size(932, 147);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
@@ -947,7 +997,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(3806, 1862);
+            this.tabPage6.Size = new System.Drawing.Size(932, 147);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -968,23 +1018,6 @@
             this.lblItemUrl.TabIndex = 7;
             this.lblItemUrl.Text = "测试地址：";
             // 
-            // finish
-            // 
-            this.finish.BackgroundImage = global::HFBBS.Properties.Resources.laboratory;
-            this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.finish.Controls.Add(this.label11);
-            this.finish.Name = "finish";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(623, 470);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 94;
-            this.button4.Text = "测试";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // intermediateStep1
             // 
             this.intermediateStep1.BindingImage = ((System.Drawing.Image)(resources.GetObject("intermediateStep1.BindingImage")));
@@ -995,6 +1028,16 @@
             this.intermediateStep1.SubtitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.intermediateStep1.Title = "采集结果预览";
             this.intermediateStep1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(874, 530);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "返回修改";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tbxResult
             // 
@@ -1007,42 +1050,12 @@
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             this.tbxResult.TextChanged += new System.EventHandler(this.tbxResult_TextChanged);
             // 
-            // button5
+            // finish
             // 
-            this.button5.Location = new System.Drawing.Point(874, 530);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "返回修改";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // startUrlWebBrowser
-            // 
-            this.startUrlWebBrowser.Location = new System.Drawing.Point(9, 101);
-            this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.startUrlWebBrowser.Name = "startUrlWebBrowser";
-            this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(949, 306);
-            this.startUrlWebBrowser.TabIndex = 5;
-            // 
-            // contentBrowser
-            // 
-            this.contentBrowser.Location = new System.Drawing.Point(3, 66);
-            this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.contentBrowser.Name = "contentBrowser";
-            this.contentBrowser.ScriptErrorsSuppressed = true;
-            this.contentBrowser.Size = new System.Drawing.Size(949, 372);
-            this.contentBrowser.TabIndex = 6;
-            // 
-            // itemWebBrowser
-            // 
-            this.itemWebBrowser.Location = new System.Drawing.Point(5, 97);
-            this.itemWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.itemWebBrowser.Name = "itemWebBrowser";
-            this.itemWebBrowser.ScriptErrorsSuppressed = true;
-            this.itemWebBrowser.Size = new System.Drawing.Size(949, 300);
-            this.itemWebBrowser.TabIndex = 11;
+            this.finish.BackgroundImage = global::HFBBS.Properties.Resources.laboratory;
+            this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.finish.Controls.Add(this.label11);
+            this.finish.Name = "finish";
             // 
             // label11
             // 
@@ -1054,14 +1067,23 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
             // 
-            // lblItemContentLog
+            // tabPage1
             // 
-            this.lblItemContentLog.AutoSize = true;
-            this.lblItemContentLog.Location = new System.Drawing.Point(489, 10);
-            this.lblItemContentLog.Name = "lblItemContentLog";
-            this.lblItemContentLog.Size = new System.Drawing.Size(17, 12);
-            this.lblItemContentLog.TabIndex = 98;
-            this.lblItemContentLog.Text = "  ";
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(932, 147);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "副标题";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(932, 147);
+            this.tabPage2.TabIndex = 7;
+            this.tabPage2.Text = "关键字";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // TaskWizardForm
             // 
@@ -1101,10 +1123,10 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.finish.ResumeLayout(false);
-            this.finish.PerformLayout();
             this.intermediateStep1.ResumeLayout(false);
             this.intermediateStep1.PerformLayout();
+            this.finish.ResumeLayout(false);
+            this.finish.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1198,5 +1220,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblItemContentLog;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
