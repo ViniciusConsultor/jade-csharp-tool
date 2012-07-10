@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HFBBS</RootNamespace>
+    <AssemblyName>HFBBS</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.3, Culture=neutral, PublicKeyToken=b9a4f3f02a87010f, processorArchitecture=MSIL" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Administrator\Desktop\samfisher83-HTML-Agility-xpath-finder-0834a9b\samfisher83-HTML-Agility-xpath-finder-0834a9b\Html_Agil_Xpath\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\DataSaver.cs" />
+    <Compile Include="BLL\RuleManager.cs" />
+    <Compile Include="CacheObject.cs" />
+    <Compile Include="CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentEditForm.cs" />
+    <Compile Include="ContentEditForm.Designer.cs">
+      <DependentUpon>ContentEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentManageForm.cs" />
+    <Compile Include="ContentManageForm.Designer.cs">
+      <DependentUpon>ContentManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\HtmlEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\HtmlEditor.designer.cs">
+      <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DraftBoxForm.cs" />
+    <Compile Include="DraftBoxForm.Designer.cs">
+      <DependentUpon>DraftBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IWorkingThread.cs" />
+    <Compile Include="Model\DownloadData.part.cs" />
+    <Compile Include="TaskWizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskWizardForm.Designer.cs">
+      <DependentUpon>TaskWizardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeForm.cs" />
+    <Compile Include="WelcomeForm.Designer.cs">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadService.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CookieChecker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CookieChecker.Designer.cs">
+      <DependentUpon>CookieChecker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SourceGetter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SourceGetter.Designer.cs">
+      <DependentUpon>SourceGetter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\URLBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\URLBuilder.Designer.cs">
+      <DependentUpon>URLBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\XmlPathSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\XmlPathSelector.Designer.cs">
+      <DependentUpon>XmlPathSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\AccessHelper.cs" />
+    <Compile Include="Helper\AutomaticTag.cs" />
+    <Compile Include="Helper\ExtensionMethods.cs" />
+    <Compile Include="Helper\ExtractUrl.cs" />
+    <Compile Include="Helper\FetchItem.cs" />
+    <Compile Include="Helper\HtmlPicker.cs" />
+    <Compile Include="Helper\HtmlTagCaching.cs" />
+    <Compile Include="Helper\HtmlTagProcessor.cs" />
+    <Compile Include="Helper\IPersistStreamInit.cs" />
+    <Compile Include="Helper\LogManager.cs" />
+    <Compile Include="Helper\NiceWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helper\RssPicker.cs" />
+    <Compile Include="Helper\UIItemBuilder.cs" />
+    <Compile Include="Helper\UrlPicker.cs" />
+    <Compile Include="Helper\Utility.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="ILogin.cs" />
+    <Compile Include="LoadingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingDialog.Designer.cs">
+      <DependentUpon>LoadingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\DownloadData.cs" />
+    <Compile Include="Model\KeyValue.cs" />
+    <Compile Include="Model\KeyValueContent.cs" />
+    <Compile Include="Model\SiteRule.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteRuleEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SiteRuleEditForm.Designer.cs">
+      <DependentUpon>SiteRuleEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SiteRuleForm.cs" />
+    <Compile Include="SiteRuleForm.Designer.cs">
+      <DependentUpon>SiteRuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskQueqeForm.cs" />
+    <Compile Include="TaskQueqeForm.Designer.cs">
+      <DependentUpon>TaskQueqeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunForm.cs" />
+    <Compile Include="TaskRunForm.Designer.cs">
+      <DependentUpon>TaskRunForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaskRunner.cs" />
+    <EmbeddedResource Include="CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentEditForm.resx">
+      <DependentUpon>ContentEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContentManageForm.resx">
+      <DependentUpon>ContentManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\HtmlEditor.resx">
+      <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DraftBoxForm.resx">
+      <DependentUpon>DraftBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskWizardForm.resx">
+      <DependentUpon>TaskWizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeForm.resx">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CookieChecker.resx">
+      <DependentUpon>CookieChecker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SourceGetter.resx">
+      <DependentUpon>SourceGetter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\URLBuilder.resx">
+      <DependentUpon>URLBuilder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\XmlPathSelector.resx">
+      <DependentUpon>XmlPathSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingDialog.resx">
+      <DependentUpon>LoadingDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SiteRuleEditForm.resx">
+      <DependentUpon>SiteRuleEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SiteRuleForm.resx">
+      <DependentUpon>SiteRuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskQueqeForm.resx">
+      <DependentUpon>TaskQueqeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunForm.resx">
+      <DependentUpon>TaskRunForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo按钮图标5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WizardBase\WizardBase.csproj">
+      <Project>{C742E00B-3933-4834-BC41-19848E1E3AF2}</Project>
+      <Name>WizardBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XDatabase.Core\XMLDatabase.Core.csproj">
+      <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
+      <Name>XMLDatabase.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988C62E-247F-471F-A183-DB509C7A3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DockDemo\Com.iFLYTEK.WinForms.csproj">
+      <Project>{EBD12217-9521-4D40-863B-33492637CFAF}</Project>
+      <Name>Com.iFLYTEK.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinFormsUI\WinFormsUI.csproj">
+      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Control\page.png" />
+    <Content Include="Control\picture.png" />
+    <Content Include="Encoding.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Pic\editor.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\laboratory.png" />
+    <None Include="Resources\select %281%29.png" />
+    <None Include="Resources\select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
