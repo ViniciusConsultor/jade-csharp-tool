@@ -521,7 +521,7 @@ namespace HFBBS
 
         private void btnInsetPage_Click(object sender, EventArgs e)
         {
-            this.webBrowserBody.Document.InvokeScript("addPage");
+            this.webBrowserBody.Document.InvokeScript("insertPage");
         }
     }
 }
