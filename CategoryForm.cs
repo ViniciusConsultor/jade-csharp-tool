@@ -45,7 +45,8 @@ namespace HFBBS
 
         private void CategoryForm_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = CurrentCategory.Name;
+            if (CurrentCategory != null)
+                this.textBox1.Text = CurrentCategory.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)

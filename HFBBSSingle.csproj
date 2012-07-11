@@ -329,6 +329,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Lib\Com.iFLYTEK.WinForms.dll" />
+    <Content Include="Lib\DevComponents.DotNetBar2.dll" />
+    <Content Include="Lib\HFBBS.DBUtility.dll" />
+    <Content Include="Lib\HtmlAgilityPack.dll" />
+    <Content Include="Lib\Interop.ADOX.dll" />
+    <Content Include="Lib\Interop.SHDocVw.dll" />
+    <Content Include="Lib\log4net.dll" />
+    <Content Include="Lib\UtilityLibrary.dll" />
+    <Content Include="Lib\WeifenLuo.WinFormsUI.Docking.dll" />
+    <Content Include="Lib\WizardBase.dll" />
+    <Content Include="Lib\XmlDatabase.Core.dll" />
     <Content Include="Pic\editor.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
