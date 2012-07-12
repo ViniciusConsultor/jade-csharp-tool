@@ -30,7 +30,6 @@ namespace HFBBS
             this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
             this.txt_news_template_file.DisplayMember = "DisplayName";
             this.txt_news_template_file.ValueMember = "Value";
-
             this.txt_tags.DataSource = RemoteWebService.Instance.GetSpecilTags();
             this.txt_tags.DisplayMember = "DisplayName";
             this.txt_tags.ValueMember = "Value";
@@ -75,11 +74,14 @@ namespace HFBBS
                 case "text4":
                     设为附加正文4ToolStripMenuItem_Click(null, null);
                     break;
+                case "text5":
+                    设为附加正文5ToolStripMenuItem_Click(null, null);
+                    break;
                 case "seoDescription":
                     设为SEO描述ToolStripMenuItem_Click(null, null);
                     break;
                 case "seoKeyword":
-                    添加为关键字ToolStripMenuItem_Click(null, null);
+                    toolStripMenuItem1_Click(null, null);
                     break;
                 case "keyword":
                     添加为关键字ToolStripMenuItem_Click(null, null);
@@ -111,6 +113,28 @@ namespace HFBBS
                 {
                     this.txt_news_template_file.Text = data.news_template_file;
                 }
+
+                this.txt_gfbm_id.Text = data.gfbm_id;
+                this.txt_gfbm_link.Text = data.gfbm_link;
+                this.txt_kfbm_link.Text = data.kfbm_link;
+                this.txt_kfbm_id.Text = data.kfbm_id;
+                this.txt_news_abs.Text = data.news_abs;
+                this.txt_news_description.Text = data.news_description;
+                this.txt_news_down.Text = data.news_down;
+                this.txt_news_guideimage.Text = data.news_guideimage;
+                this.txt_news_guideimage2.Text = data.news_guideimage2;
+                this.txt_news_left.Text = data.news_left;
+                this.txt_news_right.Text = data.news_right;
+                this.txt_news_top.Text = data.news_top;
+                this.txtCommentUrl.Text = data.comment_url;
+
+                this.chkISgfbm.Checked = data.ISgfbm;
+                this.chkISkfbm.Checked = data.ISkfbm;
+
+                this.panelkgbm.Visible = chkISkfbm.Checked;
+                this.panelgfbm.Visible = chkISgfbm.Checked;
+
+
             }
         }
 
@@ -125,6 +149,15 @@ namespace HFBBS
         }
 
         private void btnSave_Click(object sender, EventArgs e)
+        {
+            UpdateCurrentData();
+
+            CurrentData.Update();
+
+            MessageBox.Show("保存成功");
+        }
+
+        private void UpdateCurrentData()
         {
             CurrentData.Content = txtContent.Html;
             CurrentData.Summary = this.txt_row_news_abstract.Text;
@@ -155,9 +188,32 @@ namespace HFBBS
             CurrentData.cmspinglun =
                        this.chk_cmspinglun.Checked;
 
-            CurrentData.Update();
+            CurrentData.gfbm_id = this.txt_gfbm_id.Text;
+            CurrentData.gfbm_link = this.txt_gfbm_link.Text;
+            CurrentData.kfbm_link = this.txt_kfbm_link.Text;
+            CurrentData.kfbm_id = this.txt_kfbm_id.Text;
+            CurrentData.news_abs = this.txt_news_abs.Text;
+            CurrentData.news_description =
+           this.txt_news_description.Text;
+            CurrentData.news_down =
+           this.txt_news_down.Text;
+            CurrentData.news_guideimage =
+           this.txt_news_guideimage.Text;
+            CurrentData.news_guideimage2 =
+           this.txt_news_guideimage2.Text;
+            CurrentData.news_left =
+           this.txt_news_left.Text;
+            CurrentData.news_right =
+           this.txt_news_right.Text;
+            CurrentData.news_top =
+           this.txt_news_top.Text;
+            CurrentData.comment_url =
+           this.txtCommentUrl.Text;
 
-            MessageBox.Show("保存成功");
+            CurrentData.ISgfbm = this.chkISgfbm.Checked;
+            CurrentData.ISkfbm = this.chkISkfbm.Checked;
+
+
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -181,6 +237,8 @@ namespace HFBBS
 
         }
 
+        #region 编辑器菜单
+
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if (this.txtContent.SelectedText == null)
@@ -196,12 +254,20 @@ namespace HFBBS
 
         private void 添加为关键字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.txt_news_keywords.Text += "|" + this.txtContent.SelectedText;
+            if (this.txt_news_keywords.Text != "")
+                this.txt_news_keywords.Text += "|" + this.txtContent.SelectedText;
+            else
+                this.txt_news_keywords.Text = this.txtContent.SelectedText;
+            this.txt_news_keywords.Focus();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.txt_news_keyword2.Text += " " + this.txtContent.SelectedText;
+            if (this.txt_news_keyword2.Text != "")
+                this.txt_news_keyword2.Text += "#" + this.txtContent.SelectedText;
+            else
+                this.txt_news_keyword2.Text = this.txtContent.SelectedText;
+            this.txt_news_keyword2.Focus();
         }
 
         private void 设为标题ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,27 +278,45 @@ namespace HFBBS
         private void 设为副标题ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_subtitle.Text = this.txtContent.SelectedText;
+            this.txt_news_subtitle.Focus();
         }
 
         private void 设为SEO描述ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.txt_news_description.Text = this.txtContent.SelectedText;
+            this.tabControl1.SelectedIndex = 1;
+            this.txt_news_description.Focus();
         }
 
         private void 设为附件正文2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.txt_news_top.Text = this.txtContent.SelectedText;
+            this.tabControl1.SelectedIndex = 1;
+            this.txt_news_top.Focus();
         }
 
         private void 设为附加正文3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.txt_news_down.Text = this.txtContent.SelectedText;
+            this.tabControl1.SelectedIndex = 1;
+            this.txt_news_down.Focus();
         }
 
         private void 设为附加正文4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.txt_news_left.Text = this.txtContent.SelectedText;
+            this.tabControl1.SelectedIndex = 1;
+            this.txt_news_left.Focus();
         }
+
+        private void 设为附加正文5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.txt_news_right.Text = this.txtContent.SelectedText;
+            this.tabControl1.SelectedIndex = 1;
+            this.txt_news_right.Focus();
+        }
+
+        #endregion
 
         private void chkISkfbm_CheckedChanged(object sender, EventArgs e)
         {
@@ -243,6 +327,17 @@ namespace HFBBS
         {
             this.panelgfbm.Visible = chkISgfbm.Checked;
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            UpdateCurrentData();
+            CurrentData.IsPublish = true;
+            CurrentData.Update();
+            MessageBox.Show("送签发成功");
+            this.Close();
+        }
+
+
 
     }
 }

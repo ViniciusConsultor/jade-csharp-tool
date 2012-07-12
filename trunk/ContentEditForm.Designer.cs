@@ -62,7 +62,42 @@
             this.设为附件正文2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设为附加正文3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设为附加正文4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设为附加正文5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txt_news_right = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.txt_news_left = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_news_abs = new System.Windows.Forms.TextBox();
+            this.txt_news_guideimage2 = new System.Windows.Forms.TextBox();
+            this.txt_news_guideimage = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panelgfbm = new System.Windows.Forms.Panel();
+            this.txt_gfbm_link = new System.Windows.Forms.TextBox();
+            this.txt_gfbm_id = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.panelkgbm = new System.Windows.Forms.Panel();
+            this.txt_kfbm_link = new System.Windows.Forms.TextBox();
+            this.txt_kfbm_id = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.chkISgfbm = new System.Windows.Forms.CheckBox();
+            this.chkISkfbm = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.text_news_video = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtCommentUrl = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txt_news_down = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_news_top = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txt_news_description = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -75,47 +110,13 @@
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
             this.txtContent = new HFBBS.HtmlEditor();
-            this.txt_news_description = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txt_news_top = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txt_news_down = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtCommentUrl = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.text_news_video = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.chkISkfbm = new System.Windows.Forms.CheckBox();
-            this.chkISgfbm = new System.Windows.Forms.CheckBox();
-            this.panelkgbm = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txt_gfbm_id = new System.Windows.Forms.TextBox();
-            this.txt_kfbm_link = new System.Windows.Forms.TextBox();
-            this.panelgfbm = new System.Windows.Forms.Panel();
-            this.txt_gfbm_link = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txt_news_guideimage = new System.Windows.Forms.TextBox();
-            this.txt_news_guideimage2 = new System.Windows.Forms.TextBox();
-            this.txt_news_abs = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txt_news_left = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txt_news_right = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.panelkgbm.SuspendLayout();
             this.panelgfbm.SuspendLayout();
+            this.panelkgbm.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -350,9 +351,10 @@
             this.设为SEO描述ToolStripMenuItem,
             this.设为附件正文2ToolStripMenuItem,
             this.设为附加正文3ToolStripMenuItem,
-            this.设为附加正文4ToolStripMenuItem});
+            this.设为附加正文4ToolStripMenuItem,
+            this.设为附加正文5ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 202);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 224);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 设为ToolStripMenuItem
@@ -418,8 +420,16 @@
             this.设为附加正文4ToolStripMenuItem.Text = "设为附加正文4";
             this.设为附加正文4ToolStripMenuItem.Click += new System.EventHandler(this.设为附加正文4ToolStripMenuItem_Click);
             // 
+            // 设为附加正文5ToolStripMenuItem
+            // 
+            this.设为附加正文5ToolStripMenuItem.Name = "设为附加正文5ToolStripMenuItem";
+            this.设为附加正文5ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为附加正文5ToolStripMenuItem.Text = "设为附加正文5";
+            this.设为附加正文5ToolStripMenuItem.Click += new System.EventHandler(this.设为附加正文5ToolStripMenuItem_Click);
+            // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.txt_news_right);
             this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.txt_news_left);
@@ -453,6 +463,307 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "高级选项";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txt_news_right
+            // 
+            this.txt_news_right.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_right.Location = new System.Drawing.Point(74, 570);
+            this.txt_news_right.Multiline = true;
+            this.txt_news_right.Name = "txt_news_right";
+            this.txt_news_right.Size = new System.Drawing.Size(890, 99);
+            this.txt_news_right.TabIndex = 49;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(4, 613);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(65, 24);
+            this.label26.TabIndex = 48;
+            this.label26.Text = "附加正文5\r\n(正文右方)";
+            // 
+            // txt_news_left
+            // 
+            this.txt_news_left.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_left.Location = new System.Drawing.Point(75, 462);
+            this.txt_news_left.Multiline = true;
+            this.txt_news_left.Name = "txt_news_left";
+            this.txt_news_left.Size = new System.Drawing.Size(890, 99);
+            this.txt_news_left.TabIndex = 47;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(4, 503);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 24);
+            this.label25.TabIndex = 46;
+            this.label25.Text = "附加正文4\r\n(正文左方)";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(493, 115);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(71, 12);
+            this.label24.TabIndex = 45;
+            this.label24.Text = "导读图片2：";
+            // 
+            // txt_news_abs
+            // 
+            this.txt_news_abs.Location = new System.Drawing.Point(74, 87);
+            this.txt_news_abs.Name = "txt_news_abs";
+            this.txt_news_abs.Size = new System.Drawing.Size(400, 21);
+            this.txt_news_abs.TabIndex = 44;
+            // 
+            // txt_news_guideimage2
+            // 
+            this.txt_news_guideimage2.Location = new System.Drawing.Point(564, 112);
+            this.txt_news_guideimage2.Name = "txt_news_guideimage2";
+            this.txt_news_guideimage2.Size = new System.Drawing.Size(400, 21);
+            this.txt_news_guideimage2.TabIndex = 43;
+            // 
+            // txt_news_guideimage
+            // 
+            this.txt_news_guideimage.Location = new System.Drawing.Point(75, 115);
+            this.txt_news_guideimage.Name = "txt_news_guideimage";
+            this.txt_news_guideimage.Size = new System.Drawing.Size(400, 21);
+            this.txt_news_guideimage.TabIndex = 42;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(3, 118);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.TabIndex = 41;
+            this.label23.Text = "导读图片：";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(4, 95);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "跳转地址：";
+            // 
+            // panelgfbm
+            // 
+            this.panelgfbm.Controls.Add(this.txt_gfbm_link);
+            this.panelgfbm.Controls.Add(this.txt_gfbm_id);
+            this.panelgfbm.Controls.Add(this.label21);
+            this.panelgfbm.Controls.Add(this.label22);
+            this.panelgfbm.Location = new System.Drawing.Point(143, 35);
+            this.panelgfbm.Name = "panelgfbm";
+            this.panelgfbm.Size = new System.Drawing.Size(811, 26);
+            this.panelgfbm.TabIndex = 39;
+            // 
+            // txt_gfbm_link
+            // 
+            this.txt_gfbm_link.Location = new System.Drawing.Point(421, 1);
+            this.txt_gfbm_link.Name = "txt_gfbm_link";
+            this.txt_gfbm_link.Size = new System.Drawing.Size(335, 21);
+            this.txt_gfbm_link.TabIndex = 3;
+            // 
+            // txt_gfbm_id
+            // 
+            this.txt_gfbm_id.Location = new System.Drawing.Point(72, 1);
+            this.txt_gfbm_id.Name = "txt_gfbm_id";
+            this.txt_gfbm_id.Size = new System.Drawing.Size(259, 21);
+            this.txt_gfbm_id.TabIndex = 2;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(374, 5);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 12);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "链接：";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(10, 9);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "购房编号：";
+            // 
+            // panelkgbm
+            // 
+            this.panelkgbm.Controls.Add(this.txt_kfbm_link);
+            this.panelkgbm.Controls.Add(this.txt_kfbm_id);
+            this.panelkgbm.Controls.Add(this.label20);
+            this.panelkgbm.Controls.Add(this.label19);
+            this.panelkgbm.Location = new System.Drawing.Point(143, 11);
+            this.panelkgbm.Name = "panelkgbm";
+            this.panelkgbm.Size = new System.Drawing.Size(811, 26);
+            this.panelkgbm.TabIndex = 38;
+            // 
+            // txt_kfbm_link
+            // 
+            this.txt_kfbm_link.Location = new System.Drawing.Point(421, 1);
+            this.txt_kfbm_link.Name = "txt_kfbm_link";
+            this.txt_kfbm_link.Size = new System.Drawing.Size(335, 21);
+            this.txt_kfbm_link.TabIndex = 3;
+            // 
+            // txt_kfbm_id
+            // 
+            this.txt_kfbm_id.Location = new System.Drawing.Point(72, 1);
+            this.txt_kfbm_id.Name = "txt_kfbm_id";
+            this.txt_kfbm_id.Size = new System.Drawing.Size(259, 21);
+            this.txt_kfbm_id.TabIndex = 2;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(374, 5);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(41, 12);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "链接：";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(10, 6);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 12);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "看房编号：";
+            // 
+            // chkISgfbm
+            // 
+            this.chkISgfbm.AutoSize = true;
+            this.chkISgfbm.Location = new System.Drawing.Point(74, 39);
+            this.chkISgfbm.Name = "chkISgfbm";
+            this.chkISgfbm.Size = new System.Drawing.Size(72, 16);
+            this.chkISgfbm.TabIndex = 37;
+            this.chkISgfbm.Text = "购房报名";
+            this.chkISgfbm.UseVisualStyleBackColor = true;
+            this.chkISgfbm.CheckedChanged += new System.EventHandler(this.chkISgfbm_CheckedChanged);
+            // 
+            // chkISkfbm
+            // 
+            this.chkISkfbm.AutoSize = true;
+            this.chkISkfbm.Location = new System.Drawing.Point(74, 14);
+            this.chkISkfbm.Name = "chkISkfbm";
+            this.chkISkfbm.Size = new System.Drawing.Size(72, 16);
+            this.chkISkfbm.TabIndex = 36;
+            this.chkISkfbm.Text = "看房报名";
+            this.chkISkfbm.UseVisualStyleBackColor = true;
+            this.chkISkfbm.CheckedChanged += new System.EventHandler(this.chkISkfbm_CheckedChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 40);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 12);
+            this.label18.TabIndex = 35;
+            this.label18.Text = "购房报名：";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 14);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(65, 12);
+            this.label17.TabIndex = 34;
+            this.label17.Text = "看房报名：";
+            // 
+            // text_news_video
+            // 
+            this.text_news_video.Location = new System.Drawing.Point(564, 64);
+            this.text_news_video.Name = "text_news_video";
+            this.text_news_video.Size = new System.Drawing.Size(400, 21);
+            this.text_news_video.TabIndex = 33;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(493, 70);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 12);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "音频视频：";
+            // 
+            // txtCommentUrl
+            // 
+            this.txtCommentUrl.Location = new System.Drawing.Point(74, 63);
+            this.txtCommentUrl.Name = "txtCommentUrl";
+            this.txtCommentUrl.Size = new System.Drawing.Size(400, 21);
+            this.txtCommentUrl.TabIndex = 31;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 69);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "评论地址：";
+            // 
+            // txt_news_down
+            // 
+            this.txt_news_down.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_down.Location = new System.Drawing.Point(76, 357);
+            this.txt_news_down.Multiline = true;
+            this.txt_news_down.Name = "txt_news_down";
+            this.txt_news_down.Size = new System.Drawing.Size(890, 99);
+            this.txt_news_down.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 406);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 24);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "附加正文3\r\n正文下方";
+            // 
+            // txt_news_top
+            // 
+            this.txt_news_top.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_top.Location = new System.Drawing.Point(76, 244);
+            this.txt_news_top.Multiline = true;
+            this.txt_news_top.Name = "txt_news_top";
+            this.txt_news_top.Size = new System.Drawing.Size(890, 99);
+            this.txt_news_top.TabIndex = 27;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(8, 188);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 24);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "SEO描述 \r\n(150字)";
+            // 
+            // txt_news_description
+            // 
+            this.txt_news_description.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_description.Location = new System.Drawing.Point(76, 139);
+            this.txt_news_description.Multiline = true;
+            this.txt_news_description.Name = "txt_news_description";
+            this.txt_news_description.Size = new System.Drawing.Size(890, 96);
+            this.txt_news_description.TabIndex = 23;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(2, 321);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 24);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "附加正文2\r\n(正文上方)";
             // 
             // toolStrip1
             // 
@@ -512,6 +823,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(77, 36);
             this.toolStripButton2.Text = "送签发";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // textBox4
             // 
@@ -564,307 +876,6 @@
             this.txtContent.Size = new System.Drawing.Size(892, 450);
             this.txtContent.TabIndex = 0;
             // 
-            // txt_news_description
-            // 
-            this.txt_news_description.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_description.Location = new System.Drawing.Point(76, 139);
-            this.txt_news_description.Multiline = true;
-            this.txt_news_description.Name = "txt_news_description";
-            this.txt_news_description.Size = new System.Drawing.Size(890, 96);
-            this.txt_news_description.TabIndex = 23;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(2, 321);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 24);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "附加正文2\r\n(正文上方)";
-            // 
-            // txt_news_top
-            // 
-            this.txt_news_top.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_top.Location = new System.Drawing.Point(76, 244);
-            this.txt_news_top.Multiline = true;
-            this.txt_news_top.Name = "txt_news_top";
-            this.txt_news_top.Size = new System.Drawing.Size(890, 99);
-            this.txt_news_top.TabIndex = 27;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 188);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 24);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "SEO描述 \r\n(150字)";
-            // 
-            // txt_news_down
-            // 
-            this.txt_news_down.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_down.Location = new System.Drawing.Point(76, 357);
-            this.txt_news_down.Multiline = true;
-            this.txt_news_down.Name = "txt_news_down";
-            this.txt_news_down.Size = new System.Drawing.Size(890, 99);
-            this.txt_news_down.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 406);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(59, 24);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "附加正文3\r\n正文下方";
-            // 
-            // txtCommentUrl
-            // 
-            this.txtCommentUrl.Location = new System.Drawing.Point(74, 63);
-            this.txtCommentUrl.Name = "txtCommentUrl";
-            this.txtCommentUrl.Size = new System.Drawing.Size(400, 21);
-            this.txtCommentUrl.TabIndex = 31;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 69);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "评论地址：";
-            // 
-            // text_news_video
-            // 
-            this.text_news_video.Location = new System.Drawing.Point(564, 64);
-            this.text_news_video.Name = "text_news_video";
-            this.text_news_video.Size = new System.Drawing.Size(400, 21);
-            this.text_news_video.TabIndex = 33;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(493, 70);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(65, 12);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "音频视频：";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 14);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(65, 12);
-            this.label17.TabIndex = 34;
-            this.label17.Text = "看房报名：";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 40);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(65, 12);
-            this.label18.TabIndex = 35;
-            this.label18.Text = "购房报名：";
-            // 
-            // chkISkfbm
-            // 
-            this.chkISkfbm.AutoSize = true;
-            this.chkISkfbm.Location = new System.Drawing.Point(74, 14);
-            this.chkISkfbm.Name = "chkISkfbm";
-            this.chkISkfbm.Size = new System.Drawing.Size(72, 16);
-            this.chkISkfbm.TabIndex = 36;
-            this.chkISkfbm.Text = "看房报名";
-            this.chkISkfbm.UseVisualStyleBackColor = true;
-            this.chkISkfbm.CheckedChanged += new System.EventHandler(this.chkISkfbm_CheckedChanged);
-            // 
-            // chkISgfbm
-            // 
-            this.chkISgfbm.AutoSize = true;
-            this.chkISgfbm.Location = new System.Drawing.Point(74, 39);
-            this.chkISgfbm.Name = "chkISgfbm";
-            this.chkISgfbm.Size = new System.Drawing.Size(72, 16);
-            this.chkISgfbm.TabIndex = 37;
-            this.chkISgfbm.Text = "购房报名";
-            this.chkISgfbm.UseVisualStyleBackColor = true;
-            this.chkISgfbm.CheckedChanged += new System.EventHandler(this.chkISgfbm_CheckedChanged);
-            // 
-            // panelkgbm
-            // 
-            this.panelkgbm.Controls.Add(this.txt_kfbm_link);
-            this.panelkgbm.Controls.Add(this.txt_gfbm_id);
-            this.panelkgbm.Controls.Add(this.label20);
-            this.panelkgbm.Controls.Add(this.label19);
-            this.panelkgbm.Location = new System.Drawing.Point(143, 11);
-            this.panelkgbm.Name = "panelkgbm";
-            this.panelkgbm.Size = new System.Drawing.Size(811, 26);
-            this.panelkgbm.TabIndex = 38;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(10, 6);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(65, 12);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "看房编号：";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(374, 5);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(41, 12);
-            this.label20.TabIndex = 1;
-            this.label20.Text = "链接：";
-            // 
-            // txt_gfbm_id
-            // 
-            this.txt_gfbm_id.Location = new System.Drawing.Point(72, 1);
-            this.txt_gfbm_id.Name = "txt_gfbm_id";
-            this.txt_gfbm_id.Size = new System.Drawing.Size(259, 21);
-            this.txt_gfbm_id.TabIndex = 2;
-            // 
-            // txt_kfbm_link
-            // 
-            this.txt_kfbm_link.Location = new System.Drawing.Point(421, 1);
-            this.txt_kfbm_link.Name = "txt_kfbm_link";
-            this.txt_kfbm_link.Size = new System.Drawing.Size(335, 21);
-            this.txt_kfbm_link.TabIndex = 3;
-            // 
-            // panelgfbm
-            // 
-            this.panelgfbm.Controls.Add(this.txt_gfbm_link);
-            this.panelgfbm.Controls.Add(this.textBox10);
-            this.panelgfbm.Controls.Add(this.label21);
-            this.panelgfbm.Controls.Add(this.label22);
-            this.panelgfbm.Location = new System.Drawing.Point(143, 35);
-            this.panelgfbm.Name = "panelgfbm";
-            this.panelgfbm.Size = new System.Drawing.Size(811, 26);
-            this.panelgfbm.TabIndex = 39;
-            // 
-            // txt_gfbm_link
-            // 
-            this.txt_gfbm_link.Location = new System.Drawing.Point(421, 1);
-            this.txt_gfbm_link.Name = "txt_gfbm_link";
-            this.txt_gfbm_link.Size = new System.Drawing.Size(335, 21);
-            this.txt_gfbm_link.TabIndex = 3;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(72, 1);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(259, 21);
-            this.textBox10.TabIndex = 2;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(374, 5);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(41, 12);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "链接：";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 9);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(65, 12);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "购房编号：";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(4, 95);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "跳转地址：";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(3, 118);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(65, 12);
-            this.label23.TabIndex = 41;
-            this.label23.Text = "导读图片：";
-            // 
-            // txt_news_guideimage
-            // 
-            this.txt_news_guideimage.Location = new System.Drawing.Point(75, 115);
-            this.txt_news_guideimage.Name = "txt_news_guideimage";
-            this.txt_news_guideimage.Size = new System.Drawing.Size(400, 21);
-            this.txt_news_guideimage.TabIndex = 42;
-            // 
-            // txt_news_guideimage2
-            // 
-            this.txt_news_guideimage2.Location = new System.Drawing.Point(564, 112);
-            this.txt_news_guideimage2.Name = "txt_news_guideimage2";
-            this.txt_news_guideimage2.Size = new System.Drawing.Size(400, 21);
-            this.txt_news_guideimage2.TabIndex = 43;
-            // 
-            // txt_news_abs
-            // 
-            this.txt_news_abs.Location = new System.Drawing.Point(74, 87);
-            this.txt_news_abs.Name = "txt_news_abs";
-            this.txt_news_abs.Size = new System.Drawing.Size(400, 21);
-            this.txt_news_abs.TabIndex = 44;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(493, 115);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(71, 12);
-            this.label24.TabIndex = 45;
-            this.label24.Text = "导读图片2：";
-            // 
-            // txt_news_left
-            // 
-            this.txt_news_left.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_left.Location = new System.Drawing.Point(75, 462);
-            this.txt_news_left.Multiline = true;
-            this.txt_news_left.Name = "txt_news_left";
-            this.txt_news_left.Size = new System.Drawing.Size(890, 99);
-            this.txt_news_left.TabIndex = 47;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(4, 503);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 24);
-            this.label25.TabIndex = 46;
-            this.label25.Text = "附加正文4\r\n(正文左方)";
-            // 
-            // txt_news_right
-            // 
-            this.txt_news_right.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_right.Location = new System.Drawing.Point(74, 570);
-            this.txt_news_right.Multiline = true;
-            this.txt_news_right.Name = "txt_news_right";
-            this.txt_news_right.Size = new System.Drawing.Size(890, 99);
-            this.txt_news_right.TabIndex = 49;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(4, 613);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(65, 24);
-            this.label26.TabIndex = 48;
-            this.label26.Text = "附加正文5\r\n(正文右方)";
-            // 
             // ContentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -883,12 +894,12 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.panelkgbm.ResumeLayout(false);
-            this.panelkgbm.PerformLayout();
             this.panelgfbm.ResumeLayout(false);
             this.panelgfbm.PerformLayout();
+            this.panelkgbm.ResumeLayout(false);
+            this.panelkgbm.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -957,12 +968,12 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panelkgbm;
         private System.Windows.Forms.TextBox txt_kfbm_link;
-        private System.Windows.Forms.TextBox txt_gfbm_id;
+        private System.Windows.Forms.TextBox txt_kfbm_id;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panelgfbm;
         private System.Windows.Forms.TextBox txt_gfbm_link;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox txt_gfbm_id;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txt_news_abs;
@@ -975,5 +986,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox txt_news_left;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ToolStripMenuItem 设为附加正文5ToolStripMenuItem;
     }
 }

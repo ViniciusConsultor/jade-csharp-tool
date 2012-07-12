@@ -52,7 +52,7 @@ namespace HFBBS.Helper
                         kfbm_id text,
                         kfbm_link text,
                         ISgfbm bit,
-                        gfbm_id bit,
+                        gfbm_id text,
                         gfbm_link text,
                         news_abs text,
                         Content text,
