@@ -237,6 +237,12 @@ namespace HFBBS
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
             //É¾³ý½Å±¾  
             Htmlstring = Regex.Replace(Htmlstring, html2TextPattern, "", options);
+
+            if (!Htmlstring.ToLower().Contains("<p>"))
+            {
+                Htmlstring = "<P>" + Htmlstring + "</P>";
+            }
+
             return Htmlstring;
         }
 

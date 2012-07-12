@@ -29,11 +29,43 @@
         {
             margin: 0px;
             padding: 0px;
-            text-indent: 28px;
+            text-indent: 14px;
         }
         .crarr
         {
             font-size: 12px;
+        }
+        
+        #menu
+        {
+            border: 1px solid #ACA976;
+            background-color: #EBE8D7;
+            color: #369;
+            min-width: 50px;
+            min-height: 40px;
+            width: 100px;
+            height: 40px;
+            padding: 0px;
+            display: none;
+        }
+        #menu ul, li
+        {
+            list-style: none;
+            display: block;
+            padding: 2px;
+            margin: 0px;
+        }
+        
+        #menu a
+        {
+            color: #369;
+            font-size: 12px;
+        }
+        
+        #menu a:hover
+        {
+            color: red;
+            background-color: #F8F8F8;
         }
         @media print
         {
@@ -104,7 +136,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                     if ($(page).attr("id") != "page1" && $(this).text() == "") {
                         deleteCurrentPage();
                         return false;
-                    } else if (getCaretPos(currentPage.find(".content")[0]) == 0) {
+                    } else if ($(page).attr("id") != "page1" && getCaretPos(currentPage.find(".content")[0]) == 0) {
                         deleteCurrentPage();
                         return false;
                     }
@@ -186,7 +218,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             else if (element.selectionStart || element.selectionStart == '0')
                 CaretPos = element.selectionStart;
             return CaretPos;
-        }  
+        }
         // 插入分页
         function insertPage() {
             if (!currentPage)
@@ -221,16 +253,23 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             return range.text;
         }
 
+        $(function () {
+            $("#menu a").click(function () {
+                window.external.NotifyMenuClick($(this).attr("name"));
+                $("#menu").hide();
+            });
+        });
+
     </script>
 </head>
 <body data="" type="webword">
     <div id="template" style="display: none">
         <hr class="noprint" color="rgb(128,128,128)" />
-        <center class="center" unselectable="on"  class="editorContainer">
+        <center class="center" unselectable="on" class="editorContainer">
             <div class="editor" style="background-color: #ffffcc; zoom: 1; font-size: 10.5pt;
                 text-align: left; background-color: white; white-space: normal; word-break: break-all;
-                word-wrap: break-word; width: 90%; min-height:10cm;height:10cm; padding-top: 30px; padding-right: 30px;
-                padding-bottom: 30px; padding-left: 30px;">
+                word-wrap: break-word; width: 90%; min-height: 10cm; height: 10cm; padding-top: 30px;
+                padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
                 <div class="content" contenteditable="true" style="padding: 2px; border: dotted 2px #cccccc;
                     width: 100%; height: 100%;">
                     <p style="padding: 0px; margin: 0px;">
@@ -239,15 +278,25 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             </div>
         </center>
     </div>
-    <div id="menu" style="display: none">
-        <a href="javascript:void(0);">设为内容</a>
+    <div id="menu">
+        <ul>
+            <li><a href="javascript:void(0);" name="summary">设为摘要</a></li>
+            <li><a href="javascript:void(0);" name="title">设为标题</a></li>
+            <li><a href="javascript:void(0);" name="subtitle">设为副标题</a></li>
+            <li><a href="javascript:void(0);" name="text2">设为附加正文2</a></li>
+            <li><a href="javascript:void(0);" name="text3">设为附加正文3</a></li>
+            <li><a href="javascript:void(0);" name="text4">设为附加正文4</a></li>
+            <li><a href="javascript:void(0);" name="seoDescription">设为SEO描述</a></li>
+            <li><a href="javascript:void(0);" name="seoKeyword">添加为SEO关键词</a></li>
+            <li><a href="javascript:void(0);" name="keyword">添加为关键词</a></li>
+        </ul>
     </div>
     <div id="pages">
         <center class="center" unselectable="on" id="page1" class="editorContainer">
             <div class="editor" onpropertychange1="change(this)" style="font-family: ''; background-color: #ffffcc;
                 zoom: 1; font-size: 10.5pt; text-align: left; background-color: white; white-space: normal;
-                word-break: break-all; word-wrap: break-word; width: 90%; min-height:10cm;height:10cm; padding-top: 30px;
-                padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
+                word-break: break-all; word-wrap: break-word; width: 90%; min-height: 10cm; height: 10cm;
+                padding-top: 30px; padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
                 <div class="content" onresize1="showhr(this)" contenteditable="true" style="padding: 2px;
                     border: dotted 2px #cccccc; width: 100%; height: 100%;">
                     <p style="padding: 0px; margin: 0px;">

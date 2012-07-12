@@ -17,7 +17,7 @@ namespace HFBBS
         /// 获取稿源
         /// </summary>
         /// <returns></returns>
-        List<string> GetSource();
+        List<DisplayNameValuePair> GetSource();
 
         /// <summary>
         /// 获取模板
@@ -44,6 +44,7 @@ namespace HFBBS
         string news_template_file { get; set; }
 
         string news_title { get; set; }
+
         string news_sub_title { get; set; }
 
         string news_content { get; set; }
@@ -133,5 +134,56 @@ namespace HFBBS
         /// 跳转地址
         /// </summary>
         string news_abs { get; set; }
+    }
+
+    public class RemoteWebService : IRemoteWebService
+    {
+        static RemoteWebService instance;
+
+        /// <summary>
+        /// 唯一实例
+        /// </summary>
+        public static RemoteWebService Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new RemoteWebService();
+                }
+                return instance;
+            }
+        }
+
+        #region IRemoteWebService 成员
+
+        public List<DisplayNameValuePair> GetSpecilTags()
+        {
+            return new List<DisplayNameValuePair> { 
+               new DisplayNameValuePair(){ DisplayName="标签1",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="标签2",Value = "标签2"},  
+               new DisplayNameValuePair(){DisplayName="标签3",Value = "标签3"}
+            };
+        }
+
+        public List<DisplayNameValuePair> GetSource()
+        {
+            return new List<DisplayNameValuePair> { 
+               new DisplayNameValuePair(){ DisplayName="来源1",Value = "来源1"},
+               new DisplayNameValuePair(){DisplayName="来源2",Value = "来源2"},  
+               new DisplayNameValuePair(){DisplayName="来源3",Value = "来源3"}
+            };
+        }
+
+        public List<DisplayNameValuePair> GetTemplate()
+        {
+            return new List<DisplayNameValuePair> { 
+               new DisplayNameValuePair(){DisplayName="模板1",Value = "模板1"},
+               new DisplayNameValuePair(){DisplayName="模板2",Value = "模板2"},  
+               new DisplayNameValuePair(){DisplayName="模板3",Value = "模板3"}
+            };
+        }
+
+        #endregion
     }
 }

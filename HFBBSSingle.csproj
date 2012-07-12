@@ -87,6 +87,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="WHC.Pager.WinControl">
+      <HintPath>Lib\WHC.Pager.WinControl.dll</HintPath>
+    </Reference>
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WizardBase.dll</HintPath>

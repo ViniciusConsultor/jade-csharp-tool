@@ -53,12 +53,8 @@ namespace HFBBS
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.设为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设为XXXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.toolStripToolBar.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripToolBar
@@ -284,26 +280,6 @@ namespace HFBBS
             this.btnInsetPage.Text = "插入分页";
             this.btnInsetPage.Click += new System.EventHandler(this.btnInsetPage_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设为ToolStripMenuItem,
-            this.设为XXXToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
-            // 
-            // 设为ToolStripMenuItem
-            // 
-            this.设为ToolStripMenuItem.Name = "设为ToolStripMenuItem";
-            this.设为ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.设为ToolStripMenuItem.Text = "设为";
-            // 
-            // 设为XXXToolStripMenuItem
-            // 
-            this.设为XXXToolStripMenuItem.Name = "设为XXXToolStripMenuItem";
-            this.设为XXXToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.设为XXXToolStripMenuItem.Text = "设为XXX";
-            // 
             // webBrowserBody
             // 
             this.webBrowserBody.AllowWebBrowserDrop = false;
@@ -327,7 +303,6 @@ namespace HFBBS
             this.Size = new System.Drawing.Size(600, 450);
             this.toolStripToolBar.ResumeLayout(false);
             this.toolStripToolBar.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,9 +332,6 @@ namespace HFBBS
         private System.Windows.Forms.ToolStripButton toolStripButtonLine;
         private System.Windows.Forms.ToolStripButton toolStripButtonHyperlink;
         private System.Windows.Forms.ToolStripButton toolStripButtonPicture;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 设为ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 设为XXXToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnInsetPage;
     }
 }
