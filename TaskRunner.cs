@@ -31,8 +31,39 @@ namespace HFBBS
             get;
             set;
         }
+        RunningTask runningTaskModel;
+        public RunningTask RunningTaskModel
+        {
+            get
+            {
+                if (runningTaskModel == null)
+                {
+                    runningTaskModel = RunningTaskCollection.Instance.SingleOrDefault(r => r.TaskId == Rule.SiteRuleId);
+                } 
 
-        public RunningTask RunningTaskModel { get; set; }
+                if (runningTaskModel == null)
+                {
+                    runningTaskModel = new RunningTask
+                    {
+                        ContentCount = "0/0",
+                        UrlCount = "0/0",
+                        TaskId = Rule.SiteRuleId,
+                        TaskName = Rule.Name,
+                        Status = TaskStatus.运行中,
+                        StartTime = DateTime.Now,
+                        runner = this,
+                        Rule = Rule,
+                        EndTime = DateTime.MinValue
+                    };
+                    RunningTaskCollection.Instance.AddTask(this.runningTaskModel);
+                }
+                return runningTaskModel;
+            }
+            set
+            {
+                runningTaskModel = value;
+            }
+        }
 
         public string Status
         {
@@ -50,22 +81,37 @@ namespace HFBBS
             OldUrls = Model.DownloadData.GetUrlList(rule.SiteRuleId);
         }
 
+        /// <summary>
+        /// 停止
+        /// </summary>
+        public void Stop()
+        {
+            isForceStop = true;
+            this.RunningTaskModel.Status = TaskStatus.运行中;
+            this.RunningTaskModel.StartTime = DateTime.Now;
+            RunningTaskCollection.Instance.Update();
+
+            if (this.StateChange != null)
+            {
+                this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                {
+                    CurrentCount = 100,
+                    StepName = "采集完成",
+                    TotalCount = 100
+                }));
+            }
+
+        }
+
+        bool isForceStop = false;
+
         public void Start()
         {
             if (!isRunning)
             {
-                this.RunningTaskModel = new RunningTask
-                {
-                    ContentCount = "0/0",
-                    UrlCount = "0/0",
-                    TaskId = Rule.SiteRuleId,
-                    TaskName = Rule.Name,
-                    Status = TaskStatus.运行中,
-                    StartTime = DateTime.Now,
-                    EndTime = DateTime.MinValue
-                };
-
-                RunningTaskCollection.Instance.AddTask(this.RunningTaskModel);
+                this.RunningTaskModel.Status = TaskStatus.运行中;
+                this.RunningTaskModel.StartTime = DateTime.Now;
+                RunningTaskCollection.Instance.Update();
 
                 isRunning = true;
 
@@ -81,8 +127,16 @@ namespace HFBBS
                 this.RunningTaskModel.ContentCount = "0/" + urls.Count;
                 RunningTaskCollection.Instance.Update();
 
+                if (urls.Count > 0)
+                {
+                    DownloadDetail(urls);
+                }
+                else
+                {
+                    this.Logger.Error("没有采集到新网址，采集完成！");
+                }
 
-                DownloadDetail(urls);
+                this.RunningTaskModel.EndTime = DateTime.Now;
 
                 if (Rule.EnableAutoRun)
                 {
@@ -93,9 +147,20 @@ namespace HFBBS
                     this.RunningTaskModel.Status = TaskStatus.停止;
                 }
 
-                RunningTaskCollection.Instance.Update();
-                // 
+                if (this.StateChange != null)
+                {
+                    this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                    {
+                        CurrentCount = 100,
+                        StepName = "采集完成",
+                        TotalCount = 100
+                    }));
+                }
 
+                RunningTaskCollection.Instance.TaskFinish(RunningTaskModel);
+                // 
+                isRunning = false;
+                this.Logger.Success("采集完成");
             }
         }
 
@@ -104,97 +169,106 @@ namespace HFBBS
             var item = Rule;
             var total = urls.Count;
             var index = 0;
+
+            var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
+
             foreach (var url in urls)
             {
-
-                var html = HtmlPicker.VisitUrl(
-                                        url,
-                                         item.HttpMethod,
-                                                   null,
-                                                   string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                               string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                               string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
-                                               string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
-                                                   System.Text.Encoding.GetEncoding(item.Encoding));
-
-                var data = new DownloadData(url.AbsoluteUri);
-                data.IsDownload = true;
-                foreach (var itemRule in item.ItemRules)
+                if (!isForceStop)
                 {
-                    IFetcher fetcher = new FetchItem(itemRule);
-                    var result = fetcher.Fetch(html);
-                    if (result == null)
-                    {
-                        result = "";
-                    }
-                    switch (itemRule.CloumnName)
-                    {
-                        case "Title":
-                            data.Title = result;
-                            break;
-                        case "Summary":
-                            data.Summary = result;
-                            break;
-                        case "Other":
-                            data.Other = result;
-                            break;
-                        case "Content":
-                            // todo 分析图片
-                            if (itemRule.IsDownloadPic)
-                            {
-                                //
-                                var pics = UrlPicker.GetImagesUrls(ref result);
+                    var html = HtmlPicker.VisitUrl(
+                                            url,
+                                             item.HttpMethod,
+                                                       null,
+                                                       string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                                                   string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                   string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                   string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                                                       System.Text.Encoding.GetEncoding(item.Encoding));
 
-                                foreach (var key in pics)
+                    var data = new DownloadData(url.AbsoluteUri);
+                    data.IsDownload = true;
+                    foreach (var itemRule in item.ItemRules)
+                    {
+                        IFetcher fetcher = new FetchItem(itemRule);
+                        var result = fetcher.Fetch(html);
+                        if (result == null)
+                        {
+                            result = "";
+                        }
+                        switch (itemRule.CloumnName)
+                        {
+                            case "Title":
+                                data.Title = result;
+                                break;
+                            case "Summary":
+                                data.Summary = result;
+                                break;
+                            case "Other":
+                                data.Other = result;
+                                break;
+                            case "Content":
+                                // todo 分析图片
+                                if (itemRule.IsDownloadPic)
                                 {
-                                    if (!this.DownloadedPics.ContainsKey(key.Key))
+                                    //
+                                    var pics = UrlPicker.GetImagesUrls(ref result, taskImageDir);
+
+                                    foreach (var key in pics)
                                     {
-                                        this.DownloadedPics.Add(key.Key, key.Value);
-                                        DownloadFile file = new DownloadFile()
+                                        if (!this.DownloadedPics.ContainsKey(key.Key))
                                         {
-                                            TaskId = Rule.SiteRuleId,
-                                            FileName = key.Value,
-                                            Url = key.Key,
-                                            Progress = 0,
-                                            TotalSize = 0,
-                                            Number = DownloadFileCollection.Instance.GetDownloadFiles(Rule.SiteRuleId).Count + 1
-                                        };
-                                        DownloadFileCollection.Instance.AddFile(file);
+                                            this.DownloadedPics.Add(key.Key, key.Value);
+                                            DownloadFile file = new DownloadFile()
+                                            {
+                                                TaskId = Rule.SiteRuleId,
+                                                FileName = key.Value,
+                                                Url = key.Key,
+                                                Progress = 0,
+                                                TotalSize = 0,
+                                                Number = DownloadFileCollection.Instance.GetDownloadFiles(Rule.SiteRuleId).Count + 1
+                                            };
+                                            DownloadFileCollection.Instance.AddFile(file);
+                                        }
                                     }
                                 }
-                            }
-                            data.Content = result;
-                            break;
-                        case "Time":
-                            data.CreateTime = result;
-                            break;
-                        case "Source":
-                            data.Source = result;
-                            break;
-                        case "SubTitle":
-                            data.SubTitle = result;
-                            break;
-                        case "Keywords":
-                            data.Keywords = result;
-                            break;
+                                data.Content = result;
+                                break;
+                            case "Time":
+                                data.CreateTime = result;
+                                break;
+                            case "Source":
+                                data.Source = result;
+                                break;
+                            case "SubTitle":
+                                data.SubTitle = result;
+                                break;
+                            case "Keywords":
+                                data.Keywords = result;
+                                break;
+                        }
+                        //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                     }
-                    //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
-                }
-                DataSaver.Update(data);
-                Logger.Success("成功采集并更新数据到数据库【" + data.Title + "】");
-                index++;
+                    DataSaver.Update(data);
+                    Logger.Success("成功采集并更新数据到数据库【" + data.Title + "】");
+                    index++;
 
-                this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
-                RunningTaskCollection.Instance.Update();
+                    this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
+                    RunningTaskCollection.Instance.Update();
 
-                if (this.StateChange != null)
-                {
-                    this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                    if (this.StateChange != null)
                     {
-                        CurrentCount = index,
-                        StepName = "采集内容",
-                        TotalCount = total
-                    }));
+                        this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                        {
+                            CurrentCount = index,
+                            StepName = "采集内容",
+                            TotalCount = total
+                        }));
+                    }
+                }
+                else
+                {
+                    return;
                 }
             }
         }
@@ -210,32 +284,39 @@ namespace HFBBS
 
             while (true)
             {
-                if (i == startUrls.Length)
+                if (!isForceStop)
+                {
+                    if (i == startUrls.Length)
+                    {
+                        break;
+                    }
+                    Logger.Info("正在下载并分析1级第" + (i + 1) + "个网址" + startUrls[i]);
+                    var html = HtmlPicker.VisitUrl(new Uri(startUrls[i]),
+                                                       item.HttpMethod,
+                                                       null,
+                                                       string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                                                   string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                   string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                   string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                                                       System.Text.Encoding.GetEncoding(item.ListEncoding));
+                    SetExtractUrl(item, html, startUrls[i], item.ListEncoding, urls);
+                    i++;
+                    if (this.StateChange != null)
+                    {
+                        this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                        {
+                            CurrentCount = i,
+                            StepName = "采集网址",
+                            TotalCount = startUrls.Length
+                        }));
+                    }
+                    this.RunningTaskModel.UrlCount = i + "/" + startUrls.Length;
+                    RunningTaskCollection.Instance.Update();
+                }
+                else
                 {
                     break;
                 }
-                Logger.Info("正在下载并分析1级第" + (i + 1) + "个网址" + startUrls[i]);
-                var html = HtmlPicker.VisitUrl(new Uri(startUrls[i]),
-                                                   item.HttpMethod,
-                                                   null,
-                                                   string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                               string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                               string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
-                                               string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
-                                                   System.Text.Encoding.GetEncoding(item.ListEncoding));
-                SetExtractUrl(item, html, startUrls[i], item.ListEncoding, urls);
-                i++;
-                if (this.StateChange != null)
-                {
-                    this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
-                    {
-                        CurrentCount = i,
-                        StepName = "采集网址",
-                        TotalCount = startUrls.Length
-                    }));
-                }
-                this.RunningTaskModel.UrlCount = i + "/" + startUrls.Length;
-                RunningTaskCollection.Instance.Update();
             }
 
             var unFinisedUrls = Model.DownloadData.GetUnFetchedUrlList(Rule.SiteRuleId);

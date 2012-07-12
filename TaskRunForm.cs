@@ -15,7 +15,7 @@ namespace HFBBS
     {
         public SiteRule Task { get; set; }
 
-        TaskRunner taskRunner;
+        public TaskRunner taskRunner;
 
         public TaskRunForm(SiteRule rule)
         {
@@ -33,10 +33,18 @@ namespace HFBBS
         {
             this.lblStep.BeginInvoke(new MethodInvoker(() =>
             {
-                this.lblStep.Text = e.CurrentState.StepName;
-                this.lblProcess.Text = e.CurrentState.CurrentCount + "/" + e.CurrentState.TotalCount;
-                this.progressBar1.Maximum = e.CurrentState.TotalCount;
-                this.progressBar1.Value = e.CurrentState.CurrentCount;
+                if (e.CurrentState.StepName == "采集完成")
+                {
+                    this.TabText = Task.Name + "[采集完成]";
+                }
+                else
+                {
+                    this.TabText = Task.Name + "[" + e.CurrentState.StepName + "]";
+                    this.lblStep.Text = e.CurrentState.StepName;
+                    this.lblProcess.Text = e.CurrentState.CurrentCount + "/" + e.CurrentState.TotalCount;
+                    this.progressBar1.Maximum = e.CurrentState.TotalCount;
+                    this.progressBar1.Value = e.CurrentState.CurrentCount;
+                }
             }));
         }
 
@@ -98,10 +106,16 @@ namespace HFBBS
         private void TaskRunForm_Load(object sender, EventArgs e)
         {
             new Thread(taskRunner.Start).Start();
+            
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
+
+            source.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
+            this.dataGridView1.DataSource = source;
             DownloadFileCollection.Instance.OnChange += new Change(Instance_OnChange);
         }
+
+        BindingSource source = new BindingSource();
+
 
         void Instance_OnChange(object sender, EventArgs e)
         {
@@ -109,8 +123,8 @@ namespace HFBBS
             {
                 this.dataGridView1.BeginInvoke(new MethodInvoker(() =>
                 {
-                    this.dataGridView1.DataSource = null;
-                    this.dataGridView1.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
+                    source.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
+                    source.ResetBindings(false);
                 }));
             }
             catch

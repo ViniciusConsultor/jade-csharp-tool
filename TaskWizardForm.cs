@@ -45,6 +45,9 @@ namespace HFBBS
             this.txtRuleName.Text = row.Name;
             this.txtLinkXPath.Text = row.ListXPath;
 
+            this.chkIntervalTask.Checked = row.EnableAutoRun;
+            this.txtInterval.Text = row.AutoRunInterval.ToString();
+
             //this.tbxFetchStartSymbolic.Text = row.PageStartAt;
             //this.tbxFetchEndSymbolic.Text = row.PageEndAt;
 
@@ -272,6 +275,12 @@ namespace HFBBS
             }
 
             CurrentSiteRule.ForTestUrl = this.tbxItemUrl.Text;
+
+            CurrentSiteRule.EnableAutoRun = this.chkIntervalTask.Checked;
+            if (this.txtInterval.Text != "")
+            {
+                CurrentSiteRule.AutoRunInterval = int.Parse(this.txtInterval.Text);
+            }
         }
 
         public void UpdateItemRule()
@@ -580,6 +589,7 @@ namespace HFBBS
 
         private void taskWizard_FinishButtonClick(object sender, EventArgs e)
         {
+            UpdateSiteRule();
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -1203,5 +1213,25 @@ namespace HFBBS
         {
             this.taskWizard.CurrentStepIndex--;
         }
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.txtInterval.Text = "60";
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.txtInterval.Text = "720";
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.txtInterval.Text = (60 * 24).ToString();
+        }
+
+        private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.txtInterval.Text = (7 * 24 * 60).ToString();
+        }
+       
     }
 }

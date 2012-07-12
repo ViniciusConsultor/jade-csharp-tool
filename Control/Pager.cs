@@ -101,7 +101,7 @@ namespace HFBBS
         /// </summary>
         public void Bind()
         {
-           
+
             if (this.CurrentPageIndex > this.PageCount)
             {
                 this.CurrentPageIndex = this.PageCount;
@@ -111,29 +111,36 @@ namespace HFBBS
                 this.CurrentPageIndex = 1;
             }
             lblPageCount.Text = this.PageCount.ToString();
-            this.lblMaxPage.Text = "共"+this.TotalCount.ToString()+"条记录";
-            this.txtCurrentPage.Text = this.CurrentPageIndex.ToString();
+            this.bindingNavigatorCountItem.Text = "of " + PageCount;
+            this.lblMaxPage.Text = "共" + this.TotalCount.ToString() + "条记录";
+            this.bindingNavigatorPositionItem.Text = this.txtCurrentPage.Text = this.CurrentPageIndex.ToString();
 
             if (this.CurrentPageIndex == 1)
             {
                 this.btnPrev.Enabled = false;
                 this.btnFirst.Enabled = false;
+                this.bindingNavigatorMovePreviousItem.Enabled = false;
+                this.bindingNavigatorMoveFirstItem.Enabled = false;
             }
             else
             {
                 btnPrev.Enabled = true;
                 btnFirst.Enabled = true;
+                this.bindingNavigatorMovePreviousItem.Enabled = true;
+                this.bindingNavigatorMoveFirstItem.Enabled = true;
             }
 
             if (this.CurrentPageIndex == this.PageCount)
             {
                 this.btnLast.Enabled = false;
                 this.btnNext.Enabled = false;
+                this.bindingNavigatorMoveNextItem.Enabled = this.bindingNavigatorMoveLastItem.Enabled = false;
             }
             else
             {
                 btnLast.Enabled = true;
                 btnNext.Enabled = true;
+                this.bindingNavigatorMoveNextItem.Enabled = this.bindingNavigatorMoveLastItem.Enabled = true;
             }
 
             if (this.TotalCount == 0)
@@ -142,6 +149,9 @@ namespace HFBBS
                 btnLast.Enabled = false;
                 btnFirst.Enabled = false;
                 btnPrev.Enabled = false;
+                this.bindingNavigatorMovePreviousItem.Enabled = false;
+                this.bindingNavigatorMoveFirstItem.Enabled = false;
+                this.bindingNavigatorMoveNextItem.Enabled = this.bindingNavigatorMoveLastItem.Enabled = false;
             }
         }
 
@@ -196,7 +206,7 @@ namespace HFBBS
                 }
                 else
                 {
-                   MessageBox.Show("输入数字格式错误！");
+                    MessageBox.Show("输入数字格式错误！");
                 }
             }
         }
@@ -210,7 +220,7 @@ namespace HFBBS
         }
 
 
-        internal void InitPageInfo(int pageIndex,int totalCount, int currentPageSize)
+        internal void InitPageInfo(int pageIndex, int totalCount, int currentPageSize)
         {
             this.CurrentPageIndex = pageIndex;
             this.PageSize = currentPageSize;

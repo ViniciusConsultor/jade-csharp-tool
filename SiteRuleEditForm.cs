@@ -106,7 +106,11 @@ namespace HFBBS
             }
 
             CurrentSiteRule.ForTestUrl = this.tbxItemUrl.Text;
-
+            CurrentSiteRule.EnableAutoRun = this.chkIntervalTask.Checked;
+            if (this.txtInterval.Text != "")
+            {
+                CurrentSiteRule.AutoRunInterval = int.Parse(this.txtInterval.Text);
+            }
             //CurrentSiteRule.ItemRules.Clear();
 
             //siteRow.UrlTrim = this.getTrimString();
@@ -356,6 +360,8 @@ namespace HFBBS
 
                 this.tbxItemUrl.Text = row.ForTestUrl;
 
+                this.chkIntervalTask.Checked = row.EnableAutoRun;
+                this.txtInterval.Text = row.AutoRunInterval.ToString();
             }
 
         }

@@ -72,7 +72,7 @@ namespace HFBBS
 
         static List<string> AllowedExtensions = new List<string>() { ".gif", ".jpg", ".png", ".bmp" };
 
-        public static Dictionary<string, string> GetImagesUrls(ref string html)
+        public static Dictionary<string, string> GetImagesUrls(ref string html, string baseDir)
         {
             Dictionary<string, string> urlList = new Dictionary<string, string>();
 
@@ -110,7 +110,7 @@ namespace HFBBS
                     //}
                     //var localFile = Guid.NewGuid().ToString() + extension;
                     urlList.Add(src, fileName);
-                    html = html.Replace(match.Value, match.Value.Replace(match.Groups["src"].Value, fileName));
+                    html = html.Replace(match.Value, match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName));
                 }
             }
 
