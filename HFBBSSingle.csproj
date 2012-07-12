@@ -48,16 +48,6 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.ADOX, Version=6.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\Debug\Interop.ADOX.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.SHDocVw, Version=1.1.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\Debug\Interop.SHDocVw.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
@@ -86,9 +76,6 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.4547.36107, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
-    <Reference Include="WHC.Pager.WinControl">
-      <HintPath>Lib\WHC.Pager.WinControl.dll</HintPath>
     </Reference>
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,6 +113,12 @@
     </Compile>
     <Compile Include="Control\HtmlEditor.designer.cs">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Pager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\Pager.designer.cs">
+      <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
     <Compile Include="DraftBoxForm.cs">
       <SubType>Form</SubType>
@@ -254,6 +247,9 @@
     <EmbeddedResource Include="Control\HtmlEditor.resx">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Control\Pager.resx">
+      <DependentUpon>Pager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DraftBoxForm.resx">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -359,6 +355,26 @@
     <None Include="Resources\laboratory.png" />
     <None Include="Resources\select %281%29.png" />
     <None Include="Resources\select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

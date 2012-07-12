@@ -40,9 +40,9 @@
             this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Url = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.pager1 = new WHC.Pager.WinControl.Pager();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pager1 = new HFBBS.Pager();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -95,7 +95,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(921, 358);
+            this.dataGridView1.Size = new System.Drawing.Size(921, 363);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -159,18 +159,6 @@
             this.Url.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Url.Width = 200;
             // 
-            // pager1
-            // 
-            this.pager1.CurrentPageIndex = 1;
-            this.pager1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pager1.Location = new System.Drawing.Point(0, 411);
-            this.pager1.Name = "pager1";
-            this.pager1.RecordCount = 0;
-            this.pager1.Size = new System.Drawing.Size(921, 35);
-            this.pager1.TabIndex = 4;
-            this.pager1.PageChanged += new WHC.Pager.WinControl.PageChangedEventHandler(this.pager1_PageChanged);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -184,6 +172,18 @@
             this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.编辑ToolStripMenuItem.Text = "编辑";
             this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
+            // 
+            // pager1
+            // 
+            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pager1.Location = new System.Drawing.Point(0, 416);
+            this.pager1.Name = "pager1";
+            this.pager1.TotalCount = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.CurrentPageIndex = 0;
+            this.pager1.PageSize = 20;
+            this.pager1.Size = new System.Drawing.Size(921, 30);
+            this.pager1.TabIndex = 4;
             // 
             // DraftBoxForm
             // 
@@ -218,8 +218,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Source;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateTime;
         private System.Windows.Forms.DataGridViewLinkColumn Url;
-        private WHC.Pager.WinControl.Pager pager1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;
+        private Pager pager1;
     }
 }
