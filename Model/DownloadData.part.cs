@@ -159,6 +159,7 @@ namespace HFBBS.Model
             get { return _kfbm_id; }
             set { _kfbm_id = value; }
         }
+
         /// <summary>
         /// kfbm_link
         /// </summary>		
@@ -168,6 +169,7 @@ namespace HFBBS.Model
             get { return _kfbm_link; }
             set { _kfbm_link = value; }
         }
+
         /// <summary>
         /// ISgfbm
         /// </summary>		
@@ -177,11 +179,12 @@ namespace HFBBS.Model
             get { return _isgfbm; }
             set { _isgfbm = value; }
         }
+
         /// <summary>
         /// gfbm_id
         /// </summary>		
-        private bool _gfbm_id;
-        public bool gfbm_id
+        private string _gfbm_id = "";
+        public string gfbm_id
         {
             get { return _gfbm_id; }
             set { _gfbm_id = value; }
@@ -496,14 +499,7 @@ namespace HFBBS.Model
                 }
                 if (ds.Tables[0].Rows[0]["gfbm_id"] != null && ds.Tables[0].Rows[0]["gfbm_id"].ToString() != "")
                 {
-                    if ((ds.Tables[0].Rows[0]["gfbm_id"].ToString() == "1") || (ds.Tables[0].Rows[0]["gfbm_id"].ToString().ToLower() == "true"))
-                    {
-                        this.gfbm_id = true;
-                    }
-                    else
-                    {
-                        this.gfbm_id = false;
-                    }
+                    this.gfbm_id = ds.Tables[0].Rows[0]["gfbm_id"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["gfbm_link"] != null && ds.Tables[0].Rows[0]["gfbm_link"].ToString() != "")
                 {
@@ -613,7 +609,7 @@ namespace HFBBS.Model
 					new OleDbParameter("@kfbm_id", OleDbType.VarChar,0),
 					new OleDbParameter("@kfbm_link", OleDbType.VarChar,0),
 					new OleDbParameter("@ISgfbm", OleDbType.Boolean,1),
-					new OleDbParameter("@gfbm_id", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_id", OleDbType.VarChar,0),
 					new OleDbParameter("@gfbm_link", OleDbType.VarChar,0),
 					new OleDbParameter("@news_abs", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
@@ -730,7 +726,7 @@ namespace HFBBS.Model
 					new OleDbParameter("@kfbm_id", OleDbType.VarChar,0),
 					new OleDbParameter("@kfbm_link", OleDbType.VarChar,0),
 					new OleDbParameter("@ISgfbm", OleDbType.Boolean,1),
-					new OleDbParameter("@gfbm_id", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_id", OleDbType.VarChar,0),
 					new OleDbParameter("@gfbm_link", OleDbType.VarChar,0),
 					new OleDbParameter("@news_abs", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
@@ -960,14 +956,7 @@ namespace HFBBS.Model
                 }
                 if (ds.Tables[0].Rows[0]["gfbm_id"] != null && ds.Tables[0].Rows[0]["gfbm_id"].ToString() != "")
                 {
-                    if ((ds.Tables[0].Rows[0]["gfbm_id"].ToString() == "1") || (ds.Tables[0].Rows[0]["gfbm_id"].ToString().ToLower() == "true"))
-                    {
-                        this.gfbm_id = true;
-                    }
-                    else
-                    {
-                        this.gfbm_id = false;
-                    }
+                    this.gfbm_id = ds.Tables[0].Rows[0]["gfbm_id"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["gfbm_link"] != null && ds.Tables[0].Rows[0]["gfbm_link"].ToString() != "")
                 {
