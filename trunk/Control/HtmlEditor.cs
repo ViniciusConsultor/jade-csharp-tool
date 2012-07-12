@@ -26,6 +26,27 @@ namespace HFBBS
             InitializeComponent();
 
             InitializeControls();
+
+            this.Load += new EventHandler(HtmlEditor_Load);
+        }
+
+        public void SetScriptingForm(Form form)
+        {
+            webBrowserBody.ObjectForScripting = form;
+        }
+
+        public void NotifyMenuClick(string commad)
+        {
+            MessageBox.Show(commad);
+        }
+
+
+        void HtmlEditor_Load(object sender, EventArgs e)
+        {
+            if (this.ContextMenuStrip != null)
+            {
+                this.webBrowserBody.ContextMenuStrip = this.ContextMenuStrip;
+            }
         }
 
 
@@ -59,12 +80,36 @@ namespace HFBBS
         {
             get
             {
-                return webBrowserBody.Document.InvokeScript("GetHtml").ToString();
+                var value = webBrowserBody.Document.InvokeScript("GetHtml");
+                if (value == null)
+                {
+                    return "";
+                }
+                return value.ToString();
             }
             set
             {
-                var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
-                webBrowserBody.Document.InvokeScript("InitPages", new string[] { html });
+                if (value != null)
+                {
+                    var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
+                    webBrowserBody.Document.InvokeScript("InitPages", new string[] { html });
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取选择的文本
+        /// </summary>
+        public string SelectText
+        {
+            get
+            {
+                var value = webBrowserBody.Document.InvokeScript("getSelectText");
+                if (value == null)
+                {
+                    return "";
+                }
+                return value.ToString();
             }
         }
 

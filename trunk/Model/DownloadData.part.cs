@@ -13,127 +13,334 @@ namespace HFBBS.Model
     {
         public DownloadData()
         { }
+
         #region Model
+        /// <summary>
+        /// ID
+        /// </summary>		
         private int _id;
-        private int? _taskid;
-        private string _title;
-        private string _content;
-        private string _summary;
-        private string _source;
-        private string _createtime;
-        private string _other;
-        private string _url;
-        private bool _isdownload;
-        private bool _ispublish;
-        private string _subtitle;
-        private string _keywords;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SubTitle
-        {
-            set { _subtitle = value; }
-            get { return _subtitle; }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Keywords
-        {
-            set { _keywords = value; }
-            get { return _keywords; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public int ID
         {
-            set { _id = value; }
             get { return _id; }
+            set { _id = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
-        public int? TaskId
+        /// news_guideimage2
+        /// </summary>		
+        private string _news_guideimage2 = "";
+        public string news_guideimage2
         {
-            set { _taskid = value; }
+            get { return _news_guideimage2; }
+            set { _news_guideimage2 = value; }
+        }
+        /// <summary>
+        /// news_description
+        /// </summary>		
+        private string _news_description = "";
+        public string news_description
+        {
+            get { return _news_description; }
+            set { _news_description = value; }
+        }
+        /// <summary>
+        /// news_link
+        /// </summary>		
+        private string _news_link = "";
+        public string news_link
+        {
+            get { return _news_link; }
+            set { _news_link = value; }
+        }
+        /// <summary>
+        /// news_down
+        /// </summary>		
+        private string _news_down = "";
+        public string news_down
+        {
+            get { return _news_down; }
+            set { _news_down = value; }
+        }
+        /// <summary>
+        /// news_right
+        /// </summary>		
+        private string _news_right = "";
+        public string news_right
+        {
+            get { return _news_right; }
+            set { _news_right = value; }
+        }
+        /// <summary>
+        /// news_left
+        /// </summary>		
+        private string _news_left = "";
+        public string news_left
+        {
+            get { return _news_left; }
+            set { _news_left = value; }
+        }
+        /// <summary>
+        /// comment_url
+        /// </summary>		
+        private string _comment_url = "";
+        public string comment_url
+        {
+            get { return _comment_url; }
+            set { _comment_url = value; }
+        }
+        /// <summary>
+        /// news_video
+        /// </summary>		
+        private string _news_video = "";
+        public string news_video
+        {
+            get { return _news_video; }
+            set { _news_video = value; }
+        }
+        /// <summary>
+        /// news_keywords2
+        /// </summary>		
+        private string _news_keywords2 = "";
+        public string news_keywords2
+        {
+            get { return _news_keywords2; }
+            set { _news_keywords2 = value; }
+        }
+        /// <summary>
+        /// label_base
+        /// </summary>		
+        private string _label_base = "";
+        public string label_base
+        {
+            get { return _label_base; }
+            set { _label_base = value; }
+        }
+        /// <summary>
+        /// TaskId
+        /// </summary>		
+        private int _taskid;
+        public int TaskId
+        {
             get { return _taskid; }
+            set { _taskid = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
-        public string Title
+        /// cmspinglun
+        /// </summary>		
+        private bool _cmspinglun;
+        public bool cmspinglun
         {
-            set { _title = value; }
-            get { return _title; }
+            get { return _cmspinglun; }
+            set { _cmspinglun = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// bbspinglun
+        /// </summary>		
+        private bool _bbspinglun;
+        public bool bbspinglun
+        {
+            get { return _bbspinglun; }
+            set { _bbspinglun = value; }
+        }
+        /// <summary>
+        /// ISkfbm
+        /// </summary>		
+        private bool _iskfbm;
+        public bool ISkfbm
+        {
+            get { return _iskfbm; }
+            set { _iskfbm = value; }
+        }
+        /// <summary>
+        /// kfbm_id
+        /// </summary>		
+        private string _kfbm_id = "";
+        public string kfbm_id
+        {
+            get { return _kfbm_id; }
+            set { _kfbm_id = value; }
+        }
+        /// <summary>
+        /// kfbm_link
+        /// </summary>		
+        private string _kfbm_link = "";
+        public string kfbm_link
+        {
+            get { return _kfbm_link; }
+            set { _kfbm_link = value; }
+        }
+        /// <summary>
+        /// ISgfbm
+        /// </summary>		
+        private bool _isgfbm;
+        public bool ISgfbm
+        {
+            get { return _isgfbm; }
+            set { _isgfbm = value; }
+        }
+        /// <summary>
+        /// gfbm_id
+        /// </summary>		
+        private bool _gfbm_id;
+        public bool gfbm_id
+        {
+            get { return _gfbm_id; }
+            set { _gfbm_id = value; }
+        }
+        /// <summary>
+        /// gfbm_link
+        /// </summary>		
+        private string _gfbm_link = "";
+        public string gfbm_link
+        {
+            get { return _gfbm_link; }
+            set { _gfbm_link = value; }
+        }
+        /// <summary>
+        /// news_abs
+        /// </summary>		
+        private string _news_abs = "";
+        public string news_abs
+        {
+            get { return _news_abs; }
+            set { _news_abs = value; }
+        }
+        /// <summary>
+        /// Content
+        /// </summary>		
+        private string _content = "";
         public string Content
         {
-            set { _content = value; }
             get { return _content; }
+            set { _content = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// Title
+        /// </summary>		
+        private string _title = "";
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
+        /// <summary>
+        /// Summary
+        /// </summary>		
+        private string _summary = "";
         public string Summary
         {
-            set { _summary = value; }
             get { return _summary; }
+            set { _summary = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// Source
+        /// </summary>		
+        private string _source = "";
         public string Source
         {
-            set { _source = value; }
             get { return _source; }
+            set { _source = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// CreateTime
+        /// </summary>		
+        private string _createtime = "";
         public string CreateTime
         {
-            set { _createtime = value; }
             get { return _createtime; }
+            set { _createtime = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// Other
+        /// </summary>		
+        private string _other = "";
         public string Other
         {
-            set { _other = value; }
             get { return _other; }
+            set { _other = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// Url
+        /// </summary>		
+        private string _url = "";
         public string Url
         {
-            set { _url = value; }
             get { return _url; }
+            set { _url = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// IsDownload
+        /// </summary>		
+        private bool _isdownload;
         public bool IsDownload
         {
-            set { _isdownload = value; }
             get { return _isdownload; }
+            set { _isdownload = value; }
         }
         /// <summary>
-        /// 
-        /// </summary>
+        /// IsPublish
+        /// </summary>		
+        private bool _ispublish;
         public bool IsPublish
         {
-            set { _ispublish = value; }
             get { return _ispublish; }
+            set { _ispublish = value; }
         }
-        #endregion Model
+        /// <summary>
+        /// SubTitle
+        /// </summary>		
+        private string _subtitle = "";
+        public string SubTitle
+        {
+            get { return _subtitle; }
+            set { _subtitle = value; }
+        }
+        /// <summary>
+        /// Keywords
+        /// </summary>		
+        private string _keywords = "";
+        public string Keywords
+        {
+            get { return _keywords; }
+            set { _keywords = value; }
+        }
+        /// <summary>
+        /// news_source_name
+        /// </summary>		
+        private string _news_source_name = "";
+        public string news_source_name
+        {
+            get { return _news_source_name; }
+            set { _news_source_name = value; }
+        }
+        /// <summary>
+        /// news_template_file
+        /// </summary>		
+        private string _news_template_file = "";
+        public string news_template_file
+        {
+            get { return _news_template_file; }
+            set { _news_template_file = value; }
+        }
+        /// <summary>
+        /// news_top
+        /// </summary>		
+        private string _news_top = "";
+        public string news_top
+        {
+            get { return _news_top; }
+            set { _news_top = value; }
+        }
+        /// <summary>
+        /// news_guideimage
+        /// </summary>		
+        private string _news_guideimage = "";
+        public string news_guideimage
+        {
+            get { return _news_guideimage; }
+            set { _news_guideimage = value; }
+        }
+        #endregion
+
 
 
         #region  Method
@@ -144,7 +351,7 @@ namespace HFBBS.Model
         public DownloadData(int ID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
+            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where ID=@ID ");
             OleDbParameter[] parameters = {
@@ -152,6 +359,11 @@ namespace HFBBS.Model
             parameters[0].Value = ID;
 
             DataSet ds = DbHelperOleDb.Query(strSql.ToString(), parameters);
+            GetModelFromDataSet(ds);
+        }
+
+        private void GetModelFromDataSet(DataSet ds)
+        {
             if (ds.Tables[0].Rows.Count > 0)
             {
                 if (ds.Tables[0].Rows[0]["ID"] != null && ds.Tables[0].Rows[0]["ID"].ToString() != "")
@@ -173,6 +385,133 @@ namespace HFBBS.Model
                 if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
                 {
                     this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_source_name"] != null && ds.Tables[0].Rows[0]["news_source_name"].ToString() != "")
+                {
+                    this.news_source_name = ds.Tables[0].Rows[0]["news_source_name"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_template_file"] != null && ds.Tables[0].Rows[0]["news_template_file"].ToString() != "")
+                {
+                    this.news_template_file = ds.Tables[0].Rows[0]["news_template_file"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_top"] != null && ds.Tables[0].Rows[0]["news_top"].ToString() != "")
+                {
+                    this.news_top = ds.Tables[0].Rows[0]["news_top"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_guideimage"] != null && ds.Tables[0].Rows[0]["news_guideimage"].ToString() != "")
+                {
+                    this.news_guideimage = ds.Tables[0].Rows[0]["news_guideimage"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_guideimage2"] != null && ds.Tables[0].Rows[0]["news_guideimage2"].ToString() != "")
+                {
+                    this.news_guideimage2 = ds.Tables[0].Rows[0]["news_guideimage2"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_description"] != null && ds.Tables[0].Rows[0]["news_description"].ToString() != "")
+                {
+                    this.news_description = ds.Tables[0].Rows[0]["news_description"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_link"] != null && ds.Tables[0].Rows[0]["news_link"].ToString() != "")
+                {
+                    this.news_link = ds.Tables[0].Rows[0]["news_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_down"] != null && ds.Tables[0].Rows[0]["news_down"].ToString() != "")
+                {
+                    this.news_down = ds.Tables[0].Rows[0]["news_down"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_right"] != null && ds.Tables[0].Rows[0]["news_right"].ToString() != "")
+                {
+                    this.news_right = ds.Tables[0].Rows[0]["news_right"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_left"] != null && ds.Tables[0].Rows[0]["news_left"].ToString() != "")
+                {
+                    this.news_left = ds.Tables[0].Rows[0]["news_left"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["comment_url"] != null && ds.Tables[0].Rows[0]["comment_url"].ToString() != "")
+                {
+                    this.comment_url = ds.Tables[0].Rows[0]["comment_url"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_video"] != null && ds.Tables[0].Rows[0]["news_video"].ToString() != "")
+                {
+                    this.news_video = ds.Tables[0].Rows[0]["news_video"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_keywords2"] != null && ds.Tables[0].Rows[0]["news_keywords2"].ToString() != "")
+                {
+                    this.news_keywords2 = ds.Tables[0].Rows[0]["news_keywords2"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["label_base"] != null && ds.Tables[0].Rows[0]["label_base"].ToString() != "")
+                {
+                    this.label_base = ds.Tables[0].Rows[0]["label_base"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["cmspinglun"] != null && ds.Tables[0].Rows[0]["cmspinglun"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["cmspinglun"].ToString() == "1") || (ds.Tables[0].Rows[0]["cmspinglun"].ToString().ToLower() == "true"))
+                    {
+                        this.cmspinglun = true;
+                    }
+                    else
+                    {
+                        this.cmspinglun = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["bbspinglun"] != null && ds.Tables[0].Rows[0]["bbspinglun"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["bbspinglun"].ToString() == "1") || (ds.Tables[0].Rows[0]["bbspinglun"].ToString().ToLower() == "true"))
+                    {
+                        this.bbspinglun = true;
+                    }
+                    else
+                    {
+                        this.bbspinglun = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["ISkfbm"] != null && ds.Tables[0].Rows[0]["ISkfbm"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["ISkfbm"].ToString() == "1") || (ds.Tables[0].Rows[0]["ISkfbm"].ToString().ToLower() == "true"))
+                    {
+                        this.ISkfbm = true;
+                    }
+                    else
+                    {
+                        this.ISkfbm = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["kfbm_id"] != null && ds.Tables[0].Rows[0]["kfbm_id"].ToString() != "")
+                {
+                    this.kfbm_id = ds.Tables[0].Rows[0]["kfbm_id"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["kfbm_link"] != null && ds.Tables[0].Rows[0]["kfbm_link"].ToString() != "")
+                {
+                    this.kfbm_link = ds.Tables[0].Rows[0]["kfbm_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["ISgfbm"] != null && ds.Tables[0].Rows[0]["ISgfbm"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["ISgfbm"].ToString() == "1") || (ds.Tables[0].Rows[0]["ISgfbm"].ToString().ToLower() == "true"))
+                    {
+                        this.ISgfbm = true;
+                    }
+                    else
+                    {
+                        this.ISgfbm = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["gfbm_id"] != null && ds.Tables[0].Rows[0]["gfbm_id"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["gfbm_id"].ToString() == "1") || (ds.Tables[0].Rows[0]["gfbm_id"].ToString().ToLower() == "true"))
+                    {
+                        this.gfbm_id = true;
+                    }
+                    else
+                    {
+                        this.gfbm_id = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["gfbm_link"] != null && ds.Tables[0].Rows[0]["gfbm_link"].ToString() != "")
+                {
+                    this.gfbm_link = ds.Tables[0].Rows[0]["gfbm_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_abs"] != null && ds.Tables[0].Rows[0]["news_abs"].ToString() != "")
+                {
+                    this.news_abs = ds.Tables[0].Rows[0]["news_abs"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["Content"] != null && ds.Tables[0].Rows[0]["Content"].ToString() != "")
                 {
@@ -246,14 +585,37 @@ namespace HFBBS.Model
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into [DownloadData] (");
-            strSql.Append("TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish)");
+            strSql.Append("TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish)");
             strSql.Append(" values (");
-            strSql.Append("@TaskId,@Title,@SubTitle,@Keywords,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@IsDownload,@IsPublish)");
+            strSql.Append("@TaskId,@Title,@SubTitle,@Keywords,@news_source_name,@news_template_file,@news_top,@news_guideimage,@news_guideimage2,@news_description,@news_link,@news_down,@news_right,@news_left,@comment_url,@news_video,@news_keywords2,@label_base,@cmspinglun,@bbspinglun,@ISkfbm,@kfbm_id,@kfbm_link,@ISgfbm,@gfbm_id,@gfbm_link,@news_abs,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@IsDownload,@IsPublish)");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@TaskId", OleDbType.Integer,4),
 					new OleDbParameter("@Title", OleDbType.VarChar,0),
 					new OleDbParameter("@SubTitle", OleDbType.VarChar,0),
 					new OleDbParameter("@Keywords", OleDbType.VarChar,0),
+					new OleDbParameter("@news_source_name", OleDbType.VarChar,0),
+					new OleDbParameter("@news_template_file", OleDbType.VarChar,0),
+					new OleDbParameter("@news_top", OleDbType.VarChar,0),
+					new OleDbParameter("@news_guideimage", OleDbType.VarChar,0),
+					new OleDbParameter("@news_guideimage2", OleDbType.VarChar,0),
+					new OleDbParameter("@news_description", OleDbType.VarChar,0),
+					new OleDbParameter("@news_link", OleDbType.VarChar,0),
+					new OleDbParameter("@news_down", OleDbType.VarChar,0),
+					new OleDbParameter("@news_right", OleDbType.VarChar,0),
+					new OleDbParameter("@news_left", OleDbType.VarChar,0),
+					new OleDbParameter("@comment_url", OleDbType.VarChar,0),
+					new OleDbParameter("@news_video", OleDbType.VarChar,0),
+					new OleDbParameter("@news_keywords2", OleDbType.VarChar,0),
+					new OleDbParameter("@label_base", OleDbType.VarChar,0),
+					new OleDbParameter("@cmspinglun", OleDbType.Boolean,1),
+					new OleDbParameter("@bbspinglun", OleDbType.Boolean,1),
+					new OleDbParameter("@ISkfbm", OleDbType.Boolean,1),
+					new OleDbParameter("@kfbm_id", OleDbType.VarChar,0),
+					new OleDbParameter("@kfbm_link", OleDbType.VarChar,0),
+					new OleDbParameter("@ISgfbm", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_id", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_link", OleDbType.VarChar,0),
+					new OleDbParameter("@news_abs", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
 					new OleDbParameter("@Summary", OleDbType.VarChar,0),
 					new OleDbParameter("@Source", OleDbType.VarChar,0),
@@ -266,14 +628,37 @@ namespace HFBBS.Model
             parameters[1].Value = Title;
             parameters[2].Value = SubTitle;
             parameters[3].Value = Keywords;
-            parameters[4].Value = Content;
-            parameters[5].Value = Summary;
-            parameters[6].Value = Source;
-            parameters[7].Value = CreateTime;
-            parameters[8].Value = Other;
-            parameters[9].Value = Url;
-            parameters[10].Value = IsDownload;
-            parameters[11].Value = IsPublish;
+            parameters[4].Value = news_source_name;
+            parameters[5].Value = news_template_file;
+            parameters[6].Value = news_top;
+            parameters[7].Value = news_guideimage;
+            parameters[8].Value = news_guideimage2;
+            parameters[9].Value = news_description;
+            parameters[10].Value = news_link;
+            parameters[11].Value = news_down;
+            parameters[12].Value = news_right;
+            parameters[13].Value = news_left;
+            parameters[14].Value = comment_url;
+            parameters[15].Value = news_video;
+            parameters[16].Value = news_keywords2;
+            parameters[17].Value = label_base;
+            parameters[18].Value = cmspinglun;
+            parameters[19].Value = bbspinglun;
+            parameters[20].Value = ISkfbm;
+            parameters[21].Value = kfbm_id;
+            parameters[22].Value = kfbm_link;
+            parameters[23].Value = ISgfbm;
+            parameters[24].Value = gfbm_id;
+            parameters[25].Value = gfbm_link;
+            parameters[26].Value = news_abs;
+            parameters[27].Value = Content;
+            parameters[28].Value = Summary;
+            parameters[29].Value = Source;
+            parameters[30].Value = CreateTime;
+            parameters[31].Value = Other;
+            parameters[32].Value = Url;
+            parameters[33].Value = IsDownload;
+            parameters[34].Value = IsPublish;
 
             DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -288,6 +673,29 @@ namespace HFBBS.Model
             strSql.Append("Title=@Title,");
             strSql.Append("SubTitle=@SubTitle,");
             strSql.Append("Keywords=@Keywords,");
+            strSql.Append("news_source_name=@news_source_name,");
+            strSql.Append("news_template_file=@news_template_file,");
+            strSql.Append("news_top=@news_top,");
+            strSql.Append("news_guideimage=@news_guideimage,");
+            strSql.Append("news_guideimage2=@news_guideimage2,");
+            strSql.Append("news_description=@news_description,");
+            strSql.Append("news_link=@news_link,");
+            strSql.Append("news_down=@news_down,");
+            strSql.Append("news_right=@news_right,");
+            strSql.Append("news_left=@news_left,");
+            strSql.Append("comment_url=@comment_url,");
+            strSql.Append("news_video=@news_video,");
+            strSql.Append("news_keywords2=@news_keywords2,");
+            strSql.Append("label_base=@label_base,");
+            strSql.Append("cmspinglun=@cmspinglun,");
+            strSql.Append("bbspinglun=@bbspinglun,");
+            strSql.Append("ISkfbm=@ISkfbm,");
+            strSql.Append("kfbm_id=@kfbm_id,");
+            strSql.Append("kfbm_link=@kfbm_link,");
+            strSql.Append("ISgfbm=@ISgfbm,");
+            strSql.Append("gfbm_id=@gfbm_id,");
+            strSql.Append("gfbm_link=@gfbm_link,");
+            strSql.Append("news_abs=@news_abs,");
             strSql.Append("Content=@Content,");
             strSql.Append("Summary=@Summary,");
             strSql.Append("Source=@Source,");
@@ -302,6 +710,29 @@ namespace HFBBS.Model
 					new OleDbParameter("@Title", OleDbType.VarChar,0),
 					new OleDbParameter("@SubTitle", OleDbType.VarChar,0),
 					new OleDbParameter("@Keywords", OleDbType.VarChar,0),
+					new OleDbParameter("@news_source_name", OleDbType.VarChar,0),
+					new OleDbParameter("@news_template_file", OleDbType.VarChar,0),
+					new OleDbParameter("@news_top", OleDbType.VarChar,0),
+					new OleDbParameter("@news_guideimage", OleDbType.VarChar,0),
+					new OleDbParameter("@news_guideimage2", OleDbType.VarChar,0),
+					new OleDbParameter("@news_description", OleDbType.VarChar,0),
+					new OleDbParameter("@news_link", OleDbType.VarChar,0),
+					new OleDbParameter("@news_down", OleDbType.VarChar,0),
+					new OleDbParameter("@news_right", OleDbType.VarChar,0),
+					new OleDbParameter("@news_left", OleDbType.VarChar,0),
+					new OleDbParameter("@comment_url", OleDbType.VarChar,0),
+					new OleDbParameter("@news_video", OleDbType.VarChar,0),
+					new OleDbParameter("@news_keywords2", OleDbType.VarChar,0),
+					new OleDbParameter("@label_base", OleDbType.VarChar,0),
+					new OleDbParameter("@cmspinglun", OleDbType.Boolean,1),
+					new OleDbParameter("@bbspinglun", OleDbType.Boolean,1),
+					new OleDbParameter("@ISkfbm", OleDbType.Boolean,1),
+					new OleDbParameter("@kfbm_id", OleDbType.VarChar,0),
+					new OleDbParameter("@kfbm_link", OleDbType.VarChar,0),
+					new OleDbParameter("@ISgfbm", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_id", OleDbType.Boolean,1),
+					new OleDbParameter("@gfbm_link", OleDbType.VarChar,0),
+					new OleDbParameter("@news_abs", OleDbType.VarChar,0),
 					new OleDbParameter("@Content", OleDbType.VarChar,0),
 					new OleDbParameter("@Summary", OleDbType.VarChar,0),
 					new OleDbParameter("@Source", OleDbType.VarChar,0),
@@ -315,15 +746,38 @@ namespace HFBBS.Model
             parameters[1].Value = Title;
             parameters[2].Value = SubTitle;
             parameters[3].Value = Keywords;
-            parameters[4].Value = Content;
-            parameters[5].Value = Summary;
-            parameters[6].Value = Source;
-            parameters[7].Value = CreateTime;
-            parameters[8].Value = Other;
-            parameters[9].Value = Url;
-            parameters[10].Value = IsDownload;
-            parameters[11].Value = IsPublish;
-            parameters[12].Value = ID;
+            parameters[4].Value = news_source_name;
+            parameters[5].Value = news_template_file;
+            parameters[6].Value = news_top;
+            parameters[7].Value = news_guideimage;
+            parameters[8].Value = news_guideimage2;
+            parameters[9].Value = news_description;
+            parameters[10].Value = news_link;
+            parameters[11].Value = news_down;
+            parameters[12].Value = news_right;
+            parameters[13].Value = news_left;
+            parameters[14].Value = comment_url;
+            parameters[15].Value = news_video;
+            parameters[16].Value = news_keywords2;
+            parameters[17].Value = label_base;
+            parameters[18].Value = cmspinglun;
+            parameters[19].Value = bbspinglun;
+            parameters[20].Value = ISkfbm;
+            parameters[21].Value = kfbm_id;
+            parameters[22].Value = kfbm_link;
+            parameters[23].Value = ISgfbm;
+            parameters[24].Value = gfbm_id;
+            parameters[25].Value = gfbm_link;
+            parameters[26].Value = news_abs;
+            parameters[27].Value = Content;
+            parameters[28].Value = Summary;
+            parameters[29].Value = Source;
+            parameters[30].Value = CreateTime;
+            parameters[31].Value = Other;
+            parameters[32].Value = Url;
+            parameters[33].Value = IsDownload;
+            parameters[34].Value = IsPublish;
+            parameters[35].Value = ID;
 
             int rows = DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -366,7 +820,7 @@ namespace HFBBS.Model
         public void GetModel(int ID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
+            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish ");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where ID=@ID ");
             OleDbParameter[] parameters = {
@@ -395,6 +849,133 @@ namespace HFBBS.Model
                 if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
                 {
                     this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_source_name"] != null && ds.Tables[0].Rows[0]["news_source_name"].ToString() != "")
+                {
+                    this.news_source_name = ds.Tables[0].Rows[0]["news_source_name"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_template_file"] != null && ds.Tables[0].Rows[0]["news_template_file"].ToString() != "")
+                {
+                    this.news_template_file = ds.Tables[0].Rows[0]["news_template_file"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_top"] != null && ds.Tables[0].Rows[0]["news_top"].ToString() != "")
+                {
+                    this.news_top = ds.Tables[0].Rows[0]["news_top"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_guideimage"] != null && ds.Tables[0].Rows[0]["news_guideimage"].ToString() != "")
+                {
+                    this.news_guideimage = ds.Tables[0].Rows[0]["news_guideimage"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_guideimage2"] != null && ds.Tables[0].Rows[0]["news_guideimage2"].ToString() != "")
+                {
+                    this.news_guideimage2 = ds.Tables[0].Rows[0]["news_guideimage2"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_description"] != null && ds.Tables[0].Rows[0]["news_description"].ToString() != "")
+                {
+                    this.news_description = ds.Tables[0].Rows[0]["news_description"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_link"] != null && ds.Tables[0].Rows[0]["news_link"].ToString() != "")
+                {
+                    this.news_link = ds.Tables[0].Rows[0]["news_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_down"] != null && ds.Tables[0].Rows[0]["news_down"].ToString() != "")
+                {
+                    this.news_down = ds.Tables[0].Rows[0]["news_down"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_right"] != null && ds.Tables[0].Rows[0]["news_right"].ToString() != "")
+                {
+                    this.news_right = ds.Tables[0].Rows[0]["news_right"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_left"] != null && ds.Tables[0].Rows[0]["news_left"].ToString() != "")
+                {
+                    this.news_left = ds.Tables[0].Rows[0]["news_left"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["comment_url"] != null && ds.Tables[0].Rows[0]["comment_url"].ToString() != "")
+                {
+                    this.comment_url = ds.Tables[0].Rows[0]["comment_url"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_video"] != null && ds.Tables[0].Rows[0]["news_video"].ToString() != "")
+                {
+                    this.news_video = ds.Tables[0].Rows[0]["news_video"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_keywords2"] != null && ds.Tables[0].Rows[0]["news_keywords2"].ToString() != "")
+                {
+                    this.news_keywords2 = ds.Tables[0].Rows[0]["news_keywords2"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["label_base"] != null && ds.Tables[0].Rows[0]["label_base"].ToString() != "")
+                {
+                    this.label_base = ds.Tables[0].Rows[0]["label_base"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["cmspinglun"] != null && ds.Tables[0].Rows[0]["cmspinglun"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["cmspinglun"].ToString() == "1") || (ds.Tables[0].Rows[0]["cmspinglun"].ToString().ToLower() == "true"))
+                    {
+                        this.cmspinglun = true;
+                    }
+                    else
+                    {
+                        this.cmspinglun = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["bbspinglun"] != null && ds.Tables[0].Rows[0]["bbspinglun"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["bbspinglun"].ToString() == "1") || (ds.Tables[0].Rows[0]["bbspinglun"].ToString().ToLower() == "true"))
+                    {
+                        this.bbspinglun = true;
+                    }
+                    else
+                    {
+                        this.bbspinglun = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["ISkfbm"] != null && ds.Tables[0].Rows[0]["ISkfbm"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["ISkfbm"].ToString() == "1") || (ds.Tables[0].Rows[0]["ISkfbm"].ToString().ToLower() == "true"))
+                    {
+                        this.ISkfbm = true;
+                    }
+                    else
+                    {
+                        this.ISkfbm = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["kfbm_id"] != null && ds.Tables[0].Rows[0]["kfbm_id"].ToString() != "")
+                {
+                    this.kfbm_id = ds.Tables[0].Rows[0]["kfbm_id"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["kfbm_link"] != null && ds.Tables[0].Rows[0]["kfbm_link"].ToString() != "")
+                {
+                    this.kfbm_link = ds.Tables[0].Rows[0]["kfbm_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["ISgfbm"] != null && ds.Tables[0].Rows[0]["ISgfbm"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["ISgfbm"].ToString() == "1") || (ds.Tables[0].Rows[0]["ISgfbm"].ToString().ToLower() == "true"))
+                    {
+                        this.ISgfbm = true;
+                    }
+                    else
+                    {
+                        this.ISgfbm = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["gfbm_id"] != null && ds.Tables[0].Rows[0]["gfbm_id"].ToString() != "")
+                {
+                    if ((ds.Tables[0].Rows[0]["gfbm_id"].ToString() == "1") || (ds.Tables[0].Rows[0]["gfbm_id"].ToString().ToLower() == "true"))
+                    {
+                        this.gfbm_id = true;
+                    }
+                    else
+                    {
+                        this.gfbm_id = false;
+                    }
+                }
+                if (ds.Tables[0].Rows[0]["gfbm_link"] != null && ds.Tables[0].Rows[0]["gfbm_link"].ToString() != "")
+                {
+                    this.gfbm_link = ds.Tables[0].Rows[0]["gfbm_link"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["news_abs"] != null && ds.Tables[0].Rows[0]["news_abs"].ToString() != "")
+                {
+                    this.news_abs = ds.Tables[0].Rows[0]["news_abs"].ToString();
                 }
                 if (ds.Tables[0].Rows[0]["Content"] != null && ds.Tables[0].Rows[0]["Content"].ToString() != "")
                 {

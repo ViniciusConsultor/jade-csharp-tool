@@ -16,14 +16,6 @@ namespace HFBBS.Model
         {
             TaskId = taskId;
             Url = url;
-            _title = "";
-            _content = "";
-            _summary = "";
-            _source = "";
-            _createtime = "";
-            _other = "";
-            _keywords = "";
-            _subtitle = "";
         }
       
 
@@ -33,83 +25,14 @@ namespace HFBBS.Model
         public DownloadData(string url)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,Content,Summary,Source,CreateTime,Other,Url,IsDownload,IsPublish,SubTitle,Keywords ");
+            strSql.Append("select *");
             strSql.Append(" FROM [DownloadData] ");
             strSql.Append(" where Url=@Url ");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@Url", OleDbType.VarChar)};
             parameters[0].Value = url;
-
             DataSet ds = DbHelperOleDb.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                if (ds.Tables[0].Rows[0]["ID"] != null && ds.Tables[0].Rows[0]["ID"].ToString() != "")
-                {
-                    this.ID = int.Parse(ds.Tables[0].Rows[0]["ID"].ToString());
-                }
-                if (ds.Tables[0].Rows[0]["TaskId"] != null && ds.Tables[0].Rows[0]["TaskId"].ToString() != "")
-                {
-                    this.TaskId = int.Parse(ds.Tables[0].Rows[0]["TaskId"].ToString());
-                } 
-                if (ds.Tables[0].Rows[0]["SubTitle"] != null && ds.Tables[0].Rows[0]["SubTitle"].ToString() != "")
-                {
-                    this.SubTitle = ds.Tables[0].Rows[0]["SubTitle"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Keywords"] != null && ds.Tables[0].Rows[0]["Keywords"].ToString() != "")
-                {
-                    this.Keywords = ds.Tables[0].Rows[0]["Keywords"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Title"] != null && ds.Tables[0].Rows[0]["Title"].ToString() != "")
-                {
-                    this.Title = ds.Tables[0].Rows[0]["Title"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Content"] != null && ds.Tables[0].Rows[0]["Content"].ToString() != "")
-                {
-                    this.Content = ds.Tables[0].Rows[0]["Content"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Summary"] != null && ds.Tables[0].Rows[0]["Summary"].ToString() != "")
-                {
-                    this.Summary = ds.Tables[0].Rows[0]["Summary"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Source"] != null && ds.Tables[0].Rows[0]["Source"].ToString() != "")
-                {
-                    this.Source = ds.Tables[0].Rows[0]["Source"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["CreateTime"] != null && ds.Tables[0].Rows[0]["CreateTime"].ToString() != "")
-                {
-                    this.CreateTime = ds.Tables[0].Rows[0]["CreateTime"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Other"] != null && ds.Tables[0].Rows[0]["Other"].ToString() != "")
-                {
-                    this.Other = ds.Tables[0].Rows[0]["Other"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["Url"] != null && ds.Tables[0].Rows[0]["Url"].ToString() != "")
-                {
-                    this.Url = ds.Tables[0].Rows[0]["Url"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["IsDownload"] != null && ds.Tables[0].Rows[0]["IsDownload"].ToString() != "")
-                {
-                    if ((ds.Tables[0].Rows[0]["IsDownload"].ToString() == "1") || (ds.Tables[0].Rows[0]["IsDownload"].ToString().ToLower() == "true"))
-                    {
-                        this.IsDownload = true;
-                    }
-                    else
-                    {
-                        this.IsDownload = false;
-                    }
-                }
-                if (ds.Tables[0].Rows[0]["IsPublish"] != null && ds.Tables[0].Rows[0]["IsPublish"].ToString() != "")
-                {
-                    if ((ds.Tables[0].Rows[0]["IsPublish"].ToString() == "1") || (ds.Tables[0].Rows[0]["IsPublish"].ToString().ToLower() == "true"))
-                    {
-                        this.IsPublish = true;
-                    }
-                    else
-                    {
-                        this.IsPublish = false;
-                    }
-                }
-            }
+            this.GetModelFromDataSet(ds);          
         }
 
         /// <summary>
@@ -162,6 +85,21 @@ namespace HFBBS.Model
             }
 
             return result;
+        } 
+        
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetList(string strWhere, out int totalCount, int page = 1, int pageSize = 10)
+        {
+            var sql = string.Format(
+   @"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by ID DESC) order by ID ) order by ID DESC", pageSize, page * pageSize, strWhere == "" ? "" : "where " + strWhere);
+
+            var countSql = string.Format("select count(*) from [DownloadData] {0}", strWhere == "" ? "" : "where " + strWhere);
+
+            totalCount = (int)DbHelperOleDb.GetSingle(countSql);
+
+            return DbHelperOleDb.Query(sql);
         }
 
     }
