@@ -87,6 +87,51 @@ namespace HFBBS
         public TaskStatus Status { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+
+        public TaskRunner runner { get; set; }
+        public SiteRule Rule { get; set; }
+
+        public System.Timers.Timer timer;
+
+        public void StarTimer()
+        {
+            if (timer == null)
+            {
+                timer = new System.Timers.Timer(Rule.AutoRunInterval * 60 * 1000);
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
+            }
+            else
+            {
+                timer.Stop();
+            }
+            timer.Start();
+        }
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (runner != null)
+            {
+                StartWork();
+            }
+        }
+
+        public void StartWork()
+        {
+            new Thread(runner.Start).Start();
+        }
+
+        public void StopWork()
+        {
+            runner.Stop();
+        }
+
+        public void StopTimer()
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+            }
+        }
     }
 
     public enum TaskStatus
@@ -116,7 +161,7 @@ namespace HFBBS
             {
                 Directory.CreateDirectory(taskDir);
             }
-            return taskDir + FileName;
+            return taskDir + "\\" + FileName;
         }
     }
 
@@ -174,7 +219,6 @@ namespace HFBBS
                 if (instance == null)
                 {
                     instance = new RunningTaskCollection();
-                    instance.Add(new RunningTask { TaskName = "test" });
                 }
                 return instance;
             }
@@ -196,6 +240,17 @@ namespace HFBBS
 
         public void Update()
         {
+            this.NotifyChange();
+        }
+
+        public void TaskFinish(RunningTask task)
+        {
+            if (task.Status == TaskStatus.休眠)
+            {
+                // 休眠
+                task.StarTimer();
+            }
+
             this.NotifyChange();
         }
     }

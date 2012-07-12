@@ -135,6 +135,8 @@
             this.radioDatetime = new System.Windows.Forms.RadioButton();
             this.txtFixString = new System.Windows.Forms.TextBox();
             this.radioFixString = new System.Windows.Forms.RadioButton();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabTime = new System.Windows.Forms.TabPage();
             this.tabSummary = new System.Windows.Forms.TabPage();
@@ -165,8 +167,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabSetting.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1297,6 +1297,26 @@
             this.radioFixString.Text = "固定字符串";
             this.radioFixString.UseVisualStyleBackColor = true;
             // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(867, 192);
+            this.tabPage8.TabIndex = 6;
+            this.tabPage8.Text = "副标题";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(867, 192);
+            this.tabPage9.TabIndex = 7;
+            this.tabPage9.Text = "关键字";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -1426,6 +1446,7 @@
             this.txtInterval.Name = "txtInterval";
             this.txtInterval.Size = new System.Drawing.Size(158, 21);
             this.txtInterval.TabIndex = 3;
+            this.txtInterval.Text = "360";
             // 
             // chkIntervalTask
             // 
@@ -1639,26 +1660,6 @@
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(867, 192);
-            this.tabPage8.TabIndex = 6;
-            this.tabPage8.Text = "副标题";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // tabPage9
-            // 
-            this.tabPage9.Location = new System.Drawing.Point(4, 22);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(867, 192);
-            this.tabPage9.TabIndex = 7;
-            this.tabPage9.Text = "关键字";
-            this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // SiteRuleEditForm
             // 

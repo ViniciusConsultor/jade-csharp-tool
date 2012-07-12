@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -35,7 +36,11 @@
             this.ContentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.开始采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.停止采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -48,6 +53,7 @@
             this.ContentCount,
             this.StartTime,
             this.EndTime});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -96,6 +102,29 @@
             this.EndTime.Name = "EndTime";
             this.EndTime.Width = 120;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始采集ToolStripMenuItem,
+            this.停止采集ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // 开始采集ToolStripMenuItem
+            // 
+            this.开始采集ToolStripMenuItem.Name = "开始采集ToolStripMenuItem";
+            this.开始采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.开始采集ToolStripMenuItem.Text = "开始采集";
+            this.开始采集ToolStripMenuItem.Click += new System.EventHandler(this.开始采集ToolStripMenuItem_Click);
+            // 
+            // 停止采集ToolStripMenuItem
+            // 
+            this.停止采集ToolStripMenuItem.Name = "停止采集ToolStripMenuItem";
+            this.停止采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.停止采集ToolStripMenuItem.Text = "停止采集";
+            this.停止采集ToolStripMenuItem.Click += new System.EventHandler(this.停止采集ToolStripMenuItem_Click);
+            // 
             // TaskQueqeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -108,6 +137,7 @@
             this.DockStateChanged += new System.EventHandler(this.TaskQueqeForm_DockStateChanged);
             this.Load += new System.EventHandler(this.TaskQueqeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -121,5 +151,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ContentCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndTime;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 开始采集ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 停止采集ToolStripMenuItem;
     }
 }

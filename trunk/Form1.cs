@@ -69,8 +69,23 @@ namespace HFBBS
             {
                 this.Show();
                 this.WindowState = FormWindowState.Maximized;
+                var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
+
+                if (tasks.Count > 0)
+                {
+                    if (MessageBox.Show("系统发现你有设为自动运行的采集任务,是否现在开始自动执行采集任务？", "自动采集确认!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        // 立即开始
+                        tasks.ForEach(task =>
+                        {
+                            var runnerForm = new TaskRunForm(task);
+                            CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                        });
+                    }
+                }
             }
         }
+
 
         public void ShowDock(string itemText)
         {

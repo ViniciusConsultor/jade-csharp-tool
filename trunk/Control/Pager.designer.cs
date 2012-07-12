@@ -107,8 +107,8 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 27);
-            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(39, 27);
+            this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "总项数";
             // 
             // bindingNavigatorMoveFirstItem
@@ -119,6 +119,7 @@
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 27);
             this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
+            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // bindingNavigatorMovePreviousItem
             // 
@@ -128,6 +129,7 @@
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 27);
             this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
+            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // bindingNavigatorSeparator
             // 
@@ -142,6 +144,7 @@
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 21);
             this.bindingNavigatorPositionItem.Text = "0";
             this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
+            this.bindingNavigatorPositionItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCurrentPage_KeyDown);
             // 
             // bindingNavigatorSeparator1
             // 
@@ -156,6 +159,7 @@
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 27);
             this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
+            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // bindingNavigatorMoveLastItem
             // 
@@ -165,6 +169,7 @@
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 27);
             this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
+            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // bindingNavigatorSeparator2
             // 
@@ -177,7 +182,7 @@
             this.btnFirst.Image = ((System.Drawing.Image)(resources.GetObject("btnFirst.Image")));
             this.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(45, 27);
+            this.btnFirst.Size = new System.Drawing.Size(48, 27);
             this.btnFirst.Text = "第一页";
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
@@ -187,7 +192,7 @@
             this.btnPrev.Image = ((System.Drawing.Image)(resources.GetObject("btnPrev.Image")));
             this.btnPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(45, 27);
+            this.btnPrev.Size = new System.Drawing.Size(48, 27);
             this.btnPrev.Text = "上一页";
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
@@ -197,7 +202,7 @@
             this.btnNext.Image = ((System.Drawing.Image)(resources.GetObject("btnNext.Image")));
             this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 27);
+            this.btnNext.Size = new System.Drawing.Size(48, 27);
             this.btnNext.Text = "下一页";
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
@@ -207,7 +212,7 @@
             this.btnLast.Image = ((System.Drawing.Image)(resources.GetObject("btnLast.Image")));
             this.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(45, 27);
+            this.btnLast.Size = new System.Drawing.Size(48, 27);
             this.btnLast.Text = "最后页";
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
@@ -219,7 +224,7 @@
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(17, 27);
+            this.toolStripLabel4.Size = new System.Drawing.Size(20, 27);
             this.toolStripLabel4.Text = "第";
             // 
             // txtCurrentPage
@@ -231,13 +236,13 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(17, 27);
+            this.toolStripLabel1.Size = new System.Drawing.Size(20, 27);
             this.toolStripLabel1.Text = "页";
             // 
             // btnGo
             // 
             this.btnGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnGo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.btnGo.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold);
             this.btnGo.Image = ((System.Drawing.Image)(resources.GetObject("btnGo.Image")));
             this.btnGo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGo.Name = "btnGo";
@@ -253,19 +258,19 @@
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(17, 27);
+            this.toolStripLabel2.Size = new System.Drawing.Size(20, 27);
             this.toolStripLabel2.Text = "共";
             // 
             // lblPageCount
             // 
             this.lblPageCount.Name = "lblPageCount";
-            this.lblPageCount.Size = new System.Drawing.Size(77, 27);
+            this.lblPageCount.Size = new System.Drawing.Size(85, 27);
             this.lblPageCount.Text = "lblPageCount";
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(17, 27);
+            this.toolStripLabel3.Size = new System.Drawing.Size(20, 27);
             this.toolStripLabel3.Text = "页";
             // 
             // toolStripSeparator4
@@ -276,7 +281,7 @@
             // lblMaxPage
             // 
             this.lblMaxPage.Name = "lblMaxPage";
-            this.lblMaxPage.Size = new System.Drawing.Size(65, 27);
+            this.lblMaxPage.Size = new System.Drawing.Size(76, 27);
             this.lblMaxPage.Text = "lblMaxPage";
             // 
             // Pager
