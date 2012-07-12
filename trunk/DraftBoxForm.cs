@@ -28,7 +28,23 @@ namespace HFBBS
             this.comboBox1.DataSource = tasks;
             this.comboBox1.DisplayMember = "Name";
             this.comboBox1.SelectedIndex = 0;
+            this.pager1.PageChange += new EventPagingHandler(pager1_PageChange);
 
+        }
+
+        void pager1_PageChange(EventPagingArg e)
+        {
+            var task = (SiteRule)comboBox1.SelectedItem;
+            this.dataGridView1.DataSource = null;
+            int totalCount;
+            if (task.Name == "全部任务")
+            {
+                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            }
+            else
+            {
+                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            }
         }
 
         private void DraftBoxForm_Load(object sender, EventArgs e)
@@ -55,7 +71,10 @@ namespace HFBBS
                 }
 
                 this.pager1.CurrentPageIndex = 1;
-                this.pager1.InitPageInfo(totalCount, currentPageSize);
+                this.pager1.PageSize = currentPageSize;
+                this.pager1.TotalCount = totalCount;
+                this.pager1.Bind();
+                //this.pager1.InitPageInfo(totalCount, currentPageSize);
             }
         }
 
@@ -92,18 +111,18 @@ namespace HFBBS
 
         private void pager1_PageChanged(object sender, EventArgs e)
         {
-            var task = (SiteRule)comboBox1.SelectedItem;
-            this.dataGridView1.DataSource = null;
-            int totalCount;
-            if (task.Name == "全部任务")
-            {
-                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
-            }
-            else
-            {
-                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
-            }
-            this.pager1.InitPageInfo(totalCount, currentPageSize);
+            //var task = (SiteRule)comboBox1.SelectedItem;
+            //this.dataGridView1.DataSource = null;
+            //int totalCount;
+            //if (task.Name == "全部任务")
+            //{
+            //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            //}
+            //else
+            //{
+            //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            //}
+            //this.pager1.InitPageInfo(totalCount, currentPageSize);
         }
 
         private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
