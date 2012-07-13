@@ -45,8 +45,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txt_news_subtitle = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txt_news_keyword2 = new System.Windows.Forms.TextBox();
-            this.txt_news_keywords = new System.Windows.Forms.TextBox();
             this.txt_news_title = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -109,6 +107,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
+            this.txt_news_keyword2 = new HFBBS.Control.KeywordBox();
+            this.txt_news_keywords = new HFBBS.Control.KeywordBox();
             this.txt_tags = new PresentationControls.CheckBoxComboBox();
             this.txtContent = new HFBBS.HtmlEditor();
             this.tabControl1.SuspendLayout();
@@ -162,6 +162,8 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.txt_news_keyword2);
+            this.tabPage1.Controls.Add(this.txt_news_keywords);
             this.tabPage1.Controls.Add(this.txt_tags);
             this.tabPage1.Controls.Add(this.txt_row_news_abstract);
             this.tabPage1.Controls.Add(this.label10);
@@ -172,8 +174,6 @@
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.txt_news_subtitle);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.txt_news_keyword2);
-            this.tabPage1.Controls.Add(this.txt_news_keywords);
             this.tabPage1.Controls.Add(this.txt_news_title);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label1);
@@ -183,10 +183,10 @@
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtnews_source_name);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(972, 675);
+            this.tabPage1.Size = new System.Drawing.Size(972, 674);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.Location = new System.Drawing.Point(14, 334);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(44, 12);
@@ -275,20 +275,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "副标题:";
             // 
-            // txt_news_keyword2
-            // 
-            this.txt_news_keyword2.Location = new System.Drawing.Point(550, 59);
-            this.txt_news_keyword2.Name = "txt_news_keyword2";
-            this.txt_news_keyword2.Size = new System.Drawing.Size(400, 21);
-            this.txt_news_keyword2.TabIndex = 11;
-            // 
-            // txt_news_keywords
-            // 
-            this.txt_news_keywords.Location = new System.Drawing.Point(74, 59);
-            this.txt_news_keywords.Name = "txt_news_keywords";
-            this.txt_news_keywords.Size = new System.Drawing.Size(400, 21);
-            this.txt_news_keywords.TabIndex = 10;
-            // 
             // txt_news_title
             // 
             this.txt_news_title.Location = new System.Drawing.Point(74, 32);
@@ -317,7 +303,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(8, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 12);
@@ -346,76 +332,76 @@
             this.设为附加正文4ToolStripMenuItem,
             this.设为附加正文5ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 224);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 224);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 设为ToolStripMenuItem
             // 
             this.设为ToolStripMenuItem.Name = "设为ToolStripMenuItem";
-            this.设为ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为ToolStripMenuItem.Text = "设为摘要";
             this.设为ToolStripMenuItem.Click += new System.EventHandler(this.设为ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.toolStripMenuItem1.Text = "添加为SEO关键词";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // 添加为关键字ToolStripMenuItem
             // 
             this.添加为关键字ToolStripMenuItem.Name = "添加为关键字ToolStripMenuItem";
-            this.添加为关键字ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.添加为关键字ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.添加为关键字ToolStripMenuItem.Text = "添加为关键词";
             this.添加为关键字ToolStripMenuItem.Click += new System.EventHandler(this.添加为关键字ToolStripMenuItem_Click);
             // 
             // 设为标题ToolStripMenuItem
             // 
             this.设为标题ToolStripMenuItem.Name = "设为标题ToolStripMenuItem";
-            this.设为标题ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为标题ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为标题ToolStripMenuItem.Text = "设为标题";
             this.设为标题ToolStripMenuItem.Click += new System.EventHandler(this.设为标题ToolStripMenuItem_Click);
             // 
             // 设为副标题ToolStripMenuItem
             // 
             this.设为副标题ToolStripMenuItem.Name = "设为副标题ToolStripMenuItem";
-            this.设为副标题ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为副标题ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为副标题ToolStripMenuItem.Text = "设为副标题";
             this.设为副标题ToolStripMenuItem.Click += new System.EventHandler(this.设为副标题ToolStripMenuItem_Click);
             // 
             // 设为SEO描述ToolStripMenuItem
             // 
             this.设为SEO描述ToolStripMenuItem.Name = "设为SEO描述ToolStripMenuItem";
-            this.设为SEO描述ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为SEO描述ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为SEO描述ToolStripMenuItem.Text = "设为SEO描述";
             this.设为SEO描述ToolStripMenuItem.Click += new System.EventHandler(this.设为SEO描述ToolStripMenuItem_Click);
             // 
             // 设为附件正文2ToolStripMenuItem
             // 
             this.设为附件正文2ToolStripMenuItem.Name = "设为附件正文2ToolStripMenuItem";
-            this.设为附件正文2ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为附件正文2ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为附件正文2ToolStripMenuItem.Text = "设为附件正文2";
             this.设为附件正文2ToolStripMenuItem.Click += new System.EventHandler(this.设为附件正文2ToolStripMenuItem_Click);
             // 
             // 设为附加正文3ToolStripMenuItem
             // 
             this.设为附加正文3ToolStripMenuItem.Name = "设为附加正文3ToolStripMenuItem";
-            this.设为附加正文3ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为附加正文3ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为附加正文3ToolStripMenuItem.Text = "设为附加正文3";
             this.设为附加正文3ToolStripMenuItem.Click += new System.EventHandler(this.设为附加正文3ToolStripMenuItem_Click);
             // 
             // 设为附加正文4ToolStripMenuItem
             // 
             this.设为附加正文4ToolStripMenuItem.Name = "设为附加正文4ToolStripMenuItem";
-            this.设为附加正文4ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为附加正文4ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为附加正文4ToolStripMenuItem.Text = "设为附加正文4";
             this.设为附加正文4ToolStripMenuItem.Click += new System.EventHandler(this.设为附加正文4ToolStripMenuItem_Click);
             // 
             // 设为附加正文5ToolStripMenuItem
             // 
             this.设为附加正文5ToolStripMenuItem.Name = "设为附加正文5ToolStripMenuItem";
-            this.设为附加正文5ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.设为附加正文5ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.设为附加正文5ToolStripMenuItem.Text = "设为附加正文5";
             this.设为附加正文5ToolStripMenuItem.Click += new System.EventHandler(this.设为附加正文5ToolStripMenuItem_Click);
             // 
@@ -448,10 +434,10 @@
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.txt_news_description);
             this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(972, 675);
+            this.tabPage2.Size = new System.Drawing.Size(972, 674);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "高级选项";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -777,7 +763,7 @@
             this.toolStripButton3.Image = global::HFBBS.Properties.Resources.back_2;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(65, 36);
+            this.toolStripButton3.Size = new System.Drawing.Size(68, 36);
             this.toolStripButton3.Text = "返回";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -786,7 +772,7 @@
             this.toolStripButton5.Image = global::HFBBS.Properties.Resources.preview1;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(65, 36);
+            this.toolStripButton5.Size = new System.Drawing.Size(68, 36);
             this.toolStripButton5.Text = "预览";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
@@ -795,7 +781,7 @@
             this.btnSave.Image = global::HFBBS.Properties.Resources.document_save;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(65, 36);
+            this.btnSave.Size = new System.Drawing.Size(68, 36);
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -804,7 +790,7 @@
             this.toolStripButton1.Image = global::HFBBS.Properties.Resources.gnome_application_exit;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(89, 36);
+            this.toolStripButton1.Size = new System.Drawing.Size(92, 36);
             this.toolStripButton1.Text = "存盘退出";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -813,7 +799,7 @@
             this.toolStripButton2.Image = global::HFBBS.Properties.Resources.report_check;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(77, 36);
+            this.toolStripButton2.Size = new System.Drawing.Size(80, 36);
             this.toolStripButton2.Text = "送签发";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -853,6 +839,29 @@
             this.text_news_subtitle.Name = "text_news_subtitle";
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
+            // 
+            // txt_news_keyword2
+            // 
+            this.txt_news_keyword2.BackColor = System.Drawing.Color.White;
+            this.txt_news_keyword2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_news_keyword2.Keywords = null;
+            this.txt_news_keyword2.Location = new System.Drawing.Point(550, 59);
+            this.txt_news_keyword2.Name = "txt_news_keyword2";
+            this.txt_news_keyword2.Size = new System.Drawing.Size(400, 19);
+            this.txt_news_keyword2.SplitWord = "#";
+            this.txt_news_keyword2.TabIndex = 24;
+            // 
+            // txt_news_keywords
+            // 
+            this.txt_news_keywords.BackColor = System.Drawing.Color.White;
+            this.txt_news_keywords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_news_keywords.Keywords = null;
+            this.txt_news_keywords.Location = new System.Drawing.Point(74, 62);
+            this.txt_news_keywords.Name = "txt_news_keywords";
+            this.txt_news_keywords.Size = new System.Drawing.Size(400, 19);
+            this.txt_news_keywords.SplitWord = " |";
+            this.txt_news_keywords.TabIndex = 23;
+            this.txt_news_keywords.Load += new System.EventHandler(this.txt_news_keywords_Load);
             // 
             // txt_tags
             // 
@@ -925,8 +934,6 @@
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txt_news_keyword2;
-        private System.Windows.Forms.TextBox txt_news_keywords;
         private System.Windows.Forms.TextBox txt_news_title;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
@@ -991,5 +998,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ToolStripMenuItem 设为附加正文5ToolStripMenuItem;
         private PresentationControls.CheckBoxComboBox txt_tags;
+        private Control.KeywordBox txt_news_keyword2;
+        private Control.KeywordBox txt_news_keywords;
     }
 }

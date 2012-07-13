@@ -16,6 +16,7 @@ namespace HFBBS
         {
             InitializeComponent();
             InitDockPanel();
+            //this.keywordBox1.Keywords = new List<string> { "思想", "音乐", "80后", "美食", "旅游", "电影", "听音乐", "时尚", "摄影", "健康" };
         }
 
         class TestLogin : ILogin
