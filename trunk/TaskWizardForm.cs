@@ -1232,6 +1232,17 @@ namespace HFBBS
         {
             this.txtInterval.Text = (7 * 24 * 60).ToString();
         }
+
+        private void txtInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //全角占一个汉字,半角点半个汉字,所以在字节上是不同的
+            //全角数字"KeyChar"=2,半解数字"KeyChar"=1
+            byte[] array = System.Text.Encoding.Default.GetBytes(e.KeyChar.ToString());
+            //array.LongLength,而不是array.Length
+            if (!char.IsDigit(e.KeyChar) || array.LongLength == 2) e.Handled = true;
+            //'\b'是退格键值
+            if (e.KeyChar == '\b' || e.KeyChar == '.') e.Handled = false;
+        }
        
     }
 }

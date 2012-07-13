@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("任务列表");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleForm));
-            this.node1 = new DevComponents.AdvTree.Node();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新建分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,11 +48,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // node1
-            // 
-            this.node1.Name = "node1";
-            this.node1.Text = "node1";
             // 
             // treeView1
             // 
@@ -195,7 +189,6 @@
 
         #endregion
 
-        private DevComponents.AdvTree.Node node1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ImageList iglIcons;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

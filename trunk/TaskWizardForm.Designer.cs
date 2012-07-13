@@ -117,8 +117,6 @@
             this.intermediateStep1 = new WizardBase.IntermediateStep();
             this.button5 = new System.Windows.Forms.Button();
             this.tbxResult = new System.Windows.Forms.TextBox();
-            this.finish = new WizardBase.FinishStep();
-            this.label11 = new System.Windows.Forms.Label();
             this.intermediateStep2 = new WizardBase.IntermediateStep();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
@@ -128,6 +126,8 @@
             this.chkIntervalTask = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.finish = new WizardBase.FinishStep();
+            this.label11 = new System.Windows.Forms.Label();
             this.start.SuspendLayout();
             this.stepTaskName.SuspendLayout();
             this.stepStartUrl.SuspendLayout();
@@ -145,8 +145,8 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.intermediateStep1.SuspendLayout();
-            this.finish.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
+            this.finish.SuspendLayout();
             this.SuspendLayout();
             // 
             // taskWizard
@@ -696,17 +696,17 @@
             this.tabTitle.Location = new System.Drawing.Point(6, 403);
             this.tabTitle.Name = "tabTitle";
             this.tabTitle.SelectedIndex = 0;
-            this.tabTitle.Size = new System.Drawing.Size(1898, 739);
+            this.tabTitle.Size = new System.Drawing.Size(2856, 1305);
             this.tabTitle.TabIndex = 10;
             this.tabTitle.SelectedIndexChanged += new System.EventHandler(this.tabTitle_SelectedIndexChanged);
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panelItemRule);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 21);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1890, 713);
+            this.tabPage4.Size = new System.Drawing.Size(2848, 1280);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "标题";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -719,7 +719,7 @@
             this.panelItemRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemRule.Location = new System.Drawing.Point(3, 3);
             this.panelItemRule.Name = "panelItemRule";
-            this.panelItemRule.Size = new System.Drawing.Size(1884, 707);
+            this.panelItemRule.Size = new System.Drawing.Size(2842, 1274);
             this.panelItemRule.TabIndex = 6;
             // 
             // groupBox5
@@ -965,68 +965,68 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 21);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(932, 147);
+            this.tabPage1.Size = new System.Drawing.Size(1890, 714);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "副标题";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(932, 147);
+            this.tabPage2.Size = new System.Drawing.Size(1890, 714);
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "关键字";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Location = new System.Drawing.Point(4, 21);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(932, 147);
+            this.tabPage5.Size = new System.Drawing.Size(1890, 714);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabTime
             // 
-            this.tabTime.Location = new System.Drawing.Point(4, 22);
+            this.tabTime.Location = new System.Drawing.Point(4, 21);
             this.tabTime.Name = "tabTime";
             this.tabTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTime.Size = new System.Drawing.Size(932, 147);
+            this.tabTime.Size = new System.Drawing.Size(1890, 714);
             this.tabTime.TabIndex = 2;
             this.tabTime.Text = "时间";
             this.tabTime.UseVisualStyleBackColor = true;
             // 
             // tabSummary
             // 
-            this.tabSummary.Location = new System.Drawing.Point(4, 22);
+            this.tabSummary.Location = new System.Drawing.Point(4, 21);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(932, 147);
+            this.tabSummary.Size = new System.Drawing.Size(1890, 714);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
             // 
             // tabContent
             // 
-            this.tabContent.Location = new System.Drawing.Point(4, 22);
+            this.tabContent.Location = new System.Drawing.Point(4, 21);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(932, 147);
+            this.tabContent.Size = new System.Drawing.Size(1890, 714);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Location = new System.Drawing.Point(4, 21);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(932, 147);
+            this.tabPage6.Size = new System.Drawing.Size(1890, 714);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1078,23 +1078,6 @@
             this.tbxResult.TabIndex = 10;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             this.tbxResult.TextChanged += new System.EventHandler(this.tbxResult_TextChanged);
-            // 
-            // finish
-            // 
-            this.finish.BackgroundImage = global::HFBBS.Properties.Resources.laboratory;
-            this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.finish.Controls.Add(this.label11);
-            this.finish.Name = "finish";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(313, 232);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(328, 16);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
             // 
             // intermediateStep2
             // 
@@ -1165,6 +1148,7 @@
             this.txtInterval.Size = new System.Drawing.Size(158, 21);
             this.txtInterval.TabIndex = 12;
             this.txtInterval.Text = "360";
+            this.txtInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInterval_KeyPress);
             // 
             // chkIntervalTask
             // 
@@ -1193,6 +1177,23 @@
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 9;
             this.label14.Text = "定时执行：";
+            // 
+            // finish
+            // 
+            this.finish.BackgroundImage = global::HFBBS.Properties.Resources.laboratory;
+            this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.finish.Controls.Add(this.label11);
+            this.finish.Name = "finish";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(313, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(328, 16);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
             // 
             // TaskWizardForm
             // 
@@ -1234,10 +1235,10 @@
             this.groupBox3.PerformLayout();
             this.intermediateStep1.ResumeLayout(false);
             this.intermediateStep1.PerformLayout();
-            this.finish.ResumeLayout(false);
-            this.finish.PerformLayout();
             this.intermediateStep2.ResumeLayout(false);
             this.intermediateStep2.PerformLayout();
+            this.finish.ResumeLayout(false);
+            this.finish.PerformLayout();
             this.ResumeLayout(false);
 
         }

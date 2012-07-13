@@ -95,6 +95,69 @@ namespace HFBBS.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap login__1_ {
+            get {
+                object obj = ResourceManager.GetObject("login (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login__2_ {
+            get {
+                object obj = ResourceManager.GetObject("login (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login_r1_c1 {
+            get {
+                object obj = ResourceManager.GetObject("login_r1_c1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login_r1_c3 {
+            get {
+                object obj = ResourceManager.GetObject("login_r1_c3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login_r2_c1 {
+            get {
+                object obj = ResourceManager.GetObject("login_r2_c1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login_r4_c3 {
+            get {
+                object obj = ResourceManager.GetObject("login_r4_c3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap login_r4_c4 {
+            get {
+                object obj = ResourceManager.GetObject("login_r4_c4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loginbg {
+            get {
+                object obj = ResourceManager.GetObject("loginbg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap loginbg1 {
+            get {
+                object obj = ResourceManager.GetObject("loginbg1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap logo按钮图标5 {
             get {
                 object obj = ResourceManager.GetObject("logo按钮图标5", resourceCulture);

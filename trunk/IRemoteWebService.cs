@@ -160,9 +160,18 @@ namespace HFBBS
         public List<DisplayNameValuePair> GetSpecilTags()
         {
             return new List<DisplayNameValuePair> { 
-               new DisplayNameValuePair(){ DisplayName="标签1",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="标签2",Value = "标签2"},  
-               new DisplayNameValuePair(){DisplayName="标签3",Value = "标签3"}
+               new DisplayNameValuePair(){ DisplayName="资讯中心",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="本地资讯",Value = "标签2"},  
+                new DisplayNameValuePair(){ DisplayName="国内资讯",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="今日关注",Value = "标签2"},  
+                new DisplayNameValuePair(){ DisplayName="楼盘速递",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="项目动态",Value = "标签2"},  
+                new DisplayNameValuePair(){ DisplayName="人物专访",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="地产观点",Value = "标签2"},  
+                new DisplayNameValuePair(){ DisplayName="优惠信息",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="每天行情",Value = "标签2"},  
+                new DisplayNameValuePair(){ DisplayName="专题-热点专题",Value = "标签1"},
+               new DisplayNameValuePair(){DisplayName="视频频道",Value = "标签2"}
             };
         }
 

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DevComponents.DotNetBar;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace HFBBS
@@ -59,7 +58,7 @@ namespace HFBBS
         {
             HFBBS.Helper.AccessHelper.CreateMDBDataBase();
             CacheObject.MainForm = this;
-            DialogResult dr = new FrmLogin(new TestLogin()).ShowDialog();
+            DialogResult dr = new LoginForm(new TestLogin()).ShowDialog();
 
             if (dr == DialogResult.Cancel)
             {

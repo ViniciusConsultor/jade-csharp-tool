@@ -223,7 +223,7 @@
             this.lblSystemInfo_CH.BackgroundStyle.PaddingLeft = 10;
             this.lblSystemInfo_CH.BackgroundStyle.PaddingRight = 10;
             this.lblSystemInfo_CH.BackgroundStyle.PaddingTop = 10;
-            this.lblSystemInfo_CH.Font = new System.Drawing.Font("LiSu", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSystemInfo_CH.Font = new System.Drawing.Font("隶书", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblSystemInfo_CH.Location = new System.Drawing.Point(9, -3);
             this.lblSystemInfo_CH.Name = "lblSystemInfo_CH";
             this.lblSystemInfo_CH.Size = new System.Drawing.Size(432, 78);
@@ -286,7 +286,6 @@
             this.reflectionLabel1.BackgroundStyle.PaddingRight = 20;
             this.reflectionLabel1.BackgroundStyle.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far;
             this.reflectionLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.reflectionLabel1.Font = new System.Drawing.Font("Microsoft YaHei", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.reflectionLabel1.Location = new System.Drawing.Point(0, 34);
             this.reflectionLabel1.Name = "reflectionLabel1";
             this.reflectionLabel1.Size = new System.Drawing.Size(534, 60);
@@ -307,7 +306,6 @@
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.imgLog);
             this.Controls.Add(this.groupPanel1);
-            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
