@@ -383,6 +383,7 @@
     <Content Include="Pic\editor.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\email_qq.rar" />
     <None Include="Resources\login %281%29.png" />
     <None Include="Resources\login %282%29.png" />
     <None Include="Resources\login_r4_c4.jpg" />
