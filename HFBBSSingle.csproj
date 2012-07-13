@@ -40,13 +40,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Com.iFLYTEK.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.3, Culture=neutral, PublicKeyToken=b9a4f3f02a87010f, processorArchitecture=MSIL" />
     <Reference Include="HFBBS.DBUtility, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\HFBBS.DBUtility.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ADOX, Version=6.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Lib\Interop.ADOX.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
@@ -108,6 +112,28 @@
     <Compile Include="ContentManageForm.Designer.cs">
       <DependentUpon>ContentManageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\CheckBoxComboBox\CheckBoxComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\CheckBoxComboBox.Designer.cs">
+      <DependentUpon>CheckBoxComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\GripBounds.cs" />
+    <Compile Include="Control\CheckBoxComboBox\NativeMethods.cs" />
+    <Compile Include="Control\CheckBoxComboBox\Popup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\Popup.Designer.cs">
+      <DependentUpon>Popup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\PopupComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\PopupComboBox.Designer.cs">
+      <DependentUpon>PopupComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CheckBoxComboBox\Selection Wrappers\ListSelectionWrapper.cs" />
+    <Compile Include="Control\CheckBoxComboBox\Selection Wrappers\ObjectSelectionWrapper.cs" />
     <Compile Include="Control\HtmlEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,6 +154,12 @@
     </Compile>
     <Compile Include="IRemoteWebService.cs" />
     <Compile Include="IWorkingThread.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\DownloadData.part.cs" />
     <Compile Include="TaskWizardForm.cs">
       <SubType>Form</SubType>
@@ -171,12 +203,6 @@
     </Compile>
     <Compile Include="Forms\XmlPathSelector.Designer.cs">
       <DependentUpon>XmlPathSelector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmLogin.designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\AccessHelper.cs" />
     <Compile Include="Helper\AutomaticTag.cs" />
@@ -244,6 +270,9 @@
     <EmbeddedResource Include="ContentManageForm.resx">
       <DependentUpon>ContentManageForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
+      <DependentUpon>PopupComboBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\HtmlEditor.resx">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DraftBoxForm.resx">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskWizardForm.resx">
       <DependentUpon>TaskWizardForm.cs</DependentUpon>
@@ -276,9 +308,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XmlPathSelector.resx">
       <DependentUpon>XmlPathSelector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadingDialog.resx">
       <DependentUpon>LoadingDialog.cs</DependentUpon>
@@ -342,6 +371,15 @@
     <Content Include="Pic\editor.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\login %281%29.png" />
+    <None Include="Resources\login %282%29.png" />
+    <None Include="Resources\login_r4_c4.jpg" />
+    <None Include="Resources\loginbg1.png" />
+    <None Include="Resources\loginbg.png" />
+    <None Include="Resources\login_r4_c3.jpg" />
+    <None Include="Resources\login_r1_c3.jpg" />
+    <None Include="Resources\login_r1_c1.jpg" />
+    <None Include="Resources\login_r2_c1.jpg" />
     <None Include="Resources\report_check.png" />
     <None Include="Resources\preview.png" />
     <None Include="Resources\gnome_application_exit.png" />
@@ -357,15 +395,6 @@
     <None Include="Resources\select.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ADOX">
-      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
-      <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="SHDocVw">
       <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
       <VersionMajor>1</VersionMajor>

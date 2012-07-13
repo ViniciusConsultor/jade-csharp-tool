@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            PresentationControls.CheckBoxProperties checkBoxProperties1 = new PresentationControls.CheckBoxProperties();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentEditForm));
             this.label2 = new System.Windows.Forms.Label();
             this.txtnews_source_name = new System.Windows.Forms.ComboBox();
@@ -41,7 +42,6 @@
             this.chk_bbspinglun = new System.Windows.Forms.CheckBox();
             this.chk_cmspinglun = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txt_tags = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_news_subtitle = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -109,6 +109,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
+            this.txt_tags = new PresentationControls.CheckBoxComboBox();
             this.txtContent = new HFBBS.HtmlEditor();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -161,13 +162,13 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.txt_tags);
             this.tabPage1.Controls.Add(this.txt_row_news_abstract);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.chk_bbspinglun);
             this.tabPage1.Controls.Add(this.chk_cmspinglun);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.txt_tags);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.txt_news_subtitle);
             this.tabPage1.Controls.Add(this.label6);
@@ -248,15 +249,6 @@
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 16;
             this.label8.Text = "评论启用：";
-            // 
-            // txt_tags
-            // 
-            this.txt_tags.FormattingEnabled = true;
-            this.txt_tags.Location = new System.Drawing.Point(74, 86);
-            this.txt_tags.Name = "txt_tags";
-            this.txt_tags.Size = new System.Drawing.Size(876, 20);
-            this.txt_tags.TabIndex = 15;
-            this.txt_tags.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -862,6 +854,18 @@
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
             // 
+            // txt_tags
+            // 
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txt_tags.CheckBoxProperties = checkBoxProperties1;
+            this.txt_tags.ColumnCount = 6;
+            this.txt_tags.DisplayMemberSingleItem = "";
+            this.txt_tags.FormattingEnabled = true;
+            this.txt_tags.Location = new System.Drawing.Point(74, 87);
+            this.txt_tags.Name = "txt_tags";
+            this.txt_tags.Size = new System.Drawing.Size(876, 20);
+            this.txt_tags.TabIndex = 22;
+            // 
             // txtContent
             // 
             this.txtContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -929,7 +933,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox txt_news_template_file;
         private System.Windows.Forms.TextBox txt_news_subtitle;
-        private System.Windows.Forms.ComboBox txt_tags;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chk_bbspinglun;
         private System.Windows.Forms.CheckBox chk_cmspinglun;
@@ -987,5 +990,6 @@
         private System.Windows.Forms.TextBox txt_news_left;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ToolStripMenuItem 设为附加正文5ToolStripMenuItem;
+        private PresentationControls.CheckBoxComboBox txt_tags;
     }
 }

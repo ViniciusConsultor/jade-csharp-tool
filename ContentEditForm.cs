@@ -10,6 +10,7 @@ using HFBBS.Model;
 using System.Security.Permissions;
 using System.Threading;
 using System.Runtime.InteropServices;
+using PresentationControls;
 
 namespace HFBBS
 {
@@ -19,7 +20,8 @@ namespace HFBBS
     {
 
         public DownloadData CurrentData { get; set; }
-
+        ListSelectionWrapper<DisplayNameValuePair> StatusSelections;
+        List<DisplayNameValuePair> SpecilTags;
         public ContentEditForm()
         {
             InitializeComponent();
@@ -30,9 +32,14 @@ namespace HFBBS
             this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
             this.txt_news_template_file.DisplayMember = "DisplayName";
             this.txt_news_template_file.ValueMember = "Value";
-            this.txt_tags.DataSource = RemoteWebService.Instance.GetSpecilTags();
-            this.txt_tags.DisplayMember = "DisplayName";
-            this.txt_tags.ValueMember = "Value";
+
+            SpecilTags = RemoteWebService.Instance.GetSpecilTags();
+            StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
+            this.txt_tags.DataSource = StatusSelections;
+            txt_tags.DisplayMemberSingleItem = "Name";
+            this.txt_tags.DisplayMember = "NameConcatenated";
+            this.txt_tags.ValueMember = "Selected";
+            StatusSelections[0].Selected = true;
 
             this.txtContent.SetScriptingForm(this);
 
@@ -100,7 +107,22 @@ namespace HFBBS
                 this.txtContent.Html = data.Content;
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
-                this.txt_tags.Text = data.label_base;
+
+                var tags = data.label_base.Replace("\"", "").Split('&');
+
+                StatusSelections.ForEach(item => item.Selected = false);
+
+                foreach (var tag in tags)
+                {
+                    if (tag != "")
+                    {
+                        var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
+                        var item = StatusSelections.FindObjectWithItem(specialTag);
+                        if (item != null)
+                            item.Selected = true;
+                    }
+                }
+
                 this.chk_bbspinglun.Checked = data.bbspinglun;
                 this.chk_cmspinglun.Checked = data.cmspinglun;
 
