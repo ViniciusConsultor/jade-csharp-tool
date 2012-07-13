@@ -277,7 +277,7 @@ namespace HFBBS
         private void 添加为关键字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.txt_news_keywords.Text != "")
-                this.txt_news_keywords.Text += "|" + this.txtContent.SelectedText;
+                this.txt_news_keywords.AddWord(this.txtContent.SelectedText);
             else
                 this.txt_news_keywords.Text = this.txtContent.SelectedText;
             this.txt_news_keywords.Focus();
@@ -286,7 +286,7 @@ namespace HFBBS
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (this.txt_news_keyword2.Text != "")
-                this.txt_news_keyword2.Text += "#" + this.txtContent.SelectedText;
+                this.txt_news_keyword2.AddWord(this.txtContent.SelectedText);
             else
                 this.txt_news_keyword2.Text = this.txtContent.SelectedText;
             this.txt_news_keyword2.Focus();
@@ -357,6 +357,11 @@ namespace HFBBS
             CurrentData.Update();
             MessageBox.Show("送签发成功");
             this.Close();
+        }
+
+        private void txt_news_keywords_Load(object sender, EventArgs e)
+        {
+
         }
 
 
