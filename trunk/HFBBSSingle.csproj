@@ -134,11 +134,20 @@
     </Compile>
     <Compile Include="Control\CheckBoxComboBox\Selection Wrappers\ListSelectionWrapper.cs" />
     <Compile Include="Control\CheckBoxComboBox\Selection Wrappers\ObjectSelectionWrapper.cs" />
+    <Compile Include="Control\DateEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Control\HtmlEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Control\HtmlEditor.designer.cs">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\KeywordBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\KeywordBox.Designer.cs">
+      <DependentUpon>KeywordBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\Pager.cs">
       <SubType>UserControl</SubType>
@@ -272,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\DateEdit.resx">
+      <DependentUpon>DateEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\HtmlEditor.resx">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
