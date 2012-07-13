@@ -33,9 +33,12 @@ namespace HFBBS
                 switch (this.treeView1.SelectedNode.Text)
                 {
                     case "草稿箱":
+                        CacheObject.DraftForm.IsPublished = false;
                         CacheObject.DraftForm.Activate();
                         break;
                     case "已发箱":
+                        CacheObject.DraftForm.IsPublished = true;
+                        CacheObject.DraftForm.Activate();
                         break;
                 }
             }

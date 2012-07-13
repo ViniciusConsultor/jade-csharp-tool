@@ -31,6 +31,26 @@ namespace HFBBS
             this.pager1.PageChange += new EventPagingHandler(pager1_PageChange);
 
         }
+        bool isPublished = false;
+        public bool IsPublished
+        {
+            get
+            {
+                return isPublished;
+            }
+            set
+            {
+                if (isPublished != value)
+                {
+                    isPublished = value;
+                    comboBox1_SelectedIndexChanged(null, null);
+                }
+                else
+                {
+                    isPublished = value;
+                }
+            }
+        }
 
         void pager1_PageChange(EventPagingArg e)
         {
@@ -39,11 +59,18 @@ namespace HFBBS
             int totalCount;
             if (task.Name == "全部任务")
             {
-                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+                if (IsPublished)
+                {
+                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = True", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+                }
+                else
+                {
+                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = False", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+                }
             }
             else
             {
-                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
             }
         }
 
@@ -63,11 +90,11 @@ namespace HFBBS
 
                 if (task.Name == "全部任务")
                 {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("", out totalCount, 1, currentPageSize).Tables[0];
+                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True" : "IsPublish = False"), out totalCount, 1, currentPageSize).Tables[0];
                 }
                 else
                 {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
+                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
                 }
 
                 this.pager1.CurrentPageIndex = 1;
@@ -130,6 +157,11 @@ namespace HFBBS
             var dataTable = (DataTable)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(new DownloadData((int)dataTable.Rows[dataGridView1.CurrentRow.Index]["ID"]));
             CacheObject.ContentForm.ShowDialog();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
