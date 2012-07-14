@@ -18,6 +18,7 @@ namespace HFBBS
         {
             InitializeComponent();
             this.TabText = "欢迎页";
+            this.webBrowser1.Navigate("http://bbs.hefei.cc");
         }
     }
 }

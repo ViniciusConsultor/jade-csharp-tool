@@ -186,7 +186,7 @@ namespace HFBBS
                                                    string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
                                                        System.Text.Encoding.GetEncoding(item.Encoding));
 
-                    var data = new DownloadData(url.AbsoluteUri);
+                    var data = CacheObject.NewsDAL.Get(url.AbsoluteUri);
                     data.IsDownload = true;
                     foreach (var itemRule in item.ItemRules)
                     {
@@ -353,7 +353,7 @@ namespace HFBBS
                 {
                     OldUrls.Add(url);
                     uris.Add(new Uri(url));
-                    DataSaver.Add(new DownloadData(Rule.SiteRuleId, url));
+                    DataSaver.Add(new downloaddata(Rule.SiteRuleId, url));
                     Logger.Success("成功采集网址并保存到数据库中" + url);
                 }
                 else

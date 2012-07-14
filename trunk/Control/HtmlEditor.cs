@@ -21,13 +21,21 @@ namespace HFBBS
     {
         public HtmlEditor()
         {
-            dataUpdate = 0;
+         
 
+            dataUpdate = 0;
+            
             InitializeComponent();
 
             InitializeControls();
+            //Bitmap bitmaps = HFBBS.Properties.Resources.editorToolbar1;
+            //imageList1.ImageSize = new Size(20, 20);
+            //imageList1.Images.AddStrip(bitmaps);
+            //this.toolStripButtonBold.Image = imageList1.Images[0];
 
-            this.Load += new EventHandler(HtmlEditor_Load);
+            this.Load += new EventHandler(HtmlEditor_Load); 
+
+            
         }
 
         public void SetScriptingForm(Form form)
@@ -92,7 +100,10 @@ namespace HFBBS
                 if (value != null)
                 {
                     var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
-                    webBrowserBody.Document.InvokeScript("InitPages", new string[] { html });
+
+                    var pages = html.Split(new string[] { "{{{pager}}}" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    webBrowserBody.Document.InvokeScript("InitPages", pages);
                 }
             }
         }

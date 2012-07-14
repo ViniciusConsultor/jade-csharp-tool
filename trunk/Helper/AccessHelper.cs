@@ -18,55 +18,55 @@ namespace HFBBS.Helper
         {
             try
             {
-                if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + taskName + ".mdb"))
-                {
-                    ADOX.CatalogClass cat = new ADOX.CatalogClass();
+                //                if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + taskName + ".mdb"))
+                //                {
+                //                    ADOX.CatalogClass cat = new ADOX.CatalogClass();
 
-                    cat.Create(
-                    "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
-                    + AppDomain.CurrentDomain.BaseDirectory + "\\" + taskName + ".mdb;");
+                //                    cat.Create(
+                //                    "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
+                //                    + AppDomain.CurrentDomain.BaseDirectory + "\\" + taskName + ".mdb;");
 
-                    cat = null;
-                    var sql = @"Create Table DownloadData(
-                        ID integer identity(1,1) primary key,
-                        TaskId integer,
-                        Title text ,
-                        SubTitle text ,
-                        Keywords text ,news_source_name text,
-                        news_template_file text,
-                        news_top text,
-                        news_guideimage text,
-                        news_guideimage2 text,
-                        news_description text,
-                        news_link text,
-                        news_down text,
-                        news_right text,
-                        news_left text,
-                        comment_url text,
-                        news_video text,
-                        news_keywords2 text,
-                        label_base text,
-                        cmspinglun bit,
-                        bbspinglun bit,
-                        ISkfbm bit,
-                        kfbm_id text,
-                        kfbm_link text,
-                        ISgfbm bit,
-                        gfbm_id text,
-                        gfbm_link text,
-                        news_abs text,
-                        Content text,
-                        Summary text,
-                        Source text,
-                        CreateTime text,
-                        Other text,
-                        Url text,
-                        IsDownload bit,
-                        IsPublish bit)";
+                //                    cat = null;
+                //                    var sql = @"Create Table DownloadData(
+                //                        ID integer identity(1,1) primary key,
+                //                        TaskId integer,
+                //                        Title text ,
+                //                        SubTitle text ,
+                //                        Keywords text ,news_source_name text,
+                //                        news_template_file text,
+                //                        news_top text,
+                //                        news_guideimage text,
+                //                        news_guideimage2 text,
+                //                        news_description text,
+                //                        news_link text,
+                //                        news_down text,
+                //                        news_right text,
+                //                        news_left text,
+                //                        comment_url text,
+                //                        news_video text,
+                //                        news_keywords2 text,
+                //                        label_base text,
+                //                        cmspinglun bit,
+                //                        bbspinglun bit,
+                //                        ISkfbm bit,
+                //                        kfbm_id text,
+                //                        kfbm_link text,
+                //                        ISgfbm bit,
+                //                        gfbm_id text,
+                //                        gfbm_link text,
+                //                        news_abs text,
+                //                        Content text,
+                //                        Summary text,
+                //                        Source text,
+                //                        CreateTime text,
+                //                        Other text,
+                //                        Url text,
+                //                        IsDownload bit,
+                //                        IsPublish bit)";
 
-                    excuteSql(sql);
-                }
-                return true;
+                //                    excuteSql(sql);
+                //   }
+                    return true;
             }
             //C#操作Access之创建mdb库
             catch

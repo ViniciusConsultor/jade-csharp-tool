@@ -19,7 +19,7 @@ namespace HFBBS
     public partial class ContentEditForm : Form
     {
 
-        public DownloadData CurrentData { get; set; }
+        public downloaddata CurrentData { get; set; }
         ListSelectionWrapper<DisplayNameValuePair> StatusSelections;
         List<DisplayNameValuePair> SpecilTags;
         public ContentEditForm()
@@ -44,7 +44,7 @@ namespace HFBBS
             this.txtContent.SetScriptingForm(this);
 
         }
-        public ContentEditForm(DownloadData data)
+        public ContentEditForm(downloaddata data)
             : this()
         {
             InitDownloadData(data);
@@ -96,7 +96,7 @@ namespace HFBBS
             }
         }
 
-        public void InitDownloadData(DownloadData data)
+        public void InitDownloadData(downloaddata data)
         {
             CurrentData = data;
             if (data.Content != null)
@@ -108,18 +108,22 @@ namespace HFBBS
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
-                var tags = data.label_base.Replace("\"", "").Split('&');
-
-                StatusSelections.ForEach(item => item.Selected = false);
-
-                foreach (var tag in tags)
+                if (data.label_base != null)
                 {
-                    if (tag != "")
+                    var tags = data.label_base.Replace("\"", "").Split('&');
+
+                    StatusSelections.ForEach(item => item.Selected = false);
+
+                    foreach (var tag in tags)
                     {
-                        var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
-                        var item = StatusSelections.FindObjectWithItem(specialTag);
-                        if (item != null)
-                            item.Selected = true;
+                        if (tag != "")
+                        {
+                            var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
+                            var item = StatusSelections.FindObjectWithItem(specialTag);
+                            if (item != null)
+                                item.Selected = true;
+                        }
+
                     }
                 }
 
@@ -173,8 +177,8 @@ namespace HFBBS
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCurrentData();
-
-            CurrentData.Update();
+            CurrentData.EditTime = DateTime.Now;
+            CacheObject.NewsDAL.Update(CurrentData);
 
             MessageBox.Show("保存成功");
         }
@@ -352,9 +356,10 @@ namespace HFBBS
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            CurrentData.EditTime = DateTime.Now;
             UpdateCurrentData();
             CurrentData.IsPublish = true;
-            CurrentData.Update();
+            CacheObject.NewsDAL.Update(CurrentData);
             MessageBox.Show("送签发成功");
             this.Close();
         }

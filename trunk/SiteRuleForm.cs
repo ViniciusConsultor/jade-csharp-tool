@@ -17,13 +17,13 @@ namespace HFBBS
             InitializeComponent();
 
             var categories = CacheObject.Categories.Where(c => c.ParentCategoryID == 0);
-            var baseNode = this.treeView1.Nodes[0];
+            var baseNode = this.taskTree.Nodes[0];
             foreach (var category in categories)
             {
                 InitTree(baseNode, category);
             }
 
-            this.treeView1.ExpandAll();
+            this.taskTree.ExpandAll();
         }
 
         private static void InitTree(TreeNode baseNode, Model.Category category)
@@ -61,7 +61,7 @@ namespace HFBBS
                 node.Tag = category;
                 if (category.ParentCategoryID == 0)
                 {
-                    this.treeView1.Nodes[0].Nodes.Add(node);
+                    this.taskTree.Nodes[0].Nodes.Add(node);
                 }
                 else if (CurrentCategoryNode != null)
                 {
@@ -89,9 +89,9 @@ namespace HFBBS
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (this.treeView1.SelectedNode != null && this.treeView1.SelectedNode.Tag is Category)
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is Category)
             {
-                CurrentCategory = this.treeView1.SelectedNode.Tag as Category;
+                CurrentCategory = this.taskTree.SelectedNode.Tag as Category;
                 this.编辑分组ToolStripMenuItem.Enabled = true;
                 this.删除分组ToolStripMenuItem.Enabled = true;
                 this.新建任务ToolStripMenuItem.Enabled = true;
@@ -106,7 +106,7 @@ namespace HFBBS
                 toolStripMenuItem3.Enabled = false;
             }
 
-            if (this.treeView1.SelectedNode != null && this.treeView1.SelectedNode.Tag is SiteRule)
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is SiteRule)
             {
                 this.编辑任务ToolStripMenuItem.Enabled = true;
                 this.删除任务ToolStripMenuItem.Enabled = true;
@@ -160,7 +160,7 @@ namespace HFBBS
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            if (this.treeView1.SelectedNode != null && this.treeView1.SelectedNode.Tag is SiteRule)
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is SiteRule)
             {
                 EditSiteRule();
             }
@@ -168,13 +168,13 @@ namespace HFBBS
 
         private void EditSiteRule()
         {
-            var editForm = new SiteRuleEditForm(this.treeView1.SelectedNode.Tag as SiteRule);
+            var editForm = new SiteRuleEditForm(this.taskTree.SelectedNode.Tag as SiteRule);
             if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var siteRule = editForm.CurrentSiteRule;
                 CacheObject.BLL.Update(siteRule);
-                this.treeView1.SelectedNode.Tag = siteRule;
-                this.treeView1.SelectedNode.Text = siteRule.Name;
+                this.taskTree.SelectedNode.Tag = siteRule;
+                this.taskTree.SelectedNode.Text = siteRule.Name;
             }
         }
 
@@ -182,10 +182,10 @@ namespace HFBBS
         {
             if (MessageBox.Show("确定删除任务?", "警告", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
-                var rule = this.treeView1.SelectedNode.Tag as SiteRule;
+                var rule = this.taskTree.SelectedNode.Tag as SiteRule;
                 CacheObject.BLL.DeleteSite(rule.SiteRuleId);
                 CacheObject.Rules.Remove(rule);
-                this.treeView1.SelectedNode.Parent.Nodes.Remove(this.treeView1.SelectedNode);
+                this.taskTree.SelectedNode.Parent.Nodes.Remove(this.taskTree.SelectedNode);
                 MessageBox.Show("删除成功");
             }
         }
@@ -197,7 +197,7 @@ namespace HFBBS
 
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var runnerForm = new TaskRunForm(this.treeView1.SelectedNode.Tag as SiteRule);
+            var runnerForm = new TaskRunForm(this.taskTree.SelectedNode.Tag as SiteRule);
             CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
         }
 
@@ -220,13 +220,13 @@ namespace HFBBS
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            var editForm = new TaskWizardForm(this.treeView1.SelectedNode.Tag as SiteRule);
+            var editForm = new TaskWizardForm(this.taskTree.SelectedNode.Tag as SiteRule);
             if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var siteRule = editForm.CurrentSiteRule;
                 CacheObject.BLL.Update(siteRule);
-                this.treeView1.SelectedNode.Tag = siteRule;
-                this.treeView1.SelectedNode.Text = siteRule.Name;
+                this.taskTree.SelectedNode.Tag = siteRule;
+                this.taskTree.SelectedNode.Text = siteRule.Name;
             }
         }
     }

@@ -26,15 +26,15 @@ namespace HFBBS.BLL
             return result;
         }
 
-        public void Add(DownloadData data)
+        public void Add(downloaddata data)
         {
-            data.Add();
+            CacheObject.NewsDAL.Add(data);
             //AccessHelper.excuteSql(data.GetInsertSql());
         }
 
-        public void Update(DownloadData data)
+        public void Update(downloaddata data)
         {
-            data.Update();
+            CacheObject.NewsDAL.Update(data);
             //AccessHelper.excuteSql(data.GetUpdateSql());
         }
        
