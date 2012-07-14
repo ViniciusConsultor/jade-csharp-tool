@@ -54,12 +54,14 @@ namespace HFBBS
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
             this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStripToolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripToolBar
             // 
             this.toolStripToolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripToolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBoxName,
             this.toolStripComboBoxSize,
@@ -84,7 +86,7 @@ namespace HFBBS
             this.btnInsetPage});
             this.toolStripToolBar.Location = new System.Drawing.Point(0, 0);
             this.toolStripToolBar.Name = "toolStripToolBar";
-            this.toolStripToolBar.Size = new System.Drawing.Size(600, 25);
+            this.toolStripToolBar.Size = new System.Drawing.Size(600, 27);
             this.toolStripToolBar.TabIndex = 1;
             this.toolStripToolBar.Text = "Tool Bar";
             // 
@@ -94,7 +96,7 @@ namespace HFBBS
             this.toolStripComboBoxName.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.toolStripComboBoxName.MaxDropDownItems = 30;
             this.toolStripComboBoxName.Name = "toolStripComboBoxName";
-            this.toolStripComboBoxName.Size = new System.Drawing.Size(100, 25);
+            this.toolStripComboBoxName.Size = new System.Drawing.Size(100, 27);
             this.toolStripComboBoxName.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxName_SelectedIndexChanged);
             // 
             // toolStripComboBoxSize
@@ -102,7 +104,7 @@ namespace HFBBS
             this.toolStripComboBoxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxSize.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.toolStripComboBoxSize.Name = "toolStripComboBoxSize";
-            this.toolStripComboBoxSize.Size = new System.Drawing.Size(75, 25);
+            this.toolStripComboBoxSize.Size = new System.Drawing.Size(75, 27);
             this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSize_SelectedIndexChanged);
             // 
             // toolStripButtonBold
@@ -111,7 +113,7 @@ namespace HFBBS
             this.toolStripButtonBold.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBold.Image")));
             this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBold.Name = "toolStripButtonBold";
-            this.toolStripButtonBold.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonBold.Text = "Bold";
             this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
             // 
@@ -121,7 +123,7 @@ namespace HFBBS
             this.toolStripButtonItalic.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonItalic.Image")));
             this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonItalic.Name = "toolStripButtonItalic";
-            this.toolStripButtonItalic.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonItalic.Text = "Italic";
             this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
             // 
@@ -131,7 +133,7 @@ namespace HFBBS
             this.toolStripButtonUnderline.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUnderline.Image")));
             this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
-            this.toolStripButtonUnderline.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonUnderline.Text = "Underline";
             this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
             // 
@@ -141,14 +143,14 @@ namespace HFBBS
             this.toolStripButtonColor.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColor.Image")));
             this.toolStripButtonColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonColor.Name = "toolStripButtonColor";
-            this.toolStripButtonColor.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonColor.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonColor.Text = "Font Color";
             this.toolStripButtonColor.Click += new System.EventHandler(this.toolStripButtonColor_Click);
             // 
             // toolStripSeparatorFont
             // 
             this.toolStripSeparatorFont.Name = "toolStripSeparatorFont";
-            this.toolStripSeparatorFont.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparatorFont.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonNumbers
             // 
@@ -156,7 +158,7 @@ namespace HFBBS
             this.toolStripButtonNumbers.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNumbers.Image")));
             this.toolStripButtonNumbers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonNumbers.Name = "toolStripButtonNumbers";
-            this.toolStripButtonNumbers.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNumbers.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonNumbers.Text = "Format Numbers";
             this.toolStripButtonNumbers.Click += new System.EventHandler(this.toolStripButtonNumbers_Click);
             // 
@@ -166,7 +168,7 @@ namespace HFBBS
             this.toolStripButtonBullets.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBullets.Image")));
             this.toolStripButtonBullets.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBullets.Name = "toolStripButtonBullets";
-            this.toolStripButtonBullets.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonBullets.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonBullets.Text = "Format Bullets";
             this.toolStripButtonBullets.Click += new System.EventHandler(this.toolStripButtonBullets_Click);
             // 
@@ -176,69 +178,69 @@ namespace HFBBS
             this.toolStripButtonOutdent.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOutdent.Image")));
             this.toolStripButtonOutdent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOutdent.Name = "toolStripButtonOutdent";
-            this.toolStripButtonOutdent.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOutdent.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonOutdent.Text = "Decrease Indentation";
             this.toolStripButtonOutdent.Click += new System.EventHandler(this.toolStripButtonOutdent_Click);
             // 
             // toolStripButtonIndent
             // 
             this.toolStripButtonIndent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonIndent.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonIndent.Image")));
+            this.toolStripButtonIndent.Image = global::HFBBS.Properties.Resources._020;
             this.toolStripButtonIndent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonIndent.Name = "toolStripButtonIndent";
-            this.toolStripButtonIndent.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonIndent.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonIndent.Text = "Increase Indentation";
             this.toolStripButtonIndent.Click += new System.EventHandler(this.toolStripButtonIndent_Click);
             // 
             // toolStripSeparatorFormat
             // 
             this.toolStripSeparatorFormat.Name = "toolStripSeparatorFormat";
-            this.toolStripSeparatorFormat.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparatorFormat.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonLeft
             // 
             this.toolStripButtonLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonLeft.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLeft.Image")));
+            this.toolStripButtonLeft.Image = global::HFBBS.Properties.Resources._023;
             this.toolStripButtonLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLeft.Name = "toolStripButtonLeft";
-            this.toolStripButtonLeft.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonLeft.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonLeft.Text = "Align Left";
             this.toolStripButtonLeft.Click += new System.EventHandler(this.toolStripButtonLeft_Click);
             // 
             // toolStripButtonCenter
             // 
             this.toolStripButtonCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonCenter.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonCenter.Image")));
+            this.toolStripButtonCenter.Image = global::HFBBS.Properties.Resources._021;
             this.toolStripButtonCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCenter.Name = "toolStripButtonCenter";
-            this.toolStripButtonCenter.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonCenter.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonCenter.Text = "Center";
             this.toolStripButtonCenter.Click += new System.EventHandler(this.toolStripButtonCenter_Click);
             // 
             // toolStripButtonRight
             // 
             this.toolStripButtonRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonRight.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRight.Image")));
+            this.toolStripButtonRight.Image = global::HFBBS.Properties.Resources._024;
             this.toolStripButtonRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRight.Name = "toolStripButtonRight";
-            this.toolStripButtonRight.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRight.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonRight.Text = "Align Right";
             this.toolStripButtonRight.Click += new System.EventHandler(this.toolStripButtonRight_Click);
             // 
             // toolStripButtonFull
             // 
             this.toolStripButtonFull.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonFull.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFull.Image")));
+            this.toolStripButtonFull.Image = global::HFBBS.Properties.Resources._022;
             this.toolStripButtonFull.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFull.Name = "toolStripButtonFull";
-            this.toolStripButtonFull.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonFull.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonFull.Text = "Justify";
             this.toolStripButtonFull.Click += new System.EventHandler(this.toolStripButtonFull_Click);
             // 
             // toolStripSeparatorAlign
             // 
             this.toolStripSeparatorAlign.Name = "toolStripSeparatorAlign";
-            this.toolStripSeparatorAlign.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparatorAlign.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonLine
             // 
@@ -246,37 +248,37 @@ namespace HFBBS
             this.toolStripButtonLine.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLine.Image")));
             this.toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLine.Name = "toolStripButtonLine";
-            this.toolStripButtonLine.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonLine.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonLine.Text = "Insert Horizontal Line";
             this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButtonLine_Click);
             // 
             // toolStripButtonHyperlink
             // 
             this.toolStripButtonHyperlink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonHyperlink.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonHyperlink.Image")));
+            this.toolStripButtonHyperlink.Image = global::HFBBS.Properties.Resources._025;
             this.toolStripButtonHyperlink.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonHyperlink.Name = "toolStripButtonHyperlink";
-            this.toolStripButtonHyperlink.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonHyperlink.Text = "Create a Hyperlink";
+            this.toolStripButtonHyperlink.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonHyperlink.Text = "插入链接";
             this.toolStripButtonHyperlink.Click += new System.EventHandler(this.toolStripButtonHyperlink_Click);
             // 
             // toolStripButtonPicture
             // 
             this.toolStripButtonPicture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPicture.Image = global::HFBBS.Properties.Resources.picture;
+            this.toolStripButtonPicture.Image = global::HFBBS.Properties.Resources._019;
             this.toolStripButtonPicture.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPicture.Name = "toolStripButtonPicture";
-            this.toolStripButtonPicture.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonPicture.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonPicture.Text = "插入图片";
             this.toolStripButtonPicture.Click += new System.EventHandler(this.toolStripButtonPicture_Click);
             // 
             // btnInsetPage
             // 
             this.btnInsetPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnInsetPage.Image = global::HFBBS.Properties.Resources.page;
+            this.btnInsetPage.Image = global::HFBBS.Properties.Resources._20;
             this.btnInsetPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnInsetPage.Name = "btnInsetPage";
-            this.btnInsetPage.Size = new System.Drawing.Size(23, 22);
+            this.btnInsetPage.Size = new System.Drawing.Size(24, 24);
             this.btnInsetPage.Text = "插入分页";
             this.btnInsetPage.Click += new System.EventHandler(this.btnInsetPage_Click);
             // 
@@ -285,14 +287,20 @@ namespace HFBBS
             this.webBrowserBody.AllowWebBrowserDrop = false;
             this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowserBody.Location = new System.Drawing.Point(0, 25);
+            this.webBrowserBody.Location = new System.Drawing.Point(0, 27);
             this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserBody.Name = "webBrowserBody";
             this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(600, 425);
+            this.webBrowserBody.Size = new System.Drawing.Size(600, 423);
             this.webBrowserBody.TabIndex = 0;
             this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
             this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // HtmlEditor
             // 
@@ -333,5 +341,6 @@ namespace HFBBS
         private System.Windows.Forms.ToolStripButton toolStripButtonHyperlink;
         private System.Windows.Forms.ToolStripButton toolStripButtonPicture;
         private System.Windows.Forms.ToolStripButton btnInsetPage;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

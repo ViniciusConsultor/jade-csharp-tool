@@ -24,6 +24,8 @@ namespace HFBBS
 
         public static Dictionary<string, DockContent> MdiDict = new Dictionary<string, DockContent>();
 
+        public static NewsDAL NewsDAL = new NewsDAL();
+
         public static RuleManager BLL { get; set; }
         static DraftBoxForm draftForm;
         public static DraftBoxForm DraftForm

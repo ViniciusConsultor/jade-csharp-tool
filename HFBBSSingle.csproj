@@ -40,6 +40,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Com.iFLYTEK.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="Guifreaks.Common, Version=0.1.0.0, Culture=neutral, PublicKeyToken=c3c25e41a6abca42, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Guifreaks.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Guifreaks.NavigationBar, Version=0.1.0.0, Culture=neutral, PublicKeyToken=bf0afd6b35ed9434, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Guifreaks.NavigationBar.dll</HintPath>
+    </Reference>
+    <Reference Include="Guifreaks.NavigationBar.XmlSerializers, Version=0.1.0.0, Culture=neutral, PublicKeyToken=bf0afd6b35ed9434, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Guifreaks.NavigationBar.XmlSerializers.dll</HintPath>
+    </Reference>
     <Reference Include="HFBBS.DBUtility, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\HFBBS.DBUtility.dll</HintPath>
@@ -57,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization" />
@@ -156,6 +169,7 @@
     <Compile Include="DraftBoxForm.Designer.cs">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="IRemoteWebService.cs" />
     <Compile Include="IWorkingThread.cs" />
     <Compile Include="LoginForm.cs">
@@ -273,6 +287,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContentManageForm.resx">
       <DependentUpon>ContentManageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
@@ -369,6 +384,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Lib\Com.iFLYTEK.WinForms.dll" />
     <Content Include="Lib\DevComponents.DotNetBar2.dll" />
+    <Content Include="Lib\Guifreaks.Common.dll" />
+    <Content Include="Lib\Guifreaks.NavigationBar.dll" />
+    <Content Include="Lib\Guifreaks.NavigationBar.XmlSerializers.dll" />
     <Content Include="Lib\HFBBS.DBUtility.dll" />
     <Content Include="Lib\HtmlAgilityPack.dll" />
     <Content Include="Lib\Interop.ADOX.dll" />
@@ -381,6 +399,27 @@
     <Content Include="Pic\editor.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\sites.png" />
+    <None Include="Resources\scheduled_tasks %281%29.png" />
+    <None Include="Resources\scheduled_tasks.png" />
+    <None Include="Resources\121.bmp" />
+    <None Include="Resources\025.bmp" />
+    <None Include="Resources\024.bmp" />
+    <None Include="Resources\023.bmp" />
+    <None Include="Resources\022.bmp" />
+    <None Include="Resources\021.bmp" />
+    <None Include="Resources\20.bmp" />
+    <None Include="Resources\020.bmp" />
+    <None Include="Resources\019.bmp" />
+    <None Include="Resources\15.bmp" />
+    <None Include="Resources\08.bmp" />
+    <None Include="Resources\05.bmp" />
+    <None Include="Resources\00.bmp" />
+    <None Include="Resources\3.bmp" />
+    <None Include="Resources\2.bmp" />
+    <None Include="Resources\1.bmp" />
+    <None Include="Resources\icons.bmp" />
+    <None Include="Resources\icons.gif" />
     <None Include="Resources\email_qq.rar" />
     <None Include="Resources\login %281%29.png" />
     <None Include="Resources\login %282%29.png" />
@@ -406,15 +445,6 @@
     <None Include="Resources\select.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="ADOX">
-      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
-      <VersionMajor>6</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="SHDocVw">
       <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -424,6 +454,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HFBBS.Model\HFBBS.Model.csproj">
+      <Project>{7E1670D8-2EB8-40A4-BA51-B962675E4824}</Project>
+      <Name>HFBBS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

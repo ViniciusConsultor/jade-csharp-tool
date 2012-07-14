@@ -17,7 +17,8 @@ namespace HFBBS
             InitializeComponent();
             this.m_RowStyleNormal = new DataGridViewCellStyle();
             this.m_RowStyleNormal.BackColor = Color.LightBlue;
-            this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue; CacheObject.ContentForm.InitDownloadData(new DownloadData());
+            this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue;
+            CacheObject.ContentForm.InitDownloadData(new downloaddata());
 
             this.m_RowStyleAlternate = new DataGridViewCellStyle();
             this.m_RowStyleAlternate.BackColor = Color.LightGray;
@@ -52,31 +53,51 @@ namespace HFBBS
             }
         }
 
+        SearchArgs GetArgs(int pageIndex = 1, int pageSize = 15)
+        {
+            var taskId = 0;
+
+            if (comboBox1.SelectedItem != null)
+            {
+                var task = (SiteRule)comboBox1.SelectedItem;
+                taskId = task.SiteRuleId;
+            }
+            return new SearchArgs
+            {
+                IsPublish = isPublished,
+                Keyword = this.txtKeyword.Text,
+                PageIndex = pageIndex,
+                TaskId = taskId,
+                PageSzie = pageSize
+            };
+        }
+
         void pager1_PageChange(EventPagingArg e)
         {
             var task = (SiteRule)comboBox1.SelectedItem;
             this.dataGridView1.DataSource = null;
             int totalCount;
-            if (task.Name == "全部任务")
-            {
-                if (IsPublished)
-                {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = True", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
-                }
-                else
-                {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = False", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
-                }
-            }
-            else
-            {
-                this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
-            }
+            this.dataGridView1.DataSource = CacheObject.NewsDAL.GetList(GetArgs(pager1.CurrentPageIndex, currentPageSize), out totalCount);
+            //////if (task.Name == "全部任务")
+            //////{
+            //////    if (IsPublished)
+            //////    {
+            //////        this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = True", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            //////    }
+            //////    else
+            //////    {
+            //////        this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList("IsPublish = False", out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            //////    }
+            //////}
+            //////else
+            //////{
+            //////    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, pager1.CurrentPageIndex, currentPageSize).Tables[0];
+            //////}
         }
 
         private void DraftBoxForm_Load(object sender, EventArgs e)
         {
-            CacheObject.ContentForm.InitDownloadData(new DownloadData());
+            CacheObject.ContentForm.InitDownloadData(new downloaddata());
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,14 +109,16 @@ namespace HFBBS
 
                 int totalCount;
 
-                if (task.Name == "全部任务")
-                {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True" : "IsPublish = False"), out totalCount, 1, currentPageSize).Tables[0];
-                }
-                else
-                {
-                    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
-                }
+                this.dataGridView1.DataSource = CacheObject.NewsDAL.GetList(GetArgs(), out totalCount);
+
+                //if (task.Name == "全部任务")
+                //{
+                //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True" : "IsPublish = False"), out totalCount, 1, currentPageSize).Tables[0];
+                //}
+                //else
+                //{
+                //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
+                //}
 
                 this.pager1.CurrentPageIndex = 1;
                 this.pager1.PageSize = currentPageSize;
@@ -107,8 +130,8 @@ namespace HFBBS
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var dataTable = (DataTable)this.dataGridView1.DataSource;
-            CacheObject.ContentForm.InitDownloadData(new DownloadData((int)dataTable.Rows[e.RowIndex]["ID"]));
+            var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+            CacheObject.ContentForm.InitDownloadData(dataTable[e.RowIndex]);
             CacheObject.ContentForm.ShowDialog();
         }
 
@@ -134,7 +157,7 @@ namespace HFBBS
 
         }
 
-        int currentPageSize = 10;
+        int currentPageSize = 15;
 
         private void pager1_PageChanged(object sender, EventArgs e)
         {
@@ -154,8 +177,8 @@ namespace HFBBS
 
         private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dataTable = (DataTable)this.dataGridView1.DataSource;
-            CacheObject.ContentForm.InitDownloadData(new DownloadData((int)dataTable.Rows[dataGridView1.CurrentRow.Index]["ID"]));
+            var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+            CacheObject.ContentForm.InitDownloadData(dataTable[dataGridView1.CurrentRow.Index]);
             CacheObject.ContentForm.ShowDialog();
         }
 
