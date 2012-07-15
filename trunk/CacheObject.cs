@@ -264,7 +264,7 @@ namespace HFBBS
         /// </summary>
         public event Change OnChange;
 
-        public int MaxDownloadThread = 5;
+        public int MaxDownloadThread = 20;
 
         int currentCount = 0;
 
@@ -295,7 +295,10 @@ namespace HFBBS
 
         public List<DownloadFile> GetDownloadFiles(int taskId)
         {
-            return this.Where(d => d.TaskId == taskId).ToList();
+            lock (this)
+            {
+                return this.Where(d => d.TaskId == taskId).ToList();
+            }
         }
 
         void NotifyChange()

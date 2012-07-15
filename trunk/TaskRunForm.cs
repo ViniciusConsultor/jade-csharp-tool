@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using HFBBS.Model;
+using BrightIdeasSoftware;
 
 namespace HFBBS
 {
@@ -26,7 +27,24 @@ namespace HFBBS
             this.TabText = rule.Name + "[运行]";
             taskRunner = new TaskRunner(rule, this, new BLL.DataSaverManager());
             taskRunner.StateChange += new TaskStateChange(taskRunner_StateChange);
+            this.treeListView1.CanExpandGetter = delegate(object x)
+            {
+                return false;
+            };
 
+
+            this.olvColumnProgress.Renderer = new BarRenderer(0, 100);
+
+            this.olvColumnSpeed.AspectGetter = delegate(object x)
+            {
+                var value = ((DownloadFile)x).Speed.ToString("0.00 KB/s");
+                return value;
+            };
+
+            this.olvColumn1.AspectGetter = delegate(object x)
+            {
+                return ((DownloadFile)x).Status.ToString();
+            };
         }
 
         void taskRunner_StateChange(object sender, TaskRunnerEventArgs e)
@@ -106,30 +124,32 @@ namespace HFBBS
         private void TaskRunForm_Load(object sender, EventArgs e)
         {
             new Thread(taskRunner.Start).Start();
-            
-            this.dataGridView1.AutoGenerateColumns = false;
-
-            source.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
-            this.dataGridView1.DataSource = source;
+            treeListView1.Roots = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
             DownloadFileCollection.Instance.OnChange += new Change(Instance_OnChange);
         }
 
-        BindingSource source = new BindingSource();
+        //BindingSource source = new BindingSource();
 
 
         void Instance_OnChange(object sender, EventArgs e)
         {
             try
             {
-                this.dataGridView1.BeginInvoke(new MethodInvoker(() =>
+                this.treeListView1.BeginInvoke(new MethodInvoker(() =>
                 {
-                    source.DataSource = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
-                    source.ResetBindings(false);
+                    treeListView1.Roots = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
+
+                    treeListView1.Refresh();
                 }));
             }
             catch
             {
             }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
         }
     }
 }

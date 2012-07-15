@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="hfbbsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="hfbbsModelStoreContainer">
+          <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" />
+        </EntityContainer>
+        <EntityType Name="downloaddata">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="Title" Type="text" />
+          <Property Name="SubTitle" Type="text" />
+          <Property Name="Keywords" Type="text" />
+          <Property Name="news_source_name" Type="text" />
+          <Property Name="news_template_file" Type="text" />
+          <Property Name="news_top" Type="text" />
+          <Property Name="news_guideimage" Type="text" />
+          <Property Name="news_guideimage2" Type="text" />
+          <Property Name="news_description" Type="text" />
+          <Property Name="news_link" Type="text" />
+          <Property Name="news_down" Type="text" />
+          <Property Name="news_right" Type="text" />
+          <Property Name="news_left" Type="text" />
+          <Property Name="comment_url" Type="text" />
+          <Property Name="news_video" Type="text" />
+          <Property Name="news_keywords2" Type="text" />
+          <Property Name="label_base" Type="text" />
+          <Property Name="cmspinglun" Type="bit" Nullable="false" />
+          <Property Name="bbspinglun" Type="bit" Nullable="false" />
+          <Property Name="ISkfbm" Type="bit" Nullable="false" />
+          <Property Name="kfbm_id" Type="text" />
+          <Property Name="kfbm_link" Type="text" />
+          <Property Name="ISgfbm" Type="bit" Nullable="false" />
+          <Property Name="gfbm_id" Type="text" />
+          <Property Name="gfbm_link" Type="text" />
+          <Property Name="news_abs" Type="text" />
+          <Property Name="Content" Type="text" />
+          <Property Name="Summary" Type="text" />
+          <Property Name="Source" Type="text" />
+          <Property Name="CreateTime" Type="text" />
+          <Property Name="Other" Type="text" />
+          <Property Name="Url" Type="text" />
+          <Property Name="IsEdit" Type="bit" Nullable="false" />
+          <Property Name="EditorUserName" Type="text" />
+          <Property Name="DownloadTime" Type="datetime" />
+          <Property Name="IsDownload" Type="bit" Nullable="false" />
+          <Property Name="IsPublish" Type="bit" Nullable="false" />
+          <Property Name="EditTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="text" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hfbbsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="HFBBSEntities">
+          <EntitySet Name="user" EntityType="hfbbsModel.user" />
+          <EntitySet Name="downloaddata" EntityType="hfbbsModel.downloaddata" />
+        </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="IsAdmin" Type="Boolean" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" />
+        </EntityType>
+        <EntityType Name="downloaddata">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TaskId" />
+          <Property Type="String" Name="Title" />
+          <Property Type="String" Name="SubTitle" />
+          <Property Type="String" Name="Keywords" />
+          <Property Type="String" Name="news_source_name" />
+          <Property Type="String" Name="news_template_file" />
+          <Property Type="String" Name="news_top" />
+          <Property Type="String" Name="news_guideimage" />
+          <Property Type="String" Name="news_guideimage2" />
+          <Property Type="String" Name="news_description" />
+          <Property Type="String" Name="news_link" />
+          <Property Type="String" Name="news_down" />
+          <Property Type="String" Name="news_right" />
+          <Property Type="String" Name="news_left" />
+          <Property Type="String" Name="comment_url" />
+          <Property Type="String" Name="news_video" />
+          <Property Type="String" Name="news_keywords2" />
+          <Property Type="String" Name="label_base" />
+          <Property Type="Boolean" Name="cmspinglun" Nullable="false" />
+          <Property Type="Boolean" Name="bbspinglun" Nullable="false" />
+          <Property Type="Boolean" Name="ISkfbm" Nullable="false" />
+          <Property Type="String" Name="kfbm_id" />
+          <Property Type="String" Name="kfbm_link" />
+          <Property Type="Boolean" Name="ISgfbm" Nullable="false" />
+          <Property Type="String" Name="gfbm_id" />
+          <Property Type="String" Name="gfbm_link" />
+          <Property Type="String" Name="news_abs" />
+          <Property Type="String" Name="Content" />
+          <Property Type="String" Name="Summary" />
+          <Property Type="String" Name="Source" />
+          <Property Type="String" Name="CreateTime" />
+          <Property Type="String" Name="Other" />
+          <Property Type="String" Name="Url" />
+          <Property Type="Boolean" Name="IsEdit" Nullable="false" />
+          <Property Type="String" Name="EditorUserName" />
+          <Property Type="DateTime" Name="DownloadTime" />
+          <Property Type="Boolean" Name="IsDownload" Nullable="false" />
+          <Property Type="Boolean" Name="IsPublish" Nullable="false" />
+          <Property Type="DateTime" Name="EditTime" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="hfbbsModelStoreContainer" CdmEntityContainer="HFBBSEntities">
+          <EntitySetMapping Name="user"><EntityTypeMapping TypeName="hfbbsModel.user"><MappingFragment StoreEntitySet="user">
+            <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="downloaddata">
+            <EntityTypeMapping TypeName="hfbbsModel.downloaddata">
+              <MappingFragment StoreEntitySet="downloaddata">
+                <ScalarProperty Name="EditTime" ColumnName="EditTime" />
+                <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
+                <ScalarProperty Name="IsDownload" ColumnName="IsDownload" />
+                <ScalarProperty Name="DownloadTime" ColumnName="DownloadTime" />
+                <ScalarProperty Name="EditorUserName" ColumnName="EditorUserName" />
+                <ScalarProperty Name="IsEdit" ColumnName="IsEdit" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="news_abs" ColumnName="news_abs" />
+                <ScalarProperty Name="gfbm_link" ColumnName="gfbm_link" />
+                <ScalarProperty Name="gfbm_id" ColumnName="gfbm_id" />
+                <ScalarProperty Name="ISgfbm" ColumnName="ISgfbm" />
+                <ScalarProperty Name="kfbm_link" ColumnName="kfbm_link" />
+                <ScalarProperty Name="kfbm_id" ColumnName="kfbm_id" />
+                <ScalarProperty Name="ISkfbm" ColumnName="ISkfbm" />
+                <ScalarProperty Name="bbspinglun" ColumnName="bbspinglun" />
+                <ScalarProperty Name="cmspinglun" ColumnName="cmspinglun" />
+                <ScalarProperty Name="label_base" ColumnName="label_base" />
+                <ScalarProperty Name="news_keywords2" ColumnName="news_keywords2" />
+                <ScalarProperty Name="news_video" ColumnName="news_video" />
+                <ScalarProperty Name="comment_url" ColumnName="comment_url" />
+                <ScalarProperty Name="news_left" ColumnName="news_left" />
+                <ScalarProperty Name="news_right" ColumnName="news_right" />
+                <ScalarProperty Name="news_down" ColumnName="news_down" />
+                <ScalarProperty Name="news_link" ColumnName="news_link" />
+                <ScalarProperty Name="news_description" ColumnName="news_description" />
+                <ScalarProperty Name="news_guideimage2" ColumnName="news_guideimage2" />
+                <ScalarProperty Name="news_guideimage" ColumnName="news_guideimage" />
+                <ScalarProperty Name="news_top" ColumnName="news_top" />
+                <ScalarProperty Name="news_template_file" ColumnName="news_template_file" />
+                <ScalarProperty Name="news_source_name" ColumnName="news_source_name" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" ZoomLevel="108">
+        <EntityTypeShape EntityType="hfbbsModel.user" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hfbbsModel.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
