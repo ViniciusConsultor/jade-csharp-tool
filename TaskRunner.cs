@@ -39,7 +39,7 @@ namespace HFBBS
                 if (runningTaskModel == null)
                 {
                     runningTaskModel = RunningTaskCollection.Instance.SingleOrDefault(r => r.TaskId == Rule.SiteRuleId);
-                } 
+                }
 
                 if (runningTaskModel == null)
                 {
@@ -78,7 +78,7 @@ namespace HFBBS
             Rule = rule;
             Logger = logger;
             DataSaver = dataSaver;
-            OldUrls = Model.DownloadData.GetUrlList(rule.SiteRuleId);
+            OldUrls = CacheObject.NewsDAL.GetTaskUrls(rule.SiteRuleId);
         }
 
         /// <summary>
@@ -218,12 +218,17 @@ namespace HFBBS
                                     {
                                         if (!this.DownloadedPics.ContainsKey(key.Key))
                                         {
-                                            this.DownloadedPics.Add(key.Key, key.Value);
+                                            var imageUrl = key.Key;
+                                            if (!imageUrl.Contains("http://"))
+                                            {
+                                                imageUrl = ExtractUrl.RepairUrl(url.AbsoluteUri, imageUrl);
+                                            }
+                                            this.DownloadedPics.Add(imageUrl, key.Value);
                                             DownloadFile file = new DownloadFile()
                                             {
                                                 TaskId = Rule.SiteRuleId,
                                                 FileName = key.Value,
-                                                Url = key.Key,
+                                                Url = imageUrl,
                                                 Progress = 0,
                                                 TotalSize = 0,
                                                 Number = DownloadFileCollection.Instance.GetDownloadFiles(Rule.SiteRuleId).Count + 1
@@ -275,23 +280,50 @@ namespace HFBBS
 
         int picIndex = 0;
 
+        private void CheckExtractUrlIsAvailable(List<string> seedUlrs, out List<Uri> urls)
+        {
+
+            urls = new List<Uri>();
+            foreach (string sourceUrl in seedUlrs)
+            {
+                List<string> sourceUrls = new List<string>();
+                try
+                {
+                    sourceUrls = ExtractUrl.ParseUrlFromParameter(sourceUrl);
+                }
+                catch
+                {
+                }
+                foreach (string extractUrl in sourceUrls)
+                {
+                    Uri uri;
+                    if (Uri.TryCreate(extractUrl, UriKind.Absolute, out uri))
+                    {
+                        urls.Add(uri);
+                    }
+                }
+            }
+        }
+
         private void ExtractUrls(List<Uri> urls)
         {
 
             var item = Rule;
             int i = 0;
-            var startUrls = Rule.StartUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            var startUrls = Rule.StartUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var startUris = new List<Uri>();
+            CheckExtractUrlIsAvailable(startUrls, out startUris);
 
             while (true)
             {
                 if (!isForceStop)
                 {
-                    if (i == startUrls.Length)
+                    if (i == startUris.Count)
                     {
                         break;
                     }
-                    Logger.Info("正在下载并分析1级第" + (i + 1) + "个网址" + startUrls[i]);
-                    var html = HtmlPicker.VisitUrl(new Uri(startUrls[i]),
+                    Logger.Info("正在下载并分析1级第" + (i + 1) + "个网址" + startUris[i].AbsoluteUri);
+                    var html = HtmlPicker.VisitUrl(startUris[i],
                                                        item.HttpMethod,
                                                        null,
                                                        string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
@@ -299,7 +331,7 @@ namespace HFBBS
                                                    string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
                                                    string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
                                                        System.Text.Encoding.GetEncoding(item.ListEncoding));
-                    SetExtractUrl(item, html, startUrls[i], item.ListEncoding, urls);
+                    SetExtractUrl(item, html, startUris[i].AbsoluteUri, item.ListEncoding, urls);
                     i++;
                     if (this.StateChange != null)
                     {
@@ -307,10 +339,10 @@ namespace HFBBS
                         {
                             CurrentCount = i,
                             StepName = "采集网址",
-                            TotalCount = startUrls.Length
+                            TotalCount = startUris.Count
                         }));
                     }
-                    this.RunningTaskModel.UrlCount = i + "/" + startUrls.Length;
+                    this.RunningTaskModel.UrlCount = i + "/" + startUris.Count;
                     RunningTaskCollection.Instance.Update();
                 }
                 else
@@ -319,10 +351,8 @@ namespace HFBBS
                 }
             }
 
-            var unFinisedUrls = Model.DownloadData.GetUnFetchedUrlList(Rule.SiteRuleId);
+            var unFinisedUrls = CacheObject.NewsDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
             unFinisedUrls.ForEach(u => urls.Add(new Uri(u)));
-
-
         }
 
         private void SetExtractUrl(
@@ -555,7 +585,7 @@ namespace HFBBS
                 bool isFinsh = false;
 
 
-                while (tryTime < 4 && !isFinsh)
+                while (tryTime < 1 && !isFinsh)
                 {
                     System.IO.Stream so = null;
                     try

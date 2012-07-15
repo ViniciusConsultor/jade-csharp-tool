@@ -104,7 +104,7 @@ namespace HFBBS
             return urls;
         }
 
-        private static void RepairUrls(string sourceUrl, string urlInclude, string urlExclude, List<string> urls)
+        public static void RepairUrls(string sourceUrl, string urlInclude, string urlExclude, List<string> urls)
         {
 
             int count = urls.Count;
@@ -277,13 +277,13 @@ namespace HFBBS
             try
             {
                 HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
-                html = html.ToLower();
-                if (!html.Contains("</body"))
+                //html = html.ToLower();
+                if (!html.Contains("</BODY") && !html.Contains("</body"))
                 {
                     html += "</body>";
                 }
-                html = html.Replace("<tbody>", "").Replace("</tbody>", "");
-                xpath = xpath.Replace("/tbody[1]", "").ToLower();
+                html = html.Replace("<tbody>", "").Replace("</tbody>", "").Replace("<TBODY>", "").Replace("</TBODY>", "");
+                xpath = xpath.Replace("/tbody[1]", "");
                 var body = new Regex("<body[^>]*>[\\s\\S]+</body>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 html = body.Match(html).Value;
                 HtmlDoc.LoadHtml(html);

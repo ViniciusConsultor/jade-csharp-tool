@@ -32,14 +32,13 @@
             this.lblStep = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblProcess = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Progress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Speed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.treeListView1 = new BrightIdeasSoftware.TreeListView();
+            this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnUrl = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnProgress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnSpeed = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLog
@@ -77,70 +76,70 @@
             this.lblProcess.TabIndex = 4;
             this.lblProcess.Text = "(0/0)";
             // 
-            // dataGridView1
+            // treeListView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.treeListView1.AllColumns.Add(this.olvColumnName);
+            this.treeListView1.AllColumns.Add(this.olvColumnUrl);
+            this.treeListView1.AllColumns.Add(this.olvColumnProgress);
+            this.treeListView1.AllColumns.Add(this.olvColumnSpeed);
+            this.treeListView1.AllColumns.Add(this.olvColumn1);
+            this.treeListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FileName,
-            this.Status,
-            this.TotalSize,
-            this.Progress,
-            this.Speed,
-            this.Url});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 327);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(809, 99);
-            this.dataGridView1.TabIndex = 5;
+            this.treeListView1.CheckBoxes = false;
+            this.treeListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumnName,
+            this.olvColumnUrl,
+            this.olvColumnProgress,
+            this.olvColumnSpeed,
+            this.olvColumn1});
+            this.treeListView1.Location = new System.Drawing.Point(12, 321);
+            this.treeListView1.Name = "treeListView1";
+            this.treeListView1.OwnerDraw = true;
+            this.treeListView1.ShowGroups = false;
+            this.treeListView1.Size = new System.Drawing.Size(809, 104);
+            this.treeListView1.TabIndex = 13;
+            this.treeListView1.UseCompatibleStateImageBehavior = false;
+            this.treeListView1.View = System.Windows.Forms.View.Details;
+            this.treeListView1.VirtualMode = true;
             // 
-            // FileName
+            // olvColumnName
             // 
-            this.FileName.DataPropertyName = "FileName";
-            this.FileName.HeaderText = "文件名";
-            this.FileName.Name = "FileName";
-            this.FileName.Width = 250;
+            this.olvColumnName.AspectName = "FileName";
+            this.olvColumnName.Text = "文件名";
+            this.olvColumnName.Width = 200;
             // 
-            // Status
+            // olvColumnUrl
             // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "文件状态";
-            this.Status.Name = "Status";
+            this.olvColumnUrl.AspectName = "Url";
+            this.olvColumnUrl.Text = "Url";
+            this.olvColumnUrl.Width = 200;
             // 
-            // TotalSize
+            // olvColumnProgress
             // 
-            this.TotalSize.DataPropertyName = "TotalSize";
-            this.TotalSize.HeaderText = "大小";
-            this.TotalSize.Name = "TotalSize";
-            this.TotalSize.Width = 120;
+            this.olvColumnProgress.AspectName = "Progress";
+            this.olvColumnProgress.Text = "进度";
+            this.olvColumnProgress.Width = 150;
             // 
-            // Progress
+            // olvColumnSpeed
             // 
-            this.Progress.DataPropertyName = "Progress";
-            this.Progress.HeaderText = "进度";
-            this.Progress.Name = "Progress";
+            this.olvColumnSpeed.AspectName = "Speed";
+            this.olvColumnSpeed.AspectToStringFormat = "";
+            this.olvColumnSpeed.Text = "下载速度";
+            this.olvColumnSpeed.Width = 150;
             // 
-            // Speed
+            // olvColumn1
             // 
-            this.Speed.DataPropertyName = "Speed";
-            this.Speed.HeaderText = "下载速度";
-            this.Speed.Name = "Speed";
-            // 
-            // Url
-            // 
-            this.Url.DataPropertyName = "Url";
-            this.Url.HeaderText = "网址";
-            this.Url.Name = "Url";
-            this.Url.Width = 250;
+            this.olvColumn1.AspectName = "Status";
+            this.olvColumn1.Text = "状态";
+            this.olvColumn1.Width = 100;
             // 
             // TaskRunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(833, 428);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.treeListView1);
             this.Controls.Add(this.lblProcess);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblStep);
@@ -149,7 +148,7 @@
             this.TabText = "TaskRunForm";
             this.Text = "TaskRunForm";
             this.Load += new System.EventHandler(this.TaskRunForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,12 +160,11 @@
         private System.Windows.Forms.Label lblStep;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblProcess;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Progress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Speed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Url;
+        private BrightIdeasSoftware.TreeListView treeListView1;
+        private BrightIdeasSoftware.OLVColumn olvColumnName;
+        private BrightIdeasSoftware.OLVColumn olvColumnUrl;
+        private BrightIdeasSoftware.OLVColumn olvColumnProgress;
+        private BrightIdeasSoftware.OLVColumn olvColumnSpeed;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
     }
 }

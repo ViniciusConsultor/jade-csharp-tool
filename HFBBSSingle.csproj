@@ -67,6 +67,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Users\Administrator\Desktop\samfisher83-HTML-Agility-xpath-finder-0834a9b\samfisher83-HTML-Agility-xpath-finder-0834a9b\Html_Agil_Xpath\Microsoft.mshtml.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView, Version=2.5.0.29838, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -392,6 +396,7 @@
     <Content Include="Lib\Interop.ADOX.dll" />
     <Content Include="Lib\Interop.SHDocVw.dll" />
     <Content Include="Lib\log4net.dll" />
+    <Content Include="Lib\ObjectListView.dll" />
     <Content Include="Lib\UtilityLibrary.dll" />
     <Content Include="Lib\WeifenLuo.WinFormsUI.Docking.dll" />
     <Content Include="Lib\WizardBase.dll" />
@@ -456,7 +461,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HFBBS.Model\HFBBS.Model.csproj">
+    <ProjectReference Include="HFBBS.Model\HFBBS.Model.csproj">
       <Project>{7E1670D8-2EB8-40A4-BA51-B962675E4824}</Project>
       <Name>HFBBS.Model</Name>
     </ProjectReference>
