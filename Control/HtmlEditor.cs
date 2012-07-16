@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Threading;
+using ICSharpCode.TextEditor.Document;
 
 namespace HFBBS
 {
@@ -21,11 +22,23 @@ namespace HFBBS
     {
         public HtmlEditor()
         {
-         
+
 
             dataUpdate = 0;
-            
+
             InitializeComponent();
+          
+            this.txtSource.ShowEOLMarkers = false;
+            txtSource.ShowHRuler = false;
+            txtSource.ShowInvalidLines = false;
+            txtSource.ShowMatchingBracket = true;
+            txtSource.ShowSpaces = false;
+            txtSource.ShowTabs = false;
+            txtSource.ShowVRuler = false;
+            txtSource.LineViewerStyle = LineViewerStyle.None;
+            txtSource.AllowCaretBeyondEOL = false;
+            txtSource.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("HTML");
+            txtSource.Encoding = Encoding.GetEncoding("GB2312");
 
             InitializeControls();
             //Bitmap bitmaps = HFBBS.Properties.Resources.editorToolbar1;
@@ -33,9 +46,9 @@ namespace HFBBS
             //imageList1.Images.AddStrip(bitmaps);
             //this.toolStripButtonBold.Image = imageList1.Images[0];
 
-            this.Load += new EventHandler(HtmlEditor_Load); 
+            this.Load += new EventHandler(HtmlEditor_Load);
 
-            
+
         }
 
         public void SetScriptingForm(Form form)
@@ -578,6 +591,18 @@ namespace HFBBS
         private void btnInsetPage_Click(object sender, EventArgs e)
         {
             this.webBrowserBody.Document.InvokeScript("insertPage");
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabControl1.SelectedIndex == 1)
+            {
+                this.txtSource.Text = this.Html;
+            }
+            else
+            {
+                this.Html = this.txtSource.Text;
+            }
         }
     }
 }

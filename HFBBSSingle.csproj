@@ -59,6 +59,7 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
@@ -96,10 +97,6 @@
     <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\WizardBase.dll</HintPath>
-    </Reference>
-    <Reference Include="XmlDatabase.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7169c13cb8ad33c1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\XmlDatabase.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +396,7 @@
     <Content Include="Lib\Guifreaks.NavigationBar.XmlSerializers.dll" />
     <Content Include="Lib\HFBBS.DBUtility.dll" />
     <Content Include="Lib\HtmlAgilityPack.dll" />
+    <Content Include="Lib\ICSharpCode.TextEditor.dll" />
     <Content Include="Lib\Interop.ADOX.dll" />
     <Content Include="Lib\Interop.SHDocVw.dll" />
     <Content Include="Lib\log4net.dll" />
@@ -413,6 +411,9 @@
     <Content Include="Pic\favicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\yiqianfapingtai.gif" />
+    <None Include="Resources\daiqianfapingtai.gif" />
+    <None Include="Resources\bianjipingtai.gif" />
     <None Include="Resources\cancel%281%29.png" />
     <None Include="Resources\red_ok%281%29.png" />
     <None Include="Resources\cancel.png" />
@@ -477,6 +478,10 @@
     <ProjectReference Include="HFBBS.Model\HFBBS.Model.csproj">
       <Project>{7E1670D8-2EB8-40A4-BA51-B962675E4824}</Project>
       <Name>HFBBS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="XDatabase.Core\XMLDatabase.Core.csproj">
+      <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
+      <Name>XMLDatabase.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

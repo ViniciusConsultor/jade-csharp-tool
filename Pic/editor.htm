@@ -141,6 +141,10 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                         return false;
                     }
                 }
+            }).dbclick(function () {
+                if (document.activeElement) {
+                    alert(document.activeElement);
+                }
             });
         }
 
