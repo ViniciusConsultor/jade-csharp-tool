@@ -20,6 +20,8 @@ namespace HFBBS
             RunningTasks = new List<RunningTask>();
         }
 
+        public static bool IsDebug = true;
+
         public static Form1 MainForm { get; set; }
 
         public static Dictionary<string, DockContent> MdiDict = new Dictionary<string, DockContent>();

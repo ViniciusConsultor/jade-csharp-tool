@@ -17,14 +17,14 @@ namespace HFBBS
             InitializeComponent();
             InitDockPanel();
 
-            for (var i = 0; i < 3; i++)
-            {
-                for (var j = 0; j < 50; j++)
-                {
-                    var bitmap = ImageHelper.Cut(HFBBS.Properties.Resources.icons, j * 20, 20 * i, 20, 20);
-                    bitmap.Save("d:\\icons\\" + i + j + ".bmp");
-                }
-            }
+            //for (var i = 0; i < 3; i++)
+            //{
+            //    for (var j = 0; j < 50; j++)
+            //    {
+            //        var bitmap = ImageHelper.Cut(HFBBS.Properties.Resources.icons, j * 20, 20 * i, 20, 20);
+            //        bitmap.Save("d:\\icons\\" + i + j + ".bmp");
+            //    }
+            //}
 
             //var bitmap = ImageHelper.Cut(HFBBS.Properties.Resources.icons, 0, 0, 1000, 20);
             //bitmap.Save("d:\\1.bmp");
@@ -79,6 +79,13 @@ namespace HFBBS
         {
             //////HFBBS.Helper.AccessHelper.CreateMDBDataBase();
             CacheObject.MainForm = this;
+
+            if (CacheObject.IsDebug)
+            {
+                this.Show();
+                return;
+            }
+
             DialogResult dr = new LoginForm(new TestLogin()).ShowDialog();
 
             if (dr == DialogResult.Cancel)

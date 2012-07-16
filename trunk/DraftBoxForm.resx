@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="IsPublish.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="Select.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Title.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsPublish.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="IsEdit.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="editor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Content.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -132,13 +144,32 @@
   <metadata name="Source.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="CreateTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DownloadTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Url.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>174, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAqlJREFUOE+Nk19I
+        U1Ecxy9JYRFYpDDJiMpeUpCoMOecyiBlzplLt7b5hxWZYYSSmUmUmD5oYoYvUk+99SCIRCRkLTOM0K1t
+        2ra73aW2/DdNRbeU/bnfzr3pUAr0wOGee+7v8+HH95xLUduMVWdBfNCpqmZnNN+f1J2+u109/93nyI8L
+        0srrIVrVS+AVlrkMTGgw8THHLRBQMf+VQJ8eGaBVipBD+TLoVM5x0MYEWfvpAmBSjacPTjdtEZRK9wlA
+        Z9WzjNq0GdoiGNPC9y0PrEuJeYNiKnY/FR2WaCWRpbBJEHKpyeRaLQLGNAB5Z52kC6eK7GmxbJIiZC8E
+        Zktw/2bCnbDg8AEqaf5NgtdvV8A7kocVixxeqwJrY2oEJ0sJcBWsR4eFwUzSARG7tXB9kNqIYO+GJOJ5
+        zaGuISYHDWYJqowZqDWkoudzGibfCTHdn44pfSoW9EKAIR0wpKPpIpRrThSHu9B0nmpvoqUoM6agdkSB
+        954u1Fjy0WEUYckgxXyfCKsmOYGVYB0kTLcapldZQ0Swh5c8Gs22NztyUWZIx22LDMuBRcyuudFC38Br
+        aw4wrv2byfrJgMvKUwK17OhFXtDqlHo7XFo4V0YxvTqOAOsHN5YDv9A8mhsG+fvABTxTjJ/D8iW5JFbL
+        CxqtF5g2Rgbj4gAPLvo9/LN/rhsVxlReABIqB/62XQq11SX2xMVEZBE0khdUGMQt7S4ZGm0aNNh0qLcW
+        44fPwedx72saD67ZC9gXrWf1yYlROoJsvY1lw2eib5kyP1WaxdANJ6PcKEa1hctEhLd0Lro7U74Ik6Ku
+        /QNuvpKaAdFB3aDwceXAeV+VSYx6cwae9WXMKbIFD0nd8R39RFzRuZMR+b2d8eYrhUdad1NUAtnatWN4
+        vZBw1LHwGW9D/wGq186hGDOULgAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>
