@@ -64,6 +64,14 @@ namespace HFBBS.Model
 
         public List<downloaddata> GetList(SearchArgs args, out int totalCount)
         {
+            totalCount = 10;
+
+            return new List<downloaddata> { 
+                new downloaddata(){Title="test 1", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false},
+                 new downloaddata(){Title="test 2", IsDownload = true,IsEdit = false,EditorUserName="xxx",IsPublish= true},
+                  new downloaddata(){Title="test3 ", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false}
+            };
+
             var query = Repository.downloaddata.Where(
                 t => (args.IsDownload ? t.IsDownload == true : true) &&
                     (args.IsEdit ? t.IsEdit == true : true) &&
