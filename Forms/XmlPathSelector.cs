@@ -208,11 +208,11 @@ namespace HFBBS.Forms
                 Console.WriteLine(e.ToElement.ClientRectangle);
                 if (current != null)
                 {
-                    current.Style = current.Style.Replace("BACKGROUND-COLOR: #9fc4e7", "");
+                    current.Style = current.Style.Replace("BORDER-BOTTOM: #0000cc 1px solid; BORDER-LEFT: #0000cc 1px solid; BACKGROUND-COLOR: #9fc4e7; BORDER-TOP: #0000cc 1px solid; BORDER-RIGHT: #0000cc 1px solid", "");
                 }
                 current = element;
                 Console.WriteLine(e.ToElement.ClientRectangle);
-                current.Style += "background-color:#9FC4E7;";
+                current.Style += "background-color:#9FC4E7;border:1px solid #0000CC;";
 
                 this.txtxmlpath.Text = GetXmlPath(current);
             }
