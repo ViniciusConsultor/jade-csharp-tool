@@ -84,33 +84,21 @@ namespace HFBBS
             {
                 if (!string.IsNullOrEmpty(match.Groups["src"].Value) && !urlList.ContainsKey(match.Groups["src"].Value))
                 {
-
                     var src = match.Groups["src"].Value;
-
                     var fileName = src;
-
                     var slashIndex = fileName.LastIndexOf("/");
-
                     if (slashIndex > -1)
                     {
                         fileName = fileName.Substring(slashIndex + 1);
                     }
-
                     if (!fileName.Contains("."))
                     {
                         fileName += ".jpg";
                     }
-
-                    //var src = match.Groups["src"].Value;
-                    //var extension = src.Substring(src.LastIndexOf("."));
-
-                    //if (!AllowedExtensions.Contains(extension))
-                    //{
-                    //    extension = ".jpg";
-                    //}
-                    //var localFile = Guid.NewGuid().ToString() + extension;
                     urlList.Add(src, fileName);
-                    html = html.Replace(match.Value, match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName));
+                    var newImage = match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName);
+                    newImage = "<p style='text-align:center'>" + newImage + "</p>";
+                    html = html.Replace(match.Value, newImage);
                 }
             }
 
