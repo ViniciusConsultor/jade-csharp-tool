@@ -53,9 +53,16 @@ namespace HFBBS
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
-            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabEditor = new System.Windows.Forms.TabPage();
+            this.tabSource = new System.Windows.Forms.TabPage();
+            this.txtSource = new ICSharpCode.TextEditor.TextEditorControl();
+            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.toolStripToolBar.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabEditor.SuspendLayout();
+            this.tabSource.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripToolBar
@@ -282,35 +289,83 @@ namespace HFBBS
             this.btnInsetPage.Text = "≤Â»Î∑÷“≥";
             this.btnInsetPage.Click += new System.EventHandler(this.btnInsetPage_Click);
             // 
-            // webBrowserBody
-            // 
-            this.webBrowserBody.AllowWebBrowserDrop = false;
-            this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowserBody.Location = new System.Drawing.Point(0, 27);
-            this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowserBody.Name = "webBrowserBody";
-            this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(600, 423);
-            this.webBrowserBody.TabIndex = 0;
-            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
-            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabEditor);
+            this.tabControl1.Controls.Add(this.tabSource);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 27);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(600, 423);
+            this.tabControl1.TabIndex = 2;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabEditor
+            // 
+            this.tabEditor.Controls.Add(this.webBrowserBody);
+            this.tabEditor.Location = new System.Drawing.Point(4, 25);
+            this.tabEditor.Name = "tabEditor";
+            this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEditor.Size = new System.Drawing.Size(592, 394);
+            this.tabEditor.TabIndex = 0;
+            this.tabEditor.Text = "±‡º≠∆˜";
+            this.tabEditor.UseVisualStyleBackColor = true;
+            // 
+            // tabSource
+            // 
+            this.tabSource.Controls.Add(this.txtSource);
+            this.tabSource.Location = new System.Drawing.Point(4, 25);
+            this.tabSource.Name = "tabSource";
+            this.tabSource.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSource.Size = new System.Drawing.Size(592, 394);
+            this.tabSource.TabIndex = 1;
+            this.tabSource.Text = "Source";
+            this.tabSource.UseVisualStyleBackColor = true;
+            // 
+            // txtSource
+            // 
+            this.txtSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSource.IsReadOnly = false;
+            this.txtSource.Location = new System.Drawing.Point(3, 3);
+            this.txtSource.Name = "txtSource";
+            this.txtSource.Size = new System.Drawing.Size(586, 388);
+            this.txtSource.TabIndex = 0;
+            // 
+            // webBrowserBody
+            // 
+            this.webBrowserBody.AllowWebBrowserDrop = false;
+            this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowserBody.Location = new System.Drawing.Point(3, 3);
+            this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowserBody.Name = "webBrowserBody";
+            this.webBrowserBody.ScriptErrorsSuppressed = true;
+            this.webBrowserBody.Size = new System.Drawing.Size(586, 388);
+            this.webBrowserBody.TabIndex = 0;
+            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
+            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
+            // 
             // HtmlEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.webBrowserBody);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStripToolBar);
             this.Name = "HtmlEditor";
             this.Size = new System.Drawing.Size(600, 450);
             this.toolStripToolBar.ResumeLayout(false);
             this.toolStripToolBar.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabEditor.ResumeLayout(false);
+            this.tabSource.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +397,9 @@ namespace HFBBS
         private System.Windows.Forms.ToolStripButton toolStripButtonPicture;
         private System.Windows.Forms.ToolStripButton btnInsetPage;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabEditor;
+        private System.Windows.Forms.TabPage tabSource;
+        private ICSharpCode.TextEditor.TextEditorControl txtSource;
     }
 }

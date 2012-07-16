@@ -192,7 +192,7 @@ namespace HFBBS
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCurrentData();
-            CurrentData.EditTime = DateTime.Now;
+       
             CacheObject.NewsDAL.Update(CurrentData);
 
             MessageBox.Show("保存成功");
@@ -200,6 +200,9 @@ namespace HFBBS
 
         private void UpdateCurrentData()
         {
+            CurrentData.IsEdit = true;
+            CurrentData.EditTime = DateTime.Now;
+            CurrentData.EditorUserName = CacheObject.CurrentUser.Name;
             CurrentData.Content = txtContent.Html;
             CurrentData.Summary = this.txt_row_news_abstract.Text;
 
@@ -371,7 +374,6 @@ namespace HFBBS
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            CurrentData.EditTime = DateTime.Now;
             UpdateCurrentData();
             CurrentData.IsPublish = true;
             CacheObject.NewsDAL.Update(CurrentData);
@@ -385,6 +387,36 @@ namespace HFBBS
         }
 
         private void txtContent_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_news_keyword2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbSearchLabel_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void text_news_video_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label28_Click(object sender, EventArgs e)
         {
 
         }

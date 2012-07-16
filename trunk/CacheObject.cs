@@ -31,6 +31,19 @@ namespace HFBBS
         public static RuleManager BLL { get; set; }
         static DraftBoxForm draftForm;
 
+        public static User CurrentUser
+        {
+            get
+            {
+                return new User
+                {
+                    UserName = "hefeibbs",
+                    Name = "张阳",
+                    Password = ""
+                };
+            }
+        }
+
         public static DraftBoxForm DraftForm
         {
             get
@@ -369,5 +382,19 @@ namespace HFBBS
             this.NotifyChange();
         }
 
+    }
+
+
+    public class User
+    {
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
     }
 }

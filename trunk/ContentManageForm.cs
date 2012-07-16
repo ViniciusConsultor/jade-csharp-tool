@@ -13,7 +13,7 @@ namespace HFBBS
 {
     public partial class ContentManageForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {
-         Dictionary<string, int> ImageIndexDic = new Dictionary<string, int>();
+        Dictionary<string, int> ImageIndexDic = new Dictionary<string, int>();
 
         int GetImageIndex(string icon)
         {
@@ -28,9 +28,16 @@ namespace HFBBS
             }
             else
             {
-                this.imageList1.Images.Add(Image.FromFile(CacheObject.IconDir + "\\" + icon));
-                ImageIndexDic.Add(icon, this.imageList1.Images.Count - 1);
-                return this.imageList1.Images.Count - 1;
+                try
+                {
+                    this.imageList1.Images.Add(Image.FromFile(CacheObject.IconDir + "\\" + icon));
+                    ImageIndexDic.Add(icon, this.imageList1.Images.Count - 1);
+                    return this.imageList1.Images.Count - 1;
+                }
+                catch
+                {
+                    return 0;
+                }
             }
         }
 
@@ -39,8 +46,20 @@ namespace HFBBS
             InitializeComponent();
             this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
 
-            //this.imageList1.Images.Add(Resources.sites);
+            this.imageList1.Images.Add(Resources.sites);
 
+
+            this.imageList2.Images.Add(Resources.bianjipingtai);
+            this.imageList2.Images.Add(Resources.daiqianfapingtai);
+            this.imageList2.Images.Add(Resources.yiqianfapingtai);
+
+            this.treeView1.Nodes[0].ImageIndex = 0;
+            this.treeView1.Nodes[0].SelectedImageIndex = 0;
+            this.treeView1.Nodes[1].ImageIndex = 1;
+            this.treeView1.Nodes[1].SelectedImageIndex = 1;
+            this.treeView1.Nodes[2].ImageIndex = 2;
+            this.treeView1.Nodes[2].SelectedImageIndex = 2;
+            ImageIndexDic.Add("sites", this.imageList1.Images.Count - 1);
             var categories = CacheObject.Categories.Where(c => c.ParentCategoryID == 0);
             var baseNode = this.taskTree.Nodes[0];
             foreach (var category in categories)
@@ -84,7 +103,7 @@ namespace HFBBS
         }
 
 
-        private  void InitTree(TreeNode baseNode, Model.Category category)
+        private void InitTree(TreeNode baseNode, Model.Category category)
         {
 
             TreeNode node = new TreeNode(category.Name, 0, 0);
