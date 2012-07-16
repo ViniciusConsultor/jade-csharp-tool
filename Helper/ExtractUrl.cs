@@ -215,8 +215,8 @@ namespace HFBBS
 
         public static List<string> GetLinks(HtmlAgilityPack.HtmlNode node)
         {
-            var links = node.SelectNodes("//a");
-            return links.Where(l => l.Attributes["href"] != null).Select(l => l.Attributes["href"].Value.ToString()).ToList();
+            var links = node.SelectNodes(".//a[@href]");
+            return links.Select(l => l.Attributes["href"].Value.ToString()).ToList();
         }
 
         private static string html2TextPattern =
