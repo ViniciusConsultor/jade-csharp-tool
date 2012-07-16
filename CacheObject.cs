@@ -30,6 +30,7 @@ namespace HFBBS
 
         public static RuleManager BLL { get; set; }
         static DraftBoxForm draftForm;
+
         public static DraftBoxForm DraftForm
         {
             get
@@ -49,8 +50,16 @@ namespace HFBBS
             }
         }
 
+        public static string IconDir
+        {
+            get
+            {
+                return AppDomain.CurrentDomain.BaseDirectory + "\\Pic";
+            }
+        }
 
         static ContentEditForm editForm;
+
         public static ContentEditForm ContentForm
         {
             get

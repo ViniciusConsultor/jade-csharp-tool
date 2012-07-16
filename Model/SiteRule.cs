@@ -117,6 +117,14 @@ namespace HFBBS.Model
             this.ListXMLPathType = XMLPathType.Href;
             this.EnableAutoRun = false;
             this.AutoRunInterval = 60;
+            this.IconImage = "favicon.ico";
+        }
+
+
+        public string IconImage
+        {
+            get;
+            set;
         }
 
         /// <summary>

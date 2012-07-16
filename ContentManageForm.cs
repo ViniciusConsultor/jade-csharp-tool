@@ -13,19 +13,40 @@ namespace HFBBS
 {
     public partial class ContentManageForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {
+         Dictionary<string, int> ImageIndexDic = new Dictionary<string, int>();
+
+        int GetImageIndex(string icon)
+        {
+            if (string.IsNullOrEmpty(icon))
+            {
+                icon = "favicon.ico";
+            }
+
+            if (ImageIndexDic.ContainsKey(icon))
+            {
+                return ImageIndexDic[icon];
+            }
+            else
+            {
+                this.imageList1.Images.Add(Image.FromFile(CacheObject.IconDir + "\\" + icon));
+                ImageIndexDic.Add(icon, this.imageList1.Images.Count - 1);
+                return this.imageList1.Images.Count - 1;
+            }
+        }
+
         public ContentManageForm()
         {
             InitializeComponent();
-
             this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
-            this.imageList1.Images.Add(Resources.sites);
+
+            //this.imageList1.Images.Add(Resources.sites);
+
             var categories = CacheObject.Categories.Where(c => c.ParentCategoryID == 0);
             var baseNode = this.taskTree.Nodes[0];
             foreach (var category in categories)
             {
                 InitTree(baseNode, category);
             }
-
             this.taskTree.ExpandAll();
         }
 
@@ -63,7 +84,7 @@ namespace HFBBS
         }
 
 
-        private static void InitTree(TreeNode baseNode, Model.Category category)
+        private  void InitTree(TreeNode baseNode, Model.Category category)
         {
 
             TreeNode node = new TreeNode(category.Name, 0, 0);
@@ -76,7 +97,8 @@ namespace HFBBS
             var rules = CacheObject.Rules.Where(r => r.CategoryID == category.ID);
             foreach (var rule in rules)
             {
-                TreeNode leaf = new TreeNode(rule.Name, 1, 1);
+                var index = GetImageIndex(rule.IconImage);
+                TreeNode leaf = new TreeNode(rule.Name, index, index);
                 leaf.Tag = rule;
                 node.Nodes.Add(leaf);
             }
@@ -189,7 +211,8 @@ namespace HFBBS
             {
                 siteRule = ruleForm.CurrentSiteRule;
                 CacheObject.BLL.AddSite(siteRule);
-                TreeNode leaf = new TreeNode(siteRule.Name, 1, 1);
+                var index = GetImageIndex(siteRule.IconImage);
+                TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
                 this.CurrentCategoryNode.Nodes.Add(leaf);
             }
@@ -212,6 +235,8 @@ namespace HFBBS
                 CacheObject.BLL.Update(siteRule);
                 this.taskTree.SelectedNode.Tag = siteRule;
                 this.taskTree.SelectedNode.Text = siteRule.Name;
+                this.taskTree.SelectedNode.ImageIndex = GetImageIndex(siteRule.IconImage);
+                this.taskTree.SelectedNode.SelectedImageIndex = GetImageIndex(siteRule.IconImage);
             }
         }
 
@@ -249,7 +274,8 @@ namespace HFBBS
             {
                 siteRule = ruleForm.CurrentSiteRule;
                 CacheObject.BLL.AddSite(siteRule);
-                TreeNode leaf = new TreeNode(siteRule.Name, 1, 1);
+                var index = GetImageIndex(siteRule.IconImage);
+                TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
                 this.CurrentCategoryNode.Nodes.Add(leaf);
             }
@@ -262,8 +288,11 @@ namespace HFBBS
             {
                 var siteRule = editForm.CurrentSiteRule;
                 CacheObject.BLL.Update(siteRule);
+                var index = GetImageIndex(siteRule.IconImage);
                 this.taskTree.SelectedNode.Tag = siteRule;
                 this.taskTree.SelectedNode.Text = siteRule.Name;
+                this.taskTree.SelectedNode.ImageIndex = GetImageIndex(siteRule.IconImage);
+                this.taskTree.SelectedNode.SelectedImageIndex = GetImageIndex(siteRule.IconImage);
             }
         }
 
