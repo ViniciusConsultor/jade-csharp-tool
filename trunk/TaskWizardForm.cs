@@ -864,8 +864,8 @@ namespace HFBBS
 
         void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (currenActiveBrowser.ReadyState != WebBrowserReadyState.Complete)
-                return;
+            //if (currenActiveBrowser.ReadyState != WebBrowserReadyState.Complete)
+            //    return;
 
             if (e.Url == currenActiveBrowser.Url)
             {

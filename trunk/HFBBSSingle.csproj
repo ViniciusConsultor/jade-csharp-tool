@@ -410,6 +410,9 @@
     <Content Include="Pic\editor.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pic\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\cancel%281%29.png" />
     <None Include="Resources\red_ok%281%29.png" />
     <None Include="Resources\cancel.png" />

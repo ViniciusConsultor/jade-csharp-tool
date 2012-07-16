@@ -41,9 +41,25 @@ namespace HFBBS
             this.txt_tags.ValueMember = "Selected";
             StatusSelections[0].Selected = true;
 
+            this.cmbSearchLabel.DataSource = SpecilTags;
+            this.cmbSearchLabel.DisplayMember = "DisplayName";
+            this.cmbSearchLabel.ValueMember = "Value";
+            this.cmbSearchLabel.SelectedIndexChanged += new EventHandler(cmbSearchLabel_SelectedIndexChanged);
             this.txtContent.SetScriptingForm(this);
 
         }
+
+        void cmbSearchLabel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var tag = this.cmbSearchLabel.Text;
+            var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
+            var item = StatusSelections.FindObjectWithItem(specialTag);
+            if (item != null)
+                item.Selected = true;
+
+            txt_tags.RefreshTxt();
+        }
+
         public ContentEditForm(downloaddata data)
             : this()
         {
@@ -108,12 +124,11 @@ namespace HFBBS
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
+                StatusSelections.ForEach(item => item.Selected = false);
+
                 if (data.label_base != null)
                 {
                     var tags = data.label_base.Replace("\"", "").Split('&');
-
-                    StatusSelections.ForEach(item => item.Selected = false);
-
                     foreach (var tag in tags)
                     {
                         if (tag != "")
@@ -365,6 +380,11 @@ namespace HFBBS
         }
 
         private void txt_news_keywords_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtContent_Load(object sender, EventArgs e)
         {
 
         }

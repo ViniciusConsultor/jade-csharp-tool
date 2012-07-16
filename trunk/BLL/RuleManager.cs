@@ -7,12 +7,15 @@ using System.Xml;
 using System.Collections.Specialized;
 using HFBBS.Model;
 using XmlDatabase.Core;
+using System.Drawing;
+using System.Net;
+using Com.iFLYTEK.WinForms.Browser;
+using System.Threading;
 
 namespace HFBBS.BLL
 {
     public class RuleManager
     {
-    
         const string DatabaseName = "SiteConfig";
 
         /// <summary>
@@ -44,9 +47,38 @@ namespace HFBBS.BLL
                     name.SiteRuleId = GetNextId();
                 }
                 db.Store(name);
+
+                if (name.IconImage == "favicon.ico")
+                {
+                    LoadIcon(name);
+                }
             }
         }
 
+        private void LoadIcon(Object name)
+        {
+
+            var rule = name as SiteRule;
+
+            Uri uri = new Uri(rule.ForTestUrl);
+
+            //to check input uri
+            if (!Uri.TryCreate("http://" + uri.Host + "/favicon.ico", UriKind.Absolute, out uri))
+            { return; }
+            //to verify if icon exists
+            try
+            {
+                WebClient client = new WebClient();
+                client.DownloadFile(uri, CacheObject.IconDir + "\\" + uri.Host + ".ico");
+                rule.IconImage = uri.Host + ".ico";
+                Update(rule);
+                return;
+            }
+            catch (WebException)
+            {
+                return;
+            }
+        }
 
         public SiteRule GetSiteRule(int id)
         {
@@ -87,6 +119,12 @@ namespace HFBBS.BLL
             using (XDatabase db = XDatabase.Open(DatabaseName))
             {
                 db.Store(rule);
+
+                if (rule.IconImage == "" || rule.IconImage == "favicon.ico")
+                {
+                    LoadIcon(rule);
+                    //new Thread(LoadIcon).Start(rule);
+                }
             }
         }
         /// <summary>

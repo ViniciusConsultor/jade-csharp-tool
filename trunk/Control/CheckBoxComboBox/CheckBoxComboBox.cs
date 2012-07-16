@@ -196,6 +196,12 @@ namespace PresentationControls
 
         #region EVENT CALLERS and OVERRIDES e.g. OnResize()
 
+
+        public void RefreshTxt()
+        {
+            this.ShowDropDown();
+        }
+
         protected void OnCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             if (DropDownStyle != ComboBoxStyle.DropDownList)
@@ -394,6 +400,7 @@ namespace PresentationControls
         public void SynchroniseControlsWithComboBoxItems()
         {
             SuspendLayout();
+
             table.Controls.Clear();
 
             #region Disposes all items that are no longer in the combo box list
@@ -409,6 +416,7 @@ namespace PresentationControls
             }
 
             #endregion
+
             #region Recreate the list in the same order of the combo box items
 
             CheckBoxComboBoxItemList NewList = new CheckBoxComboBoxItemList();
@@ -433,6 +441,7 @@ namespace PresentationControls
             _Items.AddRange(NewList);
 
             #endregion
+
             #region Add the items to the controls in reversed order to maintain correct docking order
 
             if (NewList.Count > 0)
@@ -452,6 +461,7 @@ namespace PresentationControls
             }
 
             #endregion
+
             ResumeLayout();
         }
 

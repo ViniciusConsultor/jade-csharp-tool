@@ -5,5 +5,11 @@
     <Setting Name="EncodingFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">Encoding.txt</Value>
     </Setting>
+    <Setting Name="AutoRun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DefaultSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
