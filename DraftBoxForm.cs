@@ -227,7 +227,7 @@ namespace HFBBS
                 foreach (var index in rowIndexes)
                 {
                     var data = dataTable[index];
-                    //CacheObject.NewsDAL.Delete(data);
+                    CacheObject.NewsDAL.Delete(data);
                 }
                 comboBox1_SelectedIndexChanged(null, null);
 
@@ -251,7 +251,7 @@ namespace HFBBS
                     var data = dataTable[index];
                     data.IsPublish = true;
                     data.EditTime = DateTime.Now;
-                    //CacheObject.NewsDAL.Update(data);
+                    CacheObject.NewsDAL.Update(data);
                 }
                 comboBox1_SelectedIndexChanged(null, null);
 
