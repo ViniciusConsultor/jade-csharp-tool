@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class Form1 : Form
     {
@@ -77,7 +77,7 @@ namespace HFBBS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //////HFBBS.Helper.AccessHelper.CreateMDBDataBase();
+            Helper.AccessHelper.CreateMDBDataBase();
             CacheObject.MainForm = this;
 
             if (CacheObject.IsDebug)

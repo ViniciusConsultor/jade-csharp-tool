@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class TaskQueqeForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {

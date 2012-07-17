@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.DataGridViewEx.ColumnEx;
+using Jade.DataGridViewEx.ColumnEx;
 
-namespace HFBBS.DataGridViewEx
+namespace Jade.DataGridViewEx
 {
     /// <summary>
     /// 扩展的DataGridView

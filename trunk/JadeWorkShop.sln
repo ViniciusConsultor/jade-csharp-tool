@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFBBSSingle", "HFBBSSingle.csproj", "{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jade.Form", "Jade.Form.csproj", "{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFBBS.Model", "HFBBS.Model\HFBBS.Model.csproj", "{7E1670D8-2EB8-40A4-BA51-B962675E4824}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jade.Model.MySql", "HFBBS.Model\Jade.Model.MySql.csproj", "{7E1670D8-2EB8-40A4-BA51-B962675E4824}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLDatabase.Core", "XDatabase.Core\XMLDatabase.Core.csproj", "{71DA40A9-971B-47D7-9565-725F35A8C4A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jade.Model", "Core\Jade.Model.csproj", "{05A12713-54A5-4EF0-9872-A431165864BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jade.Model.Access", "Jade.Model.Access\Jade.Model.Access.csproj", "{EB80F962-0359-49B0-8B22-234959701181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,26 @@ Global
 		{71DA40A9-971B-47D7-9565-725F35A8C4A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{71DA40A9-971B-47D7-9565-725F35A8C4A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{71DA40A9-971B-47D7-9565-725F35A8C4A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{05A12713-54A5-4EF0-9872-A431165864BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EB80F962-0359-49B0-8B22-234959701181}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

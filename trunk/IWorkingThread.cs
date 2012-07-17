@@ -1,5 +1,5 @@
 ﻿using System;
-namespace HFBBS
+namespace Jade
 {
     public interface IWorkingThread
     {

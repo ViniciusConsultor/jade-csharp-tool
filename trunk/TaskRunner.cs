@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HFBBS.Model;
-using HFBBS.BLL;
+using Jade.Model;
+using Jade.BLL;
 using System.Threading;
 using System.IO;
+using Jade.Model.MySql;
 
-namespace HFBBS
+namespace Jade
 {
     public class TaskRunner
     {
@@ -78,7 +79,7 @@ namespace HFBBS
             Rule = rule;
             Logger = logger;
             DataSaver = dataSaver;
-            OldUrls = CacheObject.NewsDAL.GetTaskUrls(rule.SiteRuleId);
+            OldUrls = CacheObject.DownloadDataDAL.GetTaskUrls(rule.SiteRuleId);
         }
 
         /// <summary>
@@ -186,7 +187,7 @@ namespace HFBBS
                                                    string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
                                                        System.Text.Encoding.GetEncoding(item.Encoding));
 
-                    var data = CacheObject.NewsDAL.Get(url.AbsoluteUri);
+                    var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri);
                     data.IsDownload = true;
                     foreach (var itemRule in item.ItemRules)
                     {
@@ -216,13 +217,13 @@ namespace HFBBS
 
                                     foreach (var key in pics)
                                     {
-                                        if (!this.DownloadedPics.ContainsKey(key.Key))
+                                        var imageUrl = key.Key;
+                                        if (!imageUrl.Contains("http://"))
                                         {
-                                            var imageUrl = key.Key;
-                                            if (!imageUrl.Contains("http://"))
-                                            {
-                                                imageUrl = ExtractUrl.RepairUrl(url.AbsoluteUri, imageUrl);
-                                            }
+                                            imageUrl = ExtractUrl.RepairUrl(url.AbsoluteUri, imageUrl);
+                                        }
+                                        if (!this.DownloadedPics.ContainsKey(imageUrl))
+                                        {
                                             this.DownloadedPics.Add(imageUrl, key.Value);
                                             DownloadFile file = new DownloadFile()
                                             {
@@ -351,7 +352,7 @@ namespace HFBBS
                 }
             }
 
-            var unFinisedUrls = CacheObject.NewsDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
+            var unFinisedUrls = CacheObject.DownloadDataDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
             unFinisedUrls.ForEach(u => urls.Add(new Uri(u)));
         }
 
@@ -383,7 +384,7 @@ namespace HFBBS
                 {
                     OldUrls.Add(url);
                     uris.Add(new Uri(url));
-                    DataSaver.Add(new downloaddata(Rule.SiteRuleId, url));
+                    DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
                     Logger.Success("成功采集网址并保存到数据库中" + url);
                 }
                 else

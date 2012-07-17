@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Net;
 
-namespace HFBBS
+namespace Jade
 {
     public class HtmlPicker
     {

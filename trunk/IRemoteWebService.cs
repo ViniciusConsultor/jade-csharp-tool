@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HFBBS
+namespace Jade
 {
     public interface IRemoteWebService
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace HFBBS
+namespace Jade
 {
     public interface IFormLog
     {

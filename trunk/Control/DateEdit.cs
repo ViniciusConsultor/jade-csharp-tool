@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Globalization;
 
-namespace HFBBS
+namespace Jade
 {
 	/// <summary>
 	/// Summary description for DateEdit. The DateEdit control is designed to allow Null DateTime values

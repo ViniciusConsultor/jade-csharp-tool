@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using HFBBS.Model;
+using Jade.Model;
 
-namespace HFBBS
+namespace Jade
 {
     public interface IFetcher
     {

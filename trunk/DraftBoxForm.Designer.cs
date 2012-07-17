@@ -1,4 +1,4 @@
-﻿namespace HFBBS
+﻿namespace Jade
 {
     partial class DraftBoxForm
     {
@@ -40,9 +40,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.pager1 = new HFBBS.Pager();
-            this.dataGridView1 = new HFBBS.DataGridViewEx.DataGridViewEx();
-            this.Select = new HFBBS.DataGridViewEx.ColumnEx.DataGridViewCheckBoxColumnEx();
+            this.pager1 = new Jade.Pager();
+            this.dataGridView1 = new Jade.DataGridViewEx.DataGridViewEx();
+            this.Select = new Jade.DataGridViewEx.ColumnEx.DataGridViewCheckBoxColumnEx();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsPublish = new System.Windows.Forms.DataGridViewImageColumn();
             this.IsEdit = new System.Windows.Forms.DataGridViewImageColumn();
@@ -154,7 +154,7 @@
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Image = global::HFBBS.Properties.Resources.no;
+            this.toolStripButton1.Image = global::Jade.Properties.Resources.no;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(49, 22);

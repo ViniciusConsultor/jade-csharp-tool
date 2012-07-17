@@ -5,14 +5,14 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Collections.Specialized;
-using HFBBS.Model;
+using Jade.Model;
 using XmlDatabase.Core;
 using System.Drawing;
 using System.Net;
 using Com.iFLYTEK.WinForms.Browser;
 using System.Threading;
 
-namespace HFBBS.BLL
+namespace Jade.BLL
 {
     public class RuleManager
     {

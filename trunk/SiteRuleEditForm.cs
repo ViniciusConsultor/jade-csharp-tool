@@ -6,14 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.Forms;
-using HFBBS.Model;
+using Jade.Forms;
+using Jade.Model;
 using System.Threading;
 using System.IO;
 
-namespace HFBBS
+namespace Jade
 {
-    public partial class SiteRuleEditForm : Form, HFBBS.IWorkingThread
+    public partial class SiteRuleEditForm : Form, Jade.IWorkingThread
     {
         bool isSaving = false;
 
@@ -465,7 +465,7 @@ namespace HFBBS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new HFBBS.Forms.XmlPathSelector("http://news.baidu.com").Show();
+            new Jade.Forms.XmlPathSelector("http://news.baidu.com").Show();
         }
 
 
@@ -679,7 +679,7 @@ namespace HFBBS
             if (!CheckExtractUrlIsAvailable(out urls)) return;
             var url = urls.Count > 0 ? urls[0].AbsoluteUri : "http://www.hefei.cc";
             var path = this.txtLinkXPath.Text ?? "//a";
-            HFBBS.Forms.XmlPathSelector xpath = new XmlPathSelector(url, path, CurrentSiteRule.ListXMLPathType, CurrentSiteRule.ListXMLPathSelectType);
+            Jade.Forms.XmlPathSelector xpath = new XmlPathSelector(url, path, CurrentSiteRule.ListXMLPathType, CurrentSiteRule.ListXMLPathSelectType);
             if (xpath.ShowDialog() == DialogResult.OK)
             {
                 this.txtLinkXPath.Text = xpath.XPath;
@@ -692,7 +692,7 @@ namespace HFBBS
         {
             UpdateItemRule();
             var url = this.tbxItemUrl.Text != "" ? this.tbxItemUrl.Text : "http://www.hefei.cc";
-            HFBBS.Forms.XmlPathSelector xpath = new XmlPathSelector(url, CurrentItemRule.XPath, CurrentItemRule.XMLPathType, CurrentItemRule.XMLPathSelectType);
+            Jade.Forms.XmlPathSelector xpath = new XmlPathSelector(url, CurrentItemRule.XPath, CurrentItemRule.XMLPathType, CurrentItemRule.XMLPathSelectType);
             if (xpath.ShowDialog() == DialogResult.OK)
             {
                 this.txtCXpath.Text = xpath.XPath;

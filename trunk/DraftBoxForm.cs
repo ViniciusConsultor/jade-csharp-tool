@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.Model;
+using Jade.Model;
+using Jade.Model.MySql;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class DraftBoxForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {
@@ -18,8 +19,6 @@ namespace HFBBS
             this.m_RowStyleNormal = new DataGridViewCellStyle();
             this.m_RowStyleNormal.BackColor = Color.LightBlue;
             this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue;
-            CacheObject.ContentForm.InitDownloadData(new downloaddata());
-
             this.m_RowStyleAlternate = new DataGridViewCellStyle();
             this.m_RowStyleAlternate.BackColor = Color.LightGray;
             this.m_RowStyleAlternate.SelectionBackColor = Color.LightSlateGray;
@@ -77,7 +76,7 @@ namespace HFBBS
             var task = (SiteRule)comboBox1.SelectedItem;
             this.dataGridView1.DataSource = null;
             int totalCount;
-            this.dataGridView1.DataSource = CacheObject.NewsDAL.GetList(GetArgs(pager1.CurrentPageIndex, currentPageSize), out totalCount);
+            this.dataGridView1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(pager1.CurrentPageIndex, currentPageSize), out totalCount);
             //////if (task.Name == "全部任务")
             //////{
             //////    if (IsPublished)
@@ -110,7 +109,7 @@ namespace HFBBS
 
                 int totalCount;
 
-                this.dataGridView1.DataSource = CacheObject.NewsDAL.GetList(GetArgs(), out totalCount);
+                this.dataGridView1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(), out totalCount);
 
                 //if (task.Name == "全部任务")
                 //{
@@ -131,7 +130,7 @@ namespace HFBBS
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+            var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(dataTable[e.RowIndex]);
             CacheObject.ContentForm.ShowDialog();
         }
@@ -166,7 +165,7 @@ namespace HFBBS
 
         private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+            var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(dataTable[dataGridView1.CurrentRow.Index]);
             CacheObject.ContentForm.ShowDialog();
         }
@@ -185,7 +184,7 @@ namespace HFBBS
         {
             if (dataGridView1.RowCount > 0)
             {
-                var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+                var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
 
                 if (dataTable == null || dataTable.Count == 0)
                 {
@@ -223,11 +222,11 @@ namespace HFBBS
             else
             {
                 // todo Send
-                var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+                var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
                 foreach (var index in rowIndexes)
                 {
                     var data = dataTable[index];
-                    CacheObject.NewsDAL.Delete(data);
+                    CacheObject.DownloadDataDAL.Delete(data);
                 }
                 comboBox1_SelectedIndexChanged(null, null);
 
@@ -245,13 +244,13 @@ namespace HFBBS
             else
             {
                 // todo Send
-                var dataTable = (List<downloaddata>)this.dataGridView1.DataSource;
+                var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
                 foreach (var index in rowIndexes)
                 {
                     var data = dataTable[index];
                     data.IsPublish = true;
                     data.EditTime = DateTime.Now;
-                    CacheObject.NewsDAL.Update(data);
+                    CacheObject.DownloadDataDAL.Update(data);
                 }
                 comboBox1_SelectedIndexChanged(null, null);
 

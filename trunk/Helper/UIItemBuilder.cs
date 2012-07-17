@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Specialized;
 
-namespace HFBBS
+namespace Jade
 {
     public class EncodingUIBuilder
     {
@@ -16,7 +16,7 @@ namespace HFBBS
             {
                 if(encodingList == null)
                 {
-                    FileStream stream = File.OpenRead(HFBBS.Properties.Settings.Default.EncodingFilePath);
+                    FileStream stream = File.OpenRead(Jade.Properties.Settings.Default.EncodingFilePath);
                     StreamReader reader = new StreamReader(stream);
                     encodingList = new List<string>();
                     

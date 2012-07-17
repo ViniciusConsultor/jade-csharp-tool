@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Windows.Forms;
 
-namespace HFBBS
+namespace Jade
 {
     /// <summary>
     /// ÉêÃ÷Î¯ÍÐ

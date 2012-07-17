@@ -7,7 +7,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace HFBBS
+namespace Jade
 {
     //定义触发单击事件的委托
     public delegate void datagridviewcheckboxHeaderEventHander(object sender, datagridviewCheckboxHeaderEventArgs e);

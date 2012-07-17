@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HFBBS
+namespace Jade
 {
     /// <summary>
     /// 提供一个接口，用戶登錄時驗證用戶名和密碼。

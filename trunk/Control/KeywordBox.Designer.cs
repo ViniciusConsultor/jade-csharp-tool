@@ -1,4 +1,4 @@
-﻿namespace HFBBS.Control
+﻿namespace Jade.Control
 {
     partial class KeywordBox
     {

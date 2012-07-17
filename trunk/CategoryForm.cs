@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.Model;
+using Jade.Model;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class CategoryForm : Form
     {
@@ -54,7 +54,7 @@ namespace HFBBS
             if (CurrentCategory == null)
             {
                 CurrentCategory = new Category();
-                CurrentCategory.ID = CacheObject.BLL.GetNextCategoryId();
+                CurrentCategory.ID = CacheObject.RuleManager.GetNextCategoryId();
             }
 
             if (this.comboBox1.Text != "")

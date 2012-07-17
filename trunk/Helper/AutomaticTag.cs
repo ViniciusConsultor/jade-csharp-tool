@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace HFBBS
+namespace Jade
 {
     public class AutomaticTag
     {

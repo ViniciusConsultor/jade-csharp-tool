@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.Model;
-using HFBBS.Properties;
+using Jade.Model;
+using Jade.Properties;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class ContentManageForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {
@@ -133,7 +133,7 @@ namespace HFBBS
             if (DialogResult.OK == form.ShowDialog())
             {
                 var category = form.CurrentCategory;
-                CacheObject.BLL.AddCategory(category);
+                CacheObject.RuleManager.AddCategory(category);
 
                 var node = new TreeNode(category.Name, 0, 0);
                 node.Tag = category;
@@ -159,7 +159,7 @@ namespace HFBBS
             if (DialogResult.OK == form.ShowDialog())
             {
                 var category = form.CurrentCategory;
-                CacheObject.BLL.UpdateCategory(category);
+                CacheObject.RuleManager.UpdateCategory(category);
                 this.CurrentCategoryNode.Text = category.Name;
                 this.CurrentCategoryNode.Tag = category;
             }
@@ -212,7 +212,7 @@ namespace HFBBS
                 }
                 else
                 {
-                    CacheObject.BLL.DeleteCategory(CurrentCategory.ID);
+                    CacheObject.RuleManager.DeleteCategory(CurrentCategory.ID);
                     CacheObject.Categories.Remove(CurrentCategory);
                     this.CurrentCategoryNode.Parent.Nodes.Remove(this.CurrentCategoryNode);
                     MessageBox.Show("删除成功");
@@ -229,7 +229,7 @@ namespace HFBBS
             if (ruleForm.ShowDialog() == DialogResult.OK)
             {
                 siteRule = ruleForm.CurrentSiteRule;
-                CacheObject.BLL.AddSite(siteRule);
+                CacheObject.RuleManager.AddSite(siteRule);
                 var index = GetImageIndex(siteRule.IconImage);
                 TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
@@ -251,7 +251,7 @@ namespace HFBBS
             if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var siteRule = editForm.CurrentSiteRule;
-                CacheObject.BLL.Update(siteRule);
+                CacheObject.RuleManager.Update(siteRule);
                 this.taskTree.SelectedNode.Tag = siteRule;
                 this.taskTree.SelectedNode.Text = siteRule.Name;
                 this.taskTree.SelectedNode.ImageIndex = GetImageIndex(siteRule.IconImage);
@@ -264,7 +264,7 @@ namespace HFBBS
             if (MessageBox.Show("确定删除任务?", "警告", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 var rule = this.taskTree.SelectedNode.Tag as SiteRule;
-                CacheObject.BLL.DeleteSite(rule.SiteRuleId);
+                CacheObject.RuleManager.DeleteSite(rule.SiteRuleId);
                 CacheObject.Rules.Remove(rule);
                 this.taskTree.SelectedNode.Parent.Nodes.Remove(this.taskTree.SelectedNode);
                 MessageBox.Show("删除成功");
@@ -292,7 +292,7 @@ namespace HFBBS
             if (ruleForm.ShowDialog() == DialogResult.OK)
             {
                 siteRule = ruleForm.CurrentSiteRule;
-                CacheObject.BLL.AddSite(siteRule);
+                CacheObject.RuleManager.AddSite(siteRule);
                 var index = GetImageIndex(siteRule.IconImage);
                 TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
@@ -306,7 +306,7 @@ namespace HFBBS
             if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var siteRule = editForm.CurrentSiteRule;
-                CacheObject.BLL.Update(siteRule);
+                CacheObject.RuleManager.Update(siteRule);
                 var index = GetImageIndex(siteRule.IconImage);
                 this.taskTree.SelectedNode.Tag = siteRule;
                 this.taskTree.SelectedNode.Text = siteRule.Name;

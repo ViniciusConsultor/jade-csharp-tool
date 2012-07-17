@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace HFBBS.Control
+namespace Jade.Control
 {
     public partial class KeywordBox : UserControl
     {

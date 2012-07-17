@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
-namespace HFBBS
+namespace Jade
 {
     public class UrlPicker
     {

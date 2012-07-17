@@ -8,8 +8,8 @@
     <ProjectGuid>{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HFBBS</RootNamespace>
-    <AssemblyName>HFBBS</AssemblyName>
+    <RootNamespace>Jade</RootNamespace>
+    <AssemblyName>Jade.Form</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -60,6 +60,11 @@
       <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
+    <Reference Include="Interop.ADOX, Version=6.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Lib\Interop.ADOX.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
@@ -170,6 +175,7 @@
     <Compile Include="Control\Pager.designer.cs">
       <DependentUpon>Pager.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseFactory.cs" />
     <Compile Include="DraftBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,7 +191,6 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\DownloadData.part.cs" />
     <Compile Include="TaskWizardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,7 +260,6 @@
       <DependentUpon>LoadingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\DownloadData.cs" />
     <Compile Include="Model\KeyValue.cs" />
     <Compile Include="Model\KeyValueContent.cs" />
     <Compile Include="Model\SiteRule.cs" />
@@ -475,9 +479,17 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="HFBBS.Model\HFBBS.Model.csproj">
+    <ProjectReference Include="Core\Jade.Model.csproj">
+      <Project>{05A12713-54A5-4EF0-9872-A431165864BE}</Project>
+      <Name>Jade.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="HFBBS.Model\Jade.Model.MySql.csproj">
       <Project>{7E1670D8-2EB8-40A4-BA51-B962675E4824}</Project>
-      <Name>HFBBS.Model</Name>
+      <Name>Jade.Model.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="Jade.Model.Access\Jade.Model.Access.csproj">
+      <Project>{EB80F962-0359-49B0-8B22-234959701181}</Project>
+      <Name>Jade.Model.Access</Name>
     </ProjectReference>
     <ProjectReference Include="XDatabase.Core\XMLDatabase.Core.csproj">
       <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>

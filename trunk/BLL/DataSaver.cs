@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HFBBS.Helper;
+using Jade.Helper;
 using System.Data;
-using HFBBS.Model;
+using Jade.Model;
+using Jade.Model.MySql;
 
-namespace HFBBS.BLL
+namespace Jade.BLL
 {
     public class DataSaverManager
     {
@@ -26,15 +27,15 @@ namespace HFBBS.BLL
             return result;
         }
 
-        public void Add(downloaddata data)
+        public void Add(IDownloadData data)
         {
-            CacheObject.NewsDAL.Add(data);
+            CacheObject.DownloadDataDAL.Add(data);
             //AccessHelper.excuteSql(data.GetInsertSql());
         }
 
-        public void Update(downloaddata data)
+        public void Update(IDownloadData data)
         {
-            CacheObject.NewsDAL.Update(data);
+            CacheObject.DownloadDataDAL.Update(data);
             //AccessHelper.excuteSql(data.GetUpdateSql());
         }
        

@@ -6,20 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HFBBS.Model;
+using Jade.Model;
 using System.Security.Permissions;
 using System.Threading;
 using System.Runtime.InteropServices;
 using PresentationControls;
+using Jade.Model.MySql;
 
-namespace HFBBS
+namespace Jade
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     [ComVisible(true)]
     public partial class ContentEditForm : Form
     {
 
-        public downloaddata CurrentData { get; set; }
+        public IDownloadData CurrentData { get; set; }
         ListSelectionWrapper<DisplayNameValuePair> StatusSelections;
         List<DisplayNameValuePair> SpecilTags;
         public ContentEditForm()
@@ -60,7 +61,7 @@ namespace HFBBS
             txt_tags.RefreshTxt();
         }
 
-        public ContentEditForm(downloaddata data)
+        public ContentEditForm(IDownloadData data)
             : this()
         {
             InitDownloadData(data);
@@ -112,7 +113,7 @@ namespace HFBBS
             }
         }
 
-        public void InitDownloadData(downloaddata data)
+        public void InitDownloadData(IDownloadData data)
         {
             CurrentData = data;
             if (data.Content != null)
@@ -193,7 +194,7 @@ namespace HFBBS
         {
             UpdateCurrentData();
        
-            CacheObject.NewsDAL.Update(CurrentData);
+            CacheObject.DownloadDataDAL.Update(CurrentData);
 
             MessageBox.Show("保存成功");
         }
@@ -376,7 +377,7 @@ namespace HFBBS
         {
             UpdateCurrentData();
             CurrentData.IsPublish = true;
-            CacheObject.NewsDAL.Update(CurrentData);
+            CacheObject.DownloadDataDAL.Update(CurrentData);
             MessageBox.Show("送签发成功");
             this.Close();
         }

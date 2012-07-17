@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class LoadingDialog : Form
     {
