@@ -1,4 +1,4 @@
-﻿namespace HFBBS
+﻿namespace Jade
 {
     partial class TaskWizardForm
     {
@@ -1180,7 +1180,7 @@
             // 
             // finish
             // 
-            this.finish.BackgroundImage = global::HFBBS.Properties.Resources.laboratory;
+            this.finish.BackgroundImage = global::Jade.Properties.Resources.laboratory;
             this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.finish.Controls.Add(this.label11);
             this.finish.Name = "finish";

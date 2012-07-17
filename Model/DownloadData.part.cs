@@ -3,7 +3,7 @@ using System.Data;
 using System.Text;
 using System.Data.OleDb;
 using Maticsoft.DBUtility;//Please add references
-namespace HFBBS.Model
+namespace Jade.Model
 {
     /// <summary>
     /// 类DownloadData。

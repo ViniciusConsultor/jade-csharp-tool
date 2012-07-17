@@ -1,4 +1,4 @@
-﻿namespace HFBBS
+﻿namespace Jade
 {
     partial class ContentManageForm
     {
@@ -196,12 +196,12 @@
             this.naviBand1.ClientArea.Name = "ClientArea";
             this.naviBand1.ClientArea.Size = new System.Drawing.Size(294, 299);
             this.naviBand1.ClientArea.TabIndex = 0;
-            this.naviBand1.LargeImage = global::HFBBS.Properties.Resources.page;
+            this.naviBand1.LargeImage = global::Jade.Properties.Resources.page;
             this.naviBand1.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
             this.naviBand1.Location = new System.Drawing.Point(1, 27);
             this.naviBand1.Name = "naviBand1";
             this.naviBand1.Size = new System.Drawing.Size(294, 299);
-            this.naviBand1.SmallImage = global::HFBBS.Properties.Resources.logo按钮图标5;
+            this.naviBand1.SmallImage = global::Jade.Properties.Resources.logo按钮图标5;
             this.naviBand1.TabIndex = 3;
             this.naviBand1.Text = "内容管理";
             // 
@@ -246,7 +246,7 @@
             this.naviBand2.ClientArea.Size = new System.Drawing.Size(294, 299);
             this.naviBand2.ClientArea.TabIndex = 0;
             this.naviBand2.ClientArea.Text = "任务管理";
-            this.naviBand2.LargeImage = global::HFBBS.Properties.Resources.scheduled_tasks__1_;
+            this.naviBand2.LargeImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
             this.naviBand2.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
             this.naviBand2.Location = new System.Drawing.Point(1, 27);
             this.naviBand2.Name = "naviBand2";

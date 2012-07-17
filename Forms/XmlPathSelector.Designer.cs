@@ -1,4 +1,4 @@
-﻿namespace HFBBS.Forms
+﻿namespace Jade.Forms
 {
     partial class XmlPathSelector
     {
@@ -348,7 +348,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::HFBBS.Properties.Resources.select;
+            this.toolStripButton1.Image = global::Jade.Properties.Resources.select;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
@@ -368,7 +368,7 @@
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.Image = global::HFBBS.Properties.Resources.laboratory;
+            this.toolStripButton3.Image = global::Jade.Properties.Resources.laboratory;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(57, 28);
@@ -377,7 +377,7 @@
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.Image = global::HFBBS.Properties.Resources.select__1_;
+            this.toolStripButton2.Image = global::Jade.Properties.Resources.select__1_;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(57, 28);

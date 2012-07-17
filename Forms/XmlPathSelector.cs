@@ -9,10 +9,10 @@ using System.Windows.Forms;
 using Com.iFLYTEK.WinForms.Browser;
 using System.Text.RegularExpressions;
 using mshtml;
-using HFBBS.Model;
+using Jade.Model;
 using System.Threading;     //包含正则表达式  
 
-namespace HFBBS.Forms
+namespace Jade.Forms
 {
     public partial class XmlPathSelector : Form, IBaseBrowserForm
     {

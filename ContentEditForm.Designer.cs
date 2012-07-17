@@ -1,4 +1,4 @@
-﻿namespace HFBBS
+﻿namespace Jade
 {
     partial class ContentEditForm
     {
@@ -108,9 +108,9 @@
             this.chk_bbspinglun = new System.Windows.Forms.CheckBox();
             this.chk_cmspinglun = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtContent = new HFBBS.HtmlEditor();
-            this.txt_news_keyword2 = new HFBBS.Control.KeywordBox();
-            this.txt_news_keywords = new HFBBS.Control.KeywordBox();
+            this.txtContent = new Jade.HtmlEditor();
+            this.txt_news_keyword2 = new Jade.Control.KeywordBox();
+            this.txt_news_keywords = new Jade.Control.KeywordBox();
             this.txt_tags = new PresentationControls.CheckBoxComboBox();
             this.txt_row_news_abstract = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -714,7 +714,7 @@
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.Image = global::HFBBS.Properties.Resources.back_2;
+            this.toolStripButton3.Image = global::Jade.Properties.Resources.back_2;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(68, 36);
@@ -723,7 +723,7 @@
             // 
             // toolStripButton5
             // 
-            this.toolStripButton5.Image = global::HFBBS.Properties.Resources.preview1;
+            this.toolStripButton5.Image = global::Jade.Properties.Resources.preview1;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(68, 36);
@@ -732,7 +732,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::HFBBS.Properties.Resources.document_save;
+            this.btnSave.Image = global::Jade.Properties.Resources.document_save;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(68, 36);
@@ -741,7 +741,7 @@
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Image = global::HFBBS.Properties.Resources.gnome_application_exit;
+            this.toolStripButton1.Image = global::Jade.Properties.Resources.gnome_application_exit;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(92, 36);
@@ -750,7 +750,7 @@
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.Image = global::HFBBS.Properties.Resources.report_check;
+            this.toolStripButton2.Image = global::Jade.Properties.Resources.report_check;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(80, 36);

@@ -1,4 +1,4 @@
-﻿namespace HFBBS
+﻿namespace Jade
 {
     partial class TaskRunForm
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Data.OleDb;
 using Maticsoft.DBUtility;
 using System.Collections.Generic;//Please add references
-namespace HFBBS.Model
+namespace Jade.Model
 {
 
     public partial class DownloadData

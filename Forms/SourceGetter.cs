@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class SourceGetter : Form
     {

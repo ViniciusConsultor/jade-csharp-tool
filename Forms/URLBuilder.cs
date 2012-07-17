@@ -7,10 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
-using HFBBS.Forms;
-using HFBBS.Model;
+using Jade.Forms;
+using Jade.Model;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class URLBuilder : Form
     {
@@ -227,7 +227,7 @@ namespace HFBBS
         {
             var url = this.txtStartUrl.Text != "" ? this.txtStartUrl.Text : "http://www.hefei.cc";
             var path = "//a";
-            HFBBS.Forms.XmlPathSelector xpath = new XmlPathSelector(url, path, XMLPathType.Href, XMLPathSelectType.Multiple);
+            Jade.Forms.XmlPathSelector xpath = new XmlPathSelector(url, path, XMLPathType.Href, XMLPathSelectType.Multiple);
             if (xpath.ShowDialog() == DialogResult.OK)
             {
                 if (this.txtStartUrl.Text != "")

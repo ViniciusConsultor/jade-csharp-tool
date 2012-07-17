@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HFBBS.Model;
-using HFBBS.BLL;
+using Jade.Model;
+using Jade.BLL;
 using System.Threading;
 using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
+using Jade.Model.MySql;
+using Jade.DAL;
 
-namespace HFBBS
+namespace Jade
 {
     public class CacheObject
     {
         static CacheObject()
         {
-            BLL = new RuleManager();
-            Rules = BLL.GetSiteRules();
-            Categories = BLL.GetCategories();
+            RuleManager = new RuleManager();
+            Rules = RuleManager.GetSiteRules();
+            Categories = RuleManager.GetCategories();
             RunningTasks = new List<RunningTask>();
+            DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
         }
 
-        public static bool IsDebug = true;
+        public static bool IsDebug = false;
 
         public static Form1 MainForm { get; set; }
 
@@ -28,7 +31,13 @@ namespace HFBBS
 
         public static NewsDAL NewsDAL = new NewsDAL();
 
-        public static RuleManager BLL { get; set; }
+        public static RuleManager RuleManager { get; set; }
+
+        /// <summary>
+        /// 下载数据DAL
+        /// </summary>
+        public static IDownloadDataDAL DownloadDataDAL { get; set; }
+
         static DraftBoxForm draftForm;
 
         public static User CurrentUser

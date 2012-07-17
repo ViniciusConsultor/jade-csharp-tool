@@ -10,7 +10,7 @@ using System.Security.Permissions;
 using System.Threading;
 using ICSharpCode.TextEditor.Document;
 
-namespace HFBBS
+namespace Jade
 {
     /// <summary>
     /// Html±à¼­Æ÷

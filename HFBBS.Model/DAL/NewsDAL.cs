@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Jade;
 
-namespace HFBBS.Model
+namespace Jade.Model.MySql
 {
     public class NewsDAL
     {
@@ -102,20 +103,5 @@ namespace HFBBS.Model
         }
     }
 
-    public class SearchArgs
-    {
-        public string Keyword { get; set; }
-
-        public bool IsDownload { get; set; }
-
-        public bool IsEdit { get; set; }
-
-        public bool IsPublish { get; set; }
-
-        public int TaskId { get; set; }
-
-        public int PageIndex { get; set; }
-
-        public int PageSzie { get; set; }
-    }
+   
 }

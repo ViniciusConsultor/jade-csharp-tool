@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using HFBBS.Model;
+using Jade.Model;
 
-namespace HFBBS
+namespace Jade
 {
     public partial class WelcomeForm : WeifenLuo.WinFormsUI.Docking.DockContent
     {

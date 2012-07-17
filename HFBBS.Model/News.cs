@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HFBBS.Model
+namespace Jade.Model.MySql
 {
     public class News
     {

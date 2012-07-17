@@ -65,10 +65,10 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="hfbbsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+      <Schema Namespace="Jade.Model.MySql" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
         <EntityContainer Name="HFBBSEntities">
-          <EntitySet Name="user" EntityType="hfbbsModel.user" />
-          <EntitySet Name="downloaddata" EntityType="hfbbsModel.downloaddata" />
+          <EntitySet Name="user" EntityType="Jade.Model.MySql.user" />
+          <EntitySet Name="downloaddata" EntityType="Jade.Model.MySql.downloaddata" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -129,13 +129,13 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
         <EntityContainerMapping StorageEntityContainer="hfbbsModelStoreContainer" CdmEntityContainer="HFBBSEntities">
-          <EntitySetMapping Name="user"><EntityTypeMapping TypeName="hfbbsModel.user"><MappingFragment StoreEntitySet="user">
+          <EntitySetMapping Name="user"><EntityTypeMapping TypeName="Jade.Model.MySql.user"><MappingFragment StoreEntitySet="user">
             <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
             <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="UserName" ColumnName="UserName" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="downloaddata">
-            <EntityTypeMapping TypeName="hfbbsModel.downloaddata">
+            <EntityTypeMapping TypeName="Jade.Model.MySql.downloaddata">
               <MappingFragment StoreEntitySet="downloaddata">
                 <ScalarProperty Name="EditTime" ColumnName="EditTime" />
                 <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
@@ -201,8 +201,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1" ZoomLevel="108">
-        <EntityTypeShape EntityType="hfbbsModel.user" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hfbbsModel.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
+        <EntityTypeShape EntityType="Jade.Model.MySql.user" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Jade.Model.MySql.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
       </Diagram>
     </Diagrams>
   </Designer>

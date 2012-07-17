@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using HFBBS.DataGridViewEx.CommonEx;
+using Jade.DataGridViewEx.CommonEx;
 using System.Windows.Forms.VisualStyles;
 
-namespace HFBBS.DataGridViewEx.ColumnEx
+namespace Jade.DataGridViewEx.ColumnEx
 {
     /// <summary>
     /// 扩展列

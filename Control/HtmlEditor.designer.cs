@@ -1,5 +1,5 @@
 
-namespace HFBBS
+namespace Jade
 {
     partial class HtmlEditor
     {
@@ -192,7 +192,7 @@ namespace HFBBS
             // toolStripButtonIndent
             // 
             this.toolStripButtonIndent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonIndent.Image = global::HFBBS.Properties.Resources._020;
+            this.toolStripButtonIndent.Image = global::Jade.Properties.Resources._020;
             this.toolStripButtonIndent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonIndent.Name = "toolStripButtonIndent";
             this.toolStripButtonIndent.Size = new System.Drawing.Size(24, 24);
@@ -207,7 +207,7 @@ namespace HFBBS
             // toolStripButtonLeft
             // 
             this.toolStripButtonLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonLeft.Image = global::HFBBS.Properties.Resources._023;
+            this.toolStripButtonLeft.Image = global::Jade.Properties.Resources._023;
             this.toolStripButtonLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLeft.Name = "toolStripButtonLeft";
             this.toolStripButtonLeft.Size = new System.Drawing.Size(24, 24);
@@ -217,7 +217,7 @@ namespace HFBBS
             // toolStripButtonCenter
             // 
             this.toolStripButtonCenter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonCenter.Image = global::HFBBS.Properties.Resources._021;
+            this.toolStripButtonCenter.Image = global::Jade.Properties.Resources._021;
             this.toolStripButtonCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCenter.Name = "toolStripButtonCenter";
             this.toolStripButtonCenter.Size = new System.Drawing.Size(24, 24);
@@ -227,7 +227,7 @@ namespace HFBBS
             // toolStripButtonRight
             // 
             this.toolStripButtonRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonRight.Image = global::HFBBS.Properties.Resources._024;
+            this.toolStripButtonRight.Image = global::Jade.Properties.Resources._024;
             this.toolStripButtonRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRight.Name = "toolStripButtonRight";
             this.toolStripButtonRight.Size = new System.Drawing.Size(24, 24);
@@ -237,7 +237,7 @@ namespace HFBBS
             // toolStripButtonFull
             // 
             this.toolStripButtonFull.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonFull.Image = global::HFBBS.Properties.Resources._022;
+            this.toolStripButtonFull.Image = global::Jade.Properties.Resources._022;
             this.toolStripButtonFull.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFull.Name = "toolStripButtonFull";
             this.toolStripButtonFull.Size = new System.Drawing.Size(24, 24);
@@ -262,7 +262,7 @@ namespace HFBBS
             // toolStripButtonHyperlink
             // 
             this.toolStripButtonHyperlink.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonHyperlink.Image = global::HFBBS.Properties.Resources._025;
+            this.toolStripButtonHyperlink.Image = global::Jade.Properties.Resources._025;
             this.toolStripButtonHyperlink.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonHyperlink.Name = "toolStripButtonHyperlink";
             this.toolStripButtonHyperlink.Size = new System.Drawing.Size(24, 24);
@@ -272,7 +272,7 @@ namespace HFBBS
             // toolStripButtonPicture
             // 
             this.toolStripButtonPicture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPicture.Image = global::HFBBS.Properties.Resources._019;
+            this.toolStripButtonPicture.Image = global::Jade.Properties.Resources._019;
             this.toolStripButtonPicture.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPicture.Name = "toolStripButtonPicture";
             this.toolStripButtonPicture.Size = new System.Drawing.Size(24, 24);
@@ -282,7 +282,7 @@ namespace HFBBS
             // btnInsetPage
             // 
             this.btnInsetPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnInsetPage.Image = global::HFBBS.Properties.Resources._20;
+            this.btnInsetPage.Image = global::Jade.Properties.Resources._20;
             this.btnInsetPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnInsetPage.Name = "btnInsetPage";
             this.btnInsetPage.Size = new System.Drawing.Size(24, 24);

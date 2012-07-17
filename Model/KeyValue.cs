@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 
-namespace HFBBS.Model
+namespace Jade.Model
 {
     /// <summary>
     /// 键值对
