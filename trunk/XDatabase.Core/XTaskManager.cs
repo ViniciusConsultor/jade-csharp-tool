@@ -94,10 +94,10 @@ namespace XmlDatabase.Core
 
             return new XSubmitStatus(hasError, sb.ToString());
         }
-        private void AddOrUpdateObject(object o) {
+        private void AddOrUpdateObject(IXmlStoreItem o)
+        {
             string typeFullName = o.GetType().FullName;
             string typeName = o.GetType().Name;
-
             string dataFile =
                 string.Format("{4}\\{0}\\{1}\\{2}\\{3}.xml",
                     "Entities",
@@ -158,7 +158,8 @@ namespace XmlDatabase.Core
 
 
         }
-        private void DeleteObject(object o) {
+        private void DeleteObject(IXmlStoreItem o)
+        {
             Guid id = internaldb.ids.GetObjectId(o);
 
             string typeFullName = o.GetType().FullName;

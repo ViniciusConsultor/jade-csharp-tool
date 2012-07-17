@@ -113,7 +113,6 @@ namespace XmlDatabase.Core
                         p.SetValue(instance, Convert.ChangeType(e.Attribute(p.Name).Value, pType), null);
                     }
                 }
-
             }
 
 

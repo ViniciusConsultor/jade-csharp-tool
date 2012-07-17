@@ -131,6 +131,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                     menu_layer.css({ display: "none" });
                 }
             });
+
             $(page).find(".content").keydown(function (e) {
                 if (e.keyCode == 8) {
                     if ($(page).attr("id") != "page1" && $(this).text() == "") {
@@ -146,6 +147,8 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                     alert(document.activeElement);
                 }
             });
+            
+
         }
 
         function deleteCurrentPage() {
@@ -206,6 +209,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         onload = function () {
             bindEvent("#page1");
         };
+
         function getCaretPos(element) {
             var CaretPos = 0; // IE Support  
             if (document.selection) {

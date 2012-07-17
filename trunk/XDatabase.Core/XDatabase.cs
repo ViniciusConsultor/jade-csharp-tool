@@ -243,7 +243,8 @@ namespace XmlDatabase.Core
         /// 如果对象具有一个uuid，则更新，否则插入
         /// </summary>
         /// <param name="instance">对象实例，用object类型是为了尽可能地简化操作</param>
-        public void Store(object instance) {
+        public void Store(IXmlStoreItem instance)
+        {
             XDocument x = XDocument.Load(DATABASECONFIGFILE);
             XElement typeRegistraion = x.Root.
                 Element("Types").Elements("Type").
@@ -264,7 +265,8 @@ namespace XmlDatabase.Core
         /// </summary>
         /// <param name="instance">对象实例，用object类型是为了尽可能地简化操作</param>
         /// <param name="singleFile">是否要用单独的一个文件存储一个对象</param>
-        public void Store(object instance, bool singleFile) {
+        public void Store(IXmlStoreItem instance, bool singleFile)
+        {
 
             string typeFullName=instance.GetType().FullName;
             string typeName = instance.GetType().Name;
@@ -337,7 +339,8 @@ namespace XmlDatabase.Core
         /// </summary>
         /// <typeparam name="T">要查询的类型</typeparam>
         /// <returns>对象实例的集合</returns>
-        public T[] Query<T>() {
+        public T[] Query<T>()
+        {
             
             //读取的时候，应该将对象的引用放在内存中
             //TODO:目前所有对象都放在一个文件里面，以后要考虑分开存放
@@ -376,7 +379,8 @@ namespace XmlDatabase.Core
         /// 删除某个对象，如果对象没有uuid，则表示该对象根本就没有存在于数据库中，不进行任何操作
         /// </summary>
         /// <param name="instance">要删除的对象实例</param>
-        public void Delete(object instance) {
+        public void Delete(IXmlStoreItem instance)
+        {
             if (autoSubmit)
             {
                 Guid id = ids.GetObjectId(instance);
@@ -410,7 +414,8 @@ namespace XmlDatabase.Core
         /// 循环调用了Delete方法。如果数据库是自动提交的话，则直接就删除了。否则就进入任务队列
         /// </summary>
         /// <param name="objects">要删除的对象集合</param>
-        public void Delete(object[] objects) {
+        public void Delete(IXmlStoreItem[] objects)
+        {
             foreach (var item in objects)
             {
                 Delete(item);
