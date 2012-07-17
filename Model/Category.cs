@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HFBBS.Model
 {
-    public class Category
+    public class Category : XmlDatabase.Core.IXmlStoreItem
     {
         public int ID { get; set; }
 
@@ -21,5 +21,14 @@ namespace HFBBS.Model
             }
             return null;
         }
+
+        #region IXmlStoreItem 成员
+
+        public object GetPrimaryKey()
+        {
+            return "Category" + this.ID;
+        }
+
+        #endregion
     }
 }

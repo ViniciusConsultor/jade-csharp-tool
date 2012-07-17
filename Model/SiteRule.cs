@@ -9,7 +9,7 @@ namespace HFBBS.Model
     /// <summary>
     /// 任务规则
     /// </summary>
-    public class SiteRule
+    public class SiteRule : XmlDatabase.Core.IXmlStoreItem
     {
         /// <summary>
         /// 创建默认规则
@@ -366,6 +366,15 @@ namespace HFBBS.Model
             get;
             set;
         }
+
+        #region IXmlStoreItem 成员
+
+        public object GetPrimaryKey()
+        {
+            return this.SiteRuleId;
+        }
+
+        #endregion
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace XmlDatabase.Core
     class XChangeItem
     {
         public XChangeAction Action { get; set; }
-        public object UserData { get; set; }
+        public IXmlStoreItem UserData { get; set; }
     }
 
     enum XChangeAction

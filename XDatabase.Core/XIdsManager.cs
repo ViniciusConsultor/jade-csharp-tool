@@ -28,35 +28,69 @@ namespace XmlDatabase.Core
         }
 
 
-        private Dictionary<object,Guid> ids = new Dictionary<object,Guid>();
+        private Dictionary<object, Guid> ids = new Dictionary<object, Guid>();
 
         public Guid GetObjectId(object o)
         {
-            if (ids.Keys.Contains(o))
-                return ids[o];
+            if (o is IXmlStoreItem)
+            {
+                var key = ((IXmlStoreItem)o).GetPrimaryKey();
+                if (ids.Keys.Contains(key))
+                    return ids[key];
+            }
+            else
+            {
+                if (ids.Keys.Contains(o))
+                    return ids[o];
+            }
 
             return Guid.Empty;
         }
 
 
-        public void Set(object o, Guid id) {
-            if (ids.Values.Contains(id)) {
+        public void Set(object o, Guid id)
+        {
+
+            if (ids.Values.Contains(id))
+            {
                 ids.Remove(ids.FirstOrDefault(k => k.Value == id).Key);
                 Set(o, id);
                 return;
             }
-            if (!ids.Keys.Contains(o))
+
+            if (o is IXmlStoreItem)
             {
-                ids.Add(o, id);
+                var key = ((IXmlStoreItem)o).GetPrimaryKey();
+                if (!ids.Keys.Contains(key))
+                {
+
+                    ids.Add(key, id);
+                }
+            }
+            else
+            {
+                if (!ids.Keys.Contains(o))
+                {
+                    ids.Add(o, id);
+                }
             }
         }
 
         public void Remove(object o)
         {
-            ids.Remove(o);
+            if (o is IXmlStoreItem)
+            {
+                var key = ((IXmlStoreItem)o).GetPrimaryKey();
+                ids.Remove(key);
+            }
+            else
+            {
+                ids.Remove(o);
+            }
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             ids.Clear();
         }
     }
