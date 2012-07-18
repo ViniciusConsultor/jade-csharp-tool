@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HFBBS.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Jade.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="EncodingFilePath" Type="System.String" Scope="User">
@@ -13,6 +13,24 @@
     </Setting>
     <Setting Name="ReplaceString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IsOnline" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IsEditModel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ServerIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="ServerUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">root</Value>
+    </Setting>
+    <Setting Name="ServerPasword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">111111</Value>
+    </Setting>
+    <Setting Name="ServerDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hfbbs</Value>
     </Setting>
   </Settings>
 </SettingsFile>

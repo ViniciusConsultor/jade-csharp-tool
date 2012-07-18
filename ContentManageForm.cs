@@ -69,6 +69,19 @@ namespace Jade
             this.taskTree.ExpandAll();
         }
 
+
+        public void UpdateUI()
+        {
+            if (Jade.Properties.Settings.Default.IsEditModel)
+            {
+                this.naviBar1.ActiveBand = this.naviBand1;
+            }
+            else
+            {
+                this.naviBar1.ActiveBand = this.naviBand2;
+            }
+        }
+
         private void ContentManageForm_Load(object sender, EventArgs e)
         {
             this.treeView1.ExpandAll();
@@ -101,7 +114,6 @@ namespace Jade
         {
             BindList();
         }
-
 
         private void InitTree(TreeNode baseNode, Model.Category category)
         {

@@ -11,12 +11,18 @@ namespace Jade
 {
     public partial class LoginForm : Form
     {
+        Jade.Properties.Settings setting;
         private ILogin login = null;
 
         public LoginForm(ILogin login)
         {
             this.login = login;
             InitializeComponent();
+            setting = Jade.Properties.Settings.Default;
+            this.rblEdit.Checked = setting.IsEditModel;
+            this.rblNotEdit.Checked = !this.rblEdit.Checked;
+            this.rblServer.Checked = setting.IsOnline;
+            this.rblSingle.Checked = !this.rblServer.Checked;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -27,6 +33,10 @@ namespace Jade
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            setting.IsEditModel = this.rblEdit.Checked;
+            setting.IsOnline = this.rblServer.Checked;
+            setting.Save();
+
             string username = this.txtUserName.Text;
             string password = this.txtPassword.Text;
 

@@ -63,8 +63,10 @@ namespace Jade
             var siteRule = new ContentManageForm();
             siteRule.Width = 150;
             AddDock(siteRule, DockState.DockLeft);
+            CacheObject.NavForm = siteRule;
+            dockPanel1.DockLeftPortion = 100 / (double)dockPanel1.Width;
             //AddDock(new TaskQueqeForm(), DockState.DockTopAutoHide);
-           // new ContentManageForm().Show(siteRule.Pane, DockAlignment.Bottom, 0.5);
+            // new ContentManageForm().Show(siteRule.Pane, DockAlignment.Bottom, 0.5);
 
             var taskForm = new WelcomeForm();
             AddDock(taskForm, DockState.Document);
@@ -94,6 +96,7 @@ namespace Jade
             }
             else
             {
+                CacheObject.NavForm.UpdateUI();
                 this.Show();
                 this.WindowState = FormWindowState.Maximized;
                 var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
@@ -123,6 +126,11 @@ namespace Jade
                 item = CacheObject.MdiDict[type];
                 item.Activate();
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
