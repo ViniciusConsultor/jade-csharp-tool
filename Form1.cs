@@ -72,9 +72,9 @@ namespace Jade
             AddDock(taskForm, DockState.Document);
             taskForm.DockAreas = DockAreas.Document;
             var queqe = new TaskQueqeForm();
-            AddDock(queqe, DockState.DockTop);
+            AddDock(queqe, DockState.DockBottom);
             //queqe.Show(taskForm.Pane, DockAlignment.Top, 0.2);
-            queqe.DockState = DockState.DockTopAutoHide;
+            queqe.DockState = DockState.DockBottomAutoHide;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -132,5 +132,76 @@ namespace Jade
         {
             System.Environment.Exit(0);
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            if (new SystemConfigForm().ShowDialog() == DialogResult.OK)
+            {
+                // update DAL
+            }
+        }
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripButton4_Click(null, null);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            // 编辑设置
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            //采集设置
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // 编辑设置
+            toolStripButton2_Click(null, null);
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //采集设置
+            toolStripButton3_Click(null, null);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            //草稿箱
+            CacheObject.DraftForm.IsEdited = false;
+            CacheObject.DraftForm.IsPublished = false;
+            CacheObject.DraftForm.TabText = "草稿箱";
+            CacheObject.DraftForm.Activate();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            // 待发箱
+            CacheObject.DraftForm.IsEdited = true;
+            CacheObject.DraftForm.IsPublished = false;
+            CacheObject.DraftForm.TabText = "待发箱";
+            CacheObject.DraftForm.Activate();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            CacheObject.DraftForm.IsEdited = false;
+            CacheObject.DraftForm.IsPublished = true;
+            CacheObject.DraftForm.TabText = "已发箱";
+            CacheObject.DraftForm.Activate();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripButton7_Click(null, null);
+        }
+
     }
 }

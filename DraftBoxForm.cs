@@ -40,14 +40,27 @@ namespace Jade
             }
             set
             {
-                if (isPublished != value)
+                isPublished = value;
+                comboBox1_SelectedIndexChanged(null, null);
+            }
+        }
+
+        bool isEdit = false;
+        public bool IsEdited
+        {
+            get
+            {
+                return isEdit;
+            }
+            set
+            {
+                if (isEdit != value)
                 {
-                    isPublished = value;
-                    comboBox1_SelectedIndexChanged(null, null);
+                    isEdit = value;
                 }
                 else
                 {
-                    isPublished = value;
+                    isEdit = value;
                 }
             }
         }
@@ -64,6 +77,7 @@ namespace Jade
             return new SearchArgs
             {
                 IsPublish = isPublished,
+                IsEdit = IsEdited,
                 Keyword = this.txtKeyword.Text,
                 PageIndex = pageIndex,
                 TaskId = taskId,
