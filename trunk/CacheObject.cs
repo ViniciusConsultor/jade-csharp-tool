@@ -57,7 +57,7 @@ namespace Jade
         {
             get
             {
-                if (draftForm == null)
+                if (draftForm == null || draftForm.IsDisposed)
                 {
                     draftForm = new DraftBoxForm();
                     MainForm.AddDock(draftForm, DockState.Document);
@@ -69,6 +69,23 @@ namespace Jade
                 }
 
                 return draftForm;
+            }
+        }
+
+        static ContentManageForm navForm;
+        public static ContentManageForm NavForm
+        {
+            get
+            {
+                if (navForm == null || navForm.IsDisposed)
+                {
+                    navForm = new ContentManageForm();
+                }
+                return navForm;
+            }
+            set
+            {
+                navForm = value;
             }
         }
 

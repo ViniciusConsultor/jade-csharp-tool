@@ -33,7 +33,13 @@
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("待发箱");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("已发箱");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("任务列表");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentManageForm));
             this.naviBar1 = new Guifreaks.NavigationBar.NaviBar(this.components);
+            this.naviBand1 = new Guifreaks.NavigationBar.NaviBand(this.components);
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.naviBand2 = new Guifreaks.NavigationBar.NaviBand(this.components);
+            this.taskTree = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新建分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,18 +54,13 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.naviBand1 = new Guifreaks.NavigationBar.NaviBand(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.naviBand2 = new Guifreaks.NavigationBar.NaviBand(this.components);
-            this.taskTree = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.naviBar1)).BeginInit();
             this.naviBar1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.naviBand1.ClientArea.SuspendLayout();
             this.naviBand1.SuspendLayout();
             this.naviBand2.ClientArea.SuspendLayout();
             this.naviBand2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // naviBar1
@@ -76,6 +77,101 @@
             this.naviBar1.TabIndex = 2;
             this.naviBar1.Text = "naviBar1";
             this.naviBar1.VisibleLargeButtons = 2;
+            // 
+            // naviBand1
+            // 
+            // 
+            // naviBand1.ClientArea
+            // 
+            this.naviBand1.ClientArea.Controls.Add(this.treeView1);
+            this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
+            this.naviBand1.ClientArea.Name = "ClientArea";
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(294, 299);
+            this.naviBand1.ClientArea.TabIndex = 0;
+            this.naviBand1.LargeImage = global::Jade.Properties.Resources.page;
+            this.naviBand1.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
+            this.naviBand1.Location = new System.Drawing.Point(1, 27);
+            this.naviBand1.Name = "naviBand1";
+            this.naviBand1.Size = new System.Drawing.Size(294, 299);
+            this.naviBand1.SmallImage = global::Jade.Properties.Resources.logo按钮图标5;
+            this.naviBand1.TabIndex = 3;
+            this.naviBand1.Text = "内容管理";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeView1.ImageIndex = 0;
+            this.treeView1.ImageList = this.imageList2;
+            this.treeView1.Indent = 20;
+            this.treeView1.ItemHeight = 30;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "草稿箱";
+            treeNode2.ImageIndex = 2;
+            treeNode2.Name = "root";
+            treeNode2.Text = "待发箱";
+            treeNode3.ImageIndex = 1;
+            treeNode3.Name = "Node1";
+            treeNode3.Text = "已发箱";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            this.treeView1.SelectedImageIndex = 0;
+            this.treeView1.ShowLines = false;
+            this.treeView1.Size = new System.Drawing.Size(294, 299);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
+            // 
+            // imageList2
+            // 
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList2.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // naviBand2
+            // 
+            // 
+            // naviBand2.ClientArea
+            // 
+            this.naviBand2.ClientArea.Controls.Add(this.taskTree);
+            this.naviBand2.ClientArea.Location = new System.Drawing.Point(0, 0);
+            this.naviBand2.ClientArea.Name = "ClientArea";
+            this.naviBand2.ClientArea.Size = new System.Drawing.Size(294, 299);
+            this.naviBand2.ClientArea.TabIndex = 0;
+            this.naviBand2.ClientArea.Text = "任务管理";
+            this.naviBand2.LargeImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
+            this.naviBand2.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
+            this.naviBand2.Location = new System.Drawing.Point(1, 27);
+            this.naviBand2.Name = "naviBand2";
+            this.naviBand2.Size = new System.Drawing.Size(294, 299);
+            this.naviBand2.TabIndex = 5;
+            this.naviBand2.Text = "任务管理";
+            // 
+            // taskTree
+            // 
+            this.taskTree.ContextMenuStrip = this.contextMenuStrip1;
+            this.taskTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskTree.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskTree.ImageIndex = 0;
+            this.taskTree.ImageList = this.imageList1;
+            this.taskTree.Location = new System.Drawing.Point(0, 0);
+            this.taskTree.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.taskTree.Name = "taskTree";
+            treeNode4.Name = "root";
+            treeNode4.Text = "任务列表";
+            this.taskTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            this.taskTree.SelectedImageIndex = 0;
+            this.taskTree.ShowRootLines = false;
+            this.taskTree.Size = new System.Drawing.Size(294, 299);
+            this.taskTree.TabIndex = 1;
+            this.taskTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.taskTree_AfterSelect);
+            this.taskTree.DoubleClick += new System.EventHandler(this.tasktree_DoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -180,118 +276,24 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // imageList2
-            // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // naviBand1
-            // 
-            // 
-            // naviBand1.ClientArea
-            // 
-            this.naviBand1.ClientArea.Controls.Add(this.treeView1);
-            this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
-            this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(294, 299);
-            this.naviBand1.ClientArea.TabIndex = 0;
-            this.naviBand1.LargeImage = global::Jade.Properties.Resources.page;
-            this.naviBand1.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
-            this.naviBand1.Location = new System.Drawing.Point(1, 27);
-            this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(294, 299);
-            this.naviBand1.SmallImage = global::Jade.Properties.Resources.logo按钮图标5;
-            this.naviBand1.TabIndex = 3;
-            this.naviBand1.Text = "内容管理";
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Font = new System.Drawing.Font("SimSun", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList2;
-            this.treeView1.Indent = 20;
-            this.treeView1.ItemHeight = 30;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "草稿箱";
-            treeNode2.ImageIndex = 2;
-            treeNode2.Name = "root";
-            treeNode2.Text = "待发箱";
-            treeNode3.ImageIndex = 1;
-            treeNode3.Name = "Node1";
-            treeNode3.Text = "已发箱";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(294, 299);
-            this.treeView1.TabIndex = 1;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
-            // 
-            // naviBand2
-            // 
-            // 
-            // naviBand2.ClientArea
-            // 
-            this.naviBand2.ClientArea.Controls.Add(this.taskTree);
-            this.naviBand2.ClientArea.Location = new System.Drawing.Point(0, 0);
-            this.naviBand2.ClientArea.Name = "ClientArea";
-            this.naviBand2.ClientArea.Size = new System.Drawing.Size(294, 299);
-            this.naviBand2.ClientArea.TabIndex = 0;
-            this.naviBand2.ClientArea.Text = "任务管理";
-            this.naviBand2.LargeImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
-            this.naviBand2.LayoutStyle = Guifreaks.NavigationBar.NaviLayoutStyle.Office2007Black;
-            this.naviBand2.Location = new System.Drawing.Point(1, 27);
-            this.naviBand2.Name = "naviBand2";
-            this.naviBand2.Size = new System.Drawing.Size(294, 299);
-            this.naviBand2.TabIndex = 5;
-            this.naviBand2.Text = "任务管理";
-            // 
-            // taskTree
-            // 
-            this.taskTree.ContextMenuStrip = this.contextMenuStrip1;
-            this.taskTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.taskTree.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.taskTree.ImageIndex = 0;
-            this.taskTree.ImageList = this.imageList1;
-            this.taskTree.Location = new System.Drawing.Point(0, 0);
-            this.taskTree.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.taskTree.Name = "taskTree";
-            treeNode4.Name = "root";
-            treeNode4.Text = "任务列表";
-            this.taskTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.taskTree.SelectedImageIndex = 0;
-            this.taskTree.ShowRootLines = false;
-            this.taskTree.Size = new System.Drawing.Size(294, 299);
-            this.taskTree.TabIndex = 1;
-            this.taskTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.taskTree_AfterSelect);
-            this.taskTree.DoubleClick += new System.EventHandler(this.tasktree_DoubleClick);
-            // 
             // ContentManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(296, 430);
             this.Controls.Add(this.naviBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ContentManageForm";
             this.TabText = "功能导航";
-            this.Text = "ContentManageForm";
+            this.Text = "功能导航";
             this.Load += new System.EventHandler(this.ContentManageForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.naviBar1)).EndInit();
             this.naviBar1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.naviBand1.ClientArea.ResumeLayout(false);
             this.naviBand1.ResumeLayout(false);
             this.naviBand2.ClientArea.ResumeLayout(false);
             this.naviBand2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

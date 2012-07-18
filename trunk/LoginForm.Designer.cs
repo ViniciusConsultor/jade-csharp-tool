@@ -34,11 +34,11 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.rblServer = new System.Windows.Forms.RadioButton();
+            this.rblSingle = new System.Windows.Forms.RadioButton();
+            this.rblEdit = new System.Windows.Forms.RadioButton();
+            this.rblNotEdit = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -92,8 +92,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.rblServer);
+            this.groupBox1.Controls.Add(this.rblSingle);
             this.groupBox1.Location = new System.Drawing.Point(571, 196);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(258, 43);
@@ -101,32 +101,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "运行模式";
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "单机模式";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(131, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(83, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "工作站模式";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton3);
-            this.groupBox2.Controls.Add(this.radioButton4);
+            this.groupBox2.Controls.Add(this.rblEdit);
+            this.groupBox2.Controls.Add(this.rblNotEdit);
             this.groupBox2.Location = new System.Drawing.Point(571, 256);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(258, 43);
@@ -134,34 +112,56 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "默认界面";
             // 
-            // radioButton3
+            // rblServer
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(131, 21);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(47, 16);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "编辑";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rblServer.AutoSize = true;
+            this.rblServer.Checked = true;
+            this.rblServer.Location = new System.Drawing.Point(131, 18);
+            this.rblServer.Name = "rblServer";
+            this.rblServer.Size = new System.Drawing.Size(83, 16);
+            this.rblServer.TabIndex = 3;
+            this.rblServer.TabStop = true;
+            this.rblServer.Text = "工作站模式";
+            this.rblServer.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // rblSingle
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(17, 21);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(47, 16);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.Text = "采集";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rblSingle.AutoSize = true;
+            this.rblSingle.Location = new System.Drawing.Point(17, 18);
+            this.rblSingle.Name = "rblSingle";
+            this.rblSingle.Size = new System.Drawing.Size(71, 16);
+            this.rblSingle.TabIndex = 2;
+            this.rblSingle.Text = "单机模式";
+            this.rblSingle.UseVisualStyleBackColor = true;
+            // 
+            // rblEdit
+            // 
+            this.rblEdit.AutoSize = true;
+            this.rblEdit.Checked = true;
+            this.rblEdit.Location = new System.Drawing.Point(131, 17);
+            this.rblEdit.Name = "rblEdit";
+            this.rblEdit.Size = new System.Drawing.Size(47, 16);
+            this.rblEdit.TabIndex = 3;
+            this.rblEdit.TabStop = true;
+            this.rblEdit.Text = "编辑";
+            this.rblEdit.UseVisualStyleBackColor = true;
+            // 
+            // rblNotEdit
+            // 
+            this.rblNotEdit.AutoSize = true;
+            this.rblNotEdit.Location = new System.Drawing.Point(17, 17);
+            this.rblNotEdit.Name = "rblNotEdit";
+            this.rblNotEdit.Size = new System.Drawing.Size(47, 16);
+            this.rblNotEdit.TabIndex = 2;
+            this.rblNotEdit.Text = "采集";
+            this.rblNotEdit.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::Jade.Properties.Resources.loginbg1;
+            this.BackgroundImage = global::Jade.Properties.Resources.laboratory;
             this.ClientSize = new System.Drawing.Size(872, 387);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -191,11 +191,11 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton rblServer;
+        private System.Windows.Forms.RadioButton rblSingle;
+        private System.Windows.Forms.RadioButton rblEdit;
+        private System.Windows.Forms.RadioButton rblNotEdit;
 
     }
 }
