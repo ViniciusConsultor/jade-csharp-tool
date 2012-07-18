@@ -34,13 +34,18 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rblServer = new System.Windows.Forms.RadioButton();
             this.rblSingle = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rblEdit = new System.Windows.Forms.RadioButton();
             this.rblNotEdit = new System.Windows.Forms.RadioButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtUserName
@@ -68,7 +73,7 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Image = global::Jade.Properties.Resources.login__1_;
             this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(615, 316);
+            this.btnLogin.Location = new System.Drawing.Point(615, 326);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 40);
             this.btnLogin.TabIndex = 2;
@@ -82,7 +87,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Image = global::Jade.Properties.Resources.login__2_;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(722, 316);
+            this.btnCancel.Location = new System.Drawing.Point(721, 326);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 40);
             this.btnCancel.TabIndex = 3;
@@ -92,36 +97,26 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.rblServer);
             this.groupBox1.Controls.Add(this.rblSingle);
-            this.groupBox1.Location = new System.Drawing.Point(571, 196);
+            this.groupBox1.Location = new System.Drawing.Point(551, 248);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(258, 43);
+            this.groupBox1.Size = new System.Drawing.Size(139, 43);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "运行模式";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rblEdit);
-            this.groupBox2.Controls.Add(this.rblNotEdit);
-            this.groupBox2.Location = new System.Drawing.Point(571, 256);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(258, 43);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "默认界面";
             // 
             // rblServer
             // 
             this.rblServer.AutoSize = true;
             this.rblServer.Checked = true;
-            this.rblServer.Location = new System.Drawing.Point(131, 18);
+            this.rblServer.Location = new System.Drawing.Point(70, 18);
             this.rblServer.Name = "rblServer";
-            this.rblServer.Size = new System.Drawing.Size(83, 16);
+            this.rblServer.Size = new System.Drawing.Size(59, 16);
             this.rblServer.TabIndex = 3;
             this.rblServer.TabStop = true;
-            this.rblServer.Text = "工作站模式";
+            this.rblServer.Text = "工作组";
             this.rblServer.UseVisualStyleBackColor = true;
             // 
             // rblSingle
@@ -129,16 +124,28 @@
             this.rblSingle.AutoSize = true;
             this.rblSingle.Location = new System.Drawing.Point(17, 18);
             this.rblSingle.Name = "rblSingle";
-            this.rblSingle.Size = new System.Drawing.Size(71, 16);
+            this.rblSingle.Size = new System.Drawing.Size(47, 16);
             this.rblSingle.TabIndex = 2;
-            this.rblSingle.Text = "单机模式";
+            this.rblSingle.Text = "单机";
             this.rblSingle.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.rblEdit);
+            this.groupBox2.Controls.Add(this.rblNotEdit);
+            this.groupBox2.Location = new System.Drawing.Point(704, 248);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(131, 43);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "默认界面";
             // 
             // rblEdit
             // 
             this.rblEdit.AutoSize = true;
             this.rblEdit.Checked = true;
-            this.rblEdit.Location = new System.Drawing.Point(131, 17);
+            this.rblEdit.Location = new System.Drawing.Point(70, 17);
             this.rblEdit.Name = "rblEdit";
             this.rblEdit.Size = new System.Drawing.Size(47, 16);
             this.rblEdit.TabIndex = 3;
@@ -156,13 +163,45 @@
             this.rblNotEdit.Text = "采集";
             this.rblNotEdit.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Location = new System.Drawing.Point(189, 13);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(85, 30);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(554, 190);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(281, 47);
+            this.panel1.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(93, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(80, 14);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Text = "test";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::Jade.Properties.Resources.laboratory;
+            this.BackgroundImage = global::Jade.Properties.Resources.loginbg1;
             this.ClientSize = new System.Drawing.Size(872, 387);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
@@ -175,10 +214,14 @@
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.Text = "登陆编辑中心";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,6 +239,9 @@
         private System.Windows.Forms.RadioButton rblSingle;
         private System.Windows.Forms.RadioButton rblEdit;
         private System.Windows.Forms.RadioButton rblNotEdit;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

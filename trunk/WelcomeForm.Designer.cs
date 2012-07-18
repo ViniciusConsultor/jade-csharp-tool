@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.components = new System.ComponentModel.Container();
+            this.webBrowser1 = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.SuspendLayout();
             // 
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(833, 428);
             this.webBrowser1.TabIndex = 0;
             // 
@@ -49,13 +50,14 @@
             this.Name = "WelcomeForm";
             this.TabText = "TaskRunForm";
             this.Text = "TaskRunForm";
+            this.Load += new System.EventHandler(this.WelcomeForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser webBrowser1;
 
     }
 }

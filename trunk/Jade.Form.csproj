@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="Com.iFLYTEK.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Com.iFLYTEK.WinForms.dll</HintPath>
+      <HintPath>Lib\Com.iFLYTEK.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Guifreaks.Common, Version=0.1.0.0, Culture=neutral, PublicKeyToken=c3c25e41a6abca42, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
