@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Jade
 {
@@ -25,6 +26,8 @@ namespace Jade
             this.rblNotEdit.Checked = !this.rblEdit.Checked;
             this.rblServer.Checked = setting.IsOnline;
             this.rblSingle.Checked = !this.rblServer.Checked;
+            this.txtUserName.Text = setting.UserName;
+            this.txtPassword.Text = setting.UserPassword;
 
         }
 
@@ -39,9 +42,6 @@ namespace Jade
             remoteLogin();
             return;
 
-            setting.IsEditModel = this.rblEdit.Checked;
-            setting.IsOnline = this.rblServer.Checked;
-            setting.Save();
 
             string username = this.txtUserName.Text;
             string password = this.txtPassword.Text;
@@ -80,16 +80,76 @@ namespace Jade
             }
         }
 
-
         string cookie;
+
         void remoteLogin()
         {
-            CookieAwareWebClient client = new CookieAwareWebClient();
-            client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            //client._cookieContainer = this.cookie;
-            client.Headers[HttpRequestHeader.Cookie] = cookie; 
-            client.UploadDataCompleted += new UploadDataCompletedEventHandler(client_UploadDataCompleted);
-            client.UploadDataAsync(new Uri("http://newscms.house365.com/newCMS/chk_log.php"), "POST", System.Text.Encoding.GetEncoding("GB2312").GetBytes("user_name=zhangyang&pass_word=House365&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32"));
+            System.Net.ServicePointManager.Expect100Continue = false;
+            MyWebRequest request = CacheObject.WebRequset;
+            request.Url = "http://newscms.house365.com/newCMS/chk_log.php";
+            request.RequestData = new RequestPostData()
+            {
+                PostDatas = new List<PostDataItem> { new PostDataItem{
+                        Data = "user_name="+this.txtUserName.Text+ "&pass_word="+this.txtPassword.Text+ "&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32"
+                    }}
+            };
+
+            request.Cookie = cookie;
+            var result = request.Post();
+            Console.WriteLine(result);
+            CacheObject.Cookie = request.Cookie;
+
+            // "<script type=\"text/javascript\">alert(\"验证码不正确!\"); location.href=\"../newCMS/login.php\";</script>"
+            if (!result.Contains("index.php"))
+            {
+                if (result.Contains("验证码不正确"))
+                {
+                    MessageBox.Show("验证码不正确！");
+                }
+                else
+                {
+                    MessageBox.Show("用户名或密码错误！");
+                }
+                DownloadValidCode();
+                return;
+            }
+
+            var decodeCookie = System.Web.HttpUtility.UrlDecode(CacheObject.Cookie, Encoding.GetEncoding("GB2312"));
+            var uStart = decodeCookie.IndexOf("usid=");
+            var uEnd = decodeCookie.IndexOf(";", uStart);
+            var userId = decodeCookie.Substring(uStart, uEnd - uStart).Replace("usid=", "");
+            var trueName = decodeCookie.Substring(decodeCookie.LastIndexOf("=") + 1);
+
+            // 更新setting
+            setting.UserName = this.txtUserName.Text;
+            setting.UserPassword = this.txtPassword.Text;
+            setting.IsEditModel = this.rblEdit.Checked;
+            setting.IsOnline = this.rblServer.Checked;
+            setting.UserId = userId;
+            setting.Name = trueName;
+            setting.Save();
+
+  
+            CacheObject.CurrentUser = new User
+            {
+                Id = setting.UserId,
+                Name = trueName,
+                UserName = setting.UserName,
+                Password = this.txtPassword.Text
+            };
+
+            CacheObject.IsLognIn = true;
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+
+            return;
+
+            //CookieAwareWebClient client = new CookieAwareWebClient();
+            //client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            ////client._cookieContainer = this.cookie;
+            //client.Headers[HttpRequestHeader.Cookie] = cookie;
+            //client.UploadDataCompleted += new UploadDataCompletedEventHandler(client_UploadDataCompleted);
+            //client.UploadDataAsync(new Uri("http://newscms.house365.com/newCMS/chk_log.php"), "POST", System.Text.Encoding.GetEncoding("GB2312").GetBytes("user_name=zhangyang&pass_word=House365&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32"));
 
         }
 
@@ -119,13 +179,28 @@ namespace Jade
             {
                 MemoryStream stream = new MemoryStream(e.Result, 0, e.Result.Length);
                 this.pictureBox1.Image = Image.FromStream(stream);
-                cookie =(sender as WebClient).ResponseHeaders[HttpResponseHeader.SetCookie];
+                cookie = (sender as WebClient).ResponseHeaders[HttpResponseHeader.SetCookie].Replace("; path=/", "");
             }
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             DownloadValidCode();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            DownloadValidCode();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            setting.UserName = this.txtUserName.Text;
+            setting.UserPassword = this.txtPassword.Text;
+            setting.IsEditModel = this.rblEdit.Checked;
+            setting.IsOnline = this.rblServer.Checked;
+            setting.Save();
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }
 }

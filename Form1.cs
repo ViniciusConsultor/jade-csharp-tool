@@ -71,6 +71,8 @@ namespace Jade
             var taskForm = new WelcomeForm();
             AddDock(taskForm, DockState.Document);
             taskForm.DockAreas = DockAreas.Document;
+            CacheObject.WelcomeForm = taskForm;
+
             var queqe = new TaskQueqeForm();
             AddDock(queqe, DockState.DockBottom);
             //queqe.Show(taskForm.Pane, DockAlignment.Top, 0.2);
@@ -100,7 +102,8 @@ namespace Jade
                 this.Show();
                 this.WindowState = FormWindowState.Maximized;
                 var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
-
+                this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
+                CacheObject.WelcomeForm.LoadtoPage();
                 if (tasks.Count > 0)
                 {
                     if (MessageBox.Show("系统发现你有设为自动运行的采集任务,是否现在开始自动执行采集任务？", "自动采集确认!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)

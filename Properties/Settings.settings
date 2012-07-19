@@ -32,5 +32,17 @@
     <Setting Name="ServerDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)">hfbbs</Value>
     </Setting>
+    <Setting Name="UserId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5809</Value>
+    </Setting>
+    <Setting Name="Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">张阳</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">zhangyang</Value>
+    </Setting>
+    <Setting Name="UserPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">House365</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

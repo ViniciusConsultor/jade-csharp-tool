@@ -9,6 +9,8 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using Jade.Model.MySql;
 using Jade.DAL;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Jade
 {
@@ -22,7 +24,20 @@ namespace Jade
             RunningTasks = new List<RunningTask>();
             DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
         }
+        static MyWebRequest webRequset;
+        public static MyWebRequest WebRequset
+        {
+            get
+            {
+                if (webRequset == null)
+                {
+                    webRequset = new MyWebRequest();
+                }
+                return webRequset;
+            }
+        }
 
+        public static string Cookie = "";
         public static bool IsDebug = false;
 
         public static Form1 MainForm { get; set; }
@@ -40,16 +55,37 @@ namespace Jade
 
         static DraftBoxForm draftForm;
 
+        /// <summary>
+        /// 是否已登录
+        /// </summary>
+        public static bool IsLognIn
+        {
+            get;
+            set;
+        }
+
+        static User currentUser;
         public static User CurrentUser
         {
             get
             {
-                return new User
+                if (currentUser == null)
                 {
-                    UserName = "hefeibbs",
-                    Name = "张阳",
-                    Password = ""
-                };
+                    currentUser = new User
+                    {
+                        Id = Jade.Properties.Settings.Default.UserId,
+                        Name = Jade.Properties.Settings.Default.Name,
+                        UserName = Jade.Properties.Settings.Default.UserName,
+                        Password = Jade.Properties.Settings.Default.UserPassword
+                    };
+                }
+
+                return currentUser;
+            }
+
+            set
+            {
+                currentUser = value;
             }
         }
 
@@ -81,6 +117,10 @@ namespace Jade
                 {
                     navForm = new ContentManageForm();
                 }
+                if (navForm.DockPanel == null)
+                {
+                    MainForm.AddDock(navForm, DockState.DockLeft);
+                }
                 return navForm;
             }
             set
@@ -89,6 +129,26 @@ namespace Jade
             }
         }
 
+        static WelcomeForm welForm;
+        public static WelcomeForm WelcomeForm
+        {
+            get
+            {
+                if (welForm == null || welForm.IsDisposed)
+                {
+                    welForm = new WelcomeForm();
+                }
+                if (welForm.DockPanel == null)
+                {
+                    MainForm.AddDock(welForm, DockState.Document);
+                }
+                return welForm;
+            }
+            set
+            {
+                welForm = value;
+            }
+        }
         public static string IconDir
         {
             get
@@ -410,9 +470,307 @@ namespace Jade
 
     }
 
+    /// <summary>
+    /// MSP请求
+    /// </summary>
+    public class MyWebRequest : IDisposable
+    {
+        public MyWebRequest(string url = "http://msp.iflytek.com/index.htm")
+        {
+            this.Url = url;
+        }
+
+        /// <summary>
+        /// 服务器地址
+        /// </summary>
+        public string Url
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 文本协议头
+        /// </summary>
+        private string contentType = "application/x-www-form-urlencoded";
+
+
+        /// <summary>
+        /// 混杂协议头
+        /// </summary>
+        private string multipart = "multipart/mixed;boundary=---------boundary string";
+
+        /// <summary>
+        /// 内容类型
+        /// </summary>
+        public string ContentType
+        {
+            get { return contentType; }
+            set { contentType = value; }
+        }
+
+        private string boundary = "---------boundary string";
+
+        /// <summary>
+        /// 分隔符
+        /// </summary>
+        public string Boundary
+        {
+            get { return boundary; }
+            set { boundary = value; }
+        }
+
+        /// <summary>
+        /// 请求数据
+        /// </summary>
+        public RequestPostData RequestData
+        {
+            get;
+            set;
+        }
+
+        string endcoingName = "gb2312";
+
+        /// <summary>
+        /// 内容编码(计算boundary的Content-length时使用)，默认gb2312
+        /// </summary>
+        public string EncodingName
+        {
+            get
+            {
+                return endcoingName;
+            }
+            set
+            {
+                endcoingName = value;
+            }
+        }
+
+        protected HttpWebResponse _myHttpWebResponse = null;
+
+        public string Accept
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 获取请求的Post数据
+        /// </summary>
+        /// <returns></returns>
+        public string GetPostData()
+        {
+            if (RequestData.IsMultipart)
+            {
+                List<string> postData = new List<string>();
+                string boundary = "--" + this.Boundary;
+                postData.Add(boundary);
+                foreach (PostDataItem post in RequestData.PostDatas)
+                {
+                    postData.Add(string.Format("Content-type:{0}", post.ContentType));
+                    postData.Add(string.Format("Content-length:{0}", Encoding.GetEncoding(EncodingName).GetBytes(post.Data).Length));
+                    postData.Add(string.Empty);
+                    postData.Add(post.Data);
+                    postData.Add(boundary);
+                }
+                var postDataArray = postData.ToArray();
+                postDataArray[postDataArray.Length - 1] += "--";
+                return String.Join("\r\n", postDataArray);
+            }
+            else
+            {
+                return RequestData.PostDatas[0].Data;
+            }
+        }
+
+        /// <summary>
+        /// 响应信息
+        /// </summary>
+        public string ResponseMessage
+        {
+            get;
+            set;
+        }
+
+
+        public string Cookie
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 解析后的响应信息字典
+        /// </summary>
+        public Dictionary<string, string> ResponseDictionary
+        {
+            get;
+            set;
+        }
+
+        private void GetKeyValueDictionFromResponse()
+        {
+            var results = ResponseMessage.Split('&');
+            ResponseDictionary = new Dictionary<string, string>();
+            foreach (var result in results)
+            {
+                var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                if (keyvaluepair.Length == 2)
+                {
+                    ResponseDictionary.Add(keyvaluepair[0], keyvaluepair[1]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// POST数据
+        /// </summary>
+        /// <returns>是否成功</returns> 
+        public string Post()
+        {
+            System.Net.ServicePointManager.Expect100Continue = false;
+            var request = (HttpWebRequest)WebRequest.Create(this.Url);
+            request.Headers[HttpRequestHeader.Cookie] = this.Cookie;
+            if (this.RequestData.IsMultipart)
+            {
+                request.ContentType = this.multipart;
+            }
+            else
+            {
+                request.ContentType = this.ContentType;
+            }
+            string postData = this.GetPostData();
+
+            Console.WriteLine("请求数据如下:");
+
+            Console.WriteLine(postData);
+
+            byte[] buffer = Encoding.GetEncoding(this.EncodingName).GetBytes(postData);
+
+            request.Method = "POST";
+            request.AllowWriteStreamBuffering = true;
+            request.ContentLength = buffer.Length;
+            request.Accept = "*/*";
+            request.KeepAlive = true;
+            // 获取请求stream
+            Stream requestStream = request.GetRequestStream();
+            // 写入post数据
+            requestStream.Write(buffer, 0, buffer.Length);
+            // 关闭流
+            requestStream.Close();
+            // 获取响应
+            _myHttpWebResponse = (HttpWebResponse)request.GetResponse();
+            // 获取响应流
+            var responseStream = _myHttpWebResponse.GetResponseStream();
+            var sr = new StreamReader(responseStream, Encoding.GetEncoding(EncodingName));
+            GetCookie();
+            ResponseMessage = sr.ReadToEnd();
+            // GetKeyValueDictionFromResponse();
+            return ResponseMessage;
+
+        }
+
+        public string Get()
+        {
+            System.Net.ServicePointManager.Expect100Continue = false;
+            var request = (HttpWebRequest)WebRequest.Create(this.Url);
+            request.Headers[HttpRequestHeader.Cookie] = this.Cookie;
+            request.Method = "GET";
+            request.AllowWriteStreamBuffering = true;
+            request.Accept = "*/*";
+            request.KeepAlive = true;
+            // 获取响应
+            _myHttpWebResponse = (HttpWebResponse)request.GetResponse();
+            // 获取响应流
+            var responseStream = _myHttpWebResponse.GetResponseStream();
+            var sr = new StreamReader(responseStream, Encoding.GetEncoding(EncodingName));
+            GetCookie();
+            ResponseMessage = sr.ReadToEnd();
+            // GetKeyValueDictionFromResponse();
+            return ResponseMessage;
+        }
+
+        private void GetCookie()
+        {
+            if (_myHttpWebResponse.Headers[HttpResponseHeader.SetCookie] != null)
+            {
+                var regex = new Regex(@"expires=\w+, \d+-\w+-\d+ \d+:\d+:\d+ GMT;*");
+                this.Cookie = _myHttpWebResponse.Headers[HttpResponseHeader.SetCookie].Replace("path=/,", "").Replace("path=/", "");
+                this.Cookie = regex.Replace(Cookie, "");
+            }
+        }
+
+        ~MyWebRequest()
+        {
+            this.Dispose();
+        }
+
+        #region IDisposable 成员
+
+        public void Dispose()
+        {
+            if (_myHttpWebResponse != null)
+            {
+                _myHttpWebResponse.Close();
+                _myHttpWebResponse = null;
+            }
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 请求Post的数据集合
+    /// </summary>
+    public class RequestPostData
+    {
+        /// <summary>
+        /// 数据集合
+        /// </summary>
+        public List<PostDataItem> PostDatas
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 是否是Multipart
+        /// </summary>
+        public bool IsMultipart
+        {
+            get
+            {
+                return this.PostDatas.Count > 1;
+            }
+        }
+
+        public void AddPost()
+        {
+        }
+    }
+
+    /// <summary>
+    /// POST 数据片段
+    /// </summary>
+    public class PostDataItem
+    {
+        public string Data
+        {
+            get;
+            set;
+        }
+
+        public string ContentType
+        {
+            get;
+            set;
+        }
+    }
 
     public class User
     {
+        public string Id { get; set; }
+
         public string Name
         {
             get;
