@@ -42,6 +42,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -73,11 +74,11 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Image = global::Jade.Properties.Resources.login__1_;
             this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(615, 326);
+            this.btnLogin.Location = new System.Drawing.Point(672, 326);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 40);
             this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "     登录";
+            this.btnLogin.Text = "     联网";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
@@ -87,7 +88,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCancel.Image = global::Jade.Properties.Resources.login__2_;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(721, 326);
+            this.btnCancel.Location = new System.Drawing.Point(753, 326);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 40);
             this.btnCancel.TabIndex = 3;
@@ -97,7 +98,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.rblServer);
             this.groupBox1.Controls.Add(this.rblSingle);
             this.groupBox1.Location = new System.Drawing.Point(551, 248);
@@ -131,7 +132,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.rblEdit);
             this.groupBox2.Controls.Add(this.rblNotEdit);
             this.groupBox2.Location = new System.Drawing.Point(704, 248);
@@ -156,12 +157,13 @@
             // rblNotEdit
             // 
             this.rblNotEdit.AutoSize = true;
+            this.rblNotEdit.BackColor = System.Drawing.Color.Transparent;
             this.rblNotEdit.Location = new System.Drawing.Point(17, 17);
             this.rblNotEdit.Name = "rblNotEdit";
             this.rblNotEdit.Size = new System.Drawing.Size(47, 16);
             this.rblNotEdit.TabIndex = 2;
             this.rblNotEdit.Text = "采集";
-            this.rblNotEdit.UseVisualStyleBackColor = true;
+            this.rblNotEdit.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
@@ -172,6 +174,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // panel1
@@ -194,13 +197,27 @@
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "test";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::Jade.Properties.Resources.login__1_;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(591, 326);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 40);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "     单机";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackgroundImage = global::Jade.Properties.Resources.loginbg1;
             this.ClientSize = new System.Drawing.Size(872, 387);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -242,6 +259,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
 
     }
 }

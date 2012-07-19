@@ -128,6 +128,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.finish = new WizardBase.FinishStep();
             this.label11 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.start.SuspendLayout();
             this.stepTaskName.SuspendLayout();
             this.stepStartUrl.SuspendLayout();
@@ -147,6 +148,7 @@
             this.intermediateStep1.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
             this.finish.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // taskWizard
@@ -167,7 +169,7 @@
             this.taskWizard.NextButtonEnabled = true;
             this.taskWizard.NextButtonText = "下一步 >";
             this.taskWizard.NextButtonVisible = true;
-            this.taskWizard.Size = new System.Drawing.Size(958, 606);
+            this.taskWizard.Size = new System.Drawing.Size(958, 658);
             this.taskWizard.WizardSteps.Add(this.start);
             this.taskWizard.WizardSteps.Add(this.stepTaskName);
             this.taskWizard.WizardSteps.Add(this.stepStartUrl);
@@ -233,16 +235,7 @@
             // stepStartUrl
             // 
             this.stepStartUrl.BindingImage = ((System.Drawing.Image)(resources.GetObject("stepStartUrl.BindingImage")));
-            this.stepStartUrl.Controls.Add(this.lblStartUrlLoger);
-            this.stepStartUrl.Controls.Add(this.label10);
-            this.stepStartUrl.Controls.Add(this.radioLinkHref);
-            this.stepStartUrl.Controls.Add(this.radioInnerLinks);
-            this.stepStartUrl.Controls.Add(this.label3);
-            this.stepStartUrl.Controls.Add(this.txtStartUrlXPath);
-            this.stepStartUrl.Controls.Add(this.linkLabel1);
-            this.stepStartUrl.Controls.Add(this.label5);
-            this.stepStartUrl.Controls.Add(this.btnSelectStartUrl);
-            this.stepStartUrl.Controls.Add(this.lbxUrls);
+            this.stepStartUrl.Controls.Add(this.panel1);
             this.stepStartUrl.Controls.Add(this.startUrlWebBrowser);
             this.stepStartUrl.Controls.Add(this.lblStartUrlLog);
             this.stepStartUrl.Controls.Add(this.button1);
@@ -258,7 +251,7 @@
             // 
             this.lblStartUrlLoger.AutoSize = true;
             this.lblStartUrlLoger.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblStartUrlLoger.Location = new System.Drawing.Point(317, 428);
+            this.lblStartUrlLoger.Location = new System.Drawing.Point(311, 25);
             this.lblStartUrlLoger.Name = "lblStartUrlLoger";
             this.lblStartUrlLoger.Size = new System.Drawing.Size(293, 12);
             this.lblStartUrlLoger.TabIndex = 95;
@@ -267,7 +260,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(24, 426);
+            this.label10.Location = new System.Drawing.Point(18, 23);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 12);
             this.label10.TabIndex = 98;
@@ -277,7 +270,7 @@
             // 
             this.radioLinkHref.AutoSize = true;
             this.radioLinkHref.Checked = true;
-            this.radioLinkHref.Location = new System.Drawing.Point(199, 424);
+            this.radioLinkHref.Location = new System.Drawing.Point(193, 21);
             this.radioLinkHref.Name = "radioLinkHref";
             this.radioLinkHref.Size = new System.Drawing.Size(71, 16);
             this.radioLinkHref.TabIndex = 97;
@@ -288,7 +281,7 @@
             // radioInnerLinks
             // 
             this.radioInnerLinks.AutoSize = true;
-            this.radioInnerLinks.Location = new System.Drawing.Point(98, 424);
+            this.radioInnerLinks.Location = new System.Drawing.Point(92, 21);
             this.radioInnerLinks.Name = "radioInnerLinks";
             this.radioInnerLinks.Size = new System.Drawing.Size(95, 16);
             this.radioInnerLinks.TabIndex = 96;
@@ -298,7 +291,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 450);
+            this.label3.Location = new System.Drawing.Point(19, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 94;
@@ -306,7 +299,7 @@
             // 
             // txtStartUrlXPath
             // 
-            this.txtStartUrlXPath.Location = new System.Drawing.Point(119, 443);
+            this.txtStartUrlXPath.Location = new System.Drawing.Point(113, 40);
             this.txtStartUrlXPath.Name = "txtStartUrlXPath";
             this.txtStartUrlXPath.Size = new System.Drawing.Size(495, 21);
             this.txtStartUrlXPath.TabIndex = 93;
@@ -314,7 +307,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(49, 521);
+            this.linkLabel1.Location = new System.Drawing.Point(43, 118);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(53, 12);
             this.linkLabel1.TabIndex = 90;
@@ -325,7 +318,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(30, 498);
+            this.label5.Location = new System.Drawing.Point(24, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 12);
             this.label5.TabIndex = 89;
@@ -334,7 +327,7 @@
             // btnSelectStartUrl
             // 
             this.btnSelectStartUrl.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSelectStartUrl.Location = new System.Drawing.Point(812, 421);
+            this.btnSelectStartUrl.Location = new System.Drawing.Point(806, 18);
             this.btnSelectStartUrl.Name = "btnSelectStartUrl";
             this.btnSelectStartUrl.Size = new System.Drawing.Size(125, 45);
             this.btnSelectStartUrl.TabIndex = 88;
@@ -347,7 +340,7 @@
             this.lbxUrls.ContextMenuStrip = this.startUrlmenu;
             this.lbxUrls.FormattingEnabled = true;
             this.lbxUrls.ItemHeight = 12;
-            this.lbxUrls.Location = new System.Drawing.Point(119, 470);
+            this.lbxUrls.Location = new System.Drawing.Point(113, 67);
             this.lbxUrls.Name = "lbxUrls";
             this.lbxUrls.Size = new System.Drawing.Size(827, 88);
             this.lbxUrls.TabIndex = 87;
@@ -401,11 +394,14 @@
             // 
             // startUrlWebBrowser
             // 
+            this.startUrlWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.startUrlWebBrowser.Location = new System.Drawing.Point(9, 101);
             this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.startUrlWebBrowser.Name = "startUrlWebBrowser";
             this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(949, 306);
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(946, 358);
             this.startUrlWebBrowser.TabIndex = 5;
             // 
             // lblStartUrlLog
@@ -696,7 +692,7 @@
             this.tabTitle.Location = new System.Drawing.Point(6, 403);
             this.tabTitle.Name = "tabTitle";
             this.tabTitle.SelectedIndex = 0;
-            this.tabTitle.Size = new System.Drawing.Size(2856, 1305);
+            this.tabTitle.Size = new System.Drawing.Size(3814, 1923);
             this.tabTitle.TabIndex = 10;
             this.tabTitle.SelectedIndexChanged += new System.EventHandler(this.tabTitle_SelectedIndexChanged);
             // 
@@ -967,7 +963,7 @@
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 21);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1890, 714);
+            this.tabPage1.Size = new System.Drawing.Size(2848, 1280);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "副标题";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -976,7 +972,7 @@
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1890, 714);
+            this.tabPage2.Size = new System.Drawing.Size(2848, 1280);
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "关键字";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -986,7 +982,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 21);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1890, 714);
+            this.tabPage5.Size = new System.Drawing.Size(2848, 1280);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -996,7 +992,7 @@
             this.tabTime.Location = new System.Drawing.Point(4, 21);
             this.tabTime.Name = "tabTime";
             this.tabTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTime.Size = new System.Drawing.Size(1890, 714);
+            this.tabTime.Size = new System.Drawing.Size(3806, 1898);
             this.tabTime.TabIndex = 2;
             this.tabTime.Text = "时间";
             this.tabTime.UseVisualStyleBackColor = true;
@@ -1006,7 +1002,7 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 21);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(1890, 714);
+            this.tabSummary.Size = new System.Drawing.Size(2848, 1280);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
@@ -1016,7 +1012,7 @@
             this.tabContent.Location = new System.Drawing.Point(4, 21);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(1890, 714);
+            this.tabContent.Size = new System.Drawing.Size(2848, 1280);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
@@ -1026,7 +1022,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 21);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1890, 714);
+            this.tabPage6.Size = new System.Drawing.Size(2848, 1280);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1195,11 +1191,30 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.lblStartUrlLoger);
+            this.panel1.Controls.Add(this.lbxUrls);
+            this.panel1.Controls.Add(this.btnSelectStartUrl);
+            this.panel1.Controls.Add(this.radioLinkHref);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.radioInnerLinks);
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txtStartUrlXPath);
+            this.panel1.Location = new System.Drawing.Point(9, 465);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(946, 150);
+            this.panel1.TabIndex = 99;
+            // 
             // TaskWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 606);
+            this.ClientSize = new System.Drawing.Size(958, 658);
             this.Controls.Add(this.taskWizard);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1239,6 +1254,8 @@
             this.intermediateStep2.PerformLayout();
             this.finish.ResumeLayout(false);
             this.finish.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1343,5 +1360,6 @@
         private System.Windows.Forms.CheckBox chkIntervalTask;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Panel panel1;
     }
 }

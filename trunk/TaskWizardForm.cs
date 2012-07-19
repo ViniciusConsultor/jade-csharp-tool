@@ -22,6 +22,11 @@ namespace Jade
 
         public TaskWizardForm(SiteRule rule)
         {
+            this.Width = (int)(Screen.PrimaryScreen.WorkingArea.Width * 0.8);
+            this.Height = (int)(Screen.PrimaryScreen.WorkingArea.Height * 0.8);
+
+            this.Size = new System.Drawing.Size(this.Width, this.Height);
+
             InitializeComponent();
             this.CurrentSiteRule = rule;
             this.InitializeUIItem(rule);
@@ -176,7 +181,7 @@ namespace Jade
                 if (row.XPath != null)
                     this.txtCXpath.Text = row.XPath;
 
-               
+
                 BindXpathType(row.XMLPathType);
 
                 if (row.XMLPathSelectType == XMLPathSelectType.OnlyOne)
@@ -494,6 +499,10 @@ namespace Jade
             }
             else if (sender.CurrentStepIndex == 4)
             {
+                if (this.tbxItemUrl.Text == "")
+                {
+                    this.tbxItemUrl.Text = forTestUrl;
+                }
                 this.itemWebBrowser.Navigate(this.tbxItemUrl.Text);
                 this.enableNavigate = true;
                 this.EnableSelect = false;
@@ -1243,6 +1252,6 @@ namespace Jade
             //'\b'是退格键值
             if (e.KeyChar == '\b' || e.KeyChar == '.') e.Handled = false;
         }
-       
+
     }
 }
