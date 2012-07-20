@@ -27,7 +27,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -511,6 +511,39 @@
     <Content Include="Pic\favicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="release\DevExpress.Data.v12.1.dll" />
+    <Content Include="release\DevExpress.Data.v12.1.xml" />
+    <Content Include="release\DevExpress.DemoData.v12.1.Core.dll" />
+    <Content Include="release\DevExpress.DemoData.v12.1.dll" />
+    <Content Include="release\DevExpress.Office.v12.1.Core.dll" />
+    <Content Include="release\DevExpress.Office.v12.1.Core.xml" />
+    <Content Include="release\DevExpress.Printing.v12.1.Core.dll" />
+    <Content Include="release\DevExpress.Printing.v12.1.Core.xml" />
+    <Content Include="release\DevExpress.RichEdit.v12.1.Core.dll" />
+    <Content Include="release\DevExpress.RichEdit.v12.1.Core.xml" />
+    <Content Include="release\DevExpress.Tutorials.v12.1.dll" />
+    <Content Include="release\DevExpress.Utils.v12.1.dll" />
+    <Content Include="release\DevExpress.Utils.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraBars.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraBars.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraEditors.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraEditors.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraLayout.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraLayout.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraNavBar.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraNavBar.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraRichEdit.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraRichEdit.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.xml" />
+    <Content Include="release\DevExpress.XtraWizard.v12.1.dll" />
+    <Content Include="release\DevExpress.XtraWizard.v12.1.xml" />
+    <Content Include="release\SiteConfig\core.xml" />
+    <Content Include="release\SiteConfig\Entities\Jade.Model.Category\Data\Jade.Model.Category.xml" />
+    <Content Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Data\Jade.Model.SiteRule.xml" />
+    <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
+    <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
+    <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
     <None Include="Resources\yiqianfapingtai.gif" />
     <None Include="Resources\daiqianfapingtai.gif" />
     <None Include="Resources\bianjipingtai.gif" />
@@ -591,6 +624,10 @@
       <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
       <Name>XMLDatabase.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="release\SiteConfig\Entities\Jade.Model.Category\Index\" />
+    <Folder Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Index\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
