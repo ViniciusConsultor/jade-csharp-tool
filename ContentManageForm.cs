@@ -59,6 +59,7 @@ namespace Jade
             this.treeView1.Nodes[1].SelectedImageIndex = 1;
             this.treeView1.Nodes[2].ImageIndex = 2;
             this.treeView1.Nodes[2].SelectedImageIndex = 2;
+
             ImageIndexDic.Add("sites", this.imageList1.Images.Count - 1);
             var categories = CacheObject.Categories.Where(c => c.ParentCategoryID == 0);
             var baseNode = this.taskTree.Nodes[0];

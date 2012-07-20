@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraSplashScreen;
 
 namespace Jade
 {
@@ -13,9 +14,10 @@ namespace Jade
         [STAThread]
         static void Main()
         {
+            SplashScreenManager.ShowForm(typeof(StartScreen));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }

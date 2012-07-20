@@ -31,28 +31,29 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskWizardForm));
             this.taskWizard = new WizardBase.WizardControl();
-            this.start = new WizardBase.StartStep();
-            this.label1 = new System.Windows.Forms.Label();
-            this.stepTaskName = new WizardBase.IntermediateStep();
-            this.txtRuleName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.stepStartUrl = new WizardBase.IntermediateStep();
-            this.lblStartUrlLoger = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.radioLinkHref = new System.Windows.Forms.RadioButton();
-            this.radioInnerLinks = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtStartUrlXPath = new System.Windows.Forms.TextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnSelectStartUrl = new System.Windows.Forms.Button();
-            this.lbxUrls = new System.Windows.Forms.ListBox();
             this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看代码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.start = new WizardBase.StartStep();
+            this.label1 = new System.Windows.Forms.Label();
+            this.stepTaskName = new WizardBase.IntermediateStep();
+            this.txtRuleName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.stepStartUrl = new WizardBase.IntermediateStep();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblStartUrlLoger = new System.Windows.Forms.Label();
+            this.lbxUrls = new System.Windows.Forms.ListBox();
+            this.btnSelectStartUrl = new System.Windows.Forms.Button();
+            this.radioLinkHref = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.radioInnerLinks = new System.Windows.Forms.RadioButton();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtStartUrlXPath = new System.Windows.Forms.TextBox();
             this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.lblStartUrlLog = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -128,11 +129,11 @@
             this.label14 = new System.Windows.Forms.Label();
             this.finish = new WizardBase.FinishStep();
             this.label11 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.startUrlmenu.SuspendLayout();
             this.start.SuspendLayout();
             this.stepTaskName.SuspendLayout();
             this.stepStartUrl.SuspendLayout();
-            this.startUrlmenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.stepContentUrl.SuspendLayout();
             this.stepTestUrl.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -148,7 +149,6 @@
             this.intermediateStep1.SuspendLayout();
             this.intermediateStep2.SuspendLayout();
             this.finish.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // taskWizard
@@ -183,6 +183,53 @@
             this.taskWizard.CancelButtonClick += new System.EventHandler(this.taskWizard_CancelButtonClick);
             this.taskWizard.FinishButtonClick += new System.EventHandler(this.taskWizard_FinishButtonClick);
             this.taskWizard.NextButtonClick += new WizardBase.WizardNextButtonClickEventHandler(this.taskWizard_NextButtonClick);
+            // 
+            // startUrlmenu
+            // 
+            this.startUrlmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem,
+            this.编辑ToolStripMenuItem,
+            this.浏览ToolStripMenuItem,
+            this.清空ToolStripMenuItem,
+            this.查看代码ToolStripMenuItem});
+            this.startUrlmenu.Name = "startUrlmenu";
+            this.startUrlmenu.Size = new System.Drawing.Size(119, 114);
+            this.startUrlmenu.Opening += new System.ComponentModel.CancelEventHandler(this.startUrlmenu_Opening);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // 编辑ToolStripMenuItem
+            // 
+            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.编辑ToolStripMenuItem.Text = "编辑";
+            this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
+            // 
+            // 浏览ToolStripMenuItem
+            // 
+            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
+            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.浏览ToolStripMenuItem.Text = "浏览";
+            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
+            // 
+            // 清空ToolStripMenuItem
+            // 
+            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
+            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.清空ToolStripMenuItem.Text = "清空";
+            this.清空ToolStripMenuItem.Click += new System.EventHandler(this.清空ToolStripMenuItem_Click);
+            // 
+            // 查看代码ToolStripMenuItem
+            // 
+            this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
+            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.查看代码ToolStripMenuItem.Text = "查看代码";
+            this.查看代码ToolStripMenuItem.Click += new System.EventHandler(this.查看代码ToolStripMenuItem_Click);
             // 
             // start
             // 
@@ -247,6 +294,34 @@
             this.stepStartUrl.Title = "起始页面设置";
             this.stepStartUrl.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.lblStartUrlLoger);
+            this.panel1.Controls.Add(this.lbxUrls);
+            this.panel1.Controls.Add(this.btnSelectStartUrl);
+            this.panel1.Controls.Add(this.radioLinkHref);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.radioInnerLinks);
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txtStartUrlXPath);
+            this.panel1.Location = new System.Drawing.Point(9, 108);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1904, 150);
+            this.panel1.TabIndex = 99;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(18, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 12);
+            this.label10.TabIndex = 98;
+            this.label10.Text = "选择模式：";
+            // 
             // lblStartUrlLoger
             // 
             this.lblStartUrlLoger.AutoSize = true;
@@ -257,14 +332,26 @@
             this.lblStartUrlLoger.TabIndex = 95;
             this.lblStartUrlLoger.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
             // 
-            // label10
+            // lbxUrls
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 12);
-            this.label10.TabIndex = 98;
-            this.label10.Text = "选择模式：";
+            this.lbxUrls.ContextMenuStrip = this.startUrlmenu;
+            this.lbxUrls.FormattingEnabled = true;
+            this.lbxUrls.ItemHeight = 12;
+            this.lbxUrls.Location = new System.Drawing.Point(113, 67);
+            this.lbxUrls.Name = "lbxUrls";
+            this.lbxUrls.Size = new System.Drawing.Size(827, 88);
+            this.lbxUrls.TabIndex = 87;
+            // 
+            // btnSelectStartUrl
+            // 
+            this.btnSelectStartUrl.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnSelectStartUrl.Location = new System.Drawing.Point(806, 18);
+            this.btnSelectStartUrl.Name = "btnSelectStartUrl";
+            this.btnSelectStartUrl.Size = new System.Drawing.Size(125, 45);
+            this.btnSelectStartUrl.TabIndex = 88;
+            this.btnSelectStartUrl.Text = "点此开始选择";
+            this.btnSelectStartUrl.UseVisualStyleBackColor = true;
+            this.btnSelectStartUrl.Click += new System.EventHandler(this.btnSelectStartUrl_Click);
             // 
             // radioLinkHref
             // 
@@ -278,6 +365,15 @@
             this.radioLinkHref.Text = "链接网址";
             this.radioLinkHref.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 95);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 12);
+            this.label5.TabIndex = 89;
+            this.label5.Text = "最终起始页面:";
+            // 
             // radioInnerLinks
             // 
             this.radioInnerLinks.AutoSize = true;
@@ -287,6 +383,17 @@
             this.radioInnerLinks.TabIndex = 96;
             this.radioInnerLinks.Text = "所选框内网址";
             this.radioInnerLinks.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(43, 118);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel1.TabIndex = 90;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "高级设置";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label3
             // 
@@ -304,94 +411,6 @@
             this.txtStartUrlXPath.Size = new System.Drawing.Size(495, 21);
             this.txtStartUrlXPath.TabIndex = 93;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(43, 118);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
-            this.linkLabel1.TabIndex = 90;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "高级设置";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 95);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 12);
-            this.label5.TabIndex = 89;
-            this.label5.Text = "最终起始页面:";
-            // 
-            // btnSelectStartUrl
-            // 
-            this.btnSelectStartUrl.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSelectStartUrl.Location = new System.Drawing.Point(806, 18);
-            this.btnSelectStartUrl.Name = "btnSelectStartUrl";
-            this.btnSelectStartUrl.Size = new System.Drawing.Size(125, 45);
-            this.btnSelectStartUrl.TabIndex = 88;
-            this.btnSelectStartUrl.Text = "点此开始选择";
-            this.btnSelectStartUrl.UseVisualStyleBackColor = true;
-            this.btnSelectStartUrl.Click += new System.EventHandler(this.btnSelectStartUrl_Click);
-            // 
-            // lbxUrls
-            // 
-            this.lbxUrls.ContextMenuStrip = this.startUrlmenu;
-            this.lbxUrls.FormattingEnabled = true;
-            this.lbxUrls.ItemHeight = 12;
-            this.lbxUrls.Location = new System.Drawing.Point(113, 67);
-            this.lbxUrls.Name = "lbxUrls";
-            this.lbxUrls.Size = new System.Drawing.Size(827, 88);
-            this.lbxUrls.TabIndex = 87;
-            // 
-            // startUrlmenu
-            // 
-            this.startUrlmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem,
-            this.编辑ToolStripMenuItem,
-            this.浏览ToolStripMenuItem,
-            this.清空ToolStripMenuItem,
-            this.查看代码ToolStripMenuItem});
-            this.startUrlmenu.Name = "startUrlmenu";
-            this.startUrlmenu.Size = new System.Drawing.Size(125, 114);
-            this.startUrlmenu.Opening += new System.ComponentModel.CancelEventHandler(this.startUrlmenu_Opening);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
-            // 
-            // 编辑ToolStripMenuItem
-            // 
-            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.编辑ToolStripMenuItem.Text = "编辑";
-            this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
-            // 
-            // 浏览ToolStripMenuItem
-            // 
-            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
-            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.浏览ToolStripMenuItem.Text = "浏览";
-            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
-            // 
-            // 清空ToolStripMenuItem
-            // 
-            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
-            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.清空ToolStripMenuItem.Text = "清空";
-            this.清空ToolStripMenuItem.Click += new System.EventHandler(this.清空ToolStripMenuItem_Click);
-            // 
-            // 查看代码ToolStripMenuItem
-            // 
-            this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
-            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.查看代码ToolStripMenuItem.Text = "查看代码";
-            this.查看代码ToolStripMenuItem.Click += new System.EventHandler(this.查看代码ToolStripMenuItem_Click);
-            // 
             // startUrlWebBrowser
             // 
             this.startUrlWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -401,7 +420,7 @@
             this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.startUrlWebBrowser.Name = "startUrlWebBrowser";
             this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(946, 358);
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(800, 200);
             this.startUrlWebBrowser.TabIndex = 5;
             // 
             // lblStartUrlLog
@@ -702,7 +721,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 21);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(2848, 1280);
+            this.tabPage4.Size = new System.Drawing.Size(3806, 1898);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "标题";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -715,7 +734,7 @@
             this.panelItemRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemRule.Location = new System.Drawing.Point(3, 3);
             this.panelItemRule.Name = "panelItemRule";
-            this.panelItemRule.Size = new System.Drawing.Size(2842, 1274);
+            this.panelItemRule.Size = new System.Drawing.Size(3800, 1892);
             this.panelItemRule.TabIndex = 6;
             // 
             // groupBox5
@@ -963,7 +982,7 @@
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 21);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(2848, 1280);
+            this.tabPage1.Size = new System.Drawing.Size(3806, 1898);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "副标题";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -972,7 +991,7 @@
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(2848, 1280);
+            this.tabPage2.Size = new System.Drawing.Size(3806, 1898);
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "关键字";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -982,7 +1001,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 21);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(2848, 1280);
+            this.tabPage5.Size = new System.Drawing.Size(3806, 1898);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1002,7 +1021,7 @@
             this.tabSummary.Location = new System.Drawing.Point(4, 21);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(2848, 1280);
+            this.tabSummary.Size = new System.Drawing.Size(3806, 1898);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
@@ -1012,7 +1031,7 @@
             this.tabContent.Location = new System.Drawing.Point(4, 21);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(2848, 1280);
+            this.tabContent.Size = new System.Drawing.Size(3806, 1898);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
@@ -1022,7 +1041,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 21);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(2848, 1280);
+            this.tabPage6.Size = new System.Drawing.Size(3806, 1898);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1191,25 +1210,6 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.lblStartUrlLoger);
-            this.panel1.Controls.Add(this.lbxUrls);
-            this.panel1.Controls.Add(this.btnSelectStartUrl);
-            this.panel1.Controls.Add(this.radioLinkHref);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.radioInnerLinks);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txtStartUrlXPath);
-            this.panel1.Location = new System.Drawing.Point(9, 465);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(946, 150);
-            this.panel1.TabIndex = 99;
-            // 
             // TaskWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1223,13 +1223,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "规则设置向导";
             this.Load += new System.EventHandler(this.TaskWizardForm_Load);
+            this.startUrlmenu.ResumeLayout(false);
             this.start.ResumeLayout(false);
             this.start.PerformLayout();
             this.stepTaskName.ResumeLayout(false);
             this.stepTaskName.PerformLayout();
             this.stepStartUrl.ResumeLayout(false);
             this.stepStartUrl.PerformLayout();
-            this.startUrlmenu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.stepContentUrl.ResumeLayout(false);
             this.stepContentUrl.PerformLayout();
             this.stepTestUrl.ResumeLayout(false);
@@ -1254,8 +1256,6 @@
             this.intermediateStep2.PerformLayout();
             this.finish.ResumeLayout(false);
             this.finish.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
