@@ -537,6 +537,9 @@
     <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.xml" />
     <Content Include="release\DevExpress.XtraWizard.v12.1.dll" />
     <Content Include="release\DevExpress.XtraWizard.v12.1.xml" />
+    <Content Include="release\hfbbs.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="release\SiteConfig\core.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.Category\Data\Jade.Model.Category.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Data\Jade.Model.SiteRule.xml" />
