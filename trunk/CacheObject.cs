@@ -40,7 +40,7 @@ namespace Jade
         public static string Cookie = "";
         public static bool IsDebug = false;
 
-        public static Form1 MainForm { get; set; }
+        public static MainForm MainForm { get; set; }
 
         public static Dictionary<string, DockContent> MdiDict = new Dictionary<string, DockContent>();
 
@@ -89,45 +89,45 @@ namespace Jade
             }
         }
 
-        public static DraftBoxForm DraftForm
-        {
-            get
-            {
-                if (draftForm == null || draftForm.IsDisposed)
-                {
-                    draftForm = new DraftBoxForm();
-                    MainForm.AddDock(draftForm, DockState.Document);
-                }
+        //public static DraftBoxForm DraftForm
+        //{
+        //    get
+        //    {
+        //        if (draftForm == null || draftForm.IsDisposed)
+        //        {
+        //            draftForm = new DraftBoxForm();
+        //            MainForm.AddDock(draftForm, DockState.Document);
+        //        }
 
-                if (draftForm.DockPanel == null)
-                {
-                    MainForm.AddDock(draftForm, DockState.Document);
-                }
+        //        if (draftForm.DockPanel == null)
+        //        {
+        //            MainForm.AddDock(draftForm, DockState.Document);
+        //        }
 
-                return draftForm;
-            }
-        }
+        //        return draftForm;
+        //    }
+        //}
 
-        static ContentManageForm navForm;
-        public static ContentManageForm NavForm
-        {
-            get
-            {
-                if (navForm == null || navForm.IsDisposed)
-                {
-                    navForm = new ContentManageForm();
-                }
-                if (navForm.DockPanel == null)
-                {
-                    MainForm.AddDock(navForm, DockState.DockLeft);
-                }
-                return navForm;
-            }
-            set
-            {
-                navForm = value;
-            }
-        }
+        //static ContentManageForm navForm;
+        //public static ContentManageForm NavForm
+        //{
+        //    get
+        //    {
+        //        if (navForm == null || navForm.IsDisposed)
+        //        {
+        //            navForm = new ContentManageForm();
+        //        }
+        //        if (navForm.DockPanel == null)
+        //        {
+        //            MainForm.AddDock(navForm, DockState.DockLeft);
+        //        }
+        //        return navForm;
+        //    }
+        //    set
+        //    {
+        //        navForm = value;
+        //    }
+        //}
 
         static WelcomeForm welForm;
         public static WelcomeForm WelcomeForm
@@ -138,10 +138,10 @@ namespace Jade
                 {
                     welForm = new WelcomeForm();
                 }
-                if (welForm.DockPanel == null)
-                {
-                    MainForm.AddDock(welForm, DockState.Document);
-                }
+                //if (welForm.DockPanel == null)
+                //{
+                //    MainForm.AddDock(welForm, DockState.Document);
+                //}
                 return welForm;
             }
             set
@@ -331,6 +331,7 @@ namespace Jade
                 if (instance == null)
                 {
                     instance = new RunningTaskCollection();
+                    instance.Add(new RunningTask { TaskName = "test0", Status = TaskStatus.运行中, StartTime = DateTime.Now, EndTime = DateTime.MaxValue });
                 }
                 return instance;
             }

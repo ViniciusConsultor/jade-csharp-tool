@@ -117,7 +117,7 @@ namespace Jade
                         tasks.ForEach(task =>
                         {
                             var runnerForm = new TaskRunForm(task);
-                            CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                            //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
                         });
                     }
                 }

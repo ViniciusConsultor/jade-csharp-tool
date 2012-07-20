@@ -12,7 +12,7 @@ using BrightIdeasSoftware;
 
 namespace Jade
 {
-    public partial class TaskRunForm : WeifenLuo.WinFormsUI.Docking.DockContent, Jade.ILog
+    public partial class TaskRunForm : DevExpress.XtraEditors.XtraUserControl, Jade.ILog
     {
         public SiteRule Task { get; set; }
 
@@ -24,7 +24,7 @@ namespace Jade
             Task = rule;
             InitializeComponent();
             this.Text = rule.Name + "[运行]";
-            this.TabText = rule.Name + "[运行]";
+            //this.TabText = rule.Name + "[运行]";
             taskRunner = new TaskRunner(rule, this, new BLL.DataSaverManager());
             taskRunner.StateChange += new TaskStateChange(taskRunner_StateChange);
             this.treeListView1.CanExpandGetter = delegate(object x)
@@ -53,11 +53,11 @@ namespace Jade
             {
                 if (e.CurrentState.StepName == "采集完成")
                 {
-                    this.TabText = Task.Name + "[采集完成]";
+                    //this.TabText = Task.Name + "[采集完成]";
                 }
                 else
                 {
-                    this.TabText = Task.Name + "[" + e.CurrentState.StepName + "]";
+                    //this.TabText = Task.Name + "[" + e.CurrentState.StepName + "]";
                     this.lblStep.Text = e.CurrentState.StepName;
                     this.lblProcess.Text = e.CurrentState.CurrentCount + "/" + e.CurrentState.TotalCount;
                     this.progressBar1.Maximum = e.CurrentState.TotalCount;

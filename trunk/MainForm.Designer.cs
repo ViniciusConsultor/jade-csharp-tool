@@ -32,11 +32,16 @@
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("任务列表");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.applicationMenu1 = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonMiniToolbar1 = new DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(this.components);
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
@@ -48,7 +53,19 @@
             this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarGroupControlContainer1 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
             this.taskTree = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.新建分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除分组ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.新建任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
             this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
@@ -56,16 +73,15 @@
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.taskRunnerPanel1 = new Jade.TaskRunnerPanel();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.tabbedView3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.applicationMenu1 = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             this.dockPanel3.SuspendLayout();
@@ -74,13 +90,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             this.navBarControl1.SuspendLayout();
             this.navBarGroupControlContainer1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.dockPanel2.SuspendLayout();
+            this.dockPanel2_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -88,22 +105,41 @@
             this.ribbon.ApplicationButtonDropDownControl = this.applicationMenu1;
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.ExpandCollapseItem.Name = "";
+            this.ribbon.Images = this.imageList1;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
             this.barButtonItem1,
             this.barDockingMenuItem1,
             this.barButtonItem2,
             this.barButtonItem3});
+            this.ribbon.LargeImages = this.imageList1;
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 7;
+            this.ribbon.MaxItemId = 13;
             this.ribbon.MiniToolbars.Add(this.ribbonMiniToolbar1);
             this.ribbon.Name = "ribbon";
-            this.ribbon.PageHeaderItemLinks.Add(this.barButtonItem3);
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
             this.ribbon.Size = new System.Drawing.Size(743, 148);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Toolbar.ItemLinks.Add(this.barButtonItem1);
+            // 
+            // applicationMenu1
+            // 
+            this.applicationMenu1.ItemLinks.Add(this.barButtonItem2);
+            this.applicationMenu1.Name = "applicationMenu1";
+            this.applicationMenu1.Ribbon = this.ribbon;
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "退出";
+            this.barButtonItem2.Id = 5;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // barButtonItem1
             // 
@@ -117,18 +153,31 @@
             this.barDockingMenuItem1.Id = 4;
             this.barDockingMenuItem1.Name = "barDockingMenuItem1";
             // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "新建任务";
+            this.barButtonItem3.Id = 12;
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1});
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup2});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "管理";
+            this.ribbonPage1.Text = "任务";
             // 
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barDockingMenuItem1);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "管理";
+            this.ribbonPageGroup1.Text = "视图";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
             // 
             // ribbonStatusBar
             // 
@@ -240,6 +289,7 @@
             // taskTree
             // 
             this.taskTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.taskTree.ContextMenuStrip = this.contextMenuStrip1;
             this.taskTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.taskTree.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskTree.ImageIndex = 0;
@@ -255,12 +305,103 @@
             this.taskTree.ShowRootLines = false;
             this.taskTree.Size = new System.Drawing.Size(192, 113);
             this.taskTree.TabIndex = 2;
+            this.taskTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.taskTree_AfterSelect);
+            this.taskTree.DoubleClick += new System.EventHandler(this.tasktree_DoubleClick);
             // 
-            // imageList1
+            // contextMenuStrip1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.新建分组ToolStripMenuItem,
+            this.编辑分组ToolStripMenuItem,
+            this.删除分组ToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripSeparator1,
+            this.新建任务ToolStripMenuItem,
+            this.编辑任务ToolStripMenuItem,
+            this.删除任务ToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.运行ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 242);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // 新建分组ToolStripMenuItem
+            // 
+            this.新建分组ToolStripMenuItem.Name = "新建分组ToolStripMenuItem";
+            this.新建分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建分组ToolStripMenuItem.Text = "新建分组";
+            this.新建分组ToolStripMenuItem.Click += new System.EventHandler(this.新建分组ToolStripMenuItem_Click);
+            // 
+            // 编辑分组ToolStripMenuItem
+            // 
+            this.编辑分组ToolStripMenuItem.Name = "编辑分组ToolStripMenuItem";
+            this.编辑分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.编辑分组ToolStripMenuItem.Text = "编辑分组";
+            // 
+            // 删除分组ToolStripMenuItem
+            // 
+            this.删除分组ToolStripMenuItem.Name = "删除分组ToolStripMenuItem";
+            this.删除分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除分组ToolStripMenuItem.Text = "删除分组";
+            this.删除分组ToolStripMenuItem.Click += new System.EventHandler(this.删除分组ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Text = "向导新建任务";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Text = "向导编辑任务";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // 新建任务ToolStripMenuItem
+            // 
+            this.新建任务ToolStripMenuItem.Name = "新建任务ToolStripMenuItem";
+            this.新建任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建任务ToolStripMenuItem.Text = "高级新建任务";
+            this.新建任务ToolStripMenuItem.Click += new System.EventHandler(this.新建任务ToolStripMenuItem_Click);
+            // 
+            // 编辑任务ToolStripMenuItem
+            // 
+            this.编辑任务ToolStripMenuItem.Name = "编辑任务ToolStripMenuItem";
+            this.编辑任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.编辑任务ToolStripMenuItem.Text = "高级编辑任务";
+            this.编辑任务ToolStripMenuItem.Click += new System.EventHandler(this.编辑任务ToolStripMenuItem_Click);
+            // 
+            // 删除任务ToolStripMenuItem
+            // 
+            this.删除任务ToolStripMenuItem.Name = "删除任务ToolStripMenuItem";
+            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除任务ToolStripMenuItem.Text = "删除任务";
+            this.删除任务ToolStripMenuItem.Click += new System.EventHandler(this.删除任务ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // 运行ToolStripMenuItem
+            // 
+            this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.运行ToolStripMenuItem.Text = "运行";
+            this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
             // 
             // navBarGroup2
             // 
@@ -315,14 +456,23 @@
             this.dockPanel2.Name = "dockPanel2";
             this.dockPanel2.OriginalSize = new System.Drawing.Size(200, 200);
             this.dockPanel2.Size = new System.Drawing.Size(543, 200);
-            this.dockPanel2.Text = "dockPanel2";
+            this.dockPanel2.Text = "运行任务";
             // 
             // dockPanel2_Container
             // 
+            this.dockPanel2_Container.Controls.Add(this.taskRunnerPanel1);
             this.dockPanel2_Container.Location = new System.Drawing.Point(4, 25);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
             this.dockPanel2_Container.Size = new System.Drawing.Size(535, 171);
             this.dockPanel2_Container.TabIndex = 0;
+            // 
+            // taskRunnerPanel1
+            // 
+            this.taskRunnerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskRunnerPanel1.Location = new System.Drawing.Point(0, 0);
+            this.taskRunnerPanel1.Name = "taskRunnerPanel1";
+            this.taskRunnerPanel1.Size = new System.Drawing.Size(535, 171);
+            this.taskRunnerPanel1.TabIndex = 0;
             // 
             // documentManager1
             // 
@@ -346,25 +496,6 @@
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // applicationMenu1
-            // 
-            this.applicationMenu1.ItemLinks.Add(this.barButtonItem2);
-            this.applicationMenu1.Name = "applicationMenu1";
-            this.applicationMenu1.Ribbon = this.ribbon;
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "退出";
-            this.barButtonItem2.Id = 5;
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "barButtonItem3";
-            this.barButtonItem3.Id = 6;
-            this.barButtonItem3.Name = "barButtonItem3";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -377,9 +508,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Ribbon = this.ribbon;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "MainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
             this.dockPanel3.ResumeLayout(false);
@@ -388,13 +522,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             this.navBarControl1.ResumeLayout(false);
             this.navBarGroupControlContainer1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.dockPanel2.ResumeLayout(false);
+            this.dockPanel2_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,8 +537,6 @@
         #endregion
 
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraBars.Docking.DockManager dockManager1;
         private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
@@ -434,6 +567,23 @@
         private System.Windows.Forms.ImageList imageList1;
         private DevExpress.XtraBars.Ribbon.ApplicationMenu applicationMenu1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private TaskRunnerPanel taskRunnerPanel1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 新建分组ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 编辑分组ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除分组ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem 新建任务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 编辑任务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除任务ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 运行ToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     }
 }

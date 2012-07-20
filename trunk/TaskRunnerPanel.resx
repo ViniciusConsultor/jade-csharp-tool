@@ -117,54 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="applicationMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>769, 17</value>
-  </metadata>
-  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>456, 17</value>
-  </metadata>
-  <metadata name="ribbonMiniToolbar1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>293, 17</value>
-  </metadata>
-  <metadata name="dockManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="runningTaskCollectionBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="barAndDockingController1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>569, 17</value>
-  </metadata>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-</value>
-  </data>
-  <metadata name="documentManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>143, 17</value>
   </metadata>
 </root>
