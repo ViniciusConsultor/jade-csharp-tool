@@ -70,7 +70,6 @@ namespace Jade
             this.taskTree.ExpandAll();
         }
 
-
         public void UpdateUI()
         {
             if (Jade.Properties.Settings.Default.IsEditModel)
@@ -292,7 +291,7 @@ namespace Jade
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var runnerForm = new TaskRunForm(this.taskTree.SelectedNode.Tag as SiteRule);
-            CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+            //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)

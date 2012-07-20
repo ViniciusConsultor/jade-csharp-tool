@@ -15,5 +15,26 @@ namespace Jade
         {
             InitializeComponent();
         }
+
+        private void txtStartUrl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (this.txtStartUrl.Text != "")
+                {
+                    if (!this.txtStartUrl.Text.Contains("http://"))
+                    {
+                        this.txtStartUrl.Text = "http://" + this.txtStartUrl.Text;
+                    }
+                    //var temp = this.enableNavigate;
+                    //this.enableNavigate = true;
+                    this.startUrlWebBrowser.Navigate(this.txtStartUrl.Text);
+
+                    //this.enableNavigate = temp;
+                    e.Handled = true;
+                }
+
+            }
+        }
     }
 }

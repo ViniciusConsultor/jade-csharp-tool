@@ -145,7 +145,6 @@
             this.Controls.Add(this.lblStep);
             this.Controls.Add(this.txtLog);
             this.Name = "TaskRunForm";
-            this.TabText = "TaskRunForm";
             this.Text = "TaskRunForm";
             this.Load += new System.EventHandler(this.TaskRunForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();

@@ -40,6 +40,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Com.iFLYTEK.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.BonusSkins.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a" />
     <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -49,9 +50,12 @@
     <Reference Include="DevExpress.DemoData.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.ExpressApp.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.ExpressApp.Win.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Office.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Persistent.Base.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -64,18 +68,21 @@
     <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Xpo.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraGrid.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraNavBar.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraRichEdit.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -129,6 +136,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -167,12 +175,6 @@
     </Compile>
     <Compile Include="ContentEditForm.Designer.cs">
       <DependentUpon>ContentEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContentManageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContentManageForm.Designer.cs">
-      <DependentUpon>ContentManageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\CheckboxCellHeader.cs" />
     <Compile Include="Control\CheckBoxComboBox\CheckBoxComboBox.cs">
@@ -264,6 +266,12 @@
     <Compile Include="SystemConfigForm.Designer.cs">
       <DependentUpon>SystemConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskRunnerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskRunnerPanel.Designer.cs">
+      <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskWizardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,12 +285,6 @@
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DownloadService.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CookieChecker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -357,7 +359,7 @@
       <DependentUpon>TaskQueqeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskRunForm.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TaskRunForm.Designer.cs">
       <DependentUpon>TaskRunForm.cs</DependentUpon>
@@ -374,10 +376,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContentEditForm.resx">
       <DependentUpon>ContentEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContentManageForm.resx">
-      <DependentUpon>ContentManageForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
@@ -413,14 +411,14 @@
     <EmbeddedResource Include="SystemConfigForm.resx">
       <DependentUpon>SystemConfigForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunnerPanel.resx">
+      <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskWizardForm.resx">
       <DependentUpon>TaskWizardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeForm.resx">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CookieChecker.resx">
       <DependentUpon>CookieChecker.cs</DependentUpon>
@@ -468,6 +466,7 @@
       <DependentUpon>WelcomePanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\RunningTaskCollection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
