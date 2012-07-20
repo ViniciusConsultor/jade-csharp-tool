@@ -284,7 +284,6 @@
     <Compile Include="WelcomeForm.Designer.cs">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DownloadService.cs" />
     <Compile Include="Forms\CookieChecker.cs">
       <SubType>Form</SubType>
     </Compile>

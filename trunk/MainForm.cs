@@ -327,17 +327,17 @@ namespace Jade
             var siteRule = SiteRule.CreateDefaultRule();
             siteRule.CategoryID = this.CurrentCategory.ID;
             // var ruleForm = new SiteRuleEditForm(siteRule);
-            var ruleForm = new SiteRuleWizardForm();
+            var ruleForm = new SiteRuleWizardForm(siteRule);
                 //new TaskWizardForm(siteRule);
             //CacheObject.BLL.AddSite(siteRule);
             if (ruleForm.ShowDialog() == DialogResult.OK)
             {
-                //siteRule = ruleForm.CurrentSiteRule;
-                //CacheObject.RuleManager.AddSite(siteRule);
-                //var index = GetImageIndex(siteRule.IconImage);
-                //TreeNode leaf = new TreeNode(siteRule.Name, index, index);
-                //leaf.Tag = siteRule;
-                //this.CurrentCategoryNode.Nodes.Add(leaf);
+                siteRule = ruleForm.CurrentSiteRule;
+                CacheObject.RuleManager.AddSite(siteRule);
+                var index = GetImageIndex(siteRule.IconImage);
+                TreeNode leaf = new TreeNode(siteRule.Name, index, index);
+                leaf.Tag = siteRule;
+                this.CurrentCategoryNode.Nodes.Add(leaf);
             }
         }
 
@@ -354,6 +354,26 @@ namespace Jade
                 this.taskTree.SelectedNode.ImageIndex = GetImageIndex(siteRule.IconImage);
                 this.taskTree.SelectedNode.SelectedImageIndex = GetImageIndex(siteRule.IconImage);
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void barDockingMenuItem1_ListItemClick(object sender, ListItemClickEventArgs e)
+        {
+
+        }
+
+        private void ribbon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void galleryControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

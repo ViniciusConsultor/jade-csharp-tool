@@ -157,6 +157,7 @@ namespace Jade
                 {
                     CurrentCategoryNode.Nodes.Add(node);
                 }
+                this.taskTree.ExpandAll();
             }
         }
 
@@ -246,6 +247,7 @@ namespace Jade
                 TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
                 this.CurrentCategoryNode.Nodes.Add(leaf);
+                this.taskTree.ExpandAll();
             }
         }
 
@@ -309,6 +311,7 @@ namespace Jade
                 TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
                 this.CurrentCategoryNode.Nodes.Add(leaf);
+                this.taskTree.ExpandAll();
             }
         }
 

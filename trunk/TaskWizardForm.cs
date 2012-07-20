@@ -371,11 +371,6 @@ namespace Jade
 
         }
 
-        private void btnDeleteUrl_Click(object sender, EventArgs e)
-        {
-
-        }
-
         int itemRuleIndex = 0;
         LoadingDialog loadingDialog;
         private void taskWizard_NextButtonClick(WizardBase.WizardControl sender, WizardBase.WizardNextButtonClickEventArgs args)
