@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database CreateTime="2012-07-18T14:57:03.765625+08:00" Version="1.0.0.0">
+  <Types>
+    <Type FullName="Jade.Model.Category" RowCountPerFile="1000" SingleRowPerFile="false" />
+    <Type FullName="Jade.Model.SiteRule" RowCountPerFile="1000" SingleRowPerFile="false" />
+  </Types>
+</Database>
