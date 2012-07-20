@@ -127,7 +127,7 @@
             this.rblSingle.Name = "rblSingle";
             this.rblSingle.Size = new System.Drawing.Size(47, 16);
             this.rblSingle.TabIndex = 2;
-            this.rblSingle.Text = "单机";
+            this.rblSingle.Text = "本地";
             this.rblSingle.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -215,7 +215,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::Jade.Properties.Resources.loginbg1;
             this.ClientSize = new System.Drawing.Size(872, 387);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);

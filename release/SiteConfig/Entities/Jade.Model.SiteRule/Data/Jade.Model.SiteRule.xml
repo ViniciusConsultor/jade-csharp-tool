@@ -280,4 +280,172 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
+  <SiteRule _uuid="4cbc97da-c844-4542-bf06-8f1182e26747" CategoryID="1" IconImage="favicon.ico" SiteRuleId="6" Name="rr" StartUrl="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml@@http://www.tianya.cn/new/publicforum/articleslist.asp?stritem=worldlook&amp;amp;part=1&amp;amp;strsubitem=&amp;amp;strsubitem2=" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="time=ct=1342809742.107; __guid=365377341; __ptime=1342809744004; __cid=29; bbsclk=c%3D0%26o%3D%26d%3D; __guid2=1104556493; TIANYA_NAV_STATE=1%2C0%2C0%2C0%2C0%2C0%2C0; __gads=ID=88a16f8d30c41a91:T=1341043273:S=ALNI_MY4YV1ICRScLtqHqQzMQ_qx3YS4BQ; historyitem=pworldlook-pfuninfo; __utma=22245310.1843908394.1341722927.1341722927.1342807863.2; __utmb=22245310.12.10.1342807863; __utmz=22245310.1341722927.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __ty_tips_info=c%3D2%26t%3D9678%26d%3D21%26fc%3D1; __utmc=22245310; ASPSESSIONIDQQSSTBTD=BMGAHKGAJPLNDGHKLJDNLDFM; ASPSESSIONIDQQACBCDS=EOKFIFMAELFJOKENJPAECKDH" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml" ForTestUrl="http://www.tianya.cn/publicforum/content/worldlook/1/453155.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//div[@id=&quot;forumContentDiv&quot;]//table/tbody[1]/tr[1]/td[2]/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule XPath="//h1[@id=&quot;hTitle&quot;]/span[2]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="UserDiy" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule XPath="//div[@id=&quot;pContentDiv&quot;]//div" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="Multiple" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
+  <SiteRule _uuid="b0099b3a-8476-4d12-99fc-4895eb945764" CategoryID="1" IconImage="www.tianya.cn.ico" SiteRuleId="6" Name="rr" StartUrl="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml@@http://www.tianya.cn/new/publicforum/articleslist.asp?stritem=worldlook&amp;amp;part=1&amp;amp;strsubitem=&amp;amp;strsubitem2=" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="time=ct=1342809742.107; __guid=365377341; __ptime=1342809744004; __cid=29; bbsclk=c%3D0%26o%3D%26d%3D; __guid2=1104556493; TIANYA_NAV_STATE=1%2C0%2C0%2C0%2C0%2C0%2C0; __gads=ID=88a16f8d30c41a91:T=1341043273:S=ALNI_MY4YV1ICRScLtqHqQzMQ_qx3YS4BQ; historyitem=pworldlook-pfuninfo; __utma=22245310.1843908394.1341722927.1341722927.1342807863.2; __utmb=22245310.12.10.1342807863; __utmz=22245310.1341722927.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __ty_tips_info=c%3D2%26t%3D9678%26d%3D21%26fc%3D1; __utmc=22245310; ASPSESSIONIDQQSSTBTD=BMGAHKGAJPLNDGHKLJDNLDFM; ASPSESSIONIDQQACBCDS=EOKFIFMAELFJOKENJPAECKDH" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml" ForTestUrl="http://www.tianya.cn/publicforum/content/worldlook/1/453155.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//div[@id=&quot;forumContentDiv&quot;]//table/tbody[1]/tr[1]/td[2]/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule XPath="//h1[@id=&quot;hTitle&quot;]/span[2]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="UserDiy" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule XPath="//div[@id=&quot;pContentDiv&quot;]//div" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="Multiple" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
+  <SiteRule _uuid="ab6ed91a-aa2e-4b54-bc76-fe02591ab24e" CategoryID="1" IconImage="www.tianya.cn.ico" SiteRuleId="6" Name="天涯八卦" StartUrl="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml@@http://www.tianya.cn/new/publicforum/articleslist.asp?stritem=worldlook&amp;amp;part=1&amp;amp;strsubitem=&amp;amp;strsubitem2=" Encoding="GB2312" HttpMethod="GET" HttpPostData="" Cookie="time=ct=1342809742.107; __guid=365377341; __ptime=1342809744004; __cid=29; bbsclk=c%3D0%26o%3D%26d%3D; __guid2=1104556493; TIANYA_NAV_STATE=1%2C0%2C0%2C0%2C0%2C0%2C0; __gads=ID=88a16f8d30c41a91:T=1341043273:S=ALNI_MY4YV1ICRScLtqHqQzMQ_qx3YS4BQ; historyitem=pworldlook-pfuninfo; __utma=22245310.1843908394.1341722927.1341722927.1342807863.2; __utmb=22245310.12.10.1342807863; __utmz=22245310.1341722927.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __ty_tips_info=c%3D2%26t%3D9678%26d%3D21%26fc%3D1; __utmc=22245310; ASPSESSIONIDQQSSTBTD=BMGAHKGAJPLNDGHKLJDNLDFM; ASPSESSIONIDQQACBCDS=EOKFIFMAELFJOKENJPAECKDH" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://www.tianya.cn/publicforum/articleslist/0/worldlook.shtml" ForTestUrl="http://www.tianya.cn/publicforum/content/worldlook/1/453155.shtml" ListEncoding="GB2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//div[@id=&quot;forumContentDiv&quot;]//table/tbody[1]/tr[1]/td[2]/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule XPath="//h1[@id=&quot;hTitle&quot;]/span[2]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy年MM月dd日 HH时mm分ss秒">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="UserDiy" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule XPath="//div[@id=&quot;pContentDiv&quot;]//div" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="Multiple" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule XPath="//h1" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
 </XMLDatabase-Entities>

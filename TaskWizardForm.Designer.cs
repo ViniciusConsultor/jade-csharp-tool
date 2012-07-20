@@ -54,6 +54,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtStartUrlXPath = new System.Windows.Forms.TextBox();
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.lblStartUrlLog = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
@@ -69,6 +70,7 @@
             this.radioHref = new System.Windows.Forms.RadioButton();
             this.radionInnerLinks = new System.Windows.Forms.RadioButton();
             this.txtUrlResult = new System.Windows.Forms.RichTextBox();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.stepTestUrl = new WizardBase.IntermediateStep();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.trvUrlTree = new System.Windows.Forms.TreeView();
@@ -77,6 +79,7 @@
             this.btnCopyUrlToClipboard = new System.Windows.Forms.Button();
             this.btnFetchUrl = new System.Windows.Forms.Button();
             this.stepItemRule = new WizardBase.IntermediateStep();
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.tabTitle = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panelItemRule = new System.Windows.Forms.Panel();
@@ -126,9 +129,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.finish = new WizardBase.FinishStep();
             this.label11 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.start.SuspendLayout();
             this.stepTaskName.SuspendLayout();
             this.stepStartUrl.SuspendLayout();
@@ -249,8 +249,6 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.lblStartUrlLoger);
             this.panel1.Controls.Add(this.lbxUrls);
@@ -261,9 +259,10 @@
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtStartUrlXPath);
-            this.panel1.Location = new System.Drawing.Point(9, 726);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 468);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2862, 150);
+            this.panel1.Size = new System.Drawing.Size(958, 150);
             this.panel1.TabIndex = 99;
             // 
             // label10
@@ -287,12 +286,14 @@
             // 
             // lbxUrls
             // 
+            this.lbxUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lbxUrls.ContextMenuStrip = this.startUrlmenu;
             this.lbxUrls.FormattingEnabled = true;
             this.lbxUrls.ItemHeight = 12;
             this.lbxUrls.Location = new System.Drawing.Point(113, 67);
             this.lbxUrls.Name = "lbxUrls";
-            this.lbxUrls.Size = new System.Drawing.Size(827, 88);
+            this.lbxUrls.Size = new System.Drawing.Size(0, 88);
             this.lbxUrls.TabIndex = 87;
             // 
             // startUrlmenu
@@ -410,6 +411,18 @@
             this.txtStartUrlXPath.Name = "txtStartUrlXPath";
             this.txtStartUrlXPath.Size = new System.Drawing.Size(495, 21);
             this.txtStartUrlXPath.TabIndex = 93;
+            // 
+            // startUrlWebBrowser
+            // 
+            this.startUrlWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.startUrlWebBrowser.Location = new System.Drawing.Point(9, 101);
+            this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.startUrlWebBrowser.Name = "startUrlWebBrowser";
+            this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(900, 300);
+            this.startUrlWebBrowser.TabIndex = 5;
             // 
             // lblStartUrlLog
             // 
@@ -567,6 +580,15 @@
             this.txtUrlResult.TabIndex = 7;
             this.txtUrlResult.Text = "";
             // 
+            // contentBrowser
+            // 
+            this.contentBrowser.Location = new System.Drawing.Point(6, 114);
+            this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.contentBrowser.Name = "contentBrowser";
+            this.contentBrowser.ScriptErrorsSuppressed = true;
+            this.contentBrowser.Size = new System.Drawing.Size(949, 372);
+            this.contentBrowser.TabIndex = 6;
+            // 
             // stepTestUrl
             // 
             this.stepTestUrl.BindingImage = ((System.Drawing.Image)(resources.GetObject("stepTestUrl.BindingImage")));
@@ -665,6 +687,15 @@
             this.stepItemRule.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.stepItemRule.Click += new System.EventHandler(this.stepItemRule_Click);
             // 
+            // itemWebBrowser
+            // 
+            this.itemWebBrowser.Location = new System.Drawing.Point(5, 97);
+            this.itemWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.itemWebBrowser.Name = "itemWebBrowser";
+            this.itemWebBrowser.ScriptErrorsSuppressed = true;
+            this.itemWebBrowser.Size = new System.Drawing.Size(949, 300);
+            this.itemWebBrowser.TabIndex = 11;
+            // 
             // tabTitle
             // 
             this.tabTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -681,17 +712,17 @@
             this.tabTitle.Location = new System.Drawing.Point(6, 403);
             this.tabTitle.Name = "tabTitle";
             this.tabTitle.SelectedIndex = 0;
-            this.tabTitle.Size = new System.Drawing.Size(4772, 2541);
+            this.tabTitle.Size = new System.Drawing.Size(6688, 3777);
             this.tabTitle.TabIndex = 10;
             this.tabTitle.SelectedIndexChanged += new System.EventHandler(this.tabTitle_SelectedIndexChanged);
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panelItemRule);
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(4764, 2516);
+            this.tabPage4.Size = new System.Drawing.Size(6680, 3751);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "标题";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -704,7 +735,7 @@
             this.panelItemRule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelItemRule.Location = new System.Drawing.Point(3, 3);
             this.panelItemRule.Name = "panelItemRule";
-            this.panelItemRule.Size = new System.Drawing.Size(4758, 2510);
+            this.panelItemRule.Size = new System.Drawing.Size(6674, 3745);
             this.panelItemRule.TabIndex = 6;
             // 
             // groupBox5
@@ -950,68 +981,68 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(3806, 1898);
+            this.tabPage1.Size = new System.Drawing.Size(5722, 3133);
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "副标题";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(3806, 1898);
+            this.tabPage2.Size = new System.Drawing.Size(5722, 3133);
             this.tabPage2.TabIndex = 7;
             this.tabPage2.Text = "关键字";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 21);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(3806, 1898);
+            this.tabPage5.Size = new System.Drawing.Size(5722, 3133);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "来源";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabTime
             // 
-            this.tabTime.Location = new System.Drawing.Point(4, 21);
+            this.tabTime.Location = new System.Drawing.Point(4, 22);
             this.tabTime.Name = "tabTime";
             this.tabTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTime.Size = new System.Drawing.Size(3806, 1898);
+            this.tabTime.Size = new System.Drawing.Size(5722, 3133);
             this.tabTime.TabIndex = 2;
             this.tabTime.Text = "时间";
             this.tabTime.UseVisualStyleBackColor = true;
             // 
             // tabSummary
             // 
-            this.tabSummary.Location = new System.Drawing.Point(4, 21);
+            this.tabSummary.Location = new System.Drawing.Point(4, 22);
             this.tabSummary.Name = "tabSummary";
             this.tabSummary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSummary.Size = new System.Drawing.Size(3806, 1898);
+            this.tabSummary.Size = new System.Drawing.Size(5722, 3133);
             this.tabSummary.TabIndex = 3;
             this.tabSummary.Text = "摘要";
             this.tabSummary.UseVisualStyleBackColor = true;
             // 
             // tabContent
             // 
-            this.tabContent.Location = new System.Drawing.Point(4, 21);
+            this.tabContent.Location = new System.Drawing.Point(4, 22);
             this.tabContent.Name = "tabContent";
             this.tabContent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContent.Size = new System.Drawing.Size(3806, 1898);
+            this.tabContent.Size = new System.Drawing.Size(5722, 3133);
             this.tabContent.TabIndex = 4;
             this.tabContent.Text = "内容";
             this.tabContent.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 21);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(3806, 1898);
+            this.tabPage6.Size = new System.Drawing.Size(5722, 3133);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "其他";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1165,7 +1196,7 @@
             // 
             // finish
             // 
-            this.finish.BackgroundImage = global::Jade.Properties.Resources.laboratory;
+            this.finish.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("finish.BackgroundImage")));
             this.finish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.finish.Controls.Add(this.label11);
             this.finish.Name = "finish";
@@ -1173,42 +1204,12 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.Location = new System.Drawing.Point(313, 232);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(328, 16);
             this.label11.TabIndex = 0;
             this.label11.Text = "恭喜你，配置完成！点击完成按钮完成编辑！";
-            // 
-            // startUrlWebBrowser
-            // 
-            this.startUrlWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.startUrlWebBrowser.Location = new System.Drawing.Point(9, 101);
-            this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.startUrlWebBrowser.Name = "startUrlWebBrowser";
-            this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(1758, 818);
-            this.startUrlWebBrowser.TabIndex = 5;
-            // 
-            // contentBrowser
-            // 
-            this.contentBrowser.Location = new System.Drawing.Point(3, 66);
-            this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.contentBrowser.Name = "contentBrowser";
-            this.contentBrowser.ScriptErrorsSuppressed = true;
-            this.contentBrowser.Size = new System.Drawing.Size(949, 372);
-            this.contentBrowser.TabIndex = 6;
-            // 
-            // itemWebBrowser
-            // 
-            this.itemWebBrowser.Location = new System.Drawing.Point(5, 97);
-            this.itemWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.itemWebBrowser.Name = "itemWebBrowser";
-            this.itemWebBrowser.ScriptErrorsSuppressed = true;
-            this.itemWebBrowser.Size = new System.Drawing.Size(949, 300);
-            this.itemWebBrowser.TabIndex = 11;
             // 
             // TaskWizardForm
             // 
@@ -1221,7 +1222,7 @@
             this.MinimizeBox = false;
             this.Name = "TaskWizardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "规则设置向导";
+            this.Text = "m,z";
             this.Load += new System.EventHandler(this.TaskWizardForm_Load);
             this.start.ResumeLayout(false);
             this.start.PerformLayout();
