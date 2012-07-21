@@ -415,6 +415,13 @@ namespace Jade
 
             TreeNode parentNode = new TreeNode(sourceUrl);
             List<string> urls;
+
+            //WebBrowser b = new WebBrowser();
+            //b.DocumentText = html;
+            //Console.WriteLine(html == b.DocumentText);
+            //html = b.DocumentText;
+            //b.Dispose();
+            //b = null;
             urls = ExtractUrl.ExtractAccurateUrl(CurrentSiteRule, html, sourceUrl);
 
             foreach (string url in urls)
@@ -429,10 +436,6 @@ namespace Jade
             {
                 this.trvUrlTree.Nodes.Add(parentNode);
             }));
-        }
-        private void taskWizard_BackButtonClick(WizardBase.WizardControl sender, WizardBase.WizardClickEventArgs args)
-        {
-
         }
 
         private void taskWizard_CancelButtonClick(object sender, EventArgs e)
@@ -497,7 +500,7 @@ namespace Jade
                 Console.WriteLine(e.ToElement.ClientRectangle);
                 if (current != null)
                 {
-                    current.Style = current.Style.Replace("BORDER-BOTTOM: #0000cc 1px solid; BORDER-LEFT: #0000cc 1px solid; BACKGROUND-COLOR: #9fc4e7; BORDER-TOP: #0000cc 1px solid; BORDER-RIGHT: #0000cc 1px solid", "");
+                    current.Style = current.Style.Replace("BORDER-BOTTOM: #0000cc 1px solid;", "").Replace("BORDER-LEFT: #0000cc 1px solid;", "").Replace("BACKGROUND-COLOR: #9fc4e7;", "").Replace("BORDER-TOP: #0000cc 1px solid;", "").Replace("BORDER-RIGHT: #0000cc 1px solid", "");
                 }
                 current = element;
                 Console.WriteLine(e.ToElement.ClientRectangle);
@@ -524,7 +527,7 @@ namespace Jade
         {
             if (path1 == path2)
             {
-                return string.Empty;
+                return path1;
             }
             var paths1 = path1.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
             var paths2 = path2.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries);
@@ -572,11 +575,11 @@ namespace Jade
             //IHTMLDocument2 htmlDocument = this.iReaperWebBrowser.Document.DomDocument as mshtml.IHTMLDocument2;
             var name = element.TagName.ToLower();
             //IHTMLElement el = element as IHTMLElement;
-            IHTMLDocument2 htmlDocument = currenActiveBrowser.Document.DomDocument as IHTMLDocument2;
+            //IHTMLDocument2 htmlDocument = currenActiveBrowser.Document.DomDocument as IHTMLDocument2;
 
-            IHTMLSelectionObject currentSelection = htmlDocument.selection;
+            //IHTMLSelectionObject currentSelection = htmlDocument.selection;
 
-            Console.WriteLine(currentSelection.type);
+            //Console.WriteLine(currentSelection.type);
 
             if (element.Id != null)
             {
@@ -620,6 +623,14 @@ namespace Jade
                 }
                 else
                 {
+
+                    if (element.GetAttribute("className") != "")
+                    {
+                        xname += "[@class=\"" + element.GetAttribute("className") + "\"]";
+                        path = "/" + xname + path;
+                        break;
+                    }
+
                     if (index > 0)
                         xname += "[" + index + "]";
                 }
@@ -631,16 +642,25 @@ namespace Jade
             return path;
         }
 
+        HtmlElement last;
+
         void Document_Click(object sender, HtmlElementEventArgs e)
         {
             if (EnableSelect)
             {
-                var newPath = GetXmlPath(current);
-
-                if (newPath == this.currentTxtbox.Text)
+                if (current == last)
                 {
                     return;
                 }
+
+                last = current;
+
+                var newPath = GetXmlPath(current);
+
+                //if (newPath == this.currentTxtbox.Text)
+                //{
+                //    return;
+                //}
 
                 this.currentTxtbox.Text = newPath;
 
@@ -716,14 +736,21 @@ namespace Jade
             browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
         }
 
+        public Uri Url
+        {
+            get;
+            set;
+        }
+
         void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             //if (currenActiveBrowser.ReadyState != WebBrowserReadyState.Complete)
             //    return;
 
-            if (e.Url == currenActiveBrowser.Url)
+            if (e.Url == Url)
             {
                 OnBrowserLoaded();
+                enableNavigate = false;
             }
         }
 
@@ -1123,6 +1150,7 @@ namespace Jade
                 this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
                 this.XMLPathType = Model.XMLPathType.Href;
                 this.contentBrowser.Navigate(this.txtStartUrl.Text);
+                this.Url = new Uri(this.txtStartUrl.Text);
             }
             else if (e.Page == this.contentUrlPage)
             {
@@ -1181,11 +1209,6 @@ namespace Jade
                                 loadingDialog.Percentage = 100;
                                 this.loadingDialog.Refresh();
                                 this.loadingDialog.Close();
-                                if (this.txtTestUrl.Text == "")
-                                {
-                                    this.txtTestUrl.Text = forTestUrl;
-                                }
-
                             }));
 
                             break;
@@ -1217,6 +1240,7 @@ namespace Jade
                 {
                     this.txtTestUrl.Text = forTestUrl;
                 }
+                this.Url = new Uri(this.txtTestUrl.Text);
                 this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
                 this.enableNavigate = true;
                 this.EnableSelect = false;
@@ -1287,10 +1311,12 @@ namespace Jade
                 {
                     this.txtStartUrl.Text = "http://" + this.txtStartUrl.Text;
                 }
-                var temp = this.enableNavigate;
+                //var temp = this.enableNavigate;
                 this.enableNavigate = true;
                 this.startUrlWebBrowser.Navigate(this.txtStartUrl.Text);
-                this.enableNavigate = temp;
+
+                this.Url = new Uri(this.txtStartUrl.Text);
+                //this.enableNavigate = temp;
             }
         }
 
@@ -1309,6 +1335,106 @@ namespace Jade
             BindBrowseEvent(startUrlWebBrowser);
             BindBrowseEvent(contentBrowser);
             BindBrowseEvent(itemWebBrowser);
+        }
+
+        /// <summary>
+        /// 自动识别
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAutoReListPage_Click(object sender, EventArgs e)
+        {
+            var linkNodes = ExtractUrl.GetLinkNodes(this.currenActiveBrowser.Document.Body.OuterHtml, "下一页", "Next", "Next &gt;", "下页", "Last", "末页", "尾页");
+
+            bool hasLast = false;
+
+            if (linkNodes.Count != 0)
+            {
+                var linkTexts = linkNodes.Select(t => t.InnerText).ToList();
+
+                // 下一页
+                HtmlAgilityPack.HtmlNode next = null;
+
+                if (linkTexts.Contains("下一页"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "下一页");
+                }
+                else if (linkTexts.Contains("下页"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "下页");
+                }
+                else if (linkTexts.Contains("Next"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "Next");
+                }
+                else if (linkTexts.Contains("Next &gt;"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "Next &gt;");
+                }
+
+                // 尾页
+                HtmlAgilityPack.HtmlNode last = null;
+                if (linkTexts.Contains("尾页"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "尾页");
+                }
+                else if (linkTexts.Contains("末页"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "末页");
+                }
+                else if (linkTexts.Contains("Last"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "Last");
+                }
+
+                string pageXpath = "";
+
+                if (last != null && next != null)
+                {
+                    pageXpath = this.GetCommonXpath(next.XPath, last.XPath);
+
+                }
+                else
+                {
+                    // 只有下一页
+                    pageXpath = linkNodes[0].XPath;
+                    pageXpath = pageXpath.Substring(0, pageXpath.LastIndexOf("a") + 1);
+                    pageXpath = pageXpath.Insert(pageXpath.LastIndexOf("/"), "/");
+                }
+
+                linkNodes = linkNodes[0].SelectNodes(pageXpath).ToList();
+                // get 下一页
+            }
+
+            ProcessLinkNodes(linkNodes);
+        }
+
+        private void ProcessLinkNodes(List<HtmlAgilityPack.HtmlNode> linkNodes)
+        {
+
+            foreach (var node in linkNodes)
+            {
+                if (!this.lbxUrls.Items.Contains(this.txtStartUrl.Text))
+                {
+                    this.lbxUrls.Items.Add(this.txtStartUrl.Text);
+                }
+                var url = node.Attributes["href"].Value;
+
+                if (!url.Contains("http://"))
+                {
+                    url = ExtractUrl.RepairUrl(this.txtStartUrl.Text, url);
+                }
+
+                if (!this.lbxUrls.Items.Contains(url))
+                {
+                    this.lbxUrls.Items.Add(url);
+                }
+            }
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
         }
 
     }

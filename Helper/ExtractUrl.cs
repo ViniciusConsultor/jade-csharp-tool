@@ -219,6 +219,22 @@ namespace Jade
             return links.Select(l => l.Attributes["href"].Value.ToString()).ToList();
         }
 
+
+        /// <summary>
+        /// 从html获取链接
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="containText">链接文本包含的</param>
+        /// <returns></returns>
+        public static List<HtmlAgilityPack.HtmlNode> GetLinkNodes(string html, params string[] texts)
+        {
+            HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDoc.LoadHtml(html);
+            var links = HtmlDoc.DocumentNode.SelectNodes("//a[@href]");
+            return links.Where(l => l.InnerText != null && texts.Contains(l.InnerText)).ToList();
+        }
+
+
         private static string html2TextPattern =
 @"(?<script><script[^>]*?>.*?</script>)|(?<style><style>.*?</style>)|(?<comment><!--.*?-->)" +
 @"|(?<html>(?!<ps|(<p>)|(<img)|(<br)|(strong))" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
@@ -277,6 +293,7 @@ namespace Jade
             try
             {
                 HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                HtmlDoc.OptionAutoCloseOnEnd = true;
                 //html = html.ToLower();
                 if (!html.Contains("</BODY") && !html.Contains("</body"))
                 {

@@ -36,10 +36,6 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Com.iFLYTEK.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Com.iFLYTEK.WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.BonusSkins.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a" />
     <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -56,6 +52,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Persistent.Base.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -93,24 +90,13 @@
     <Reference Include="DevExpress.XtraWizard.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Guifreaks.Common, Version=0.1.0.0, Culture=neutral, PublicKeyToken=c3c25e41a6abca42, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Guifreaks.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Guifreaks.NavigationBar, Version=0.1.0.0, Culture=neutral, PublicKeyToken=bf0afd6b35ed9434, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Guifreaks.NavigationBar.dll</HintPath>
-    </Reference>
-    <Reference Include="Guifreaks.NavigationBar.XmlSerializers, Version=0.1.0.0, Culture=neutral, PublicKeyToken=bf0afd6b35ed9434, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Guifreaks.NavigationBar.XmlSerializers.dll</HintPath>
-    </Reference>
     <Reference Include="HFBBS.DBUtility, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\HFBBS.DBUtility.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\HtmlInspector_src\HtmlInspector\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
     <Reference Include="Interop.ADOX, Version=6.0.0.0, Culture=neutral, processorArchitecture=x86">
@@ -151,14 +137,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\UtilityLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.4547.36107, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
-    <Reference Include="WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\WizardBase.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\DataSaver.cs" />
@@ -175,6 +153,44 @@
     </Compile>
     <Compile Include="ContentEditForm.Designer.cs">
       <DependentUpon>ContentEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContentListPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContentListPanel.Designer.cs">
+      <DependentUpon>ContentListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Browser\BaseWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\Browser\BaseWebBrowser.Designer.cs">
+      <DependentUpon>BaseWebBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Browser\BrowserExtendedNavigatingEventArgs.cs" />
+    <Compile Include="Control\Browser\BrowserToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\Browser\BrowserToolStrip.Designer.cs">
+      <DependentUpon>BrowserToolStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Browser\DWebBrowserEvents2.cs" />
+    <Compile Include="Control\Browser\ExtendedWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\Browser\ExtendedWebBrowser.Designer.cs">
+      <DependentUpon>ExtendedWebBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Browser\IBaseBrowserForm.cs" />
+    <Compile Include="Control\Browser\IWebBrowser2.cs" />
+    <Compile Include="Control\Browser\NativeMethods.cs" />
+    <Compile Include="Control\Browser\TabContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\Browser\TabContextMenu.Designer.cs">
+      <DependentUpon>TabContextMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Browser\UrlContext.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Control\CheckboxCellHeader.cs" />
     <Compile Include="Control\CheckBoxComboBox\CheckBoxComboBox.cs">
@@ -227,7 +243,7 @@
     </Compile>
     <Compile Include="DatabaseFactory.cs" />
     <Compile Include="DraftBoxForm.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DraftBoxForm.Designer.cs">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
@@ -271,12 +287,6 @@
     </Compile>
     <Compile Include="TaskRunnerPanel.Designer.cs">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TaskWizardForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TaskWizardForm.Designer.cs">
-      <DependentUpon>TaskWizardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WelcomeForm.cs">
       <SubType>Form</SubType>
@@ -376,6 +386,25 @@
     <EmbeddedResource Include="ContentEditForm.resx">
       <DependentUpon>ContentEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ContentListPanel.resx">
+      <DependentUpon>ContentListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Browser\BaseWebBrowser.resx">
+      <DependentUpon>BaseWebBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Browser\BrowserToolStrip.resx">
+      <DependentUpon>BrowserToolStrip.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Browser\BrowserToolStrip.zh-CHS.resx">
+      <DependentUpon>BrowserToolStrip.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Browser\ExtendedWebBrowser.resx">
+      <DependentUpon>ExtendedWebBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -412,9 +441,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunnerPanel.resx">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TaskWizardForm.resx">
-      <DependentUpon>TaskWizardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeForm.resx">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
@@ -494,6 +520,8 @@
     <Content Include="Lib\Guifreaks.NavigationBar.XmlSerializers.dll" />
     <Content Include="Lib\HFBBS.DBUtility.dll" />
     <Content Include="Lib\HtmlAgilityPack.dll" />
+    <Content Include="Lib\HtmlAgilityPack.pdb" />
+    <Content Include="Lib\HtmlAgilityPack.XML" />
     <Content Include="Lib\ICSharpCode.TextEditor.dll" />
     <Content Include="Lib\Interop.ADOX.dll" />
     <Content Include="Lib\Interop.SHDocVw.dll" />
@@ -545,6 +573,10 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\IeToolbar.bmp" />
+    <None Include="Resources\setting.png" />
+    <None Include="Resources\run_copy.png" />
+    <None Include="Resources\add.png" />
     <None Include="Resources\yiqianfapingtai.gif" />
     <None Include="Resources\daiqianfapingtai.gif" />
     <None Include="Resources\bianjipingtai.gif" />

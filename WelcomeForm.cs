@@ -13,13 +13,12 @@ using System.Text.RegularExpressions;
 
 namespace Jade
 {
-    public partial class WelcomeForm : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class WelcomeForm : Form
     {
 
         public WelcomeForm()
         {
             InitializeComponent();
-            this.TabText = "欢迎页";
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
         }
 

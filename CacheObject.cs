@@ -6,7 +6,6 @@ using Jade.Model;
 using Jade.BLL;
 using System.Threading;
 using System.IO;
-using WeifenLuo.WinFormsUI.Docking;
 using Jade.Model.MySql;
 using Jade.DAL;
 using System.Net;
@@ -41,8 +40,6 @@ namespace Jade
         public static bool IsDebug = false;
 
         public static MainForm MainForm { get; set; }
-
-        public static Dictionary<string, DockContent> MdiDict = new Dictionary<string, DockContent>();
 
         public static NewsDAL NewsDAL = new NewsDAL();
 

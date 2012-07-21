@@ -20,6 +20,10 @@ namespace Jade
         public MainForm()
         {
             InitializeComponent();
+
+            CacheObject.MainForm = this;
+
+            this.DoubleBuffered = true;
             this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
             this.imageList1.Images.Add(Resources.sites);
             ImageIndexDic.Add("sites", this.imageList1.Images.Count - 1);
@@ -38,7 +42,6 @@ namespace Jade
             }
             this.taskTree.ExpandAll();
 
-            DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
         }
 
         Dictionary<string, int> ImageIndexDic = new Dictionary<string, int>();
@@ -131,32 +134,62 @@ namespace Jade
         //    }
         //}
 
+        BaseDocument editor;
+
         private void navDraft_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            MessageBox.Show("草稿箱");
+            PrepareContentPanel();
+            editor.Caption = "草稿箱";
+            tabbedView1.Controller.Activate(editor);
         }
+
+        private void PrepareContentPanel()
+        {
+            if (editor == null || editor.Control == null)
+            {
+                tabbedView1.BeginUpdate();
+                var form = new DraftBoxForm();
+                editor = tabbedView1.Controller.AddDocument(form);
+                editor.Form.Text = "草稿箱";
+                editor.Caption = "草稿箱";
+                var draft = editor.Control as DraftBoxForm;
+                draft.IsEdited = false;
+                draft.IsPublished = false;
+                tabbedView1.EndUpdate();
+            }
+        }
+
+        public void OpenNewUrl(string url)
+        {
+            tabbedView1.BeginUpdate();
+            var form = new WelcomePanel();
+            var doc = tabbedView1.Controller.AddDocument(form);
+            form.Navigate(url, doc);
+            doc.Caption = "新窗口";
+            tabbedView1.EndUpdate();
+            tabbedView1.Controller.Activate(doc);
+        }
+
 
         private void navEdited_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            MessageBox.Show("已编辑");
+            PrepareContentPanel();
+            editor.Caption = "已编辑";
+            var draft = editor.Control as DraftBoxForm;
+            draft.IsEdited = true;
+            draft.IsPublished = false;
+            tabbedView1.Controller.Activate(editor);
         }
 
         private void navPublished_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            if (d == null || d.Control == null)
-            {
-                tabbedView1.BeginUpdate();
-                WelcomePanel form = new WelcomePanel();
-                d = tabbedView1.Controller.AddDocument(form);
-                d.Form.Text = "WelcomeForm";
-                d.Caption = "WelcomeForm";
-                tabbedView1.EndUpdate();
-            }
 
-            if (d != null)
-            {
-                tabbedView1.Controller.Activate(d);
-            }
+            PrepareContentPanel();
+            var draft = editor.Control as DraftBoxForm;
+            draft.IsEdited = false;
+            draft.IsPublished = true;
+            editor.Caption = "已发布";
+            tabbedView1.Controller.Activate(editor);
         }
 
         private void 新建分组ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -273,7 +306,7 @@ namespace Jade
         {
             if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is SiteRule)
             {
-                EditSiteRule();
+                toolStripMenuItem4_Click(sender, e);
             }
         }
 
@@ -328,7 +361,7 @@ namespace Jade
             siteRule.CategoryID = this.CurrentCategory.ID;
             // var ruleForm = new SiteRuleEditForm(siteRule);
             var ruleForm = new SiteRuleWizardForm(siteRule);
-                //new TaskWizardForm(siteRule);
+            //new TaskWizardForm(siteRule);
             //CacheObject.BLL.AddSite(siteRule);
             if (ruleForm.ShowDialog() == DialogResult.OK)
             {
@@ -343,7 +376,7 @@ namespace Jade
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            var editForm = new TaskWizardForm(this.taskTree.SelectedNode.Tag as SiteRule);
+            var editForm = new SiteRuleWizardForm(this.taskTree.SelectedNode.Tag as SiteRule);
             if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 var siteRule = editForm.CurrentSiteRule;
@@ -358,7 +391,63 @@ namespace Jade
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
 
+            DialogResult dr = new LoginForm().ShowDialog();
+
+            if (dr == DialogResult.Cancel)
+            {
+                this.Close();
+            }
+            else
+            {
+                // CacheObject.NavForm.UpdateUI();
+                this.Show();
+                this.WindowState = FormWindowState.Maximized;
+                var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
+                this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
+
+                if (Properties.Settings.Default.IsEditModel)
+                {
+                    this.navBarControl1.ActiveGroup = this.navBarGroup1;
+                }
+                else
+                {
+                    this.navBarControl1.ActiveGroup = this.navTask;
+                }
+
+                if (CacheObject.IsLognIn)
+                {
+                    if (d == null || d.Control == null)
+                    {
+                        tabbedView1.BeginUpdate();
+                        WelcomePanel form = new WelcomePanel();
+                        d = tabbedView1.Controller.AddDocument(form);
+                        tabbedView1.EndUpdate();
+                    }
+                    d.Form.Text = "远程网站";
+                    d.Caption = "远程网站";
+                    if (d != null)
+                    {
+                        (d.Control as WelcomePanel).Navigate("http://newscms.house365.com/newCMS/index.php", d, CacheObject.Cookie);
+
+                        tabbedView1.Controller.Activate(d);
+                    }
+                }
+
+                if (tasks.Count > 0)
+                {
+                    if (MessageBox.Show("系统发现你有设为自动运行的采集任务,是否现在开始自动执行采集任务？", "自动采集确认!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        // 立即开始
+                        tasks.ForEach(task =>
+                        {
+                            var runnerForm = new TaskRunForm(task);
+                            //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                        });
+                    }
+                }
+            }
         }
 
         private void barDockingMenuItem1_ListItemClick(object sender, ListItemClickEventArgs e)
@@ -374,6 +463,69 @@ namespace Jade
         private void galleryControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
+            toolStripMenuItem4_Click(sender, e);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var task = this.taskTree.SelectedNode.Tag as SiteRule;
+
+            if (task != null)
+            {
+                var runnerForm = new TaskRunForm(task);
+
+                tabbedView1.BeginUpdate();
+                var document = tabbedView1.Controller.AddDocument(runnerForm);
+                document.Form.Text = task.Name;
+                document.Caption = task.Name + "[运行中]";
+                tabbedView1.EndUpdate();
+            }
+            else
+            {
+                MessageBox.Show("请选择一个任务");
+            }
+        }
+
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is Category)
+            {
+                toolStripMenuItem3_Click(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("请选择一个分类节点");
+            }
+
+        }
+
+        private void barButtonItem4_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            navDraft_LinkClicked(sender, null);
+        }
+
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            navEdited_LinkClicked(null, null);
+        }
+
+        private void barCheckItem1_CheckedChanged(object sender, ItemClickEventArgs e)
+        {
+            navPublished_LinkClicked(null, null);
+        }
+
+        private void barButtonItem6_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            new SystemConfigForm().ShowDialog();
         }
     }
 }

@@ -195,7 +195,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 14);
             this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "test";
             // 
             // button1
             // 
@@ -231,6 +230,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登陆编辑中心";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.groupBox1.ResumeLayout(false);

@@ -43,36 +43,40 @@
             // 
             // txtLog
             // 
-            this.txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLog.Location = new System.Drawing.Point(12, 12);
+            this.txtLog.Location = new System.Drawing.Point(14, 14);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(809, 278);
+            this.txtLog.Size = new System.Drawing.Size(943, 324);
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
             // lblStep
             // 
+            this.lblStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStep.AutoSize = true;
-            this.lblStep.Location = new System.Drawing.Point(12, 297);
+            this.lblStep.Location = new System.Drawing.Point(14, 346);
             this.lblStep.Name = "lblStep";
-            this.lblStep.Size = new System.Drawing.Size(53, 12);
+            this.lblStep.Size = new System.Drawing.Size(55, 14);
             this.lblStep.TabIndex = 2;
             this.lblStep.Text = "采集内容";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(72, 292);
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.progressBar1.Location = new System.Drawing.Point(84, 341);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(430, 23);
+            this.progressBar1.Size = new System.Drawing.Size(502, 27);
             this.progressBar1.TabIndex = 3;
             // 
             // lblProcess
             // 
+            this.lblProcess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblProcess.AutoSize = true;
-            this.lblProcess.Location = new System.Drawing.Point(509, 297);
+            this.lblProcess.Location = new System.Drawing.Point(594, 346);
             this.lblProcess.Name = "lblProcess";
-            this.lblProcess.Size = new System.Drawing.Size(35, 12);
+            this.lblProcess.Size = new System.Drawing.Size(36, 14);
             this.lblProcess.TabIndex = 4;
             this.lblProcess.Text = "(0/0)";
             // 
@@ -83,8 +87,7 @@
             this.treeListView1.AllColumns.Add(this.olvColumnProgress);
             this.treeListView1.AllColumns.Add(this.olvColumnSpeed);
             this.treeListView1.AllColumns.Add(this.olvColumn1);
-            this.treeListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.treeListView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.treeListView1.CheckBoxes = false;
             this.treeListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -93,11 +96,11 @@
             this.olvColumnProgress,
             this.olvColumnSpeed,
             this.olvColumn1});
-            this.treeListView1.Location = new System.Drawing.Point(12, 321);
+            this.treeListView1.Location = new System.Drawing.Point(14, 374);
             this.treeListView1.Name = "treeListView1";
             this.treeListView1.OwnerDraw = true;
             this.treeListView1.ShowGroups = false;
-            this.treeListView1.Size = new System.Drawing.Size(809, 104);
+            this.treeListView1.Size = new System.Drawing.Size(943, 121);
             this.treeListView1.TabIndex = 13;
             this.treeListView1.UseCompatibleStateImageBehavior = false;
             this.treeListView1.View = System.Windows.Forms.View.Details;
@@ -136,16 +139,15 @@
             // 
             // TaskRunForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 428);
             this.Controls.Add(this.treeListView1);
             this.Controls.Add(this.lblProcess);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblStep);
             this.Controls.Add(this.txtLog);
             this.Name = "TaskRunForm";
-            this.Text = "TaskRunForm";
+            this.Size = new System.Drawing.Size(972, 499);
             this.Load += new System.EventHandler(this.TaskRunForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.treeListView1)).EndInit();
             this.ResumeLayout(false);

@@ -6,7 +6,7 @@ using Jade;
 
 namespace Jade.Model.MySql
 {
-    public class NewsDAL
+    public class NewsDAL : Jade.DAL.IDownloadDataDAL
     {
         HFBBSEntities Repository = new HFBBSEntities();
 
@@ -87,6 +87,45 @@ namespace Jade.Model.MySql
         }
 
 
+
+        public void Add(IDownloadData data)
+        {
+            this.Add(data as downloaddata);
+        }
+
+        public void Delete(IDownloadData data)
+        {
+            this.Delete(data as downloaddata);
+        }
+
+        IDownloadData DAL.IDownloadDataDAL.Get(int id)
+        {
+            return this.Get(id);
+        }
+
+        IDownloadData DAL.IDownloadDataDAL.Get(string url)
+        {
+            return this.Get(url);
+        }
+
+        List<IDownloadData> DAL.IDownloadDataDAL.GetList(SearchArgs args, out int totalCount)
+        {
+            var result = new List<IDownloadData>();
+
+            var datas = this.GetList(args, out totalCount);
+
+            foreach (var row in datas)
+            {
+                result.Add(row);
+            }
+
+            return result;
+        }
+
+        public void Update(IDownloadData data)
+        {
+            this.Update(data as downloaddata);
+        }
     }
 
     public partial class downloaddata

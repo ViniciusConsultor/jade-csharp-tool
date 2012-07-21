@@ -180,7 +180,6 @@
             this.Controls.Add(this.taskTree);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SiteRuleForm";
-            this.TabText = "任务列表";
             this.Text = "任务列表";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
