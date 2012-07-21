@@ -17,6 +17,7 @@ namespace Jade
         {
             InitializeComponent();
             setting = Jade.Properties.Settings.Default;
+            Bind();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -54,6 +55,9 @@ namespace Jade
             setting.ServerDatabase = this.txtDatabase.Text;
             setting.ServerUser = this.txtUserName.Text;
             setting.Save();
+
+            // 
+           CacheObject.DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
         }
     }
 }

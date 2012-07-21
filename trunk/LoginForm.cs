@@ -17,9 +17,9 @@ namespace Jade
         Jade.Properties.Settings setting;
         private ILogin login = null;
 
-        public LoginForm(ILogin login)
+        public LoginForm()
         {
-            this.login = login;
+            //this.login = login;
             InitializeComponent();
             setting = Jade.Properties.Settings.Default;
             this.rblEdit.Checked = setting.IsEditModel;

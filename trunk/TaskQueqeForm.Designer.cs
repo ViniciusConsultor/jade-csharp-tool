@@ -134,9 +134,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TaskQueqeForm";
-            this.TabText = "任务队列";
             this.Text = "任务队列";
-            this.DockStateChanged += new System.EventHandler(this.TaskQueqeForm_DockStateChanged);
             this.Load += new System.EventHandler(this.TaskQueqeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

@@ -26,6 +26,7 @@ namespace Jade
         public ContentEditForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
             this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
             this.txtnews_source_name.DisplayMember = "DisplayName";
             this.txtnews_source_name.ValueMember = "Value";

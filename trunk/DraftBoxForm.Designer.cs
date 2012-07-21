@@ -38,9 +38,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.pager1 = new Jade.Pager();
             this.dataGridView1 = new Jade.DataGridViewEx.DataGridViewEx();
             this.Select = new Jade.DataGridViewEx.ColumnEx.DataGridViewCheckBoxColumnEx();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +49,10 @@
             this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DownloadTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Url = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.pager1 = new Jade.Pager();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -62,12 +63,11 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewLinkColumn1 = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -88,7 +88,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(921, 47);
+            this.panel1.Size = new System.Drawing.Size(969, 47);
             this.panel1.TabIndex = 2;
             // 
             // txtKeyword
@@ -138,40 +138,8 @@
             this.panel2.Controls.Add(this.dataGridView1);
             this.panel2.Location = new System.Drawing.Point(0, 75);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(921, 335);
+            this.panel2.Size = new System.Drawing.Size(969, 335);
             this.panel2.TabIndex = 5;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 47);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(921, 25);
-            this.toolStrip1.TabIndex = 6;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = global::Jade.Properties.Resources.no;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButton1.Text = "删除";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // pager1
-            // 
-            this.pager1.CurrentPageIndex = 0;
-            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pager1.Location = new System.Drawing.Point(0, 416);
-            this.pager1.Name = "pager1";
-            this.pager1.PageCount = 0;
-            this.pager1.PageSize = 20;
-            this.pager1.Size = new System.Drawing.Size(921, 30);
-            this.pager1.TabIndex = 4;
-            this.pager1.TotalCount = 0;
             // 
             // dataGridView1
             // 
@@ -193,7 +161,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 60, 3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(921, 335);
+            this.dataGridView1.Size = new System.Drawing.Size(969, 335);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
@@ -283,6 +251,47 @@
             this.Url.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Url.Width = 200;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 47);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(969, 25);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::Jade.Properties.Resources.no;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton1.Text = "删除";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton2.Text = "发布";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // pager1
+            // 
+            this.pager1.CurrentPageIndex = 0;
+            this.pager1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pager1.Location = new System.Drawing.Point(0, 416);
+            this.pager1.Name = "pager1";
+            this.pager1.PageCount = 0;
+            this.pager1.PageSize = 20;
+            this.pager1.Size = new System.Drawing.Size(969, 30);
+            this.pager1.TabIndex = 4;
+            this.pager1.TotalCount = 0;
+            // 
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.HeaderText = "";
@@ -363,35 +372,25 @@
             this.dataGridViewLinkColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewLinkColumn1.Width = 200;
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(49, 22);
-            this.toolStripButton2.Text = "发布";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
             // DraftBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 446);
+            this.AutoScroll = true;
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "DraftBoxForm";
-            this.TabText = "草稿箱";
-            this.Text = "草稿箱";
+            this.Size = new System.Drawing.Size(969, 446);
             this.Load += new System.EventHandler(this.DraftBoxForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

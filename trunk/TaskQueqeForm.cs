@@ -9,17 +9,13 @@ using System.Windows.Forms;
 
 namespace Jade
 {
-    public partial class TaskQueqeForm : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class TaskQueqeForm : Form
     {
         public TaskQueqeForm()
         {
             InitializeComponent();
         }
 
-        private void TaskQueqeForm_DockStateChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(this.DockState.ToString());
-        }
         BindingSource source = new BindingSource();
         private void TaskQueqeForm_Load(object sender, EventArgs e)
         {
@@ -90,7 +86,7 @@ namespace Jade
                 {
                     e.Cancel = true;
                 }
-                
+
             }
             else
             {

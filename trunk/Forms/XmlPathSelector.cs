@@ -108,7 +108,6 @@ namespace Jade.Forms
             this.XMLPathType = XMLPathType.InnerTextWithPic;
             this.XMLPathSelectType = XMLPathSelectType.OnlyOne;
             this.iReaperWebBrowser.DocumentTitleChanged += new EventHandler(UpdateTabTitle);
-            resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseBrowserForm));
             //this.TabPageContextMenu = tabContextMenu;
             //tabContextMenu.Context = this;
             this.browserToolStrip1.WbForm = this;

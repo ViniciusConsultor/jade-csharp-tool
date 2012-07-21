@@ -48,7 +48,6 @@
             this.ClientSize = new System.Drawing.Size(833, 428);
             this.Controls.Add(this.webBrowser1);
             this.Name = "WelcomeForm";
-            this.TabText = "TaskRunForm";
             this.Text = "TaskRunForm";
             this.Load += new System.EventHandler(this.WelcomeForm_Load);
             this.ResumeLayout(false);

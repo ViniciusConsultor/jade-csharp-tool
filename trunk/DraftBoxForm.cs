@@ -11,11 +11,12 @@ using Jade.Model.MySql;
 
 namespace Jade
 {
-    public partial class DraftBoxForm : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class DraftBoxForm : UserControl
     {
         public DraftBoxForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
             this.m_RowStyleNormal = new DataGridViewCellStyle();
             this.m_RowStyleNormal.BackColor = Color.LightBlue;
             this.m_RowStyleNormal.SelectionBackColor = Color.LightSteelBlue;
@@ -159,7 +160,7 @@ namespace Jade
 
         }
 
-        int currentPageSize = 15;
+        int currentPageSize = 12;
 
         private void pager1_PageChanged(object sender, EventArgs e)
         {

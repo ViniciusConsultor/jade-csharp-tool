@@ -14,6 +14,7 @@ namespace Jade
         public TaskRunnerPanel()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
             this.runningTaskCollectionBindingSource.DataSource = RunningTaskCollection.Instance;
             RunningTaskCollection.Instance.OnChange += new Change(Instance_OnChange);
         }

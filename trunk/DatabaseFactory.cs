@@ -32,11 +32,19 @@ namespace Jade
 
         public  Model.IDownloadData CreateDownloadData(string url, int taskId)
         {
+            if (Properties.Settings.Default.IsOnline)
+            {
+                return new Model.MySql.downloaddata(taskId, url);
+            }
             return new Model.Access.DownloadData(taskId, url);
         }
 
         public  Jade.DAL.IDownloadDataDAL CreateDAL()
         {
+            if (Properties.Settings.Default.IsOnline)
+            {
+                return new Model.MySql.NewsDAL();
+            }
             return new Model.Access.DownloadDataDAL();
         }
 

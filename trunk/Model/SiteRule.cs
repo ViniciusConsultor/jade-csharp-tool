@@ -60,8 +60,8 @@ namespace Jade.Model
                 CloumnName = "Content",
                 ItemName="内容",
                 FetchType = ItemFetchType.XPath,
-                IsDownloadPic = false,
-                XMLPathType = XMLPathType.InnerText,
+                IsDownloadPic = true,
+                XMLPathType = XMLPathType.InnerTextWithPic,
                 XPath="//body",
                 XMLPathSelectType = XMLPathSelectType.OnlyOne      
                 }, new ItemRule() {
@@ -78,7 +78,7 @@ namespace Jade.Model
                 FetchType = ItemFetchType.XPath,
                 IsDownloadPic = false,
                 XMLPathType = XMLPathType.InnerText,
-                XPath="//h1",
+                XPath="",
                 XMLPathSelectType = XMLPathSelectType.OnlyOne      
                 }
             });

@@ -10,7 +10,7 @@ using Jade.Model;
 
 namespace Jade
 {
-    public partial class SiteRuleForm : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class SiteRuleForm : Form
     {
         public SiteRuleForm()
         {
@@ -203,31 +203,31 @@ namespace Jade
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            var siteRule = SiteRule.CreateDefaultRule();
-            siteRule.CategoryID = this.CurrentCategory.ID;
-            // var ruleForm = new SiteRuleEditForm(siteRule);
-            var ruleForm = new TaskWizardForm(siteRule);
-            //CacheObject.BLL.AddSite(siteRule);
-            if (ruleForm.ShowDialog() == DialogResult.OK)
-            {
-                siteRule = ruleForm.CurrentSiteRule;
-                CacheObject.RuleManager.AddSite(siteRule);
-                TreeNode leaf = new TreeNode(siteRule.Name, 1, 1);
-                leaf.Tag = siteRule;
-                this.CurrentCategoryNode.Nodes.Add(leaf);
-            }
+            //var siteRule = SiteRule.CreateDefaultRule();
+            //siteRule.CategoryID = this.CurrentCategory.ID;
+            //// var ruleForm = new SiteRuleEditForm(siteRule);
+            //var ruleForm = new TaskWizardForm(siteRule);
+            ////CacheObject.BLL.AddSite(siteRule);
+            //if (ruleForm.ShowDialog() == DialogResult.OK)
+            //{
+            //    siteRule = ruleForm.CurrentSiteRule;
+            //    CacheObject.RuleManager.AddSite(siteRule);
+            //    TreeNode leaf = new TreeNode(siteRule.Name, 1, 1);
+            //    leaf.Tag = siteRule;
+            //    this.CurrentCategoryNode.Nodes.Add(leaf);
+            //}
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            var editForm = new TaskWizardForm(this.taskTree.SelectedNode.Tag as SiteRule);
-            if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var siteRule = editForm.CurrentSiteRule;
-                CacheObject.RuleManager.Update(siteRule);
-                this.taskTree.SelectedNode.Tag = siteRule;
-                this.taskTree.SelectedNode.Text = siteRule.Name;
-            }
+            //var editForm = new TaskWizardForm(this.taskTree.SelectedNode.Tag as SiteRule);
+            //if (editForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    var siteRule = editForm.CurrentSiteRule;
+            //    CacheObject.RuleManager.Update(siteRule);
+            //    this.taskTree.SelectedNode.Tag = siteRule;
+            //    this.taskTree.SelectedNode.Text = siteRule.Name;
+            //}
         }
     }
 }
