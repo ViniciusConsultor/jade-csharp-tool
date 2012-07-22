@@ -147,7 +147,11 @@ namespace Jade
         {
             var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(dataTable[e.RowIndex]);
-            CacheObject.ContentForm.ShowDialog();
+            if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+            {
+                int totalCount;
+                this.dataGridView1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.pager1.CurrentPageIndex), out totalCount);
+            }
         }
 
         //定义两种行样式
@@ -182,7 +186,11 @@ namespace Jade
         {
             var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
             CacheObject.ContentForm.InitDownloadData(dataTable[dataGridView1.CurrentRow.Index]);
-            CacheObject.ContentForm.ShowDialog();
+            if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+            {
+                int totalCount;
+                this.dataGridView1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.pager1.CurrentPageIndex), out totalCount);
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

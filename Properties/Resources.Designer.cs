@@ -270,6 +270,13 @@ namespace Jade.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap network {
+            get {
+                object obj = ResourceManager.GetObject("network", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap no {
             get {
                 object obj = ResourceManager.GetObject("no", resourceCulture);
@@ -280,6 +287,13 @@ namespace Jade.Properties {
         internal static System.Drawing.Bitmap page {
             get {
                 object obj = ResourceManager.GetObject("page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pc_security_2 {
+            get {
+                object obj = ResourceManager.GetObject("pc_security_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

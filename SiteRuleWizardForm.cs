@@ -376,7 +376,8 @@ namespace Jade
             var index = 1;
             foreach (var r in Datas)
             {
-                sb.AppendFormat("【第{0}条结果】:{1}\r\n", index++, r);
+                if (!r.Contains("javascript:"))
+                    sb.AppendFormat("【第{0}条结果】:{1}\r\n", index++, r);
             }
             var txt = sb.ToString();
             if (txt == "")
@@ -426,10 +427,13 @@ namespace Jade
 
             foreach (string url in urls)
             {
-                parentNode.Nodes.Add(url);
-                if (forTestUrl == "")
+                if (!url.Contains("javascript"))
                 {
-                    forTestUrl = url;
+                    parentNode.Nodes.Add(url);
+                    if (forTestUrl == "")
+                    {
+                        forTestUrl = url;
+                    }
                 }
             }
             this.trvUrlTree.BeginInvoke(new MethodInvoker(delegate()
@@ -1420,10 +1424,18 @@ namespace Jade
                 }
                 var url = node.Attributes["href"].Value;
 
+                if (url.StartsWith("javas"))
+                {
+                    continue;
+                }
+
                 if (!url.Contains("http://"))
                 {
                     url = ExtractUrl.RepairUrl(this.txtStartUrl.Text, url);
                 }
+
+                url = url.Replace("&amp;", "&");
+
 
                 if (!this.lbxUrls.Items.Contains(url))
                 {
