@@ -179,6 +179,13 @@ namespace Jade.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap dockPanel3_Image {
+            get {
+                object obj = ResourceManager.GetObject("dockPanel3.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap document_save {
             get {
                 object obj = ResourceManager.GetObject("document_save", resourceCulture);
@@ -287,6 +294,13 @@ namespace Jade.Properties {
         internal static System.Drawing.Bitmap page {
             get {
                 object obj = ResourceManager.GetObject("page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap panelContainer2_Image {
+            get {
+                object obj = ResourceManager.GetObject("panelContainer2.Image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
