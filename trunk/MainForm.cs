@@ -601,5 +601,20 @@ namespace Jade
             }
 
         }
+
+        private void hideContainerBottom_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void taskRunnerPanel1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dockPanel4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

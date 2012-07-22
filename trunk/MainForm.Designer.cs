@@ -57,6 +57,8 @@
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.listView1 = new System.Windows.Forms.ListView();
             this.taskRunnerPanel1 = new Jade.TaskRunnerPanel();
+            this.dockPanel4 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel4_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.dockPanel3 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -82,6 +84,9 @@
             this.删除任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
@@ -90,15 +95,16 @@
             this.tabbedView3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox2 = new DevExpress.XtraEditors.MemoEdit();
+            this.comboBox2 = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.hideContainerBottom.SuspendLayout();
             this.dockPanel2.SuspendLayout();
             this.dockPanel2_Container.SuspendLayout();
+            this.dockPanel4.SuspendLayout();
+            this.dockPanel4_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
             this.dockPanel3.SuspendLayout();
             this.dockPanel1.SuspendLayout();
@@ -112,6 +118,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBox2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBox2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -140,7 +148,7 @@
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ribbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.True;
-            this.ribbon.Size = new System.Drawing.Size(743, 147);
+            this.ribbon.Size = new System.Drawing.Size(1005, 147);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Toolbar.ItemLinks.Add(this.barButtonItem1);
             this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
@@ -186,7 +194,7 @@
             // 
             // barStaticItem1
             // 
-            this.barStaticItem1.Caption = "barStaticItem1";
+            this.barStaticItem1.Caption = "准备就绪";
             this.barStaticItem1.Id = 13;
             this.barStaticItem1.Name = "barStaticItem1";
             this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -272,10 +280,10 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem1);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 470);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 472);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(743, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1005, 31);
             // 
             // imageList1
             // 
@@ -304,22 +312,25 @@
             // 
             this.hideContainerBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
             this.hideContainerBottom.Controls.Add(this.dockPanel2);
+            this.hideContainerBottom.Controls.Add(this.dockPanel4);
             this.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hideContainerBottom.Location = new System.Drawing.Point(0, 432);
+            this.hideContainerBottom.Location = new System.Drawing.Point(0, 434);
             this.hideContainerBottom.Name = "hideContainerBottom";
-            this.hideContainerBottom.Size = new System.Drawing.Size(743, 38);
+            this.hideContainerBottom.Size = new System.Drawing.Size(1005, 38);
+            this.hideContainerBottom.Click += new System.EventHandler(this.hideContainerBottom_Click);
             // 
             // dockPanel2
             // 
             this.dockPanel2.Controls.Add(this.dockPanel2_Container);
             this.dockPanel2.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
             this.dockPanel2.ID = new System.Guid("ddb177ea-4214-48f7-a7e7-9bf6cf38e536");
+            this.dockPanel2.Image = global::Jade.Properties.Resources.dockPanel3_Image;
             this.dockPanel2.Location = new System.Drawing.Point(0, 0);
             this.dockPanel2.Name = "dockPanel2";
             this.dockPanel2.OriginalSize = new System.Drawing.Size(200, 200);
             this.dockPanel2.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
             this.dockPanel2.SavedIndex = 1;
-            this.dockPanel2.Size = new System.Drawing.Size(743, 200);
+            this.dockPanel2.Size = new System.Drawing.Size(1005, 200);
             this.dockPanel2.Text = "运行任务";
             this.dockPanel2.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             // 
@@ -329,7 +340,7 @@
             this.dockPanel2_Container.Controls.Add(this.taskRunnerPanel1);
             this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(735, 173);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(997, 173);
             this.dockPanel2_Container.TabIndex = 0;
             // 
             // listView1
@@ -345,8 +356,34 @@
             this.taskRunnerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.taskRunnerPanel1.Location = new System.Drawing.Point(0, 0);
             this.taskRunnerPanel1.Name = "taskRunnerPanel1";
-            this.taskRunnerPanel1.Size = new System.Drawing.Size(735, 173);
+            this.taskRunnerPanel1.Size = new System.Drawing.Size(997, 173);
             this.taskRunnerPanel1.TabIndex = 0;
+            this.taskRunnerPanel1.Load += new System.EventHandler(this.taskRunnerPanel1_Load);
+            // 
+            // dockPanel4
+            // 
+            this.dockPanel4.Controls.Add(this.dockPanel4_Container);
+            this.dockPanel4.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel4.ID = new System.Guid("ea570ad5-6a3d-4575-b1cc-7679dc1b4677");
+            this.dockPanel4.Image = global::Jade.Properties.Resources.panelContainer2_Image;
+            this.dockPanel4.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel4.Name = "dockPanel4";
+            this.dockPanel4.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel4.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel4.SavedIndex = 1;
+            this.dockPanel4.Size = new System.Drawing.Size(1005, 200);
+            this.dockPanel4.Text = "运行日志";
+            this.dockPanel4.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
+            this.dockPanel4.Click += new System.EventHandler(this.dockPanel4_Click);
+            // 
+            // dockPanel4_Container
+            // 
+            this.dockPanel4_Container.Controls.Add(this.textBox2);
+            this.dockPanel4_Container.Controls.Add(this.comboBox2);
+            this.dockPanel4_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel4_Container.Name = "dockPanel4_Container";
+            this.dockPanel4_Container.Size = new System.Drawing.Size(997, 173);
+            this.dockPanel4_Container.TabIndex = 0;
             // 
             // barAndDockingController1
             // 
@@ -382,7 +419,7 @@
             this.dockPanel1.Location = new System.Drawing.Point(0, 147);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 285);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 287);
             this.dockPanel1.Text = "导航";
             // 
             // dockPanel1_Container
@@ -390,7 +427,7 @@
             this.dockPanel1_Container.Controls.Add(this.navBarControl1);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 258);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 260);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // navBarControl1
@@ -410,7 +447,7 @@
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 192;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(192, 258);
+            this.navBarControl1.Size = new System.Drawing.Size(192, 260);
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
@@ -496,85 +533,104 @@
             this.导出规则ToolStripMenuItem,
             this.导入任务ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 292);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 270);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 新建分组ToolStripMenuItem
             // 
             this.新建分组ToolStripMenuItem.Name = "新建分组ToolStripMenuItem";
-            this.新建分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.新建分组ToolStripMenuItem.Text = "新建分组";
             this.新建分组ToolStripMenuItem.Click += new System.EventHandler(this.新建分组ToolStripMenuItem_Click);
             // 
             // 编辑分组ToolStripMenuItem
             // 
             this.编辑分组ToolStripMenuItem.Name = "编辑分组ToolStripMenuItem";
-            this.编辑分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.编辑分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.编辑分组ToolStripMenuItem.Text = "编辑分组";
             // 
             // 删除分组ToolStripMenuItem
             // 
             this.删除分组ToolStripMenuItem.Name = "删除分组ToolStripMenuItem";
-            this.删除分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.删除分组ToolStripMenuItem.Text = "删除分组";
             this.删除分组ToolStripMenuItem.Click += new System.EventHandler(this.删除分组ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItem3.Text = "向导新建任务";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(148, 22);
             this.toolStripMenuItem4.Text = "向导编辑任务";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click_1);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // 新建任务ToolStripMenuItem
             // 
             this.新建任务ToolStripMenuItem.Name = "新建任务ToolStripMenuItem";
-            this.新建任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.新建任务ToolStripMenuItem.Text = "高级新建任务";
             this.新建任务ToolStripMenuItem.Click += new System.EventHandler(this.新建任务ToolStripMenuItem_Click);
             // 
             // 编辑任务ToolStripMenuItem
             // 
             this.编辑任务ToolStripMenuItem.Name = "编辑任务ToolStripMenuItem";
-            this.编辑任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.编辑任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.编辑任务ToolStripMenuItem.Text = "高级编辑任务";
             this.编辑任务ToolStripMenuItem.Click += new System.EventHandler(this.编辑任务ToolStripMenuItem_Click);
             // 
             // 删除任务ToolStripMenuItem
             // 
             this.删除任务ToolStripMenuItem.Name = "删除任务ToolStripMenuItem";
-            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.删除任务ToolStripMenuItem.Text = "删除任务";
             this.删除任务ToolStripMenuItem.Click += new System.EventHandler(this.删除任务ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(145, 6);
             // 
             // 运行ToolStripMenuItem
             // 
             this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
-            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.运行ToolStripMenuItem.Text = "运行";
             this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(145, 6);
+            // 
+            // 导出规则ToolStripMenuItem
+            // 
+            this.导出规则ToolStripMenuItem.Name = "导出规则ToolStripMenuItem";
+            this.导出规则ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导出规则ToolStripMenuItem.Text = "导出规则";
+            this.导出规则ToolStripMenuItem.Click += new System.EventHandler(this.导出规则ToolStripMenuItem_Click);
+            // 
+            // 导入任务ToolStripMenuItem
+            // 
+            this.导入任务ToolStripMenuItem.Name = "导入任务ToolStripMenuItem";
+            this.导入任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.导入任务ToolStripMenuItem.Text = "导入任务";
+            this.导入任务ToolStripMenuItem.Click += new System.EventHandler(this.导入任务ToolStripMenuItem_Click);
             // 
             // navTask
             // 
@@ -621,30 +677,41 @@
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // toolStripMenuItem5
+            // textBox2
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.EditValue = "";
+            this.textBox2.Location = new System.Drawing.Point(0, 20);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Properties.Appearance.Font = new System.Drawing.Font("Courier New", 8.25F);
+            this.textBox2.Properties.Appearance.Options.UseFont = true;
+            this.textBox2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.textBox2.Properties.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox2.Properties.WordWrap = false;
+            this.textBox2.Size = new System.Drawing.Size(997, 153);
+            this.textBox2.TabIndex = 2;
             // 
-            // 导出规则ToolStripMenuItem
+            // comboBox2
             // 
-            this.导出规则ToolStripMenuItem.Name = "导出规则ToolStripMenuItem";
-            this.导出规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.导出规则ToolStripMenuItem.Text = "导出规则";
-            this.导出规则ToolStripMenuItem.Click += new System.EventHandler(this.导出规则ToolStripMenuItem_Click);
-            // 
-            // 导入任务ToolStripMenuItem
-            // 
-            this.导入任务ToolStripMenuItem.Name = "导入任务ToolStripMenuItem";
-            this.导入任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.导入任务ToolStripMenuItem.Text = "导入任务";
-            this.导入任务ToolStripMenuItem.Click += new System.EventHandler(this.导入任务ToolStripMenuItem_Click);
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBox2.Location = new System.Drawing.Point(0, 0);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.comboBox2.Properties.Appearance.Options.UseFont = true;
+            this.comboBox2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBox2.Properties.Items.AddRange(new object[] {
+            "Build",
+            "Debug"});
+            this.comboBox2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBox2.Size = new System.Drawing.Size(997, 20);
+            this.comboBox2.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 501);
+            this.ClientSize = new System.Drawing.Size(1005, 503);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.hideContainerBottom);
             this.Controls.Add(this.ribbonStatusBar);
@@ -663,6 +730,8 @@
             this.hideContainerBottom.ResumeLayout(false);
             this.dockPanel2.ResumeLayout(false);
             this.dockPanel2_Container.ResumeLayout(false);
+            this.dockPanel4.ResumeLayout(false);
+            this.dockPanel4_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
             this.dockPanel3.ResumeLayout(false);
             this.dockPanel1.ResumeLayout(false);
@@ -676,6 +745,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textBox2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBox2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -744,5 +815,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem 导出规则ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入任务ToolStripMenuItem;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel4;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel4_Container;
+        private DevExpress.XtraEditors.MemoEdit textBox2;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBox2;
     }
 }
