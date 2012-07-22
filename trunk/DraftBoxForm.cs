@@ -11,7 +11,7 @@ using Jade.Model.MySql;
 
 namespace Jade
 {
-    public partial class DraftBoxForm : UserControl
+    public partial class DraftBoxForm : DevExpress.XtraEditors.XtraUserControl
     {
         public DraftBoxForm()
         {
@@ -203,33 +203,39 @@ namespace Jade
 
         }
 
+        object lastDatasource;
+
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (dataGridView1.RowCount > 0)
+            if (lastDatasource != dataGridView1.DataSource)
             {
-                var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
+                lastDatasource = dataGridView1.DataSource;
+                if (dataGridView1.RowCount > 0)
+                {
+                    var dataTable = (List<IDownloadData>)this.dataGridView1.DataSource;
 
-                if (dataTable == null || dataTable.Count == 0)
-                {
-                    return;
-                }
-                for (var i = 0; i < dataTable.Count; i++)
-                {
-                    DataGridViewRow CurrentRow = this.dataGridView1.Rows[i];
-                    var data = dataTable[CurrentRow.Index];
-                    CurrentRow.Cells[2].Value = data.IsPublish ? Properties.Resources.yes : Properties.Resources.no;
-                    CurrentRow.Cells[3].Value = data.IsEdit ? Properties.Resources.yes : Properties.Resources.no;
-                    //以下为根据上一行内容判断所属组的效果
-                    if (i % 2 == 0)//首行必须特殊处理，将其设置为常规样式
+                    if (dataTable == null || dataTable.Count == 0)
                     {
-                        CurrentRow.DefaultCellStyle = this.m_RowStyleNormal;
+                        return;
                     }
-                    else
+                    for (var i = 0; i < dataTable.Count; i++)
                     {
-                        CurrentRow.DefaultCellStyle = this.m_RowStyleAlternate;
+                        DataGridViewRow CurrentRow = this.dataGridView1.Rows[i];
+                        var data = dataTable[CurrentRow.Index];
+                        CurrentRow.Cells[2].Value = data.IsPublish ? Properties.Resources.yes : Properties.Resources.no;
+                        CurrentRow.Cells[3].Value = data.IsEdit ? Properties.Resources.yes : Properties.Resources.no;
+                        //以下为根据上一行内容判断所属组的效果
+                        if (i % 2 == 0)//首行必须特殊处理，将其设置为常规样式
+                        {
+                            CurrentRow.DefaultCellStyle = this.m_RowStyleNormal;
+                        }
+                        else
+                        {
+                            CurrentRow.DefaultCellStyle = this.m_RowStyleAlternate;
+                        }
+                        CurrentRow.HeaderCell.Value = Convert.ToString(i + 1);//显示行号，也可以设置成显示其他信息
+                        CurrentRow.HeaderCell.ToolTipText = "当前第" + Convert.ToString(i + 1) + "行";//设置ToolTip信息
                     }
-                    CurrentRow.HeaderCell.Value = Convert.ToString(i + 1);//显示行号，也可以设置成显示其他信息
-                    CurrentRow.HeaderCell.ToolTipText = "当前第" + Convert.ToString(i + 1) + "行";//设置ToolTip信息
                 }
             }
         }

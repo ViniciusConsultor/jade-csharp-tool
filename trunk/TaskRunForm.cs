@@ -138,8 +138,7 @@ namespace Jade
                 this.treeListView1.BeginInvoke(new MethodInvoker(() =>
                 {
                     treeListView1.Roots = DownloadFileCollection.Instance.GetDownloadFiles(Task.SiteRuleId);
-
-                    treeListView1.Refresh();
+                    //treeListView1.Refresh();
                 }));
             }
             catch
