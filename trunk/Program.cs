@@ -14,6 +14,7 @@ namespace Jade
         [STAThread]
         static void Main()
         {
+            
             SplashScreenManager.ShowForm(typeof(StartScreen));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

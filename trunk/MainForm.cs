@@ -11,6 +11,7 @@ using DevExpress.XtraBars.Docking2010.Views;
 using DevExpress.XtraRichEdit;
 using Jade.Properties;
 using Jade.Model;
+using DevExpress.XtraSplashScreen;
 
 namespace Jade
 {
@@ -140,6 +141,9 @@ namespace Jade
         {
             PrepareContentPanel();
             editor.Caption = "草稿箱";
+            var draft = editor.Control as DraftBoxForm;
+            draft.IsEdited = false;
+            draft.IsPublished = false;
             tabbedView1.Controller.Activate(editor);
         }
 
@@ -147,6 +151,7 @@ namespace Jade
         {
             if (editor == null || editor.Control == null)
             {
+                SplashScreenManager.ShowForm(typeof(WaitForm1));
                 tabbedView1.BeginUpdate();
                 var form = new DraftBoxForm();
                 editor = tabbedView1.Controller.AddDocument(form);
@@ -156,13 +161,14 @@ namespace Jade
                 draft.IsEdited = false;
                 draft.IsPublished = false;
                 tabbedView1.EndUpdate();
+                SplashScreenManager.CloseForm();
             }
         }
 
-        public void OpenNewUrl(string url)
+        public void OpenNewUrl(string url, WebBrowser parent = null)
         {
             tabbedView1.BeginUpdate();
-            var form = new WelcomePanel();
+            var form = new WelcomePanel(parent);
             var doc = tabbedView1.Controller.AddDocument(form);
             form.Navigate(url, doc);
             doc.Caption = "新窗口";
@@ -170,6 +176,11 @@ namespace Jade
             tabbedView1.Controller.Activate(doc);
         }
 
+        public void CloseDoc(BaseDocument doc)
+        {
+            tabbedView1.Controller.RemoveDocument(doc);
+            doc.Dispose();
+        }
 
         private void navEdited_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
@@ -416,8 +427,16 @@ namespace Jade
                     this.navBarControl1.ActiveGroup = this.navTask;
                 }
 
+
+
                 if (CacheObject.IsLognIn)
                 {
+                    // 更新API数据
+                    new System.Threading.Thread(() =>
+                    {
+                        RemoteAPI.GetNewsId();
+                    }).Start();
+
                     if (d == null || d.Control == null)
                     {
                         tabbedView1.BeginUpdate();
@@ -526,6 +545,61 @@ namespace Jade
         private void barButtonItem6_ItemClick(object sender, ItemClickEventArgs e)
         {
             new SystemConfigForm().ShowDialog();
+        }
+
+        private void 导出规则ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var task = this.taskTree.SelectedNode.Tag as SiteRule;
+
+            if (task != null)
+            {
+
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.FileName = task.Name + ".task";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    CommXmlSerialize.ObjectSerializeXml(task, dialog.FileName);
+                    MessageBox.Show("导出成功");
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一个任务");
+            }
+        }
+
+        private void 导入任务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is Category)
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.FileName = "*.task";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var task = CommXmlSerialize.XmlDeserializeObject<SiteRule>(dialog.FileName);
+                        var categoryID = (this.taskTree.SelectedNode.Tag as Category).ID;
+                        task.CategoryID = categoryID;
+                        task.SiteRuleId = 0;
+                        CacheObject.RuleManager.AddSite(task);
+                        var index = GetImageIndex(task.IconImage);
+                        TreeNode leaf = new TreeNode(task.Name, index, index);
+                        leaf.Tag = task;
+                        this.CurrentCategoryNode.Nodes.Add(leaf);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("导入失败");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一个分类节点");
+            }
+
         }
     }
 }

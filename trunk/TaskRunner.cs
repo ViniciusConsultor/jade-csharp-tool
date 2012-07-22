@@ -380,16 +380,19 @@ namespace Jade
 
             foreach (string url in urls)
             {
-                if (!OldUrls.Contains(url))
+                if (!url.Contains("javascript"))
                 {
-                    OldUrls.Add(url);
-                    uris.Add(new Uri(url));
-                    DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
-                    Logger.Success("成功采集网址并保存到数据库中" + url);
-                }
-                else
-                {
-                    Logger.Error("发现重复网址" + url);
+                    if (!OldUrls.Contains(url))
+                    {
+                        OldUrls.Add(url);
+                        uris.Add(new Uri(url));
+                        DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
+                        Logger.Success("成功采集网址并保存到数据库中" + url);
+                    }
+                    else
+                    {
+                        Logger.Error("发现重复网址" + url);
+                    }
                 }
             }
         }

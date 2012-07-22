@@ -78,6 +78,23 @@ namespace Com.iFLYTEK.WinForms.Browser
         }
 
         /// <summary>
+        /// ¹Ø±Õ
+        /// </summary>
+        public event EventHandler Closing;
+
+
+        /// <summary>
+        /// Raises the <see cref="NavigationError"/> event
+        /// </summary>
+        /// <param name="e">Empty</param>
+        protected virtual void OnClosing(EventArgs e)
+        {
+            if (Closing != null)
+            { this.Closing(this, e); }
+        }
+
+
+        /// <summary>
         /// Fires when downloading of a document begins
         /// </summary>
         public event EventHandler Downloading;
@@ -236,11 +253,12 @@ namespace Com.iFLYTEK.WinForms.Browser
             [DispId(0x00000107)]
             public void WindowClosing(bool isChildWindow, ref bool cancel)
             {
+                _Browser.OnClosing(EventArgs.Empty);
             }
 
             public void OnQuit()
             {
-
+                _Browser.OnClosing(EventArgs.Empty);
             }
 
             public void StatusTextChange(string text)
@@ -319,7 +337,7 @@ namespace Com.iFLYTEK.WinForms.Browser
             {
             }
 
-           
+
 
             public void PrintTemplateInstantiation(object pDisp)
             {

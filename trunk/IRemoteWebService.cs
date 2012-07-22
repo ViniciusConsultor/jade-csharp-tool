@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Jade
 {
@@ -149,7 +151,14 @@ namespace Jade
             {
                 if (instance == null)
                 {
-                    instance = new RemoteWebService();
+                    if (File.Exists("api.xml"))
+                    {
+                        instance = Load();
+                    }
+                    else
+                    {
+                        instance = new RemoteWebService();
+                    }
                 }
                 return instance;
             }
@@ -157,42 +166,83 @@ namespace Jade
 
         #region IRemoteWebService 成员
 
+        public List<DisplayNameValuePair> SpecilTags { get; set; }
+        //= new List<DisplayNameValuePair> { 
+        //   new DisplayNameValuePair(){ DisplayName="资讯中心",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="本地资讯",Value = "标签2"},  
+        //    new DisplayNameValuePair(){ DisplayName="国内资讯",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="今日关注",Value = "标签2"},  
+        //    new DisplayNameValuePair(){ DisplayName="楼盘速递",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="项目动态",Value = "标签2"},  
+        //    new DisplayNameValuePair(){ DisplayName="人物专访",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="地产观点",Value = "标签2"},  
+        //    new DisplayNameValuePair(){ DisplayName="优惠信息",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="每天行情",Value = "标签2"},  
+        //    new DisplayNameValuePair(){ DisplayName="专题-热点专题",Value = "标签1"},
+        //   new DisplayNameValuePair(){DisplayName="视频频道",Value = "标签2"}
+        //};
+
         public List<DisplayNameValuePair> GetSpecilTags()
         {
-            return new List<DisplayNameValuePair> { 
-               new DisplayNameValuePair(){ DisplayName="资讯中心",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="本地资讯",Value = "标签2"},  
-                new DisplayNameValuePair(){ DisplayName="国内资讯",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="今日关注",Value = "标签2"},  
-                new DisplayNameValuePair(){ DisplayName="楼盘速递",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="项目动态",Value = "标签2"},  
-                new DisplayNameValuePair(){ DisplayName="人物专访",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="地产观点",Value = "标签2"},  
-                new DisplayNameValuePair(){ DisplayName="优惠信息",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="每天行情",Value = "标签2"},  
-                new DisplayNameValuePair(){ DisplayName="专题-热点专题",Value = "标签1"},
-               new DisplayNameValuePair(){DisplayName="视频频道",Value = "标签2"}
-            };
+            return SpecilTags;
         }
+
+        public List<DisplayNameValuePair> Source { get; set; }
+        //new List<DisplayNameValuePair> { 
+        //   new DisplayNameValuePair(){ DisplayName="来源1",Value = "来源1"},
+        //   new DisplayNameValuePair(){DisplayName="来源2",Value = "来源2"},  
+        //   new DisplayNameValuePair(){DisplayName="来源3",Value = "来源3"}
+        //};
 
         public List<DisplayNameValuePair> GetSource()
         {
-            return new List<DisplayNameValuePair> { 
-               new DisplayNameValuePair(){ DisplayName="来源1",Value = "来源1"},
-               new DisplayNameValuePair(){DisplayName="来源2",Value = "来源2"},  
-               new DisplayNameValuePair(){DisplayName="来源3",Value = "来源3"}
-            };
+            return Source;
         }
+
+        public List<DisplayNameValuePair> Template { get; set; }
 
         public List<DisplayNameValuePair> GetTemplate()
         {
-            return new List<DisplayNameValuePair> { 
-               new DisplayNameValuePair(){DisplayName="模板1",Value = "模板1"},
-               new DisplayNameValuePair(){DisplayName="模板2",Value = "模板2"},  
-               new DisplayNameValuePair(){DisplayName="模板3",Value = "模板3"}
-            };
+            return Template;
+        }
+
+        public void Save()
+        {
+            CommXmlSerialize.ObjectSerializeXml(this, "api.xml");
+        }
+
+        public static RemoteWebService Load()
+        {
+            return CommXmlSerialize.XmlDeserializeObject<RemoteWebService>("api.xml");
         }
 
         #endregion
     }
+
+    public class CommXmlSerialize
+    {
+
+        public static void ObjectSerializeXml<T>(T obj, string file)
+        {
+            using (FileStream ms = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                serializer.Serialize(ms, obj);
+                ms.Close();
+            }
+        }
+
+
+        public static T XmlDeserializeObject<T>(string fileName) where T : class
+        {
+            using (FileStream ms = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                return serializer.Deserialize(ms) as T;
+            }
+
+        }
+
+    }
+
 }

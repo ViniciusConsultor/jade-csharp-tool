@@ -12,6 +12,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using PresentationControls;
 using Jade.Model.MySql;
+using DevExpress.XtraSplashScreen;
 
 namespace Jade
 {
@@ -43,23 +44,42 @@ namespace Jade
             this.txt_tags.ValueMember = "Selected";
             StatusSelections[0].Selected = true;
 
-            this.cmbSearchLabel.DataSource = SpecilTags;
+            //this.cmbSearchLabel.DataSource = SpecilTags;
             this.cmbSearchLabel.DisplayMember = "DisplayName";
             this.cmbSearchLabel.ValueMember = "Value";
             this.cmbSearchLabel.SelectedIndexChanged += new EventHandler(cmbSearchLabel_SelectedIndexChanged);
+            this.cmbSearchLabel.Text = "";
             this.txtContent.SetScriptingForm(this);
 
         }
 
         void cmbSearchLabel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var tag = this.cmbSearchLabel.Text;
-            var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
-            var item = StatusSelections.FindObjectWithItem(specialTag);
-            if (item != null)
-                item.Selected = true;
-
-            txt_tags.RefreshTxt();
+            if (!isProcess)
+            {
+                if (this.cmbSearchLabel.SelectedItem != null && this.cmbSearchLabel.SelectedItem is DisplayNameValuePair)
+                {
+                    var tag = this.cmbSearchLabel.Text;
+                    var specialTag = this.cmbSearchLabel.SelectedItem as DisplayNameValuePair;
+                    var item = StatusSelections.FindObjectWithItem(specialTag);
+                    if (item != null)
+                    {
+                        item.Selected = true;
+                    }
+                    else
+                    {
+                        RemoteWebService.Instance.SpecilTags.Add(specialTag);
+                        RemoteWebService.Instance.Save();
+                        item = new ObjectSelectionWrapper<DisplayNameValuePair>(specialTag, StatusSelections);
+                        item.Selected = true;
+                        StatusSelections.Add(item);
+                        txt_tags.DataSource = null;
+                        txt_tags.DataSource = StatusSelections;
+                        //this.txt_tags.Items.Add(item);
+                    }
+                    txt_tags.RefreshTxt();
+                }
+            }
         }
 
         public ContentEditForm(IDownloadData data)
@@ -194,14 +214,18 @@ namespace Jade
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCurrentData();
-       
-            CacheObject.DownloadDataDAL.Update(CurrentData);
 
+            CacheObject.DownloadDataDAL.Update(CurrentData);
             MessageBox.Show("保存成功");
         }
 
         private void UpdateCurrentData()
         {
+
+            CurrentData.news_source_name = this.txtnews_source_name.Text;
+
+            CurrentData.news_template_file = (this.txt_news_template_file.SelectedItem as DisplayNameValuePair).Value;
+
             CurrentData.IsEdit = true;
             CurrentData.EditTime = DateTime.Now;
             CurrentData.EditorUserName = CacheObject.CurrentUser.Name;
@@ -270,7 +294,10 @@ namespace Jade
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             btnSave_Click(null, null);
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+
             this.Close();
+
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -301,14 +328,29 @@ namespace Jade
         private void 添加为关键字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.txt_news_keywords.Text != "")
+            {
                 this.txt_news_keywords.AddWord(this.txtContent.SelectedText);
+            }
             else
                 this.txt_news_keywords.Text = this.txtContent.SelectedText;
+
+            if (this.txt_news_keyword2.Text != "")
+                this.txt_news_keyword2.AddWord(this.txtContent.SelectedText);
+            else
+                this.txt_news_keyword2.Text = this.txtContent.SelectedText;
+
             this.txt_news_keywords.Focus();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (this.txt_news_keywords.Text != "")
+            {
+                this.txt_news_keywords.AddWord(this.txtContent.SelectedText);
+            }
+            else
+                this.txt_news_keywords.Text = this.txtContent.SelectedText;
+
             if (this.txt_news_keyword2.Text != "")
                 this.txt_news_keyword2.AddWord(this.txtContent.SelectedText);
             else
@@ -330,35 +372,35 @@ namespace Jade
         private void 设为SEO描述ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_description.Text = this.txtContent.SelectedText;
-            this.tabControl1.SelectedIndex = 1;
+            //this.tabControl1.SelectedIndex = 1;
             this.txt_news_description.Focus();
         }
 
         private void 设为附件正文2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_top.Text = this.txtContent.SelectedText;
-            this.tabControl1.SelectedIndex = 1;
+            //this.tabControl1.SelectedIndex = 1;
             this.txt_news_top.Focus();
         }
 
         private void 设为附加正文3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_down.Text = this.txtContent.SelectedText;
-            this.tabControl1.SelectedIndex = 1;
+            //this.tabControl1.SelectedIndex = 1;
             this.txt_news_down.Focus();
         }
 
         private void 设为附加正文4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_left.Text = this.txtContent.SelectedText;
-            this.tabControl1.SelectedIndex = 1;
+            //.tabControl1.SelectedIndex = 1;
             this.txt_news_left.Focus();
         }
 
         private void 设为附加正文5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_right.Text = this.txtContent.SelectedText;
-            this.tabControl1.SelectedIndex = 1;
+            //this.tabControl1.SelectedIndex = 1;
             this.txt_news_right.Focus();
         }
 
@@ -376,10 +418,13 @@ namespace Jade
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
             UpdateCurrentData();
+            RemoteAPI.Publish(CurrentData);
             CurrentData.IsPublish = true;
             CacheObject.DownloadDataDAL.Update(CurrentData);
-            MessageBox.Show("送签发成功");
+            SplashScreenManager.CloseForm();
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
 
@@ -419,6 +464,83 @@ namespace Jade
         }
 
         private void label28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCommentUrl_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_news_template_file_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        bool isProcess = false;
+
+        private void cmbSearchLabel_TextUpdate(object sender, EventArgs e)
+        {
+            if (CacheObject.IsLognIn)
+            {
+                if (this.cmbSearchLabel.Text != null)
+                {
+                    isProcess = true;
+                    this.cmbSearchLabel.TextUpdate -= new System.EventHandler(this.cmbSearchLabel_TextUpdate);
+
+                    try
+                    {
+                        var text = this.cmbSearchLabel.Text;
+
+                        // this.cmbSearchLabel.Items.Clear();
+
+                        this.cmbSearchLabel.DataSource = RemoteAPI.SearchLabel(this.cmbSearchLabel.Text);
+                        cmbSearchLabel.SelectedIndex = -1; 
+
+                        cmbSearchLabel.DroppedDown = true;
+
+
+                        cmbSearchLabel.Text = text;
+                        cmbSearchLabel.SelectionStart = cmbSearchLabel.Text.Length;
+                        //显示鼠标指针  
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.IBeam;
+                        //保持鼠标指针形状  
+                        Cursor = System.Windows.Forms.Cursors.Default;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    this.cmbSearchLabel.TextUpdate += new System.EventHandler(this.cmbSearchLabel_TextUpdate);
+
+                    isProcess = false;
+                }
+            }
+        }
+
+        private void txt_tags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_row_news_abstract_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_news_description_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_news_down_TextChanged(object sender, EventArgs e)
         {
 
         }

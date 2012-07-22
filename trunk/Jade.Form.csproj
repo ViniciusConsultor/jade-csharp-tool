@@ -263,6 +263,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RemoteAPI.cs" />
     <Compile Include="SettingManager.cs" />
     <Compile Include="SiteRuleWizardForm.cs">
       <SubType>Form</SubType>
@@ -287,6 +288,12 @@
     </Compile>
     <Compile Include="TaskRunnerPanel.Designer.cs">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="WelcomeForm.cs">
       <SubType>Form</SubType>
@@ -429,7 +436,6 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="SiteRuleWizardForm.resx">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -441,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunnerPanel.resx">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WelcomeForm.resx">
       <DependentUpon>WelcomeForm.cs</DependentUpon>
@@ -573,6 +582,9 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\yes.png" />
+    <None Include="Resources\network.png" />
+    <None Include="Resources\pc_security_2.png" />
     <None Include="Resources\IeToolbar.bmp" />
     <None Include="Resources\setting.png" />
     <None Include="Resources\run_copy.png" />

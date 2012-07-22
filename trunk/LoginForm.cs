@@ -202,5 +202,13 @@ namespace Jade
             setting.Save();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(null, null);
+            }
+        }
     }
 }

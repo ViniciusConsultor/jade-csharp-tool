@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rblServer = new System.Windows.Forms.RadioButton();
             this.rblSingle = new System.Windows.Forms.RadioButton();
@@ -42,7 +40,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSelectStartUrl = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -67,34 +67,6 @@
             this.txtPassword.Size = new System.Drawing.Size(170, 14);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "pass";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Image = global::Jade.Properties.Resources.login__1_;
-            this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(672, 326);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 40);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "     联网";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCancel.Image = global::Jade.Properties.Resources.login__2_;
-            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(753, 326);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 40);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "     取消";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // groupBox1
             // 
@@ -195,20 +167,40 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 14);
             this.textBox1.TabIndex = 8;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // button1
+            // btnSelectStartUrl
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::Jade.Properties.Resources.login__1_;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(591, 326);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 40);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "     单机";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSelectStartUrl.Image = global::Jade.Properties.Resources.network;
+            this.btnSelectStartUrl.Location = new System.Drawing.Point(568, 326);
+            this.btnSelectStartUrl.Name = "btnSelectStartUrl";
+            this.btnSelectStartUrl.Size = new System.Drawing.Size(90, 29);
+            this.btnSelectStartUrl.TabIndex = 102;
+            this.btnSelectStartUrl.Text = " 联网登录";
+            this.btnSelectStartUrl.ToolTip = "登录到网址服务器，可以发布内容";
+            this.btnSelectStartUrl.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Image = global::Jade.Properties.Resources.pc_security_2;
+            this.simpleButton1.Location = new System.Drawing.Point(672, 326);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(91, 29);
+            this.simpleButton1.TabIndex = 103;
+            this.simpleButton1.Text = " 离线操作";
+            this.simpleButton1.ToolTip = "登录到本地，不能发布内容到服务器";
+            this.simpleButton1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Image = global::Jade.Properties.Resources.login__2_;
+            this.simpleButton2.Location = new System.Drawing.Point(774, 326);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(69, 29);
+            this.simpleButton2.TabIndex = 104;
+            this.simpleButton2.Text = " 取消";
+            this.simpleButton2.ToolTip = "登录到本地，不能发布内容到服务器";
+            this.simpleButton2.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // LoginForm
             // 
@@ -217,12 +209,12 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Jade.Properties.Resources.loginbg1;
             this.ClientSize = new System.Drawing.Size(872, 387);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.simpleButton2);
+            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.btnSelectStartUrl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUserName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -249,8 +241,6 @@
 
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rblServer;
@@ -260,7 +250,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private DevExpress.XtraEditors.SimpleButton btnSelectStartUrl;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
 
     }
 }

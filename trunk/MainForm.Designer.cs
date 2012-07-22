@@ -43,7 +43,6 @@
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.ribbonMiniToolbar1 = new DevExpress.XtraBars.Ribbon.RibbonMiniToolbar(this.components);
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -51,6 +50,7 @@
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.hideContainerBottom = new DevExpress.XtraBars.Docking.AutoHideContainer();
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
@@ -63,7 +63,7 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
             this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
             this.navPublished = new DevExpress.XtraNavBar.NavBarItem();
@@ -83,13 +83,16 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.tabbedView3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -229,12 +232,6 @@
             this.barButtonItem6.Name = "barButtonItem6";
             this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -279,6 +276,12 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(743, 31);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // dockManager1
             // 
@@ -411,18 +414,18 @@
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // navBarGroup1
+            // navBarGroup2
             // 
-            this.navBarGroup1.Caption = "服务器内容";
-            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            this.navBarGroup2.Caption = "内容管理";
+            this.navBarGroup2.Expanded = true;
+            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
-            this.navBarGroup1.LargeImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.SmallImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup1.TopVisibleLinkIndex = 1;
+            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup2.Name = "navBarGroup2";
+            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
             // 
             // navDraft
             // 
@@ -488,85 +491,88 @@
             this.编辑任务ToolStripMenuItem,
             this.删除任务ToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.运行ToolStripMenuItem});
+            this.运行ToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.导出规则ToolStripMenuItem,
+            this.导入任务ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 220);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 292);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 新建分组ToolStripMenuItem
             // 
             this.新建分组ToolStripMenuItem.Name = "新建分组ToolStripMenuItem";
-            this.新建分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.新建分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.新建分组ToolStripMenuItem.Text = "新建分组";
             this.新建分组ToolStripMenuItem.Click += new System.EventHandler(this.新建分组ToolStripMenuItem_Click);
             // 
             // 编辑分组ToolStripMenuItem
             // 
             this.编辑分组ToolStripMenuItem.Name = "编辑分组ToolStripMenuItem";
-            this.编辑分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.编辑分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.编辑分组ToolStripMenuItem.Text = "编辑分组";
             // 
             // 删除分组ToolStripMenuItem
             // 
             this.删除分组ToolStripMenuItem.Name = "删除分组ToolStripMenuItem";
-            this.删除分组ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.删除分组ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除分组ToolStripMenuItem.Text = "删除分组";
             this.删除分组ToolStripMenuItem.Click += new System.EventHandler(this.删除分组ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem3.Text = "向导新建任务";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem4.Text = "向导编辑任务";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click_1);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // 新建任务ToolStripMenuItem
             // 
             this.新建任务ToolStripMenuItem.Name = "新建任务ToolStripMenuItem";
-            this.新建任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.新建任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.新建任务ToolStripMenuItem.Text = "高级新建任务";
             this.新建任务ToolStripMenuItem.Click += new System.EventHandler(this.新建任务ToolStripMenuItem_Click);
             // 
             // 编辑任务ToolStripMenuItem
             // 
             this.编辑任务ToolStripMenuItem.Name = "编辑任务ToolStripMenuItem";
-            this.编辑任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.编辑任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.编辑任务ToolStripMenuItem.Text = "高级编辑任务";
             this.编辑任务ToolStripMenuItem.Click += new System.EventHandler(this.编辑任务ToolStripMenuItem_Click);
             // 
             // 删除任务ToolStripMenuItem
             // 
             this.删除任务ToolStripMenuItem.Name = "删除任务ToolStripMenuItem";
-            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.删除任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除任务ToolStripMenuItem.Text = "删除任务";
             this.删除任务ToolStripMenuItem.Click += new System.EventHandler(this.删除任务ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(145, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // 运行ToolStripMenuItem
             // 
             this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
-            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.运行ToolStripMenuItem.Text = "运行";
             this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
             // 
@@ -580,18 +586,18 @@
             this.navTask.Name = "navTask";
             this.navTask.SmallImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
             // 
-            // navBarGroup2
+            // navBarGroup1
             // 
-            this.navBarGroup2.Caption = "内容管理";
-            this.navBarGroup2.Expanded = true;
-            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            this.navBarGroup1.Caption = "服务器内容";
+            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
-            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup2.Name = "navBarGroup2";
-            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup1.LargeImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup1.Name = "navBarGroup1";
+            this.navBarGroup1.SmallImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup1.TopVisibleLinkIndex = 1;
             // 
             // documentManager1
             // 
@@ -614,6 +620,25 @@
             this.repositoryItemButtonEdit1.AutoHeight = false;
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+            // 
+            // 导出规则ToolStripMenuItem
+            // 
+            this.导出规则ToolStripMenuItem.Name = "导出规则ToolStripMenuItem";
+            this.导出规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导出规则ToolStripMenuItem.Text = "导出规则";
+            this.导出规则ToolStripMenuItem.Click += new System.EventHandler(this.导出规则ToolStripMenuItem_Click);
+            // 
+            // 导入任务ToolStripMenuItem
+            // 
+            this.导入任务ToolStripMenuItem.Name = "导入任务ToolStripMenuItem";
+            this.导入任务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.导入任务ToolStripMenuItem.Text = "导入任务";
+            this.导入任务ToolStripMenuItem.Click += new System.EventHandler(this.导入任务ToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -716,5 +741,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem 导出规则ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导入任务ToolStripMenuItem;
     }
 }

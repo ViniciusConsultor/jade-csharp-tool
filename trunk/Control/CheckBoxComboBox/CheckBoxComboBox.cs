@@ -199,6 +199,7 @@ namespace PresentationControls
 
         public void RefreshTxt()
         {
+            _CheckBoxComboBoxListControl.SynchroniseControlsWithComboBoxItems();
             this.ShowDropDown();
         }
 
