@@ -4,6 +4,9 @@ namespace Jade.Model
 {
     public interface IDownloadData
     {
+        bool IsChecked { get; set; }
+        int publishedIndex { get; }
+        int editedIndex { get; }
         bool bbspinglun { get; set; }
         bool cmspinglun { get; set; }
         string comment_url { get; set; }

@@ -20,6 +20,10 @@ namespace Jade
         public ContentListPanel()
         {
             InitializeComponent();
+            gridView1.OptionsSelection.MultiSelect = true;
+            gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+
+
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
@@ -35,20 +39,20 @@ namespace Jade
 
         void gridView1_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
-            if (e.Column.Name == "Edited")
-            {
-                var data = e.Row as IDownloadData;
-                //bool isEdit = (bool)e.Value;
-                e.Value = data.IsEdit ? 1 : 0;
-                //if (isEdit)
-                //{
-                //    e.Value = Properties.Resources.yes;
-                //}
-                //else
-                //{
-                //    e.Value = Properties.Resources.no;
-                //}
-            }
+            //if (e.Column.Name == "Edited")
+            //{
+            //    var data = e.Row as IDownloadData;
+            //    //bool isEdit = (bool)e.Value;
+            //    e.Value = data.IsEdit ? 1 : 0;
+            //    //if (isEdit)
+            //    //{
+            //    //    e.Value = Properties.Resources.yes;
+            //    //}
+            //    //else
+            //    //{
+            //    //    e.Value = Properties.Resources.no;
+            //    //}
+            //}
         }
         int currentPageSize = 15;
         void pager1_PageChange(EventPagingArg e)
@@ -149,7 +153,7 @@ namespace Jade
 
         private void gridView1_Click(object sender, EventArgs e)
         {
-            if (ClickGridCheckBox(this.gridView1, "Check", m_checkStatus))
+            if (ClickGridCheckBox(this.gridView1, "IsChecked", m_checkStatus))
             {
                 m_checkStatus = !m_checkStatus;
             }
@@ -162,7 +166,7 @@ namespace Jade
         /// <param name="e"></param>
         private void gridView1_CustomDrawColumnHeader(object sender, DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e)
         {
-            if (e.Column != null && e.Column.FieldName == "Check")
+            if (e.Column != null && e.Column.FieldName == "IsChecked")
             {
                 e.Info.InnerElements.Clear();
                 e.Painter.DrawObject(e.Info);
@@ -178,7 +182,7 @@ namespace Jade
         /// <param name="e"></param>
         void gridView1_DataSourceChanged(object sender, EventArgs e)
         {
-            GridColumn column = this.gridView1.Columns.ColumnByFieldName("Check");
+            GridColumn column = this.gridView1.Columns.ColumnByFieldName("IsChecked");
             if (column != null)
             {
                 column.Width = 30;
@@ -230,6 +234,91 @@ namespace Jade
                 }
             }
             return result;
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            comboBox1_SelectedIndexChanged(sender, e);
+        }
+
+        private void txtKeyword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                comboBox1_SelectedIndexChanged(sender, e);
+            }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            var rowIndexes = GetSelectedRows();
+
+            // = this.dataGridView1.GetCheckedIndexes(0);
+            if (rowIndexes.Count == 0)
+            {
+                MessageBox.Show("请至少选中一行");
+            }
+            else
+            {
+                // todo Send
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                foreach (var data in rowIndexes)
+                {
+                    //var data = dataTable[index];
+                    data.IsPublish = true;
+                    data.EditTime = DateTime.Now;
+                    CacheObject.DownloadDataDAL.Update(data);
+                }
+                comboBox1_SelectedIndexChanged(null, null);
+
+                MessageBox.Show("发布成功！");
+            }
+        }
+
+        private List<IDownloadData> GetSelectedRows()
+        {
+            //var rowIndexes = new List<int>();
+            var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+            return dataTable.FindAll(d => d.IsChecked);
+            
+            //var rowIndexes = new List<int>();
+            //for (int rowIndex = 0; rowIndex < this.gridView1.RowCount; rowIndex++)
+            //{
+            //    object objValue = this.gridView1.GetRowCellValue(rowIndex, "IsChecked");
+            //    if (objValue != null)
+            //    {
+            //        bool check = false;
+            //        bool.TryParse(objValue.ToString(), out check);
+            //        if (check)
+            //        {
+            //            rowIndexes.Add(rowIndex);
+            //        }
+            //    }
+            //}
+            //return rowIndexes;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+            var rowIndexes = GetSelectedRows();
+            if (rowIndexes.Count == 0)
+            {
+                MessageBox.Show("请至少选中一行");
+            }
+            else
+            {
+                // todo Send
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                foreach (var index in rowIndexes)
+                {
+                    // data = dataTable[index];
+                    CacheObject.DownloadDataDAL.Delete(index);
+                }
+                comboBox1_SelectedIndexChanged(null, null);
+
+                MessageBox.Show("删除成功！");
+            }
         }
     }
 }

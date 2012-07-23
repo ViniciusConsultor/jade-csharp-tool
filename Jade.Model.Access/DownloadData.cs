@@ -554,6 +554,17 @@ namespace Jade.Model.Access
             Url = url;
         }
 
+
+        public int publishedIndex
+        {
+            get { return this.IsPublish ? 1 : 0; }
+        }
+
+        public int editedIndex
+        {
+            get { return this.IsEdit ? 1 : 0; }
+        }
+        public bool IsChecked { get; set; }
     }
 }
 

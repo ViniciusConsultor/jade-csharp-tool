@@ -21,7 +21,7 @@ namespace Jade
         public MainForm()
         {
             InitializeComponent();
-
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle("Office 2010 Blue");
             CacheObject.MainForm = this;
 
             this.DoubleBuffered = true;
