@@ -10,6 +10,7 @@ using Jade.Model.MySql;
 using Jade.DAL;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace Jade
 {
@@ -186,6 +187,394 @@ namespace Jade
             set;
         }
     }
+
+    //public class CheckboxableData : IDownloadData
+    //{
+
+    //    public CheckboxableData(IDownloadData t)
+    //    {
+    //        Type t1 = t.GetType();//得到父类的类型
+    //        Type t2 = this.GetType(); //得到子类的类型
+    //        foreach (PropertyInfo p1 in t1.GetProperties())
+    //        {
+    //            foreach (PropertyInfo p2 in t2.GetProperties())
+    //            {
+    //                if (p1.PropertyType == p2.PropertyType && p1.Name == p2.Name)
+    //                {
+    //                    p2.SetValue(this, p1.GetValue(t, null), null);//给子类对象赋值
+    //                    break;
+    //                }
+    //            }
+    //        }
+    //    }
+    //    public bool IsChecked { get; set; }
+
+    //    public int publishedIndex
+    //    {
+    //        get ;
+    //    }
+
+    //    public int editedIndex
+    //    {
+    //        get ;
+    //    }
+
+    //    public bool bbspinglun
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool cmspinglun
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string comment_url
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string Content
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string CreateTime
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public DateTime? DownloadTime
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string EditorUserName
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public DateTime? EditTime
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string gfbm_id
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string gfbm_link
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public int ID
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool IsDownload
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool IsEdit
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool ISgfbm
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool ISkfbm
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public bool IsPublish
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string Keywords
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string kfbm_id
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string kfbm_link
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string label_base
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string news_abs
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string news_description
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public string news_down
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_guideimage
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_guideimage2
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_keywords2
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_left
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_link
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_right
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_source_name
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_template_file
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_top
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string news_video
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string Other
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string Source
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string SubTitle
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string Summary
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public int? TaskId
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string Title
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+
+    //    public string Url
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
+    //}
+
+    //public class CheckboxableDataCollection<T> : List<CheckboxableData<T>> where T : class
+    //{
+    //    public CheckboxableDataCollection(List<T> list)
+    //    {
+    //        list.ForEach(t => this.Add(new CheckboxableData<T>(t)));
+    //    }
+    //}
 
     public class RunningTask
     {

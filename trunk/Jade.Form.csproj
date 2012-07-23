@@ -93,11 +93,6 @@
       <HintPath>Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
-    <Reference Include="Interop.ADOX, Version=6.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>Lib\Interop.ADOX.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
@@ -389,6 +384,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContentListPanel.resx">
       <DependentUpon>ContentListPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\Browser\BaseWebBrowser.resx">
       <DependentUpon>BaseWebBrowser.cs</DependentUpon>
@@ -577,6 +573,8 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\dockPanel3.Image.png" />
+    <None Include="Resources\panelContainer2.Image.png" />
     <None Include="Resources\yes.png" />
     <None Include="Resources\network.png" />
     <None Include="Resources\pc_security_2.png" />

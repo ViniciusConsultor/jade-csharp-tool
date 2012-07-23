@@ -42,12 +42,10 @@
             this.Content = new DevExpress.XtraGrid.Columns.GridColumn();
             this.StartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.repositoryItemImageComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new DevExpress.XtraEditors.PanelControl();
             this.txtKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -57,9 +55,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
             this.pager1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
@@ -74,9 +71,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemImageComboBox1,
-            this.repositoryItemImageEdit1,
-            this.repositoryItemImageComboBox2});
+            this.repositoryItemImageEdit1});
             this.gridControl1.Size = new System.Drawing.Size(810, 340);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -101,8 +96,9 @@
             // Check
             // 
             this.Check.Caption = " ";
-            this.Check.FieldName = "Check";
+            this.Check.FieldName = "IsChecked";
             this.Check.Name = "Check";
+            this.Check.OptionsFilter.AllowAutoFilter = false;
             this.Check.Visible = true;
             this.Check.VisibleIndex = 0;
             this.Check.Width = 30;
@@ -121,14 +117,14 @@
             // 
             this.Edited.Caption = "已编辑";
             this.Edited.ColumnEdit = this.repositoryItemImageEdit1;
-            this.Edited.FieldName = "Edited";
+            this.Edited.FieldName = "editedIndex";
             this.Edited.Name = "Edited";
             this.Edited.OptionsColumn.AllowEdit = false;
             this.Edited.OptionsFilter.AllowFilter = false;
             this.Edited.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.Edited.Visible = true;
-            this.Edited.VisibleIndex = 3;
-            this.Edited.Width = 50;
+            this.Edited.VisibleIndex = 2;
+            this.Edited.Width = 40;
             // 
             // repositoryItemImageEdit1
             // 
@@ -143,8 +139,8 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "yes.png");
-            this.imageList1.Images.SetKeyName(1, "sites.png");
+            this.imageList1.Images.SetKeyName(0, "dialog_cancel (1).png");
+            this.imageList1.Images.SetKeyName(1, "yes.png");
             // 
             // Editor
             // 
@@ -154,18 +150,19 @@
             this.Editor.OptionsColumn.AllowEdit = false;
             this.Editor.OptionsFilter.AllowAutoFilter = false;
             this.Editor.Visible = true;
-            this.Editor.VisibleIndex = 2;
-            this.Editor.Width = 108;
+            this.Editor.VisibleIndex = 3;
+            this.Editor.Width = 109;
             // 
             // IsPublish
             // 
             this.IsPublish.Caption = "已发布";
-            this.IsPublish.FieldName = "IsPublish";
+            this.IsPublish.ColumnEdit = this.repositoryItemImageEdit1;
+            this.IsPublish.FieldName = "publishedIndex";
             this.IsPublish.Name = "IsPublish";
             this.IsPublish.OptionsColumn.AllowEdit = false;
             this.IsPublish.Visible = true;
             this.IsPublish.VisibleIndex = 4;
-            this.IsPublish.Width = 50;
+            this.IsPublish.Width = 40;
             // 
             // Content
             // 
@@ -175,7 +172,7 @@
             this.Content.OptionsColumn.AllowEdit = false;
             this.Content.Visible = true;
             this.Content.VisibleIndex = 5;
-            this.Content.Width = 145;
+            this.Content.Width = 150;
             // 
             // StartTime
             // 
@@ -185,36 +182,18 @@
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
             this.StartTime.VisibleIndex = 6;
-            this.StartTime.Width = 145;
+            this.StartTime.Width = 150;
             // 
             // EndTime
             // 
             this.EndTime.Caption = "最后修改时间";
-            this.EndTime.FieldName = "EndTime";
+            this.EndTime.FieldName = "EditTime";
             this.EndTime.Name = "EndTime";
             this.EndTime.OptionsColumn.AllowEdit = false;
             this.EndTime.UnboundType = DevExpress.Data.UnboundColumnType.DateTime;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 7;
-            this.EndTime.Width = 156;
-            // 
-            // repositoryItemImageComboBox1
-            // 
-            this.repositoryItemImageComboBox1.AutoHeight = false;
-            this.repositoryItemImageComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
-            // 
-            // repositoryItemImageComboBox2
-            // 
-            this.repositoryItemImageComboBox2.AutoHeight = false;
-            this.repositoryItemImageComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageComboBox2.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", null, 1),
-            new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", null, 0)});
-            this.repositoryItemImageComboBox2.Name = "repositoryItemImageComboBox2";
-            this.repositoryItemImageComboBox2.SmallImages = this.imageList1;
+            this.EndTime.Width = 165;
             // 
             // toolStrip1
             // 
@@ -232,16 +211,18 @@
             this.toolStripButton1.Image = global::Jade.Properties.Resources.no;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton1.Text = "删除";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton2
             // 
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButton2.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton2.Text = "发布";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // panel1
             // 
@@ -261,6 +242,7 @@
             this.txtKeyword.Name = "txtKeyword";
             this.txtKeyword.Size = new System.Drawing.Size(243, 22);
             this.txtKeyword.TabIndex = 3;
+            this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);
             // 
             // label2
             // 
@@ -278,6 +260,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(237, 22);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // label1
             // 
@@ -332,10 +315,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pager1.ResumeLayout(false);
@@ -359,7 +341,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.Panel panel1;
+        private DevExpress.XtraEditors.PanelControl panel1;
         private System.Windows.Forms.TextBox txtKeyword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -369,9 +351,7 @@
         private System.Windows.Forms.BindingNavigator bindingNavigator;
         private DevExpress.XtraGrid.Columns.GridColumn Check;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageEdit repositoryItemImageEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
         private System.Windows.Forms.ImageList imageList1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox2;
 
     }
 }
