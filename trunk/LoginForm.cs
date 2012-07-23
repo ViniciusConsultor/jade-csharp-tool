@@ -177,9 +177,21 @@ namespace Jade
         {
             if (e.Error == null)
             {
-                MemoryStream stream = new MemoryStream(e.Result, 0, e.Result.Length);
-                this.pictureBox1.Image = Image.FromStream(stream);
-                cookie = (sender as WebClient).ResponseHeaders[HttpResponseHeader.SetCookie].Replace("; path=/", "");
+                try
+                {
+
+                    MemoryStream stream = new MemoryStream(e.Result, 0, e.Result.Length);
+                    this.pictureBox1.Image = Image.FromStream(stream);
+                    cookie = (sender as WebClient).ResponseHeaders[HttpResponseHeader.SetCookie].Replace("; path=/", "");
+                }
+                catch
+                {
+                    MessageBox.Show("加载验证码出错，请选择离线操作");
+                }
+            }
+            else
+            {
+                MessageBox.Show("加载验证码出错，请选择离线操作");
             }
         }
 

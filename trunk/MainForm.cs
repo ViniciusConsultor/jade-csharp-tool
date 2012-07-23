@@ -15,7 +15,7 @@ using DevExpress.XtraSplashScreen;
 
 namespace Jade
 {
-    public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class MainForm : DevExpress.XtraBars.Ribbon.RibbonForm, Jade.ILog
     {
         BaseDocument d;
         public MainForm()
@@ -98,19 +98,19 @@ namespace Jade
         private Category CurrentCategory;
         private void add(string s)
         {
-            RichEditControl control = new RichEditControl();
-            control.Name = s;
-            control.Text = s;
-            control.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Draft;
-            control.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            control.LayoutUnit = DevExpress.XtraRichEdit.DocumentLayoutUnit.Pixel;
-            control.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
-            control.Options.VerticalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
-            tabbedView1.BeginUpdate();
-            BaseDocument document = tabbedView1.Controller.AddDocument(control);
-            control.Document.Sections[0].Page.Width = 10000;
-            document.Form.Text = s;
-            tabbedView1.EndUpdate();
+            //RichEditControl control = new RichEditControl();
+            //control.Name = s;
+            //control.Text = s;
+            //control.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Draft;
+            //control.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            //control.LayoutUnit = DevExpress.XtraRichEdit.DocumentLayoutUnit.Pixel;
+            //control.Options.HorizontalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
+            //control.Options.VerticalRuler.Visibility = DevExpress.XtraRichEdit.RichEditRulerVisibility.Hidden;
+            //tabbedView1.BeginUpdate();
+            //BaseDocument document = tabbedView1.Controller.AddDocument(control);
+            //control.Document.Sections[0].Page.Width = 10000;
+            //document.Form.Text = s;
+            //tabbedView1.EndUpdate();
         }
 
         //private void navBarGroup2_ItemChanged(object sender, EventArgs e)
@@ -355,13 +355,18 @@ namespace Jade
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var task = this.taskTree.SelectedNode.Tag as SiteRule;
-            var runnerForm = new TaskRunForm(task);
+            var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
+            new System.Threading.Thread(taskRunner.Start).Start();
 
-            tabbedView1.BeginUpdate();
-            var document = tabbedView1.Controller.AddDocument(runnerForm);
-            document.Form.Text = task.Name;
-            document.Caption = task.Name + "[运行中]";
-            tabbedView1.EndUpdate();
+            dockManager1.ActivePanel = this.dockPanel4;
+
+            //var runnerForm = new TaskRunForm(task);
+
+            //tabbedView1.BeginUpdate();
+            //var document = tabbedView1.Controller.AddDocument(runnerForm);
+            //document.Form.Text = task.Name;
+            //document.Caption = task.Name + "[运行中]";
+            //tabbedView1.EndUpdate();
 
             //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
         }
@@ -616,5 +621,65 @@ namespace Jade
         {
 
         }
+
+        #region ILog 成员
+
+
+        private void InsertToRichTextbox(string str, RichTextBox txtbox, Color color)
+        {
+            try
+            {
+                lock (this)
+                {
+                    int i = txtbox.SelectionStart;
+                    txtbox.Select(i, 0);
+                    txtbox.SelectionColor = color;
+                    txtbox.Focus();
+                    txtbox.AppendText(str + "\r\n");
+                    txtbox.Select(i + str.Length + 2, 0);
+                    txtbox.SelectionColor = Color.Black;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void Info(string msg)
+        {
+            Log(msg, Color.Black);
+        }
+
+        public void Success(string msg)
+        {
+            Log(msg, Color.Green);
+        }
+
+        public void Error(string msg)
+        {
+            Log(msg, Color.Red);
+
+        }
+
+        public void Warn(string msg)
+        {
+            Log(msg, Color.Yellow);
+        }
+
+        public void Log(string msg, Color color)
+        {
+            try
+            {
+                this.txtLog.BeginInvoke(new MethodInvoker(() =>
+                {
+                    InsertToRichTextbox(msg, this.txtLog, color);
+                }));
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
     }
 }
