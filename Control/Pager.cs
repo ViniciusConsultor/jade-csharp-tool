@@ -19,7 +19,7 @@ namespace Jade
     /// <summary>
     /// ·ÖÒ³¿Ø¼ş³ÊÏÖ
     /// </summary>
-    public partial class Pager : UserControl
+    public partial class Pager : DevExpress.XtraEditors.XtraUserControl
     {
         public Pager()
         {

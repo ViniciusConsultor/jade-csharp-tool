@@ -141,7 +141,7 @@ namespace Jade
         {
             PrepareContentPanel();
             editor.Caption = "草稿箱";
-            var draft = editor.Control as DraftBoxForm;
+            var draft = editor.Control as ContentListPanel;
             draft.IsEdited = false;
             draft.IsPublished = false;
             tabbedView1.Controller.Activate(editor);
@@ -153,13 +153,14 @@ namespace Jade
             {
                 SplashScreenManager.ShowForm(typeof(WaitForm1));
                 tabbedView1.BeginUpdate();
-                var form = new DraftBoxForm();
+                // var form = new DraftBoxForm();
+                var form = new ContentListPanel();
                 editor = tabbedView1.Controller.AddDocument(form);
                 editor.Form.Text = "草稿箱";
                 editor.Caption = "草稿箱";
-                var draft = editor.Control as DraftBoxForm;
-                draft.IsEdited = false;
-                draft.IsPublished = false;
+                var draft = editor.Control as ContentListPanel;
+                //draft.IsEdited = false;
+                //draft.IsPublished = false;
                 tabbedView1.EndUpdate();
                 SplashScreenManager.CloseForm();
             }
@@ -358,7 +359,7 @@ namespace Jade
             var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
             new System.Threading.Thread(taskRunner.Start).Start();
 
-            dockManager1.ActivePanel = this.dockPanel4;
+            dockManager1.ActivePanel = this.dockPanel2;
 
             //var runnerForm = new TaskRunForm(task);
 
@@ -409,69 +410,70 @@ namespace Jade
         {
             DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
 
-            DialogResult dr = new LoginForm().ShowDialog();
-
-            if (dr == DialogResult.Cancel)
+            if (!CacheObject.IsDebug)
             {
-                this.Close();
+                DialogResult dr = new LoginForm().ShowDialog();
+
+                if (dr == DialogResult.Cancel)
+                {
+                    this.Close();
+                }
+            }
+            // CacheObject.NavForm.UpdateUI();
+            this.Show();
+            this.WindowState = FormWindowState.Maximized;
+            var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
+            this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
+
+            if (Properties.Settings.Default.IsEditModel)
+            {
+                this.navBarControl1.ActiveGroup = this.navBarGroup1;
             }
             else
             {
-                // CacheObject.NavForm.UpdateUI();
-                this.Show();
-                this.WindowState = FormWindowState.Maximized;
-                var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
-                this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
+                this.navBarControl1.ActiveGroup = this.navTask;
+            }
 
-                if (Properties.Settings.Default.IsEditModel)
+
+
+            if (CacheObject.IsLognIn)
+            {
+                // 更新API数据
+                new System.Threading.Thread(() =>
                 {
-                    this.navBarControl1.ActiveGroup = this.navBarGroup1;
+                    RemoteAPI.GetNewsId();
+                }).Start();
+
+                if (d == null || d.Control == null)
+                {
+                    tabbedView1.BeginUpdate();
+                    WelcomePanel form = new WelcomePanel();
+                    d = tabbedView1.Controller.AddDocument(form);
+                    tabbedView1.EndUpdate();
                 }
-                else
+                d.Form.Text = "远程网站";
+                d.Caption = "远程网站";
+                if (d != null)
                 {
-                    this.navBarControl1.ActiveGroup = this.navTask;
-                }
+                    (d.Control as WelcomePanel).Navigate("http://newscms.house365.com/newCMS/index.php", d, CacheObject.Cookie);
 
-
-
-                if (CacheObject.IsLognIn)
-                {
-                    // 更新API数据
-                    new System.Threading.Thread(() =>
-                    {
-                        RemoteAPI.GetNewsId();
-                    }).Start();
-
-                    if (d == null || d.Control == null)
-                    {
-                        tabbedView1.BeginUpdate();
-                        WelcomePanel form = new WelcomePanel();
-                        d = tabbedView1.Controller.AddDocument(form);
-                        tabbedView1.EndUpdate();
-                    }
-                    d.Form.Text = "远程网站";
-                    d.Caption = "远程网站";
-                    if (d != null)
-                    {
-                        (d.Control as WelcomePanel).Navigate("http://newscms.house365.com/newCMS/index.php", d, CacheObject.Cookie);
-
-                        tabbedView1.Controller.Activate(d);
-                    }
-                }
-
-                if (tasks.Count > 0)
-                {
-                    if (MessageBox.Show("系统发现你有设为自动运行的采集任务,是否现在开始自动执行采集任务？", "自动采集确认!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-                    {
-                        // 立即开始
-                        tasks.ForEach(task =>
-                        {
-                            var runnerForm = new TaskRunForm(task);
-                            //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
-                        });
-                    }
+                    tabbedView1.Controller.Activate(d);
                 }
             }
+
+            if (tasks.Count > 0)
+            {
+                if (MessageBox.Show("系统发现你有设为自动运行的采集任务,是否现在开始自动执行采集任务？", "自动采集确认!", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    // 立即开始
+                    tasks.ForEach(task =>
+                    {
+                        var runnerForm = new TaskRunForm(task);
+                        //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                    });
+                }
+            }
+
         }
 
         private void barDockingMenuItem1_ListItemClick(object sender, ListItemClickEventArgs e)
@@ -505,13 +507,15 @@ namespace Jade
 
             if (task != null)
             {
-                var runnerForm = new TaskRunForm(task);
-
-                tabbedView1.BeginUpdate();
-                var document = tabbedView1.Controller.AddDocument(runnerForm);
-                document.Form.Text = task.Name;
-                document.Caption = task.Name + "[运行中]";
-                tabbedView1.EndUpdate();
+                var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
+                new System.Threading.Thread(taskRunner.Start).Start();
+                dockManager1.ActivePanel = this.dockPanel4;
+                //var runnerForm = new TaskRunForm(task);
+                //tabbedView1.BeginUpdate();
+                //var document = tabbedView1.Controller.AddDocument(runnerForm);
+                //document.Form.Text = task.Name;
+                //document.Caption = task.Name + "[运行中]";
+                //tabbedView1.EndUpdate();
             }
             else
             {

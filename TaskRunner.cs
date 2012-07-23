@@ -118,7 +118,7 @@ namespace Jade
 
                 Status = "正在启动";
 
-                Logger.Info("正在初始化配置,请稍等...");
+                Logger.Info("[" + Rule.Name + "] 正在初始化配置,请稍等...");
 
                 List<Uri> urls = new List<Uri>();
 
@@ -134,7 +134,7 @@ namespace Jade
                 }
                 else
                 {
-                    this.Logger.Error("没有采集到新网址，采集完成！");
+                    this.Logger.Error("[" + Rule.Name + "] 没有采集到新网址，采集完成！");
                 }
 
                 this.RunningTaskModel.EndTime = DateTime.Now;
@@ -161,7 +161,7 @@ namespace Jade
                 RunningTaskCollection.Instance.TaskFinish(RunningTaskModel);
                 // 
                 isRunning = false;
-                this.Logger.Success("采集完成");
+                this.Logger.Success("[" + Rule.Name + "] 采集完成");
             }
         }
 
@@ -256,7 +256,7 @@ namespace Jade
                         //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                     }
                     DataSaver.Update(data);
-                    Logger.Success("成功采集并更新数据到数据库【" + data.Title + "】");
+                    Logger.Success("[" + Rule.Name + "] 成功采集并更新数据到数据库【" + data.Title + "】");
                     index++;
 
                     this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
@@ -323,7 +323,7 @@ namespace Jade
                     {
                         break;
                     }
-                    Logger.Info("正在下载并分析1级第" + (i + 1) + "个网址" + startUris[i].AbsoluteUri);
+                    Logger.Info("[" + Rule.Name + "] 正在下载并分析1级第" + (i + 1) + "个网址" + startUris[i].AbsoluteUri);
                     var html = HtmlPicker.VisitUrl(startUris[i],
                                                        item.HttpMethod,
                                                        null,
@@ -387,11 +387,11 @@ namespace Jade
                         OldUrls.Add(url);
                         uris.Add(new Uri(url));
                         DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
-                        Logger.Success("成功采集网址并保存到数据库中" + url);
+                        Logger.Success("[" + Rule.Name + "] 成功采集网址并保存到数据库中" + url);
                     }
                     else
                     {
-                        Logger.Error("发现重复网址" + url);
+                        Logger.Error("[" + Rule.Name + "] 发现重复网址" + url);
                     }
                 }
             }

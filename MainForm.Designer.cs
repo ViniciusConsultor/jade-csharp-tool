@@ -55,10 +55,10 @@
             this.hideContainerBottom = new DevExpress.XtraBars.Docking.AutoHideContainer();
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.taskRunnerPanel1 = new Jade.TaskRunnerPanel();
             this.dockPanel4 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel4_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.txtLog = new System.Windows.Forms.RichTextBox();
             this.comboBox2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.dockPanel3 = new DevExpress.XtraBars.Docking.DockPanel();
@@ -96,7 +96,6 @@
             this.tabbedView3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.txtLog = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -335,27 +334,18 @@
             // 
             // dockPanel2_Container
             // 
-            this.dockPanel2_Container.Controls.Add(this.listView1);
             this.dockPanel2_Container.Controls.Add(this.taskRunnerPanel1);
-            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 25);
             this.dockPanel2_Container.Name = "dockPanel2_Container";
-            this.dockPanel2_Container.Size = new System.Drawing.Size(997, 173);
+            this.dockPanel2_Container.Size = new System.Drawing.Size(997, 171);
             this.dockPanel2_Container.TabIndex = 0;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(287, 125);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 97);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // taskRunnerPanel1
             // 
             this.taskRunnerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.taskRunnerPanel1.Location = new System.Drawing.Point(0, 0);
             this.taskRunnerPanel1.Name = "taskRunnerPanel1";
-            this.taskRunnerPanel1.Size = new System.Drawing.Size(997, 173);
+            this.taskRunnerPanel1.Size = new System.Drawing.Size(997, 171);
             this.taskRunnerPanel1.TabIndex = 0;
             this.taskRunnerPanel1.Load += new System.EventHandler(this.taskRunnerPanel1_Load);
             // 
@@ -383,6 +373,15 @@
             this.dockPanel4_Container.Name = "dockPanel4_Container";
             this.dockPanel4_Container.Size = new System.Drawing.Size(997, 171);
             this.dockPanel4_Container.TabIndex = 0;
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 20);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(997, 151);
+            this.txtLog.TabIndex = 2;
+            this.txtLog.Text = "";
             // 
             // comboBox2
             // 
@@ -692,15 +691,6 @@
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // txtLog
-            // 
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Location = new System.Drawing.Point(0, 20);
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(997, 151);
-            this.txtLog.TabIndex = 2;
-            this.txtLog.Text = "";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -795,7 +785,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
-        private System.Windows.Forms.ListView listView1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerBottom;
         private DevExpress.XtraBars.BarButtonItem 运行;
