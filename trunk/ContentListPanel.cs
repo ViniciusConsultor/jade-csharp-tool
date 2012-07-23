@@ -11,6 +11,7 @@ using DevExpress.LookAndFeel;
 using DevExpress.XtraGrid.Columns;
 using Jade.Model;
 using Jade.Model.MySql;
+using DevExpress.XtraGrid.Views.Grid;
 namespace Jade
 {
     public partial class ContentListPanel : DevExpress.XtraEditors.XtraUserControl
@@ -22,15 +23,32 @@ namespace Jade
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
-
-            this.comboBox1.SelectedIndexChanged+=new EventHandler(comboBox1_SelectedIndexChanged);
-
+            this.gridView1.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(gridView1_CustomUnboundColumnData);
+            this.comboBox1.SelectedIndexChanged += new EventHandler(comboBox1_SelectedIndexChanged);
             var tasks = CacheObject.Rules;
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
             this.comboBox1.DataSource = tasks;
             this.comboBox1.DisplayMember = "Name";
             this.comboBox1.SelectedIndex = 0;
             this.pager1.PageChange += new EventPagingHandler(pager1_PageChange);
+        }
+
+        void gridView1_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            if (e.Column.Name == "Edited")
+            {
+                var data = e.Row as IDownloadData;
+                //bool isEdit = (bool)e.Value;
+                e.Value = data.IsEdit ? 1 : 0;
+                //if (isEdit)
+                //{
+                //    e.Value = Properties.Resources.yes;
+                //}
+                //else
+                //{
+                //    e.Value = Properties.Resources.no;
+                //}
+            }
         }
         int currentPageSize = 15;
         void pager1_PageChange(EventPagingArg e)
@@ -137,6 +155,11 @@ namespace Jade
             }
         }
 
+        /// <summary>
+        /// 绘制表头
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView1_CustomDrawColumnHeader(object sender, DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e)
         {
             if (e.Column != null && e.Column.FieldName == "Check")
@@ -147,12 +170,18 @@ namespace Jade
                 e.Handled = true;
             }
         }
+
+        /// <summary>
+        /// 绘制单元格
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void gridView1_DataSourceChanged(object sender, EventArgs e)
         {
             GridColumn column = this.gridView1.Columns.ColumnByFieldName("Check");
             if (column != null)
             {
-                column.Width = 80;
+                column.Width = 30;
                 column.OptionsColumn.ShowCaption = false;
                 column.ColumnEdit = new RepositoryItemCheckEdit();
             }

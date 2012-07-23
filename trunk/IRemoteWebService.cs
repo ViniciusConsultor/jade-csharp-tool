@@ -158,6 +158,10 @@ namespace Jade
                     else
                     {
                         instance = new RemoteWebService();
+                        instance.SpecilTags = new List<DisplayNameValuePair>();
+                        instance.Template = new List<DisplayNameValuePair>();
+                        instance.Source = new List<DisplayNameValuePair>();
+
                     }
                 }
                 return instance;
