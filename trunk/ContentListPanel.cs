@@ -22,8 +22,7 @@ namespace Jade
             InitializeComponent();
             gridView1.OptionsSelection.MultiSelect = true;
             gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
-
-
+            this.gridView1.RowCellClick += new RowCellClickEventHandler(gridView1_RowCellClick);
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
@@ -319,6 +318,21 @@ namespace Jade
 
                 MessageBox.Show("删除成功！");
             }
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void gridView1_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            var rowIndex = e.RowHandle;
         }
     }
 }
