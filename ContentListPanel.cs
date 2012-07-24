@@ -21,11 +21,11 @@ namespace Jade
         {
             InitializeComponent();
             gridView1.OptionsSelection.MultiSelect = true;
-            gridView1.MouseDown += new MouseEventHandler(gridView1_MouseDown);
+            //gridView1.MouseDown += new MouseEventHandler(gridView1_MouseDown);
             //gridView1.OptionsBehavior.Editable=false;
             gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
             gridView1.DoubleClick += new EventHandler(gridView1_DoubleClick);
-            this.gridView1.RowCellClick += new RowCellClickEventHandler(gridView1_RowCellClick);
+            //this.gridView1.RowCellClick += new RowCellClickEventHandler(gridView1_RowCellClick);
             //this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
