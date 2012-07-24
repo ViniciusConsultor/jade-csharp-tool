@@ -212,6 +212,12 @@
     <Compile Include="Control\DateEdit.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Control\DevPager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\DevPager.Designer.cs">
+      <DependentUpon>DevPager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\HtmlEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -408,6 +414,9 @@
     <EmbeddedResource Include="Control\DateEdit.resx">
       <DependentUpon>DateEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Control\DevPager.resx">
+      <DependentUpon>DevPager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\HtmlEditor.resx">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -426,7 +435,6 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="SiteRuleWizardForm.resx">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -35,7 +35,7 @@ namespace Jade.Model.Access
 
         public List<IDownloadData> GetList(SearchArgs args, out int totalCount)
         {
-            var where = args.IsDownload ? "t.IsDownload  = 1" : "1=1";
+            var where = args.IsDownload ? "t.IsDownload  = 1" : "t.IsDownload  = 1";
             where += args.IsEdit ? " and IsEdit  = 1" : " and 1=1";
             where += args.IsPublish ? " and IsPublish  = 1" : " and IsPublish = 0";
             where += args.TaskId != 0 ? " and TaskId  = " + args.TaskId : " and 1=1";
