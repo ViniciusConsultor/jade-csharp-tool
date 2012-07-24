@@ -52,6 +52,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pager1 = new Jade.Pager();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.devPager1 = new Jade.Control.DevPager();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageEdit1)).BeginInit();
@@ -76,7 +77,6 @@
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gridControl1.DoubleClick += new System.EventHandler(this.gridControl1_DoubleClick);
             // 
             // gridView1
             // 
@@ -93,7 +93,6 @@
             this.gridView1.GroupPanelText = " ";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.Click += new System.EventHandler(this.gridView1_Click_1);
             // 
             // Check
             // 
@@ -213,7 +212,7 @@
             this.toolStripButton1.Image = global::Jade.Properties.Resources.no;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton1.Text = "删除";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -222,7 +221,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(49, 22);
+            this.toolStripButton2.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton2.Text = "发布";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -304,10 +303,19 @@
             this.bindingNavigator.TabIndex = 0;
             this.bindingNavigator.Text = "bindingNavigator1";
             // 
+            // devPager1
+            // 
+            this.devPager1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.devPager1.Location = new System.Drawing.Point(0, 386);
+            this.devPager1.Name = "devPager1";
+            this.devPager1.Size = new System.Drawing.Size(813, 32);
+            this.devPager1.TabIndex = 10;
+            // 
             // ContentListPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.devPager1);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
@@ -354,6 +362,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn Check;
         private DevExpress.XtraEditors.Repository.RepositoryItemImageEdit repositoryItemImageEdit1;
         private System.Windows.Forms.ImageList imageList1;
+        private Control.DevPager devPager1;
 
     }
 }

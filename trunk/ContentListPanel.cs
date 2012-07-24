@@ -21,12 +21,14 @@ namespace Jade
         {
             InitializeComponent();
             gridView1.OptionsSelection.MultiSelect = true;
+            gridView1.MouseDown += new MouseEventHandler(gridView1_MouseDown);
+            //gridView1.OptionsBehavior.Editable=false;
             gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+            gridView1.DoubleClick += new EventHandler(gridView1_DoubleClick);
             this.gridView1.RowCellClick += new RowCellClickEventHandler(gridView1_RowCellClick);
-            this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
+            //this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
-            this.gridView1.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(gridView1_CustomUnboundColumnData);
             this.comboBox1.SelectedIndexChanged += new EventHandler(comboBox1_SelectedIndexChanged);
             var tasks = CacheObject.Rules;
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
@@ -36,23 +38,40 @@ namespace Jade
             this.pager1.PageChange += new EventPagingHandler(pager1_PageChange);
         }
 
-        void gridView1_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        void gridView1_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (e.Column.Name == "Edited")
+            //DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hInfo = gridView1.CalcHitInfo(new Point(e.X, e.Y));
+            //if (e.Button == MouseButtons.Left && e.Clicks == 2)
             //{
-            //    var data = e.Row as IDownloadData;
-            //    //bool isEdit = (bool)e.Value;
-            //    e.Value = data.IsEdit ? 1 : 0;
-            //    //if (isEdit)
-            //    //{
-            //    //    e.Value = Properties.Resources.yes;
-            //    //}
-            //    //else
-            //    //{
-            //    //    e.Value = Properties.Resources.no;
-            //    //}
-            //}
+            //    //判断光标是否在行范围内  
+            //    if (hInfo.InRow)
+            //    {
+            //        //取得选定行信息  
+            //        string nodeName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "nodeName").ToString();
+
+            //    }
+            //}  
         }
+
+        void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+            Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+            info = gridView1.CalcHitInfo(pt);
+            if (info.InRowCell)
+            {
+                rowIndex = info.RowHandle;
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                CacheObject.ContentForm.InitDownloadData(dataTable[rowIndex]);
+                if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+                {
+                    int totalCount;
+                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.pager1.CurrentPageIndex), out totalCount);
+                }
+            }
+        }
+
+
         int currentPageSize = 15;
         void pager1_PageChange(EventPagingArg e)
         {
@@ -186,9 +205,17 @@ namespace Jade
             {
                 column.Width = 30;
                 column.OptionsColumn.ShowCaption = false;
-                column.ColumnEdit = new RepositoryItemCheckEdit();
+                var c = new RepositoryItemCheckEdit();
+                c.CheckedChanged += new EventHandler(c_CheckedChanged);
+                column.ColumnEdit = c;
             }
         }
+
+        void c_CheckedChanged(object sender, EventArgs e)
+        {
+            gridView1.EndSelection();
+        }
+
         public static void DrawCheckBox(DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e, bool chk)
         {
             RepositoryItemCheckEdit repositoryCheck = e.Column.ColumnEdit as RepositoryItemCheckEdit;
@@ -279,7 +306,7 @@ namespace Jade
             //var rowIndexes = new List<int>();
             var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
             return dataTable.FindAll(d => d.IsChecked);
-            
+
             //var rowIndexes = new List<int>();
             //for (int rowIndex = 0; rowIndex < this.gridView1.RowCount; rowIndex++)
             //{
@@ -320,19 +347,10 @@ namespace Jade
             }
         }
 
-        private void gridControl1_DoubleClick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void gridView1_Click_1(object sender, EventArgs e)
-        {
-           
-        }
-
+        int rowIndex = -1;
         void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            var rowIndex = e.RowHandle;
+            rowIndex = e.RowHandle;
         }
     }
 }
