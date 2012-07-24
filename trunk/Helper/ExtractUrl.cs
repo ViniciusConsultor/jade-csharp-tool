@@ -399,6 +399,13 @@ namespace Jade
         {
             try
             {
+                if (originalUrl.StartsWith("javas"))
+                {
+                    return string.Empty; ;
+                }
+
+                originalUrl = originalUrl.Replace("&amp;", "&");
+
                 Uri originalUri;
                 Uri baseUri = new Uri(baseUrl);
                 Uri resultUri;
