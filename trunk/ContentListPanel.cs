@@ -17,6 +17,8 @@ namespace Jade
     public partial class ContentListPanel : DevExpress.XtraEditors.XtraUserControl
     {
         bool m_checkStatus;
+
+        List<SiteRule> tasks;
         public ContentListPanel()
         {
             InitializeComponent();
@@ -29,13 +31,14 @@ namespace Jade
             //this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
-            this.comboBox1.SelectedIndexChanged += new EventHandler(comboBox1_SelectedIndexChanged);
-            var tasks = CacheObject.Rules;
+            this.comboBoxEdit1.TextChanged += new EventHandler(comboBox1_SelectedIndexChanged);
+            tasks = CacheObject.Rules;
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
-            this.comboBox1.DataSource = tasks;
-            this.comboBox1.DisplayMember = "Name";
-            this.comboBox1.SelectedIndex = 0;
-            this.pager1.PageChange += new EventPagingHandler(pager1_PageChange);
+            this.comboBoxEdit1.Properties.DataSource = tasks;
+            this.comboBoxEdit1.Properties.DisplayMember = "Name";
+            this.comboBoxEdit1.EditValue = "全部任务";
+            this.comboBoxEdit1.ItemIndex = 0;
+            this.devPager1.PageChange += new EventPagingHandler(pager1_PageChange);
         }
 
         void gridView1_MouseDown(object sender, MouseEventArgs e)
@@ -66,7 +69,7 @@ namespace Jade
                 if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
                 {
                     int totalCount;
-                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.pager1.CurrentPageIndex), out totalCount);
+                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.devPager1.CurrentPageIndex), out totalCount);
                 }
             }
         }
@@ -75,10 +78,10 @@ namespace Jade
         int currentPageSize = 15;
         void pager1_PageChange(EventPagingArg e)
         {
-            var task = (SiteRule)comboBox1.SelectedItem;
+            var task = tasks[comboBoxEdit1.ItemIndex];
             this.gridControl1.DataSource = null;
             int totalCount;
-            this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(pager1.CurrentPageIndex, currentPageSize), out totalCount);
+            this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(devPager1.CurrentPageIndex, currentPageSize), out totalCount);
         }
 
         bool isPublished = false;
@@ -119,11 +122,14 @@ namespace Jade
         {
             var taskId = 0;
 
-            if (comboBox1.SelectedItem != null)
-            {
-                var task = (SiteRule)comboBox1.SelectedItem;
-                taskId = task.SiteRuleId;
-            }
+            //if (comboBox1.SelectedItem != null)
+            //{
+            //    var task = (SiteRule)comboBox1.SelectedItem;
+            //    taskId = task.SiteRuleId;
+            //}
+
+            taskId = tasks[comboBoxEdit1.ItemIndex].SiteRuleId;
+
             return new SearchArgs
             {
                 IsPublish = isPublished,
@@ -142,9 +148,14 @@ namespace Jade
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
+            if (comboBoxEdit1.ItemIndex == -1)
             {
-                var task = (SiteRule)comboBox1.SelectedItem;
+                comboBoxEdit1.ItemIndex = 0;
+            }
+
+            if (comboBoxEdit1.ItemIndex > -1)
+            {
+                var task = tasks[comboBoxEdit1.ItemIndex];
                 this.gridControl1.DataSource = null;
 
                 int totalCount;
@@ -160,10 +171,10 @@ namespace Jade
                 //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
                 //}
 
-                this.pager1.CurrentPageIndex = 1;
-                this.pager1.PageSize = currentPageSize;
-                this.pager1.TotalCount = totalCount;
-                this.pager1.Bind();
+                this.devPager1.CurrentPageIndex = 1;
+                this.devPager1.PageSize = currentPageSize;
+                this.devPager1.TotalCount = totalCount;
+                this.devPager1.Bind();
                 //this.pager1.InitPageInfo(totalCount, currentPageSize);
             }
         }
@@ -351,6 +362,16 @@ namespace Jade
         void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             rowIndex = e.RowHandle;
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            toolStripButton1_Click(null, null);
+        }
+
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            toolStripButton2_Click(null, null);
         }
     }
 }

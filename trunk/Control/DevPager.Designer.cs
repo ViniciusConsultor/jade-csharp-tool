@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DevPager));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.bar1 = new DevExpress.XtraBars.Bar();
-            this.bar2 = new DevExpress.XtraBars.Bar();
-            this.bar3 = new DevExpress.XtraBars.Bar();
+            this.pageBar = new DevExpress.XtraBars.Bar();
             this.btnFirst = new DevExpress.XtraBars.BarButtonItem();
             this.btnPre = new DevExpress.XtraBars.BarButtonItem();
             this.btnNext = new DevExpress.XtraBars.BarButtonItem();
@@ -40,17 +39,12 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.txtPageNumber = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
-            this.lblTotalPageCount = new DevExpress.XtraBars.BarStaticItem();
-            this.barStaticItem5 = new DevExpress.XtraBars.BarStaticItem();
-            this.bar4 = new DevExpress.XtraBars.Bar();
-            this.bar5 = new DevExpress.XtraBars.Bar();
-            this.bar6 = new DevExpress.XtraBars.Bar();
+            this.lblStatus = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             this.SuspendLayout();
@@ -58,17 +52,13 @@
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar1,
-            this.bar2,
-            this.bar3,
-            this.bar4,
-            this.bar5,
-            this.bar6});
+            this.pageBar});
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
             this.barManager1.DockControls.Add(this.barDockControlLeft);
             this.barManager1.DockControls.Add(this.barDockControlRight);
             this.barManager1.Form = this;
+            this.barManager1.Images = this.imageList1;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnFirst,
             this.btnPre,
@@ -76,80 +66,63 @@
             this.btnLast,
             this.barStaticItem1,
             this.txtPageNumber,
-            this.barStaticItem2,
-            this.barStaticItem3,
-            this.lblTotalPageCount,
-            this.barStaticItem5});
-            this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 10;
+            this.lblStatus});
+            this.barManager1.MaxItemId = 11;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
-            this.barManager1.StatusBar = this.bar3;
+            this.barManager1.StatusBar = this.pageBar;
             // 
-            // bar1
+            // pageBar
             // 
-            this.bar1.BarName = "Tools";
-            this.bar1.DockCol = 0;
-            this.bar1.DockRow = 1;
-            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar1.Text = "Tools";
-            // 
-            // bar2
-            // 
-            this.bar2.BarName = "Main menu";
-            this.bar2.DockCol = 0;
-            this.bar2.DockRow = 0;
-            this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar2.OptionsBar.MultiLine = true;
-            this.bar2.OptionsBar.UseWholeRow = true;
-            this.bar2.Text = "Main menu";
-            // 
-            // bar3
-            // 
-            this.bar3.BarName = "Status bar";
-            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
-            this.bar3.DockCol = 0;
-            this.bar3.DockRow = 0;
-            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
-            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnFirst),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPre),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnNext),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnLast),
+            this.pageBar.BarName = "Status bar";
+            this.pageBar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            this.pageBar.DockCol = 0;
+            this.pageBar.DockRow = 0;
+            this.pageBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.pageBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnFirst, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPre, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnNext, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnLast, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.txtPageNumber),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem3),
-            new DevExpress.XtraBars.LinkPersistInfo(this.lblTotalPageCount),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem5)});
-            this.bar3.OptionsBar.AllowQuickCustomization = false;
-            this.bar3.OptionsBar.DrawDragBorder = false;
-            this.bar3.OptionsBar.UseWholeRow = true;
-            this.bar3.Text = "Status bar";
+            new DevExpress.XtraBars.LinkPersistInfo(this.lblStatus)});
+            this.pageBar.OptionsBar.AllowQuickCustomization = false;
+            this.pageBar.OptionsBar.DrawDragBorder = false;
+            this.pageBar.OptionsBar.UseWholeRow = true;
+            this.pageBar.Text = "Status bar";
             // 
             // btnFirst
             // 
             this.btnFirst.Caption = "首页";
             this.btnFirst.Id = 0;
+            this.btnFirst.ImageIndex = 2;
             this.btnFirst.Name = "btnFirst";
+            this.btnFirst.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFirst_Click);
             // 
             // btnPre
             // 
             this.btnPre.Caption = "上一页";
             this.btnPre.Id = 1;
+            this.btnPre.ImageIndex = 1;
             this.btnPre.Name = "btnPre";
+            this.btnPre.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPre_Click);
             // 
             // btnNext
             // 
             this.btnNext.Caption = "下一页";
             this.btnNext.Id = 2;
+            this.btnNext.ImageIndex = 0;
             this.btnNext.Name = "btnNext";
+            this.btnNext.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNext_Click);
             // 
             // btnLast
             // 
             this.btnLast.Caption = "末页";
             this.btnLast.Id = 3;
+            this.btnLast.ImageIndex = 3;
             this.btnLast.Name = "btnLast";
+            this.btnLast.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLast_Click);
             // 
             // barStaticItem1
             // 
@@ -162,95 +135,62 @@
             // txtPageNumber
             // 
             this.txtPageNumber.Caption = "1";
+            this.txtPageNumber.Description = "1";
             this.txtPageNumber.Edit = this.repositoryItemTextEdit1;
             this.txtPageNumber.Id = 5;
             this.txtPageNumber.Name = "txtPageNumber";
+            this.txtPageNumber.ShownEditor += new DevExpress.XtraBars.ItemClickEventHandler(this.txtPageNumber_ShownEditor);
             // 
             // repositoryItemTextEdit1
             // 
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            this.repositoryItemTextEdit1.NullText = "1";
+            this.repositoryItemTextEdit1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Edit_KeyDown);
             // 
-            // barStaticItem2
+            // lblStatus
             // 
-            this.barStaticItem2.Caption = "页";
-            this.barStaticItem2.Id = 6;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem3
-            // 
-            this.barStaticItem3.Caption = "共";
-            this.barStaticItem3.Id = 7;
-            this.barStaticItem3.Name = "barStaticItem3";
-            this.barStaticItem3.TextAlignment = System.Drawing.StringAlignment.Near;
-            this.barStaticItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barStaticItem3_ItemClick);
-            // 
-            // lblTotalPageCount
-            // 
-            this.lblTotalPageCount.Caption = "n";
-            this.lblTotalPageCount.Id = 8;
-            this.lblTotalPageCount.Name = "lblTotalPageCount";
-            this.lblTotalPageCount.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barStaticItem5
-            // 
-            this.barStaticItem5.Caption = "页";
-            this.barStaticItem5.Id = 9;
-            this.barStaticItem5.Name = "barStaticItem5";
-            this.barStaticItem5.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // bar4
-            // 
-            this.bar4.BarName = "Custom 5";
-            this.bar4.DockCol = 0;
-            this.bar4.DockRow = 2;
-            this.bar4.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar4.Text = "Custom 5";
-            // 
-            // bar5
-            // 
-            this.bar5.BarName = "Custom 6";
-            this.bar5.DockCol = 0;
-            this.bar5.DockRow = 3;
-            this.bar5.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar5.Text = "Custom 6";
-            // 
-            // bar6
-            // 
-            this.bar6.BarName = "Custom 7";
-            this.bar6.DockCol = 0;
-            this.bar6.DockRow = 4;
-            this.bar6.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar6.Text = "Custom 7";
+            this.lblStatus.Caption = "共{0}页  {2}条";
+            this.lblStatus.Id = 10;
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(700, 138);
+            this.barDockControlTop.Size = new System.Drawing.Size(700, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 5);
-            this.barDockControlBottom.Size = new System.Drawing.Size(700, 27);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 7);
+            this.barDockControlBottom.Size = new System.Drawing.Size(700, 25);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 138);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 0);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 7);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(700, 138);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(700, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 7);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "bindingNavigatorMoveNextItem.Image.png");
+            this.imageList1.Images.SetKeyName(1, "bindingNavigatorMovePreviousItem.Image.png");
+            this.imageList1.Images.SetKeyName(2, "bindingNavigatorMoveFirstItem.Image.png");
+            this.imageList1.Images.SetKeyName(3, "bindingNavigatorMoveLastItem.Image.png");
             // 
             // DevPager
             // 
@@ -271,26 +211,19 @@
         #endregion
 
         private DevExpress.XtraBars.BarManager barManager1;
-        private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.Bar bar2;
-        private DevExpress.XtraBars.Bar bar3;
+        private DevExpress.XtraBars.Bar pageBar;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.BarButtonItem btnFirst;
         private DevExpress.XtraBars.BarButtonItem btnPre;
-        private DevExpress.XtraBars.Bar bar4;
-        private DevExpress.XtraBars.Bar bar5;
-        private DevExpress.XtraBars.Bar bar6;
         private DevExpress.XtraBars.BarButtonItem btnNext;
         private DevExpress.XtraBars.BarButtonItem btnLast;
         private DevExpress.XtraBars.BarStaticItem barStaticItem1;
         private DevExpress.XtraBars.BarEditItem txtPageNumber;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
-        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
-        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
-        private DevExpress.XtraBars.BarStaticItem lblTotalPageCount;
-        private DevExpress.XtraBars.BarStaticItem barStaticItem5;
+        private DevExpress.XtraBars.BarStaticItem lblStatus;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

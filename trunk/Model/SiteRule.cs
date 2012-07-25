@@ -404,6 +404,11 @@ namespace Jade.Model
     public class ItemRule
     {
         /// <summary>
+        /// 替换XPath
+        /// </summary>
+        public string AnotherXPath { get; set; }
+
+        /// <summary>
         /// 采集方式
         /// </summary>
         public ItemFetchType FetchType { get; set; }

@@ -187,7 +187,7 @@ namespace Jade
         {
             PrepareContentPanel();
             editor.Caption = "已编辑";
-            var draft = editor.Control as DraftBoxForm;
+            var draft = editor.Control as ContentListPanel;
             draft.IsEdited = true;
             draft.IsPublished = false;
             tabbedView1.Controller.Activate(editor);
@@ -197,7 +197,7 @@ namespace Jade
         {
 
             PrepareContentPanel();
-            var draft = editor.Control as DraftBoxForm;
+            var draft = editor.Control as ContentListPanel;
             draft.IsEdited = false;
             draft.IsPublished = true;
             editor.Caption = "已发布";

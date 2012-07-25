@@ -42,7 +42,7 @@ namespace Jade
             txt_tags.DisplayMemberSingleItem = "Name";
             this.txt_tags.DisplayMember = "NameConcatenated";
             this.txt_tags.ValueMember = "Selected";
-            StatusSelections[0].Selected = true;
+            //StatusSelections[0].Selected = true;
 
             //this.cmbSearchLabel.DataSource = SpecilTags;
             this.cmbSearchLabel.DisplayMember = "DisplayName";
@@ -174,7 +174,7 @@ namespace Jade
 
                 if (data.news_template_file != null)
                 {
-                    this.txt_news_template_file.Text = data.news_template_file;
+                    this.txt_news_template_file.SelectedValue = data.news_template_file;
                 }
 
                 this.txt_gfbm_id.Text = data.gfbm_id;
@@ -224,8 +224,10 @@ namespace Jade
 
             CurrentData.news_source_name = this.txtnews_source_name.Text;
 
-            CurrentData.news_template_file = (this.txt_news_template_file.SelectedItem as DisplayNameValuePair).Value;
-
+            if (this.txt_news_template_file.SelectedItem != null)
+            {
+                CurrentData.news_template_file = (this.txt_news_template_file.SelectedItem as DisplayNameValuePair).Value;
+            }
             CurrentData.IsEdit = true;
             CurrentData.EditTime = DateTime.Now;
             CurrentData.EditorUserName = CacheObject.CurrentUser.Name;

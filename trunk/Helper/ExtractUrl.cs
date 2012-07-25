@@ -281,7 +281,7 @@ namespace Jade
         /// <param name="selectType"></param>
         /// <param name="pathType"></param>
         /// <returns></returns>
-        public static List<string> ExtractDataFromHtml(string html, string xpath, XMLPathSelectType selectType, XMLPathType pathType)
+        public static List<string> ExtractDataFromHtml(string html, string xpath, XMLPathSelectType selectType, XMLPathType pathType,string anotherXPath = "")
         {
 
             var result = new List<string>();
@@ -305,6 +305,13 @@ namespace Jade
                 html = body.Match(html).Value;
                 HtmlDoc.LoadHtml(html);
                 var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
+
+                // Ìæ»»XPATH
+                if (nodes == null && anotherXPath != "")
+                {
+                    nodes = HtmlDoc.DocumentNode.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
+                }
+
                 if (nodes != null)
                 {
                     if (selectType == XMLPathSelectType.Multiple)
