@@ -38,7 +38,7 @@ namespace Jade
         }
 
         public static string Cookie = "";
-        public static bool IsDebug = true;
+        public static bool IsDebug = false;
 
         public static MainForm MainForm { get; set; }
 
@@ -1056,6 +1056,105 @@ namespace Jade
             return ResponseMessage;
 
         }
+
+
+        /// <summary> 
+        /// 上传图片文件 
+        /// </summary> 
+        /// <param name="url">提交的地址</param> 
+        /// <param name="poststr">发送的文本串   比如：user=eking&pass=123456  param> 
+        /// <param name="fileformname">文本域的名称  比如：name="file"，那么fileformname=file  param> 
+        /// <param name="filepath">上传的文件路径  比如： c:\12.jpg param> 
+        /// <param name="cookie">cookie数据</param> 
+        /// <param name="refre">头部的跳转地址</param> 
+        /// <returns></returns> 
+        public string UploadImage(string poststr, string filepath, string imageType = "image/jpeg")
+        {
+            System.Net.ServicePointManager.Expect100Continue = false;
+            var gb2312 = Encoding.GetEncoding("gb2312");
+            var webrequest = (HttpWebRequest)WebRequest.Create(this.Url);
+            webrequest.Headers[HttpRequestHeader.Cookie] = this.Cookie;
+            webrequest.Headers.Remove(HttpRequestHeader.Referer);
+            webrequest.Headers.Add(HttpRequestHeader.Referer, "http://newscms.house365.com/newCMS/news/addpic.php?parent_channel_id=8000000&bjq=");
+
+            // 这个可以是改变的，也可以是下面这个固定的字符串 
+            string boundary = "----WebKitFormBoundaryIvak6JnUzBTVvZHH";
+
+            // 创建request对象 
+            //HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url); 
+            webrequest.ContentType = "multipart/form-data; boundary=" + boundary;
+            webrequest.Method = "POST";
+            webrequest.AllowWriteStreamBuffering = true;
+            webrequest.Accept = "*/*";
+            webrequest.KeepAlive = true;
+
+            // 构造发送数据
+            StringBuilder sb = new StringBuilder();
+
+            // 文本域的数据，将user=eking&pass=123456  格式的文本域拆分 ，然后构造 
+            foreach (string c in poststr.Split('&'))
+            {
+                string[] item = c.Split('=');
+                if (item.Length != 2)
+                {
+                    break;
+                }
+                string name = item[0];
+                string value = item[1];
+                sb.Append("-" + boundary);
+                sb.Append("\r\n");
+                sb.Append("Content-Disposition: form-data; name=\"" + name + "\"");
+                sb.Append("\r\n\r\n");
+                sb.Append(value);
+                sb.Append("\r\n");
+            }
+
+            // 文件域的数据
+            sb.Append("-" + boundary);
+            sb.Append("\r\n");
+            sb.Append("Content-Disposition: form-data; name=\"filename\"; filename=\"" + new FileInfo(filepath).Name + "\"");
+            sb.Append("\r\n");
+
+            sb.Append("Content-Type: ");
+            sb.Append(imageType);
+            sb.Append("\r\n\r\n\0");
+
+            string postHeader = sb.ToString();
+            byte[] postHeaderBytes = Encoding.UTF8.GetBytes(postHeader);
+
+            //构造尾部数据 
+            byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n-" + boundary + "-\r\n");
+
+            FileStream fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            long length = postHeaderBytes.Length + fileStream.Length + boundaryBytes.Length;
+            webrequest.ContentLength = length;
+
+            Stream requestStream = webrequest.GetRequestStream();
+
+            // 输入头部数据 
+            requestStream.Write(postHeaderBytes, 0, postHeaderBytes.Length);
+
+            // 输入文件流数据 
+            byte[] buffer = new Byte[checked((uint)Math.Min(4096, (int)fileStream.Length))];
+            int bytesRead = 0;
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                requestStream.Write(buffer, 0, bytesRead);
+
+            // 输入尾部数据 
+            requestStream.Write(boundaryBytes, 0, boundaryBytes.Length);
+
+            // 获取响应
+            _myHttpWebResponse = (HttpWebResponse)webrequest.GetResponse();
+            // 获取响应流
+            var responseStream = _myHttpWebResponse.GetResponseStream();
+            var sr = new StreamReader(responseStream, Encoding.GetEncoding(EncodingName));
+            GetCookie();
+            ResponseMessage = sr.ReadToEnd();
+            // GetKeyValueDictionFromResponse();
+            return ResponseMessage;
+        }
+
+
 
         public string Get()
         {

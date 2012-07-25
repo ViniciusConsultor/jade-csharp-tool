@@ -147,18 +147,19 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "dialog_cancel (1).png");
-            this.imageList1.Images.SetKeyName(1, "toolStripButton2.Image.png");
+            this.imageList1.Images.SetKeyName(1, "yes.png");
+            this.imageList1.Images.SetKeyName(2, "toolStripButton2.Image.png");
             // 
             // Editor
             // 
             this.Editor.Caption = "编辑";
-            this.Editor.FieldName = "Editor";
+            this.Editor.FieldName = "EditorUserName";
             this.Editor.Name = "Editor";
             this.Editor.OptionsColumn.AllowEdit = false;
             this.Editor.OptionsFilter.AllowAutoFilter = false;
             this.Editor.Visible = true;
             this.Editor.VisibleIndex = 3;
-            this.Editor.Width = 109;
+            this.Editor.Width = 80;
             // 
             // IsPublish
             // 
@@ -169,7 +170,7 @@
             this.IsPublish.OptionsColumn.AllowEdit = false;
             this.IsPublish.Visible = true;
             this.IsPublish.VisibleIndex = 4;
-            this.IsPublish.Width = 40;
+            this.IsPublish.Width = 42;
             // 
             // Content
             // 
@@ -179,7 +180,7 @@
             this.Content.OptionsColumn.AllowEdit = false;
             this.Content.Visible = true;
             this.Content.VisibleIndex = 5;
-            this.Content.Width = 150;
+            this.Content.Width = 158;
             // 
             // StartTime
             // 
@@ -189,7 +190,7 @@
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
             this.StartTime.VisibleIndex = 6;
-            this.StartTime.Width = 150;
+            this.StartTime.Width = 158;
             // 
             // EndTime
             // 
@@ -200,7 +201,7 @@
             this.EndTime.UnboundType = DevExpress.Data.UnboundColumnType.DateTime;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 7;
-            this.EndTime.Width = 165;
+            this.EndTime.Width = 176;
             // 
             // panel1
             // 
@@ -268,7 +269,7 @@
             // 
             this.barButtonItem2.Caption = "发布";
             this.barButtonItem2.Id = 1;
-            this.barButtonItem2.ImageIndex = 1;
+            this.barButtonItem2.ImageIndex = 2;
             this.barButtonItem2.Name = "barButtonItem2";
             this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
             // 

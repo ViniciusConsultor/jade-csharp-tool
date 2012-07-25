@@ -74,6 +74,47 @@
                 display: none;
             }
         }
+        
+        .mydiv
+        {
+            background-color: #ff6;
+            border: 1px solid #f90;
+            text-align: center;
+            line-height: 40px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 99;
+            width: 400px;
+            height: 120px;
+            left: 50%; /*FF IE7*/
+            top: 50%; /*FF IE7*/
+            margin-left: -150px !important; /*FF IE7 该值为本身宽的一半 */
+            margin-top: -60px !important; /*FF IE7 该值为本身高的一半*/
+            margin-top: 0px;
+            position: fixed !important; /*FF IE7*/
+            position: absolute; /*IE6*/
+            _top: expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2); /*IE5 IE5.5*/
+        }
+        .bg
+        {
+            background-color: #ccc;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0; /*FF IE7*/
+            filter: alpha(opacity=50); /*IE*/
+            opacity: 0.5; /*FF*/
+            z-index: 1;
+            position: fixed !important; /*FF IE7*/
+            position: absolute; /*IE6*/
+            _top: expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2); /*IE5 IE5.5*/
+        }
     </style>
     <script type="text/javascript">
         (function (a, b) {
@@ -95,6 +136,17 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         })(window);
     </script>
     <script language="javascript">
+
+        function showDiv() {
+            document.getElementById('popDiv').style.display = 'block';
+            document.getElementById('bg').style.display = 'block';
+        }
+
+        function closeDiv() {
+            document.getElementById('popDiv').style.display = 'none';
+            document.getElementById('bg').style.display = 'none';
+        }
+
         var pageInex = 2;
         function addPage(html, title) {
             var template = $($("#template").html());
@@ -142,12 +194,8 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                         return false;
                     }
                 }
-            }).dbclick(function () {
-                if (document.activeElement) {
-                    alert(document.activeElement);
-                }
             });
-            
+
 
         }
 
@@ -164,7 +212,9 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             } else {
                 txt = document.getSelection();
             }
-            return txt.toString();
+            if (txt)
+                return txt.toString();
+            return "";
 
         }
 
@@ -174,6 +224,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             for (var i = 1; i < arguments.length; i++) {
                 addPage(arguments[i]);
             }
+            bindImage();
         }
 
         function clear() {
@@ -208,6 +259,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
 
         onload = function () {
             bindEvent("#page1");
+            bindImage();
         };
 
         function getCaretPos(element) {
@@ -262,16 +314,92 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             return range.text;
         }
 
+        function bindImage() {
+            $("img").unbind("click");
+            $("img").click(function () {
+                showDiv();
+                $("#editImage").attr("src", $(this).attr("src"));
+                var image = this;
+                $("#title").val($(image).attr("title"));
+                $("#alt").val($(image).attr("alt"));
+                $("#btnok").unbind().click(function () {
+                    var title = $("#title").val();
+                    var alt = $("#alt").val();
+                    $(image).attr("title", title);
+                    $(image).attr("alt", alt);
+                    if (title != "") {
+                        var next = $(image).next("span");
+                        if (next.length > 0) {
+                            next.text(title);
+                        } else {
+                            $(image).after("<br /><span style='text-align:center;'>" + title + "</span");
+                        }
+                    }
+                    closeDiv();
+                });
+
+            });
+
+        }
+
         $(function () {
             $("#menu a").click(function () {
                 window.external.NotifyMenuClick($(this).attr("name"));
                 $("#menu").hide();
             });
+
+            setInterval(function () {
+                bindImage();
+            }, 2000);
         });
+
+
 
     </script>
 </head>
 <body data="" type="webword">
+    <div id="bg" class="bg" style="display: none;">
+    </div>
+    <div id="popDiv" class="mydiv" style="display: none;">
+        <div>
+            <img id="editImage" src="" width="250" height="250" />
+        </div>
+        <div>
+            <fieldset>
+                <legend>设置</legend>
+                <table class="properties">
+                    <tbody>
+                        <tr>
+                            <td class="column1">
+                                <label id="titlelabel" for="title">
+                                    标题</label>
+                            </td>
+                            <td colspan="2">
+                                <input id="title" name="title" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="column1">
+                                <label id="altlabel" for="alt">
+                                    替换文本</label>
+                            </td>
+                            <td colspan="2">
+                                <input id="alt" name="alt" type="text" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <button id="btnok">
+                                    确定</button>
+                                <button id="btncancel" onclick="closeDiv();">
+                                    取消</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
     <div id="template" style="display: none">
         <hr class="noprint" color="rgb(128,128,128)" />
         <center class="center" unselectable="on" class="editorContainer">
@@ -295,7 +423,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             <li><a href="javascript:void(0);" name="text2">设为附加正文2</a></li>
             <li><a href="javascript:void(0);" name="text3">设为附加正文3</a></li>
             <li><a href="javascript:void(0);" name="text4">设为附加正文4</a></li>
-             <li><a href="javascript:void(0);" name="text5">设为附加正文5</a></li>
+            <li><a href="javascript:void(0);" name="text5">设为附加正文5</a></li>
             <li><a href="javascript:void(0);" name="seoDescription">设为SEO描述</a></li>
             <li><a href="javascript:void(0);" name="seoKeyword">添加为SEO关键词</a></li>
             <li><a href="javascript:void(0);" name="keyword">添加为关键词</a></li>

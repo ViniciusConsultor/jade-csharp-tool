@@ -420,14 +420,21 @@ namespace Jade
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            SplashScreenManager.ShowForm(typeof(WaitForm1));
-            UpdateCurrentData();
-            RemoteAPI.Publish(CurrentData);
-            CurrentData.IsPublish = true;
-            CacheObject.DownloadDataDAL.Update(CurrentData);
-            SplashScreenManager.CloseForm();
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Close();
+            if (CacheObject.IsLognIn)
+            {
+                SplashScreenManager.ShowForm(typeof(WaitForm1));
+                UpdateCurrentData();
+                RemoteAPI.Publish(CurrentData);
+                CurrentData.IsPublish = true;
+                CacheObject.DownloadDataDAL.Update(CurrentData);
+                SplashScreenManager.CloseForm();
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
+            }
         }
 
         private void txt_news_keywords_Load(object sender, EventArgs e)
@@ -498,7 +505,7 @@ namespace Jade
                         // this.cmbSearchLabel.Items.Clear();
 
                         this.cmbSearchLabel.DataSource = RemoteAPI.SearchLabel(this.cmbSearchLabel.Text);
-                        cmbSearchLabel.SelectedIndex = -1; 
+                        cmbSearchLabel.SelectedIndex = -1;
 
                         cmbSearchLabel.DroppedDown = true;
 

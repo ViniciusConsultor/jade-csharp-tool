@@ -151,7 +151,7 @@ namespace Jade
         {
             if (editor == null || editor.Control == null)
             {
-                SplashScreenManager.ShowForm(typeof(WaitForm1));
+                //SplashScreenManager.ShowForm(typeof(WaitForm1));
                 tabbedView1.BeginUpdate();
                 // var form = new DraftBoxForm();
                 var form = new ContentListPanel();
@@ -162,7 +162,7 @@ namespace Jade
                 //draft.IsEdited = false;
                 //draft.IsPublished = false;
                 tabbedView1.EndUpdate();
-                SplashScreenManager.CloseForm();
+                //SplashScreenManager.CloseForm();
             }
         }
 
@@ -408,6 +408,8 @@ namespace Jade
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            navDraft_LinkClicked(sender, null);
+
             DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
 
             if (!CacheObject.IsDebug)
