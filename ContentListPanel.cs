@@ -28,7 +28,7 @@ namespace Jade
             gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
             gridView1.DoubleClick += new EventHandler(gridView1_DoubleClick);
             //this.gridView1.RowCellClick += new RowCellClickEventHandler(gridView1_RowCellClick);
-            //this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
+            this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
             this.comboBoxEdit1.TextChanged += new EventHandler(comboBox1_SelectedIndexChanged);
@@ -39,6 +39,7 @@ namespace Jade
             this.comboBoxEdit1.EditValue = "全部任务";
             this.comboBoxEdit1.ItemIndex = 0;
             this.devPager1.PageChange += new EventPagingHandler(pager1_PageChange);
+            CacheObject.ContentForm.InitDownloadData(new downloaddata());
         }
 
         void gridView1_MouseDown(object sender, MouseEventArgs e)
@@ -371,7 +372,10 @@ namespace Jade
 
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            toolStripButton2_Click(null, null);
+            if (CacheObject.IsLognIn)
+                toolStripButton2_Click(null, null);
+            else
+                MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
         }
     }
 }

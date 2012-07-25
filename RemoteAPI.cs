@@ -155,8 +155,26 @@ namespace Jade
             return result;
         }
 
+        static void UploadImage()
+        {
+            NiceWebClient client = new NiceWebClient();
+            client.Cookie = CacheObject.Cookie;
+            client.Referer = "http://newscms.house365.com/newCMS/news/addpic.php?parent_channel_id=8000000&bjq=";
+
+            var results = client.UploadFile("http://newscms.house365.com/newCMS/news/addpic_save.php", @"D:\Documents\Pictures\icon.gif");
+            var txt = Encoding.GetEncoding("gb2312").GetString(results);
+            Console.WriteLine(txt);
+
+            var request = CacheObject.WebRequset;
+            request.Url = "http://newscms.house365.com/newCMS/news/addpic_save.php";
+            request.Cookie = CacheObject.Cookie;
+            var result = request.UploadImage("shuiyin=ok&sywz_ty=cb&parent_channel_id=8000000&upload_userid=5809&bjq=", @"D:\Documents\Pictures\icon.gif", "image/gif");
+            Console.WriteLine(result);
+        }
+
         public static void Publish(Model.IDownloadData data = null)
         {
+            UploadImage();
             if (data != null)
             {
                 string newsid = GetNewsId();
