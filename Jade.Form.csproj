@@ -285,6 +285,12 @@
     <Compile Include="TaskRunnerPanel.Designer.cs">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UrlSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlSettingForm.designer.cs">
+      <DependentUpon>UrlSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WaitForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -448,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TaskRunnerPanel.resx">
       <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UrlSettingForm.resx">
+      <DependentUpon>UrlSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaitForm1.resx">
       <DependentUpon>WaitForm1.cs</DependentUpon>

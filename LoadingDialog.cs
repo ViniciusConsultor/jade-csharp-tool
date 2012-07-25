@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Jade
 {
-    public partial class LoadingDialog : Form
+    public partial class LoadingDialog : DevExpress.XtraEditors.XtraForm
     {
         private static Color borderColor = Color.FromArgb(0, 0, 0);
         private static Color headerColor = Color.FromArgb(211, 219, 222);
@@ -39,15 +39,15 @@ namespace Jade
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, borderColor, ButtonBorderStyle.Solid);
-            e.Graphics.FillRectangle(new SolidBrush(headerColor), 1, 1, this.Size.Width - 2, 26);
+            //ControlPaint.DrawBorder(e.Graphics, ClientRectangle, borderColor, ButtonBorderStyle.Solid);
+            //e.Graphics.FillRectangle(new SolidBrush(headerColor), 1, 1, this.Size.Width - 2, 26);
         }
 
         public int Percentage
         {
             set
             {
-                this.lblPercentage.Text = value + "%";
+                this.lblMessage.Text = "处理中，当前进度" + value + "%";
             }
         }
 
