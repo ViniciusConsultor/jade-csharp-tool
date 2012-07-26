@@ -225,7 +225,15 @@ namespace Jade
 
         void c_CheckedChanged(object sender, EventArgs e)
         {
-            gridView1.EndSelection();
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+            Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+            info = gridView1.CalcHitInfo(pt);
+            if (info.InRowCell)
+            {
+                rowIndex = info.RowHandle;
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                gridView1.SetRowCellValue(rowIndex, "IsChecked", !dataTable[rowIndex].IsChecked);
+            }
         }
 
         public static void DrawCheckBox(DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e, bool chk)
