@@ -148,7 +148,7 @@ namespace Jade
 
                 StatusSelections.ForEach(item => item.Selected = false);
 
-                if (data.label_base != null)
+                if (!string.IsNullOrEmpty(data.label_base))
                 {
                     var tags = data.label_base.Replace("\"", "").Split('&');
                     foreach (var tag in tags)
@@ -164,36 +164,33 @@ namespace Jade
                 }
                 else
                 {
-                    //default tag
+                    var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(Properties.Settings.Default.DefaultTag.Trim()));
+                    var item = StatusSelections.FindObjectWithItem(specialTag);
+                    if (item != null)
+                        item.Selected = true;
                 }
 
                 this.chk_bbspinglun.Checked = data.bbspinglun;
                 this.chk_cmspinglun.Checked = data.cmspinglun;
 
-                if (data.news_source_name != null)
+                if (!string.IsNullOrEmpty(data.news_source_name))
                 {
                     this.txtnews_source_name.Text = data.news_source_name;
                 }
                 else
                 {
-                    if (this.txtnews_source_name.Items.Count > 0)
-                    {
-                        // todo 设为default
-                        this.txtnews_source_name.SelectedIndex = 0;
-                    }
-
+                    var defaultSouce = Properties.Settings.Default.DefaultSource.Trim();
+                    this.txtnews_source_name.SelectedValue = defaultSouce;
                 }
 
-                if (data.news_template_file != null)
+                if (!string.IsNullOrEmpty(data.news_template_file))
                 {
                     this.txt_news_template_file.SelectedValue = data.news_template_file;
                 }
                 else
                 {
-                    if (this.txt_news_template_file.Items.Count > 0)
-                    {
-                        this.txt_news_template_file.SelectedIndex = 0;
-                    }
+                    var defaultSouce = Properties.Settings.Default.DefaultTemplate.Trim();
+                    this.txt_news_template_file.SelectedValue = defaultSouce;
                 }
 
                 this.txt_gfbm_id.Text = data.gfbm_id;
@@ -220,20 +217,9 @@ namespace Jade
             }
         }
 
-        private void ContentEditForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCurrentData();
-
             CacheObject.DownloadDataDAL.Update(CurrentData);
             MessageBox.Show("保存成功");
         }
@@ -316,20 +302,10 @@ namespace Jade
         {
             btnSave_Click(null, null);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
-
             this.Close();
 
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void 设为XXXToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         #region 编辑器菜单
 
@@ -481,56 +457,6 @@ namespace Jade
             }
         }
 
-        private void txt_news_keywords_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtContent_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_news_keyword2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbSearchLabel_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void text_news_video_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCommentUrl_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_news_template_file_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         bool isProcess = false;
 
         private void cmbSearchLabel_TextUpdate(object sender, EventArgs e)
@@ -572,33 +498,6 @@ namespace Jade
                 }
             }
         }
-
-        private void txt_tags_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_row_news_abstract_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_news_description_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_news_down_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
     }
 }

@@ -211,31 +211,37 @@ namespace Jade
                     HtmlDoc = null;
                 }
 
-                string newsid = GetNewsId();
-                var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=8000000&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat=&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
-                    encoding(data.news_source_name), encoding(data.news_template_file), encoding(data.Title), encoding(data.Keywords), encoding(data.news_keywords2),
-                     encoding(data.SubTitle),
-                   getLabelData(data.label_base),
-                    data.cmspinglun ? "1" : "0", "", "", data.kfbm_id, data.kfbm_link, data.gfbm_id, data.gfbm_link,
-                    encoding(data.Content),
-                    encoding(data.news_abs), encoding(data.news_top), data.news_guideimage, data.news_guideimage2, encoding(data.Summary), encoding(data.news_description),
-                    data.news_link, encoding(data.news_down),
-                     encoding(data.news_left), encoding(data.news_right), data.comment_url, data.news_video, newsid);
-
-                var request = CacheObject.WebRequset;
-                request.Url = "http://newscms.house365.com/newCMS/news/news_save.php";
-                request.Cookie = CacheObject.Cookie;
-                request.RequestData = new RequestPostData()
+                try
                 {
-                    PostDatas = new List<PostDataItem> { new PostDataItem{
-                        Data = postData
-                }}
-                };
+                    string newsid = GetNewsId();
+                    var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=8000000&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat=&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
+                        encoding(data.news_source_name), encoding(data.news_template_file), encoding(data.Title), encoding(data.Keywords), encoding(data.news_keywords2),
+                         encoding(data.SubTitle),
+                       getLabelData(data.label_base),
+                        data.cmspinglun ? "1" : "0", "", "", data.kfbm_id, data.kfbm_link, data.gfbm_id, data.gfbm_link,
+                        encoding(data.Content),
+                        encoding(data.news_abs), encoding(data.news_top), data.news_guideimage, data.news_guideimage2, encoding(data.Summary), encoding(data.news_description),
+                        data.news_link, encoding(data.news_down),
+                         encoding(data.news_left), encoding(data.news_right), data.comment_url, data.news_video, newsid);
 
-                var result = request.Post();
-                if (result != "" && !result.Contains("修改失败"))
+                    var request = CacheObject.WebRequset;
+                    request.Url = "http://newscms.house365.com/newCMS/news/news_save.php";
+                    request.Cookie = CacheObject.Cookie;
+                    request.RequestData = new RequestPostData()
+                    {
+                        PostDatas = new List<PostDataItem> { new PostDataItem{
+                        Data = postData}}
+                    };
+
+                    var result = request.Post();
+                    if (result != "" && !result.Contains("修改失败"))
+                    {
+                        return true;
+                    }
+                }
+                catch
                 {
-                    return true;
+                    return false;
                 }
             }
             return false;

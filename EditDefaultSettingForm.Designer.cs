@@ -30,20 +30,20 @@
         {
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.urlSettingBox = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEditLabel = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEditTemplete = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEditSource = new DevExpress.XtraEditors.LookUpEdit();
+            this.label1 = new System.Windows.Forms.Label();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.lblUrlExclude = new System.Windows.Forms.Label();
             this.lblUrlInclude = new System.Windows.Forms.Label();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lookUpEditSource = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditTemplete = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditLabel = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.urlSettingBox)).BeginInit();
             this.urlSettingBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLabel.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButton3
@@ -71,7 +71,53 @@
             this.urlSettingBox.Name = "urlSettingBox";
             this.urlSettingBox.Size = new System.Drawing.Size(439, 159);
             this.urlSettingBox.TabIndex = 95;
-            this.urlSettingBox.Text = "内容页地址高级设置";
+            this.urlSettingBox.Text = "表单默认项设置";
+            // 
+            // lookUpEditLabel
+            // 
+            this.lookUpEditLabel.Location = new System.Drawing.Point(115, 98);
+            this.lookUpEditLabel.Name = "lookUpEditLabel";
+            this.lookUpEditLabel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditLabel.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Value")});
+            this.lookUpEditLabel.Size = new System.Drawing.Size(271, 20);
+            this.lookUpEditLabel.TabIndex = 99;
+            // 
+            // lookUpEditTemplete
+            // 
+            this.lookUpEditTemplete.Location = new System.Drawing.Point(115, 64);
+            this.lookUpEditTemplete.Name = "lookUpEditTemplete";
+            this.lookUpEditTemplete.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditTemplete.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Value")});
+            this.lookUpEditTemplete.Size = new System.Drawing.Size(271, 20);
+            this.lookUpEditTemplete.TabIndex = 98;
+            // 
+            // lookUpEditSource
+            // 
+            this.lookUpEditSource.Location = new System.Drawing.Point(115, 30);
+            this.lookUpEditSource.Name = "lookUpEditSource";
+            this.lookUpEditSource.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditSource.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", 40, "说明"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", 40, "值")});
+            this.lookUpEditSource.Size = new System.Drawing.Size(271, 20);
+            this.lookUpEditSource.TabIndex = 97;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(18, 101);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 96;
+            this.label1.Text = "默认标签:";
             // 
             // simpleButton2
             // 
@@ -117,52 +163,7 @@
             this.simpleButton4.Size = new System.Drawing.Size(72, 23);
             this.simpleButton4.TabIndex = 97;
             this.simpleButton4.Text = "取消";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(18, 101);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 96;
-            this.label1.Text = "默认标签:";
-            // 
-            // lookUpEditSource
-            // 
-            this.lookUpEditSource.Location = new System.Drawing.Point(115, 30);
-            this.lookUpEditSource.Name = "lookUpEditSource";
-            this.lookUpEditSource.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditSource.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", 40, "说明"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", 40, "值")});
-            this.lookUpEditSource.Size = new System.Drawing.Size(271, 20);
-            this.lookUpEditSource.TabIndex = 97;
-            // 
-            // lookUpEditTemplete
-            // 
-            this.lookUpEditTemplete.Location = new System.Drawing.Point(115, 64);
-            this.lookUpEditTemplete.Name = "lookUpEditTemplete";
-            this.lookUpEditTemplete.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditTemplete.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Value")});
-            this.lookUpEditTemplete.Size = new System.Drawing.Size(271, 20);
-            this.lookUpEditTemplete.TabIndex = 98;
-            // 
-            // lookUpEditLabel
-            // 
-            this.lookUpEditLabel.Location = new System.Drawing.Point(115, 98);
-            this.lookUpEditLabel.Name = "lookUpEditLabel";
-            this.lookUpEditLabel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditLabel.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Value")});
-            this.lookUpEditLabel.Size = new System.Drawing.Size(271, 20);
-            this.lookUpEditLabel.TabIndex = 99;
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // EditDefaultSettingForm
             // 
@@ -177,9 +178,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.urlSettingBox)).EndInit();
             this.urlSettingBox.ResumeLayout(false);
             this.urlSettingBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLabel.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
