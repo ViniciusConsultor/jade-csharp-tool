@@ -102,6 +102,8 @@
             this.Check.FieldName = "IsChecked";
             this.Check.Name = "Check";
             this.Check.OptionsFilter.AllowAutoFilter = false;
+            this.Check.OptionsFilter.AllowFilter = false;
+            this.Check.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.False;
             this.Check.Visible = true;
             this.Check.VisibleIndex = 0;
             this.Check.Width = 30;

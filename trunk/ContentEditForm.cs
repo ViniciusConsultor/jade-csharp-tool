@@ -160,8 +160,11 @@ namespace Jade
                             if (item != null)
                                 item.Selected = true;
                         }
-
                     }
+                }
+                else
+                {
+                    //default tag
                 }
 
                 this.chk_bbspinglun.Checked = data.bbspinglun;
@@ -171,10 +174,26 @@ namespace Jade
                 {
                     this.txtnews_source_name.Text = data.news_source_name;
                 }
+                else
+                {
+                    if (this.txtnews_source_name.Items.Count > 0)
+                    {
+                        // todo 设为default
+                        this.txtnews_source_name.SelectedIndex = 0;
+                    }
+
+                }
 
                 if (data.news_template_file != null)
                 {
                     this.txt_news_template_file.SelectedValue = data.news_template_file;
+                }
+                else
+                {
+                    if (this.txt_news_template_file.Items.Count > 0)
+                    {
+                        this.txt_news_template_file.SelectedIndex = 0;
+                    }
                 }
 
                 this.txt_gfbm_id.Text = data.gfbm_id;
@@ -422,14 +441,39 @@ namespace Jade
         {
             if (CacheObject.IsLognIn)
             {
+
+                if (this.txt_tags.Text == "")
+                {
+                    MessageBox.Show("请选择标签！'");
+                    return;
+                }
+
+                if (this.txt_news_keywords.Text == "")
+                {
+                    MessageBox.Show("请填写关键字！'");
+                    return;
+                }
+
+                if (this.txt_news_keyword2.Text == "")
+                {
+                    MessageBox.Show("请填写SEO关键字！'");
+                    return;
+                }
+
                 SplashScreenManager.ShowForm(typeof(WaitForm1));
                 UpdateCurrentData();
-                RemoteAPI.Publish(CurrentData);
-                CurrentData.IsPublish = true;
-                CacheObject.DownloadDataDAL.Update(CurrentData);
-                SplashScreenManager.CloseForm();
-                this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                this.Close();
+                if (RemoteAPI.Publish(CurrentData))
+                {
+                    CurrentData.IsPublish = true;
+                    CacheObject.DownloadDataDAL.Update(CurrentData);
+                    SplashScreenManager.CloseForm();
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("发布失败，服务器响应'修改失败！'");
+                }
             }
             else
             {

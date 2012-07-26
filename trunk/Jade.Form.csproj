@@ -244,6 +244,13 @@
     <Compile Include="DraftBoxForm.Designer.cs">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditDefaultSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditDefaultSettingForm.Designer.cs">
+      <DependentUpon>EditDefaultSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="IRemoteWebService.cs" />
     <Compile Include="IWorkingThread.cs" />
@@ -258,6 +265,12 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PublishForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PublishForm.Designer.cs">
+      <DependentUpon>PublishForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RemoteAPI.cs" />
     <Compile Include="SettingManager.cs" />
@@ -436,11 +449,17 @@
     <EmbeddedResource Include="DraftBoxForm.resx">
       <DependentUpon>DraftBoxForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditDefaultSettingForm.resx">
+      <DependentUpon>EditDefaultSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PublishForm.resx">
+      <DependentUpon>PublishForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SiteRuleWizardForm.resx">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
@@ -582,9 +601,6 @@
     <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.xml" />
     <Content Include="release\DevExpress.XtraWizard.v12.1.dll" />
     <Content Include="release\DevExpress.XtraWizard.v12.1.xml" />
-    <Content Include="release\hfbbs.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="release\SiteConfig\core.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.Category\Data\Jade.Model.Category.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Data\Jade.Model.SiteRule.xml" />

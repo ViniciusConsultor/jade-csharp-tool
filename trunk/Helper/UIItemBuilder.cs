@@ -18,8 +18,7 @@ namespace Jade
                 {
                     FileStream stream = File.OpenRead(Jade.Properties.Settings.Default.EncodingFilePath);
                     StreamReader reader = new StreamReader(stream);
-                    encodingList = new List<string>();
-                    
+                    encodingList = new List<string>();                   
                     while (!reader.EndOfStream)
                     {
                         encodingList.Add(reader.ReadLine());

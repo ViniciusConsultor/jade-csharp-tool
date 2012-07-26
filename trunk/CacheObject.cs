@@ -1074,11 +1074,12 @@ namespace Jade
             var gb2312 = Encoding.GetEncoding("gb2312");
             var webrequest = (HttpWebRequest)WebRequest.Create(this.Url);
             webrequest.Headers[HttpRequestHeader.Cookie] = this.Cookie;
-            webrequest.Headers.Remove(HttpRequestHeader.Referer);
-            webrequest.Headers.Add(HttpRequestHeader.Referer, "http://newscms.house365.com/newCMS/news/addpic.php?parent_channel_id=8000000&bjq=");
+            // webrequest.Headers.Remove(HttpRequestHeader.Referer);
+            //webrequest.Headers.Add(HttpRequestHeader.Referer, "http://newscms.house365.com/newCMS/news/addpic.php?parent_channel_id=8000000&bjq=");
 
-            // 这个可以是改变的，也可以是下面这个固定的字符串 
-            string boundary = "----WebKitFormBoundaryIvak6JnUzBTVvZHH";
+            string boundary = "----------" + DateTime.Now.Ticks.ToString("x");
+            // boundary
+            //string boundary = "----------------------------7dc1571c41816";
 
             // 创建request对象 
             //HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url); 
@@ -1087,6 +1088,8 @@ namespace Jade
             webrequest.AllowWriteStreamBuffering = true;
             webrequest.Accept = "*/*";
             webrequest.KeepAlive = true;
+
+            var postStream = new MemoryStream();
 
             // 构造发送数据
             StringBuilder sb = new StringBuilder();
@@ -1101,16 +1104,24 @@ namespace Jade
                 }
                 string name = item[0];
                 string value = item[1];
-                sb.Append("-" + boundary);
+                sb.Append("--" + boundary);
                 sb.Append("\r\n");
                 sb.Append("Content-Disposition: form-data; name=\"" + name + "\"");
                 sb.Append("\r\n\r\n");
                 sb.Append(value);
                 sb.Append("\r\n");
+
             }
 
+            //var fileField = "--" + boundary + "\r\n";
+            //fileField += "Content-Disposition: form-data; name=\"filename\"; filename=\"" + Path.GetFileName(filepath) + "\"\r\n";
+            //fileField += "Content-Type: " + imageType + "\r\n\r\n";
+            //var  b = Encoding.Default.GetBytes(fileField);
+            //postStream.Write(b, 0, b.Length);
+
+
             // 文件域的数据
-            sb.Append("-" + boundary);
+            sb.Append("--" + boundary);
             sb.Append("\r\n");
             sb.Append("Content-Disposition: form-data; name=\"filename\"; filename=\"" + new FileInfo(filepath).Name + "\"");
             sb.Append("\r\n");
@@ -1123,7 +1134,8 @@ namespace Jade
             byte[] postHeaderBytes = Encoding.UTF8.GetBytes(postHeader);
 
             //构造尾部数据 
-            byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n-" + boundary + "-\r\n");
+            byte[] boundaryBytes =
+            Encoding.ASCII.GetBytes("--" + boundary + "");
 
             FileStream fileStream = new FileStream(filepath, FileMode.Open, FileAccess.Read);
             long length = postHeaderBytes.Length + fileStream.Length + boundaryBytes.Length;

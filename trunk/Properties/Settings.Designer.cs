@@ -50,18 +50,6 @@ namespace Jade.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DefaultSource {
-            get {
-                return ((string)(this["DefaultSource"]));
-            }
-            set {
-                this["DefaultSource"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ReplaceString {
             get {
                 return ((string)(this["ReplaceString"]));
@@ -188,6 +176,42 @@ namespace Jade.Properties {
             }
             set {
                 this["UserPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("资讯中心")]
+        public string DefaultTag {
+            get {
+                return ((string)(this["DefaultTag"]));
+            }
+            set {
+                this["DefaultTag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("365地产家居网")]
+        public string DefaultSource {
+            get {
+                return ((string)(this["DefaultSource"]));
+            }
+            set {
+                this["DefaultSource"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/hfestate/template/estate.htm")]
+        public string DefaultTemplate {
+            get {
+                return ((string)(this["DefaultTemplate"]));
+            }
+            set {
+                this["DefaultTemplate"] = value;
             }
         }
     }
