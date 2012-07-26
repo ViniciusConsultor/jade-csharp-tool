@@ -8,9 +8,6 @@
     <Setting Name="AutoRun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DefaultSource" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="ReplaceString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -43,6 +40,15 @@
     </Setting>
     <Setting Name="UserPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">House365</Value>
+    </Setting>
+    <Setting Name="DefaultTag" Type="System.String" Scope="User">
+      <Value Profile="(Default)">资讯中心</Value>
+    </Setting>
+    <Setting Name="DefaultSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">365地产家居网</Value>
+    </Setting>
+    <Setting Name="DefaultTemplate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/hfestate/template/estate.htm</Value>
     </Setting>
   </Settings>
 </SettingsFile>

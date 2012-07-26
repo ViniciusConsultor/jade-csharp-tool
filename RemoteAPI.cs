@@ -155,28 +155,62 @@ namespace Jade
             return result;
         }
 
-        static void UploadImage()
+        public static string UploadImage(string filename)
         {
-            NiceWebClient client = new NiceWebClient();
+            var client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
-            client.Referer = "http://newscms.house365.com/newCMS/news/addpic.php?parent_channel_id=8000000&bjq=";
-
-            var results = client.UploadFile("http://newscms.house365.com/newCMS/news/addpic_save.php", @"D:\Documents\Pictures\icon.gif");
-            var txt = Encoding.GetEncoding("gb2312").GetString(results);
-            Console.WriteLine(txt);
-
-            var request = CacheObject.WebRequset;
-            request.Url = "http://newscms.house365.com/newCMS/news/addpic_save.php";
-            request.Cookie = CacheObject.Cookie;
-            var result = request.UploadImage("shuiyin=ok&sywz_ty=cb&parent_channel_id=8000000&upload_userid=5809&bjq=", @"D:\Documents\Pictures\icon.gif", "image/gif");
-            Console.WriteLine(result);
+            var response = client.UploadFile("http://newscms.house365.com/newCMS/news/addpic_save.php", "shuiyin=ok&sywz_ty=cb", @"filename=" + filename);
+            // "附件保存成功!\r\n<script type=\"text/javascript\">\r\n\r\n\r\nfunction returnValue()\r\n{\r\nwindow.opener.document.all.src.value='http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png';    //地址\r\nthis.close();\r\n}\r\n\r\nfunction returnValue2()\r\n{\r\nwindow.opener.ksfj('http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png','','',0,'');\r\nthis.close();\r\n}\r\n\r\n\r\n\r\nvar refresh = \"list_pic.php?user_id=5809&parent_channel_id=&bjq=\";\r\nfunction myrefresh()\r\n{\r\nwindow.location.href=refresh;\r\n}\r\nsetTimeout('myrefresh()',1000); //指定1秒刷新一次\r\n</script>"
+            if (response.Contains("附件保存成功"))
+            {
+                var regex = new System.Text.RegularExpressions.Regex("value='([^']+)'");
+                var url = regex.Match(response).Groups[1].Value;
+                return url;
+            }
+            return "";
         }
 
-        public static void Publish(Model.IDownloadData data = null)
+        public static bool Publish(Model.IDownloadData data = null)
         {
-            UploadImage();
+            //UploadImage();
+            //return;
             if (data != null)
             {
+                if (data.Content.IndexOf("<img") > -1 || data.Content.IndexOf("<IMG") > -1)
+                {
+                    HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                    HtmlDoc.OptionAutoCloseOnEnd = true;
+
+                    HtmlDoc.LoadHtml(data.Content);
+                    var nodes = HtmlDoc.DocumentNode.SelectNodes("//img");
+                    if (nodes != null)
+                    {
+                        foreach (HtmlAgilityPack.HtmlNode node in nodes)
+                        {
+                            var src = node.Attributes["src"].Value;
+                            if (!src.Contains("http://"))
+                            {
+                                if (System.IO.File.Exists(src))
+                                {
+                                    try
+                                    {
+                                        var real = UploadImage(src);
+                                        if (real != "")
+                                        {
+                                            data.Content = data.Content.Replace(src, real);
+                                        }
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    HtmlDoc = null;
+                }
+
                 string newsid = GetNewsId();
                 var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=8000000&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat=&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
                     encoding(data.news_source_name), encoding(data.news_template_file), encoding(data.Title), encoding(data.Keywords), encoding(data.news_keywords2),
@@ -199,8 +233,12 @@ namespace Jade
                 };
 
                 var result = request.Post();
-                Console.WriteLine(result);
+                if (result != "" && !result.Contains("修改失败"))
+                {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }

@@ -687,5 +687,10 @@ namespace Jade
         }
 
         #endregion
+
+        private void barButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            new EditDefaultSettingForm().ShowDialog();
+        }
     }
 }
