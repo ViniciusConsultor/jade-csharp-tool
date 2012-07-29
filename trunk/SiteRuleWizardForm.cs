@@ -12,6 +12,7 @@ using mshtml;
 using System.Reflection;
 using System.Threading;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Jade
 {
@@ -359,6 +360,8 @@ namespace Jade
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //force bind
+            OnBrowserLoaded();
             this.enableNavigate = false;
             this.EnableSelect = true;
             this.XMLPathType = radionInnerLinks.Checked ? XMLPathType.InnerLinks : XMLPathType.Href;
@@ -578,6 +581,35 @@ namespace Jade
 
         public string GetXmlPath(HtmlElement element)
         {
+            HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDoc.OptionAutoCloseOnEnd = true;
+            var html = currenActiveBrowser.DocumentText.ToLower();
+
+            html = html.Replace("<tbody>", "").Replace("</tbody>", "");
+            var body = new Regex("<body[^>]*>[\\s\\S]+</body>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            html = body.Match(html).Value;
+            // check html
+            var checkRegex = new Regex("<body", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var checkResults = checkRegex.Matches(html);
+            if (checkResults.Count > 1)
+            {
+                html = html.Substring(checkResults[checkResults.Count - 1].Index);
+            }
+            HtmlDoc.LoadHtml(html);
+            var nodes = HtmlDoc.DocumentNode.SelectNodes("//" + element.TagName.ToLower());
+            var outHtml = element.InnerHtml.ToLower();
+            var selected = nodes.FirstOrDefault(n => n.InnerHtml == outHtml);
+
+            if (selected != null)
+            {
+                return selected.XPath.Replace("/body[1]", "/");
+            }
+            HtmlDoc = null;
+            return GetXmlPath2(element);
+        }
+
+        public string GetXmlPath2(HtmlElement element)
+        {
             //IHTMLDocument2 htmlDocument = this.iReaperWebBrowser.Document.DomDocument as mshtml.IHTMLDocument2;
             var name = element.TagName.ToLower();
             //IHTMLElement el = element as IHTMLElement;
@@ -723,7 +755,15 @@ namespace Jade
         {
             if (enableNavigate)
             {
-                DevExpress.XtraSplashScreen.SplashScreenManager.ShowForm(typeof(WaitForm1));
+                try
+                {
+                    if (DevExpress.XtraSplashScreen.SplashScreenManager.Default == null)
+                        DevExpress.XtraSplashScreen.SplashScreenManager.ShowForm(typeof(WaitForm1));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             e.Cancel = !enableNavigate;
         }
@@ -877,6 +917,8 @@ namespace Jade
         {
             this.enableNavigate = false;
             this.EnableSelect = true;
+            //force bind
+            OnBrowserLoaded();
             this.XMLPathType = radioInnerLinks.Checked ? XMLPathType.InnerLinks : XMLPathType.Href;
             this.XMLPathSelectType = radioInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
             this.CurrentXPathSelected = (xpath) =>
@@ -1072,6 +1114,9 @@ namespace Jade
 
         private void btnCXPath_Click(object sender, EventArgs e)
         {
+            current = null;
+            //force bind
+            OnBrowserLoaded();
             this.EnableSelect = true;
             this.currentTxtbox = this.txtCXpath;
             this.currentActiveLogLabel = this.lblItemContentLog;
@@ -1165,6 +1210,7 @@ namespace Jade
                 this.contentBrowser.Navigate(this.txtStartUrl.Text);
                 this.isBindCompleted = false;
                 this.Url = new Uri(this.txtStartUrl.Text);
+                isLink = true;
             }
             else if (e.Page == this.contentUrlPage)
             {
@@ -1247,6 +1293,7 @@ namespace Jade
                     }
                 });
                 this.workingThread.Start();
+                isLink = false;
             }
             else if (e.Page == this.previewPage)
             {
@@ -1292,7 +1339,7 @@ namespace Jade
                 {
                     DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
                 }
-              
+
                 DevExpress.XtraSplashScreen.SplashScreenManager.ShowForm(typeof(WaitForm1));
                 var html = HtmlPicker.VisitUrl(
                                          uri,
@@ -1363,7 +1410,7 @@ namespace Jade
         /// <param name="e"></param>
         private void btnAutoReListPage_Click(object sender, EventArgs e)
         {
-            var linkNodes = ExtractUrl.GetLinkNodes(this.currenActiveBrowser.Document.Body.OuterHtml, "下一页", "Next", "Next &gt;", "下页", "Last", "末页", "尾页");
+            var linkNodes = ExtractUrl.GetLinkNodes(this.currenActiveBrowser.Document.Body.OuterHtml, "下一页", "Next", "Next &gt;", "下页", "Last", "末页", "尾页", "2", "3");
 
             bool hasLast = false;
 
@@ -1390,6 +1437,10 @@ namespace Jade
                 {
                     next = linkNodes.FirstOrDefault(n => n.InnerText == "Next &gt;");
                 }
+                else if (linkTexts.Contains("2"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "2");
+                }
 
                 // 尾页
                 HtmlAgilityPack.HtmlNode last = null;
@@ -1404,6 +1455,10 @@ namespace Jade
                 else if (linkTexts.Contains("Last"))
                 {
                     last = linkNodes.FirstOrDefault(n => n.InnerText == "Last");
+                }
+                else if (linkTexts.Contains("3"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "3");
                 }
 
                 string pageXpath = "";
@@ -1480,6 +1535,7 @@ namespace Jade
             if (this.itemRuleTab.SelectedTabPage.Text == "内容")
             {
                 this.chkDownloadPic.Enabled = true;
+
             }
             else
             {

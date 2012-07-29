@@ -499,5 +499,24 @@ namespace Jade
             }
         }
 
+        private void label23_Click(object sender, EventArgs e)
+        {
+            var imageSelector = new ImageSelecter(true);
+            if (imageSelector.ShowDialog() == DialogResult.OK)
+            {
+                this.txt_news_guideimage.Text = imageSelector.SelectedFile;
+            }
+        }
+
+        private void label24_Click(object sender, EventArgs e)
+        {
+
+            var imageSelector = new ImageSelecter(true);
+            if (imageSelector.ShowDialog() == DialogResult.OK)
+            {
+                this.txt_news_guideimage.Text = imageSelector.SelectedFile;
+            }
+        }
+
     }
 }

@@ -170,6 +170,30 @@ namespace Jade
             return "";
         }
 
+        public static List<string> GetImages()
+        {
+            var result = new List<string>();
+            if (CacheObject.IsLognIn)
+            {
+                var request = CacheObject.WebRequset;
+                request.Url = "http://newscms.house365.com/newCMS/news/list_pic.php?parent_channel_id=8000000&which_field=keywords&search_word=&type_ename=&user_id=0&fromday=&show_mode=&bjq=&cx.x=47&cx.y=7";
+                var html = request.Get();
+                var xpath = "//*[@id=\"pictable\"]//img";
+                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                HtmlDoc.OptionAutoCloseOnEnd = true;
+                HtmlDoc.LoadHtml(html);
+                var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
+                if (nodes != null)
+                {
+                    foreach (HtmlAgilityPack.HtmlNode node in nodes)
+                    {
+                        result.Add(node.Attributes["src"].Value);
+                    }
+                }
+            }
+            return result;
+        }
+
         public static bool Publish(Model.IDownloadData data = null)
         {
             //UploadImage();

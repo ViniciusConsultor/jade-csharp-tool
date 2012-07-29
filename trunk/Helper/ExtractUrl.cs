@@ -236,7 +236,7 @@ namespace Jade
 
 
         private static string html2TextPattern =
-@"(?<script><script[^>]*?>.*?</script>)|(?<style><style>.*?</style>)|(?<comment><!--.*?-->)" +
+@"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)" +
 @"|(?<html>(?!<ps|(<p>)|(<img)|(<br)|(strong))" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
    @"<[^>]+>)" + // HTML标记
 @"|(?<quot>&(quot|#34);)" + // 符号: "
@@ -281,17 +281,18 @@ namespace Jade
         /// <param name="selectType"></param>
         /// <param name="pathType"></param>
         /// <returns></returns>
-        public static List<string> ExtractDataFromHtml(string html, string xpath, XMLPathSelectType selectType, XMLPathType pathType,string anotherXPath = "")
+        public static List<string> ExtractDataFromHtml(string html, string xpath, XMLPathSelectType selectType, XMLPathType pathType, string anotherXPath = "")
         {
 
             var result = new List<string>();
-            if (xpath == "")
+            if (xpath == "" || html == "")
             {
                 return result;
             }
 
             try
             {
+                var oldHtml = html;
                 HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
                 HtmlDoc.OptionAutoCloseOnEnd = true;
                 //html = html.ToLower();
@@ -303,6 +304,19 @@ namespace Jade
                 xpath = xpath.Replace("/tbody[1]", "");
                 var body = new Regex("<body[^>]*>[\\s\\S]+</body>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 html = body.Match(html).Value;
+                ;
+                if (html == "")
+                {
+                    html = oldHtml;
+                }
+
+                // check html
+                var checkRegex = new Regex("<body", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var checkResults = checkRegex.Matches(html);
+                if (checkResults.Count > 1)
+                {
+                    html = html.Substring(checkResults[checkResults.Count - 1].Index);
+                }
                 HtmlDoc.LoadHtml(html);
                 var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
 
