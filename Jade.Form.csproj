@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -66,7 +66,6 @@
     <Reference Include="DevExpress.XtraBars.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -129,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumGroupCaptionControl.cs" />
     <Compile Include="BLL\DataSaver.cs" />
     <Compile Include="BLL\RuleManager.cs" />
     <Compile Include="CacheObject.cs" />
@@ -252,6 +252,12 @@
     </Compile>
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="ImageSelecter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageSelecter.Designer.cs">
+      <DependentUpon>ImageSelecter.cs</DependentUpon>
+    </Compile>
     <Compile Include="IRemoteWebService.cs" />
     <Compile Include="IWorkingThread.cs" />
     <Compile Include="LoginForm.cs">
@@ -436,6 +442,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\DevPager.resx">
       <DependentUpon>DevPager.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\HtmlEditor.resx">
       <DependentUpon>HtmlEditor.cs</DependentUpon>
@@ -451,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditDefaultSettingForm.resx">
       <DependentUpon>EditDefaultSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageSelecter.resx">
+      <DependentUpon>ImageSelecter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -608,6 +618,11 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\folder_yellow_parent.png" />
+    <None Include="Resources\drive_remote.png" />
+    <None Include="Resources\gallery_256.png" />
+    <None Include="Resources\recent_documents.png" />
+    <None Include="Resources\dir.png" />
     <None Include="Resources\dockPanel3.Image.png" />
     <None Include="Resources\panelContainer2.Image.png" />
     <None Include="Resources\yes.png" />
@@ -670,17 +685,6 @@
     <None Include="Resources\select.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="SHDocVw">
-      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="Core\Jade.Model.csproj">
       <Project>{05A12713-54A5-4EF0-9872-A431165864BE}</Project>
       <Name>Jade.Model</Name>
@@ -701,6 +705,17 @@
   <ItemGroup>
     <Folder Include="release\SiteConfig\Entities\Jade.Model.Category\Index\" />
     <Folder Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Index\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

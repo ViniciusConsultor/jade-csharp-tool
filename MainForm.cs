@@ -374,6 +374,7 @@ namespace Jade
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            CurrentCategory = this.taskTree.SelectedNode.Tag as Category;
             var siteRule = SiteRule.CreateDefaultRule();
             siteRule.CategoryID = this.CurrentCategory.ID;
             // var ruleForm = new SiteRuleEditForm(siteRule);
@@ -388,6 +389,7 @@ namespace Jade
                 TreeNode leaf = new TreeNode(siteRule.Name, index, index);
                 leaf.Tag = siteRule;
                 this.CurrentCategoryNode.Nodes.Add(leaf);
+                ruleForm.Dispose();
             }
         }
 
@@ -403,6 +405,7 @@ namespace Jade
                 this.taskTree.SelectedNode.Text = siteRule.Name;
                 this.taskTree.SelectedNode.ImageIndex = GetImageIndex(siteRule.IconImage);
                 this.taskTree.SelectedNode.SelectedImageIndex = GetImageIndex(siteRule.IconImage);
+                editForm.Dispose();
             }
         }
 

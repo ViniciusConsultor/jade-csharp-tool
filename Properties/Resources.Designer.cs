@@ -179,6 +179,13 @@ namespace Jade.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap dir {
+            get {
+                object obj = ResourceManager.GetObject("dir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap dockPanel3_Image {
             get {
                 object obj = ResourceManager.GetObject("dockPanel3.Image", resourceCulture);
@@ -189,6 +196,13 @@ namespace Jade.Properties {
         internal static System.Drawing.Bitmap document_save {
             get {
                 object obj = ResourceManager.GetObject("document_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap drive_remote {
+            get {
+                object obj = ResourceManager.GetObject("drive_remote", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -210,6 +224,20 @@ namespace Jade.Properties {
         internal static System.Drawing.Bitmap editorToolbar3 {
             get {
                 object obj = ResourceManager.GetObject("editorToolbar3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap folder_yellow_parent {
+            get {
+                object obj = ResourceManager.GetObject("folder_yellow_parent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap gallery_256 {
+            get {
+                object obj = ResourceManager.GetObject("gallery_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -329,6 +357,13 @@ namespace Jade.Properties {
         internal static System.Drawing.Bitmap preview1 {
             get {
                 object obj = ResourceManager.GetObject("preview1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap recent_documents {
+            get {
+                object obj = ResourceManager.GetObject("recent_documents", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

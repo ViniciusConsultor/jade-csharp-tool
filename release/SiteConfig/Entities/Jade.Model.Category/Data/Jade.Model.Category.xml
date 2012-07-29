@@ -2,4 +2,5 @@
 <XMLDatabase-Entities>
   <Category _uuid="ca19e93f-0001-4252-aa8f-597c8e094a92" ID="1" ParentCategoryID="0" Name="党群机构" />
   <Category _uuid="91ddc370-4264-43c3-b167-2c7a1fceade9" ID="2" ParentCategoryID="0" Name="地方都市报" />
+  <Category _uuid="b89fa3b2-6904-4235-a927-b6526f4a67f3" ID="3" ParentCategoryID="0" Name="政府机构网站" />
 </XMLDatabase-Entities>
