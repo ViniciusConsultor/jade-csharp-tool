@@ -81,7 +81,7 @@ namespace Jade
                 this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            if (this.endTags != null)
+            if (this.EndTag != null)
             {
                 this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
             }
