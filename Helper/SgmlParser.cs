@@ -122,6 +122,7 @@ namespace Sgml {
 
                 Stream stream = null;
                 Encoding e = Encoding.Default;
+
                 switch (this.resolvedUri.Scheme) {
                     case "file": {
                             string path = this.resolvedUri.LocalPath;
