@@ -579,7 +579,7 @@ namespace Jade
 
         bool isLink = true;
 
-        public string GetXmlPath(HtmlElement element)
+        public string GetXmlPath2(HtmlElement element)
         {
             HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
             HtmlDoc.OptionAutoCloseOnEnd = true;
@@ -605,10 +605,10 @@ namespace Jade
                 return selected.XPath.Replace("/body[1]", "/");
             }
             HtmlDoc = null;
-            return GetXmlPath2(element);
+            return GetXmlPath(element);
         }
 
-        public string GetXmlPath2(HtmlElement element)
+        public string GetXmlPath(HtmlElement element)
         {
             //IHTMLDocument2 htmlDocument = this.iReaperWebBrowser.Document.DomDocument as mshtml.IHTMLDocument2;
             var name = element.TagName.ToLower();

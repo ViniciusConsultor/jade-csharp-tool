@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Jade.Model;
+using Sgml;
+using System.IO;
+using System.Xml;
 
 namespace Jade
 {
@@ -248,6 +251,8 @@ namespace Jade
 @"|(?<copy>&(copy|#169);)" + // 符号: (char)169
 @"|(?<others>&(d+);)"; // 符号: 其他
 
+        private static string removeNoUsedHtml = @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)"; // 符号: 其他
+
         public static string NoHTML(string Htmlstring) //去除HTML标记  
         {
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
@@ -271,7 +276,60 @@ namespace Jade
             return result;
         }
 
+        static string RemoveXml(string html)
+        {
+            var regex = new System.Text.RegularExpressions.Regex("<\\?xml[^>]+>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+            var notValidTag = new System.Text.RegularExpressions.Regex("<\\w+\\:\\w+>", System.Text.RegularExpressions.RegexOptions.Compiled);
+            var tbody = new System.Text.RegularExpressions.Regex("<[/]*tbody>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+            html = regex.Replace(html, "");
+            html = notValidTag.Replace(html, "");
+            html = tbody.Replace(html, "");
+            html = notused.Replace(html, "");
+            return html;
+        }
 
+        static string SgmlTranslate(string input)
+        {
+            input = RemoveXml(input);
+            var reader = new SgmlReader();
+            reader.DocType = "HTML";
+            reader.WhitespaceHandling = WhitespaceHandling.None;
+            reader.CaseFolding = Sgml.CaseFolding.ToLower;
+            reader.InputStream = new StringReader(input);
+
+            var output = new StringWriter();
+            var writer = new XmlTextWriter(output);
+            writer.Formatting = Formatting.Indented;
+
+            var allowedAttr = new string[] { "class", "href", "id", "src" };
+            while (reader.Read())
+            {
+                try
+                {
+                    if (reader.NodeType != XmlNodeType.Whitespace
+                        && reader.NodeType != XmlNodeType.XmlDeclaration
+                        && reader.NodeType != XmlNodeType.CDATA
+                        && reader.NodeType != XmlNodeType.Comment)
+                    {
+
+                        if (reader.NodeType == XmlNodeType.Attribute)
+                        {
+                            writer.WriteNode(reader, true);
+                            continue;
+                        }
+
+                        writer.WriteNode(reader, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            writer.Close();
+            return output.ToString().Replace("xmlns=\"http://www.w3.org/1999/xhtml\"", "");
+        }
 
         /// <summary>
         /// 使用xpath从html提取内容
@@ -293,22 +351,26 @@ namespace Jade
             try
             {
                 var oldHtml = html;
-                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
-                HtmlDoc.OptionAutoCloseOnEnd = true;
+                html = SgmlTranslate(html);
                 //html = html.ToLower();
                 if (!html.Contains("</BODY") && !html.Contains("</body"))
                 {
                     html += "</body>";
                 }
-                html = html.Replace("<tbody>", "").Replace("</tbody>", "").Replace("<TBODY>", "").Replace("</TBODY>", "");
+                //html = html.Replace("<tbody>", "").Replace("</tbody>", "").Replace("<TBODY>", "").Replace("</TBODY>", "");
+
                 xpath = xpath.Replace("/tbody[1]", "");
+
                 var body = new Regex("<body[^>]*>[\\s\\S]+</body>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
                 html = body.Match(html).Value;
-                ;
+
                 if (html == "")
                 {
                     html = oldHtml;
                 }
+
+
 
                 // check html
                 var checkRegex = new Regex("<body", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -317,6 +379,91 @@ namespace Jade
                 {
                     html = html.Substring(checkResults[checkResults.Count - 1].Index);
                 }
+                File.WriteAllText("html.xml", html);
+
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(html);
+
+                var findNodes = doc.SelectNodes(xpath);
+
+                // 替换XPATH
+                if (findNodes == null && anotherXPath != "")
+                {
+                    findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
+                }
+
+                if (findNodes != null)
+                {
+                    if (selectType == XMLPathSelectType.Multiple)
+                    {
+                        foreach (XmlNode node in findNodes)
+                        {
+                            switch (pathType)
+                            {
+                                case XMLPathType.Href:
+                                    if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
+                                        result.Add(node.Attributes["href"].Value.ToString());
+                                    break;
+                                case XMLPathType.InnerHtml:
+                                    result.Add(node.InnerXml);
+                                    break;
+                                case XMLPathType.InnerText:
+                                    result.Add(node.InnerText);
+                                    break;
+                                case XMLPathType.InnerLinks:
+                                    var links = node.SelectNodes(".//a");
+                                    foreach (XmlNode link in links)
+                                    {
+                                        if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
+                                            result.Add(link.Attributes["href"].Value);
+                                    }
+                                    break;
+                                case XMLPathType.InnerTextWithPic:
+                                    result.Add(NoHTML(node.InnerXml));
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (findNodes.Count > 0)
+                        {
+                            var node = findNodes[0];
+                            switch (pathType)
+                            {
+                                case XMLPathType.Href:
+                                    if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
+                                        result.Add(node.Attributes["href"].Value.ToString());
+                                    break;
+                                case XMLPathType.InnerHtml:
+                                    result.Add(node.InnerXml);
+                                    break;
+                                case XMLPathType.InnerText:
+                                    result.Add(node.InnerText);
+                                    break;
+                                case XMLPathType.InnerLinks:
+                                    var links = node.SelectNodes(".//a");
+                                    foreach (XmlNode link in links)
+                                    {
+                                        if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
+                                            result.Add(link.Attributes["href"].Value);
+                                    }
+                                    break;
+                                case XMLPathType.InnerTextWithPic:
+                                    result.Add(NoHTML(node.InnerXml));
+                                    break;
+                            }
+                        }
+
+                    }
+                }
+
+                return result;
+
+                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                //HtmlDoc.OptionAutoCloseOnEnd = true;
+                HtmlDoc.OptionFixNestedTags = true;
+                HtmlDoc.OptionOutputAsXml = true;
                 HtmlDoc.LoadHtml(html);
                 var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
 
@@ -335,7 +482,8 @@ namespace Jade
                             switch (pathType)
                             {
                                 case XMLPathType.Href:
-                                    result.Add(node.Attributes["href"].Value.ToString());
+                                    if (node.Attributes["href"] != null)
+                                        result.Add(node.Attributes["href"].Value.ToString());
                                     break;
                                 case XMLPathType.InnerHtml:
                                     result.Add(node.InnerHtml);
@@ -381,8 +529,9 @@ namespace Jade
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
             return result;
         }

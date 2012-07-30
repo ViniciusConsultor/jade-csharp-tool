@@ -252,6 +252,8 @@
     </Compile>
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\SgmlParser.cs" />
+    <Compile Include="Helper\SgmlReader.cs" />
     <Compile Include="ImageSelecter.cs">
       <SubType>Form</SubType>
     </Compile>
