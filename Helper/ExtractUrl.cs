@@ -281,7 +281,7 @@ namespace Jade
             var regex = new System.Text.RegularExpressions.Regex("<\\?xml[^>]+>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
             var notValidTag = new System.Text.RegularExpressions.Regex("<\\w+\\:\\w+>", System.Text.RegularExpressions.RegexOptions.Compiled);
             var tbody = new System.Text.RegularExpressions.Regex("<[/]*tbody>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>[\\s\\S]*?</script>)|(?<style><style[^>]*>[\\s\\S]*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
             html = regex.Replace(html, "");
             html = notValidTag.Replace(html, "");
             html = tbody.Replace(html, "");
@@ -379,151 +379,157 @@ namespace Jade
                 }
                 File.WriteAllText("html.xml", html);
 
-                //XmlDocument doc = new XmlDocument();
-                //doc.LoadXml(html);
-
-                //var findNodes = doc.SelectNodes(xpath);
-
-                //// Ìæ»»XPATH
-                //if (findNodes == null && anotherXPath != "")
-                //{
-                //    findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
-                //}
-
-                //if (findNodes != null)
-                //{
-                //    if (selectType == XMLPathSelectType.Multiple)
-                //    {
-                //        foreach (XmlNode node in findNodes)
-                //        {
-                //            switch (pathType)
-                //            {
-                //                case XMLPathType.Href:
-                //                    if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
-                //                        result.Add(node.Attributes["href"].Value.ToString());
-                //                    break;
-                //                case XMLPathType.InnerHtml:
-                //                    result.Add(node.InnerXml);
-                //                    break;
-                //                case XMLPathType.InnerText:
-                //                    result.Add(node.InnerText);
-                //                    break;
-                //                case XMLPathType.InnerLinks:
-                //                    var links = node.SelectNodes(".//a");
-                //                    foreach (XmlNode link in links)
-                //                    {
-                //                        if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
-                //                            result.Add(link.Attributes["href"].Value);
-                //                    }
-                //                    break;
-                //                case XMLPathType.InnerTextWithPic:
-                //                    result.Add(NoHTML(node.InnerXml));
-                //                    break;
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if (findNodes.Count > 0)
-                //        {
-                //            var node = findNodes[0];
-                //            switch (pathType)
-                //            {
-                //                case XMLPathType.Href:
-                //                    if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
-                //                        result.Add(node.Attributes["href"].Value.ToString());
-                //                    break;
-                //                case XMLPathType.InnerHtml:
-                //                    result.Add(node.InnerXml);
-                //                    break;
-                //                case XMLPathType.InnerText:
-                //                    result.Add(node.InnerText);
-                //                    break;
-                //                case XMLPathType.InnerLinks:
-                //                    var links = node.SelectNodes(".//a");
-                //                    foreach (XmlNode link in links)
-                //                    {
-                //                        if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
-                //                            result.Add(link.Attributes["href"].Value);
-                //                    }
-                //                    break;
-                //                case XMLPathType.InnerTextWithPic:
-                //                    result.Add(NoHTML(node.InnerXml));
-                //                    break;
-                //            }
-                //        }
-
-                //    }
-                //}
-
-                //return result;
-
-                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
-                //HtmlDoc.OptionAutoCloseOnEnd = true;
-                HtmlDoc.OptionFixNestedTags = true;
-                HtmlDoc.OptionOutputAsXml = true;
-                HtmlDoc.LoadHtml(html);
-                var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
-
-                // Ìæ»»XPATH
-                if (nodes == null && anotherXPath != "")
+                try
                 {
-                    nodes = HtmlDoc.DocumentNode.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
-                }
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(html);
 
-                if (nodes != null)
-                {
-                    if (selectType == XMLPathSelectType.Multiple)
+                    var findNodes = doc.SelectNodes(xpath);
+
+                    // Ìæ»»XPATH
+                    if (findNodes == null && anotherXPath != "")
                     {
-                        foreach (HtmlAgilityPack.HtmlNode node in nodes)
+                        findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
+                    }
+
+                    if (findNodes != null)
+                    {
+                        if (selectType == XMLPathSelectType.Multiple)
                         {
-                            switch (pathType)
+                            foreach (XmlNode node in findNodes)
                             {
-                                case XMLPathType.Href:
-                                    if (node.Attributes["href"] != null)
-                                        result.Add(node.Attributes["href"].Value.ToString());
-                                    break;
-                                case XMLPathType.InnerHtml:
-                                    result.Add(node.InnerHtml);
-                                    break;
-                                case XMLPathType.InnerText:
-                                    result.Add(node.InnerText);
-                                    break;
-                                case XMLPathType.InnerLinks:
-                                    result.AddRange(GetLinks(node));
-                                    break;
-                                case XMLPathType.InnerTextWithPic:
-                                    result.Add(NoHTML(node.InnerHtml));
-                                    break;
+                                switch (pathType)
+                                {
+                                    case XMLPathType.Href:
+                                        if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
+                                            result.Add(node.Attributes["href"].Value.ToString());
+                                        break;
+                                    case XMLPathType.InnerHtml:
+                                        result.Add(node.InnerXml);
+                                        break;
+                                    case XMLPathType.InnerText:
+                                        result.Add(node.InnerText);
+                                        break;
+                                    case XMLPathType.InnerLinks:
+                                        var links = node.SelectNodes(".//a");
+                                        foreach (XmlNode link in links)
+                                        {
+                                            if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
+                                                result.Add(link.Attributes["href"].Value);
+                                        }
+                                        break;
+                                    case XMLPathType.InnerTextWithPic:
+                                        result.Add(NoHTML(node.InnerXml));
+                                        break;
+                                }
                             }
+                        }
+                        else
+                        {
+                            if (findNodes.Count > 0)
+                            {
+                                var node = findNodes[0];
+                                switch (pathType)
+                                {
+                                    case XMLPathType.Href:
+                                        if (node.Attributes["href"] != null && !node.Attributes["href"].Value.Contains("#"))
+                                            result.Add(node.Attributes["href"].Value.ToString());
+                                        break;
+                                    case XMLPathType.InnerHtml:
+                                        result.Add(node.InnerXml);
+                                        break;
+                                    case XMLPathType.InnerText:
+                                        result.Add(node.InnerText);
+                                        break;
+                                    case XMLPathType.InnerLinks:
+                                        var links = node.SelectNodes(".//a");
+                                        foreach (XmlNode link in links)
+                                        {
+                                            if (link.Attributes["href"] != null && !link.Attributes["href"].Value.Contains("#"))
+                                                result.Add(link.Attributes["href"].Value);
+                                        }
+                                        break;
+                                    case XMLPathType.InnerTextWithPic:
+                                        result.Add(NoHTML(node.InnerXml));
+                                        break;
+                                }
+                            }
+
                         }
                     }
-                    else
+
+                    return result;
+                }
+                catch
+                {
+
+                    HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                    //HtmlDoc.OptionAutoCloseOnEnd = true;
+                    HtmlDoc.OptionFixNestedTags = true;
+                    HtmlDoc.OptionOutputAsXml = true;
+                    HtmlDoc.LoadHtml(html);
+                    var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
+
+                    // Ìæ»»XPATH
+                    if (nodes == null && anotherXPath != "")
                     {
-                        if (nodes.Count > 0)
+                        nodes = HtmlDoc.DocumentNode.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
+                    }
+
+                    if (nodes != null)
+                    {
+                        if (selectType == XMLPathSelectType.Multiple)
                         {
-                            var node = nodes[0];
-                            switch (pathType)
+                            foreach (HtmlAgilityPack.HtmlNode node in nodes)
                             {
-                                case XMLPathType.Href:
-                                    if (node.Attributes["href"] != null)
-                                        result.Add(node.Attributes["href"].Value.ToString());
-                                    break;
-                                case XMLPathType.InnerHtml:
-                                    result.Add(node.InnerHtml);
-                                    break;
-                                case XMLPathType.InnerText:
-                                    result.Add(node.InnerText);
-                                    break;
-                                case XMLPathType.InnerLinks:
-                                    result.AddRange(GetLinks(node));
-                                    break;
-                                case XMLPathType.InnerTextWithPic:
-                                    result.Add(NoHTML(node.InnerHtml));
-                                    break;
+                                switch (pathType)
+                                {
+                                    case XMLPathType.Href:
+                                        if (node.Attributes["href"] != null)
+                                            result.Add(node.Attributes["href"].Value.ToString());
+                                        break;
+                                    case XMLPathType.InnerHtml:
+                                        result.Add(node.InnerHtml);
+                                        break;
+                                    case XMLPathType.InnerText:
+                                        result.Add(node.InnerText);
+                                        break;
+                                    case XMLPathType.InnerLinks:
+                                        result.AddRange(GetLinks(node));
+                                        break;
+                                    case XMLPathType.InnerTextWithPic:
+                                        result.Add(NoHTML(node.InnerHtml));
+                                        break;
+                                }
                             }
                         }
+                        else
+                        {
+                            if (nodes.Count > 0)
+                            {
+                                var node = nodes[0];
+                                switch (pathType)
+                                {
+                                    case XMLPathType.Href:
+                                        if (node.Attributes["href"] != null)
+                                            result.Add(node.Attributes["href"].Value.ToString());
+                                        break;
+                                    case XMLPathType.InnerHtml:
+                                        result.Add(node.InnerHtml);
+                                        break;
+                                    case XMLPathType.InnerText:
+                                        result.Add(node.InnerText);
+                                        break;
+                                    case XMLPathType.InnerLinks:
+                                        result.AddRange(GetLinks(node));
+                                        break;
+                                    case XMLPathType.InnerTextWithPic:
+                                        result.Add(NoHTML(node.InnerHtml));
+                                        break;
+                                }
+                            }
 
+                        }
                     }
                 }
             }

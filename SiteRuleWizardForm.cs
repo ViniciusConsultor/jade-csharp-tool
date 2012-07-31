@@ -833,7 +833,7 @@ namespace Jade
         public List<string> ExtractDataFromHtml()
         {
 
-            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.Document.Body.OuterHtml, this.currentTxtbox.Text, XMLPathSelectType, XMLPathType);
+            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.DocumentText, this.currentTxtbox.Text, XMLPathSelectType, XMLPathType);
 
             var pathType = this.XMLPathType;
             var xpath = this.currentTxtbox.Text;
