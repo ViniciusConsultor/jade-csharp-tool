@@ -541,6 +541,7 @@
       <DependentUpon>WelcomePanel.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <EmbeddedResource Include="Html.dtd" />
     <None Include="Properties\DataSources\RunningTaskCollection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
