@@ -360,6 +360,8 @@ namespace Jade
 
         private void button2_Click(object sender, EventArgs e)
         {
+            current = null;
+            last = null;
             //force bind
             OnBrowserLoaded();
             this.enableNavigate = false;
@@ -417,7 +419,7 @@ namespace Jade
             string encoding)
         {
 
-          
+
             List<string> urls;
 
             //WebBrowser b = new WebBrowser();
@@ -694,10 +696,10 @@ namespace Jade
         {
             if (EnableSelect)
             {
-                if (current == last)
-                {
-                    return;
-                }
+                //if (current == last)
+                //{
+                //    return;
+                //}
 
                 last = current;
 
@@ -744,6 +746,7 @@ namespace Jade
                         {
                             CurrentXPathSelected(currentTxtbox.Text);
                         }
+                        current = null;
                     }
                 }
                 else
@@ -753,6 +756,7 @@ namespace Jade
                     {
                         CurrentXPathSelected(currentTxtbox.Text);
                     }
+                    current = null;
                 }
 
             }
@@ -821,6 +825,8 @@ namespace Jade
             if (e.Url == Url)
             {
                 DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
+
+                //this.currenActiveBrowser.DocumentText = ExtractUrl.SgmlTranslate(this.currenActiveBrowser.DocumentText);
             }
 
         }
@@ -922,6 +928,8 @@ namespace Jade
 
         private void btnSelectStartUrl_Click(object sender, EventArgs e)
         {
+            current = null;
+            last = null;
             this.enableNavigate = false;
             this.EnableSelect = true;
             //force bind
@@ -1122,6 +1130,7 @@ namespace Jade
         private void btnCXPath_Click(object sender, EventArgs e)
         {
             current = null;
+            last = null;
             //force bind
             OnBrowserLoaded();
             this.EnableSelect = true;
@@ -1321,6 +1330,12 @@ namespace Jade
             }
             else if (e.Page == this.previewPage)
             {
+                if (loadingDialog != null && workingThread != null)
+                {
+                    loadingDialog.Close();
+                    workingThread.Abort();
+                }
+
                 if (this.txtTestUrl.Text == "")
                 {
                     this.txtTestUrl.Text = forTestUrl;
@@ -1497,7 +1512,7 @@ namespace Jade
                     // 只有下一页
                     pageXpath = linkNodes[0].XPath;
                     pageXpath = pageXpath.Substring(0, pageXpath.LastIndexOf("a") + 1);
-                    pageXpath = pageXpath.Insert(pageXpath.LastIndexOf("/"), "/");
+                    //pageXpath = pageXpath.Insert(pageXpath.LastIndexOf("/"), "/");
                 }
 
                 linkNodes = linkNodes[0].SelectNodes(pageXpath).ToList();
@@ -1589,6 +1604,8 @@ namespace Jade
         /// <param name="e"></param>
         private void btnSelectAnotherXpath_Click(object sender, EventArgs e)
         {
+            current = null;
+            last = null;
             this.EnableSelect = true;
             this.currentTxtbox = this.txtAnotherXPath;
             this.XMLPathSelectType = Model.XMLPathSelectType.OnlyOne;

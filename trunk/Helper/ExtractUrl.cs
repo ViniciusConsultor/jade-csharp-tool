@@ -281,7 +281,7 @@ namespace Jade
             var regex = new System.Text.RegularExpressions.Regex("<\\?xml[^>]+>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
             var notValidTag = new System.Text.RegularExpressions.Regex("<\\w+\\:\\w+>", System.Text.RegularExpressions.RegexOptions.Compiled);
             var tbody = new System.Text.RegularExpressions.Regex("<[/]*tbody>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>[\\s\\S]*?</script>)|(?<style><style[^>]*>[\\s\\S]*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
+            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
             html = regex.Replace(html, "");
             html = notValidTag.Replace(html, "");
             html = tbody.Replace(html, "");
@@ -289,7 +289,13 @@ namespace Jade
             return html;
         }
 
-        static string SgmlTranslate(string input)
+        static string RemoveScriptStyleComment(string html)
+        {
+            var notused = new System.Text.RegularExpressions.Regex("(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+            return notused.Replace(html, "");
+        }
+
+        public static string SgmlTranslate(string input)
         {
             input = RemoveXml(input);
             var reader = new SgmlReader();
@@ -302,7 +308,6 @@ namespace Jade
             var writer = new XmlTextWriter(output);
             writer.Formatting = Formatting.Indented;
 
-            var allowedAttr = new string[] { "class", "href", "id", "src" };
             while (reader.Read())
             {
                 try
@@ -350,8 +355,11 @@ namespace Jade
 
             try
             {
-                var oldHtml = html;
+
                 html = SgmlTranslate(html);
+
+                //var oldHtml = html;
+
                 //html = html.ToLower();
                 if (!html.Contains("</BODY") && !html.Contains("</body"))
                 {
@@ -361,22 +369,23 @@ namespace Jade
 
                 xpath = xpath.Replace("/tbody[1]", "");
 
-                var body = new Regex("<body[^>]*>[\\s\\S]+</body>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                //var body = new Regex("<html[^>]*>.*?</html>", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
-                html = body.Match(html).Value;
+                //html = body.Match(html).Value;
 
-                if (html == "")
-                {
-                    html = oldHtml;
-                }
+                //if (html == "")
+                //{
+                //    html = oldHtml;
+                //}
 
                 // check html
-                var checkRegex = new Regex("<body", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var checkRegex = new Regex("<body[^>]*>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                 var checkResults = checkRegex.Matches(html);
                 if (checkResults.Count > 1)
                 {
-                    html = html.Substring(checkResults[checkResults.Count - 1].Index);
+                    html = "<html>" + html.Substring(checkResults[checkResults.Count - 1].Index);
                 }
+
                 File.WriteAllText("html.xml", html);
 
                 try
