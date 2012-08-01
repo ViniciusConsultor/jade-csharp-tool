@@ -27,6 +27,7 @@ namespace Jade.Model
                 IsDownloadPic = false,
                 XMLPathType = XMLPathType.InnerText,
                 XPath="//h1",
+                AnotherXPath="//title",
                 XMLPathSelectType = XMLPathSelectType.OnlyOne      
                 },  new ItemRule() {
                 CloumnName = "SubTitle",

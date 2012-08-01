@@ -319,7 +319,8 @@ namespace XmlDatabase.Core
                     id=Guid.NewGuid();
                     XElement newInstance = instance.ConvertToXml(id);
                     data.Root.Add(newInstance);
-
+                    // 添加到缓存
+                    ids.Set(instance, id);
                     //编写日志
                     Log.WriteEx(string.Format(Properties.Resources.InsertObject, id, instance.ToString()), true);
                 }
