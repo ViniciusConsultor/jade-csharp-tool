@@ -417,7 +417,7 @@ namespace Jade
             string encoding)
         {
 
-            TreeNode parentNode = new TreeNode(sourceUrl);
+          
             List<string> urls;
 
             //WebBrowser b = new WebBrowser();
@@ -428,6 +428,13 @@ namespace Jade
             //b = null;
             urls = ExtractUrl.ExtractAccurateUrl(CurrentSiteRule, html, sourceUrl);
 
+            TreeNode parentNode = new TreeNode(sourceUrl);
+
+            BindUrlTree(urls, parentNode);
+        }
+
+        private void BindUrlTree(List<string> urls, TreeNode parentNode)
+        {
             foreach (string url in urls)
             {
                 if (!url.Contains("javascript"))
@@ -1239,6 +1246,7 @@ namespace Jade
                         }
                     }
                 }
+
                 if (urls.Count == 0)
                 {
                     MessageBox.Show(this, "没有合法的测试采集网址！", "测试采集网址错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1259,6 +1267,22 @@ namespace Jade
 
                 this.workingThread = new Thread(delegate()
                 {
+
+                    if (!string.IsNullOrEmpty(item.DiyContentPageUrl))
+                    {
+                        string[] dirBaseUrls = item.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                        List<string> dirUrls = new List<string>();
+                        if (urls != null && dirBaseUrls.Length > 0)
+                        {
+                            foreach (string url in dirBaseUrls)
+                            {
+                                dirUrls.AddRange(ExtractUrl.ParseUrlFromParameter(url));
+                            }
+                        }
+                        TreeNode parentNode = new TreeNode("用户自定义");
+                        BindUrlTree(dirUrls, parentNode);
+                    }
+
                     int i = 0;
                     while (true)
                     {

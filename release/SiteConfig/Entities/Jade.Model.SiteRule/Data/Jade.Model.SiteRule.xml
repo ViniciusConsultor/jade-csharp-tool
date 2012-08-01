@@ -4480,62 +4480,6 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
-  <SiteRule _uuid="6f8b87a3-2de6-4a3f-abcf-9275361453e6" CategoryID="5" IconImage="favicon.ico" SiteRuleId="76" Name="市行政服务中心&#x9;" StartUrl="http://www.hfxzzx.gov.cn/ChannelDir/3110.html@@http://www.hfxzzx.gov.cn/ChannelDir/3110_2.html@@http://www.hfxzzx.gov.cn/ChannelDir/3110_10.html" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="tracker_cookie_1=True; tracker_cookie_datetime_1=2012-7-31%2015%3A49%3A7; ASP.NET_SessionId=yltg5cbfwpwgwsryguah5k45" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="ContentDir" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://www.hfxzzx.gov.cn/ChannelDir/3110.html" ForTestUrl="http://www.hfxzzx.gov.cn/ContentDir/20115/3011524827.html" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//a" EnableAutoRun="false" AutoRunInterval="60">
-    <ListPageType Enum="Html" />
-    <ItemRules>
-      <ItemRule AnotherXPath="" XPath="//div[1]/table[3]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/div[1]/table[1]/tbody[1]/tr[1]/td[1]/b[1]/font[1]/span[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerTextWithPic" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
-        <FetchType Enum="UserDiy" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="Datetime" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="//div[1]/table[3]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[2]/td[1]/table[1]/tbody[1]/tr[2]/td[1]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerTextWithPic" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="//h1" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule AnotherXPath="" XPath="" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-    </ItemRules>
-    <ListFetchType Enum="XPath" />
-    <ListXMLPathType Enum="Href" />
-    <ListXMLPathSelectType Enum="Multiple" />
-  </SiteRule>
   <SiteRule _uuid="6d4502f9-f26f-457c-8136-b9a686c5a97c" CategoryID="5" IconImage="favicon.ico" SiteRuleId="76" Name="市行政服务中心&#x9;" StartUrl="http://www.hfxzzx.gov.cn/ChannelDir/3110.html@@http://www.hfxzzx.gov.cn/ChannelDir/3110_2.html@@http://www.hfxzzx.gov.cn/ChannelDir/3110_10.html" Encoding="GB2312" HttpMethod="GET" HttpPostData="" Cookie="tracker_cookie_1=True; tracker_cookie_datetime_1=2012-7-31%2015%3A49%3A7; ASP.NET_SessionId=yltg5cbfwpwgwsryguah5k45" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="ContentDir" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://www.hfxzzx.gov.cn/ChannelDir/3110.html" ForTestUrl="http://www.hfxzzx.gov.cn/ContentDir/20115/3011524827.html" ListEncoding="GB2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//a" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
@@ -5080,6 +5024,62 @@
         <DiyType Enum="DefaultValue" />
       </ItemRule>
       <ItemRule AnotherXPath="" XPath="//font[@id=&quot;fontzoom&quot;]/p[3]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
+  <SiteRule _uuid="8da1ee81-d54b-43a3-bc4a-7dd6d5d700e0" CategoryID="6" IconImage="info.2012.163.com.ico" SiteRuleId="85" Name="奥运资料库" StartUrl="http://info.2012.163.com/stadium/list/" DiyContentPageUrl="http://info.2012.163.com/athlete/list_data/world_gold/index/&lt;0,74,1,False,False&gt;.json@@http://info.2012.163.com/athlete/list_data/china_gold/index/&lt;0,8,1,False,False&gt;.json" Encoding="UTF-8" HttpMethod="GET" HttpPostData="" Cookie="__ntes__test__cookies=1343786572953; _ntes_nnid=59cc659f94b8eedf6a74f644855f8d51,1343783667453; _ntes_nuid=59cc659f94b8eedf6a74f644855f8d51; P_INFO=miaoyi673048143@126.com|1323744308|0|mail126|11&amp;17|anh&amp;1323744304&amp;mail126#anh&amp;340100#10|&amp;0; vjuids=-4334b87c.138dc5e5c52.0.9c15339c3b9c8; vjlast=1343726968.1343783667.13" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://info.2012.163.com/stadium/list/" ForTestUrl="http://info.2012.163.com/athlete/list_data/china_gold/index/1.json" ListEncoding="GB2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule AnotherXPath="" XPath="//div//ul//li" ItemName="标题" CloumnName="Title" StartTarget="&quot;athleteName&quot;:&quot;" EndTarget="&quot;" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="FromHTML" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="Multiple" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="&quot;itemName&quot;:&quot;" EndTarget="&quot;" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="FromHTML" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="&quot;athletePicUrl&quot;:&quot;" EndTarget="&quot;" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="FromHTML" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="UserDiy" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="//body" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerTextWithPic" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule AnotherXPath="" XPath="//h1" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />

@@ -5,4 +5,5 @@
   <Category _uuid="b89fa3b2-6904-4235-a927-b6526f4a67f3" ID="3" ParentCategoryID="0" Name="政府机构网站" />
   <Category _uuid="128a742a-a18a-49cf-82ed-71e3f7bd6975" ID="4" ParentCategoryID="0" Name="县、区、开发区网站" />
   <Category _uuid="fd32fc1b-a3e2-40b8-93c5-2682790d6ef9" ID="5" ParentCategoryID="0" Name="其他机构网站" />
+  <Category _uuid="5fe94286-04ae-4922-b0b5-e244c3b3d87d" ID="6" ParentCategoryID="0" Name="伦敦奥运" />
 </XMLDatabase-Entities>
