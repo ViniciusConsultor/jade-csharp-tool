@@ -34,7 +34,6 @@
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.applicationMenu1 = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
@@ -67,10 +66,7 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
-            this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
-            this.navPublished = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarGroupControlContainer1 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
             this.taskTree = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -90,7 +86,10 @@
             this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
+            this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
+            this.navPublished = new DevExpress.XtraNavBar.NavBarItem();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
@@ -128,7 +127,6 @@
             this.ribbon.ExpandCollapseItem.Name = "";
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
-            this.barButtonItem1,
             this.barDockingMenuItem1,
             this.barButtonItem2,
             this.barButtonItem3,
@@ -148,9 +146,8 @@
             this.ribbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ribbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.True;
-            this.ribbon.Size = new System.Drawing.Size(1005, 147);
+            this.ribbon.Size = new System.Drawing.Size(1005, 148);
             this.ribbon.StatusBar = this.ribbonStatusBar;
-            this.ribbon.Toolbar.ItemLinks.Add(this.barButtonItem1);
             this.ribbon.Click += new System.EventHandler(this.ribbon_Click);
             // 
             // applicationMenu1
@@ -164,12 +161,6 @@
             this.barButtonItem2.Caption = "退出";
             this.barButtonItem2.Id = 5;
             this.barButtonItem2.Name = "barButtonItem2";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 1;
-            this.barButtonItem1.Name = "barButtonItem1";
             // 
             // barDockingMenuItem1
             // 
@@ -289,10 +280,10 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem1);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 472);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 471);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1005, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1005, 32);
             // 
             // imageList1
             // 
@@ -319,13 +310,13 @@
             // 
             // hideContainerBottom
             // 
-            this.hideContainerBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.hideContainerBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(221)))), ((int)(((byte)(238)))));
             this.hideContainerBottom.Controls.Add(this.dockPanel2);
             this.hideContainerBottom.Controls.Add(this.dockPanel4);
             this.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hideContainerBottom.Location = new System.Drawing.Point(0, 434);
+            this.hideContainerBottom.Location = new System.Drawing.Point(0, 429);
             this.hideContainerBottom.Name = "hideContainerBottom";
-            this.hideContainerBottom.Size = new System.Drawing.Size(1005, 38);
+            this.hideContainerBottom.Size = new System.Drawing.Size(1005, 42);
             this.hideContainerBottom.Click += new System.EventHandler(this.hideContainerBottom_Click);
             // 
             // dockPanel2
@@ -441,18 +432,18 @@
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
             this.dockPanel1.ID = new System.Guid("cf3e2d3d-11be-49f5-8be7-f2ab0ff0285d");
             this.dockPanel1.Image = global::Jade.Properties.Resources.scheduled_tasks__1_;
-            this.dockPanel1.Location = new System.Drawing.Point(0, 147);
+            this.dockPanel1.Location = new System.Drawing.Point(0, 148);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(200, 287);
+            this.dockPanel1.Size = new System.Drawing.Size(200, 281);
             this.dockPanel1.Text = "导航";
             // 
             // dockPanel1_Container
             // 
             this.dockPanel1_Container.Controls.Add(this.navBarControl1);
-            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 23);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 25);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 260);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(192, 252);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // navBarControl1
@@ -472,43 +463,17 @@
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 192;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(192, 260);
+            this.navBarControl1.Size = new System.Drawing.Size(192, 252);
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // navBarGroup2
+            // navBarGroup1
             // 
-            this.navBarGroup2.Caption = "内容管理";
-            this.navBarGroup2.Expanded = true;
-            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
-            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup2.Name = "navBarGroup2";
-            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
-            // 
-            // navDraft
-            // 
-            this.navDraft.Caption = "草稿箱";
-            this.navDraft.LargeImage = global::Jade.Properties.Resources.bianjipingtai;
-            this.navDraft.Name = "navDraft";
-            this.navDraft.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navDraft_LinkClicked);
-            // 
-            // navEdited
-            // 
-            this.navEdited.Caption = "已编辑";
-            this.navEdited.LargeImage = global::Jade.Properties.Resources.daiqianfapingtai;
-            this.navEdited.Name = "navEdited";
-            this.navEdited.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navEdited_LinkClicked);
-            // 
-            // navPublished
-            // 
-            this.navPublished.Caption = "已发布";
-            this.navPublished.LargeImage = global::Jade.Properties.Resources.yiqianfapingtai;
-            this.navPublished.Name = "navPublished";
-            this.navPublished.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navPublished_LinkClicked);
+            this.navBarGroup1.Caption = "服务器内容";
+            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup1.LargeImage = global::Jade.Properties.Resources.network;
+            this.navBarGroup1.Name = "navBarGroup1";
+            this.navBarGroup1.SmallImage = global::Jade.Properties.Resources.network;
             // 
             // navBarGroupControlContainer1
             // 
@@ -522,7 +487,7 @@
             this.taskTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.taskTree.ContextMenuStrip = this.contextMenuStrip1;
             this.taskTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.taskTree.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.taskTree.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.taskTree.ImageIndex = 0;
             this.taskTree.ImageList = this.imageList1;
             this.taskTree.Location = new System.Drawing.Point(0, 0);
@@ -667,18 +632,39 @@
             this.navTask.Name = "navTask";
             this.navTask.SmallImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
             // 
-            // navBarGroup1
+            // navBarGroup2
             // 
-            this.navBarGroup1.Caption = "服务器内容";
-            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            this.navBarGroup2.Caption = "抓取内容管理";
+            this.navBarGroup2.Expanded = true;
+            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
-            this.navBarGroup1.LargeImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.SmallImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup1.TopVisibleLinkIndex = 1;
+            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup2.Name = "navBarGroup2";
+            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
+            // 
+            // navDraft
+            // 
+            this.navDraft.Caption = "草稿箱";
+            this.navDraft.LargeImage = global::Jade.Properties.Resources.bianjipingtai;
+            this.navDraft.Name = "navDraft";
+            this.navDraft.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navDraft_LinkClicked);
+            // 
+            // navEdited
+            // 
+            this.navEdited.Caption = "已编辑";
+            this.navEdited.LargeImage = global::Jade.Properties.Resources.daiqianfapingtai;
+            this.navEdited.Name = "navEdited";
+            this.navEdited.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navEdited_LinkClicked);
+            // 
+            // navPublished
+            // 
+            this.navPublished.Caption = "已发布";
+            this.navPublished.LargeImage = global::Jade.Properties.Resources.yiqianfapingtai;
+            this.navPublished.Name = "navPublished";
+            this.navPublished.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navPublished_LinkClicked);
             // 
             // documentManager1
             // 
@@ -760,7 +746,6 @@
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView2;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private DevExpress.XtraBars.Ribbon.RibbonMiniToolbar ribbonMiniToolbar1;
         private DevExpress.XtraBars.BarAndDockingController barAndDockingController1;
