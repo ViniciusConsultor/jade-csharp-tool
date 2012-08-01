@@ -172,7 +172,7 @@ namespace Jade
                 {
                     case ItemFetchType.XPath:
                         var xpathResult = ExtractUrl.ExtractDataFromHtml(fetchStuff, CurrentItemRule.XPath, CurrentItemRule.XMLPathSelectType, CurrentItemRule.XMLPathType);
-                        return string.Join("", xpathResult.ToArray());
+                        return string.Join(" ", xpathResult.ToArray());
                     case ItemFetchType.UserDiy:
                         if (CurrentItemRule.DiyType == UserDiyType.Datetime)
                         {
@@ -246,10 +246,10 @@ namespace Jade
         }
 
 
-        int GetStartIndex(string fetchStuff, out int index)
+        int GetStartIndex(string fetchStuff, out int endIndex)
         {
             var startIndex = -1;
-            index = 0;
+            endIndex = -1;
             if (startTags != null)
             {
                 var i = 0;
@@ -258,10 +258,9 @@ namespace Jade
                     startIndex = fetchStuff.IndexOf(start);
                     if (startIndex > -1)
                     {
-                        index = i;
+                        endIndex = fetchStuff.IndexOf(start, startIndex + start.Length);
                         break;
                     }
-                    i++;
                 }
             }
             return startIndex;
@@ -270,14 +269,13 @@ namespace Jade
         int GetEndIndex(int startIndex, string fetchStuff, out int index)
         {
             var endIndex = -1;
-            fetchStuff = fetchStuff.Substring(startIndex);
             index = 0;
             if (startTags != null)
             {
                 var i = 0;
                 foreach (var start in endTags)
                 {
-                    endIndex = fetchStuff.IndexOf(start);
+                    endIndex = fetchStuff.IndexOf(start, startIndex);
                     if (endIndex > -1)
                     {
                         index = i;
@@ -286,13 +284,13 @@ namespace Jade
                     i++;
                 }
             }
-            return endIndex + startIndex;
+            return endIndex;
         }
 
 
         private string SubString(string fetchStuff, string startTag, string endTag)
         {
-            string result;
+            string result = "";
 
             if (this.IsUseRegex)
             {
@@ -305,29 +303,68 @@ namespace Jade
             else
             {
                 int startIndex, endIndex;
+                bool isEnd = false;
 
-                var sindex = 0;
-                var eindex = 0;
+                startIndex = -1;
+                endIndex = -1;
 
-                startIndex = this.GetStartIndex(fetchStuff, out sindex);
-
-                if (startIndex == -1)
-                    return string.Empty;
-
-                endIndex = this.GetEndIndex(startIndex, fetchStuff, out eindex);
-
-                if (endIndex == -1)
+                var lastIndex = 0;
+                while (!isEnd)
                 {
-                    return string.Empty;
-                    //result = fetchStuff.Substring(startIndex + startTag.Length);
-                }
-                else if (endIndex < startIndex)
-                {
-                    result = string.Empty;
-                }
-                else
-                {
-                    result = fetchStuff.Substring(startIndex + startTags[sindex].Length, endIndex - startIndex - startTags[sindex].Length);
+                    string start = "";
+                    string end = "";
+                    if (startTags != null)
+                    {
+                        foreach (var tag in startTags)
+                        {
+                            startIndex = fetchStuff.IndexOf(tag, lastIndex);
+                            if (startIndex > -1)
+                            {
+                                start = tag;
+                                lastIndex = startIndex + start.Length;
+                                break;
+                            }
+                        }
+                    }
+
+                    //  endIndex = fetchStuff.IndexOf(start, startIndex + start.Length);
+
+                    //startIndex = this.GetStartIndex(fetchStuff, out endIndex);
+
+                    if (startIndex == -1)
+                        isEnd = true;
+                    else
+                    {
+                        if (endTags != null)
+                        {
+                            foreach (var tag in endTags)
+                            {
+                                endIndex = fetchStuff.IndexOf(tag, lastIndex);
+                                if (endIndex > -1)
+                                {
+                                    end = tag;
+                                    lastIndex = endIndex + end.Length;
+                                    break;
+                                }
+                            }
+                        }
+
+                        //endIndex = this.GetEndIndex(startIndex, fetchStuff, out eindex);
+
+                        if (endIndex == -1)
+                        {
+                            isEnd = true;
+                            //result = fetchStuff.Substring(startIndex + startTag.Length);
+                        }
+                        else if (endIndex < startIndex)
+                        {
+                            isEnd = true;
+                        }
+                        else
+                        {
+                            result += fetchStuff.Substring(startIndex + start.Length, endIndex - startIndex - start.Length) + " ";
+                        }
+                    }
                 }
             }
             return result;

@@ -541,6 +541,7 @@
             this.linkLabel1.TabIndex = 90;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "高级设置";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
             // 
             // label3

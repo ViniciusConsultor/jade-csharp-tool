@@ -201,6 +201,7 @@ namespace Jade
                         {
                             case "Title":
                                 data.Title = result;
+                                //File.AppendAllText("user.txt", result);
                                 break;
                             case "Summary":
                                 data.Summary = result;
@@ -248,6 +249,7 @@ namespace Jade
                                 break;
                             case "SubTitle":
                                 data.SubTitle = result;
+                               //File.AppendAllText("item.txt", result);
                                 break;
                             case "Keywords":
                                 data.Keywords = result;
@@ -323,7 +325,25 @@ namespace Jade
                     {
                         break;
                     }
+
+                    if (!string.IsNullOrEmpty(Rule.DiyContentPageUrl))
+                    {
+                        Logger.Info("[" + Rule.Name + "] 正在处理用户自定义内容页");
+
+                        string[] dirBaseUrls = Rule.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                        List<string> dirUrls = new List<string>();
+                        if (urls != null && dirBaseUrls.Length > 0)
+                        {
+                            foreach (string url in dirBaseUrls)
+                            {
+                                dirUrls.AddRange(ExtractUrl.ParseUrlFromParameter(url));
+                            }
+                        }
+                        AddUrls(urls, dirUrls);
+                    }
+
                     Logger.Info("[" + Rule.Name + "] 正在下载并分析1级第" + (i + 1) + "个网址" + startUris[i].AbsoluteUri);
+
                     var html = HtmlPicker.VisitUrl(startUris[i],
                                                        item.HttpMethod,
                                                        null,
@@ -378,6 +398,11 @@ namespace Jade
             else
                 urls = ExtractUrl.ExtractAccurateRssUrl(RssPicker.GetRssLinks(html, Encoding.GetEncoding(encoding)), item.IncludePart, item.ExcludePart);
 
+            AddUrls(uris, urls);
+        }
+
+        private void AddUrls(List<Uri> uris, List<string> urls)
+        {
             foreach (string url in urls)
             {
                 if (!url.Contains("javascript"))

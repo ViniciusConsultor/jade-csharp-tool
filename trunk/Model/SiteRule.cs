@@ -164,6 +164,15 @@ namespace Jade.Model
         }
 
         /// <summary>
+        /// 自定义内容页地址
+        /// </summary>
+        public string DiyContentPageUrl
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 网页编码
         /// </summary>
         public string Encoding
@@ -403,6 +412,11 @@ namespace Jade.Model
     /// </summary>
     public class ItemRule
     {
+        /// <summary>
+        /// 多相匹配
+        /// </summary>
+        public bool MulityMatch { get; set; }
+
         /// <summary>
         /// 替换XPath
         /// </summary>
