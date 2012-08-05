@@ -47,5 +47,6 @@ namespace Jade.Model
         int? TaskId { get; set; }
         string Title { get; set; }
         string Url { get; set; }
+        int RemoteId { get; set; }
     }
 }

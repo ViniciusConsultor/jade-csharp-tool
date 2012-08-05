@@ -411,6 +411,8 @@ namespace Jade
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Jade.Helper.AccessHelper.CreateMDBDataBase();
+
             navDraft_LinkClicked(sender, null);
 
             DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
@@ -432,7 +434,7 @@ namespace Jade
 
             if (Properties.Settings.Default.IsEditModel)
             {
-                this.navBarControl1.ActiveGroup = this.navBarGroup1;
+                this.navBarControl1.ActiveGroup = this.navBarGroup2;
             }
             else
             {
