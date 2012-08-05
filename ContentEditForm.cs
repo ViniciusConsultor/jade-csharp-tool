@@ -155,7 +155,7 @@ namespace Jade
                     {
                         if (tag != "")
                         {
-                            var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(tag.Trim()));
+                            var specialTag = SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(tag.Trim()));
                             var item = StatusSelections.FindObjectWithItem(specialTag);
                             if (item != null)
                                 item.Selected = true;
@@ -164,7 +164,7 @@ namespace Jade
                 }
                 else
                 {
-                    var specialTag = SpecilTags.SingleOrDefault(t => t.DisplayName.Equals(Properties.Settings.Default.DefaultTag.Trim()));
+                    var specialTag = SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(Properties.Settings.Default.DefaultTag.Trim()));
                     var item = StatusSelections.FindObjectWithItem(specialTag);
                     if (item != null)
                         item.Selected = true;
@@ -435,11 +435,12 @@ namespace Jade
                     MessageBox.Show("请填写SEO关键字！'");
                     return;
                 }
-
-                SplashScreenManager.ShowForm(typeof(WaitForm1));
+                if (SplashScreenManager.Default == null)
+                    SplashScreenManager.ShowForm(typeof(WaitForm1));
                 UpdateCurrentData();
                 if (RemoteAPI.Publish(CurrentData))
                 {
+                    RemoteAPI.SendNews(CurrentData.RemoteId);
                     CurrentData.IsPublish = true;
                     CacheObject.DownloadDataDAL.Update(CurrentData);
                     SplashScreenManager.CloseForm();
@@ -515,6 +516,51 @@ namespace Jade
             if (imageSelector.ShowDialog() == DialogResult.OK)
             {
                 this.txt_news_guideimage.Text = imageSelector.SelectedFile;
+            }
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+
+            if (CacheObject.IsLognIn)
+            {
+
+                if (this.txt_tags.Text == "")
+                {
+                    MessageBox.Show("请选择标签！'");
+                    return;
+                }
+
+                if (this.txt_news_keywords.Text == "")
+                {
+                    MessageBox.Show("请填写关键字！'");
+                    return;
+                }
+
+                if (this.txt_news_keyword2.Text == "")
+                {
+                    MessageBox.Show("请填写SEO关键字！'");
+                    return;
+                }
+                if (SplashScreenManager.Default == null)
+                    SplashScreenManager.ShowForm(typeof(WaitForm1));
+                UpdateCurrentData();
+                if (RemoteAPI.Publish(CurrentData))
+                {
+                    CurrentData.IsPublish = true;
+                    CacheObject.DownloadDataDAL.Update(CurrentData);
+                    SplashScreenManager.CloseForm();
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("发布失败，服务器响应'修改失败！'");
+                }
+            }
+            else
+            {
+                MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
             }
         }
 

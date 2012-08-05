@@ -220,11 +220,12 @@ namespace Jade.Model.Access
         private string _other = "";
         private string _url = "";
         private DateTime? _downloadtime = DateTime.Now;
-        private string _editorusername="";
+        private string _editorusername = "";
         private bool _isedit;
         private DateTime? _edittime = DateTime.MinValue;
         private bool _isdownload;
         private bool _ispublish;
+        private int _remoteId = 0;
         /// <summary>
         /// 
         /// </summary>
@@ -565,6 +566,13 @@ namespace Jade.Model.Access
             get { return this.IsEdit ? 1 : 0; }
         }
         public bool IsChecked { get; set; }
+
+
+        public int RemoteId
+        {
+            get { return _remoteId; }
+            set { _remoteId = value; }
+        }
     }
 }
 

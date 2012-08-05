@@ -39,9 +39,9 @@ namespace Jade.Model.Access
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into DownloadData(");
-            strSql.Append("TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish)");
+            strSql.Append("TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish,RemoteId)");
             strSql.Append(" values (");
-            strSql.Append("@TaskId,@Title,@SubTitle,@Keywords,@news_source_name,@news_template_file,@news_top,@news_guideimage,@news_guideimage2,@news_description,@news_link,@news_down,@news_right,@news_left,@comment_url,@news_video,@news_keywords2,@label_base,@cmspinglun,@bbspinglun,@ISkfbm,@kfbm_id,@kfbm_link,@ISgfbm,@gfbm_id,@gfbm_link,@news_abs,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@DownloadTime,@EditorUserName,@IsEdit,@EditTime,@IsDownload,@IsPublish)");
+            strSql.Append("@TaskId,@Title,@SubTitle,@Keywords,@news_source_name,@news_template_file,@news_top,@news_guideimage,@news_guideimage2,@news_description,@news_link,@news_down,@news_right,@news_left,@comment_url,@news_video,@news_keywords2,@label_base,@cmspinglun,@bbspinglun,@ISkfbm,@kfbm_id,@kfbm_link,@ISgfbm,@gfbm_id,@gfbm_link,@news_abs,@Content,@Summary,@Source,@CreateTime,@Other,@Url,@DownloadTime,@EditorUserName,@IsEdit,@EditTime,@IsDownload,@IsPublish,@RemoteId)");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@TaskId", OleDbType.Integer,4),
 					new OleDbParameter("@Title", OleDbType.VarChar,0),
@@ -81,7 +81,8 @@ namespace Jade.Model.Access
 					new OleDbParameter("@IsEdit", OleDbType.Boolean,1),
 					new OleDbParameter("@EditTime", OleDbType.Date),
 					new OleDbParameter("@IsDownload", OleDbType.Boolean,1),
-					new OleDbParameter("@IsPublish", OleDbType.Boolean,1)};
+					new OleDbParameter("@IsPublish", OleDbType.Boolean,1),
+                    new OleDbParameter("@RemoteId", OleDbType.Integer,4)};
             parameters[0].Value = model.TaskId;
             parameters[1].Value = model.Title;
             parameters[2].Value = model.SubTitle;
@@ -121,7 +122,7 @@ namespace Jade.Model.Access
             parameters[36].Value = model.EditTime;
             parameters[37].Value = model.IsDownload;
             parameters[38].Value = model.IsPublish;
-
+            parameters[39].Value = model.RemoteId;
             int rows = DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -177,7 +178,8 @@ namespace Jade.Model.Access
             strSql.Append("IsEdit=@IsEdit,");
             strSql.Append("EditTime=@EditTime,");
             strSql.Append("IsDownload=@IsDownload,");
-            strSql.Append("IsPublish=@IsPublish");
+            strSql.Append("IsPublish=@IsPublish,");
+            strSql.Append("RemoteId=@RemoteId");
             strSql.Append(" where ID=@ID");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@TaskId", OleDbType.Integer,4),
@@ -219,6 +221,7 @@ namespace Jade.Model.Access
 					new OleDbParameter("@EditTime", OleDbType.Date),
 					new OleDbParameter("@IsDownload", OleDbType.Boolean,1),
 					new OleDbParameter("@IsPublish", OleDbType.Boolean,1),
+                    new OleDbParameter("@RemoteId", OleDbType.Integer,4),
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
             parameters[0].Value = model.TaskId;
             parameters[1].Value = model.Title;
@@ -259,7 +262,8 @@ namespace Jade.Model.Access
             parameters[36].Value = model.EditTime;
             parameters[37].Value = model.IsDownload;
             parameters[38].Value = model.IsPublish;
-            parameters[39].Value = model.ID;
+            parameters[39].Value = model.RemoteId;
+            parameters[40].Value = model.ID;
 
             int rows = DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -323,7 +327,7 @@ namespace Jade.Model.Access
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish from DownloadData ");
+            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish,RemoteId from DownloadData ");
             strSql.Append(" where ID=@ID");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@ID", OleDbType.Integer,4)
@@ -346,7 +350,7 @@ namespace Jade.Model.Access
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish from DownloadData ");
+            strSql.Append("select RemoteId,ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish from DownloadData ");
             strSql.Append(" where Url=@Url");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@Url", OleDbType.VarChar,0)
@@ -367,7 +371,10 @@ namespace Jade.Model.Access
         public DownloadData GetModel(DataRow row)
         {
             var model = new DownloadData();
-
+            if (row["RemoteId"] != null && row["RemoteId"].ToString() != "")
+            {
+                model.RemoteId = int.Parse(row["RemoteId"].ToString());
+            }
             if (row["ID"] != null && row["ID"].ToString() != "")
             {
                 model.ID = int.Parse(row["ID"].ToString());
@@ -586,7 +593,7 @@ namespace Jade.Model.Access
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish ");
+            strSql.Append("select RemoteId,ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish ");
             strSql.Append(" FROM DownloadData ");
             if (strWhere.Trim() != "")
             {

@@ -53,6 +53,7 @@
           <Property Name="IsDownload" Type="bit" Nullable="false" />
           <Property Name="IsPublish" Type="bit" Nullable="false" />
           <Property Name="EditTime" Type="datetime" />
+          <Property Name="RemoteId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -122,6 +123,7 @@
           <Property Type="Boolean" Name="IsDownload" Nullable="false" />
           <Property Type="Boolean" Name="IsPublish" Nullable="false" />
           <Property Type="DateTime" Name="EditTime" />
+          <Property Type="Int32" Name="RemoteId" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -137,6 +139,7 @@
           <EntitySetMapping Name="downloaddata">
             <EntityTypeMapping TypeName="Jade.Model.MySql.downloaddata">
               <MappingFragment StoreEntitySet="downloaddata">
+                <ScalarProperty Name="RemoteId" ColumnName="RemoteId" />
                 <ScalarProperty Name="EditTime" ColumnName="EditTime" />
                 <ScalarProperty Name="IsPublish" ColumnName="IsPublish" />
                 <ScalarProperty Name="IsDownload" ColumnName="IsDownload" />

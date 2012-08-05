@@ -313,6 +313,23 @@ namespace Jade
                     //var data = dataTable[index];
                     data.IsPublish = true;
                     data.EditTime = DateTime.Now;
+
+                    if (data.label_base == "")
+                    {
+                        data.label_base =Properties.Settings.Default.DefaultTag;
+                    }
+
+                    if (data.news_source_name == "")
+                    {
+                        data.news_source_name = Properties.Settings.Default.DefaultSource;
+                    }
+
+                    if (data.news_template_file == "")
+                    {
+                        data.news_source_name = Properties.Settings.Default.DefaultTemplate;
+                    }
+
+                    RemoteAPI.Publish(data);
                     CacheObject.DownloadDataDAL.Update(data);
                 }
                 comboBox1_SelectedIndexChanged(null, null);
