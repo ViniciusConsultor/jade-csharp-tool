@@ -27,7 +27,7 @@ namespace Jade
             dataUpdate = 0;
 
             InitializeComponent();
-          
+
             this.txtSource.ShowEOLMarkers = false;
             txtSource.ShowHRuler = false;
             txtSource.ShowInvalidLines = false;
@@ -469,8 +469,24 @@ namespace Jade
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand("InsertImage", true, null);
-            RefreshToolBar();
+            var imageSelect = new ImageSelecter();
+            if (imageSelect.ShowDialog() == DialogResult.OK)
+            {
+                ImageForm image = new ImageForm(new ImageModel() { Src = imageSelect.SelectedFile, Title = "", Alt = "" });
+                if (image.ShowDialog() == DialogResult.OK)
+                {
+                    if (!image.ImageModel.Src.Contains("http:"))
+                    {
+                        image.ImageModel.Src = "file:///" + image.ImageModel.Src.Replace("\\", "/");
+                    }
+
+                    var html = string.Format("<p style='text-align:center'><img src='{0}' alt='{1}' title='{2}' /><br/><span class='title'>{2}</span></p>", image.ImageModel.Src, image.ImageModel.Alt, image.ImageModel.Title);
+                    this.webBrowserBody.Document.InvokeScript("insertImage", new object[] { html });
+                }
+            }
+
+            //webBrowserBody.Document.ExecCommand("InsertImage", true, null);
+            //RefreshToolBar();
         }
 
         #endregion

@@ -309,37 +309,45 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             pageInex++;
         }
 
+        function insertImage(html) {
+            var range = document.selection.createRange();
+            range.pasteHTML(html);
+        }
         function getSelectText() {
             var range = document.selection.createRange();
             return range.text;
         }
 
+        var isClick = false;
+
         function bindImage() {
             $("img").unbind("click");
             $("img").click(function () {
-                showDiv();
-                $("#editImage").attr("src", $(this).attr("src"));
+                if (isClick) {
+                    return;
+                }
+                isClick = true;
                 var image = this;
-                $("#title").val($(image).attr("title"));
-                $("#alt").val($(image).attr("alt"));
-                $("#btnok").unbind().click(function () {
-                    var title = $("#title").val();
-                    var alt = $("#alt").val();
-                    $(image).attr("title", title);
-                    $(image).attr("alt", alt);
-                    if (title != "") {
-                        var next = $(image).next("span");
-                        if (next.length > 0) {
-                            next.text(title);
-                        } else {
-                            $(image).after("<br /><span style='text-align:center;'>" + title + "</span");
+                var result = window.external.EditImage($(this).attr("src"), $(image).attr("title"), $(image).attr("alt"));
+                if (result != "") {
+                    result = eval("(" + result + ")");
+                    if ($.isArray(result)) {
+                        $(image).attr("title", result[1]);
+                        $(image).attr("alt", result[2]);
+                        var title = result[1];
+                        if (title != "") {
+                            var next = $(image).parent().find("span.title");
+                            if (next.length > 0) {
+                                next.text(title);
+                            } else {
+                                $(image).after("<br /><span class='title' style='text-align:center;'>" + title + "</span");
+                            }
                         }
                     }
-                    closeDiv();
-                });
+                }
+                isClick = false;
 
             });
-
         }
 
         $(function () {

@@ -88,6 +88,16 @@ namespace Jade
             InitDownloadData(data);
         }
 
+        public string EditImage(string src, string title, string alt)
+        {
+            ImageForm image = new ImageForm(new ImageModel() {Src = src,Title= title,Alt = alt });
+            if (image.ShowDialog() != DialogResult.OK)
+            {
+                return "";
+            }
+            return image.ImageModel.ToString();
+        }
+
         public void NotifyMenuClick(string commad)
         {
             //<li><a href="javascript:void(0);" name="summary">设为摘要</a></li>

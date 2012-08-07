@@ -31,6 +31,7 @@
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup2 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup3 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageSelecter));
             this.mainGallery = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
@@ -64,7 +65,7 @@
             this.mainGallery.Gallery.ItemDoubleClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.galleryControlGallery1_ItemDoubleClick);
             this.mainGallery.Location = new System.Drawing.Point(223, 0);
             this.mainGallery.Name = "mainGallery";
-            this.mainGallery.Size = new System.Drawing.Size(710, 583);
+            this.mainGallery.Size = new System.Drawing.Size(710, 462);
             this.mainGallery.TabIndex = 1;
             this.mainGallery.Text = "galleryControl1";
             // 
@@ -72,7 +73,7 @@
             // 
             this.galleryControlClient1.GalleryControl = this.mainGallery;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 24);
-            this.galleryControlClient1.Size = new System.Drawing.Size(689, 557);
+            this.galleryControlClient1.Size = new System.Drawing.Size(689, 436);
             // 
             // navBarControl1
             // 
@@ -91,7 +92,7 @@
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 217;
             this.navBarControl1.OptionsNavPane.ShowExpandButton = false;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(217, 583);
+            this.navBarControl1.Size = new System.Drawing.Size(217, 462);
             this.navBarControl1.SkinExplorerBarViewScrollStyle = DevExpress.XtraNavBar.SkinExplorerBarViewScrollStyle.ScrollBar;
             this.navBarControl1.TabIndex = 2;
             this.navBarControl1.Text = "navBarControl1";
@@ -114,7 +115,7 @@
             // 
             this.navBarRencent.Caption = "最近使用";
             this.navBarRencent.Hint = "最近使用";
-            this.navBarRencent.LargeImage = global::Jade.Properties.Resources.recent_documents;
+            this.navBarRencent.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarRencent.LargeImage")));
             this.navBarRencent.Name = "navBarRencent";
             this.navBarRencent.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarRencent_LinkClicked);
             // 
@@ -122,14 +123,14 @@
             // 
             this.navBarItemDownload.Caption = "附件库";
             this.navBarItemDownload.Hint = "下载的图片库";
-            this.navBarItemDownload.LargeImage = global::Jade.Properties.Resources.gallery_256;
+            this.navBarItemDownload.LargeImage = global::Jade.Properties.Resources.attachment_yellow;
             this.navBarItemDownload.Name = "navBarItemDownload";
             this.navBarItemDownload.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemDownload_LinkClicked);
             // 
             // navBarItemRemote
             // 
             this.navBarItemRemote.Caption = "远程图片库";
-            this.navBarItemRemote.LargeImage = global::Jade.Properties.Resources.drive_remote;
+            this.navBarItemRemote.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItemRemote.LargeImage")));
             this.navBarItemRemote.Name = "navBarItemRemote";
             this.navBarItemRemote.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemRemote_LinkClicked);
             // 
@@ -137,10 +138,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 583);
+            this.ClientSize = new System.Drawing.Size(933, 462);
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.mainGallery);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ImageSelecter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "图片选择";
             this.Load += new System.EventHandler(this.ImageSelecter_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainGallery)).EndInit();

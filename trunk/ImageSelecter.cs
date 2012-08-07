@@ -22,7 +22,6 @@ namespace Jade
         {
             InitializeComponent();
 
-          
             //GalleryItemGroup group = new GalleryItemGroup();
             //group.Caption = "附件库";
             //group.CaptionAlignment = GalleryItemGroupCaptionAlignment.Stretch;
@@ -236,7 +235,14 @@ namespace Jade
 
             if (file.StartsWith("http:") || !e.Item.Hint.Contains("文件夹"))
             {
-                SelectedFile = file;
+                if (file.StartsWith("http:"))
+                {
+                    SelectedFile = file;
+                }
+                else
+                {
+                    SelectedFile = AppDomain.CurrentDomain.BaseDirectory + "\\" + file;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

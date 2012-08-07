@@ -254,6 +254,12 @@
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\SgmlParser.cs" />
     <Compile Include="Helper\SgmlReader.cs" />
+    <Compile Include="ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageForm.Designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageSelecter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,6 +467,9 @@
     <EmbeddedResource Include="EditDefaultSettingForm.resx">
       <DependentUpon>EditDefaultSettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageSelecter.resx">
       <DependentUpon>ImageSelecter.cs</DependentUpon>
     </EmbeddedResource>
@@ -621,10 +630,11 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
-    <None Include="Resources\folder_yellow_parent.png" />
-    <None Include="Resources\drive_remote.png" />
-    <None Include="Resources\gallery_256.png" />
     <None Include="Resources\recent_documents.png" />
+    <None Include="Resources\drive_remote.png" />
+    <None Include="Resources\attachment_yellow.png" />
+    <None Include="Resources\folder_yellow_parent.png" />
+    <None Include="Resources\gallery_256.png" />
     <None Include="Resources\dir.png" />
     <None Include="Resources\dockPanel3.Image.png" />
     <None Include="Resources\panelContainer2.Image.png" />

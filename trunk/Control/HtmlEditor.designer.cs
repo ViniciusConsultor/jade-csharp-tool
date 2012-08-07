@@ -121,7 +121,7 @@ namespace Jade
             this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBold.Name = "toolStripButtonBold";
             this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBold.Text = "Bold";
+            this.toolStripButtonBold.Text = "加粗";
             this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
             // 
             // toolStripButtonItalic
@@ -131,7 +131,7 @@ namespace Jade
             this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonItalic.Name = "toolStripButtonItalic";
             this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonItalic.Text = "Italic";
+            this.toolStripButtonItalic.Text = "倾斜";
             this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
             // 
             // toolStripButtonUnderline
@@ -141,7 +141,7 @@ namespace Jade
             this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
             this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonUnderline.Text = "Underline";
+            this.toolStripButtonUnderline.Text = "下划线";
             this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
             // 
             // toolStripButtonColor
@@ -151,7 +151,7 @@ namespace Jade
             this.toolStripButtonColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonColor.Name = "toolStripButtonColor";
             this.toolStripButtonColor.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonColor.Text = "Font Color";
+            this.toolStripButtonColor.Text = "字体颜色";
             this.toolStripButtonColor.Click += new System.EventHandler(this.toolStripButtonColor_Click);
             // 
             // toolStripSeparatorFont
@@ -186,7 +186,7 @@ namespace Jade
             this.toolStripButtonOutdent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOutdent.Name = "toolStripButtonOutdent";
             this.toolStripButtonOutdent.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonOutdent.Text = "Decrease Indentation";
+            this.toolStripButtonOutdent.Text = "减少缩进";
             this.toolStripButtonOutdent.Click += new System.EventHandler(this.toolStripButtonOutdent_Click);
             // 
             // toolStripButtonIndent
@@ -196,7 +196,7 @@ namespace Jade
             this.toolStripButtonIndent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonIndent.Name = "toolStripButtonIndent";
             this.toolStripButtonIndent.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonIndent.Text = "Increase Indentation";
+            this.toolStripButtonIndent.Text = "增加缩进";
             this.toolStripButtonIndent.Click += new System.EventHandler(this.toolStripButtonIndent_Click);
             // 
             // toolStripSeparatorFormat
@@ -211,7 +211,7 @@ namespace Jade
             this.toolStripButtonLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLeft.Name = "toolStripButtonLeft";
             this.toolStripButtonLeft.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonLeft.Text = "Align Left";
+            this.toolStripButtonLeft.Text = "左对齐";
             this.toolStripButtonLeft.Click += new System.EventHandler(this.toolStripButtonLeft_Click);
             // 
             // toolStripButtonCenter
@@ -221,7 +221,7 @@ namespace Jade
             this.toolStripButtonCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCenter.Name = "toolStripButtonCenter";
             this.toolStripButtonCenter.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonCenter.Text = "Center";
+            this.toolStripButtonCenter.Text = "剧中对齐";
             this.toolStripButtonCenter.Click += new System.EventHandler(this.toolStripButtonCenter_Click);
             // 
             // toolStripButtonRight
@@ -231,7 +231,7 @@ namespace Jade
             this.toolStripButtonRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRight.Name = "toolStripButtonRight";
             this.toolStripButtonRight.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonRight.Text = "Align Right";
+            this.toolStripButtonRight.Text = "右对齐";
             this.toolStripButtonRight.Click += new System.EventHandler(this.toolStripButtonRight_Click);
             // 
             // toolStripButtonFull
@@ -256,7 +256,7 @@ namespace Jade
             this.toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLine.Name = "toolStripButtonLine";
             this.toolStripButtonLine.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonLine.Text = "Insert Horizontal Line";
+            this.toolStripButtonLine.Text = "插入直线";
             this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButtonLine_Click);
             // 
             // toolStripButtonHyperlink
@@ -312,10 +312,10 @@ namespace Jade
             // tabEditor
             // 
             this.tabEditor.Controls.Add(this.webBrowserBody);
-            this.tabEditor.Location = new System.Drawing.Point(4, 25);
+            this.tabEditor.Location = new System.Drawing.Point(4, 24);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(592, 394);
+            this.tabEditor.Size = new System.Drawing.Size(592, 395);
             this.tabEditor.TabIndex = 0;
             this.tabEditor.Text = "编辑器";
             this.tabEditor.UseVisualStyleBackColor = true;
@@ -323,12 +323,12 @@ namespace Jade
             // tabSource
             // 
             this.tabSource.Controls.Add(this.txtSource);
-            this.tabSource.Location = new System.Drawing.Point(4, 25);
+            this.tabSource.Location = new System.Drawing.Point(4, 24);
             this.tabSource.Name = "tabSource";
             this.tabSource.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSource.Size = new System.Drawing.Size(592, 394);
+            this.tabSource.Size = new System.Drawing.Size(592, 395);
             this.tabSource.TabIndex = 1;
-            this.tabSource.Text = "Source";
+            this.tabSource.Text = "源代码";
             this.tabSource.UseVisualStyleBackColor = true;
             // 
             // txtSource
@@ -337,7 +337,7 @@ namespace Jade
             this.txtSource.IsReadOnly = false;
             this.txtSource.Location = new System.Drawing.Point(3, 3);
             this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(586, 388);
+            this.txtSource.Size = new System.Drawing.Size(586, 389);
             this.txtSource.TabIndex = 0;
             // 
             // webBrowserBody
@@ -349,7 +349,7 @@ namespace Jade
             this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserBody.Name = "webBrowserBody";
             this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(586, 388);
+            this.webBrowserBody.Size = new System.Drawing.Size(586, 389);
             this.webBrowserBody.TabIndex = 0;
             this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
             this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
