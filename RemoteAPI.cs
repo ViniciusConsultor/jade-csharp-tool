@@ -116,13 +116,14 @@ namespace Jade
         static string getLabelData(string labels)
         {
             var result = "";
-            var tags = labels.Replace("\"", "").Split('&');
+            var tags = labels.Replace("\"", "").Split('&', ',');
             foreach (var tag in tags)
             {
                 if (tag != "")
                 {
                     var specialTag = RemoteWebService.Instance.SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(tag.Trim()));
-                    result += "&" + encoding("label_id[]") + "=" + specialTag.Value;
+                    if (specialTag != null)
+                        result += "&" + encoding("label_id[]") + "=" + specialTag.Value;
                 }
             }
             return result;
@@ -149,7 +150,7 @@ namespace Jade
 
             foreach (Match matchLabel in labels)
             {
-                result.Add(new DisplayNameValuePair { DisplayName = matchLabel.Groups[2].Value, Value = matchLabel.Groups[1].Value });
+                result.Add(new DisplayNameValuePair { DisplayName = matchLabel.Groups[2].Value.Trim(), Value = matchLabel.Groups[1].Value });
             }
 
             return result;

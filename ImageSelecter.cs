@@ -242,6 +242,12 @@ namespace Jade
                 else
                 {
                     SelectedFile = AppDomain.CurrentDomain.BaseDirectory + "\\" + file;
+
+                    if (!Directory.Exists("Rencenty"))
+                    {
+                        Directory.CreateDirectory("Rencenty");
+                    }
+                
                     // 拷贝到最近选择
                     File.Copy(SelectedFile, "Rencenty\\" + Path.GetFileName(SelectedFile),true);
                 }

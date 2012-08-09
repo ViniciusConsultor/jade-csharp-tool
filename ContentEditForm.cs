@@ -160,7 +160,7 @@ namespace Jade
 
                 if (!string.IsNullOrEmpty(data.label_base))
                 {
-                    var tags = data.label_base.Replace("\"", "").Split('&');
+                    var tags = data.label_base.Replace("\"", "").Split('&',',');
                     foreach (var tag in tags)
                     {
                         if (tag != "")
