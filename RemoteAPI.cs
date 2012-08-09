@@ -18,7 +18,7 @@ namespace Jade
             request.RequestData = new RequestPostData()
             {
                 PostDatas = new List<PostDataItem> { new PostDataItem{
-                        Data = "channel_id=8000000\0"
+                        Data = "channel_id="+CacheObject.channelid+"\0"
                     }}
             };
             var result = request.Post();
@@ -139,7 +139,7 @@ namespace Jade
         {
             var result = new List<DisplayNameValuePair>();
             var request = CacheObject.WebRequset;
-            request.Url = "http://newscms.house365.com/newCMS/news/ajax_channel.php?keyword=" + encoding(label) + "&chengshiid=8000000";
+            request.Url = "http://newscms.house365.com/newCMS/news/ajax_channel.php?keyword=" + encoding(label) + "&chengshiid=" + CacheObject.channelid;
             var html = request.Get();
 
             //<li onselect="this.text.value = '家在合肥'; chk_channel('8050800','家在合肥'); "> 家在合肥</li>
@@ -177,7 +177,7 @@ namespace Jade
             if (CacheObject.IsLognIn)
             {
                 var request = CacheObject.WebRequset;
-                request.Url = "http://newscms.house365.com/newCMS/news/list_pic.php?parent_channel_id=8000000&which_field=keywords&search_word=&type_ename=&user_id=0&fromday=&show_mode=&bjq=&cx.x=47&cx.y=7";
+                request.Url = "http://newscms.house365.com/newCMS/news/list_pic.php?parent_channel_id=" + CacheObject.channelid + "&which_field=keywords&search_word=&type_ename=&user_id=0&fromday=&show_mode=&bjq=&cx.x=47&cx.y=7";
                 var html = request.Get();
                 var xpath = "//*[@id=\"pictable\"]//img";
                 HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
@@ -209,7 +209,7 @@ namespace Jade
         /// <returns></returns>
         public static bool SendNews(int newsId)
         {
-            var url = "http://newscms.house365.com/newCMS/news/news_send.php?news_id=" + newsId + "&channel_id=8000000";
+            var url = "http://newscms.house365.com/newCMS/news/news_send.php?news_id=" + newsId + "&channel_id=" + CacheObject.channelid;
             var request = CacheObject.WebRequset;
             request.Url = url;
             request.Cookie = CacheObject.Cookie;
@@ -224,6 +224,7 @@ namespace Jade
         }
         public static bool Publish(Model.IDownloadData data = null)
         {
+            CacheObject.CurrentRequestCount++;
             //UploadImage();
             //return;
             if (data != null)
@@ -273,7 +274,7 @@ namespace Jade
                     {
                         data.RemoteId = int.Parse(newsid);
                     }
-                    var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=8000000&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat={28}&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
+                    var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=" + CacheObject.channelid + "&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat={28}&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
                         encoding(data.news_source_name), encoding(data.news_template_file), encoding(data.Title), encoding(data.Keywords), encoding(data.news_keywords2),
                          encoding(data.SubTitle),
                        getLabelData(data.label_base),

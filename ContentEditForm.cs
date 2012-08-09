@@ -28,13 +28,7 @@ namespace Jade
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
-            this.txtnews_source_name.DisplayMember = "DisplayName";
-            this.txtnews_source_name.ValueMember = "Value";
-
-            this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
-            this.txt_news_template_file.DisplayMember = "DisplayName";
-            this.txt_news_template_file.ValueMember = "Value";
+            BindSelector();
 
             SpecilTags = RemoteWebService.Instance.GetSpecilTags();
             StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
@@ -51,6 +45,17 @@ namespace Jade
             this.cmbSearchLabel.Text = "";
             this.txtContent.SetScriptingForm(this);
 
+        }
+
+        private void BindSelector()
+        {
+            this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
+            this.txtnews_source_name.DisplayMember = "DisplayName";
+            this.txtnews_source_name.ValueMember = "Value";
+
+            this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
+            this.txt_news_template_file.DisplayMember = "DisplayName";
+            this.txt_news_template_file.ValueMember = "Value";
         }
 
         void cmbSearchLabel_SelectedIndexChanged(object sender, EventArgs e)
@@ -90,7 +95,7 @@ namespace Jade
 
         public string EditImage(string src, string title, string alt)
         {
-            ImageForm image = new ImageForm(new ImageModel() {Src = src,Title= title,Alt = alt });
+            ImageForm image = new ImageForm(new ImageModel() { Src = src, Title = title, Alt = alt });
             if (image.ShowDialog() != DialogResult.OK)
             {
                 return "";
@@ -146,6 +151,7 @@ namespace Jade
 
         public void InitDownloadData(IDownloadData data)
         {
+            BindSelector();
             CurrentData = data;
             if (data.Content != null)
             {
@@ -160,7 +166,7 @@ namespace Jade
 
                 if (!string.IsNullOrEmpty(data.label_base))
                 {
-                    var tags = data.label_base.Replace("\"", "").Split('&',',');
+                    var tags = data.label_base.Replace("\"", "").Split('&', ',');
                     foreach (var tag in tags)
                     {
                         if (tag != "")
@@ -189,8 +195,15 @@ namespace Jade
                 }
                 else
                 {
-                    var defaultSouce = Properties.Settings.Default.DefaultSource.Trim();
-                    this.txtnews_source_name.SelectedValue = defaultSouce;
+                    try
+                    {
+                        var defaultSouce = Properties.Settings.Default.DefaultSource.Trim();
+                        this.txtnews_source_name.SelectedValue = defaultSouce;
+                    }
+                    catch
+                    {
+                        this.txtnews_source_name.SelectedIndex = 0;
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(data.news_template_file))
@@ -199,8 +212,15 @@ namespace Jade
                 }
                 else
                 {
-                    var defaultSouce = Properties.Settings.Default.DefaultTemplate.Trim();
-                    this.txt_news_template_file.SelectedValue = defaultSouce;
+                    try
+                    {
+                        var defaultSouce = Properties.Settings.Default.DefaultTemplate.Trim();
+                        this.txt_news_template_file.SelectedValue = defaultSouce;
+                    }
+                    catch
+                    {
+                        this.txt_news_template_file.SelectedIndex = 0;
+                    }
                 }
 
                 this.txt_gfbm_id.Text = data.gfbm_id;
@@ -236,6 +256,11 @@ namespace Jade
 
         private void UpdateCurrentData()
         {
+            if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount)
+            {
+                MessageBox.Show("已超过限定使用次数，程序自动退出");
+                System.Environment.Exit(0);
+            }
 
             CurrentData.news_source_name = this.txtnews_source_name.Text;
 
