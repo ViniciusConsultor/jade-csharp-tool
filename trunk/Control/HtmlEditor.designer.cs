@@ -29,7 +29,6 @@ namespace Jade
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HtmlEditor));
             this.toolStripToolBar = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBoxName = new System.Windows.Forms.ToolStripComboBox();
@@ -53,12 +52,12 @@ namespace Jade
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabEditor = new System.Windows.Forms.TabPage();
+            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.tabSource = new System.Windows.Forms.TabPage();
             this.txtSource = new ICSharpCode.TextEditor.TextEditorControl();
-            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.toolStripToolBar.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -312,21 +311,35 @@ namespace Jade
             // tabEditor
             // 
             this.tabEditor.Controls.Add(this.webBrowserBody);
-            this.tabEditor.Location = new System.Drawing.Point(4, 24);
+            this.tabEditor.Location = new System.Drawing.Point(4, 25);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(592, 395);
+            this.tabEditor.Size = new System.Drawing.Size(592, 394);
             this.tabEditor.TabIndex = 0;
             this.tabEditor.Text = "±à¼­Æ÷";
             this.tabEditor.UseVisualStyleBackColor = true;
             // 
+            // webBrowserBody
+            // 
+            this.webBrowserBody.AllowWebBrowserDrop = false;
+            this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowserBody.Location = new System.Drawing.Point(3, 3);
+            this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowserBody.Name = "webBrowserBody";
+            this.webBrowserBody.ScriptErrorsSuppressed = true;
+            this.webBrowserBody.Size = new System.Drawing.Size(586, 388);
+            this.webBrowserBody.TabIndex = 0;
+            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
+            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
+            // 
             // tabSource
             // 
             this.tabSource.Controls.Add(this.txtSource);
-            this.tabSource.Location = new System.Drawing.Point(4, 24);
+            this.tabSource.Location = new System.Drawing.Point(4, 25);
             this.tabSource.Name = "tabSource";
             this.tabSource.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSource.Size = new System.Drawing.Size(592, 395);
+            this.tabSource.Size = new System.Drawing.Size(592, 394);
             this.tabSource.TabIndex = 1;
             this.tabSource.Text = "Ô´´úÂë";
             this.tabSource.UseVisualStyleBackColor = true;
@@ -339,20 +352,6 @@ namespace Jade
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(586, 389);
             this.txtSource.TabIndex = 0;
-            // 
-            // webBrowserBody
-            // 
-            this.webBrowserBody.AllowWebBrowserDrop = false;
-            this.webBrowserBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowserBody.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowserBody.Location = new System.Drawing.Point(3, 3);
-            this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowserBody.Name = "webBrowserBody";
-            this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(586, 389);
-            this.webBrowserBody.TabIndex = 0;
-            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
-            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
             // 
             // HtmlEditor
             // 
