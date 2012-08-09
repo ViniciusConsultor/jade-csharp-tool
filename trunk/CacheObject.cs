@@ -16,6 +16,8 @@ namespace Jade
 {
     public class CacheObject
     {
+        public static int MaxRequestCount = 50;
+        public static int CurrentRequestCount = 0;
         static CacheObject()
         {
             RuleManager = new RuleManager();
@@ -186,6 +188,8 @@ namespace Jade
             get;
             set;
         }
+
+        public static string channelid { get; set; }
     }
 
     //public class CheckboxableData : IDownloadData

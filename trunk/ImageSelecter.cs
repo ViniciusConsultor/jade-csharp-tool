@@ -243,13 +243,19 @@ namespace Jade
                 {
                     SelectedFile = AppDomain.CurrentDomain.BaseDirectory + "\\" + file;
 
-                    if (!Directory.Exists("Rencenty"))
+                    try
                     {
-                        Directory.CreateDirectory("Rencenty");
+                        if (!Directory.Exists("Rencenty"))
+                        {
+                            Directory.CreateDirectory("Rencenty");
+                        }
+
+                        // 拷贝到最近选择
+                        File.Copy(SelectedFile, "Rencenty\\" + Path.GetFileName(SelectedFile), true);
                     }
-                
-                    // 拷贝到最近选择
-                    File.Copy(SelectedFile, "Rencenty\\" + Path.GetFileName(SelectedFile),true);
+                    catch
+                    {
+                    }
                 }
                 this.DialogResult = DialogResult.OK;
                 this.Close();

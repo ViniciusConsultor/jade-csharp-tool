@@ -120,6 +120,14 @@ namespace Jade
             var userId = decodeCookie.Substring(uStart, uEnd - uStart).Replace("usid=", "");
             var trueName = decodeCookie.Substring(decodeCookie.LastIndexOf("=") + 1);
 
+            // var PHPSESSID=d95b4f4b6c6e24be2ac96d1ae826d50c; usid=2190;  channelids=12000000;  user_manage=0%2C12000000;  true_name=%CD%F5%CE%B0%CE%B0
+
+            uStart = decodeCookie.IndexOf("channelids=");
+            uEnd = decodeCookie.IndexOf(";", uStart);
+            var channelid = decodeCookie.Substring(uStart, uEnd - uStart).Replace("channelids=", "");
+
+            CacheObject.channelid = channelid;
+
             // 更新setting
             setting.UserName = this.txtUserName.Text;
             setting.UserPassword = this.txtPassword.Text;
@@ -129,7 +137,7 @@ namespace Jade
             setting.Name = trueName;
             setting.Save();
 
-  
+
             CacheObject.CurrentUser = new User
             {
                 Id = setting.UserId,
