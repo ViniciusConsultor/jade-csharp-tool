@@ -114,9 +114,34 @@ namespace Jade
                 {
                     var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
 
-                    var pages = html.Split(new string[] { "{{{pager}}}" }, StringSplitOptions.RemoveEmptyEntries);
+                    var pages = html.Split(new string[] { "<hr class=enorth_new_page>" }, StringSplitOptions.RemoveEmptyEntries);
 
                     webBrowserBody.Document.InvokeScript("InitPages", pages);
+                }
+            }
+        }
+
+        /// <summary>
+        /// “≥√Ê±ÍÃ‚
+        /// </summary>
+        public string PageTitles
+        {
+            get
+            {
+                var value = webBrowserBody.Document.InvokeScript("GetTitle");
+                if (value == null)
+                {
+                    return "";
+                }
+                return value.ToString();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    var pages = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+                    webBrowserBody.Document.InvokeScript("InitTitles", pages);
                 }
             }
         }
@@ -609,15 +634,19 @@ namespace Jade
             this.webBrowserBody.Document.InvokeScript("insertPage");
         }
 
+        string lastTitle = "";
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.tabControl1.SelectedIndex == 1)
             {
+                lastTitle = this.PageTitles;
                 this.txtSource.Text = this.Html;
             }
             else
             {
                 this.Html = this.txtSource.Text;
+                this.PageTitles = lastTitle;
             }
         }
     }

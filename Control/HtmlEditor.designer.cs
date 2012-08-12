@@ -29,6 +29,7 @@ namespace Jade
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HtmlEditor));
             this.toolStripToolBar = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBoxName = new System.Windows.Forms.ToolStripComboBox();
@@ -52,10 +53,10 @@ namespace Jade
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabEditor = new System.Windows.Forms.TabPage();
-            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.tabSource = new System.Windows.Forms.TabPage();
             this.txtSource = new ICSharpCode.TextEditor.TextEditorControl();
             this.toolStripToolBar.SuspendLayout();
