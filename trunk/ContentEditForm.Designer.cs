@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             PresentationControls.CheckBoxProperties checkBoxProperties1 = new PresentationControls.CheckBoxProperties();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentEditForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.设为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.添加为关键字ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,13 +108,14 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtContent = new Jade.HtmlEditor();
             this.txt_news_keyword2 = new Jade.Control.KeywordBox();
             this.txt_news_keywords = new Jade.Control.KeywordBox();
@@ -125,6 +127,8 @@
             this.panelgfbm.SuspendLayout();
             this.panelkgbm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -139,6 +143,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(994, 700);
             this.tabControl1.TabIndex = 5;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -354,19 +359,13 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
-            this.tabPage2.Controls.Add(this.panelgfbm);
-            this.tabPage2.Controls.Add(this.panelkgbm);
+            this.tabPage2.Controls.Add(this.panelControl1);
             this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.txt_row_news_abstract);
-            this.tabPage2.Controls.Add(this.chk_bbspinglun);
-            this.tabPage2.Controls.Add(this.chk_cmspinglun);
-            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.txt_news_template_file);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.txtnews_source_name);
             this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.txt_news_right);
-            this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.txt_news_left);
             this.tabPage2.Controls.Add(this.label25);
             this.tabPage2.Controls.Add(this.label24);
@@ -375,20 +374,10 @@
             this.tabPage2.Controls.Add(this.txt_news_guideimage);
             this.tabPage2.Controls.Add(this.label23);
             this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.chkISgfbm);
-            this.tabPage2.Controls.Add(this.chkISkfbm);
-            this.tabPage2.Controls.Add(this.label18);
-            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.text_news_video);
             this.tabPage2.Controls.Add(this.label16);
-            this.tabPage2.Controls.Add(this.txtCommentUrl);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.txt_news_down);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.txt_news_top);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.txt_news_description);
-            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -405,7 +394,7 @@
             this.panelgfbm.Controls.Add(this.txt_gfbm_id);
             this.panelgfbm.Controls.Add(this.label21);
             this.panelgfbm.Controls.Add(this.label22);
-            this.panelgfbm.Location = new System.Drawing.Point(144, 114);
+            this.panelgfbm.Location = new System.Drawing.Point(24, 29);
             this.panelgfbm.Name = "panelgfbm";
             this.panelgfbm.Size = new System.Drawing.Size(811, 26);
             this.panelgfbm.TabIndex = 39;
@@ -468,7 +457,7 @@
             this.panelkgbm.Controls.Add(this.txt_kfbm_id);
             this.panelkgbm.Controls.Add(this.label20);
             this.panelkgbm.Controls.Add(this.label19);
-            this.panelkgbm.Location = new System.Drawing.Point(146, 84);
+            this.panelkgbm.Location = new System.Drawing.Point(165, 61);
             this.panelkgbm.Name = "panelkgbm";
             this.panelkgbm.Size = new System.Drawing.Size(811, 26);
             this.panelkgbm.TabIndex = 38;
@@ -526,7 +515,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(7, 201);
+            this.label28.Location = new System.Drawing.Point(20, 217);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(41, 12);
             this.label28.TabIndex = 58;
@@ -534,16 +523,16 @@
             // 
             // txt_row_news_abstract
             // 
-            this.txt_row_news_abstract.Location = new System.Drawing.Point(75, 186);
+            this.txt_row_news_abstract.Location = new System.Drawing.Point(75, 170);
             this.txt_row_news_abstract.Multiline = true;
             this.txt_row_news_abstract.Name = "txt_row_news_abstract";
-            this.txt_row_news_abstract.Size = new System.Drawing.Size(712, 78);
+            this.txt_row_news_abstract.Size = new System.Drawing.Size(879, 123);
             this.txt_row_news_abstract.TabIndex = 57;
             // 
             // chk_bbspinglun
             // 
             this.chk_bbspinglun.AutoSize = true;
-            this.chk_bbspinglun.Location = new System.Drawing.Point(167, 36);
+            this.chk_bbspinglun.Location = new System.Drawing.Point(186, 13);
             this.chk_bbspinglun.Name = "chk_bbspinglun";
             this.chk_bbspinglun.Size = new System.Drawing.Size(72, 16);
             this.chk_bbspinglun.TabIndex = 56;
@@ -553,7 +542,7 @@
             // chk_cmspinglun
             // 
             this.chk_cmspinglun.AutoSize = true;
-            this.chk_cmspinglun.Location = new System.Drawing.Point(73, 36);
+            this.chk_cmspinglun.Location = new System.Drawing.Point(92, 13);
             this.chk_cmspinglun.Name = "chk_cmspinglun";
             this.chk_cmspinglun.Size = new System.Drawing.Size(72, 16);
             this.chk_cmspinglun.TabIndex = 55;
@@ -563,7 +552,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 37);
+            this.label8.Location = new System.Drawing.Point(23, 14);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 12);
             this.label8.TabIndex = 54;
@@ -605,7 +594,7 @@
             // 
             // txt_news_right
             // 
-            this.txt_news_right.Location = new System.Drawing.Point(74, 652);
+            this.txt_news_right.Location = new System.Drawing.Point(92, 331);
             this.txt_news_right.Multiline = true;
             this.txt_news_right.Name = "txt_news_right";
             this.txt_news_right.Size = new System.Drawing.Size(709, 74);
@@ -614,7 +603,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(4, 679);
+            this.label26.Location = new System.Drawing.Point(22, 358);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(65, 24);
             this.label26.TabIndex = 48;
@@ -624,27 +613,27 @@
             // 
             this.txt_news_left.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_left.Location = new System.Drawing.Point(75, 561);
+            this.txt_news_left.Location = new System.Drawing.Point(75, 528);
             this.txt_news_left.Multiline = true;
             this.txt_news_left.Name = "txt_news_left";
-            this.txt_news_left.Size = new System.Drawing.Size(708, 82);
+            this.txt_news_left.Size = new System.Drawing.Size(874, 95);
             this.txt_news_left.TabIndex = 47;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(4, 585);
+            this.label25.Location = new System.Drawing.Point(3, 558);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 24);
+            this.label25.Size = new System.Drawing.Size(71, 24);
             this.label25.TabIndex = 46;
-            this.label25.Text = "附加正文4\r\n(正文左方)";
+            this.label25.Text = "分页标题\r\n（用,隔开）";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label24.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label24.Location = new System.Drawing.Point(482, 151);
+            this.label24.Location = new System.Drawing.Point(3, 126);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(71, 12);
             this.label24.TabIndex = 45;
@@ -653,23 +642,23 @@
             // 
             // txt_news_abs
             // 
-            this.txt_news_abs.Location = new System.Drawing.Point(549, 59);
+            this.txt_news_abs.Location = new System.Drawing.Point(554, 45);
             this.txt_news_abs.Name = "txt_news_abs";
             this.txt_news_abs.Size = new System.Drawing.Size(400, 21);
             this.txt_news_abs.TabIndex = 44;
             // 
             // txt_news_guideimage2
             // 
-            this.txt_news_guideimage2.Location = new System.Drawing.Point(554, 146);
+            this.txt_news_guideimage2.Location = new System.Drawing.Point(75, 123);
             this.txt_news_guideimage2.Name = "txt_news_guideimage2";
-            this.txt_news_guideimage2.Size = new System.Drawing.Size(406, 21);
+            this.txt_news_guideimage2.Size = new System.Drawing.Size(623, 21);
             this.txt_news_guideimage2.TabIndex = 43;
             // 
             // txt_news_guideimage
             // 
-            this.txt_news_guideimage.Location = new System.Drawing.Point(75, 146);
+            this.txt_news_guideimage.Location = new System.Drawing.Point(75, 79);
             this.txt_news_guideimage.Name = "txt_news_guideimage";
-            this.txt_news_guideimage.Size = new System.Drawing.Size(400, 21);
+            this.txt_news_guideimage.Size = new System.Drawing.Size(623, 21);
             this.txt_news_guideimage.TabIndex = 42;
             // 
             // label23
@@ -677,7 +666,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label23.Location = new System.Drawing.Point(3, 149);
+            this.label23.Location = new System.Drawing.Point(8, 88);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(65, 12);
             this.label23.TabIndex = 41;
@@ -687,7 +676,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(481, 64);
+            this.label12.Location = new System.Drawing.Point(486, 50);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 12);
             this.label12.TabIndex = 40;
@@ -696,7 +685,7 @@
             // chkISgfbm
             // 
             this.chkISgfbm.AutoSize = true;
-            this.chkISgfbm.Location = new System.Drawing.Point(75, 118);
+            this.chkISgfbm.Location = new System.Drawing.Point(94, 95);
             this.chkISgfbm.Name = "chkISgfbm";
             this.chkISgfbm.Size = new System.Drawing.Size(72, 16);
             this.chkISgfbm.TabIndex = 37;
@@ -707,7 +696,7 @@
             // chkISkfbm
             // 
             this.chkISkfbm.AutoSize = true;
-            this.chkISkfbm.Location = new System.Drawing.Point(75, 93);
+            this.chkISkfbm.Location = new System.Drawing.Point(94, 70);
             this.chkISkfbm.Name = "chkISkfbm";
             this.chkISkfbm.Size = new System.Drawing.Size(72, 16);
             this.chkISkfbm.TabIndex = 36;
@@ -718,7 +707,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(4, 119);
+            this.label18.Location = new System.Drawing.Point(23, 96);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(65, 12);
             this.label18.TabIndex = 35;
@@ -727,7 +716,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(4, 93);
+            this.label17.Location = new System.Drawing.Point(23, 70);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(65, 12);
             this.label17.TabIndex = 34;
@@ -735,7 +724,7 @@
             // 
             // text_news_video
             // 
-            this.text_news_video.Location = new System.Drawing.Point(72, 58);
+            this.text_news_video.Location = new System.Drawing.Point(75, 45);
             this.text_news_video.Name = "text_news_video";
             this.text_news_video.Size = new System.Drawing.Size(400, 21);
             this.text_news_video.TabIndex = 33;
@@ -743,7 +732,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 63);
+            this.label16.Location = new System.Drawing.Point(9, 50);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 32;
@@ -751,7 +740,7 @@
             // 
             // txtCommentUrl
             // 
-            this.txtCommentUrl.Location = new System.Drawing.Point(549, 34);
+            this.txtCommentUrl.Location = new System.Drawing.Point(568, 11);
             this.txtCommentUrl.Name = "txtCommentUrl";
             this.txtCommentUrl.Size = new System.Drawing.Size(400, 21);
             this.txtCommentUrl.TabIndex = 31;
@@ -759,7 +748,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(481, 37);
+            this.label15.Location = new System.Drawing.Point(500, 14);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 12);
             this.label15.TabIndex = 30;
@@ -767,7 +756,7 @@
             // 
             // txt_news_down
             // 
-            this.txt_news_down.Location = new System.Drawing.Point(76, 456);
+            this.txt_news_down.Location = new System.Drawing.Point(94, 214);
             this.txt_news_down.Multiline = true;
             this.txt_news_down.Name = "txt_news_down";
             this.txt_news_down.Size = new System.Drawing.Size(712, 89);
@@ -776,7 +765,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 488);
+            this.label14.Location = new System.Drawing.Point(24, 246);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(59, 24);
             this.label14.TabIndex = 28;
@@ -784,7 +773,7 @@
             // 
             // txt_news_top
             // 
-            this.txt_news_top.Location = new System.Drawing.Point(76, 359);
+            this.txt_news_top.Location = new System.Drawing.Point(94, 117);
             this.txt_news_top.Multiline = true;
             this.txt_news_top.Name = "txt_news_top";
             this.txt_news_top.Size = new System.Drawing.Size(712, 81);
@@ -793,7 +782,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 284);
+            this.label13.Location = new System.Drawing.Point(8, 397);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 24);
             this.label13.TabIndex = 26;
@@ -801,16 +790,16 @@
             // 
             // txt_news_description
             // 
-            this.txt_news_description.Location = new System.Drawing.Point(76, 277);
+            this.txt_news_description.Location = new System.Drawing.Point(75, 326);
             this.txt_news_description.Multiline = true;
             this.txt_news_description.Name = "txt_news_description";
-            this.txt_news_description.Size = new System.Drawing.Size(712, 76);
+            this.txt_news_description.Size = new System.Drawing.Size(874, 179);
             this.txt_news_description.TabIndex = 23;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 393);
+            this.label11.Location = new System.Drawing.Point(22, 151);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 24);
             this.label11.TabIndex = 22;
@@ -867,6 +856,16 @@
             this.toolStripButton1.Text = "保存并关闭";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Image = global::Jade.Properties.Resources.report_check;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(92, 36);
+            this.toolStripButton4.Text = "送编辑箱";
+            this.toolStripButton4.ToolTipText = "送编辑箱";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.Image = global::Jade.Properties.Resources.report_check;
@@ -912,15 +911,30 @@
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
             // 
-            // toolStripButton4
+            // panelControl1
             // 
-            this.toolStripButton4.Image = global::Jade.Properties.Resources.report_check;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(92, 36);
-            this.toolStripButton4.Text = "送编辑箱";
-            this.toolStripButton4.ToolTipText = "送编辑箱";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.panelControl1.Controls.Add(this.txt_news_top);
+            this.panelControl1.Controls.Add(this.panelgfbm);
+            this.panelControl1.Controls.Add(this.label11);
+            this.panelControl1.Controls.Add(this.panelkgbm);
+            this.panelControl1.Controls.Add(this.label14);
+            this.panelControl1.Controls.Add(this.txt_news_down);
+            this.panelControl1.Controls.Add(this.label8);
+            this.panelControl1.Controls.Add(this.chk_bbspinglun);
+            this.panelControl1.Controls.Add(this.label15);
+            this.panelControl1.Controls.Add(this.txt_news_right);
+            this.panelControl1.Controls.Add(this.label26);
+            this.panelControl1.Controls.Add(this.chk_cmspinglun);
+            this.panelControl1.Controls.Add(this.txtCommentUrl);
+            this.panelControl1.Controls.Add(this.label17);
+            this.panelControl1.Controls.Add(this.label18);
+            this.panelControl1.Controls.Add(this.chkISkfbm);
+            this.panelControl1.Controls.Add(this.chkISgfbm);
+            this.panelControl1.Location = new System.Drawing.Point(905, 656);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(44, 10);
+            this.panelControl1.TabIndex = 59;
+            this.panelControl1.Visible = false;
             // 
             // txtContent
             // 
@@ -993,6 +1007,9 @@
             this.panelkgbm.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1088,5 +1105,6 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
     }
 }

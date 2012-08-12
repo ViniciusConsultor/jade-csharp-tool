@@ -159,6 +159,7 @@ namespace Jade
                 this.txt_news_subtitle.Text = data.SubTitle;
                 this.txt_news_keywords.Text = data.Keywords;
                 this.txtContent.Html = data.Content;
+                this.txtContent.PageTitles = this.txt_news_left.Text;
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
@@ -596,6 +597,22 @@ namespace Jade
             else
             {
                 MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                //
+                this.txt_news_left.Text = this.txtContent.PageTitles;
+            }
+            else
+            {
+                if (this.txt_news_left.Text != this.txtContent.PageTitles)
+                {
+                    this.txtContent.PageTitles = this.txt_news_left.Text;
+                }
             }
         }
 
