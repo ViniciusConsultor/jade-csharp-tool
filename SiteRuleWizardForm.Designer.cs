@@ -94,15 +94,6 @@
             this.itemRuleTab = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageTitle = new DevExpress.XtraTab.XtraTabPage();
             this.ItemContrainerPanel = new DevExpress.XtraEditors.PanelControl();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.txtAnotherXPath = new DevExpress.XtraEditors.TextEdit();
-            this.btnSelectAnotherXpath = new DevExpress.XtraEditors.SimpleButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPageXPath = new DevExpress.XtraEditors.TextEdit();
-            this.btnSelectPager = new DevExpress.XtraEditors.SimpleButton();
-            this.chkDownloadPic = new System.Windows.Forms.CheckBox();
-            this.chkIdentifyPage = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.panelxPath = new System.Windows.Forms.Panel();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.radioMulti = new System.Windows.Forms.RadioButton();
@@ -130,6 +121,17 @@
             this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
+            this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.txtAnotherXPath = new DevExpress.XtraEditors.TextEdit();
+            this.btnSelectAnotherXpath = new DevExpress.XtraEditors.SimpleButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtPageXPath = new DevExpress.XtraEditors.TextEdit();
+            this.btnSelectPager = new DevExpress.XtraEditors.SimpleButton();
+            this.chkDownloadPic = new System.Windows.Forms.CheckBox();
+            this.chkIdentifyPage = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtReplace = new DevExpress.XtraEditors.MemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -155,10 +157,6 @@
             this.xtraTabPageTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemContrainerPanel)).BeginInit();
             this.ItemContrainerPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).BeginInit();
             this.panelxPath.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -167,6 +165,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCXpath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).BeginInit();
             this.wizardPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).BeginInit();
+            this.groupControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReplace.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -834,7 +839,6 @@
             // 
             // ItemContrainerPanel
             // 
-            this.ItemContrainerPanel.Controls.Add(this.groupControl3);
             this.ItemContrainerPanel.Controls.Add(this.panelxPath);
             this.ItemContrainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemContrainerPanel.Location = new System.Drawing.Point(0, 0);
@@ -842,94 +846,10 @@
             this.ItemContrainerPanel.Size = new System.Drawing.Size(853, 166);
             this.ItemContrainerPanel.TabIndex = 0;
             // 
-            // groupControl3
-            // 
-            this.groupControl3.Controls.Add(this.txtAnotherXPath);
-            this.groupControl3.Controls.Add(this.btnSelectAnotherXpath);
-            this.groupControl3.Controls.Add(this.label4);
-            this.groupControl3.Controls.Add(this.txtPageXPath);
-            this.groupControl3.Controls.Add(this.btnSelectPager);
-            this.groupControl3.Controls.Add(this.chkDownloadPic);
-            this.groupControl3.Controls.Add(this.chkIdentifyPage);
-            this.groupControl3.Controls.Add(this.label15);
-            this.groupControl3.Location = new System.Drawing.Point(6, 89);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(824, 72);
-            this.groupControl3.TabIndex = 113;
-            this.groupControl3.Text = "高级选项";
-            // 
-            // txtAnotherXPath
-            // 
-            this.txtAnotherXPath.Location = new System.Drawing.Point(184, 25);
-            this.txtAnotherXPath.Name = "txtAnotherXPath";
-            this.txtAnotherXPath.Size = new System.Drawing.Size(259, 20);
-            this.txtAnotherXPath.TabIndex = 117;
-            // 
-            // btnSelectAnotherXpath
-            // 
-            this.btnSelectAnotherXpath.Location = new System.Drawing.Point(449, 23);
-            this.btnSelectAnotherXpath.Name = "btnSelectAnotherXpath";
-            this.btnSelectAnotherXpath.Size = new System.Drawing.Size(92, 23);
-            this.btnSelectAnotherXpath.TabIndex = 115;
-            this.btnSelectAnotherXpath.Text = "点此开始选择";
-            this.btnSelectAnotherXpath.Click += new System.EventHandler(this.btnSelectAnotherXpath_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(118, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 14);
-            this.label4.TabIndex = 116;
-            this.label4.Text = "备用XPath:";
-            // 
-            // txtPageXPath
-            // 
-            this.txtPageXPath.Location = new System.Drawing.Point(184, 47);
-            this.txtPageXPath.Name = "txtPageXPath";
-            this.txtPageXPath.Size = new System.Drawing.Size(259, 20);
-            this.txtPageXPath.TabIndex = 114;
-            // 
-            // btnSelectPager
-            // 
-            this.btnSelectPager.Location = new System.Drawing.Point(449, 47);
-            this.btnSelectPager.Name = "btnSelectPager";
-            this.btnSelectPager.Size = new System.Drawing.Size(92, 23);
-            this.btnSelectPager.TabIndex = 103;
-            this.btnSelectPager.Text = "点此开始选择";
-            this.btnSelectPager.Click += new System.EventHandler(this.btnSelectPager_Click);
-            // 
-            // chkDownloadPic
-            // 
-            this.chkDownloadPic.AutoSize = true;
-            this.chkDownloadPic.Location = new System.Drawing.Point(12, 26);
-            this.chkDownloadPic.Name = "chkDownloadPic";
-            this.chkDownloadPic.Size = new System.Drawing.Size(74, 18);
-            this.chkDownloadPic.TabIndex = 111;
-            this.chkDownloadPic.Text = "下载图片";
-            this.chkDownloadPic.UseVisualStyleBackColor = true;
-            // 
-            // chkIdentifyPage
-            // 
-            this.chkIdentifyPage.AutoSize = true;
-            this.chkIdentifyPage.Location = new System.Drawing.Point(12, 46);
-            this.chkIdentifyPage.Name = "chkIdentifyPage";
-            this.chkIdentifyPage.Size = new System.Drawing.Size(98, 18);
-            this.chkIdentifyPage.TabIndex = 112;
-            this.chkIdentifyPage.Text = "内容包含分页";
-            this.chkIdentifyPage.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(126, 50);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 14);
-            this.label15.TabIndex = 113;
-            this.label15.Text = "分页路径:";
-            // 
             // panelxPath
             // 
+            this.panelxPath.Controls.Add(this.groupControl6);
+            this.panelxPath.Controls.Add(this.groupControl3);
             this.panelxPath.Controls.Add(this.groupControl2);
             this.panelxPath.Controls.Add(this.groupControl1);
             this.panelxPath.Controls.Add(this.btnCXPath);
@@ -937,19 +857,19 @@
             this.panelxPath.Controls.Add(this.lblItemContentLog);
             this.panelxPath.Controls.Add(this.lblItemLog);
             this.panelxPath.Controls.Add(this.label9);
-            this.panelxPath.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelxPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelxPath.Location = new System.Drawing.Point(2, 2);
             this.panelxPath.Name = "panelxPath";
-            this.panelxPath.Size = new System.Drawing.Size(849, 81);
+            this.panelxPath.Size = new System.Drawing.Size(849, 162);
             this.panelxPath.TabIndex = 6;
             // 
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.radioMulti);
             this.groupControl2.Controls.Add(this.radioOne);
-            this.groupControl2.Location = new System.Drawing.Point(436, 29);
+            this.groupControl2.Location = new System.Drawing.Point(384, 29);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(392, 46);
+            this.groupControl2.Size = new System.Drawing.Size(200, 46);
             this.groupControl2.TabIndex = 102;
             this.groupControl2.Text = "匹配模式";
             // 
@@ -985,7 +905,7 @@
             this.groupControl1.Controls.Add(this.radioTextWithPic);
             this.groupControl1.Location = new System.Drawing.Point(2, 29);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(428, 46);
+            this.groupControl1.Size = new System.Drawing.Size(375, 46);
             this.groupControl1.TabIndex = 101;
             this.groupControl1.Text = "匹配类型";
             // 
@@ -1182,6 +1102,109 @@
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             // 
+            // groupControl6
+            // 
+            this.groupControl6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl6.Controls.Add(this.txtReplace);
+            this.groupControl6.Location = new System.Drawing.Point(598, 31);
+            this.groupControl6.Name = "groupControl6";
+            this.groupControl6.Size = new System.Drawing.Size(248, 126);
+            this.groupControl6.TabIndex = 103;
+            this.groupControl6.Text = "文本替换（每行一个）";
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.txtAnotherXPath);
+            this.groupControl3.Controls.Add(this.btnSelectAnotherXpath);
+            this.groupControl3.Controls.Add(this.label4);
+            this.groupControl3.Controls.Add(this.txtPageXPath);
+            this.groupControl3.Controls.Add(this.btnSelectPager);
+            this.groupControl3.Controls.Add(this.chkDownloadPic);
+            this.groupControl3.Controls.Add(this.chkIdentifyPage);
+            this.groupControl3.Controls.Add(this.label15);
+            this.groupControl3.Location = new System.Drawing.Point(4, 89);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(580, 72);
+            this.groupControl3.TabIndex = 114;
+            this.groupControl3.Text = "高级选项";
+            // 
+            // txtAnotherXPath
+            // 
+            this.txtAnotherXPath.Location = new System.Drawing.Point(184, 25);
+            this.txtAnotherXPath.Name = "txtAnotherXPath";
+            this.txtAnotherXPath.Size = new System.Drawing.Size(259, 20);
+            this.txtAnotherXPath.TabIndex = 117;
+            // 
+            // btnSelectAnotherXpath
+            // 
+            this.btnSelectAnotherXpath.Location = new System.Drawing.Point(449, 23);
+            this.btnSelectAnotherXpath.Name = "btnSelectAnotherXpath";
+            this.btnSelectAnotherXpath.Size = new System.Drawing.Size(92, 23);
+            this.btnSelectAnotherXpath.TabIndex = 115;
+            this.btnSelectAnotherXpath.Text = "点此开始选择";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(118, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 14);
+            this.label4.TabIndex = 116;
+            this.label4.Text = "备用XPath:";
+            // 
+            // txtPageXPath
+            // 
+            this.txtPageXPath.Location = new System.Drawing.Point(184, 47);
+            this.txtPageXPath.Name = "txtPageXPath";
+            this.txtPageXPath.Size = new System.Drawing.Size(259, 20);
+            this.txtPageXPath.TabIndex = 114;
+            // 
+            // btnSelectPager
+            // 
+            this.btnSelectPager.Location = new System.Drawing.Point(449, 47);
+            this.btnSelectPager.Name = "btnSelectPager";
+            this.btnSelectPager.Size = new System.Drawing.Size(92, 23);
+            this.btnSelectPager.TabIndex = 103;
+            this.btnSelectPager.Text = "点此开始选择";
+            // 
+            // chkDownloadPic
+            // 
+            this.chkDownloadPic.AutoSize = true;
+            this.chkDownloadPic.Location = new System.Drawing.Point(12, 26);
+            this.chkDownloadPic.Name = "chkDownloadPic";
+            this.chkDownloadPic.Size = new System.Drawing.Size(74, 18);
+            this.chkDownloadPic.TabIndex = 111;
+            this.chkDownloadPic.Text = "下载图片";
+            this.chkDownloadPic.UseVisualStyleBackColor = true;
+            // 
+            // chkIdentifyPage
+            // 
+            this.chkIdentifyPage.AutoSize = true;
+            this.chkIdentifyPage.Location = new System.Drawing.Point(12, 46);
+            this.chkIdentifyPage.Name = "chkIdentifyPage";
+            this.chkIdentifyPage.Size = new System.Drawing.Size(98, 18);
+            this.chkIdentifyPage.TabIndex = 112;
+            this.chkIdentifyPage.Text = "内容包含分页";
+            this.chkIdentifyPage.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(126, 50);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 14);
+            this.label15.TabIndex = 113;
+            this.label15.Text = "分页路径:";
+            // 
+            // txtReplace
+            // 
+            this.txtReplace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtReplace.Location = new System.Drawing.Point(2, 22);
+            this.txtReplace.Name = "txtReplace";
+            this.txtReplace.Size = new System.Drawing.Size(244, 102);
+            this.txtReplace.TabIndex = 0;
+            // 
             // SiteRuleWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1225,11 +1248,6 @@
             this.xtraTabPageTitle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ItemContrainerPanel)).EndInit();
             this.ItemContrainerPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).EndInit();
             this.panelxPath.ResumeLayout(false);
             this.panelxPath.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
@@ -1242,6 +1260,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).EndInit();
+            this.groupControl6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReplace.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1333,20 +1359,22 @@
         private DevExpress.XtraEditors.TextEdit txtCXpath;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
-        private DevExpress.XtraEditors.TextEdit txtPageXPath;
-        private DevExpress.XtraEditors.SimpleButton btnSelectPager;
-        private System.Windows.Forms.CheckBox chkDownloadPic;
-        private System.Windows.Forms.CheckBox chkIdentifyPage;
-        private System.Windows.Forms.Label label15;
         private DevExpress.XtraEditors.TextEdit txtStartUrlXPath;
         private DevExpress.XtraEditors.TextEdit txtLinkXPath;
         private DevExpress.XtraEditors.TextEdit txtInterval;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.GroupControl groupControl6;
+        private DevExpress.XtraEditors.MemoEdit txtReplace;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.TextEdit txtAnotherXPath;
         private DevExpress.XtraEditors.SimpleButton btnSelectAnotherXpath;
         private System.Windows.Forms.Label label4;
+        private DevExpress.XtraEditors.TextEdit txtPageXPath;
+        private DevExpress.XtraEditors.SimpleButton btnSelectPager;
+        private System.Windows.Forms.CheckBox chkDownloadPic;
+        private System.Windows.Forms.CheckBox chkIdentifyPage;
+        private System.Windows.Forms.Label label15;
     }
 }

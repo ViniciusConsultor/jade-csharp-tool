@@ -644,8 +644,6 @@
     <Content Include="Lib\Guifreaks.NavigationBar.XmlSerializers.dll" />
     <Content Include="Lib\HFBBS.DBUtility.dll" />
     <Content Include="Lib\HtmlAgilityPack.dll" />
-    <Content Include="Lib\HtmlAgilityPack.pdb" />
-    <Content Include="Lib\HtmlAgilityPack.XML" />
     <Content Include="Lib\ICSharpCode.TextEditor.dll" />
     <Content Include="Lib\Interop.ADOX.dll" />
     <Content Include="Lib\Interop.SHDocVw.dll" />

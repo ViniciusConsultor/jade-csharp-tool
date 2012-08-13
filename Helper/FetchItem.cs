@@ -166,22 +166,26 @@ namespace Jade
         public string Fetch(string fetchStuff)
         {
 
+            var result = "";
+
             if (CurrentItemRule != null)
             {
                 switch (CurrentItemRule.FetchType)
                 {
                     case ItemFetchType.XPath:
                         var xpathResult = ExtractUrl.ExtractDataFromHtml(fetchStuff, CurrentItemRule.XPath, CurrentItemRule.XMLPathSelectType, CurrentItemRule.XMLPathType);
-                        return string.Join(" ", xpathResult.ToArray());
+                        result = string.Join(" ", xpathResult.ToArray());
+                        break;
                     case ItemFetchType.UserDiy:
                         if (CurrentItemRule.DiyType == UserDiyType.Datetime)
                         {
-                            return DateTime.Now.ToString(CurrentItemRule.DateTimeFormatString);
+                            result = DateTime.Now.ToString(CurrentItemRule.DateTimeFormatString);
                         }
                         else
                         {
-                            return CurrentItemRule.DefaultValue;
+                            result = CurrentItemRule.DefaultValue;
                         }
+                        break;
                     case ItemFetchType.FromRegex:
                         var regex = new Regex(CurrentItemRule.RegexText, RegexOptions.Multiline | RegexOptions.IgnoreCase);
                         var matches = regex.Matches(fetchStuff);
@@ -194,50 +198,47 @@ namespace Jade
                                 regexResult += m.Groups["content"].Value;
                             }
                         }
-                        return regexResult;
+                        result = regexResult;
+                        break;
                 }
 
             }
 
-            if (string.IsNullOrEmpty(fetchStuff))
+            if (CurrentItemRule.FetchType == ItemFetchType.FromHTML)
             {
-                return string.Empty;
-            }
+                result = SubString(fetchStuff, this.StartTag.Replace("\r\n", ""), this.EndTag.Replace("\r\n", ""));
 
-            string result = SubString(fetchStuff, this.StartTag.Replace("\r\n", ""), this.EndTag.Replace("\r\n", ""));
-
-            if (string.IsNullOrEmpty(result))
-            {
-                return result;
-            }
-
-            if (!string.IsNullOrEmpty(this.ReplaceString))
-            {
-                var replaces = this.ReplaceString.Split(new string[] { "@@@" }, StringSplitOptions.None);
-                foreach (var replace in replaces)
+                if (string.IsNullOrEmpty(result))
                 {
-                    var rules = replace.Split(new string[] { "==>" }, 2, StringSplitOptions.None);
-                    if (rules.Length == 2)
+                    return result;
+                }
+                if (this.TrimHtml)
+                {
+                    result = this.HtmToTxt(result);
+                }
+
+                if (this.HtmlTagCleanerList != null)
+                {
+                    HtmlCleanerGenerator generator = new HtmlCleanerGenerator();
+                    foreach (HtmlTagType htmlTag in this.HtmlTagCleanerList)
                     {
-                        result = result.Replace(rules[0], rules[1]);
+                        IHtmlTagCleaner cleaner = generator.GenerateCleaner(htmlTag);
+                        if (cleaner != null)
+                        {
+                            result = cleaner.CleanHtmlTag(result);
+                        }
                     }
                 }
             }
 
-            if (this.TrimHtml)
+            if (!string.IsNullOrEmpty(result))
             {
-                result = this.HtmToTxt(result);
-            }
-
-            if (this.HtmlTagCleanerList != null)
-            {
-                HtmlCleanerGenerator generator = new HtmlCleanerGenerator();
-                foreach (HtmlTagType htmlTag in this.HtmlTagCleanerList)
+                if (!string.IsNullOrEmpty(this.ReplaceString))
                 {
-                    IHtmlTagCleaner cleaner = generator.GenerateCleaner(htmlTag);
-                    if (cleaner != null)
+                    var replaces = this.ReplaceString.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                    foreach (var replace in replaces)
                     {
-                        result = cleaner.CleanHtmlTag(result);
+                        result = result.Replace(replace, string.Empty);
                     }
                 }
             }

@@ -413,6 +413,7 @@ namespace Jade.Model
     /// </summary>
     public class ItemRule
     {
+
         /// <summary>
         /// 多相匹配
         /// </summary>
@@ -526,6 +527,9 @@ namespace Jade.Model
 
         public string PageXPath { get; set; }
 
+        /// <summary>
+        /// 替换字符串
+        /// </summary>
         public string ReplaceString
         {
             get;

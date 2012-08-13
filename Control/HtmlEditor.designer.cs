@@ -312,10 +312,10 @@ namespace Jade
             // tabEditor
             // 
             this.tabEditor.Controls.Add(this.webBrowserBody);
-            this.tabEditor.Location = new System.Drawing.Point(4, 25);
+            this.tabEditor.Location = new System.Drawing.Point(4, 24);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(592, 394);
+            this.tabEditor.Size = new System.Drawing.Size(592, 395);
             this.tabEditor.TabIndex = 0;
             this.tabEditor.Text = "±à¼­Æ÷";
             this.tabEditor.UseVisualStyleBackColor = true;
@@ -329,7 +329,7 @@ namespace Jade
             this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserBody.Name = "webBrowserBody";
             this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(586, 388);
+            this.webBrowserBody.Size = new System.Drawing.Size(586, 389);
             this.webBrowserBody.TabIndex = 0;
             this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
             this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
@@ -337,10 +337,10 @@ namespace Jade
             // tabSource
             // 
             this.tabSource.Controls.Add(this.txtSource);
-            this.tabSource.Location = new System.Drawing.Point(4, 25);
+            this.tabSource.Location = new System.Drawing.Point(4, 24);
             this.tabSource.Name = "tabSource";
             this.tabSource.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSource.Size = new System.Drawing.Size(592, 394);
+            this.tabSource.Size = new System.Drawing.Size(592, 395);
             this.tabSource.TabIndex = 1;
             this.tabSource.Text = "Ô´´úÂë";
             this.tabSource.UseVisualStyleBackColor = true;

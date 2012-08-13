@@ -228,9 +228,12 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         }
 
         function InitTitles() {
-            for (var i = 1; i <= arguments.length; i++) {
-                $("#page" + i).find(".pageTitle").html(arguments[i - 1]);
-            }
+            var args = arguments;
+            window.setTimeout(function () {
+                for (var i = 1; i <= args.length; i++) {
+                    $("#page" + i).find(".pageTitle").html(args[i - 1]);
+                }
+            }, 0);
         }
 
         function InitPages() {
