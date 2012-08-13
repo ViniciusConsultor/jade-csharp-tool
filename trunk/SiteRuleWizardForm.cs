@@ -174,6 +174,7 @@ namespace Jade
         {
             if (row != null)
             {
+                this.txtReplace.Text = CurrentItemRule.ReplaceString;
 
                 this.txtAnotherXPath.Text = CurrentItemRule.AnotherXPath;
 
@@ -289,6 +290,7 @@ namespace Jade
 
         public void UpdateItemRule()
         {
+            CurrentItemRule.ReplaceString = this.txtReplace.Text;
             CurrentItemRule.AnotherXPath = this.txtAnotherXPath.Text;
 
             CurrentItemRule.FetchType = ItemFetchType.XPath;

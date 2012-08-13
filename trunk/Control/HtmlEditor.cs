@@ -141,7 +141,10 @@ namespace Jade
                 {
                     var pages = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
-                    webBrowserBody.Document.InvokeScript("InitTitles", pages);
+                    if (pages.Length > 0)
+                        webBrowserBody.Document.InvokeScript("InitTitles", pages);
+                    else
+                        webBrowserBody.Document.InvokeScript("InitTitles", new string[] { "" });
                 }
             }
         }

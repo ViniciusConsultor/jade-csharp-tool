@@ -159,7 +159,7 @@ namespace Jade
                 this.txt_news_subtitle.Text = data.SubTitle;
                 this.txt_news_keywords.Text = data.Keywords;
                 this.txtContent.Html = data.Content;
-                this.txtContent.PageTitles = this.txt_news_left.Text;
+                this.txtContent.PageTitles = data.news_left;
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
@@ -257,6 +257,11 @@ namespace Jade
 
         private void UpdateCurrentData()
         {
+            if (this.tabControl1.SelectedIndex == 0)
+            {
+                this.txt_news_left.Text = this.txtContent.PageTitles;
+            }
+
             if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount)
             {
                 MessageBox.Show("已超过限定使用次数，程序自动退出");
