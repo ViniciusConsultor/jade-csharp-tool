@@ -157,7 +157,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             document.getElementById('bg').style.display = 'none';
         }
 
-        var pageInex = 2;
+        var pageInex = 1;
         function addPage(html) {
             var template = $($("#template").html());
             template.find(".editor").attr("id", "page" + pageInex);
@@ -172,13 +172,19 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         var currentPage;
 
         function bindPageEvent(page) {
-            $(page).find(".content").click(function () {
+            var content = $(page).find(".content");
+
+            content.click(function () {
                 currentPage = $(this).parents("center");
-            }).resize(function () {
+            });
+
+            content.resize(function () {
                 if ($(currentPage).next("center").lenth > 0) {
                     //跳转到上一页
                 }
-            }).mouseup(function (e) {
+            });
+
+            content.mouseup(function (e) {
                 var txt = GetSelectTxt(), sh = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
                 //	alert(sh);
                 //	alert(e.clientX);
@@ -236,18 +242,19 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
 
         function InitPages() {
             clear();
-            $("#page1").find(".content").html(arguments[0]);
-            for (var i = 1; i < arguments.length; i++) {
+            //$("#page1").find(".content").html(arguments[0]);
+            for (var i = 0; i < arguments.length; i++) {
                 addPage(arguments[i]);
             }
             bindImage(); 
-            bindPageEvent($("#page1"));
+            //bindPageEvent($("#page1"));
         }
 
         function clear() {
             var html = "";
-            $("#pages").html(document.getElementById("page1").outerHTML);
-            pageInex = 2;
+            //document.getElementById("page1").outerHTML
+            $("#pages").html(html);
+            pageInex = 1;
         }
 
         function GetHtml() {

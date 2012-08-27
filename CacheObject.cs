@@ -40,7 +40,7 @@ namespace Jade
         }
 
         public static string Cookie = "";
-        public static bool IsDebug = true;
+        public static bool IsDebug = false;
         public static bool IsTest = true;
         public static MainForm MainForm { get; set; }
 

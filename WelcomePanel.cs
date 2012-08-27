@@ -62,11 +62,14 @@ namespace Jade
 
         void wb_BeforeNavigate2(object pDisp, ref object URL, ref object Flags, ref object TargetFrameName, ref object PostData, ref object Headers, ref bool Cancel)
         {
-            string postDataText = System.Text.Encoding.ASCII.GetString(PostData as byte[]);
-
-            if (postDataText != null)
+            if (PostData != null)
             {
-                Console.WriteLine(postDataText);
+                string postDataText = System.Text.Encoding.ASCII.GetString(PostData as byte[]);
+
+                if (postDataText != null)
+                {
+                    Console.WriteLine(postDataText);
+                }
             }
         }
 
