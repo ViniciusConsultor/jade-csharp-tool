@@ -112,11 +112,18 @@ namespace Jade
             {
                 if (value != null)
                 {
-                    var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
+                    try
+                    {
+                        var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
 
-                    var pages = html.Split(new string[] { "<hr class=enorth_new_page>" }, StringSplitOptions.RemoveEmptyEntries);
+                        var pages = html.Split(new string[] { "<hr class=enorth_new_page>" }, StringSplitOptions.RemoveEmptyEntries);
 
-                    webBrowserBody.Document.InvokeScript("InitPages", pages);
+                        webBrowserBody.Document.InvokeScript("InitPages", pages);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }
@@ -648,8 +655,11 @@ namespace Jade
             }
             else
             {
-                this.Html = this.txtSource.Text;
-                this.PageTitles = lastTitle;
+                if (this.txtSource.Text != this.Html)
+                {
+                    this.Html = this.txtSource.Text;
+                    this.PageTitles = lastTitle;
+                }
             }
         }
     }

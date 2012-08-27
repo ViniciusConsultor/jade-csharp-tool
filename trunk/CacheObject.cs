@@ -16,7 +16,7 @@ namespace Jade
 {
     public class CacheObject
     {
-        public static int MaxRequestCount = 50;
+        public static int MaxRequestCount = 10;
         public static int CurrentRequestCount = 0;
         static CacheObject()
         {
@@ -41,7 +41,7 @@ namespace Jade
 
         public static string Cookie = "";
         public static bool IsDebug = true;
-
+        public static bool IsTest = true;
         public static MainForm MainForm { get; set; }
 
         public static NewsDAL NewsDAL = new NewsDAL();

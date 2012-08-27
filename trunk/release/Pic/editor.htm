@@ -165,15 +165,16 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             template.appendTo($("#pages"));
             window.scrollTo(0, template.scrollTop());
             template.find(".content").click().focus();
-            bindPageEvent(template);
+            bindEvent(template[0]);
             pageInex++;
         }
 
         var currentPage;
 
-        function bindPageEvent(page) {
+        function bindEvent(page) {
             $(page).find(".content").click(function () {
                 currentPage = $(this).parents("center");
+                alert("currentPage change");
             }).resize(function () {
                 if ($(currentPage).next("center").lenth > 0) {
                     //跳转到上一页
@@ -204,6 +205,8 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                     }
                 }
             });
+
+
         }
 
         function deleteCurrentPage() {
@@ -237,11 +240,11 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         function InitPages() {
             clear();
             $("#page1").find(".content").html(arguments[0]);
+            bindEvent("#page1");
             for (var i = 1; i < arguments.length; i++) {
                 addPage(arguments[i]);
             }
-            bindImage(); 
-            bindPageEvent($("#page1"));
+            bindImage();
         }
 
         function clear() {
@@ -275,7 +278,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         }
 
         onload = function () {
-            bindPageEvent($("#page1"));
+            bindEvent("#page1");
             bindImage();
         };
 
@@ -302,19 +305,25 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             if (!currentPage)
                 return;
             var range = document.selection.createRange();
-            var str1 = "<SPAN id=newpage>newpage</SPAN>";
+            var str1 = "<SPAN id=newpage></SPAN>";
             range.pasteHTML(str1);
 
             var nodeName = $("#newpage").parent()[0].tagName;
-
+         
             var html = currentPage.find(".content").html();
+            alert(html);
+
             var fist = html.substr(0, html.indexOf(str1));
             var second = html.substr(html.lastIndexOf(str1) + str1.length);
-            fist += "</" + nodeName + ">";
-            currentPage.find(".content").html(fist);
-
-            second = "<" + nodeName + ">" + second;
-
+            if (fist != "") {
+                fist += "</" + nodeName + ">";
+                currentPage.find(".content").html(fist);
+                alert(fist);
+            }
+            if (second != "") {
+                second = "<" + nodeName + ">" + second;
+                alert(second);
+            }
             var template = $($("#template").html());
             template.attr("id", "page" + pageInex);
 
@@ -322,7 +331,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             template.insertAfter(currentPage[0]);
             window.scrollTo(0, template.scrollTop());
             template.find(".content").click().focus();
-            bindPageEvent(template);
+            bindEvent(template[0]);
             pageInex++;
         }
 
