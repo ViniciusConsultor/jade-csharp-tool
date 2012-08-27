@@ -171,10 +171,17 @@ namespace Jade
             var total = urls.Count;
             var index = 0;
 
+            if (CacheObject.IsTest)
+                Logger.Warn("[" + Rule.Name + "] 开始采集，试用版本只能采集10条");
+
             var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
 
-            foreach (var url in urls)
+            var max = CacheObject.IsTest ? Math.Min(10, urls.Count) : urls.Count;
+
+            //foreach (var url in urls)
+            for (var i = 0; i < max; i++)
             {
+                var url = urls[i];
                 if (!isForceStop)
                 {
                     var html = HtmlPicker.VisitUrl(
@@ -249,7 +256,7 @@ namespace Jade
                                 break;
                             case "SubTitle":
                                 data.SubTitle = result;
-                               //File.AppendAllText("item.txt", result);
+                                //File.AppendAllText("item.txt", result);
                                 break;
                             case "Keywords":
                                 data.Keywords = result;
