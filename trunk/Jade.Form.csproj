@@ -616,6 +616,9 @@
     <None Include="app.config" />
     <EmbeddedResource Include="Html.dtd" />
     <None Include="Jade.Form_TemporaryKey.pfx" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\DataSources\RunningTaskCollection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
