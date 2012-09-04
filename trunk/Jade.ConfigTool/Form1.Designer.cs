@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("任务列表");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("任务列表");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.navBarControl = new DevExpress.XtraNavBar.NavBarControl();
@@ -148,14 +148,15 @@
             this.taskTree.Location = new System.Drawing.Point(0, 0);
             this.taskTree.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.taskTree.Name = "taskTree";
-            treeNode2.Name = "root";
-            treeNode2.Text = "任务列表";
+            treeNode1.Name = "root";
+            treeNode1.Text = "任务列表";
             this.taskTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.taskTree.ShowRootLines = false;
             this.taskTree.Size = new System.Drawing.Size(165, 321);
             this.taskTree.TabIndex = 3;
             this.taskTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.taskTree_AfterSelect);
+            this.taskTree.DoubleClick += new System.EventHandler(this.tasktree_DoubleClick);
             // 
             // contextMenuStrip1
             // 
