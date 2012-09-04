@@ -15,7 +15,6 @@ namespace Jade
     {
         static log4net.ILog log = log4net.LogManager.GetLogger("ConsoleLog");
         static log4net.ILog errorLog = log4net.LogManager.GetLogger("ErrorLog");
-        static log4net.ILog errorurlLog = log4net.LogManager.GetLogger("UrlLog");
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         [DebuggerStepThrough]
@@ -48,7 +47,6 @@ namespace Jade
         [DebuggerStepThrough]
         public static void ErrorUrl(string url, string message)
         {
-            errorurlLog.Error(url + " " + message);
             errorLog.Error(url + " " + message);
         }
 
@@ -90,8 +88,6 @@ namespace Jade
             errorLog = null;
             log.Logger.Repository.Shutdown();
             log = null;
-            errorurlLog.Logger.Repository.Shutdown();
-            errorurlLog = null;
             GC.Collect();
         }
     }

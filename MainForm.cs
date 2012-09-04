@@ -43,6 +43,8 @@ namespace Jade
             }
             this.taskTree.ExpandAll();
 
+            //throw new Exception("test");
+
         }
 
         Dictionary<string, int> ImageIndexDic = new Dictionary<string, int>();
