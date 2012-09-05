@@ -87,7 +87,7 @@
             this.rblServer.Location = new System.Drawing.Point(70, 18);
             this.rblServer.Name = "rblServer";
             this.rblServer.Size = new System.Drawing.Size(59, 16);
-            this.rblServer.TabIndex = 3;
+            this.rblServer.TabIndex = 7;
             this.rblServer.TabStop = true;
             this.rblServer.Text = "工作组";
             this.rblServer.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.rblSingle.Location = new System.Drawing.Point(17, 18);
             this.rblSingle.Name = "rblSingle";
             this.rblSingle.Size = new System.Drawing.Size(47, 16);
-            this.rblSingle.TabIndex = 2;
+            this.rblSingle.TabIndex = 6;
             this.rblSingle.Text = "本地";
             this.rblSingle.UseVisualStyleBackColor = true;
             // 
@@ -121,7 +121,7 @@
             this.rblEdit.Location = new System.Drawing.Point(70, 17);
             this.rblEdit.Name = "rblEdit";
             this.rblEdit.Size = new System.Drawing.Size(47, 16);
-            this.rblEdit.TabIndex = 3;
+            this.rblEdit.TabIndex = 9;
             this.rblEdit.TabStop = true;
             this.rblEdit.Text = "编辑";
             this.rblEdit.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             this.rblNotEdit.Location = new System.Drawing.Point(17, 17);
             this.rblNotEdit.Name = "rblNotEdit";
             this.rblNotEdit.Size = new System.Drawing.Size(47, 16);
-            this.rblNotEdit.TabIndex = 2;
+            this.rblNotEdit.TabIndex = 8;
             this.rblNotEdit.Text = "采集";
             this.rblNotEdit.UseVisualStyleBackColor = false;
             // 
@@ -166,7 +166,7 @@
             this.textBox1.Location = new System.Drawing.Point(93, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 14);
-            this.textBox1.TabIndex = 8;
+            this.textBox1.TabIndex = 2;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // btnSelectStartUrl
@@ -175,7 +175,7 @@
             this.btnSelectStartUrl.Location = new System.Drawing.Point(568, 326);
             this.btnSelectStartUrl.Name = "btnSelectStartUrl";
             this.btnSelectStartUrl.Size = new System.Drawing.Size(90, 29);
-            this.btnSelectStartUrl.TabIndex = 102;
+            this.btnSelectStartUrl.TabIndex = 3;
             this.btnSelectStartUrl.Text = " 联网登录";
             this.btnSelectStartUrl.ToolTip = "登录到网址服务器，可以发布内容";
             this.btnSelectStartUrl.Click += new System.EventHandler(this.btnLogin_Click);
@@ -186,7 +186,7 @@
             this.simpleButton1.Location = new System.Drawing.Point(672, 326);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(91, 29);
-            this.simpleButton1.TabIndex = 103;
+            this.simpleButton1.TabIndex = 4;
             this.simpleButton1.Text = " 离线操作";
             this.simpleButton1.ToolTip = "登录到本地，不能发布内容到服务器";
             this.simpleButton1.Click += new System.EventHandler(this.button1_Click);
@@ -197,7 +197,7 @@
             this.simpleButton2.Location = new System.Drawing.Point(774, 326);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(69, 29);
-            this.simpleButton2.TabIndex = 104;
+            this.simpleButton2.TabIndex = 5;
             this.simpleButton2.Text = " 取消";
             this.simpleButton2.ToolTip = "登录到本地，不能发布内容到服务器";
             this.simpleButton2.Click += new System.EventHandler(this.btnCancel_Click);

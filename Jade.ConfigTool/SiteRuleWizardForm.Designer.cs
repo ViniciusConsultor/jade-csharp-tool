@@ -131,6 +131,9 @@
             this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
+            this.groupControl7 = new DevExpress.XtraEditors.GroupControl();
+            this.txtTableName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -171,6 +174,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCXpath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).BeginInit();
             this.wizardPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).BeginInit();
+            this.groupControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -204,6 +210,7 @@
             // 
             // welcomeWizardPage1
             // 
+            this.welcomeWizardPage1.Controls.Add(this.groupControl7);
             this.welcomeWizardPage1.Controls.Add(this.groupControl5);
             this.welcomeWizardPage1.Controls.Add(this.groupControl4);
             this.welcomeWizardPage1.IntroductionText = "通过向导，你将轻松创建一个站点规则\r\n首先，请填写站点名称，这个名称是你完全自定义的，可以是真实名称，也可以是你自己定义的名称";
@@ -248,7 +255,7 @@
             this.groupControl4.Controls.Add(this.label12);
             this.groupControl4.Controls.Add(this.chkIntervalTask);
             this.groupControl4.Controls.Add(this.linkLabel5);
-            this.groupControl4.Location = new System.Drawing.Point(14, 139);
+            this.groupControl4.Location = new System.Drawing.Point(14, 230);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(640, 114);
             this.groupControl4.TabIndex = 26;
@@ -1204,6 +1211,31 @@
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             // 
+            // groupControl7
+            // 
+            this.groupControl7.Controls.Add(this.txtTableName);
+            this.groupControl7.Controls.Add(this.labelControl3);
+            this.groupControl7.Location = new System.Drawing.Point(14, 140);
+            this.groupControl7.Name = "groupControl7";
+            this.groupControl7.Size = new System.Drawing.Size(640, 66);
+            this.groupControl7.TabIndex = 28;
+            this.groupControl7.Text = "任务存储信息";
+            // 
+            // txtTableName
+            // 
+            this.txtTableName.Location = new System.Drawing.Point(84, 28);
+            this.txtTableName.Name = "txtTableName";
+            this.txtTableName.Size = new System.Drawing.Size(306, 20);
+            this.txtTableName.TabIndex = 1;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(14, 30);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(60, 14);
+            this.labelControl3.TabIndex = 0;
+            this.labelControl3.Text = "存储名称：";
+            // 
             // SiteRuleWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1267,6 +1299,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).EndInit();
+            this.groupControl7.ResumeLayout(false);
+            this.groupControl7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1375,5 +1411,8 @@
         private System.Windows.Forms.CheckBox chkDownloadPic;
         private System.Windows.Forms.CheckBox chkIdentifyPage;
         private System.Windows.Forms.Label label15;
+        private DevExpress.XtraEditors.GroupControl groupControl7;
+        private DevExpress.XtraEditors.TextEdit txtTableName;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }

@@ -146,7 +146,7 @@ namespace Jade
             {
                 if (value != null)
                 {
-                    var pages = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    var pages = value.Split(new string[] { "£¬" }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (pages.Length > 0)
                         webBrowserBody.Document.InvokeScript("InitTitles", pages);

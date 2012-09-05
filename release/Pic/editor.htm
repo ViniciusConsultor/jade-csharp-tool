@@ -276,7 +276,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
         function GetTitle() {
             var html = "";
             $("#pages .editor").each(function () {
-                html += $(this).find(".pageTitle").html() + ",";
+                html += $(this).find(".pageTitle").html() + "£¬";
             });
             return html.substr(0, html.length - 1);
         }
