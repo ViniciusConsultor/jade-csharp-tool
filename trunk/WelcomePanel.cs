@@ -94,15 +94,32 @@ namespace Jade
                 {
                     this.SetOpener(this.parentBrowser, this.webBrowser1);
                 }
+
+                if (autoClose)
+                {
+                    CacheObject.MainForm.CloseDoc(this.document);
+                }
+
+                if (autoRedirect)
+                {
+                    autoRedirect = false;
+                    this.webBrowser1.Navigate(redirecUrl);
+                }
             }
         }
 
         [System.Runtime.InteropServices.DllImport("wininet.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
         public static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
 
+
+
         BaseDocument document;
         public void Navigate(string url, BaseDocument document,string cookies ="")
         {
+            if (cookies == "")
+            {
+                cookies = CacheObject.Cookie;
+            }
             if (cookies != "")
             {
                 var cookie = GetKeyValueDictionFromCookie(cookies);
@@ -115,6 +132,22 @@ namespace Jade
 
             this.webBrowser1.Navigate(url);
             this.document = document;
+        }
+
+        bool autoClose = false;
+        bool autoRedirect =  false;
+        string redirecUrl = "";
+        public void NavigateAndClose(string url, BaseDocument document, string cookies = "")
+        {
+            Navigate(url, document, cookies);
+            autoClose = true;
+        }
+
+        public void GernateHtml(string url, BaseDocument document, string newsId)
+        {
+            Navigate(url, document, CacheObject.Cookie);
+            autoRedirect = true;
+            redirecUrl = string.Format("http://newscms.house365.com/newCMS/pub/hfccbbs/system/{0}/{1}.shtml?t=1", DateTime.Now.ToString("yyyy/MMdd"), newsId);
         }
 
         private Dictionary<string, string> GetKeyValueDictionFromCookie(string cookie)

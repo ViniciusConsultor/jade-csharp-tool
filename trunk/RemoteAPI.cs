@@ -113,7 +113,7 @@ namespace Jade
             return source.Substring(startIndex + start.Length, endIndex - startIndex - start.Length);
         }
 
-        static string getLabelData(string labels)
+        static string getLabelData(string labels, string newsid)
         {
             var result = "";
             var tags = labels.Replace("\"", "").Split('&', ',');
@@ -123,7 +123,11 @@ namespace Jade
                 {
                     var specialTag = RemoteWebService.Instance.SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(tag.Trim()));
                     if (specialTag != null)
-                        result += "&" + encoding("label_id[]") + "=" + specialTag.Value;
+                    {
+                        //encoding("label_id[]")
+                        result += "&label_id%5B%5D=" + specialTag.Value;
+                        GET("http://newscms.house365.com/newCMS/news/ajax_lable.php?channel_id=" + specialTag.Value + "&news_id=" + newsid + "&pub_date=&list_order=&ty=add");
+                    }
                 }
             }
             return result;
@@ -169,6 +173,22 @@ namespace Jade
                 return url;
             }
             return "";
+        }
+
+        public static string GET(string url)
+        {
+            var client = new Jade.Http.WebClient();
+            client.Cookie = CacheObject.Cookie;
+            var response = client.OpenRead(url);
+            return response;
+        }
+
+        public static string POST(string url, string data)
+        {
+            var client = new Jade.Http.WebClient();
+            client.Cookie = CacheObject.Cookie;
+            var response = client.OpenRead(url, data);
+            return response;
         }
 
         public static List<string> GetImages()
@@ -277,7 +297,7 @@ namespace Jade
                     var postData = string.Format(@"actions=mod&rank=null&refer_channel_id=" + CacheObject.channelid + "&news_source_name_1={0}&news_source_name={0}&make_topic_more_link=1&news_template_file_1={1}&news_template_file_bak={1}&news_channel_id=0&news_template_file=&news_title={2}&news_type=1&news_type=1&news_keywords={3}&news_keywords2={4}&news_sub_title={5}{6}&comboText=&cmspinglun={7}&bbspinglun_title={8}&bbspinglun_url={9}&kfbm_id={10}&kfbm_link={11}&gfbm_id={12}&gfbm_link={13}&viewediter=&news_content={14}&news_abs={15}&news_top={16}&news_guideimage={17}&news_guideimage2={18}&news_abstract={19}&news_description={20}&news_link={21}&news_down={22}&news_left={23}&news_right={24}&comment_url={25}&news_video={26}&news_id={27}&tag2cd=&plat={28}&news_type_id=1&request_channel_id=&save.x=70&save.y=32\0",
                         encoding(data.news_source_name), encoding(data.news_template_file), encoding(data.Title), encoding(data.Keywords), encoding(data.news_keywords2),
                          encoding(data.SubTitle),
-                       getLabelData(data.label_base),
+                       getLabelData(data.label_base, newsid),
                         data.cmspinglun ? "1" : "0", "", "", data.kfbm_id, data.kfbm_link, data.gfbm_id, data.gfbm_link,
                         encoding(data.Content),
                         encoding(data.news_abs), encoding(data.news_top), data.news_guideimage, data.news_guideimage2, encoding(data.Summary), encoding(data.news_description),
@@ -302,12 +322,15 @@ namespace Jade
 
                         var regex = new System.Text.RegularExpressions.Regex("src='([^']+)'");
                         var url = regex.Match(result).Groups[1].Value;
-                        request.Url = new Uri(new Uri("http://newscms.house365.com/newCMS/news/news_save.php"), url).AbsoluteUri;
-                        result = request.Get();
-                        //<script type='text/javascript' src='tem_hf/estate.php?news_id=020655584'></script>
-                        request.Url = "http://newscms.house365.com/newCMS/template/tem_hf/estate.php?news_id=" + data.RemoteId;
-                        result = request.Get();
-                        Console.WriteLine(result);
+                        url = new Uri(new Uri("http://newscms.house365.com/newCMS/news/news_save.php"), url).AbsoluteUri;
+
+                        CacheObject.MainForm.GernateHtml(url,newsid);
+                        //result = GET(url);
+                        ////<script type='text/javascript' src='tem_hf/estate.php?news_id=020655584'></script>
+                        //var newurl = regex.Match(result).Groups[1].Value;
+                        //newurl = new Uri(new Uri("http://newscms.house365.com/newCMS/news/news_save.php"), url).AbsoluteUri;
+                        //result = GET(newurl);
+                        //Console.WriteLine(result);
                         return true;
                     }
                 }

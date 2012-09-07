@@ -12,6 +12,7 @@ using DevExpress.XtraRichEdit;
 using Jade.Properties;
 using Jade.Model;
 using DevExpress.XtraSplashScreen;
+using System.Threading;
 
 namespace Jade
 {
@@ -177,6 +178,32 @@ namespace Jade
             doc.Caption = "新窗口";
             tabbedView1.EndUpdate();
             tabbedView1.Controller.Activate(doc);
+        }
+
+        public void OpenNewUrlAndClose(string url, WebBrowser parent = null)
+        {
+            tabbedView1.BeginUpdate();
+            var form = new WelcomePanel(parent);
+            var doc = tabbedView1.Controller.AddDocument(form);
+            form.NavigateAndClose(url, doc);
+            //Thread
+            doc.Caption = "新窗口";
+            tabbedView1.EndUpdate();
+            tabbedView1.Controller.Activate(doc);
+        }
+
+        public void GernateHtml(string url, string newsId)
+        {
+            //http://newscms.house365.com/newCMS/template/createhtml.php?news_id=020734942&channel_id=8000000
+            tabbedView1.BeginUpdate();
+            var form = new WelcomePanel(null);
+            var doc = tabbedView1.Controller.AddDocument(form);
+            form.GernateHtml(url, doc,newsId);
+            //Thread
+            doc.Caption = "新窗口";
+            tabbedView1.EndUpdate();
+            tabbedView1.Controller.Activate(doc);
+
         }
 
         public void CloseDoc(BaseDocument doc)
@@ -458,6 +485,11 @@ namespace Jade
                     tabbedView1.BeginUpdate();
                     WelcomePanel form = new WelcomePanel();
                     d = tabbedView1.Controller.AddDocument(form);
+
+                    WelcomePanel testForm = new WelcomePanel();
+                    var d2 = tabbedView1.Controller.AddDocument(testForm);
+                    d2.Caption = "测试";
+
                     tabbedView1.EndUpdate();
                 }
                 d.Form.Text = "远程网站";
