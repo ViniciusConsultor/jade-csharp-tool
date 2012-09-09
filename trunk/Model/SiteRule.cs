@@ -119,8 +119,17 @@ namespace Jade.Model
             this.EnableAutoRun = false;
             this.AutoRunInterval = 60;
             this.IconImage = "favicon.ico";
+            this.CreateTime = new DateTime(2001, 1, 1, 0, 0, 0, 0);
         }
 
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime
+        {
+            get;
+            set;
+        }
 
         public string IconImage
         {

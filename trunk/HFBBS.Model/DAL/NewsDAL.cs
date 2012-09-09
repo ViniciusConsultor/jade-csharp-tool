@@ -82,7 +82,7 @@ namespace Jade.Model.MySql
                 );
             totalCount = query.Count();
 
-            return query.OrderByDescending(t => t.ID).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
+            return query.OrderByDescending(t => t.EditTime).OrderByDescending(t=>t.ID).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
 
         }
 

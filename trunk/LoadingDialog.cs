@@ -51,6 +51,18 @@ namespace Jade
             }
         }
 
+        public string Message
+        {
+            get
+            {
+                return this.lblMessage.Text;
+            }
+            set
+            {
+                this.lblMessage.Text = value;
+            }
+        }
+
         private void LoadingDialog_Load(object sender, EventArgs e)
         {
             SetSelfLocation();

@@ -172,7 +172,7 @@ namespace Jade
             var index = 0;
 
             if (CacheObject.IsTest)
-                Logger.Warn("[" + Rule.Name + "] 开始采集，试用版本只能采集10条");
+                Logger.Error("[" + Rule.Name + "] 开始采集，试用版本只能采集10条");
 
             var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
 
