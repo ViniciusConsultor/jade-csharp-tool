@@ -42,6 +42,7 @@ namespace Jade.BLL
         {
             using (XDatabase db = XDatabase.Open(DatabaseName))
             {
+                name.CreateTime = DateTime.Now;
                 if (name.SiteRuleId == 0)
                 {
                     name.SiteRuleId = GetNextId();
@@ -107,7 +108,7 @@ namespace Jade.BLL
                 Name = name,
                 SiteRuleId = GetNextId()
             };
-
+            site.CreateTime = DateTime.Now;
             using (XDatabase db = XDatabase.Open(DatabaseName))
             {
                 db.Store(site);
@@ -118,6 +119,7 @@ namespace Jade.BLL
         {
             using (XDatabase db = XDatabase.Open(DatabaseName))
             {
+                rule.CreateTime = DateTime.Now;
                 db.Store(rule);
 
                 if (rule.IconImage == "" || rule.IconImage == "favicon.ico")

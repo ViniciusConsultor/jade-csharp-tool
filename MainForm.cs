@@ -169,6 +169,8 @@ namespace Jade
             }
         }
 
+        BaseDocument newsDoc = null;
+
         public void OpenNewUrl(string url, WebBrowser parent = null)
         {
             tabbedView1.BeginUpdate();
@@ -198,7 +200,8 @@ namespace Jade
             tabbedView1.BeginUpdate();
             var form = new WelcomePanel(null);
             var doc = tabbedView1.Controller.AddDocument(form);
-            form.GernateHtml(url, doc,newsId);
+            form.GernateHtml(url, doc, newsId);
+            newsDoc = doc;
             //Thread
             doc.Caption = "新窗口";
             tabbedView1.EndUpdate();
@@ -210,6 +213,14 @@ namespace Jade
         {
             tabbedView1.Controller.RemoveDocument(doc);
             doc.Dispose();
+            if (newsDoc != null && newsDoc.Control != null)
+            {
+                tabbedView1.Controller.Activate(newsDoc);
+            }
+            else
+            {
+                tabbedView1.Controller.Activate(editor);
+            }
         }
 
         private void navEdited_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -460,6 +471,10 @@ namespace Jade
             this.WindowState = FormWindowState.Maximized;
             var tasks = CacheObject.Rules.Where(t => t.EnableAutoRun).ToList();
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
+            if (CacheObject.IsTest)
+            {
+                this.Text += " (试用版)";
+            }
 
             if (Properties.Settings.Default.IsEditModel)
             {

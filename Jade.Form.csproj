@@ -641,6 +641,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="hfbbs.sql" />
     <Content Include="Lib\Com.iFLYTEK.WinForms.dll" />
     <Content Include="Lib\DevComponents.DotNetBar2.dll" />
     <Content Include="Lib\Guifreaks.Common.dll" />

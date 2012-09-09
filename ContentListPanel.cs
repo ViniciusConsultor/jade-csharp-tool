@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -32,7 +33,7 @@ namespace Jade
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
             this.comboBoxEdit1.TextChanged += new EventHandler(comboBox1_SelectedIndexChanged);
-            tasks = CacheObject.Rules;
+            tasks = CacheObject.Rules.OrderByDescending(t => t.CreateTime).ToList();
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
             this.comboBoxEdit1.Properties.DataSource = tasks;
             this.comboBoxEdit1.Properties.DisplayMember = "Name";

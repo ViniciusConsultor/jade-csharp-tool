@@ -39,6 +39,7 @@
             this.navBarRencent = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemDownload = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemRemote = new DevExpress.XtraNavBar.NavBarItem();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainGallery)).BeginInit();
             this.mainGallery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -134,11 +135,21 @@
             this.navBarItemRemote.Name = "navBarItemRemote";
             this.navBarItemRemote.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemRemote_LinkClicked);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(315, 6);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(38, 14);
+            this.lblStatus.TabIndex = 3;
+            this.lblStatus.Text = "label1";
+            // 
             // ImageSelecter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 462);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.mainGallery);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -150,6 +161,7 @@
             this.mainGallery.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -162,5 +174,6 @@
         private DevExpress.XtraNavBar.NavBarItem navBarRencent;
         private DevExpress.XtraNavBar.NavBarItem navBarItemDownload;
         private DevExpress.XtraNavBar.NavBarItem navBarItemRemote;
+        private System.Windows.Forms.Label lblStatus;
     }
 }

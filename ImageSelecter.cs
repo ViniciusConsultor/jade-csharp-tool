@@ -49,10 +49,11 @@ namespace Jade
                 this.navBarRencent.Visible = false;
                 this.navBarItemDownload.Visible = false;
             }
-
+            this.lblStatus.Text = "正在加载远程图片......";
             new Thread(() =>
             {
                 InitRemote();
+
             }).Start();
         }
 
@@ -90,6 +91,7 @@ namespace Jade
                         {
                         }
                     }
+                    this.lblStatus.Text = "加载图片完毕";
                 }));
             }
             catch
@@ -175,7 +177,7 @@ namespace Jade
         private GalleryItem CreateDirItem(string dirName)
         {
             GalleryItem item = new GalleryItem();
-            item.Caption = Path.GetDirectoryName(dirName);
+            item.Caption = Path.GetFileNameWithoutExtension(dirName + ".txt");
             item.Hint = "文件夹：" + dirName;
             item.Image = Properties.Resources.dir;
             item.Tag = dirName;

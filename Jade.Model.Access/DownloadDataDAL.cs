@@ -43,7 +43,7 @@ namespace Jade.Model.Access
             where += !string.IsNullOrEmpty(args.Keyword) ? " and Title like '*" + args.Keyword + "*'  = " + args.TaskId : "";
 
             totalCount = GetRecordCount(where);
-            var sql = string.Format(@"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by ID DESC) order by ID ) order by ID DESC", args.PageSzie, args.PageIndex * args.PageSzie, "where " + where);
+            var sql = string.Format(@"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by EditTime DESC,ID DESC) order by EditTime ) order by EditTime DESC", args.PageSzie, args.PageIndex * args.PageSzie, "where " + where);
             var rows = DbHelperOleDb.Query(sql).Tables[0].Rows;
 
             var result = new List<IDownloadData>();

@@ -194,6 +194,10 @@ namespace Jade
                 {
                     this.txtnews_source_name.Text = data.news_source_name;
                 }
+                else if (!string.IsNullOrEmpty(data.Source))
+                {
+                    this.txtnews_source_name.Text = data.Source;
+                }
                 else
                 {
                     try
@@ -264,8 +268,19 @@ namespace Jade
 
             if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount)
             {
-                MessageBox.Show("已超过限定使用次数，程序自动退出");
-                System.Environment.Exit(0);
+                //throw new Exception(
+                // MessageBox.Show("已超过限定使用次数，程序自动退出");
+                //Thread.Sleep(2000);
+                //System.Environment.Exit(0);
+                MessageBox.Show("你使用的是试用版，有问题请及时反馈！~");
+
+                if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount * 2)
+                {
+                    //throw new Exception(
+                    MessageBox.Show("已超过限定使用次数，程序自动退出");
+                    Thread.Sleep(2000);
+                    System.Environment.Exit(0);
+                }
             }
 
             CurrentData.news_source_name = this.txtnews_source_name.Text;
@@ -476,15 +491,29 @@ namespace Jade
                     MessageBox.Show("请填写SEO关键字！'");
                     return;
                 }
-                if (SplashScreenManager.Default == null)
-                    SplashScreenManager.ShowForm(typeof(WaitForm1));
+                loadingDialog = new LoadingDialog();
+                loadingDialog.Show();
+                loadingDialog.Message = "正在保存数据到服务器....";
+                loadingDialog.Refresh();
+
                 UpdateCurrentData();
                 if (RemoteAPI.Publish(CurrentData))
                 {
-                    RemoteAPI.SendNews(CurrentData.RemoteId);
+                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        loadingDialog.Refresh();
+                        loadingDialog.Message = "保存成功，正在送签发....";
+                    }));
+                    RemoteAPI.SendNews(CurrentData.RemoteId, true);
                     CurrentData.IsPublish = true;
-                    CacheObject.DownloadDataDAL.Update(CurrentData);
-                    SplashScreenManager.CloseForm();
+                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        loadingDialog.Refresh();
+                        loadingDialog.Message = "送签发成功，正在保存到数据库....";
+                    }));
+
+                    loadingDialog.Close();
+
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }
@@ -559,7 +588,7 @@ namespace Jade
                 this.txt_news_guideimage.Text = imageSelector.SelectedFile;
             }
         }
-
+        LoadingDialog loadingDialog;
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 
@@ -583,14 +612,28 @@ namespace Jade
                     MessageBox.Show("请填写SEO关键字！'");
                     return;
                 }
-                if (SplashScreenManager.Default == null)
-                    SplashScreenManager.ShowForm(typeof(WaitForm1));
+
+                this.loadingDialog = new LoadingDialog();
+
+                loadingDialog.Show();
+                loadingDialog.Message = "正在保存数据到服务器....";
+                loadingDialog.Refresh();
+
                 UpdateCurrentData();
+
                 if (RemoteAPI.Publish(CurrentData))
                 {
                     CurrentData.IsPublish = true;
+
+                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        loadingDialog.Refresh();
+                        loadingDialog.Message = "保存成功，正在保存到数据库....";
+                    }));
                     CacheObject.DownloadDataDAL.Update(CurrentData);
-                    SplashScreenManager.CloseForm();
+
+                    loadingDialog.Close();
+
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }

@@ -201,7 +201,7 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
 
             $(page).find(".content").keydown(function (e) {
                 if (e.keyCode == 8) {
-                    if ($(page).attr("id") != "page1" && $(this).text() == "") {
+                    if ($(this).parent("div.editor").attr("id") != "page1" && $(this).text() == "") {
                         deleteCurrentPage();
                         return false;
                     } else if ($(page).attr("id") != "page1" && getCaretPos(currentPage.find(".content")[0]) == 0) {

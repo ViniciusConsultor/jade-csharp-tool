@@ -227,19 +227,10 @@ namespace Jade
         /// </summary>
         /// <param name="newsId"></param>
         /// <returns></returns>
-        public static bool SendNews(int newsId)
+        public static bool SendNews(int newsId, bool sendCheck = false)
         {
-            var url = "http://newscms.house365.com/newCMS/news/news_send.php?news_id=" + newsId + "&channel_id=" + CacheObject.channelid;
-            var request = CacheObject.WebRequset;
-            request.Url = url;
-            request.Cookie = CacheObject.Cookie;
-            request.RequestData = new RequestPostData()
-            {
-                PostDatas = new List<PostDataItem> { new PostDataItem{
-                        Data = ""}}
-            };
-            var result = request.Post();
-            Console.WriteLine(result);
+            var url = "http://newscms.house365.com/newCMS/news/news_send.php?news_id=0" + newsId + "&channel_id=" + CacheObject.channelid;
+            CacheObject.MainForm.OpenNewUrlAndClose(url);
             return true;
         }
         public static bool Publish(Model.IDownloadData data = null)
@@ -324,7 +315,7 @@ namespace Jade
                         var url = regex.Match(result).Groups[1].Value;
                         url = new Uri(new Uri("http://newscms.house365.com/newCMS/news/news_save.php"), url).AbsoluteUri;
 
-                        CacheObject.MainForm.GernateHtml(url,newsid);
+                        CacheObject.MainForm.GernateHtml(url, newsid);
                         //result = GET(url);
                         ////<script type='text/javascript' src='tem_hf/estate.php?news_id=020655584'></script>
                         //var newurl = regex.Match(result).Groups[1].Value;

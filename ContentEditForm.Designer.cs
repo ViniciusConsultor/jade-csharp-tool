@@ -33,6 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentEditForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtContent = new Jade.HtmlEditor();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.设为ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +47,9 @@
             this.设为附加正文5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbSearchLabel = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.txt_news_keyword2 = new Jade.Control.KeywordBox();
+            this.txt_news_keywords = new Jade.Control.KeywordBox();
+            this.txt_tags = new PresentationControls.CheckBoxComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,6 +60,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.txt_news_top = new System.Windows.Forms.TextBox();
             this.panelgfbm = new System.Windows.Forms.Panel();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -63,6 +69,7 @@
             this.txt_gfbm_id = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.panelkgbm = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -70,17 +77,25 @@
             this.txt_kfbm_id = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_news_down = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.chk_bbspinglun = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txt_news_right = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.chk_cmspinglun = new System.Windows.Forms.CheckBox();
+            this.txtCommentUrl = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.chkISkfbm = new System.Windows.Forms.CheckBox();
+            this.chkISgfbm = new System.Windows.Forms.CheckBox();
             this.label28 = new System.Windows.Forms.Label();
             this.txt_row_news_abstract = new System.Windows.Forms.TextBox();
-            this.chk_bbspinglun = new System.Windows.Forms.CheckBox();
-            this.chk_cmspinglun = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.txt_news_template_file = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtnews_source_name = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_news_right = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
             this.txt_news_left = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -89,20 +104,10 @@
             this.txt_news_guideimage = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.chkISgfbm = new System.Windows.Forms.CheckBox();
-            this.chkISkfbm = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.text_news_video = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtCommentUrl = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txt_news_down = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txt_news_top = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txt_news_description = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -115,20 +120,15 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.txtContent = new Jade.HtmlEditor();
-            this.txt_news_keyword2 = new Jade.Control.KeywordBox();
-            this.txt_news_keywords = new Jade.Control.KeywordBox();
-            this.txt_tags = new PresentationControls.CheckBoxComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.panelgfbm.SuspendLayout();
             this.panelkgbm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -170,6 +170,21 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtContent
+            // 
+            this.txtContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtContent.ContextMenuStrip = this.contextMenuStrip1;
+            this.txtContent.Html = "";
+            this.txtContent.Location = new System.Drawing.Point(43, 91);
+            this.txtContent.Name = "txtContent";
+            this.txtContent.PageTitles = "";
+            this.txtContent.SelectedText = null;
+            this.txtContent.Size = new System.Drawing.Size(935, 575);
+            this.txtContent.TabIndex = 27;
             // 
             // contextMenuStrip1
             // 
@@ -275,6 +290,40 @@
             this.label27.Size = new System.Drawing.Size(65, 12);
             this.label27.TabIndex = 25;
             this.label27.Text = "搜索标签：";
+            // 
+            // txt_news_keyword2
+            // 
+            this.txt_news_keyword2.BackColor = System.Drawing.Color.White;
+            this.txt_news_keyword2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_news_keyword2.Keywords = null;
+            this.txt_news_keyword2.Location = new System.Drawing.Point(550, 33);
+            this.txt_news_keyword2.Name = "txt_news_keyword2";
+            this.txt_news_keyword2.Size = new System.Drawing.Size(400, 19);
+            this.txt_news_keyword2.SplitWord = "#";
+            this.txt_news_keyword2.TabIndex = 24;
+            // 
+            // txt_news_keywords
+            // 
+            this.txt_news_keywords.BackColor = System.Drawing.Color.White;
+            this.txt_news_keywords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_news_keywords.Keywords = null;
+            this.txt_news_keywords.Location = new System.Drawing.Point(74, 37);
+            this.txt_news_keywords.Name = "txt_news_keywords";
+            this.txt_news_keywords.Size = new System.Drawing.Size(400, 19);
+            this.txt_news_keywords.SplitWord = " |";
+            this.txt_news_keywords.TabIndex = 23;
+            // 
+            // txt_tags
+            // 
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txt_tags.CheckBoxProperties = checkBoxProperties1;
+            this.txt_tags.ColumnCount = 4;
+            this.txt_tags.DisplayMemberSingleItem = "";
+            this.txt_tags.FormattingEnabled = true;
+            this.txt_tags.Location = new System.Drawing.Point(74, 65);
+            this.txt_tags.Name = "txt_tags";
+            this.txt_tags.Size = new System.Drawing.Size(528, 20);
+            this.txt_tags.TabIndex = 22;
             // 
             // label10
             // 
@@ -386,6 +435,39 @@
             this.tabPage2.Text = "高级选项";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.txt_news_top);
+            this.panelControl1.Controls.Add(this.panelgfbm);
+            this.panelControl1.Controls.Add(this.label11);
+            this.panelControl1.Controls.Add(this.panelkgbm);
+            this.panelControl1.Controls.Add(this.label14);
+            this.panelControl1.Controls.Add(this.txt_news_down);
+            this.panelControl1.Controls.Add(this.label8);
+            this.panelControl1.Controls.Add(this.chk_bbspinglun);
+            this.panelControl1.Controls.Add(this.label15);
+            this.panelControl1.Controls.Add(this.txt_news_right);
+            this.panelControl1.Controls.Add(this.label26);
+            this.panelControl1.Controls.Add(this.chk_cmspinglun);
+            this.panelControl1.Controls.Add(this.txtCommentUrl);
+            this.panelControl1.Controls.Add(this.label17);
+            this.panelControl1.Controls.Add(this.label18);
+            this.panelControl1.Controls.Add(this.chkISkfbm);
+            this.panelControl1.Controls.Add(this.chkISgfbm);
+            this.panelControl1.Location = new System.Drawing.Point(905, 656);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(44, 10);
+            this.panelControl1.TabIndex = 59;
+            this.panelControl1.Visible = false;
+            // 
+            // txt_news_top
+            // 
+            this.txt_news_top.Location = new System.Drawing.Point(94, 117);
+            this.txt_news_top.Multiline = true;
+            this.txt_news_top.Name = "txt_news_top";
+            this.txt_news_top.Size = new System.Drawing.Size(712, 81);
+            this.txt_news_top.TabIndex = 27;
+            // 
             // panelgfbm
             // 
             this.panelgfbm.Controls.Add(this.label32);
@@ -448,6 +530,15 @@
             this.label22.Size = new System.Drawing.Size(65, 12);
             this.label22.TabIndex = 0;
             this.label22.Text = "购房编号：";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(22, 151);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 24);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "附加正文2\r\n(正文上方)";
             // 
             // panelkgbm
             // 
@@ -512,6 +603,125 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "看房编号：";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(24, 246);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 24);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "附加正文3\r\n正文下方";
+            // 
+            // txt_news_down
+            // 
+            this.txt_news_down.Location = new System.Drawing.Point(94, 214);
+            this.txt_news_down.Multiline = true;
+            this.txt_news_down.Name = "txt_news_down";
+            this.txt_news_down.Size = new System.Drawing.Size(712, 89);
+            this.txt_news_down.TabIndex = 29;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(23, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 54;
+            this.label8.Text = "评论启用：";
+            // 
+            // chk_bbspinglun
+            // 
+            this.chk_bbspinglun.AutoSize = true;
+            this.chk_bbspinglun.Location = new System.Drawing.Point(186, 13);
+            this.chk_bbspinglun.Name = "chk_bbspinglun";
+            this.chk_bbspinglun.Size = new System.Drawing.Size(72, 16);
+            this.chk_bbspinglun.TabIndex = 56;
+            this.chk_bbspinglun.Text = "论坛评论";
+            this.chk_bbspinglun.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(500, 14);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "评论地址：";
+            // 
+            // txt_news_right
+            // 
+            this.txt_news_right.Location = new System.Drawing.Point(92, 331);
+            this.txt_news_right.Multiline = true;
+            this.txt_news_right.Name = "txt_news_right";
+            this.txt_news_right.Size = new System.Drawing.Size(709, 74);
+            this.txt_news_right.TabIndex = 49;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(22, 358);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(65, 24);
+            this.label26.TabIndex = 48;
+            this.label26.Text = "附加正文5\r\n(正文右方)";
+            // 
+            // chk_cmspinglun
+            // 
+            this.chk_cmspinglun.AutoSize = true;
+            this.chk_cmspinglun.Location = new System.Drawing.Point(92, 13);
+            this.chk_cmspinglun.Name = "chk_cmspinglun";
+            this.chk_cmspinglun.Size = new System.Drawing.Size(72, 16);
+            this.chk_cmspinglun.TabIndex = 55;
+            this.chk_cmspinglun.Text = "资讯评论";
+            this.chk_cmspinglun.UseVisualStyleBackColor = true;
+            // 
+            // txtCommentUrl
+            // 
+            this.txtCommentUrl.Location = new System.Drawing.Point(568, 11);
+            this.txtCommentUrl.Name = "txtCommentUrl";
+            this.txtCommentUrl.Size = new System.Drawing.Size(400, 21);
+            this.txtCommentUrl.TabIndex = 31;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(23, 70);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(65, 12);
+            this.label17.TabIndex = 34;
+            this.label17.Text = "看房报名：";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(23, 96);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 12);
+            this.label18.TabIndex = 35;
+            this.label18.Text = "购房报名：";
+            // 
+            // chkISkfbm
+            // 
+            this.chkISkfbm.AutoSize = true;
+            this.chkISkfbm.Location = new System.Drawing.Point(94, 70);
+            this.chkISkfbm.Name = "chkISkfbm";
+            this.chkISkfbm.Size = new System.Drawing.Size(72, 16);
+            this.chkISkfbm.TabIndex = 36;
+            this.chkISkfbm.Text = "看房报名";
+            this.chkISkfbm.UseVisualStyleBackColor = true;
+            this.chkISkfbm.CheckedChanged += new System.EventHandler(this.chkISkfbm_CheckedChanged);
+            // 
+            // chkISgfbm
+            // 
+            this.chkISgfbm.AutoSize = true;
+            this.chkISgfbm.Location = new System.Drawing.Point(94, 95);
+            this.chkISgfbm.Name = "chkISgfbm";
+            this.chkISgfbm.Size = new System.Drawing.Size(72, 16);
+            this.chkISgfbm.TabIndex = 37;
+            this.chkISgfbm.Text = "购房报名";
+            this.chkISgfbm.UseVisualStyleBackColor = true;
+            this.chkISgfbm.CheckedChanged += new System.EventHandler(this.chkISgfbm_CheckedChanged);
+            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -528,35 +738,6 @@
             this.txt_row_news_abstract.Name = "txt_row_news_abstract";
             this.txt_row_news_abstract.Size = new System.Drawing.Size(879, 123);
             this.txt_row_news_abstract.TabIndex = 57;
-            // 
-            // chk_bbspinglun
-            // 
-            this.chk_bbspinglun.AutoSize = true;
-            this.chk_bbspinglun.Location = new System.Drawing.Point(186, 13);
-            this.chk_bbspinglun.Name = "chk_bbspinglun";
-            this.chk_bbspinglun.Size = new System.Drawing.Size(72, 16);
-            this.chk_bbspinglun.TabIndex = 56;
-            this.chk_bbspinglun.Text = "论坛评论";
-            this.chk_bbspinglun.UseVisualStyleBackColor = true;
-            // 
-            // chk_cmspinglun
-            // 
-            this.chk_cmspinglun.AutoSize = true;
-            this.chk_cmspinglun.Location = new System.Drawing.Point(92, 13);
-            this.chk_cmspinglun.Name = "chk_cmspinglun";
-            this.chk_cmspinglun.Size = new System.Drawing.Size(72, 16);
-            this.chk_cmspinglun.TabIndex = 55;
-            this.chk_cmspinglun.Text = "资讯评论";
-            this.chk_cmspinglun.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
-            this.label8.TabIndex = 54;
-            this.label8.Text = "评论启用：";
             // 
             // txt_news_template_file
             // 
@@ -591,23 +772,6 @@
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 50;
             this.label2.Text = "稿源:";
-            // 
-            // txt_news_right
-            // 
-            this.txt_news_right.Location = new System.Drawing.Point(92, 331);
-            this.txt_news_right.Multiline = true;
-            this.txt_news_right.Name = "txt_news_right";
-            this.txt_news_right.Size = new System.Drawing.Size(709, 74);
-            this.txt_news_right.TabIndex = 49;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(22, 358);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(65, 24);
-            this.label26.TabIndex = 48;
-            this.label26.Text = "附加正文5\r\n(正文右方)";
             // 
             // txt_news_left
             // 
@@ -682,46 +846,6 @@
             this.label12.TabIndex = 40;
             this.label12.Text = "跳转地址：";
             // 
-            // chkISgfbm
-            // 
-            this.chkISgfbm.AutoSize = true;
-            this.chkISgfbm.Location = new System.Drawing.Point(94, 95);
-            this.chkISgfbm.Name = "chkISgfbm";
-            this.chkISgfbm.Size = new System.Drawing.Size(72, 16);
-            this.chkISgfbm.TabIndex = 37;
-            this.chkISgfbm.Text = "购房报名";
-            this.chkISgfbm.UseVisualStyleBackColor = true;
-            this.chkISgfbm.CheckedChanged += new System.EventHandler(this.chkISgfbm_CheckedChanged);
-            // 
-            // chkISkfbm
-            // 
-            this.chkISkfbm.AutoSize = true;
-            this.chkISkfbm.Location = new System.Drawing.Point(94, 70);
-            this.chkISkfbm.Name = "chkISkfbm";
-            this.chkISkfbm.Size = new System.Drawing.Size(72, 16);
-            this.chkISkfbm.TabIndex = 36;
-            this.chkISkfbm.Text = "看房报名";
-            this.chkISkfbm.UseVisualStyleBackColor = true;
-            this.chkISkfbm.CheckedChanged += new System.EventHandler(this.chkISkfbm_CheckedChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(23, 96);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(65, 12);
-            this.label18.TabIndex = 35;
-            this.label18.Text = "购房报名：";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(23, 70);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(65, 12);
-            this.label17.TabIndex = 34;
-            this.label17.Text = "看房报名：";
-            // 
             // text_news_video
             // 
             this.text_news_video.Location = new System.Drawing.Point(75, 45);
@@ -737,47 +861,6 @@
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 32;
             this.label16.Text = "音频视频：";
-            // 
-            // txtCommentUrl
-            // 
-            this.txtCommentUrl.Location = new System.Drawing.Point(568, 11);
-            this.txtCommentUrl.Name = "txtCommentUrl";
-            this.txtCommentUrl.Size = new System.Drawing.Size(400, 21);
-            this.txtCommentUrl.TabIndex = 31;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(500, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "评论地址：";
-            // 
-            // txt_news_down
-            // 
-            this.txt_news_down.Location = new System.Drawing.Point(94, 214);
-            this.txt_news_down.Multiline = true;
-            this.txt_news_down.Name = "txt_news_down";
-            this.txt_news_down.Size = new System.Drawing.Size(712, 89);
-            this.txt_news_down.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(24, 246);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(59, 24);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "附加正文3\r\n正文下方";
-            // 
-            // txt_news_top
-            // 
-            this.txt_news_top.Location = new System.Drawing.Point(94, 117);
-            this.txt_news_top.Multiline = true;
-            this.txt_news_top.Name = "txt_news_top";
-            this.txt_news_top.Size = new System.Drawing.Size(712, 81);
-            this.txt_news_top.TabIndex = 27;
             // 
             // label13
             // 
@@ -795,15 +878,6 @@
             this.txt_news_description.Name = "txt_news_description";
             this.txt_news_description.Size = new System.Drawing.Size(874, 179);
             this.txt_news_description.TabIndex = 23;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 151);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 24);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "附加正文2\r\n(正文上方)";
             // 
             // toolStrip1
             // 
@@ -863,7 +937,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(92, 36);
             this.toolStripButton4.Text = "送编辑箱";
-            this.toolStripButton4.ToolTipText = "送编辑箱";
+            this.toolStripButton4.ToolTipText = "送到CMS的编辑箱";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripButton2
@@ -873,6 +947,7 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(80, 36);
             this.toolStripButton2.Text = "送签发";
+            this.toolStripButton2.ToolTipText = "送签发(送到CMS的待签发箱)";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // textBox4
@@ -911,79 +986,6 @@
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.txt_news_top);
-            this.panelControl1.Controls.Add(this.panelgfbm);
-            this.panelControl1.Controls.Add(this.label11);
-            this.panelControl1.Controls.Add(this.panelkgbm);
-            this.panelControl1.Controls.Add(this.label14);
-            this.panelControl1.Controls.Add(this.txt_news_down);
-            this.panelControl1.Controls.Add(this.label8);
-            this.panelControl1.Controls.Add(this.chk_bbspinglun);
-            this.panelControl1.Controls.Add(this.label15);
-            this.panelControl1.Controls.Add(this.txt_news_right);
-            this.panelControl1.Controls.Add(this.label26);
-            this.panelControl1.Controls.Add(this.chk_cmspinglun);
-            this.panelControl1.Controls.Add(this.txtCommentUrl);
-            this.panelControl1.Controls.Add(this.label17);
-            this.panelControl1.Controls.Add(this.label18);
-            this.panelControl1.Controls.Add(this.chkISkfbm);
-            this.panelControl1.Controls.Add(this.chkISgfbm);
-            this.panelControl1.Location = new System.Drawing.Point(905, 656);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(44, 10);
-            this.panelControl1.TabIndex = 59;
-            this.panelControl1.Visible = false;
-            // 
-            // txtContent
-            // 
-            this.txtContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtContent.ContextMenuStrip = this.contextMenuStrip1;
-            this.txtContent.Html = "";
-            this.txtContent.Location = new System.Drawing.Point(43, 91);
-            this.txtContent.Name = "txtContent";
-            this.txtContent.SelectedText = null;
-            this.txtContent.Size = new System.Drawing.Size(935, 575);
-            this.txtContent.TabIndex = 27;
-            // 
-            // txt_news_keyword2
-            // 
-            this.txt_news_keyword2.BackColor = System.Drawing.Color.White;
-            this.txt_news_keyword2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_news_keyword2.Keywords = null;
-            this.txt_news_keyword2.Location = new System.Drawing.Point(550, 33);
-            this.txt_news_keyword2.Name = "txt_news_keyword2";
-            this.txt_news_keyword2.Size = new System.Drawing.Size(400, 19);
-            this.txt_news_keyword2.SplitWord = "#";
-            this.txt_news_keyword2.TabIndex = 24;
-            // 
-            // txt_news_keywords
-            // 
-            this.txt_news_keywords.BackColor = System.Drawing.Color.White;
-            this.txt_news_keywords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_news_keywords.Keywords = null;
-            this.txt_news_keywords.Location = new System.Drawing.Point(74, 37);
-            this.txt_news_keywords.Name = "txt_news_keywords";
-            this.txt_news_keywords.Size = new System.Drawing.Size(400, 19);
-            this.txt_news_keywords.SplitWord = " |";
-            this.txt_news_keywords.TabIndex = 23;
-            // 
-            // txt_tags
-            // 
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txt_tags.CheckBoxProperties = checkBoxProperties1;
-            this.txt_tags.ColumnCount = 4;
-            this.txt_tags.DisplayMemberSingleItem = "";
-            this.txt_tags.FormattingEnabled = true;
-            this.txt_tags.Location = new System.Drawing.Point(74, 65);
-            this.txt_tags.Name = "txt_tags";
-            this.txt_tags.Size = new System.Drawing.Size(528, 20);
-            this.txt_tags.TabIndex = 22;
-            // 
             // ContentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1001,15 +1003,15 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             this.panelgfbm.ResumeLayout(false);
             this.panelgfbm.PerformLayout();
             this.panelkgbm.ResumeLayout(false);
             this.panelkgbm.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
