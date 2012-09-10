@@ -28,9 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
+            this.groupControl9 = new DevExpress.XtraEditors.GroupControl();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.groupControl8 = new DevExpress.XtraEditors.GroupControl();
+            this.radioButtonAllSite2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonListPage = new System.Windows.Forms.RadioButton();
+            this.radioButtonAllSite = new System.Windows.Forms.RadioButton();
+            this.groupControl7 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.txtTableName = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.txtRuleName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -55,7 +67,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblStartUrlLoger = new System.Windows.Forms.Label();
             this.lbxUrls = new System.Windows.Forms.ListBox();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +78,10 @@
             this.radioInnerLinks = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
             this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
@@ -128,15 +140,44 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
-            this.groupControl7 = new DevExpress.XtraEditors.GroupControl();
-            this.txtTableName = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.homePage = new DevExpress.XtraWizard.WizardPage();
+            this.txtHomePage = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.btnGotoHomePage = new DevExpress.XtraEditors.SimpleButton();
+            this.wizardPage1 = new DevExpress.XtraWizard.WizardPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.btnSelectListXPath = new DevExpress.XtraEditors.SimpleButton();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.baseWebBrowser2 = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.label20 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl9)).BeginInit();
+            this.groupControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl8)).BeginInit();
+            this.groupControl8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).BeginInit();
+            this.groupControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRuleName.Properties)).BeginInit();
@@ -174,9 +215,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCXpath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).BeginInit();
             this.wizardPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).BeginInit();
-            this.groupControl7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).BeginInit();
+            this.homePage.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            this.wizardPage1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -189,6 +233,8 @@
             this.wizardControl1.Controls.Add(this.previewPage);
             this.wizardControl1.Controls.Add(this.contentDetailPage);
             this.wizardControl1.Controls.Add(this.wizardPage3);
+            this.wizardControl1.Controls.Add(this.homePage);
+            this.wizardControl1.Controls.Add(this.wizardPage1);
             this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wizardControl1.FinishText = "完成";
             this.wizardControl1.Location = new System.Drawing.Point(0, 0);
@@ -196,6 +242,8 @@
             this.wizardControl1.NextText = "下一步&N >";
             this.wizardControl1.Pages.AddRange(new DevExpress.XtraWizard.BaseWizardPage[] {
             this.welcomeWizardPage1,
+            this.homePage,
+            this.wizardPage1,
             this.startPage,
             this.contentUrlPage,
             this.previewPage,
@@ -210,6 +258,8 @@
             // 
             // welcomeWizardPage1
             // 
+            this.welcomeWizardPage1.Controls.Add(this.groupControl9);
+            this.welcomeWizardPage1.Controls.Add(this.groupControl8);
             this.welcomeWizardPage1.Controls.Add(this.groupControl7);
             this.welcomeWizardPage1.Controls.Add(this.groupControl5);
             this.welcomeWizardPage1.Controls.Add(this.groupControl4);
@@ -219,13 +269,122 @@
             this.welcomeWizardPage1.Size = new System.Drawing.Size(674, 379);
             this.welcomeWizardPage1.Text = "欢迎来到任务规则创建向导";
             // 
+            // groupControl9
+            // 
+            this.groupControl9.Controls.Add(this.radioButton3);
+            this.groupControl9.Controls.Add(this.radioButton4);
+            this.groupControl9.Location = new System.Drawing.Point(357, 134);
+            this.groupControl9.Name = "groupControl9";
+            this.groupControl9.Size = new System.Drawing.Size(311, 85);
+            this.groupControl9.TabIndex = 103;
+            this.groupControl9.Text = "页面地址控制";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(25, 62);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(109, 18);
+            this.radioButton3.TabIndex = 100;
+            this.radioButton3.Text = "域名可以不一致";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
+            this.radioButton4.Location = new System.Drawing.Point(25, 34);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(253, 18);
+            this.radioButton4.TabIndex = 98;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "域名必须一致（内容页和列表页域名一致）";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // groupControl8
+            // 
+            this.groupControl8.Controls.Add(this.radioButtonAllSite2);
+            this.groupControl8.Controls.Add(this.radioButtonListPage);
+            this.groupControl8.Controls.Add(this.radioButtonAllSite);
+            this.groupControl8.Location = new System.Drawing.Point(14, 133);
+            this.groupControl8.Name = "groupControl8";
+            this.groupControl8.Size = new System.Drawing.Size(311, 92);
+            this.groupControl8.TabIndex = 102;
+            this.groupControl8.Text = "采集方式";
+            // 
+            // radioButtonAllSite2
+            // 
+            this.radioButtonAllSite2.AutoSize = true;
+            this.radioButtonAllSite2.Location = new System.Drawing.Point(14, 48);
+            this.radioButtonAllSite2.Name = "radioButtonAllSite2";
+            this.radioButtonAllSite2.Size = new System.Drawing.Size(253, 18);
+            this.radioButtonAllSite2.TabIndex = 101;
+            this.radioButtonAllSite2.Text = "类爬虫式整站采集（首页-栏目-列表-内容）";
+            this.radioButtonAllSite2.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonListPage
+            // 
+            this.radioButtonListPage.AutoSize = true;
+            this.radioButtonListPage.Checked = true;
+            this.radioButtonListPage.Location = new System.Drawing.Point(14, 68);
+            this.radioButtonListPage.Name = "radioButtonListPage";
+            this.radioButtonListPage.Size = new System.Drawing.Size(173, 18);
+            this.radioButtonListPage.TabIndex = 100;
+            this.radioButtonListPage.TabStop = true;
+            this.radioButtonListPage.Text = "传统列表采集（列表-内容）";
+            this.radioButtonListPage.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAllSite
+            // 
+            this.radioButtonAllSite.AutoSize = true;
+            this.radioButtonAllSite.Location = new System.Drawing.Point(15, 27);
+            this.radioButtonAllSite.Name = "radioButtonAllSite";
+            this.radioButtonAllSite.Size = new System.Drawing.Size(225, 18);
+            this.radioButtonAllSite.TabIndex = 98;
+            this.radioButtonAllSite.Text = "类爬虫式整站采集（首页-列表-内容）";
+            this.radioButtonAllSite.UseVisualStyleBackColor = true;
+            // 
+            // groupControl7
+            // 
+            this.groupControl7.Controls.Add(this.labelControl4);
+            this.groupControl7.Controls.Add(this.txtTableName);
+            this.groupControl7.Controls.Add(this.labelControl3);
+            this.groupControl7.Location = new System.Drawing.Point(356, 51);
+            this.groupControl7.Name = "groupControl7";
+            this.groupControl7.Size = new System.Drawing.Size(311, 76);
+            this.groupControl7.TabIndex = 28;
+            this.groupControl7.Text = "任务存储信息";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(84, 57);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(172, 14);
+            this.labelControl4.TabIndex = 2;
+            this.labelControl4.Text = "mongodb数据表名称、文件名称";
+            // 
+            // txtTableName
+            // 
+            this.txtTableName.Location = new System.Drawing.Point(84, 28);
+            this.txtTableName.Name = "txtTableName";
+            this.txtTableName.Size = new System.Drawing.Size(189, 20);
+            this.txtTableName.TabIndex = 1;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(14, 31);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(60, 14);
+            this.labelControl3.TabIndex = 0;
+            this.labelControl3.Text = "存储名称：";
+            // 
             // groupControl5
             // 
             this.groupControl5.Controls.Add(this.txtRuleName);
             this.groupControl5.Controls.Add(this.labelControl1);
             this.groupControl5.Location = new System.Drawing.Point(14, 51);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(640, 66);
+            this.groupControl5.Size = new System.Drawing.Size(311, 76);
             this.groupControl5.TabIndex = 27;
             this.groupControl5.Text = "任务基本信息";
             // 
@@ -233,7 +392,7 @@
             // 
             this.txtRuleName.Location = new System.Drawing.Point(84, 28);
             this.txtRuleName.Name = "txtRuleName";
-            this.txtRuleName.Size = new System.Drawing.Size(306, 20);
+            this.txtRuleName.Size = new System.Drawing.Size(189, 20);
             this.txtRuleName.TabIndex = 1;
             // 
             // labelControl1
@@ -255,9 +414,9 @@
             this.groupControl4.Controls.Add(this.label12);
             this.groupControl4.Controls.Add(this.chkIntervalTask);
             this.groupControl4.Controls.Add(this.linkLabel5);
-            this.groupControl4.Location = new System.Drawing.Point(14, 230);
+            this.groupControl4.Location = new System.Drawing.Point(14, 231);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(640, 114);
+            this.groupControl4.Size = new System.Drawing.Size(656, 114);
             this.groupControl4.TabIndex = 26;
             this.groupControl4.Text = "定时执行任务";
             // 
@@ -1211,30 +1370,252 @@
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             // 
-            // groupControl7
+            // homePage
             // 
-            this.groupControl7.Controls.Add(this.txtTableName);
-            this.groupControl7.Controls.Add(this.labelControl3);
-            this.groupControl7.Location = new System.Drawing.Point(14, 140);
-            this.groupControl7.Name = "groupControl7";
-            this.groupControl7.Size = new System.Drawing.Size(640, 66);
-            this.groupControl7.TabIndex = 28;
-            this.groupControl7.Text = "任务存储信息";
+            this.homePage.Controls.Add(this.btnGotoHomePage);
+            this.homePage.Controls.Add(this.panel2);
+            this.homePage.Controls.Add(this.txtHomePage);
+            this.homePage.Controls.Add(this.label11);
+            this.homePage.Controls.Add(this.bwHomePage);
+            this.homePage.Name = "homePage";
+            this.homePage.Size = new System.Drawing.Size(859, 367);
+            this.homePage.Text = "栏目页配置";
             // 
-            // txtTableName
+            // txtHomePage
             // 
-            this.txtTableName.Location = new System.Drawing.Point(84, 28);
-            this.txtTableName.Name = "txtTableName";
-            this.txtTableName.Size = new System.Drawing.Size(306, 20);
-            this.txtTableName.TabIndex = 1;
+            this.txtHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtHomePage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.txtHomePage.Location = new System.Drawing.Point(74, 5);
+            this.txtHomePage.Name = "txtHomePage";
+            this.txtHomePage.Size = new System.Drawing.Size(687, 22);
+            this.txtHomePage.TabIndex = 105;
             // 
-            // labelControl3
+            // label11
             // 
-            this.labelControl3.Location = new System.Drawing.Point(14, 30);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(60, 14);
-            this.labelControl3.TabIndex = 0;
-            this.labelControl3.Text = "存储名称：";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 7);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 14);
+            this.label11.TabIndex = 104;
+            this.label11.Text = "网站首页：";
+            // 
+            // bwHomePage
+            // 
+            this.bwHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.bwHomePage.Location = new System.Drawing.Point(3, 32);
+            this.bwHomePage.MinimumSize = new System.Drawing.Size(20, 20);
+            this.bwHomePage.Name = "bwHomePage";
+            this.bwHomePage.ScriptErrorsSuppressed = true;
+            this.bwHomePage.Size = new System.Drawing.Size(853, 209);
+            this.bwHomePage.TabIndex = 103;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label20);
+            this.panel2.Controls.Add(this.richTextBox1);
+            this.panel2.Controls.Add(this.textEdit2);
+            this.panel2.Controls.Add(this.simpleButton6);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label16);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 247);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(859, 120);
+            this.panel2.TabIndex = 106;
+            // 
+            // simpleButton6
+            // 
+            this.simpleButton6.Location = new System.Drawing.Point(552, 29);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(98, 26);
+            this.simpleButton6.TabIndex = 101;
+            this.simpleButton6.Text = "点此开始选择";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 33);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(81, 14);
+            this.label13.TabIndex = 98;
+            this.label13.Text = "栏目XPATH：";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.DarkRed;
+            this.label16.Location = new System.Drawing.Point(6, 8);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(295, 14);
+            this.label16.TabIndex = 95;
+            this.label16.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
+            // 
+            // textEdit2
+            // 
+            this.textEdit2.Location = new System.Drawing.Point(91, 30);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Size = new System.Drawing.Size(457, 20);
+            this.textEdit2.TabIndex = 104;
+            // 
+            // btnGotoHomePage
+            // 
+            this.btnGotoHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGotoHomePage.Location = new System.Drawing.Point(767, 6);
+            this.btnGotoHomePage.Name = "btnGotoHomePage";
+            this.btnGotoHomePage.Size = new System.Drawing.Size(72, 21);
+            this.btnGotoHomePage.TabIndex = 107;
+            this.btnGotoHomePage.Text = "前往";
+            // 
+            // wizardPage1
+            // 
+            this.wizardPage1.Controls.Add(this.simpleButton8);
+            this.wizardPage1.Controls.Add(this.textBox2);
+            this.wizardPage1.Controls.Add(this.label19);
+            this.wizardPage1.Controls.Add(this.baseWebBrowser2);
+            this.wizardPage1.Controls.Add(this.panel3);
+            this.wizardPage1.Name = "wizardPage1";
+            this.wizardPage1.Size = new System.Drawing.Size(859, 367);
+            this.wizardPage1.Text = "列表页设置";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.linkLabel3);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.richTextBox2);
+            this.panel3.Controls.Add(this.textEdit1);
+            this.panel3.Controls.Add(this.btnSelectListXPath);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.label18);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 244);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(859, 123);
+            this.panel3.TabIndex = 107;
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.Location = new System.Drawing.Point(91, 30);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Size = new System.Drawing.Size(457, 20);
+            this.textEdit1.TabIndex = 104;
+            // 
+            // btnSelectListXPath
+            // 
+            this.btnSelectListXPath.Location = new System.Drawing.Point(552, 29);
+            this.btnSelectListXPath.Name = "btnSelectListXPath";
+            this.btnSelectListXPath.Size = new System.Drawing.Size(98, 26);
+            this.btnSelectListXPath.TabIndex = 101;
+            this.btnSelectListXPath.Text = "点此开始选择";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(5, 33);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(81, 14);
+            this.label17.TabIndex = 98;
+            this.label17.Text = "列表XPATH：";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.ForeColor = System.Drawing.Color.DarkRed;
+            this.label18.Location = new System.Drawing.Point(6, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(295, 14);
+            this.label18.TabIndex = 95;
+            this.label18.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
+            // 
+            // simpleButton8
+            // 
+            this.simpleButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton8.Location = new System.Drawing.Point(767, 9);
+            this.simpleButton8.Name = "simpleButton8";
+            this.simpleButton8.Size = new System.Drawing.Size(72, 21);
+            this.simpleButton8.TabIndex = 111;
+            this.simpleButton8.Text = "前往";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.textBox2.Location = new System.Drawing.Point(74, 8);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(687, 22);
+            this.textBox2.TabIndex = 110;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(4, 10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(67, 14);
+            this.label19.TabIndex = 109;
+            this.label19.Text = "栏目页面：";
+            // 
+            // baseWebBrowser2
+            // 
+            this.baseWebBrowser2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.baseWebBrowser2.Location = new System.Drawing.Point(3, 35);
+            this.baseWebBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
+            this.baseWebBrowser2.Name = "baseWebBrowser2";
+            this.baseWebBrowser2.ScriptErrorsSuppressed = true;
+            this.baseWebBrowser2.Size = new System.Drawing.Size(853, 203);
+            this.baseWebBrowser2.TabIndex = 108;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(7, 82);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(59, 14);
+            this.label20.TabIndex = 106;
+            this.label20.Text = "栏目预览:";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(91, 56);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(722, 61);
+            this.richTextBox1.TabIndex = 105;
+            this.richTextBox1.Text = "";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 68);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(59, 14);
+            this.label21.TabIndex = 108;
+            this.label21.Text = "列表预览:";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox2.Location = new System.Drawing.Point(91, 56);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(722, 61);
+            this.richTextBox2.TabIndex = 107;
+            this.richTextBox2.Text = "";
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(11, 93);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(55, 14);
+            this.linkLabel3.TabIndex = 109;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "高级设置";
             // 
             // SiteRuleWizardForm
             // 
@@ -1251,6 +1632,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
             this.wizardControl1.ResumeLayout(false);
             this.welcomeWizardPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl9)).EndInit();
+            this.groupControl9.ResumeLayout(false);
+            this.groupControl9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl8)).EndInit();
+            this.groupControl8.ResumeLayout(false);
+            this.groupControl8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).EndInit();
+            this.groupControl7.ResumeLayout(false);
+            this.groupControl7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
             this.groupControl5.PerformLayout();
@@ -1299,10 +1690,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).EndInit();
-            this.groupControl7.ResumeLayout(false);
-            this.groupControl7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTableName.Properties)).EndInit();
+            this.homePage.ResumeLayout(false);
+            this.homePage.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            this.wizardPage1.ResumeLayout(false);
+            this.wizardPage1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1414,5 +1811,38 @@
         private DevExpress.XtraEditors.GroupControl groupControl7;
         private DevExpress.XtraEditors.TextEdit txtTableName;
         private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraWizard.WizardPage homePage;
+        private DevExpress.XtraEditors.GroupControl groupControl9;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private DevExpress.XtraEditors.GroupControl groupControl8;
+        private System.Windows.Forms.RadioButton radioButtonListPage;
+        private System.Windows.Forms.RadioButton radioButtonAllSite;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private System.Windows.Forms.RadioButton radioButtonAllSite2;
+        private DevExpress.XtraEditors.SimpleButton btnGotoHomePage;
+        private System.Windows.Forms.Panel panel2;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox txtHomePage;
+        private System.Windows.Forms.Label label11;
+        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser bwHomePage;
+        private DevExpress.XtraWizard.WizardPage wizardPage1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton8;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label19;
+        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser baseWebBrowser2;
+        private System.Windows.Forms.Panel panel3;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.SimpleButton btnSelectListXPath;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.LinkLabel linkLabel3;
     }
 }

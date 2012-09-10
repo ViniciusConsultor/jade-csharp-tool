@@ -13,6 +13,8 @@ using Jade.Properties;
 using Jade.Model;
 using DevExpress.XtraSplashScreen;
 using System.Threading;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Jade
 {
@@ -291,6 +293,8 @@ namespace Jade
                 this.删除分组ToolStripMenuItem.Enabled = true;
                 this.新建任务ToolStripMenuItem.Enabled = true;
                 toolStripMenuItem3.Enabled = true;
+                this.粘贴规则ToolStripMenuItem.Enabled = true;
+                this.复制规则ToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -299,6 +303,8 @@ namespace Jade
                 this.删除分组ToolStripMenuItem.Enabled = false;
                 this.新建任务ToolStripMenuItem.Enabled = false;
                 toolStripMenuItem3.Enabled = false;
+                this.粘贴规则ToolStripMenuItem.Enabled = false;
+                this.复制规则ToolStripMenuItem.Enabled = true;
             }
 
             if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is SiteRule)
@@ -745,6 +751,58 @@ namespace Jade
         private void barButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
         {
             new EditDefaultSettingForm().ShowDialog();
+        }
+
+        SiteRule CopyRule = null;
+
+        private void 复制规则ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyRule = this.taskTree.SelectedNode.Tag as SiteRule;
+            MessageBox.Show("复制成功");
+        }
+
+        public static T DeepCopy<T>(T obj) where T : class
+        {
+            object retval;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                //序列化成流
+                bf.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                //反序列化成对象
+                retval = bf.Deserialize(ms);
+                ms.Close();
+            }
+            return (T)retval;
+        }
+
+        private void 粘贴规则ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.taskTree.SelectedNode != null && this.taskTree.SelectedNode.Tag is Category)
+            {
+                try
+                {
+                    var task = DeepCopy(CopyRule);
+                    var categoryID = (this.taskTree.SelectedNode.Tag as Category).ID;
+                    task.CategoryID = categoryID;
+                    task.SiteRuleId = 0;
+                    task.Name += "复制";
+                    CacheObject.RuleManager.AddSite(task);
+                    var index = GetImageIndex(task.IconImage);
+                    TreeNode leaf = new TreeNode(task.Name, index, index);
+                    leaf.Tag = task;
+                    this.CurrentCategoryNode.Nodes.Add(leaf);
+                }
+                catch
+                {
+                    MessageBox.Show("导入失败");
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一个分类节点");
+            }
         }
     }
 }

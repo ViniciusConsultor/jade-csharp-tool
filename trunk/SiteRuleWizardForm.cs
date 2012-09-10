@@ -181,6 +181,8 @@ namespace Jade
                 if (row.XPath != null)
                     this.txtCXpath.Text = row.XPath;
 
+                this.chkFixValue.Checked = row.FetchType == ItemFetchType.UserDiy;
+                this.txtFixValue.Text = row.DefaultValue;
 
                 BindXpathType(row.XMLPathType);
 
@@ -222,6 +224,7 @@ namespace Jade
                 default:
                     break;
             }
+
         }
 
         #endregion
@@ -293,7 +296,16 @@ namespace Jade
             CurrentItemRule.ReplaceString = this.txtReplace.Text;
             CurrentItemRule.AnotherXPath = this.txtAnotherXPath.Text;
 
-            CurrentItemRule.FetchType = ItemFetchType.XPath;
+            if (this.chkFixValue.Checked)
+            {
+                CurrentItemRule.FetchType = ItemFetchType.UserDiy;
+            }
+            else
+            {
+
+                CurrentItemRule.FetchType = ItemFetchType.XPath;
+            }
+
             CurrentItemRule.XPath = this.txtCXpath.Text;
 
             if (this.radioOne.Checked)
@@ -328,6 +340,7 @@ namespace Jade
             CurrentItemRule.IdentifyPage = this.chkIdentifyPage.Checked;
             CurrentItemRule.PageXPath = this.txtPageXPath.Text;
             CurrentItemRule.IsDownloadPic = chkDownloadPic.Checked;
+            CurrentItemRule.DefaultValue = this.txtFixValue.Text;
         }
 
         private void txtStartUrl_KeyDown(object sender, KeyEventArgs e)
