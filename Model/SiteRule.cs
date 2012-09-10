@@ -9,6 +9,7 @@ namespace Jade.Model
     /// <summary>
     /// 任务规则
     /// </summary>
+    [Serializable]
     public class SiteRule : XmlDatabase.Core.IXmlStoreItem
     {
         /// <summary>
@@ -399,6 +400,7 @@ namespace Jade.Model
     /// <summary>
     /// XPATH取值类型【InnerText，InnerLinks】
     /// </summary>
+    [Serializable]
     public enum XMLPathType
     {
         InnerText,
@@ -411,6 +413,7 @@ namespace Jade.Model
     /// <summary>
     /// XPATH选择类型  单选还是多选
     /// </summary>
+    [Serializable]
     public enum XMLPathSelectType
     {
         OnlyOne,
@@ -420,6 +423,7 @@ namespace Jade.Model
     /// <summary>
     /// 条目规则
     /// </summary>
+    [Serializable]
     public class ItemRule
     {
 
@@ -562,7 +566,7 @@ namespace Jade.Model
         public string DateTimeFormatString { get; set; }
 
     }
-
+    [Serializable]
     public enum ItemFetchType
     {
         XPath = 0,
@@ -570,13 +574,13 @@ namespace Jade.Model
         FromRegex = 2,
         UserDiy = 3
     }
-
+    [Serializable]
     public enum UserDiyType
     {
         DefaultValue = 0,
         Datetime = 1
     }
-
+    [Serializable]
     public enum ListPageType
     {
         Html = 0,

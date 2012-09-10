@@ -238,7 +238,8 @@ namespace Jade
                     var replaces = this.ReplaceString.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
                     foreach (var replace in replaces)
                     {
-                        result = result.Replace(replace, string.Empty);
+                        if (replace != "")
+                            result = result.Replace(replace, string.Empty);
                     }
                 }
             }

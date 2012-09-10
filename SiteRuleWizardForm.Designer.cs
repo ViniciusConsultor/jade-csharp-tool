@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -56,7 +55,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblStartUrlLoger = new System.Windows.Forms.Label();
             this.lbxUrls = new System.Windows.Forms.ListBox();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,10 +66,10 @@
             this.radioInnerLinks = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
             this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
@@ -129,9 +128,12 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
+            this.chkFixValue = new System.Windows.Forms.CheckBox();
+            this.txtFixValue = new DevExpress.XtraEditors.TextEdit();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -172,6 +174,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCXpath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).BeginInit();
             this.wizardPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -815,10 +818,10 @@
             // itemRuleTab
             // 
             this.itemRuleTab.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.itemRuleTab.Location = new System.Drawing.Point(0, 172);
+            this.itemRuleTab.Location = new System.Drawing.Point(0, 159);
             this.itemRuleTab.Name = "itemRuleTab";
             this.itemRuleTab.SelectedTabPage = this.xtraTabPageTitle;
-            this.itemRuleTab.Size = new System.Drawing.Size(859, 195);
+            this.itemRuleTab.Size = new System.Drawing.Size(859, 208);
             this.itemRuleTab.TabIndex = 13;
             this.itemRuleTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageTitle,
@@ -834,7 +837,7 @@
             // 
             this.xtraTabPageTitle.Controls.Add(this.ItemContrainerPanel);
             this.xtraTabPageTitle.Name = "xtraTabPageTitle";
-            this.xtraTabPageTitle.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageTitle.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageTitle.Text = "标题";
             // 
             // ItemContrainerPanel
@@ -843,7 +846,7 @@
             this.ItemContrainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemContrainerPanel.Location = new System.Drawing.Point(0, 0);
             this.ItemContrainerPanel.Name = "ItemContrainerPanel";
-            this.ItemContrainerPanel.Size = new System.Drawing.Size(853, 166);
+            this.ItemContrainerPanel.Size = new System.Drawing.Size(853, 179);
             this.ItemContrainerPanel.TabIndex = 0;
             // 
             // panelxPath
@@ -860,7 +863,7 @@
             this.panelxPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelxPath.Location = new System.Drawing.Point(2, 2);
             this.panelxPath.Name = "panelxPath";
-            this.panelxPath.Size = new System.Drawing.Size(849, 162);
+            this.panelxPath.Size = new System.Drawing.Size(849, 175);
             this.panelxPath.TabIndex = 6;
             // 
             // groupControl6
@@ -884,6 +887,9 @@
             // 
             // groupControl3
             // 
+            this.groupControl3.Controls.Add(this.label11);
+            this.groupControl3.Controls.Add(this.txtFixValue);
+            this.groupControl3.Controls.Add(this.chkFixValue);
             this.groupControl3.Controls.Add(this.txtAnotherXPath);
             this.groupControl3.Controls.Add(this.btnSelectAnotherXpath);
             this.groupControl3.Controls.Add(this.label4);
@@ -892,9 +898,9 @@
             this.groupControl3.Controls.Add(this.chkDownloadPic);
             this.groupControl3.Controls.Add(this.chkIdentifyPage);
             this.groupControl3.Controls.Add(this.label15);
-            this.groupControl3.Location = new System.Drawing.Point(4, 89);
+            this.groupControl3.Location = new System.Drawing.Point(4, 77);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(580, 72);
+            this.groupControl3.Size = new System.Drawing.Size(580, 95);
             this.groupControl3.TabIndex = 114;
             this.groupControl3.Text = "高级选项";
             // 
@@ -950,7 +956,7 @@
             // chkIdentifyPage
             // 
             this.chkIdentifyPage.AutoSize = true;
-            this.chkIdentifyPage.Location = new System.Drawing.Point(12, 46);
+            this.chkIdentifyPage.Location = new System.Drawing.Point(12, 47);
             this.chkIdentifyPage.Name = "chkIdentifyPage";
             this.chkIdentifyPage.Size = new System.Drawing.Size(98, 18);
             this.chkIdentifyPage.TabIndex = 112;
@@ -1006,7 +1012,7 @@
             this.groupControl1.Controls.Add(this.radioCInnerLinks);
             this.groupControl1.Controls.Add(this.radioText);
             this.groupControl1.Controls.Add(this.radioTextWithPic);
-            this.groupControl1.Location = new System.Drawing.Point(2, 29);
+            this.groupControl1.Location = new System.Drawing.Point(2, 28);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(375, 46);
             this.groupControl1.TabIndex = 101;
@@ -1205,6 +1211,32 @@
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             // 
+            // chkFixValue
+            // 
+            this.chkFixValue.AutoSize = true;
+            this.chkFixValue.Location = new System.Drawing.Point(12, 71);
+            this.chkFixValue.Name = "chkFixValue";
+            this.chkFixValue.Size = new System.Drawing.Size(86, 18);
+            this.chkFixValue.TabIndex = 118;
+            this.chkFixValue.Text = "使用固定值";
+            this.chkFixValue.UseVisualStyleBackColor = true;
+            // 
+            // txtFixValue
+            // 
+            this.txtFixValue.Location = new System.Drawing.Point(184, 73);
+            this.txtFixValue.Name = "txtFixValue";
+            this.txtFixValue.Size = new System.Drawing.Size(259, 20);
+            this.txtFixValue.TabIndex = 119;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(121, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 14);
+            this.label11.TabIndex = 120;
+            this.label11.Text = "固定值:";
+            // 
             // SiteRuleWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1268,6 +1300,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1376,5 +1409,8 @@
         private System.Windows.Forms.CheckBox chkDownloadPic;
         private System.Windows.Forms.CheckBox chkIdentifyPage;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label11;
+        private DevExpress.XtraEditors.TextEdit txtFixValue;
+        private System.Windows.Forms.CheckBox chkFixValue;
     }
 }

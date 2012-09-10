@@ -122,6 +122,36 @@ namespace Jade.Model
         }
 
 
+        /// <summary>
+        /// 栏目XPATH
+        /// </summary>
+        public UrlSelector ColumnUrlSelector
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 列表页XPATH
+        /// </summary>
+        public UrlSelector LisUrlSelector
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 内容页面选择器
+        /// </summary>
+        public UrlSelector ContentUrlSelector
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
         public string IconImage
         {
             get;
@@ -250,6 +280,7 @@ namespace Jade.Model
             get;
             set;
         }
+
         public string ListPageStartAt
         {
             get;
@@ -385,6 +416,43 @@ namespace Jade.Model
         }
 
         #endregion
+    }
+
+
+    /// <summary>
+    /// Url 选择器
+    /// </summary>
+    public class UrlSelector
+    {
+        public UrlSelector()
+        {
+            this.XPath = "//a";
+            this.ExcludePart = "#,javascript";
+        }
+
+        /// <summary>
+        /// XPATH
+        /// </summary>
+        public string XPath { get; set; }
+
+        /// <summary>
+        /// 必须包含
+        /// </summary>
+        public string IncludePart { get; set; }
+
+        /// <summary>
+        /// 不包含
+        /// </summary>
+        public string ExcludePart { get; set; }
+
+        /// <summary>
+        /// 自定义内容页地址
+        /// </summary>
+        public string DiyUrl
+        {
+            get;
+            set;
+        }
     }
 
     /// <summary>

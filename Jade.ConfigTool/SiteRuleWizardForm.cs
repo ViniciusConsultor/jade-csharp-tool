@@ -1209,6 +1209,16 @@ namespace Jade
                     this.enableNavigate = true;
                     this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
                 }
+
+                if (this.radioButtonListPage.Checked)
+                {
+                    this.wizardControl1.SelectedPage = startPage;
+                    return;
+                }
+            }
+            else if (e.Page == this.homePage)
+            {
+
             }
             else if (e.Page == this.startPage)
             {
@@ -1612,6 +1622,16 @@ namespace Jade
             this.currentTxtbox = this.txtAnotherXPath;
             this.XMLPathSelectType = Model.XMLPathSelectType.OnlyOne;
             this.XMLPathType = Model.XMLPathType.InnerLinks;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
     }
