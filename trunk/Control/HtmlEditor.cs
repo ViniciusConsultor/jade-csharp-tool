@@ -662,5 +662,10 @@ namespace Jade
                 }
             }
         }
+
+        internal void DeleteSelect()
+        {
+            this.webBrowserBody.Document.InvokeScript("deleteText");
+        }
     }
 }

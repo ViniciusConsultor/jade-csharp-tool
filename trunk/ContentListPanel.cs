@@ -188,6 +188,8 @@ namespace Jade
             {
                 m_checkStatus = !m_checkStatus;
             }
+
+            OpenLink(this.gridView1, "Url");
         }
 
         /// <summary>
@@ -260,6 +262,26 @@ namespace Jade
             }
         }
 
+        public void OpenLink(DevExpress.XtraGrid.Views.Grid.GridView gridView, string fieldName = "Url")
+        {
+            if (gridView != null)
+            {
+                gridView.ClearSorting();//禁止排序
+
+                gridView.PostEditor();
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+                Point pt = gridView.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+                info = gridView.CalcHitInfo(pt);
+                if (info.InRowCell && info.Column != null && info.Column.FieldName == fieldName)
+                {
+                    var rowIndex = info.RowHandle;
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var url = dataTable[rowIndex].Url;
+                    CacheObject.MainForm.OpenNewUrl(url);
+                }
+            }
+        }
+
         public static bool ClickGridCheckBox(DevExpress.XtraGrid.Views.Grid.GridView gridView, string fieldName, bool currentStatus)
         {
             bool result = false;
@@ -317,7 +339,7 @@ namespace Jade
 
                     if (data.label_base == "")
                     {
-                        data.label_base =Properties.Settings.Default.DefaultTag;
+                        data.label_base = Properties.Settings.Default.DefaultTag;
                     }
 
                     if (data.news_source_name == "")

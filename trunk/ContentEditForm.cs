@@ -146,6 +146,12 @@ namespace Jade
                 case "keyword":
                     添加为关键字ToolStripMenuItem_Click(null, null);
                     break;
+                case "copy":
+                    Clipboard.SetText(this.txtContent.SelectedText);
+                    break;
+                case "delete":
+                    this.txtContent.DeleteSelect();
+                    break;
             }
         }
 
@@ -207,7 +213,13 @@ namespace Jade
                     }
                     catch
                     {
-                        this.txtnews_source_name.SelectedIndex = 0;
+                        try
+                        {
+                            this.txtnews_source_name.SelectedIndex = 0;
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
 
@@ -224,7 +236,13 @@ namespace Jade
                     }
                     catch
                     {
-                        this.txt_news_template_file.SelectedIndex = 0;
+                        try
+                        {
+                            this.txt_news_template_file.SelectedIndex = 0;
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
 
