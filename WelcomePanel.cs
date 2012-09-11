@@ -147,6 +147,7 @@ namespace Jade
         {
             Navigate(url, document, CacheObject.Cookie);
             autoRedirect = true;
+            //URL = "http://newscms.house365.com/newCMS/pub/hfestate/system/2012/09/11/020743567.html"
             redirecUrl = string.Format("http://newscms.house365.com/newCMS/pub/hfccbbs/system/{0}/{1}.shtml?t=1", DateTime.Now.ToString("yyyy/MMdd"), newsId);
         }
 

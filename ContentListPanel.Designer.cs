@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentListPanel));
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -36,15 +35,18 @@
             this.taskName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Edited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.Editor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsPublish = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Content = new DevExpress.XtraGrid.Columns.GridColumn();
             this.StartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Url = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.repositoryItemHyperLinkEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1 = new DevExpress.XtraEditors.PanelControl();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.LookUpEdit();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
@@ -59,6 +61,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
@@ -74,7 +78,9 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemImageComboBox1});
+            this.repositoryItemImageComboBox1,
+            this.repositoryItemHyperLinkEdit1,
+            this.repositoryItemHyperLinkEdit2});
             this.gridControl1.Size = new System.Drawing.Size(810, 340);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -90,7 +96,8 @@
             this.IsPublish,
             this.Content,
             this.StartTime,
-            this.EndTime});
+            this.EndTime,
+            this.Url});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupPanelText = " ";
             this.gridView1.Name = "gridView1";
@@ -106,7 +113,7 @@
             this.Check.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.False;
             this.Check.Visible = true;
             this.Check.VisibleIndex = 0;
-            this.Check.Width = 30;
+            this.Check.Width = 27;
             // 
             // taskName
             // 
@@ -116,7 +123,7 @@
             this.taskName.OptionsColumn.AllowEdit = false;
             this.taskName.Visible = true;
             this.taskName.VisibleIndex = 1;
-            this.taskName.Width = 108;
+            this.taskName.Width = 98;
             // 
             // Edited
             // 
@@ -129,7 +136,7 @@
             this.Edited.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.Edited.Visible = true;
             this.Edited.VisibleIndex = 2;
-            this.Edited.Width = 40;
+            this.Edited.Width = 36;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -161,7 +168,7 @@
             this.Editor.OptionsFilter.AllowAutoFilter = false;
             this.Editor.Visible = true;
             this.Editor.VisibleIndex = 3;
-            this.Editor.Width = 80;
+            this.Editor.Width = 73;
             // 
             // IsPublish
             // 
@@ -172,7 +179,7 @@
             this.IsPublish.OptionsColumn.AllowEdit = false;
             this.IsPublish.Visible = true;
             this.IsPublish.VisibleIndex = 4;
-            this.IsPublish.Width = 42;
+            this.IsPublish.Width = 38;
             // 
             // Content
             // 
@@ -182,7 +189,7 @@
             this.Content.OptionsColumn.AllowEdit = false;
             this.Content.Visible = true;
             this.Content.VisibleIndex = 5;
-            this.Content.Width = 158;
+            this.Content.Width = 144;
             // 
             // StartTime
             // 
@@ -192,7 +199,7 @@
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
             this.StartTime.VisibleIndex = 6;
-            this.StartTime.Width = 158;
+            this.StartTime.Width = 100;
             // 
             // EndTime
             // 
@@ -203,7 +210,28 @@
             this.EndTime.UnboundType = DevExpress.Data.UnboundColumnType.DateTime;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 7;
-            this.EndTime.Width = 176;
+            this.EndTime.Width = 100;
+            // 
+            // Url
+            // 
+            this.Url.Caption = "原文地址";
+            this.Url.ColumnEdit = this.repositoryItemHyperLinkEdit1;
+            this.Url.FieldName = "Url";
+            this.Url.Name = "Url";
+            this.Url.OptionsColumn.AllowEdit = false;
+            this.Url.Visible = true;
+            this.Url.VisibleIndex = 8;
+            this.Url.Width = 200;
+            // 
+            // repositoryItemHyperLinkEdit1
+            // 
+            this.repositoryItemHyperLinkEdit1.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
+            // 
+            // repositoryItemHyperLinkEdit2
+            // 
+            this.repositoryItemHyperLinkEdit2.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit2.Name = "repositoryItemHyperLinkEdit2";
             // 
             // panel1
             // 
@@ -357,6 +385,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -394,6 +424,9 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraEditors.LookUpEdit comboBoxEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn Url;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit2;
 
     }
 }

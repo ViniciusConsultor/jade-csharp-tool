@@ -15,7 +15,7 @@ namespace XmlDatabase.Core
     /// <summary>
     /// 这是数据库对象，是XML Database数据库引擎中其他任何操作的起点。
     /// </summary>
-    public sealed class XDatabase:IDisposable
+    public sealed class XDatabase : IDisposable
     {
         #region 常量定义
         /// <summary>
@@ -41,6 +41,7 @@ namespace XmlDatabase.Core
         }
 
         private string fullName;
+
         /// <summary>
         /// 数据库的完整路径，包含了文件夹路径。
         /// </summary>
@@ -57,9 +58,11 @@ namespace XmlDatabase.Core
         public bool AutoSubmitMode
         {
             get
-            { return autoSubmit; 
+            {
+                return autoSubmit;
             }
-            set {
+            set
+            {
                 autoSubmit = value;
             }
         }
@@ -99,27 +102,30 @@ namespace XmlDatabase.Core
         /// <summary>
         /// 默认构造函数设置为private，目的是为了避免用户通过new关键字对其进行实例化
         /// </summary>
-        private XDatabase() {}
+        private XDatabase() { }
         /// <summary>
         /// 根据一个数据库目录名称进行构造
         /// </summary>
         /// <param name="_fullName">数据库完整名称，其实是一个路径名称</param>
-        private XDatabase(string _fullName):this() {
-            fullName = _fullName;
+        private XDatabase(string _fullName)
+            : this()
+        {
+
+            fullName = AppDomain.CurrentDomain.BaseDirectory + "\\" + _fullName;
             //TODO:这里进行必要的校验
 
             //给几个属性初始化
             ApplicationName = AppDomain.CurrentDomain.FriendlyName;
             UserName = Thread.CurrentPrincipal.Identity.Name;
             Log = new XLogWriter(this);
-            
+
             //TransactionManager = new XTransactionManager(this);
             //Cache = XBufferManager.GetInstance(this.FullName);
             ids = XIdsManager.GetInstance(this.FullName);
             taskManager = new XTaskManager(this);
 
             //编写日志
-            Log.WriteEx(Properties.Resources.DatabaseOpened,true);
+            Log.WriteEx(Properties.Resources.DatabaseOpened, true);
         }
 
         #endregion
@@ -133,9 +139,10 @@ namespace XmlDatabase.Core
         /// <returns>数据库对象</returns>
         /// <exception cref="System.IO.FileNotFoundException">如果文件夹里面不存在core.xml，则引发一个数据库异常</exception>
         /// <exception cref="XDatabaseException">其他未捕获异常会引发一个数据库异常</exception>
-        public static XDatabase Open(string database) {
+        public static XDatabase Open(string database)
+        {
             DATABASECONFIGFILE = Path.Combine(database, "core.xml");
-            
+
             try
             {
                 if (Directory.Exists(database))
@@ -153,20 +160,21 @@ namespace XmlDatabase.Core
                     }
                 }
                 else
-                { 
+                {
                     //创建该目录，并创建一个core.xml文件
                     Directory.CreateDirectory(database);//创建该文件夹
                     XDocument x = new XDocument(
                         new XElement("Database",
                             new XAttribute("CreateTime", DateTime.Now),
-                            new XAttribute("Version",XUtility.EngineVersion),
+                            new XAttribute("Version", XUtility.EngineVersion),
                             new XElement("Types")
                             ));
                     x.Save(DATABASECONFIGFILE);
                     return new XDatabase(database);
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 throw new XDatabaseException("GeneralException", ex.Message);
             }
         }
@@ -174,7 +182,8 @@ namespace XmlDatabase.Core
         /// <summary>
         /// 关闭数据库。数据库关闭之前要进行必要的资源清理工作，或者关闭一些打开的对象
         /// </summary>
-        public void Close() { 
+        public void Close()
+        {
             //TODO:数据库关闭之前要进行必要的资源清理工作，或者关闭一些打开的对象
             Log.WriteLine(Properties.Resources.DatabaseClosed);
             Log.Close();
@@ -187,13 +196,14 @@ namespace XmlDatabase.Core
         /// 配置某种对象在单文件中存放多少个，这样做的目的是为了分开存放，以提高效率
         /// </summary>
         /// <param name="items">要进行配置的类型定义集合。</param>
-        public void Configure(XTypeRegistration[] items) {
+        public void Configure(XTypeRegistration[] items)
+        {
 
             XDocument x = XDocument.Load(DATABASECONFIGFILE);
             XElement root = x.Root.Element("Types");
             foreach (var item in items)
             {
-                string typeFolder = Path.Combine(this.FullName, "Entities\\"+item.FullName);
+                string typeFolder = Path.Combine(this.FullName, "Entities\\" + item.FullName);
                 Directory.CreateDirectory(typeFolder);
                 Directory.CreateDirectory(typeFolder + "\\Data");
                 Directory.CreateDirectory(typeFolder + "\\Index");
@@ -204,11 +214,11 @@ namespace XmlDatabase.Core
                     );
                 if (found != null)
                 {
-                    found = item.ConvertToXml("Type",Guid.Empty);
+                    found = item.ConvertToXml("Type", Guid.Empty);
                 }
                 else
                 {
-                    root.Add(item.ConvertToXml("Type",Guid.Empty));
+                    root.Add(item.ConvertToXml("Type", Guid.Empty));
                 }
 
                 Log.WriteEx(string.Format(Properties.Resources.TypeConfiguration, item.FullName));
@@ -231,7 +241,7 @@ namespace XmlDatabase.Core
                 var query = from t in root.Elements("Type")
                             select (XTypeRegistration)t.ConvertToObject<XTypeRegistration>().Instance;
 
-                return query.ToList();            
+                return query.ToList();
             }
         }
 
@@ -268,7 +278,7 @@ namespace XmlDatabase.Core
         public void Store(IXmlStoreItem instance, bool singleFile)
         {
 
-            string typeFullName=instance.GetType().FullName;
+            string typeFullName = instance.GetType().FullName;
             string typeName = instance.GetType().Name;
 
             XDocument x = XDocument.Load(DATABASECONFIGFILE);
@@ -279,13 +289,7 @@ namespace XmlDatabase.Core
                 Configure(new[] { new XTypeRegistration() { FullName = typeFullName } });
 
             //TODO:目前并不拆成多个文件存放，下一阶段要考虑对此进行设计
-            string dataFile = 
-                string.Format("{4}\\{0}\\{1}\\{2}\\{3}.xml", 
-                    "Entities", 
-                    typeFullName, 
-                    "Data", 
-                    typeFullName,
-                    fullName);
+            string dataFile = GetStoreFileName(typeFullName);
 
             if (autoSubmit)
             {
@@ -313,10 +317,10 @@ namespace XmlDatabase.Core
 
                 }
                 else
-                { 
+                {
                     //新增
 
-                    id=Guid.NewGuid();
+                    id = Guid.NewGuid();
                     XElement newInstance = instance.ConvertToXml(id);
                     data.Root.Add(newInstance);
                     // 添加到缓存
@@ -327,11 +331,23 @@ namespace XmlDatabase.Core
                 data.Save(dataFile);
             }
             else
-            { 
+            {
                 //如果为延迟提交（或者我们称为批量提交）
                 taskManager.AddTask(new XChangeItem() { Action = XChangeAction.AddOrUpdate, UserData = instance });
-                
+
             }
+        }
+
+        private string GetStoreFileName(string typeFullName)
+        {
+            string dataFile =
+                string.Format("{4}\\{0}\\{1}\\{2}\\{3}.xml",
+                    "Entities",
+                    typeFullName,
+                    "Data",
+                    typeFullName,
+                    fullName);
+            return dataFile;
         }
 
 
@@ -342,11 +358,11 @@ namespace XmlDatabase.Core
         /// <returns>对象实例的集合</returns>
         public T[] Query<T>()
         {
-            
+
             //读取的时候，应该将对象的引用放在内存中
             //TODO:目前所有对象都放在一个文件里面，以后要考虑分开存放
 
-            string typeFullName =typeof(T).FullName;
+            string typeFullName = typeof(T).FullName;
             //TODO:目前并不拆成多个文件存放，下一阶段要考虑对此进行设计
             //TODO:这里的查询还要改进，得可以先过滤一部分，不要全部输出过来。当然，如果一组对象是按一个文件存放的话，那么全部读过来反而是最好的。因为一份XML文档本来就必须全部加载，不可能加载一部分
 
@@ -428,15 +444,17 @@ namespace XmlDatabase.Core
         /// </summary>
         /// <param name="continueOnError">失败时是否继续。因为是批量操作，那么可能其中某些操作会失败，该参数指示如果失败，则是否应该继续执行后面的操作</param>
         /// <remarks></remarks>
-        public XSubmitStatus SubmitChanges(bool continueOnError) {
-            return taskManager.Execute(continueOnError,false);
+        public XSubmitStatus SubmitChanges(bool continueOnError)
+        {
+            return taskManager.Execute(continueOnError, false);
         }
 
         /// <summary>
         /// 一次性提交多个更改，失败时继续执行。但会把失败的消息返回
         /// </summary>
         /// <returns></returns>
-        public XSubmitStatus SubmitChanges() {
+        public XSubmitStatus SubmitChanges()
+        {
             return SubmitChanges(true);
         }
 
@@ -446,8 +464,9 @@ namespace XmlDatabase.Core
         /// </summary>
         /// <param name="tran"></param>
         /// <remarks></remarks>
-        public XSubmitStatus SubmitChangesWithTransaction() {
-            return taskManager.Execute(false,true);
+        public XSubmitStatus SubmitChangesWithTransaction()
+        {
+            return taskManager.Execute(false, true);
         }
         #endregion
 
@@ -459,7 +478,8 @@ namespace XmlDatabase.Core
         /// 开始一个新的事务。在一个事务里面的所有操作，都不会立即提交，而是等到事务提交的时候依次执行，并且它们要么一起成功，要么一起失败。
         /// </summary>
         /// <returns>事务对象，一旦事务开启之后，要加入该事务的操作中就要添加对该事务的引用</returns>
-        public XTransaction BeginTransaction() {
+        public XTransaction BeginTransaction()
+        {
             return new XTransaction(this);//显式打开一个事务，所有的操作都必须指定该对象，并只有在commit的时候才真正写入到数据库
         }
         #endregion
@@ -470,7 +490,7 @@ namespace XmlDatabase.Core
         /// </summary>
         public void Dispose()
         {
-            
+
         }
 
         #endregion

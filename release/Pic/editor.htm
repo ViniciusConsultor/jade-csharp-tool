@@ -337,6 +337,12 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             var range = document.selection.createRange();
             range.pasteHTML(html);
         }
+
+        function deleteText() {
+            var range = document.selection.createRange();
+            range.pasteHTML("");
+        }
+
         function getSelectText() {
             var range = document.selection.createRange();
             return range.text;
@@ -418,6 +424,8 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             <li><a href="javascript:void(0);" name="seoDescription">设为SEO描述</a></li>
             <li><a href="javascript:void(0);" name="seoKeyword">添加为SEO关键词</a></li>
             <li><a href="javascript:void(0);" name="keyword">添加为关键词</a></li>
+            <li><a href="javascript:void(0);" name="copy">复制</a></li>
+            <li><a href="javascript:void(0);" name="delete">删除</a></li>
         </ul>
     </div>
     <div id="pages">

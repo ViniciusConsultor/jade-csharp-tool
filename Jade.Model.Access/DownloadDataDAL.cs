@@ -40,7 +40,7 @@ namespace Jade.Model.Access
             where += args.IsEdit ? " and IsEdit = true" : "";
             where += args.IsPublish ? " and IsPublish  = true" : " and IsPublish = false";
             where += args.TaskId != 0 ? " and TaskId  = " + args.TaskId : "";
-            where += !string.IsNullOrEmpty(args.Keyword) ? " and Title like '*" + args.Keyword + "*'  = " + args.TaskId : "";
+            where += !string.IsNullOrEmpty(args.Keyword) ? " and Title like '%" + args.Keyword + "%'": "";
 
             totalCount = GetRecordCount(where);
             var sql = string.Format(@"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by EditTime DESC,ID DESC) order by EditTime ) order by EditTime DESC", args.PageSzie, args.PageIndex * args.PageSzie, "where " + where);
