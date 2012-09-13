@@ -97,6 +97,9 @@
             this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
             this.txtReplace = new DevExpress.XtraEditors.MemoEdit();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtFixValue = new DevExpress.XtraEditors.TextEdit();
+            this.chkFixValue = new System.Windows.Forms.CheckBox();
             this.txtAnotherXPath = new DevExpress.XtraEditors.TextEdit();
             this.btnSelectAnotherXpath = new DevExpress.XtraEditors.SimpleButton();
             this.label4 = new System.Windows.Forms.Label();
@@ -131,9 +134,6 @@
             this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
-            this.chkFixValue = new System.Windows.Forms.CheckBox();
-            this.txtFixValue = new DevExpress.XtraEditors.TextEdit();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -165,6 +165,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtReplace.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -174,7 +175,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCXpath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).BeginInit();
             this.wizardPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -904,6 +904,32 @@
             this.groupControl3.TabIndex = 114;
             this.groupControl3.Text = "高级选项";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(121, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 14);
+            this.label11.TabIndex = 120;
+            this.label11.Text = "固定值:";
+            // 
+            // txtFixValue
+            // 
+            this.txtFixValue.Location = new System.Drawing.Point(184, 73);
+            this.txtFixValue.Name = "txtFixValue";
+            this.txtFixValue.Size = new System.Drawing.Size(259, 20);
+            this.txtFixValue.TabIndex = 119;
+            // 
+            // chkFixValue
+            // 
+            this.chkFixValue.AutoSize = true;
+            this.chkFixValue.Location = new System.Drawing.Point(12, 71);
+            this.chkFixValue.Name = "chkFixValue";
+            this.chkFixValue.Size = new System.Drawing.Size(86, 18);
+            this.chkFixValue.TabIndex = 118;
+            this.chkFixValue.Text = "使用固定值";
+            this.chkFixValue.UseVisualStyleBackColor = true;
+            // 
             // txtAnotherXPath
             // 
             this.txtAnotherXPath.Location = new System.Drawing.Point(184, 25);
@@ -1120,37 +1146,37 @@
             // xtraTabPageSubtitle
             // 
             this.xtraTabPageSubtitle.Name = "xtraTabPageSubtitle";
-            this.xtraTabPageSubtitle.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageSubtitle.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageSubtitle.Text = "副标题";
             // 
             // xtraTabPageTime
             // 
             this.xtraTabPageTime.Name = "xtraTabPageTime";
-            this.xtraTabPageTime.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageTime.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageTime.Text = "时间";
             // 
             // xtraTabPageSource
             // 
             this.xtraTabPageSource.Name = "xtraTabPageSource";
-            this.xtraTabPageSource.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageSource.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageSource.Text = "来源";
             // 
             // xtraTabPageSummary
             // 
             this.xtraTabPageSummary.Name = "xtraTabPageSummary";
-            this.xtraTabPageSummary.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageSummary.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageSummary.Text = "摘要";
             // 
             // xtraTabPageContent
             // 
             this.xtraTabPageContent.Name = "xtraTabPageContent";
-            this.xtraTabPageContent.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageContent.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageContent.Text = "内容";
             // 
             // xtraTabPageOther
             // 
             this.xtraTabPageOther.Name = "xtraTabPageOther";
-            this.xtraTabPageOther.Size = new System.Drawing.Size(853, 166);
+            this.xtraTabPageOther.Size = new System.Drawing.Size(853, 179);
             this.xtraTabPageOther.Text = "其他";
             // 
             // simpleButton3
@@ -1211,32 +1237,6 @@
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
             // 
-            // chkFixValue
-            // 
-            this.chkFixValue.AutoSize = true;
-            this.chkFixValue.Location = new System.Drawing.Point(12, 71);
-            this.chkFixValue.Name = "chkFixValue";
-            this.chkFixValue.Size = new System.Drawing.Size(86, 18);
-            this.chkFixValue.TabIndex = 118;
-            this.chkFixValue.Text = "使用固定值";
-            this.chkFixValue.UseVisualStyleBackColor = true;
-            // 
-            // txtFixValue
-            // 
-            this.txtFixValue.Location = new System.Drawing.Point(184, 73);
-            this.txtFixValue.Name = "txtFixValue";
-            this.txtFixValue.Size = new System.Drawing.Size(259, 20);
-            this.txtFixValue.TabIndex = 119;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(121, 73);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 14);
-            this.label11.TabIndex = 120;
-            this.label11.Text = "固定值:";
-            // 
             // SiteRuleWizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1288,6 +1288,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAnotherXPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPageXPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
@@ -1300,7 +1301,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTestUrl.Properties)).EndInit();
             this.wizardPage3.ResumeLayout(false);
             this.wizardPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFixValue.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
