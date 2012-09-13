@@ -479,7 +479,7 @@ namespace Jade
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
             if (CacheObject.IsTest)
             {
-                this.Text += " (试用版)";
+                this.Text += " (试用版）- （每次限采集10篇新闻，允许多次采集)";
             }
 
             if (Properties.Settings.Default.IsEditModel)
@@ -530,8 +530,8 @@ namespace Jade
                     // 立即开始
                     tasks.ForEach(task =>
                     {
-                        var runnerForm = new TaskRunForm(task);
-                        //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                        var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
+                        new System.Threading.Thread(taskRunner.Start).Start();
                     });
                 }
             }

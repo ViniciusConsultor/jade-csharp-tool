@@ -416,10 +416,17 @@ namespace Jade
                 {
                     if (!OldUrls.Contains(url))
                     {
-                        OldUrls.Add(url);
-                        uris.Add(new Uri(url));
-                        DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
-                        Logger.Success("[" + Rule.Name + "] 成功采集网址并保存到数据库中" + url);
+                        try
+                        {
+                            OldUrls.Add(url);
+                            uris.Add(new Uri(url));
+                            DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
+                            Logger.Success("[" + Rule.Name + "] 成功采集网址并保存到数据库中" + url);
+                        }
+                        catch(Exception ex)
+                        {
+                            Log4Log.Exception(url, ex);
+                        }
                     }
                     else
                     {

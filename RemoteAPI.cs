@@ -68,6 +68,7 @@ namespace Jade
             nodes = HtmlDoc.DocumentNode.SelectNodes("//*[@id=\"news_template_file_1\"]//option");
             if (nodes != null)
             {
+                RemoteWebService.Instance.Template.Clear();
                 List<DisplayNameValuePair> sources = RemoteWebService.Instance.Template;
                 foreach (HtmlAgilityPack.HtmlNode option in nodes)
                 {
@@ -325,8 +326,9 @@ namespace Jade
                         return true;
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Log4Log.Exception("发布新闻", ex);
                     return false;
                 }
             }
