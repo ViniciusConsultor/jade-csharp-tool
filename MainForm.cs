@@ -145,7 +145,7 @@ namespace Jade
         private void navDraft_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             PrepareContentPanel();
-            editor.Caption = "草稿箱";
+            editor.Caption = "草稿箱（未送CMS）";
             var draft = editor.Control as ContentListPanel;
             draft.IsEdited = false;
             draft.IsPublished = false;
@@ -228,7 +228,7 @@ namespace Jade
         private void navEdited_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             PrepareContentPanel();
-            editor.Caption = "已编辑";
+            editor.Caption = "已编辑但未签发";
             var draft = editor.Control as ContentListPanel;
             draft.IsEdited = true;
             draft.IsPublished = false;
@@ -242,7 +242,7 @@ namespace Jade
             var draft = editor.Control as ContentListPanel;
             draft.IsEdited = false;
             draft.IsPublished = true;
-            editor.Caption = "已发布";
+            editor.Caption = "已编辑且已送CMS";
             tabbedView1.Controller.Activate(editor);
         }
 
@@ -479,7 +479,7 @@ namespace Jade
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
             if (CacheObject.IsTest)
             {
-                this.Text += " (试用版）- （每次限采集10篇新闻，允许多次采集)";
+                this.Text += " (试用版）- （每次限采集50篇新闻，允许多次采集)";
             }
 
             if (Properties.Settings.Default.IsEditModel)
@@ -797,6 +797,79 @@ namespace Jade
                 catch
                 {
                     MessageBox.Show("导入失败");
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一个分类节点");
+            }
+        }
+
+        /// <summary>
+        /// 批量导出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            var category = this.taskTree.SelectedNode.Tag as Category;
+
+            if (category != null)
+            {
+
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.Description = "请选择一个文件夹存储规则";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var tasks = CacheObject.Rules.FindAll(r => r.CategoryID == category.ID);
+                    foreach (var task in tasks)
+                    {
+                        CommXmlSerialize.ObjectSerializeXml(task, dialog.SelectedPath + "\\" + task.Name + ".task");
+                    }
+                    MessageBox.Show("导出成功");
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择一个分类节点");
+            }
+        }
+
+        /// <summary>
+        /// 批量导入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            var category = this.taskTree.SelectedNode.Tag as Category;
+
+            if (category != null)
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.Description = "请选择存储规则的文件夹";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var files = Directory.GetFiles(dialog.SelectedPath, "*.task",SearchOption.AllDirectories);
+                    foreach (var file in files)
+                    {
+                        try
+                        {
+                            var task = CommXmlSerialize.XmlDeserializeObject<SiteRule>(file);
+                            var categoryID = (this.taskTree.SelectedNode.Tag as Category).ID;
+                            task.CategoryID = categoryID;
+                            task.SiteRuleId = 0;
+                            CacheObject.RuleManager.AddSite(task);
+                            var index = GetImageIndex(task.IconImage);
+                            TreeNode leaf = new TreeNode(task.Name, index, index);
+                            leaf.Tag = task;
+                            this.CurrentCategoryNode.Nodes.Add(leaf);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    MessageBox.Show("导入成功");
                 }
             }
             else

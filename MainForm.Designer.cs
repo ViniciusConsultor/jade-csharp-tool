@@ -65,7 +65,10 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
+            this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
+            this.navPublished = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarGroupControlContainer1 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
             this.taskTree = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
@@ -84,20 +87,19 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navDraft = new DevExpress.XtraNavBar.NavBarItem();
-            this.navEdited = new DevExpress.XtraNavBar.NavBarItem();
-            this.navPublished = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.复制规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.粘贴规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.navTask = new DevExpress.XtraNavBar.NavBarGroup();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager();
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.tabbedView3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
-            this.复制规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.粘贴规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -203,7 +205,7 @@
             // 
             // barButtonItem4
             // 
-            this.barButtonItem4.Caption = "草稿箱";
+            this.barButtonItem4.Caption = "草稿箱（未送CMS）";
             this.barButtonItem4.Id = 15;
             this.barButtonItem4.LargeGlyph = global::Jade.Properties.Resources.bianjipingtai;
             this.barButtonItem4.Name = "barButtonItem4";
@@ -211,7 +213,7 @@
             // 
             // barButtonItem5
             // 
-            this.barButtonItem5.Caption = "已编辑";
+            this.barButtonItem5.Caption = "已编未送CMS";
             this.barButtonItem5.Id = 16;
             this.barButtonItem5.LargeGlyph = global::Jade.Properties.Resources.daiqianfapingtai;
             this.barButtonItem5.Name = "barButtonItem5";
@@ -219,7 +221,7 @@
             // 
             // barCheckItem1
             // 
-            this.barCheckItem1.Caption = "已发布";
+            this.barCheckItem1.Caption = "已送CMS";
             this.barCheckItem1.Id = 17;
             this.barCheckItem1.LargeGlyph = global::Jade.Properties.Resources.yiqianfapingtai;
             this.barCheckItem1.Name = "barCheckItem1";
@@ -450,13 +452,12 @@
             // 
             // navBarControl1
             // 
-            this.navBarControl1.ActiveGroup = this.navTask;
+            this.navBarControl1.ActiveGroup = this.navBarGroup2;
             this.navBarControl1.Controls.Add(this.navBarGroupControlContainer1);
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navTask,
-            this.navBarGroup2,
-            this.navBarGroup1});
+            this.navBarGroup2});
             this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navDraft,
             this.navEdited,
@@ -469,16 +470,39 @@
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // navTask
+            // navBarGroup2
             // 
-            this.navTask.Caption = "任务管理";
-            this.navTask.ControlContainer = this.navBarGroupControlContainer1;
-            this.navTask.Expanded = true;
-            this.navTask.GroupClientHeight = 80;
-            this.navTask.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-            this.navTask.LargeImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
-            this.navTask.Name = "navTask";
-            this.navTask.SmallImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
+            this.navBarGroup2.Caption = "抓取内容管理";
+            this.navBarGroup2.Expanded = true;
+            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
+            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
+            this.navBarGroup2.Name = "navBarGroup2";
+            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
+            // 
+            // navDraft
+            // 
+            this.navDraft.Caption = "草稿箱（未送CMS）";
+            this.navDraft.LargeImage = global::Jade.Properties.Resources.bianjipingtai;
+            this.navDraft.Name = "navDraft";
+            this.navDraft.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navDraft_LinkClicked);
+            // 
+            // navEdited
+            // 
+            this.navEdited.Caption = "已编未送CMS";
+            this.navEdited.LargeImage = global::Jade.Properties.Resources.daiqianfapingtai;
+            this.navEdited.Name = "navEdited";
+            this.navEdited.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navEdited_LinkClicked);
+            // 
+            // navPublished
+            // 
+            this.navPublished.Caption = "已送CMS";
+            this.navPublished.LargeImage = global::Jade.Properties.Resources.yiqianfapingtai;
+            this.navPublished.Name = "navPublished";
+            this.navPublished.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navPublished_LinkClicked);
             // 
             // navBarGroupControlContainer1
             // 
@@ -527,11 +551,14 @@
             this.toolStripMenuItem5,
             this.导出规则ToolStripMenuItem,
             this.导入任务ToolStripMenuItem,
+            this.toolStripMenuItem9,
+            this.toolStripMenuItem8,
             this.toolStripMenuItem6,
             this.复制规则ToolStripMenuItem,
-            this.粘贴规则ToolStripMenuItem});
+            this.粘贴规则ToolStripMenuItem,
+            this.toolStripMenuItem7});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 342);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 392);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 新建分组ToolStripMenuItem
@@ -630,47 +657,34 @@
             this.导入任务ToolStripMenuItem.Text = "导入任务";
             this.导入任务ToolStripMenuItem.Click += new System.EventHandler(this.导入任务ToolStripMenuItem_Click);
             // 
-            // navBarGroup2
+            // toolStripMenuItem6
             // 
-            this.navBarGroup2.Caption = "抓取内容管理";
-            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navDraft),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navEdited),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navPublished)});
-            this.navBarGroup2.LargeImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup2.Name = "navBarGroup2";
-            this.navBarGroup2.SmallImage = global::Jade.Properties.Resources.page;
-            this.navBarGroup2.TopVisibleLinkIndex = 1;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
             // 
-            // navDraft
+            // 复制规则ToolStripMenuItem
             // 
-            this.navDraft.Caption = "草稿箱";
-            this.navDraft.LargeImage = global::Jade.Properties.Resources.bianjipingtai;
-            this.navDraft.Name = "navDraft";
-            this.navDraft.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navDraft_LinkClicked);
+            this.复制规则ToolStripMenuItem.Name = "复制规则ToolStripMenuItem";
+            this.复制规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.复制规则ToolStripMenuItem.Text = "复制规则";
+            this.复制规则ToolStripMenuItem.Click += new System.EventHandler(this.复制规则ToolStripMenuItem_Click);
             // 
-            // navEdited
+            // 粘贴规则ToolStripMenuItem
             // 
-            this.navEdited.Caption = "已编辑";
-            this.navEdited.LargeImage = global::Jade.Properties.Resources.daiqianfapingtai;
-            this.navEdited.Name = "navEdited";
-            this.navEdited.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navEdited_LinkClicked);
+            this.粘贴规则ToolStripMenuItem.Name = "粘贴规则ToolStripMenuItem";
+            this.粘贴规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.粘贴规则ToolStripMenuItem.Text = "粘贴规则";
+            this.粘贴规则ToolStripMenuItem.Click += new System.EventHandler(this.粘贴规则ToolStripMenuItem_Click);
             // 
-            // navPublished
+            // navTask
             // 
-            this.navPublished.Caption = "已发布";
-            this.navPublished.LargeImage = global::Jade.Properties.Resources.yiqianfapingtai;
-            this.navPublished.Name = "navPublished";
-            this.navPublished.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navPublished_LinkClicked);
-            // 
-            // navBarGroup1
-            // 
-            this.navBarGroup1.Caption = "服务器内容";
-            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroup1.LargeImage = global::Jade.Properties.Resources.network;
-            this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.SmallImage = global::Jade.Properties.Resources.network;
+            this.navTask.Caption = "任务管理";
+            this.navTask.ControlContainer = this.navBarGroupControlContainer1;
+            this.navTask.GroupClientHeight = 80;
+            this.navTask.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
+            this.navTask.LargeImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
+            this.navTask.Name = "navTask";
+            this.navTask.SmallImage = global::Jade.Properties.Resources.scheduled_tasks__1_;
             // 
             // documentManager1
             // 
@@ -694,24 +708,24 @@
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // toolStripMenuItem6
+            // toolStripMenuItem7
             // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 6);
             // 
-            // 复制规则ToolStripMenuItem
+            // toolStripMenuItem8
             // 
-            this.复制规则ToolStripMenuItem.Name = "复制规则ToolStripMenuItem";
-            this.复制规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.复制规则ToolStripMenuItem.Text = "复制规则";
-            this.复制规则ToolStripMenuItem.Click += new System.EventHandler(this.复制规则ToolStripMenuItem_Click);
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Text = "批量导入";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
-            // 粘贴规则ToolStripMenuItem
+            // toolStripMenuItem9
             // 
-            this.粘贴规则ToolStripMenuItem.Name = "粘贴规则ToolStripMenuItem";
-            this.粘贴规则ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.粘贴规则ToolStripMenuItem.Text = "粘贴规则";
-            this.粘贴规则ToolStripMenuItem.Click += new System.EventHandler(this.粘贴规则ToolStripMenuItem_Click);
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Text = "批量导出";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
             // MainForm
             // 
@@ -779,7 +793,6 @@
         private DevExpress.XtraNavBar.NavBarGroup navTask;
         private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer1;
         private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraNavBar.NavBarItem navDraft;
         private DevExpress.XtraNavBar.NavBarItem navEdited;
@@ -826,5 +839,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem 复制规则ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 粘贴规则ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
     }
 }

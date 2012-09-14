@@ -9,7 +9,7 @@ namespace Jade.Model
     /// <summary>
     /// 任务规则
     /// </summary>
-    public class SiteRule : XmlDatabase.Core.IXmlStoreItem
+    public class SiteRule : XmlDatabase.Core.IXmlStoreItem, Jade.IUrlFilter
     {
         /// <summary>
         /// 创建默认规则
@@ -17,7 +17,13 @@ namespace Jade.Model
         /// <returns></returns>
         public static SiteRule CreateDefaultRule()
         {
-            var rule = new SiteRule();
+            var rule = new SiteRule()
+            {
+                ColumnUrlSelector = new UrlSelector(),
+                ContentUrlSelector = new UrlSelector(),
+                LisPageUrlSelector = new UrlSelector(),
+                ListPagePagerUrlSelector = new UrlSelector()
+            };
 
             rule.ItemRules.AddRange(new List<ItemRule>() { 
                 new ItemRule() {
@@ -123,7 +129,7 @@ namespace Jade.Model
 
 
         /// <summary>
-        /// 栏目XPATH
+        /// 栏目XPATH(选择栏目的xpath)
         /// </summary>
         public UrlSelector ColumnUrlSelector
         {
@@ -132,9 +138,18 @@ namespace Jade.Model
         }
 
         /// <summary>
-        /// 列表页XPATH
+        /// 列表页XPATH(在首页或者栏目页面选择列表页面的xpath)
         /// </summary>
-        public UrlSelector LisUrlSelector
+        public UrlSelector LisPageUrlSelector
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 列表页分页链接
+        /// </summary>
+        public UrlSelector ListPagePagerUrlSelector
         {
             get;
             set;
@@ -422,18 +437,18 @@ namespace Jade.Model
     /// <summary>
     /// Url 选择器
     /// </summary>
-    public class UrlSelector
+    public class UrlSelector : IUrlFilter
     {
         public UrlSelector()
         {
-            this.XPath = "//a";
             this.ExcludePart = "#,javascript";
+            XPathList = new List<XPath>();
         }
 
         /// <summary>
-        /// XPATH
+        /// 所包含的XPATH
         /// </summary>
-        public string XPath { get; set; }
+        public List<XPath> XPathList { get; set; }
 
         /// <summary>
         /// 必须包含
@@ -448,7 +463,46 @@ namespace Jade.Model
         /// <summary>
         /// 自定义内容页地址
         /// </summary>
-        public string DiyUrl
+        public string DiyContentPageUrl
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 内容页选择器（在首页，栏目页，列表页都有内容页）
+        /// </summary>
+        public UrlSelector ContentPageUrlSelector
+        {
+            get;
+            set;
+        }
+    }
+
+    /// <summary>
+    /// XPath 对象
+    /// </summary>
+    [Serializable]
+    public class XPath
+    {
+        /// <summary>
+        /// XPATH
+        /// </summary>
+        public string XPathString { get; set; }
+
+        /// <summary>
+        /// 选择类型 （单选、多选）
+        /// </summary>
+        public XMLPathSelectType XMLPathSelectType
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 取值类型
+        /// </summary>
+        public XMLPathType XMLPathType
         {
             get;
             set;
@@ -458,6 +512,7 @@ namespace Jade.Model
     /// <summary>
     /// XPATH取值类型【InnerText，InnerLinks】
     /// </summary>
+    [Serializable]
     public enum XMLPathType
     {
         InnerText,
@@ -470,6 +525,7 @@ namespace Jade.Model
     /// <summary>
     /// XPATH选择类型  单选还是多选
     /// </summary>
+    [Serializable]
     public enum XMLPathSelectType
     {
         OnlyOne,
@@ -479,6 +535,7 @@ namespace Jade.Model
     /// <summary>
     /// 条目规则
     /// </summary>
+    [Serializable]
     public class ItemRule
     {
 
@@ -622,6 +679,7 @@ namespace Jade.Model
 
     }
 
+    [Serializable]
     public enum ItemFetchType
     {
         XPath = 0,
@@ -630,12 +688,14 @@ namespace Jade.Model
         UserDiy = 3
     }
 
+    [Serializable]
     public enum UserDiyType
     {
         DefaultValue = 0,
         Datetime = 1
     }
 
+    [Serializable]
     public enum ListPageType
     {
         Html = 0,

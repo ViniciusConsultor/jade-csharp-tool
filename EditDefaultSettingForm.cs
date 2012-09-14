@@ -33,6 +33,8 @@ namespace Jade
             this.lookUpEditTemplete.ItemIndex = RemoteWebService.Instance.Template.FindIndex(t => t.Value == Properties.Settings.Default.DefaultTemplate);
             this.lookUpEditTemplete.EditValue = Properties.Settings.Default.DefaultTemplate;
 
+            this.txtPageSize.Text = Properties.Settings.Default.PageSize.ToString();
+
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -40,6 +42,11 @@ namespace Jade
             Properties.Settings.Default.DefaultTag = this.lookUpEditLabel.Text;
             Properties.Settings.Default.DefaultTemplate = this.lookUpEditTemplete.Text;
             Properties.Settings.Default.DefaultSource = this.lookUpEditSource.Text;
+            int pageSize = 0;
+            if (int.TryParse(this.txtPageSize.Text, out pageSize))
+            {
+                Properties.Settings.Default.PageSize = pageSize;
+            }
             Properties.Settings.Default.Save();
             this.Close();
         }

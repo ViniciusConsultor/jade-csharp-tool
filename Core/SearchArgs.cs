@@ -20,5 +20,7 @@ namespace Jade
         public int PageIndex { get; set; }
 
         public int PageSzie { get; set; }
+
+        public string EditorName { get; set; }
     }
 }

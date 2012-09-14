@@ -34,6 +34,7 @@ Global
 		{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}.Release|x86.ActiveCfg = Release|x86
+		{5C81A3EF-3C49-4E6A-A54D-5EB90ECB18A9}.Release|x86.Build.0 = Release|x86
 		{7E1670D8-2EB8-40A4-BA51-B962675E4824}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{7E1670D8-2EB8-40A4-BA51-B962675E4824}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{7E1670D8-2EB8-40A4-BA51-B962675E4824}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -91,7 +92,6 @@ Global
 		{86A3E115-4156-4408-A58F-EFB7D65E62F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86A3E115-4156-4408-A58F-EFB7D65E62F1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{86A3E115-4156-4408-A58F-EFB7D65E62F1}.Release|x86.ActiveCfg = Release|Any CPU
-		{86A3E115-4156-4408-A58F-EFB7D65E62F1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

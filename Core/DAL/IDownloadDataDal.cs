@@ -12,5 +12,6 @@ namespace Jade.DAL
         global::System.Collections.Generic.List<string> GetTaskUrls(int taskId);
         global::System.Collections.Generic.List<string> GetUnFetchedUrlList(int taskId);
         void Update(IDownloadData data);
+        void DeleteAll();
     }
 }

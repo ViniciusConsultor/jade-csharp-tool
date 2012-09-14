@@ -624,6 +624,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <EmbeddedResource Include="Html.dtd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Jade.Form_TemporaryKey.pfx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
