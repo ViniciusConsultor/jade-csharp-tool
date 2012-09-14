@@ -78,6 +78,7 @@ namespace Jade.Model.MySql
                     (args.IsEdit ? t.IsEdit == true : true) &&
                     (args.IsPublish ? t.IsPublish == true : true) &&
                      (args.TaskId != 0 ? t.TaskId == args.TaskId : true) &&
+                      (args.TaskIds.Count != 0 ? args.TaskIds.Contains((int)t.TaskId) : true) &&
                      (!string.IsNullOrEmpty(args.EditorName) ? t.EditorUserName == args.EditorName : true) &&
                     (!string.IsNullOrEmpty(args.Keyword) ? t.Title.Contains(args.Keyword) : true)
                 );

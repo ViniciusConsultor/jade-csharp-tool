@@ -39,6 +39,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Editor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsPublish = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.GroupName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.SiteRuleName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Category = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Content = new DevExpress.XtraGrid.Columns.GridColumn();
             this.StartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,12 +50,15 @@
             this.CreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1 = new DevExpress.XtraEditors.PanelControl();
+            this.cmbTags = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -62,7 +68,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.devPager1 = new Jade.Control.DevPager();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -80,14 +85,14 @@
             this.gridControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControl1.Location = new System.Drawing.Point(0, 75);
+            this.gridControl1.Location = new System.Drawing.Point(0, 95);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemImageComboBox1,
             this.repositoryItemHyperLinkEdit1,
             this.repositoryItemHyperLinkEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(810, 340);
+            this.gridControl1.Size = new System.Drawing.Size(810, 320);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -100,6 +105,9 @@
             this.Edited,
             this.Editor,
             this.IsPublish,
+            this.GroupName,
+            this.SiteRuleName,
+            this.Category,
             this.Content,
             this.StartTime,
             this.EndTime,
@@ -188,6 +196,31 @@
             this.IsPublish.VisibleIndex = 4;
             this.IsPublish.Width = 38;
             // 
+            // GroupName
+            // 
+            this.GroupName.Caption = "所属分组";
+            this.GroupName.Name = "GroupName";
+            this.GroupName.Visible = true;
+            this.GroupName.VisibleIndex = 5;
+            // 
+            // SiteRuleName
+            // 
+            this.SiteRuleName.Caption = "所属任务";
+            this.SiteRuleName.FieldName = "SiteRuleName";
+            this.SiteRuleName.Name = "SiteRuleName";
+            this.SiteRuleName.OptionsColumn.AllowEdit = false;
+            this.SiteRuleName.OptionsFilter.AllowAutoFilter = false;
+            this.SiteRuleName.Visible = true;
+            this.SiteRuleName.VisibleIndex = 7;
+            // 
+            // Category
+            // 
+            this.Category.Caption = "标签";
+            this.Category.FieldName = "Category";
+            this.Category.Name = "Category";
+            this.Category.Visible = true;
+            this.Category.VisibleIndex = 6;
+            // 
             // Content
             // 
             this.Content.Caption = "内容";
@@ -195,7 +228,7 @@
             this.Content.Name = "Content";
             this.Content.OptionsColumn.AllowEdit = false;
             this.Content.Visible = true;
-            this.Content.VisibleIndex = 5;
+            this.Content.VisibleIndex = 8;
             this.Content.Width = 144;
             // 
             // StartTime
@@ -205,7 +238,7 @@
             this.StartTime.Name = "StartTime";
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
-            this.StartTime.VisibleIndex = 6;
+            this.StartTime.VisibleIndex = 9;
             this.StartTime.Width = 100;
             // 
             // EndTime
@@ -216,7 +249,7 @@
             this.EndTime.OptionsColumn.AllowEdit = false;
             this.EndTime.UnboundType = DevExpress.Data.UnboundColumnType.DateTime;
             this.EndTime.Visible = true;
-            this.EndTime.VisibleIndex = 7;
+            this.EndTime.VisibleIndex = 10;
             this.EndTime.Width = 100;
             // 
             // Url
@@ -227,7 +260,7 @@
             this.Url.Name = "Url";
             this.Url.OptionsColumn.AllowEdit = false;
             this.Url.Visible = true;
-            this.Url.VisibleIndex = 8;
+            this.Url.VisibleIndex = 11;
             this.Url.Width = 200;
             // 
             // repositoryItemHyperLinkEdit1
@@ -241,7 +274,7 @@
             this.CreateTime.FieldName = "CreateTime";
             this.CreateTime.Name = "CreateTime";
             this.CreateTime.Visible = true;
-            this.CreateTime.VisibleIndex = 9;
+            this.CreateTime.VisibleIndex = 12;
             // 
             // repositoryItemHyperLinkEdit2
             // 
@@ -250,6 +283,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmbTags);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.chkOnlyMyContent);
             this.panel1.Controls.Add(this.comboBoxEdit1);
             this.panel1.Controls.Add(this.txtKeyword);
@@ -258,16 +293,35 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(813, 47);
+            this.panel1.Size = new System.Drawing.Size(813, 65);
             this.panel1.TabIndex = 7;
+            // 
+            // cmbTags
+            // 
+            this.cmbTags.FormattingEnabled = true;
+            this.cmbTags.Location = new System.Drawing.Point(70, 40);
+            this.cmbTags.Name = "cmbTags";
+            this.cmbTags.Size = new System.Drawing.Size(280, 22);
+            this.cmbTags.TabIndex = 7;
+            this.cmbTags.TextChanged += new System.EventHandler(this.cmbTags_TextChanged);
+            this.cmbTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbTags_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 14);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "标签：";
             // 
             // chkOnlyMyContent
             // 
-            this.chkOnlyMyContent.Location = new System.Drawing.Point(670, 15);
+            this.chkOnlyMyContent.Location = new System.Drawing.Point(375, 39);
             this.chkOnlyMyContent.MenuManager = this.barManager1;
             this.chkOnlyMyContent.Name = "chkOnlyMyContent";
             this.chkOnlyMyContent.Properties.Caption = "仅显示我编辑的内容";
-            this.chkOnlyMyContent.Size = new System.Drawing.Size(127, 19);
+            this.chkOnlyMyContent.Size = new System.Drawing.Size(146, 19);
             this.chkOnlyMyContent.TabIndex = 5;
             this.chkOnlyMyContent.CheckedChanged += new System.EventHandler(this.chkOnlyMyContent_CheckedChanged);
             // 
@@ -328,6 +382,13 @@
             this.barButtonItem3.Name = "barButtonItem3";
             this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "全部导出";
+            this.barButtonItem4.Id = 3;
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -358,7 +419,7 @@
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(399, 12);
+            this.comboBoxEdit1.Location = new System.Drawing.Point(457, 13);
             this.comboBoxEdit1.MenuManager = this.barManager1;
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -366,21 +427,21 @@
             this.comboBoxEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "任务名称"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SiteRuleId", "任务编号")});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(242, 20);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(292, 20);
             this.comboBoxEdit1.TabIndex = 4;
             // 
             // txtKeyword
             // 
-            this.txtKeyword.Location = new System.Drawing.Point(70, 15);
+            this.txtKeyword.Location = new System.Drawing.Point(70, 13);
             this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(243, 22);
+            this.txtKeyword.Size = new System.Drawing.Size(280, 22);
             this.txtKeyword.TabIndex = 3;
             this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 20);
+            this.label2.Location = new System.Drawing.Point(12, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 14);
             this.label2.TabIndex = 2;
@@ -389,7 +450,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(321, 16);
+            this.label1.Location = new System.Drawing.Point(376, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 0;
@@ -406,13 +467,6 @@
             this.devPager1.Size = new System.Drawing.Size(813, 32);
             this.devPager1.TabIndex = 10;
             this.devPager1.TotalCount = 0;
-            // 
-            // barButtonItem4
-            // 
-            this.barButtonItem4.Caption = "全部导出";
-            this.barButtonItem4.Id = 3;
-            this.barButtonItem4.Name = "barButtonItem4";
-            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
             // ContentListPanel
             // 
@@ -477,6 +531,11 @@
         private DevExpress.XtraEditors.CheckEdit chkOnlyMyContent;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraGrid.Columns.GridColumn Category;
+        private DevExpress.XtraGrid.Columns.GridColumn SiteRuleName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbTags;
+        private DevExpress.XtraGrid.Columns.GridColumn GroupName;
 
     }
 }

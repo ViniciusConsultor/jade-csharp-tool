@@ -26,6 +26,36 @@ namespace Jade
             RunningTasks = new List<RunningTask>();
             DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
         }
+
+        /// <summary>
+        /// 获取tags
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetTaskTags()
+        {
+            List<string> tags = new List<string>();
+            Rules.ForEach(r =>
+            {
+                var categories = r.Tags.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                if (categories.Length > 0)
+                {
+                    foreach (var tag in categories)
+                    {
+                        if (!tags.Contains(tag))
+                        {
+                            tags.Add(tag);
+                        }
+                    }
+                }
+            });
+            return tags;
+        }
+
+        public static List<int> GetTaskIDWithTag(string tag)
+        {
+            return Rules.Where(r => r.Tags.Contains(tag)).Select(r => r.SiteRuleId).ToList();
+        }
+
         static MyWebRequest webRequset;
         public static MyWebRequest WebRequset
         {

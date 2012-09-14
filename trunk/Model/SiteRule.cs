@@ -91,10 +91,21 @@ namespace Jade.Model
         /// 分类ID
         /// </summary>
         public int CategoryID { get; set; }
+        
+
+        /// <summary>
+        /// 任务标签
+        /// </summary>
+        public string Tags
+        {
+            get;
+            set;
+        }
 
         public SiteRule()
         {
             this.CategoryID = 0;
+            this.Tags = "";
             this.Cookie = "";
             this.Encoding = "gb2312";
             this.ExcludePart = "";

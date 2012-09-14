@@ -7,6 +7,8 @@ namespace Jade
 {
     public class SearchArgs
     {
+        public List<int> TaskIds { get; set; }
+
         public string Keyword { get; set; }
 
         public bool IsDownload { get; set; }

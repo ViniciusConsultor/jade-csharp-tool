@@ -33,6 +33,7 @@ namespace Jade
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
             this.gridView1.StartSorting += new EventHandler(gridView1_StartSorting);
+            this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(gridView1_CustomColumnDisplayText);
             this.comboBoxEdit1.TextChanged += new EventHandler(comboBox1_SelectedIndexChanged);
             tasks = CacheObject.Rules.OrderByDescending(t => t.CreateTime).ToList();
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
@@ -43,11 +44,38 @@ namespace Jade
             this.devPager1.PageChange += new EventPagingHandler(pager1_PageChange);
             CacheObject.ContentForm.InitDownloadData(new downloaddata());
             currentPageSize = Properties.Settings.Default.PageSize;
+
+            var tags = CacheObject.GetTaskTags();
+            tags.Insert(0, "全部");
+            this.cmbTags.DataSource = tags;
+        }
+
+        void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.Equals(SiteRuleName))
+            {
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                var data = dataTable[e.RowHandle];
+                e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Name;
+            }
+            else if (e.Column.Equals(Category))
+            {
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                var data = dataTable[e.RowHandle];
+                e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Tags;
+            }
+            else if (e.Column.Equals(GroupName))
+            {
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                var data = dataTable[e.RowHandle];
+                var category = CacheObject.Categories.SingleOrDefault(c => c.ID == CacheObject.Rules.SingleOrDefault(r => r.SiteRuleId == data.TaskId).CategoryID);
+                e.DisplayText = category.Name;
+            }
         }
 
         void gridView1_StartSorting(object sender, EventArgs e)
         {
-           
+
         }
 
         void gridView1_MouseDown(object sender, MouseEventArgs e)
@@ -141,6 +169,7 @@ namespace Jade
 
             return new SearchArgs
             {
+                TaskIds = this.cmbTags.Text == "全部" ? new List<int>() : CacheObject.GetTaskIDWithTag(this.cmbTags.Text),
                 IsPublish = isPublished,
                 IsEdit = IsEdited,
                 Keyword = this.txtKeyword.Text,
@@ -448,10 +477,10 @@ namespace Jade
                    MessageBoxIcon.Question,
                    MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                CacheObject.DownloadDataDAL.DeleteAll(); 
+                CacheObject.DownloadDataDAL.DeleteAll();
                 comboBox1_SelectedIndexChanged(null, null);
             }
-          
+
         }
 
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -468,6 +497,19 @@ namespace Jade
                 }
                 sw.Close();
                 MessageBox.Show("导出成功");
+            }
+        }
+
+        private void cmbTags_TextChanged(object sender, EventArgs e)
+        {
+            comboBox1_SelectedIndexChanged(sender, e);
+        }
+
+        private void cmbTags_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbTags_TextChanged(null, null);
             }
         }
     }

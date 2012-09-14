@@ -877,5 +877,10 @@ namespace Jade
                 MessageBox.Show("请选择一个分类节点");
             }
         }
+
+        private void 编辑分组ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            编辑分组ToolStripMenuItem_Click(sender, e);
+        }
     }
 }
