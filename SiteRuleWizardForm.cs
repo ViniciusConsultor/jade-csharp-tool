@@ -50,6 +50,7 @@ namespace Jade
             this.txtLinkXPath.Text = row.ListXPath;
             this.chkIntervalTask.Checked = row.EnableAutoRun;
             this.txtInterval.Text = row.AutoRunInterval.ToString();
+            this.txtCategory.Text = row.Tags;
             //this.tbxFetchStartSymbolic.Text = row.PageStartAt;
             //this.tbxFetchEndSymbolic.Text = row.PageEndAt;
             this.lbxUrls.Items.Clear();
@@ -243,6 +244,7 @@ namespace Jade
 
         public void UpdateSiteRule()
         {
+            CurrentSiteRule.Tags = this.txtCategory.Text;
             CurrentSiteRule.Name = this.txtRuleName.Text;
             CurrentSiteRule.ListXPath = this.txtLinkXPath.Text;
 
@@ -1625,6 +1627,20 @@ namespace Jade
             this.currentTxtbox = this.txtAnotherXPath;
             this.XMLPathSelectType = Model.XMLPathSelectType.OnlyOne;
             this.XMLPathType = Model.XMLPathType.InnerLinks;
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var label = sender as LinkLabel;
+            if (this.txtCategory.Text.IndexOf(label.Text) > -1)
+            {
+                this.txtCategory.Text = this.txtCategory.Text.Replace(label.Text, "");
+            }
+            else
+            {
+                this.txtCategory.Text += " " + label.Text;
+            }
+            this.txtCategory.Text = this.txtCategory.Text.Trim();
         }
 
     }
