@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -57,19 +56,15 @@
             this.chkIntervalTask = new System.Windows.Forms.CheckBox();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.startPage = new DevExpress.XtraWizard.WizardPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.listPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查看代码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
             this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
@@ -128,7 +123,7 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
             this.homePage = new DevExpress.XtraWizard.WizardPage();
@@ -137,16 +132,20 @@
             this.homePageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             this.txtHomePage = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.columnPage = new DevExpress.XtraWizard.WizardPage();
             this.btnGotoColumnPage = new DevExpress.XtraEditors.SimpleButton();
             this.txtColumnPage = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.panel3 = new System.Windows.Forms.Panel();
             this.columnPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.listPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查看代码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -164,7 +163,7 @@
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtInterval.Properties)).BeginInit();
             this.startPage.SuspendLayout();
-            this.startUrlmenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.contentUrlPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -196,7 +195,7 @@
             this.panel2.SuspendLayout();
             this.columnPage.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.startUrlmenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -497,6 +496,24 @@
             this.startPage.Size = new System.Drawing.Size(859, 367);
             this.startPage.Text = "列表页分页设置";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.listPageUrlSelectorMarker);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 86);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(859, 281);
+            this.panel1.TabIndex = 108;
+            // 
+            // listPageUrlSelectorMarker
+            // 
+            this.listPageUrlSelectorMarker.CurrentUrlSelector = null;
+            this.listPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
+            this.listPageUrlSelectorMarker.Name = "listPageUrlSelectorMarker";
+            this.listPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
+            this.listPageUrlSelectorMarker.TabIndex = 0;
+            // 
             // simpleButton2
             // 
             this.simpleButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -526,47 +543,6 @@
             this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 101;
             this.label1.Text = "起始地址：";
-            // 
-            // startUrlmenu
-            // 
-            this.startUrlmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem,
-            this.编辑ToolStripMenuItem,
-            this.浏览ToolStripMenuItem,
-            this.清空ToolStripMenuItem,
-            this.查看代码ToolStripMenuItem});
-            this.startUrlmenu.Name = "startUrlmenu";
-            this.startUrlmenu.Size = new System.Drawing.Size(119, 114);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            // 
-            // 编辑ToolStripMenuItem
-            // 
-            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.编辑ToolStripMenuItem.Text = "编辑";
-            // 
-            // 浏览ToolStripMenuItem
-            // 
-            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
-            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.浏览ToolStripMenuItem.Text = "浏览";
-            // 
-            // 清空ToolStripMenuItem
-            // 
-            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
-            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.清空ToolStripMenuItem.Text = "清空";
-            // 
-            // 查看代码ToolStripMenuItem
-            // 
-            this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
-            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.查看代码ToolStripMenuItem.Text = "查看代码";
             // 
             // startUrlWebBrowser
             // 
@@ -1361,23 +1337,46 @@
             this.columnPageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
             this.columnPageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
             // 
-            // panel1
+            // startUrlmenu
             // 
-            this.panel1.Controls.Add(this.listPageUrlSelectorMarker);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 86);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(859, 281);
-            this.panel1.TabIndex = 108;
+            this.startUrlmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem,
+            this.编辑ToolStripMenuItem,
+            this.浏览ToolStripMenuItem,
+            this.清空ToolStripMenuItem,
+            this.查看代码ToolStripMenuItem});
+            this.startUrlmenu.Name = "startUrlmenu";
+            this.startUrlmenu.Size = new System.Drawing.Size(119, 114);
             // 
-            // ListPageUrlSelectorMarker1
+            // 删除ToolStripMenuItem
             // 
-            this.listPageUrlSelectorMarker.CurrentUrlSelector = null;
-            this.listPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
-            this.listPageUrlSelectorMarker.Name = "ListPageUrlSelectorMarker1";
-            this.listPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
-            this.listPageUrlSelectorMarker.TabIndex = 0;
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            // 
+            // 编辑ToolStripMenuItem
+            // 
+            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.编辑ToolStripMenuItem.Text = "编辑";
+            // 
+            // 浏览ToolStripMenuItem
+            // 
+            this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
+            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.浏览ToolStripMenuItem.Text = "浏览";
+            // 
+            // 清空ToolStripMenuItem
+            // 
+            this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
+            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.清空ToolStripMenuItem.Text = "清空";
+            // 
+            // 查看代码ToolStripMenuItem
+            // 
+            this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
+            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.查看代码ToolStripMenuItem.Text = "查看代码";
             // 
             // SiteRuleWizardForm
             // 
@@ -1414,7 +1413,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtInterval.Properties)).EndInit();
             this.startPage.ResumeLayout(false);
             this.startPage.PerformLayout();
-            this.startUrlmenu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.contentUrlPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -1455,7 +1454,7 @@
             this.columnPage.ResumeLayout(false);
             this.columnPage.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.startUrlmenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

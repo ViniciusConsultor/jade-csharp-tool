@@ -195,6 +195,10 @@ namespace Jade
                                                        System.Text.Encoding.GetEncoding(item.Encoding));
 
                     var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri);
+                    if (data == null)
+                    {
+                        continue;
+                    }
                     data.IsDownload = true;
                     foreach (var itemRule in item.ItemRules)
                     {

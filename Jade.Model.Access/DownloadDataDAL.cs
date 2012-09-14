@@ -117,5 +117,27 @@ namespace Jade.Model.Access
         }
 
         #endregion
+
+        #region IDownloadDataDAL 成员
+
+
+        public List<IDownloadData> GetAll()
+        {
+            var where = " 1=1";
+
+            var sql = @"select * from [DownloadData] where " + where;
+            var rows = DbHelperOleDb.Query(sql).Tables[0].Rows;
+
+            var result = new List<IDownloadData>();
+
+            foreach (System.Data.DataRow row in rows)
+            {
+                result.Add(GetModel(row));
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

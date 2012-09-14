@@ -141,6 +141,35 @@ namespace Jade.Model.MySql
         }
 
         #endregion
+
+        #region IDownloadDataDAL 成员
+
+
+        public List<downloaddata> GetAll()
+        {
+            return Repository.downloaddata.ToList();
+        }
+
+        #endregion
+
+        #region IDownloadDataDAL 成员
+
+
+        List<IDownloadData> DAL.IDownloadDataDAL.GetAll()
+        {
+            var result = new List<IDownloadData>();
+
+            var datas = this.GetAll();
+
+            foreach (var row in datas)
+            {
+                result.Add(row);
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 
     public partial class downloaddata
