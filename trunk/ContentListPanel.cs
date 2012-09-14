@@ -453,5 +453,22 @@ namespace Jade
             }
           
         }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(dialog.FileName, false, Encoding.GetEncoding("gb2312"), 10240);
+                var datas = CacheObject.DownloadDataDAL.GetAll();
+                foreach (var data in datas)
+                {
+                    sw.WriteLine(data.Title);
+                    sw.WriteLine(data.Content);
+                }
+                sw.Close();
+                MessageBox.Show("导出成功");
+            }
+        }
     }
 }

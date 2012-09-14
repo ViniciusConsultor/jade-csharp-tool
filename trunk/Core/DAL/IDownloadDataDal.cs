@@ -1,5 +1,6 @@
 ﻿using System;
 using Jade.Model;
+using System.Collections.Generic;
 namespace Jade.DAL
 {
     public interface IDownloadDataDAL
@@ -13,5 +14,6 @@ namespace Jade.DAL
         global::System.Collections.Generic.List<string> GetUnFetchedUrlList(int taskId);
         void Update(IDownloadData data);
         void DeleteAll();
+        List<IDownloadData> GetAll();
     }
 }
