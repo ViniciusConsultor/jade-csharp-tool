@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Threading;
 using System.IO;
 using System.Text.RegularExpressions;
+using Jade.ConfigTool;
 
 namespace Jade
 {
@@ -52,38 +53,38 @@ namespace Jade
             this.txtInterval.Text = row.AutoRunInterval.ToString();
             //this.tbxFetchStartSymbolic.Text = row.PageStartAt;
             //this.tbxFetchEndSymbolic.Text = row.PageEndAt;
-            this.lbxUrls.Items.Clear();
-            if (row != null)
-            {
-                if (!string.IsNullOrEmpty(row.StartUrl))
-                {
-                    string[] urls = row.StartUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
-                    if (urls != null && urls.Length > 0)
-                    {
-                        foreach (string url in urls)
-                        {
-                            this.lbxUrls.Items.Add(url);
-                        }
-                        this.lbxUrls.SelectedIndex = 0;
-                    }
-                }
-            }
+            //this.lbxUrls.Items.Clear();
+            //if (row != null)
+            //{
+            //    if (!string.IsNullOrEmpty(row.StartUrl))
+            //    {
+            //        string[] urls = row.StartUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            //        if (urls != null && urls.Length > 0)
+            //        {
+            //            foreach (string url in urls)
+            //            {
+            //                this.lbxUrls.Items.Add(url);
+            //            }
+            //            this.lbxUrls.SelectedIndex = 0;
+            //        }
+            //    }
+            //}
             List<string> sourceUrls = new List<string>();
-            try
-            {
-                if (this.lbxUrls.Items.Count > 0)
-                {
-                    sourceUrls = ExtractUrl.ParseUrlFromParameter(this.lbxUrls.Items[0].ToString());
-                    if (sourceUrls.Count > 0)
-                    {
-                        this.txtStartUrl.Text = sourceUrls[0];
-                        this.isBindCompleted = false;
-                    }
-                }
-            }
-            catch
-            {
-            }
+            //try
+            //{
+            //    if (this.lbxUrls.Items.Count > 0)
+            //    {
+            //        sourceUrls = ExtractUrl.ParseUrlFromParameter(this.lbxUrls.Items[0].ToString());
+            //        if (sourceUrls.Count > 0)
+            //        {
+            //            this.txtStartUrl.Text = sourceUrls[0];
+            //            this.isBindCompleted = false;
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+            //}
             ////File Encoding ComboBox.
             //if (this.cbbEncoding.Items.Count > 0)
             //    this.cbbEncoding.SelectedIndex = 0; //Empty Value.
@@ -265,19 +266,19 @@ namespace Jade
                 CurrentSiteRule.UserAgent = GetDefaultUserAgent();
             }
 
-            if (this.lbxUrls.Items != null || this.lbxUrls.Items.Count > 0)
-            {
-                string tempUrl = string.Empty;
-                foreach (string url in this.lbxUrls.Items)
-                {
-                    if (tempUrl != string.Empty)
-                    {
-                        tempUrl += BaseConfig.UrlSeparator;
-                    }
-                    tempUrl += url;
-                }
-                CurrentSiteRule.StartUrl = tempUrl;
-            }
+            //if (this.lbxUrls.Items != null || this.lbxUrls.Items.Count > 0)
+            //{
+            //    string tempUrl = string.Empty;
+            //    foreach (string url in this.lbxUrls.Items)
+            //    {
+            //        if (tempUrl != string.Empty)
+            //        {
+            //            tempUrl += BaseConfig.UrlSeparator;
+            //        }
+            //        tempUrl += url;
+            //    }
+            //    CurrentSiteRule.StartUrl = tempUrl;
+            //}
 
             CurrentSiteRule.ForTestUrl = this.txtTestUrl.Text;
 
@@ -356,7 +357,7 @@ namespace Jade
             URLBuilder urlBuilder = new URLBuilder();
             if (urlBuilder.ShowDialog() == DialogResult.OK)
             {
-                this.lbxUrls.Items.AddRange(urlBuilder.FinishedUrls);
+                //this.lbxUrls.Items.AddRange(urlBuilder.FinishedUrls);
             }
         }
 
@@ -482,6 +483,7 @@ namespace Jade
         string secondXpath = "";
         bool enableNavigate = true;
         WebBrowser currenActiveBrowser;
+        UrlSelectorMarker currentUrlMaker;
 
         Label currentActiveLogLabel;
 
@@ -791,6 +793,8 @@ namespace Jade
             BindBrowseEvent(startUrlWebBrowser);
             BindBrowseEvent(contentBrowser);
             BindBrowseEvent(itemWebBrowser);
+            BindBrowseEvent(bwHomePage);
+            BindBrowseEvent(bwColumnPage);
         }
 
         private void BindBrowseEvent(WebBrowser browser)
@@ -928,33 +932,7 @@ namespace Jade
             }
         }
 
-        private void btnSelectStartUrl_Click(object sender, EventArgs e)
-        {
-            current = null;
-            last = null;
-            this.enableNavigate = false;
-            this.EnableSelect = true;
-            //force bind
-            OnBrowserLoaded();
-            this.XMLPathType = radioInnerLinks.Checked ? XMLPathType.InnerLinks : XMLPathType.Href;
-            this.XMLPathSelectType = radioInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
-            this.CurrentXPathSelected = (xpath) =>
-            {
-                if (!this.lbxUrls.Items.Contains(this.txtStartUrl.Text))
-                {
-                    this.lbxUrls.Items.Add(this.txtStartUrl.Text);
-                }
-                var urls = ExtractDataFromHtml();
-                foreach (var url in urls)
-                {
-                    if (!this.lbxUrls.Items.Contains(url))
-                    {
-                        this.lbxUrls.Items.Add(url);
-                    }
-                }
-            };
-        }
-
+   
 
         #region IWorkingThread 成员
 
@@ -967,67 +945,6 @@ namespace Jade
         #endregion
 
 
-        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.lbxUrls.Items.Remove(this.lbxUrls.SelectedItem);
-        }
-
-        private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            URLBuilder urlBuilder = new URLBuilder();
-            string[] urls = new string[this.lbxUrls.Items.Count];
-            this.lbxUrls.Items.CopyTo(urls, 0);
-            urlBuilder.FinishedUrls = urls;
-
-            if (urlBuilder.ShowDialog() == DialogResult.OK)
-            {
-                this.lbxUrls.Items.Clear();
-                this.lbxUrls.Items.AddRange(urlBuilder.FinishedUrls);
-            }
-        }
-
-        private void 浏览ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.lbxUrls.SelectedItem != null)
-            {
-
-                List<string> sourceUrls = new List<string>();
-                try
-                {
-                    sourceUrls = ExtractUrl.ParseUrlFromParameter(this.lbxUrls.SelectedItem.ToString());
-                    this.enableNavigate = true;
-                    this.startUrlWebBrowser.Navigate(sourceUrls[0]);
-                    this.isBindCompleted = false;
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void 清空ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show(this,
-                 "您确定要清空所有的采集地址？",
-                 "清空采集地址",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Question,
-                 MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                this.lbxUrls.Items.Clear();
-            }
-        }
-
-        private void 查看代码ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.lbxUrls.SelectedItem == null)
-            {
-                MessageBox.Show(this, "请选择一个采集地址！", "请选择采集地址", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            SourceGetter sourceGetter = new SourceGetter((string)this.lbxUrls.SelectedItem);
-            sourceGetter.Show();
-        }
 
 
 
@@ -1198,27 +1115,69 @@ namespace Jade
                     e.Handled = true;
                     return;
                 }
-                this.currenActiveBrowser = startUrlWebBrowser;
-                this.currentActiveLogLabel = lblStartUrlLoger;
-                this.currentTxtbox = txtStartUrlXPath;
+
+                if (this.radioButtonListPage.Checked)
+                {
+                    this.currenActiveBrowser = startUrlWebBrowser;
+                    this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
+                    this.XMLPathType = Model.XMLPathType.Href;
+                    if (this.txtStartUrl.Text != "")
+                    {
+                        this.enableNavigate = true;
+                        this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
+                    }
+                    this.wizardControl1.SelectedPage = startPage;
+                    this.currentUrlMaker = this.listPageUrlSelectorMarker;
+                    e.Handled = true;
+                    return;
+                }
+                else
+                {
+                    this.currenActiveBrowser = this.bwHomePage;
+                    this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
+                    this.XMLPathType = Model.XMLPathType.Href;
+                    this.currentUrlMaker = homePageUrlSelectorMarker;
+                    if (this.txtHomePage.Text != "")
+                    {
+                        this.enableNavigate = true;
+                        this.bwHomePage.Navigate(txtHomePage.Text);
+                    }
+                }
+
+            }
+            else if (e.Page == this.homePage)
+            {
+                // 首页 -列表 -列表分页-内容
+                if (radioButtonAllSite.Checked)
+                {
+                    if (this.txtStartUrl.Text != "")
+                    {
+                        this.enableNavigate = true;
+                        this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
+                    }
+                    this.currentUrlMaker = this.listPageUrlSelectorMarker;
+                    this.wizardControl1.SelectedPage = startPage;
+                    e.Handled = true;
+                    return;
+                }
+                this.currenActiveBrowser = this.bwColumnPage;
                 this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
                 this.XMLPathType = Model.XMLPathType.Href;
-
+                this.currentUrlMaker = columnPageUrlSelectorMarker;
+                if (this.txtColumnPage.Text != "")
+                {
+                    this.enableNavigate = true;
+                    this.bwColumnPage.Navigate(txtColumnPage.Text);
+                }
+            }
+            else if (e.Page == this.columnPage)
+            {
+                this.currentUrlMaker = this.listPageUrlSelectorMarker;
                 if (this.txtStartUrl.Text != "")
                 {
                     this.enableNavigate = true;
                     this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
                 }
-
-                if (this.radioButtonListPage.Checked)
-                {
-                    this.wizardControl1.SelectedPage = startPage;
-                    return;
-                }
-            }
-            else if (e.Page == this.homePage)
-            {
-
             }
             else if (e.Page == this.startPage)
             {
@@ -1245,28 +1204,28 @@ namespace Jade
 
                 UpdateSiteRule();
                 List<Uri> urls = new List<Uri>();
-                foreach (string sourceUrl in lbxUrls.Items)
-                {
-                    List<string> sourceUrls = new List<string>();
-                    try
-                    {
-                        sourceUrls = ExtractUrl.ParseUrlFromParameter(sourceUrl);
-                    }
-                    catch
-                    {
-                        MessageBox.Show(this, "测试采集网址的格式非法！", "测试采集网址错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        e.Handled = true;
-                        return;
-                    }
-                    foreach (string extractUrl in sourceUrls)
-                    {
-                        Uri uri;
-                        if (Uri.TryCreate(extractUrl, UriKind.Absolute, out uri))
-                        {
-                            urls.Add(uri);
-                        }
-                    }
-                }
+                //foreach (string sourceUrl in lbxUrls.Items)
+                //{
+                //    List<string> sourceUrls = new List<string>();
+                //    try
+                //    {
+                //        sourceUrls = ExtractUrl.ParseUrlFromParameter(sourceUrl);
+                //    }
+                //    catch
+                //    {
+                //        MessageBox.Show(this, "测试采集网址的格式非法！", "测试采集网址错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        e.Handled = true;
+                //        return;
+                //    }
+                //    foreach (string extractUrl in sourceUrls)
+                //    {
+                //        Uri uri;
+                //        if (Uri.TryCreate(extractUrl, UriKind.Absolute, out uri))
+                //        {
+                //            urls.Add(uri);
+                //        }
+                //    }
+                //}
 
                 if (urls.Count == 0)
                 {
@@ -1405,7 +1364,6 @@ namespace Jade
                 DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
             }
 
-
         }
 
         private void wizardControl1_FinishClick(object sender, CancelEventArgs e)
@@ -1442,7 +1400,7 @@ namespace Jade
             URLBuilder urlBuilder = new URLBuilder();
             if (urlBuilder.ShowDialog() == DialogResult.OK)
             {
-                this.lbxUrls.Items.AddRange(urlBuilder.FinishedUrls);
+                //this.lbxUrls.Items.AddRange(urlBuilder.FinishedUrls);
             }
         }
 
@@ -1539,10 +1497,10 @@ namespace Jade
 
             foreach (var node in linkNodes)
             {
-                if (!this.lbxUrls.Items.Contains(this.txtStartUrl.Text))
-                {
-                    this.lbxUrls.Items.Add(this.txtStartUrl.Text);
-                }
+                //if (!this.lbxUrls.Items.Contains(this.txtStartUrl.Text))
+                //{
+                //    this.lbxUrls.Items.Add(this.txtStartUrl.Text);
+                //}
                 var url = node.Attributes["href"].Value;
 
                 if (url.StartsWith("javas"))
@@ -1558,10 +1516,10 @@ namespace Jade
                 url = url.Replace("&amp;", "&");
 
 
-                if (!this.lbxUrls.Items.Contains(url))
-                {
-                    this.lbxUrls.Items.Add(url);
-                }
+                //if (!this.lbxUrls.Items.Contains(url))
+                //{
+                //    this.lbxUrls.Items.Add(url);
+                //}
             }
         }
 
@@ -1632,6 +1590,104 @@ namespace Jade
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnGotoHomePage_Click(object sender, EventArgs e)
+        {
+            if (this.txtHomePage.Text != "")
+            {
+                if (!this.txtHomePage.Text.Contains("http://"))
+                {
+                    this.txtHomePage.Text = "http://" + this.txtHomePage.Text;
+                }
+                //var temp = this.enableNavigate;
+                this.enableNavigate = true;
+                this.bwHomePage.Navigate(this.txtHomePage.Text);
+                this.isBindCompleted = false;
+                this.Url = new Uri(this.txtHomePage.Text);
+                //this.enableNavigate = temp;
+            }
+        }
+
+        private void btnGotoColumnPage_Click(object sender, EventArgs e)
+        {
+            if (this.txtColumnPage.Text != "")
+            {
+                if (!this.txtColumnPage.Text.Contains("http://"))
+                {
+                    this.txtColumnPage.Text = "http://" + this.txtColumnPage.Text;
+                }
+                //var temp = this.enableNavigate;
+                this.enableNavigate = true;
+                this.bwColumnPage.Navigate(this.txtColumnPage.Text);
+                this.isBindCompleted = false;
+                this.Url = new Uri(this.txtColumnPage.Text);
+                //this.enableNavigate = temp;
+            }
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void wizardControl1_PrevClick(object sender, DevExpress.XtraWizard.WizardCommandButtonClickEventArgs e)
+        {
+            // 列表分页
+            if (e.Page == this.startPage)
+            {
+                // 首页 -栏目- 列表 -列表分页-内容
+                if (radioButtonAllSite2.Checked)
+                {
+                    this.currentUrlMaker = this.columnPageUrlSelectorMarker;
+                }
+                // 首页 -列表 -列表分页-内容
+                else if (radioButtonAllSite.Checked)
+                {
+                    wizardControl1.SelectedPage = columnPage;
+                    e.Handled = true;
+                    this.currentUrlMaker = this.homePageUrlSelectorMarker;
+                    return;
+
+                }
+                else if (radioButtonListPage.Checked)
+                {
+                    wizardControl1.SelectedPage = welcomeWizardPage1;
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        private void UrlSelectorMarker_OnXpathSelectorClick(object sender, EventArgs e)
+        {
+            OnBrowserLoaded();
+            this.enableNavigate = false;
+            this.EnableSelect = true;
+            this.CurrentXPathSelected = (xpath) =>
+            {
+                currentUrlMaker.SetXPath(xpath);
+                var Datas = ExtractDataFromHtml();
+                currentUrlMaker.SetUrlResult(Datas);
+                if (Datas.Count > 0)
+                {
+                    if (wizardControl1.SelectedPage == homePage && this.txtColumnPage.Text == "")
+                    {
+                        this.txtColumnPage.Text = Datas[0];
+                    }
+                    else if (wizardControl1.SelectedPage == columnPage && this.txtStartUrl.Text == "")
+                    {
+                        this.txtStartUrl.Text = Datas[0];
+                    }
+                }
+            };
+        }
+
+        private void UrlSelectorMarker_OnTestClick(object sender, EventArgs e)
+        {
+            var Datas = ExtractDataFromHtml();
+            currentUrlMaker.SetUrlResult(Datas);
         }
 
     }

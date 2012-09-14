@@ -37,10 +37,11 @@ namespace Jade.Model.Access
         {
             var where = " 1=1";
             where += args.IsDownload ? " and IsDownload  = true" : " and IsDownload  = true";
-            where += args.IsEdit ? " and IsEdit = true" : "";
+            where += args.IsEdit ? " and IsEdit = true" : " ";
             where += args.IsPublish ? " and IsPublish  = true" : " and IsPublish = false";
             where += args.TaskId != 0 ? " and TaskId  = " + args.TaskId : "";
             where += !string.IsNullOrEmpty(args.Keyword) ? " and Title like '%" + args.Keyword + "%'": "";
+            where += !string.IsNullOrEmpty(args.EditorName) ? " and EditorUserName = '" + args.EditorName + "'" : "";
 
             totalCount = GetRecordCount(where);
             var sql = string.Format(@"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by EditTime DESC,ID DESC) order by EditTime ) order by EditTime DESC", args.PageSzie, args.PageIndex * args.PageSzie, "where " + where);
@@ -101,6 +102,18 @@ namespace Jade.Model.Access
         public void Update(IDownloadData data)
         {
             this.Update(data as DownloadData);
+        }
+
+        #endregion
+
+        #region IDownloadDataDAL 成员
+
+
+        public void DeleteAll()
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from DownloadData ");
+            DbHelperOleDb.ExecuteSql(strSql.ToString());
         }
 
         #endregion

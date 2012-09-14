@@ -60,24 +60,12 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txtStartUrlXPath = new DevExpress.XtraEditors.TextEdit();
-            this.btnAutoReListPage = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSelectStartUrl = new DevExpress.XtraEditors.SimpleButton();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblStartUrlLoger = new System.Windows.Forms.Label();
-            this.lbxUrls = new System.Windows.Forms.ListBox();
             this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查看代码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.radioLinkHref = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.radioInnerLinks = new System.Windows.Forms.RadioButton();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label3 = new System.Windows.Forms.Label();
             this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
@@ -144,30 +132,21 @@
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
             this.homePage = new DevExpress.XtraWizard.WizardPage();
+            this.btnGotoHomePage = new DevExpress.XtraEditors.SimpleButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.homePageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             this.txtHomePage = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.btnGotoHomePage = new DevExpress.XtraEditors.SimpleButton();
-            this.wizardPage1 = new DevExpress.XtraWizard.WizardPage();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.btnSelectListXPath = new DevExpress.XtraEditors.SimpleButton();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.columnPage = new DevExpress.XtraWizard.WizardPage();
+            this.btnGotoColumnPage = new DevExpress.XtraEditors.SimpleButton();
+            this.txtColumnPage = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.baseWebBrowser2 = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
-            this.label20 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.columnPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.listPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -185,8 +164,6 @@
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtInterval.Properties)).BeginInit();
             this.startPage.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStartUrlXPath.Properties)).BeginInit();
             this.startUrlmenu.SuspendLayout();
             this.contentUrlPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -217,10 +194,9 @@
             this.wizardPage3.SuspendLayout();
             this.homePage.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            this.wizardPage1.SuspendLayout();
+            this.columnPage.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // wizardControl1
@@ -234,7 +210,7 @@
             this.wizardControl1.Controls.Add(this.contentDetailPage);
             this.wizardControl1.Controls.Add(this.wizardPage3);
             this.wizardControl1.Controls.Add(this.homePage);
-            this.wizardControl1.Controls.Add(this.wizardPage1);
+            this.wizardControl1.Controls.Add(this.columnPage);
             this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wizardControl1.FinishText = "完成";
             this.wizardControl1.Location = new System.Drawing.Point(0, 0);
@@ -243,7 +219,7 @@
             this.wizardControl1.Pages.AddRange(new DevExpress.XtraWizard.BaseWizardPage[] {
             this.welcomeWizardPage1,
             this.homePage,
-            this.wizardPage1,
+            this.columnPage,
             this.startPage,
             this.contentUrlPage,
             this.previewPage,
@@ -255,6 +231,7 @@
             this.wizardControl1.CancelClick += new System.ComponentModel.CancelEventHandler(this.wizardControl1_CancelClick);
             this.wizardControl1.FinishClick += new System.ComponentModel.CancelEventHandler(this.wizardControl1_FinishClick);
             this.wizardControl1.NextClick += new DevExpress.XtraWizard.WizardCommandButtonClickEventHandler(this.wizardControl1_NextClick);
+            this.wizardControl1.PrevClick += new DevExpress.XtraWizard.WizardCommandButtonClickEventHandler(this.wizardControl1_PrevClick);
             // 
             // welcomeWizardPage1
             // 
@@ -510,15 +487,15 @@
             // 
             // startPage
             // 
+            this.startPage.Controls.Add(this.panel1);
             this.startPage.Controls.Add(this.simpleButton2);
             this.startPage.Controls.Add(this.txtStartUrl);
             this.startPage.Controls.Add(this.label1);
-            this.startPage.Controls.Add(this.panel1);
             this.startPage.Controls.Add(this.startUrlWebBrowser);
-            this.startPage.DescriptionText = "最普遍的采集就是找到一个网站的列表页面，例如新浪国内新闻，当然，新闻很多，因此有分页。所以既需要列表首页，也需要列表的第二页，第三页。。。";
+            this.startPage.DescriptionText = "在这里设置列表页的分页";
             this.startPage.Name = "startPage";
             this.startPage.Size = new System.Drawing.Size(859, 367);
-            this.startPage.Text = "起始页设置";
+            this.startPage.Text = "列表页分页设置";
             // 
             // simpleButton2
             // 
@@ -550,81 +527,6 @@
             this.label1.TabIndex = 101;
             this.label1.Text = "起始地址：";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.txtStartUrlXPath);
-            this.panel1.Controls.Add(this.btnAutoReListPage);
-            this.panel1.Controls.Add(this.btnSelectStartUrl);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.lblStartUrlLoger);
-            this.panel1.Controls.Add(this.lbxUrls);
-            this.panel1.Controls.Add(this.radioLinkHref);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.radioInnerLinks);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 228);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(859, 139);
-            this.panel1.TabIndex = 100;
-            // 
-            // txtStartUrlXPath
-            // 
-            this.txtStartUrlXPath.Location = new System.Drawing.Point(89, 29);
-            this.txtStartUrlXPath.Name = "txtStartUrlXPath";
-            this.txtStartUrlXPath.Size = new System.Drawing.Size(457, 20);
-            this.txtStartUrlXPath.TabIndex = 103;
-            // 
-            // btnAutoReListPage
-            // 
-            this.btnAutoReListPage.Location = new System.Drawing.Point(756, 12);
-            this.btnAutoReListPage.Name = "btnAutoReListPage";
-            this.btnAutoReListPage.Size = new System.Drawing.Size(99, 29);
-            this.btnAutoReListPage.TabIndex = 102;
-            this.btnAutoReListPage.Text = "自动识别";
-            this.btnAutoReListPage.Click += new System.EventHandler(this.btnAutoReListPage_Click);
-            // 
-            // btnSelectStartUrl
-            // 
-            this.btnSelectStartUrl.Location = new System.Drawing.Point(652, 12);
-            this.btnSelectStartUrl.Name = "btnSelectStartUrl";
-            this.btnSelectStartUrl.Size = new System.Drawing.Size(99, 29);
-            this.btnSelectStartUrl.TabIndex = 101;
-            this.btnSelectStartUrl.Text = "点此开始选择";
-            this.btnSelectStartUrl.Click += new System.EventHandler(this.btnSelectStartUrl_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 6);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 14);
-            this.label10.TabIndex = 98;
-            this.label10.Text = "选择模式：";
-            // 
-            // lblStartUrlLoger
-            // 
-            this.lblStartUrlLoger.AutoSize = true;
-            this.lblStartUrlLoger.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblStartUrlLoger.Location = new System.Drawing.Point(284, 8);
-            this.lblStartUrlLoger.Name = "lblStartUrlLoger";
-            this.lblStartUrlLoger.Size = new System.Drawing.Size(295, 14);
-            this.lblStartUrlLoger.TabIndex = 95;
-            this.lblStartUrlLoger.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
-            // 
-            // lbxUrls
-            // 
-            this.lbxUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbxUrls.ContextMenuStrip = this.startUrlmenu;
-            this.lbxUrls.FormattingEnabled = true;
-            this.lbxUrls.ItemHeight = 14;
-            this.lbxUrls.Location = new System.Drawing.Point(89, 64);
-            this.lbxUrls.Name = "lbxUrls";
-            this.lbxUrls.Size = new System.Drawing.Size(757, 60);
-            this.lbxUrls.TabIndex = 87;
-            // 
             // startUrlmenu
             // 
             this.startUrlmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -641,87 +543,30 @@
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
             this.删除ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // 编辑ToolStripMenuItem
             // 
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
             this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.编辑ToolStripMenuItem.Text = "编辑";
-            this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
             // 
             // 浏览ToolStripMenuItem
             // 
             this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
             this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.浏览ToolStripMenuItem.Text = "浏览";
-            this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
             // 
             // 清空ToolStripMenuItem
             // 
             this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
             this.清空ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.清空ToolStripMenuItem.Text = "清空";
-            this.清空ToolStripMenuItem.Click += new System.EventHandler(this.清空ToolStripMenuItem_Click);
             // 
             // 查看代码ToolStripMenuItem
             // 
             this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
             this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.查看代码ToolStripMenuItem.Text = "查看代码";
-            this.查看代码ToolStripMenuItem.Click += new System.EventHandler(this.查看代码ToolStripMenuItem_Click);
-            // 
-            // radioLinkHref
-            // 
-            this.radioLinkHref.AutoSize = true;
-            this.radioLinkHref.Checked = true;
-            this.radioLinkHref.Location = new System.Drawing.Point(173, 4);
-            this.radioLinkHref.Name = "radioLinkHref";
-            this.radioLinkHref.Size = new System.Drawing.Size(73, 18);
-            this.radioLinkHref.TabIndex = 97;
-            this.radioLinkHref.TabStop = true;
-            this.radioLinkHref.Text = "链接网址";
-            this.radioLinkHref.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 14);
-            this.label5.TabIndex = 89;
-            this.label5.Text = "最终起始页面:";
-            // 
-            // radioInnerLinks
-            // 
-            this.radioInnerLinks.AutoSize = true;
-            this.radioInnerLinks.Location = new System.Drawing.Point(72, 4);
-            this.radioInnerLinks.Name = "radioInnerLinks";
-            this.radioInnerLinks.Size = new System.Drawing.Size(97, 18);
-            this.radioInnerLinks.TabIndex = 96;
-            this.radioInnerLinks.Text = "所选框内网址";
-            this.radioInnerLinks.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(16, 101);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(55, 14);
-            this.linkLabel1.TabIndex = 90;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "高级设置";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 14);
-            this.label3.TabIndex = 94;
-            this.label3.Text = "可视化路径：";
             // 
             // startUrlWebBrowser
             // 
@@ -732,7 +577,7 @@
             this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.startUrlWebBrowser.Name = "startUrlWebBrowser";
             this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(837, 193);
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(837, 51);
             this.startUrlWebBrowser.TabIndex = 6;
             // 
             // completionWizardPage1
@@ -1377,9 +1222,40 @@
             this.homePage.Controls.Add(this.txtHomePage);
             this.homePage.Controls.Add(this.label11);
             this.homePage.Controls.Add(this.bwHomePage);
+            this.homePage.DescriptionText = "在这里设置栏目或者列表页的XPATH,如果是找栏目页面，通常是国内新闻、国际新闻等";
             this.homePage.Name = "homePage";
             this.homePage.Size = new System.Drawing.Size(859, 367);
-            this.homePage.Text = "栏目页配置";
+            this.homePage.Text = "栏目/列表选择";
+            // 
+            // btnGotoHomePage
+            // 
+            this.btnGotoHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGotoHomePage.Location = new System.Drawing.Point(767, 6);
+            this.btnGotoHomePage.Name = "btnGotoHomePage";
+            this.btnGotoHomePage.Size = new System.Drawing.Size(72, 21);
+            this.btnGotoHomePage.TabIndex = 107;
+            this.btnGotoHomePage.Text = "前往";
+            this.btnGotoHomePage.Click += new System.EventHandler(this.btnGotoHomePage_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.homePageUrlSelectorMarker);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 91);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(859, 276);
+            this.panel2.TabIndex = 106;
+            // 
+            // homePageUrlSelectorMarker
+            // 
+            this.homePageUrlSelectorMarker.CurrentUrlSelector = null;
+            this.homePageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.homePageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
+            this.homePageUrlSelectorMarker.Name = "homePageUrlSelectorMarker";
+            this.homePageUrlSelectorMarker.Size = new System.Drawing.Size(859, 276);
+            this.homePageUrlSelectorMarker.TabIndex = 0;
+            this.homePageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
+            this.homePageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
             // 
             // txtHomePage
             // 
@@ -1396,9 +1272,9 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(4, 7);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 14);
+            this.label11.Size = new System.Drawing.Size(57, 14);
             this.label11.TabIndex = 104;
-            this.label11.Text = "网站首页：";
+            this.label11.Text = "Url地址：";
             // 
             // bwHomePage
             // 
@@ -1409,213 +1285,99 @@
             this.bwHomePage.MinimumSize = new System.Drawing.Size(20, 20);
             this.bwHomePage.Name = "bwHomePage";
             this.bwHomePage.ScriptErrorsSuppressed = true;
-            this.bwHomePage.Size = new System.Drawing.Size(853, 209);
+            this.bwHomePage.Size = new System.Drawing.Size(853, 53);
             this.bwHomePage.TabIndex = 103;
             // 
-            // panel2
+            // columnPage
             // 
-            this.panel2.Controls.Add(this.label20);
-            this.panel2.Controls.Add(this.richTextBox1);
-            this.panel2.Controls.Add(this.textEdit2);
-            this.panel2.Controls.Add(this.simpleButton6);
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.label16);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 247);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(859, 120);
-            this.panel2.TabIndex = 106;
+            this.columnPage.Controls.Add(this.btnGotoColumnPage);
+            this.columnPage.Controls.Add(this.txtColumnPage);
+            this.columnPage.Controls.Add(this.label19);
+            this.columnPage.Controls.Add(this.bwColumnPage);
+            this.columnPage.Controls.Add(this.panel3);
+            this.columnPage.DescriptionText = "从栏目页面找到列表页，通常是 更多 more的链接";
+            this.columnPage.Name = "columnPage";
+            this.columnPage.Size = new System.Drawing.Size(859, 367);
+            this.columnPage.Text = "列表页设置";
             // 
-            // simpleButton6
+            // btnGotoColumnPage
             // 
-            this.simpleButton6.Location = new System.Drawing.Point(552, 29);
-            this.simpleButton6.Name = "simpleButton6";
-            this.simpleButton6.Size = new System.Drawing.Size(98, 26);
-            this.simpleButton6.TabIndex = 101;
-            this.simpleButton6.Text = "点此开始选择";
+            this.btnGotoColumnPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGotoColumnPage.Location = new System.Drawing.Point(767, 9);
+            this.btnGotoColumnPage.Name = "btnGotoColumnPage";
+            this.btnGotoColumnPage.Size = new System.Drawing.Size(72, 21);
+            this.btnGotoColumnPage.TabIndex = 111;
+            this.btnGotoColumnPage.Text = "前往";
+            this.btnGotoColumnPage.Click += new System.EventHandler(this.btnGotoColumnPage_Click);
             // 
-            // label13
+            // txtColumnPage
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(5, 33);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 14);
-            this.label13.TabIndex = 98;
-            this.label13.Text = "栏目XPATH：";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ForeColor = System.Drawing.Color.DarkRed;
-            this.label16.Location = new System.Drawing.Point(6, 8);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(295, 14);
-            this.label16.TabIndex = 95;
-            this.label16.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
-            // 
-            // textEdit2
-            // 
-            this.textEdit2.Location = new System.Drawing.Point(91, 30);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(457, 20);
-            this.textEdit2.TabIndex = 104;
-            // 
-            // btnGotoHomePage
-            // 
-            this.btnGotoHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGotoHomePage.Location = new System.Drawing.Point(767, 6);
-            this.btnGotoHomePage.Name = "btnGotoHomePage";
-            this.btnGotoHomePage.Size = new System.Drawing.Size(72, 21);
-            this.btnGotoHomePage.TabIndex = 107;
-            this.btnGotoHomePage.Text = "前往";
-            // 
-            // wizardPage1
-            // 
-            this.wizardPage1.Controls.Add(this.simpleButton8);
-            this.wizardPage1.Controls.Add(this.textBox2);
-            this.wizardPage1.Controls.Add(this.label19);
-            this.wizardPage1.Controls.Add(this.baseWebBrowser2);
-            this.wizardPage1.Controls.Add(this.panel3);
-            this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(859, 367);
-            this.wizardPage1.Text = "列表页设置";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.linkLabel3);
-            this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.richTextBox2);
-            this.panel3.Controls.Add(this.textEdit1);
-            this.panel3.Controls.Add(this.btnSelectListXPath);
-            this.panel3.Controls.Add(this.label17);
-            this.panel3.Controls.Add(this.label18);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 244);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(859, 123);
-            this.panel3.TabIndex = 107;
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Location = new System.Drawing.Point(91, 30);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(457, 20);
-            this.textEdit1.TabIndex = 104;
-            // 
-            // btnSelectListXPath
-            // 
-            this.btnSelectListXPath.Location = new System.Drawing.Point(552, 29);
-            this.btnSelectListXPath.Name = "btnSelectListXPath";
-            this.btnSelectListXPath.Size = new System.Drawing.Size(98, 26);
-            this.btnSelectListXPath.TabIndex = 101;
-            this.btnSelectListXPath.Text = "点此开始选择";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(5, 33);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(81, 14);
-            this.label17.TabIndex = 98;
-            this.label17.Text = "列表XPATH：";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.ForeColor = System.Drawing.Color.DarkRed;
-            this.label18.Location = new System.Drawing.Point(6, 8);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(295, 14);
-            this.label18.TabIndex = 95;
-            this.label18.Text = "请用鼠标选择分页链接，鼠标移动切换，左键点击选定";
-            // 
-            // simpleButton8
-            // 
-            this.simpleButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton8.Location = new System.Drawing.Point(767, 9);
-            this.simpleButton8.Name = "simpleButton8";
-            this.simpleButton8.Size = new System.Drawing.Size(72, 21);
-            this.simpleButton8.TabIndex = 111;
-            this.simpleButton8.Text = "前往";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtColumnPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.textBox2.Location = new System.Drawing.Point(74, 8);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(687, 22);
-            this.textBox2.TabIndex = 110;
+            this.txtColumnPage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.txtColumnPage.Location = new System.Drawing.Point(74, 8);
+            this.txtColumnPage.Name = "txtColumnPage";
+            this.txtColumnPage.Size = new System.Drawing.Size(687, 22);
+            this.txtColumnPage.TabIndex = 110;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(4, 10);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(67, 14);
+            this.label19.Size = new System.Drawing.Size(49, 14);
             this.label19.TabIndex = 109;
-            this.label19.Text = "栏目页面：";
+            this.label19.Text = "Url地址:";
             // 
-            // baseWebBrowser2
+            // bwColumnPage
             // 
-            this.baseWebBrowser2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.bwColumnPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.baseWebBrowser2.Location = new System.Drawing.Point(3, 35);
-            this.baseWebBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
-            this.baseWebBrowser2.Name = "baseWebBrowser2";
-            this.baseWebBrowser2.ScriptErrorsSuppressed = true;
-            this.baseWebBrowser2.Size = new System.Drawing.Size(853, 203);
-            this.baseWebBrowser2.TabIndex = 108;
+            this.bwColumnPage.Location = new System.Drawing.Point(3, 35);
+            this.bwColumnPage.MinimumSize = new System.Drawing.Size(20, 20);
+            this.bwColumnPage.Name = "bwColumnPage";
+            this.bwColumnPage.ScriptErrorsSuppressed = true;
+            this.bwColumnPage.Size = new System.Drawing.Size(853, 45);
+            this.bwColumnPage.TabIndex = 108;
             // 
-            // label20
+            // panel3
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 82);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(59, 14);
-            this.label20.TabIndex = 106;
-            this.label20.Text = "栏目预览:";
+            this.panel3.Controls.Add(this.columnPageUrlSelectorMarker);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 86);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(859, 281);
+            this.panel3.TabIndex = 107;
             // 
-            // richTextBox1
+            // columnPageUrlSelectorMarker
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(91, 56);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(722, 61);
-            this.richTextBox1.TabIndex = 105;
-            this.richTextBox1.Text = "";
+            this.columnPageUrlSelectorMarker.CurrentUrlSelector = null;
+            this.columnPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.columnPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
+            this.columnPageUrlSelectorMarker.Name = "columnPageUrlSelectorMarker";
+            this.columnPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
+            this.columnPageUrlSelectorMarker.TabIndex = 0;
+            this.columnPageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
+            this.columnPageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
             // 
-            // label21
+            // panel1
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 68);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(59, 14);
-            this.label21.TabIndex = 108;
-            this.label21.Text = "列表预览:";
+            this.panel1.Controls.Add(this.listPageUrlSelectorMarker);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 86);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(859, 281);
+            this.panel1.TabIndex = 108;
             // 
-            // richTextBox2
+            // ListPageUrlSelectorMarker1
             // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(91, 56);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(722, 61);
-            this.richTextBox2.TabIndex = 107;
-            this.richTextBox2.Text = "";
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(11, 93);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(55, 14);
-            this.linkLabel3.TabIndex = 109;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "高级设置";
+            this.listPageUrlSelectorMarker.CurrentUrlSelector = null;
+            this.listPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
+            this.listPageUrlSelectorMarker.Name = "ListPageUrlSelectorMarker1";
+            this.listPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
+            this.listPageUrlSelectorMarker.TabIndex = 0;
             // 
             // SiteRuleWizardForm
             // 
@@ -1652,9 +1414,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtInterval.Properties)).EndInit();
             this.startPage.ResumeLayout(false);
             this.startPage.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStartUrlXPath.Properties)).EndInit();
             this.startUrlmenu.ResumeLayout(false);
             this.contentUrlPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -1693,13 +1452,10 @@
             this.homePage.ResumeLayout(false);
             this.homePage.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            this.wizardPage1.ResumeLayout(false);
-            this.wizardPage1.PerformLayout();
+            this.columnPage.ResumeLayout(false);
+            this.columnPage.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1713,15 +1469,6 @@
         private DevExpress.XtraEditors.TextEdit txtRuleName;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser startUrlWebBrowser;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lblStartUrlLoger;
-        private System.Windows.Forms.ListBox lbxUrls;
-        private System.Windows.Forms.RadioButton radioLinkHref;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton radioInnerLinks;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtStartUrl;
         private System.Windows.Forms.Label label14;
@@ -1749,7 +1496,6 @@
         private DevExpress.XtraEditors.SimpleButton btnOutputChildNode;
         private DevExpress.XtraEditors.SimpleButton btnOutputParentNode;
         private DevExpress.XtraEditors.SimpleButton btnFetchUrl;
-        private DevExpress.XtraEditors.SimpleButton btnSelectStartUrl;
         private DevExpress.XtraWizard.WizardPage contentDetailPage;
         private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser itemWebBrowser;
         private DevExpress.XtraEditors.LabelControl labelControl2;
@@ -1775,7 +1521,6 @@
         private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看代码ToolStripMenuItem;
         private System.Windows.Forms.RadioButton radioHref;
-        private DevExpress.XtraEditors.SimpleButton btnAutoReListPage;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private System.Windows.Forms.LinkLabel linkUrlSeniorSetting;
         private DevExpress.XtraTab.XtraTabControl itemRuleTab;
@@ -1791,7 +1536,6 @@
         private DevExpress.XtraEditors.TextEdit txtCXpath;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.TextEdit txtStartUrlXPath;
         private DevExpress.XtraEditors.TextEdit txtLinkXPath;
         private DevExpress.XtraEditors.TextEdit txtInterval;
         private DevExpress.XtraEditors.GroupControl groupControl5;
@@ -1822,27 +1566,18 @@
         private System.Windows.Forms.RadioButton radioButtonAllSite2;
         private DevExpress.XtraEditors.SimpleButton btnGotoHomePage;
         private System.Windows.Forms.Panel panel2;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton6;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtHomePage;
         private System.Windows.Forms.Label label11;
         private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser bwHomePage;
-        private DevExpress.XtraWizard.WizardPage wizardPage1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton8;
-        private System.Windows.Forms.TextBox textBox2;
+        private DevExpress.XtraWizard.WizardPage columnPage;
+        private DevExpress.XtraEditors.SimpleButton btnGotoColumnPage;
+        private System.Windows.Forms.TextBox txtColumnPage;
         private System.Windows.Forms.Label label19;
-        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser baseWebBrowser2;
+        private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser bwColumnPage;
         private System.Windows.Forms.Panel panel3;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.SimpleButton btnSelectListXPath;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.LinkLabel linkLabel3;
+        private ConfigTool.UrlSelectorMarker homePageUrlSelectorMarker;
+        private ConfigTool.UrlSelectorMarker columnPageUrlSelectorMarker;
+        private System.Windows.Forms.Panel panel1;
+        private ConfigTool.UrlSelectorMarker listPageUrlSelectorMarker;
     }
 }

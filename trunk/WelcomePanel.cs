@@ -102,6 +102,8 @@ namespace Jade
 
                 if (autoRedirect)
                 {
+                    CacheObject.MainForm.CloseDoc(this.document);
+                    return;
                     autoRedirect = false;
                     this.webBrowser1.Navigate(redirecUrl);
                 }

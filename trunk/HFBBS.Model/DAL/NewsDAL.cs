@@ -78,11 +78,12 @@ namespace Jade.Model.MySql
                     (args.IsEdit ? t.IsEdit == true : true) &&
                     (args.IsPublish ? t.IsPublish == true : true) &&
                      (args.TaskId != 0 ? t.TaskId == args.TaskId : true) &&
+                     (!string.IsNullOrEmpty(args.EditorName) ? t.EditorUserName == args.EditorName : true) &&
                     (!string.IsNullOrEmpty(args.Keyword) ? t.Title.Contains(args.Keyword) : true)
                 );
             totalCount = query.Count();
 
-            return query.OrderByDescending(t => t.EditTime).OrderByDescending(t=>t.ID).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
+            return query.OrderByDescending(t => t.EditTime).OrderByDescending(t => t.ID).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
 
         }
 
@@ -126,6 +127,20 @@ namespace Jade.Model.MySql
         {
             this.Update(data as downloaddata);
         }
+
+        #region IDownloadDataDAL 成员
+
+
+        public void DeleteAll()
+        {
+            foreach (var data in Repository.downloaddata)
+            {
+                Repository.DeleteObject(data);
+            }
+            Repository.SaveChanges();
+        }
+
+        #endregion
     }
 
     public partial class downloaddata
@@ -142,5 +157,5 @@ namespace Jade.Model.MySql
         }
     }
 
-   
+
 }

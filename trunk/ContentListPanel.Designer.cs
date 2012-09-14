@@ -43,9 +43,10 @@
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Url = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.CreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1 = new DevExpress.XtraEditors.PanelControl();
-            this.comboBoxEdit1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
@@ -54,10 +55,12 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             this.txtKeyword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.devPager1 = new Jade.Control.DevPager();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -65,8 +68,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -97,7 +101,8 @@
             this.Content,
             this.StartTime,
             this.EndTime,
-            this.Url});
+            this.Url,
+            this.CreateTime});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupPanelText = " ";
             this.gridView1.Name = "gridView1";
@@ -228,6 +233,14 @@
             this.repositoryItemHyperLinkEdit1.AutoHeight = false;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             // 
+            // CreateTime
+            // 
+            this.CreateTime.Caption = "发布时间";
+            this.CreateTime.FieldName = "CreateTime";
+            this.CreateTime.Name = "CreateTime";
+            this.CreateTime.Visible = true;
+            this.CreateTime.VisibleIndex = 9;
+            // 
             // repositoryItemHyperLinkEdit2
             // 
             this.repositoryItemHyperLinkEdit2.AutoHeight = false;
@@ -235,6 +248,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkOnlyMyContent);
             this.panel1.Controls.Add(this.comboBoxEdit1);
             this.panel1.Controls.Add(this.txtKeyword);
             this.panel1.Controls.Add(this.label2);
@@ -245,18 +259,15 @@
             this.panel1.Size = new System.Drawing.Size(813, 47);
             this.panel1.TabIndex = 7;
             // 
-            // comboBoxEdit1
+            // chkOnlyMyContent
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(399, 12);
-            this.comboBoxEdit1.MenuManager = this.barManager1;
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "任务名称"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SiteRuleId", "任务编号")});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(242, 20);
-            this.comboBoxEdit1.TabIndex = 4;
+            this.chkOnlyMyContent.Location = new System.Drawing.Point(670, 15);
+            this.chkOnlyMyContent.MenuManager = this.barManager1;
+            this.chkOnlyMyContent.Name = "chkOnlyMyContent";
+            this.chkOnlyMyContent.Properties.Caption = "仅显示我编辑的内容";
+            this.chkOnlyMyContent.Size = new System.Drawing.Size(127, 19);
+            this.chkOnlyMyContent.TabIndex = 5;
+            this.chkOnlyMyContent.CheckedChanged += new System.EventHandler(this.chkOnlyMyContent_CheckedChanged);
             // 
             // barManager1
             // 
@@ -270,9 +281,10 @@
             this.barManager1.Images = this.imageList1;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barButtonItem1,
-            this.barButtonItem2});
+            this.barButtonItem2,
+            this.barButtonItem3});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 2;
+            this.barManager1.MaxItemId = 3;
             // 
             // bar2
             // 
@@ -282,7 +294,8 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem3, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
@@ -331,6 +344,19 @@
             this.barDockControlRight.Location = new System.Drawing.Point(813, 24);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 429);
             // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Location = new System.Drawing.Point(399, 12);
+            this.comboBoxEdit1.MenuManager = this.barManager1;
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "任务名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SiteRuleId", "任务编号")});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(242, 20);
+            this.comboBoxEdit1.TabIndex = 4;
+            // 
             // txtKeyword
             // 
             this.txtKeyword.Location = new System.Drawing.Point(70, 15);
@@ -369,6 +395,14 @@
             this.devPager1.TabIndex = 10;
             this.devPager1.TotalCount = 0;
             // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "全部删除";
+            this.barButtonItem3.Id = 2;
+            this.barButtonItem3.ImageIndex = 0;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
             // ContentListPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -390,8 +424,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -427,6 +462,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn Url;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn CreateTime;
+        private DevExpress.XtraEditors.CheckEdit chkOnlyMyContent;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
 
     }
 }

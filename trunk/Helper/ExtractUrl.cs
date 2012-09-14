@@ -259,12 +259,30 @@ namespace Jade
             //É¾³ý½Å±¾  
             Htmlstring = Regex.Replace(Htmlstring, html2TextPattern, "", options);
 
-            if (!Htmlstring.ToLower().Contains("<p>"))
-            {
-                Htmlstring = "<P>" + Htmlstring + "</P>";
-            }
+            return RepairHtml(Htmlstring);
+        }
 
-            return Htmlstring;
+        /// <summary>
+        /// ÐÞ¸´html
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static string RepairHtml(string html)
+        {
+
+            var ps = html.Split(new string[] { "<p>", "</p>", "<P>", "</P>", "<BR/>", "<br/>", "<br>", "<BR>", "<br />", "<BR />" }, StringSplitOptions.RemoveEmptyEntries);
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var p in ps)
+            {
+                var pragrah = p.Trim();
+                if (!string.IsNullOrEmpty(pragrah))
+                {
+                    sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                }
+            }
+            return sb.ToString();
         }
 
 
@@ -386,7 +404,7 @@ namespace Jade
                     html = "<html>" + html.Substring(checkResults[checkResults.Count - 1].Index);
                 }
 
-                File.WriteAllText("html.xml", html);
+                //File.WriteAllText("html.xml", html);
 
                 try
                 {

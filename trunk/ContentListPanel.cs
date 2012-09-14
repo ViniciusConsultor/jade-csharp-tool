@@ -32,6 +32,7 @@ namespace Jade
             this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
             this.gridView1.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView1_CustomDrawColumnHeader);
             this.gridView1.DataSourceChanged += new EventHandler(gridView1_DataSourceChanged);
+            this.gridView1.StartSorting += new EventHandler(gridView1_StartSorting);
             this.comboBoxEdit1.TextChanged += new EventHandler(comboBox1_SelectedIndexChanged);
             tasks = CacheObject.Rules.OrderByDescending(t => t.CreateTime).ToList();
             tasks.Insert(0, new SiteRule() { Name = "全部任务" });
@@ -41,6 +42,12 @@ namespace Jade
             this.comboBoxEdit1.ItemIndex = 0;
             this.devPager1.PageChange += new EventPagingHandler(pager1_PageChange);
             CacheObject.ContentForm.InitDownloadData(new downloaddata());
+            currentPageSize = Properties.Settings.Default.PageSize;
+        }
+
+        void gridView1_StartSorting(object sender, EventArgs e)
+        {
+           
         }
 
         void gridView1_MouseDown(object sender, MouseEventArgs e)
@@ -139,7 +146,8 @@ namespace Jade
                 Keyword = this.txtKeyword.Text,
                 PageIndex = pageIndex,
                 TaskId = taskId,
-                PageSzie = pageSize
+                EditorName = this.chkOnlyMyContent.Checked ? CacheObject.CurrentUser.Name : "",
+                PageSzie = Properties.Settings.Default.PageSize
             };
         }
         private void DraftBoxForm_Load(object sender, EventArgs e)
@@ -424,6 +432,26 @@ namespace Jade
                 toolStripButton2_Click(null, null);
             else
                 MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
+        }
+
+        private void chkOnlyMyContent_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox1_SelectedIndexChanged(null, null);
+        }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (MessageBox.Show(this,
+                   "您确定要删除所有数据？",
+                   "清空采集数据",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question,
+                   MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                CacheObject.DownloadDataDAL.DeleteAll(); 
+                comboBox1_SelectedIndexChanged(null, null);
+            }
+          
         }
     }
 }

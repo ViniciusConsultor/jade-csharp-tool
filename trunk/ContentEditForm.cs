@@ -530,6 +530,8 @@ namespace Jade
                         loadingDialog.Message = "送签发成功，正在保存到数据库....";
                     }));
 
+                    CacheObject.DownloadDataDAL.Update(CurrentData);
+
                     loadingDialog.Close();
 
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;

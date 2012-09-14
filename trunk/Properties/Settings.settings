@@ -50,5 +50,8 @@
     <Setting Name="DefaultTemplate" Type="System.String" Scope="User">
       <Value Profile="(Default)">/hfestate/template/estate.htm</Value>
     </Setting>
+    <Setting Name="PageSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

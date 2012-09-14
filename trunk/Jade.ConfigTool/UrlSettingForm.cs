@@ -12,9 +12,9 @@ namespace Jade
 {
     public partial class UrlSettingForm : DevExpress.XtraEditors.XtraForm
     {
-        SiteRule currentRule;
+        IUrlFilter currentRule;
 
-        public UrlSettingForm(SiteRule rule)
+        public UrlSettingForm(IUrlFilter rule)
         {
             this.currentRule = rule;
             InitializeComponent();
