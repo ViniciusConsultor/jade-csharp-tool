@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.linkLabel16 = new System.Windows.Forms.LinkLabel();
             this.linkLabel15 = new System.Windows.Forms.LinkLabel();
             this.linkLabel14 = new System.Windows.Forms.LinkLabel();
@@ -69,7 +69,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblStartUrlLoger = new System.Windows.Forms.Label();
             this.lbxUrls = new System.Windows.Forms.ListBox();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,10 +80,10 @@
             this.radioInnerLinks = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
             this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
@@ -145,10 +145,9 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.wizardControl1.SuspendLayout();
             this.welcomeWizardPage1.SuspendLayout();
@@ -255,6 +254,14 @@
             this.groupControl5.Size = new System.Drawing.Size(640, 139);
             this.groupControl5.TabIndex = 27;
             this.groupControl5.Text = "任务基本信息";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(396, 61);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(168, 14);
+            this.labelControl4.TabIndex = 38;
+            this.labelControl4.Text = "你可以添加多个标签，空格隔开";
             // 
             // linkLabel16
             // 
@@ -1403,14 +1410,6 @@
             this.tbxResult.Size = new System.Drawing.Size(859, 367);
             this.tbxResult.TabIndex = 11;
             this.tbxResult.Text = "使用提示：\r\n1.点测试可以预览结果\r\n2.可以多种方式采集内容";
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Location = new System.Drawing.Point(396, 61);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(168, 14);
-            this.labelControl4.TabIndex = 38;
-            this.labelControl4.Text = "你可以添加多个标签，空格隔开";
             // 
             // SiteRuleWizardForm
             // 

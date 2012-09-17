@@ -435,7 +435,7 @@ namespace Jade
                                         result.Add(node.InnerXml);
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText);
+                                        result.Add(node.InnerText.Trim());
                                         break;
                                     case XMLPathType.InnerLinks:
                                         var links = node.SelectNodes(".//a");
@@ -446,7 +446,7 @@ namespace Jade
                                         }
                                         break;
                                     case XMLPathType.InnerTextWithPic:
-                                        result.Add(NoHTML(node.InnerXml));
+                                        result.Add(NoHTML(node.InnerXml).Trim());
                                         break;
                                 }
                             }
@@ -463,10 +463,10 @@ namespace Jade
                                             result.Add(node.Attributes["href"].Value.ToString());
                                         break;
                                     case XMLPathType.InnerHtml:
-                                        result.Add(node.InnerXml);
+                                        result.Add(node.InnerXml.Trim());
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText);
+                                        result.Add(node.InnerText.Trim());
                                         break;
                                     case XMLPathType.InnerLinks:
                                         var links = node.SelectNodes(".//a");
@@ -477,7 +477,7 @@ namespace Jade
                                         }
                                         break;
                                     case XMLPathType.InnerTextWithPic:
-                                        result.Add(NoHTML(node.InnerXml));
+                                        result.Add(NoHTML(node.InnerXml).Trim());
                                         break;
                                 }
                             }
@@ -519,13 +519,13 @@ namespace Jade
                                         result.Add(node.InnerHtml);
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText);
+                                        result.Add(node.InnerText.Trim());
                                         break;
                                     case XMLPathType.InnerLinks:
                                         result.AddRange(GetLinks(node));
                                         break;
                                     case XMLPathType.InnerTextWithPic:
-                                        result.Add(NoHTML(node.InnerHtml));
+                                        result.Add(NoHTML(node.InnerHtml).Trim());
                                         break;
                                 }
                             }
@@ -545,13 +545,13 @@ namespace Jade
                                         result.Add(node.InnerHtml);
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText);
+                                        result.Add(node.InnerText.Trim());
                                         break;
                                     case XMLPathType.InnerLinks:
                                         result.AddRange(GetLinks(node));
                                         break;
                                     case XMLPathType.InnerTextWithPic:
-                                        result.Add(NoHTML(node.InnerHtml));
+                                        result.Add(NoHTML(node.InnerHtml).Trim());
                                         break;
                                 }
                             }
