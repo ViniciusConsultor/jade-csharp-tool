@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentListPanel));
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -36,7 +35,7 @@
             this.taskName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Edited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
             this.Editor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsPublish = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GroupName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +52,7 @@
             this.cmbTags = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
@@ -200,6 +199,7 @@
             // 
             this.GroupName.Caption = "所属分组";
             this.GroupName.Name = "GroupName";
+            this.GroupName.OptionsColumn.AllowEdit = false;
             this.GroupName.Visible = true;
             this.GroupName.VisibleIndex = 5;
             // 
@@ -218,6 +218,7 @@
             this.Category.Caption = "标签";
             this.Category.FieldName = "Category";
             this.Category.Name = "Category";
+            this.Category.OptionsColumn.AllowEdit = false;
             this.Category.Visible = true;
             this.Category.VisibleIndex = 6;
             // 

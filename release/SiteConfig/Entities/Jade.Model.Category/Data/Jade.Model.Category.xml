@@ -8,4 +8,5 @@
   <Category _uuid="5fe94286-04ae-4922-b0b5-e244c3b3d87d" ID="6" ParentCategoryID="0" Name="伦敦奥运" />
   <Category _uuid="c01bd8e4-145f-4451-af3d-c48e26c5687d" ID="7" ParentCategoryID="0" Name="本地报媒" />
   <Category _uuid="9ee63b88-2464-487f-9e7e-8866321f6c9a" ID="8" ParentCategoryID="0" Name="儿童故事" />
+  <Category _uuid="a28d540b-cb40-4c94-94cb-fc226ad68ef2" ID="9" ParentCategoryID="0" Name="测试分组" />
 </XMLDatabase-Entities>
