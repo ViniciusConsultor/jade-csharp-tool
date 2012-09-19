@@ -45,7 +45,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.mainTab;
-            this.xtraTabControl1.Size = new System.Drawing.Size(869, 278);
+            this.xtraTabControl1.Size = new System.Drawing.Size(869, 203);
             this.xtraTabControl1.TabIndex = 3;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.mainTab,
@@ -56,7 +56,7 @@
             // 
             this.mainTab.Controls.Add(this.urlSelectorPanel1);
             this.mainTab.Name = "mainTab";
-            this.mainTab.Size = new System.Drawing.Size(863, 249);
+            this.mainTab.Size = new System.Drawing.Size(863, 174);
             this.mainTab.Text = "链接规则";
             // 
             // urlSelectorPanel1
@@ -65,16 +65,17 @@
             this.urlSelectorPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlSelectorPanel1.Location = new System.Drawing.Point(0, 0);
             this.urlSelectorPanel1.Name = "urlSelectorPanel1";
-            this.urlSelectorPanel1.Size = new System.Drawing.Size(863, 249);
+            this.urlSelectorPanel1.Size = new System.Drawing.Size(863, 174);
             this.urlSelectorPanel1.TabIndex = 0;
             this.urlSelectorPanel1.OnXpathSelectorClick += new System.EventHandler(this.urlSelectorPanel1_OnXpathSelectorClick);
             this.urlSelectorPanel1.OnTestClick += new System.EventHandler(this.urlSelectorPanel1_OnTestClick);
+            this.urlSelectorPanel1.OnSelectUrlClick += new System.EventHandler(this.urlSelectorPanel1_OnSelectUrlClick);
             // 
             // contentTab
             // 
             this.contentTab.Controls.Add(this.urlSelectorPanel2);
             this.contentTab.Name = "contentTab";
-            this.contentTab.Size = new System.Drawing.Size(863, 249);
+            this.contentTab.Size = new System.Drawing.Size(863, 174);
             this.contentTab.Text = "包含的内容页规则";
             // 
             // urlSelectorPanel2
@@ -83,10 +84,11 @@
             this.urlSelectorPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.urlSelectorPanel2.Location = new System.Drawing.Point(0, 0);
             this.urlSelectorPanel2.Name = "urlSelectorPanel2";
-            this.urlSelectorPanel2.Size = new System.Drawing.Size(863, 249);
+            this.urlSelectorPanel2.Size = new System.Drawing.Size(863, 174);
             this.urlSelectorPanel2.TabIndex = 1;
             this.urlSelectorPanel2.OnXpathSelectorClick += new System.EventHandler(this.urlSelectorPanel1_OnXpathSelectorClick);
             this.urlSelectorPanel2.OnTestClick += new System.EventHandler(this.urlSelectorPanel1_OnTestClick);
+            this.urlSelectorPanel2.OnSelectUrlClick += new System.EventHandler(this.urlSelectorPanel1_OnSelectUrlClick);
             // 
             // UrlSelectorMarker
             // 
@@ -94,7 +96,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControl1);
             this.Name = "UrlSelectorMarker";
-            this.Size = new System.Drawing.Size(869, 278);
+            this.Size = new System.Drawing.Size(869, 203);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.mainTab.ResumeLayout(false);

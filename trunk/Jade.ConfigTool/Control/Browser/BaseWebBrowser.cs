@@ -27,7 +27,8 @@ namespace Com.iFLYTEK.WinForms.Browser
         }
 
         void wb_BeforeNavigate2(object pDisp, ref object URL, ref object Flags, ref object TargetFrameName, ref object PostData, ref object Headers, ref bool Cancel)
-        {    
+        { 
+   
         }
 
         SHDocVw.IWebBrowser2 Iwb2;

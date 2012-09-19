@@ -23,8 +23,8 @@ namespace Jade
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
             webBrowser1.StartNewWindow += new EventHandler<Com.iFLYTEK.WinForms.Browser.BrowserExtendedNavigatingEventArgs>(webBrowser1_StartNewWindow);
             this.webBrowser1.AllowWebBrowserDrop = false;
-            this.webBrowser1.WebBrowserShortcutsEnabled = false;
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser1.WebBrowserShortcutsEnabled = true;
+            this.webBrowser1.IsWebBrowserContextMenuEnabled = true;
             this.webBrowser1.Quit += new EventHandler(webBrowser1_Quit);
 
             SHDocVw.WebBrowser wb = (SHDocVw.WebBrowser)this.webBrowser1.ActiveXInstance;

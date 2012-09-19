@@ -39,18 +39,39 @@ namespace Jade
                     this.InitializeItemRuleDetail(CurrentItemRule);
                 }
             }
-
         }
         #region InitializeUIItem
 
         private void InitializeUIItem(SiteRule row)
         {
-            radionInnerLinks.Checked = row.ListXMLPathType == Model.XMLPathType.InnerLinks;
+            if (row.SiteExractMode == SiteExractMode.ListContent)
+            {
+                this.radioButtonListPage.Checked = true;
+            }
+            else if (row.SiteExractMode == SiteExractMode.HomeListContent)
+            {
+                this.radioButtonAllSite.Checked = true;
+            }
+            else
+            {
+                this.radioButtonAllSite2.Checked = true;
+            }
+
+            //radionInnerLinks.Checked = row.ListXMLPathType == Model.XMLPathType.InnerLinks;
+            radioButtonNotWithSameDomain.Checked = !row.WithSameDomain;
+            radioButtonWithSameDomain.Checked = row.WithSameDomain;
+            this.txtHomePage.Text = row.IndexPage;
+            this.txtStartUrl.Text = row.Referer;
             //Fill Start Url List.
             this.txtRuleName.Text = row.Name;
-            this.txtLinkXPath.Text = row.ListXPath;
+            //this.txtLinkXPath.Text = row.ListXPath;
             this.chkIntervalTask.Checked = row.EnableAutoRun;
             this.txtInterval.Text = row.AutoRunInterval.ToString();
+
+            this.homePageUrlSelectorMarker.CurrentUrlSelector = row.ColumnUrlSelector;
+            this.columnPageUrlSelectorMarker.CurrentUrlSelector = row.LisPageUrlSelector;
+            this.listPageUrlSelectorMarker.CurrentUrlSelector = row.ListPagePagerUrlSelector;
+            this.contentUrlSelectorMarker.CurrentUrlSelector = row.ContentUrlSelector;
             //this.tbxFetchStartSymbolic.Text = row.PageStartAt;
             //this.tbxFetchEndSymbolic.Text = row.PageEndAt;
             //this.lbxUrls.Items.Clear();
@@ -241,12 +262,31 @@ namespace Jade
 
         public void UpdateSiteRule()
         {
-            CurrentSiteRule.Name = this.txtRuleName.Text;
-            CurrentSiteRule.ListXPath = this.txtLinkXPath.Text;
+            if (this.radioButtonListPage.Checked)
+            {
+                CurrentSiteRule.SiteExractMode = SiteExractMode.ListContent;
+            }
+            else if (this.radioButtonAllSite.Checked)
+            {
+                CurrentSiteRule.SiteExractMode = SiteExractMode.HomeListContent;
+            }
+            else
+            {
+                CurrentSiteRule.SiteExractMode = SiteExractMode.HomeColumnListContent;
+            }
 
-            CurrentSiteRule.ListXMLPathType = radionInnerLinks.Checked ? XMLPathType.InnerLinks : Model.XMLPathType.Href;
-            CurrentSiteRule.ListFetchType = ItemFetchType.XPath;
-            CurrentSiteRule.ListXMLPathSelectType = radionInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
+            this.homePageUrlSelectorMarker.UpdateUrlSelector();
+            this.columnPageUrlSelectorMarker.UpdateUrlSelector();
+            this.listPageUrlSelectorMarker.UpdateUrlSelector();
+            this.contentUrlSelectorMarker.UpdateUrlSelector();
+
+            CurrentSiteRule.WithSameDomain = this.radioButtonWithSameDomain.Checked;
+            CurrentSiteRule.Name = this.txtRuleName.Text;
+            CurrentSiteRule.IndexPage = this.txtHomePage.Text;
+
+            //CurrentSiteRule.ListXMLPathType = radionInnerLinks.Checked ? XMLPathType.InnerLinks : Model.XMLPathType.Href;
+            //CurrentSiteRule.ListFetchType = ItemFetchType.XPath;
+            //CurrentSiteRule.ListXMLPathSelectType = radionInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
             CurrentSiteRule.HttpMethod = "GET";
             if (string.IsNullOrEmpty(this.txtStartUrl.Text))
                 CurrentSiteRule.Referer = null;
@@ -254,7 +294,7 @@ namespace Jade
                 CurrentSiteRule.Referer = this.txtStartUrl.Text;
 
             CurrentSiteRule.ListPageType = ListPageType.Html;
-            if (this.contentBrowser.Document != null)
+            if (this.startUrlWebBrowser.Document != null)
             {
                 if (string.IsNullOrEmpty(this.startUrlWebBrowser.Document.Cookie))
                     CurrentSiteRule.Cookie = null;
@@ -262,7 +302,10 @@ namespace Jade
                     CurrentSiteRule.Cookie = this.startUrlWebBrowser.Document.Cookie;
 
                 CurrentSiteRule.ListEncoding = this.startUrlWebBrowser.Document.Encoding;
-                CurrentSiteRule.Encoding = this.contentBrowser.Document.Encoding;
+                if (contentBrowser.Document != null)
+                {
+                    CurrentSiteRule.Encoding = this.contentBrowser.Document.Encoding;
+                }
                 CurrentSiteRule.UserAgent = GetDefaultUserAgent();
             }
 
@@ -369,8 +412,8 @@ namespace Jade
             OnBrowserLoaded();
             this.enableNavigate = false;
             this.EnableSelect = true;
-            this.XMLPathType = radionInnerLinks.Checked ? XMLPathType.InnerLinks : XMLPathType.Href;
-            this.XMLPathSelectType = radionInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
+            // this.XMLPathType = radionInnerLinks.Checked ? XMLPathType.InnerLinks : XMLPathType.Href;
+            //this.XMLPathSelectType = radionInnerLinks.Checked ? Model.XMLPathSelectType.OnlyOne : Model.XMLPathSelectType.Multiple;
             this.CurrentXPathSelected = (xpath) =>
             {
                 TestContentPageExtract();
@@ -392,7 +435,7 @@ namespace Jade
             {
                 txt = "没有匹配结果";
             }
-            this.txtUrlResult.Text = txt;
+            //this.txtUrlResult.Text = txt;
         }
 
         private void stepItemRule_Click(object sender, EventArgs e)
@@ -421,8 +464,6 @@ namespace Jade
             string html, string sourceUrl,
             string encoding)
         {
-
-
             List<string> urls;
 
             //WebBrowser b = new WebBrowser();
@@ -431,11 +472,11 @@ namespace Jade
             //html = b.DocumentText;
             //b.Dispose();
             //b = null;
-            urls = ExtractUrl.ExtractAccurateUrl(CurrentSiteRule, html, sourceUrl);
+            //urls = ExtractUrl.ExtractAccurateUrl(CurrentSiteRule, html, sourceUrl);
 
-            TreeNode parentNode = new TreeNode(sourceUrl);
+            // TreeNode parentNode = new TreeNode(sourceUrl);
 
-            BindUrlTree(urls, parentNode);
+            //BindUrlTree(urls, parentNode);
         }
 
         private void BindUrlTree(List<string> urls, TreeNode parentNode)
@@ -478,10 +519,12 @@ namespace Jade
         XMLPathSelectType XMLPathSelectType;
         bool EnableSelect;
         TextEdit currentTxtbox;
+
         int SelectedCount = 0;
         string firstXpath = "";
         string secondXpath = "";
         bool enableNavigate = true;
+
         WebBrowser currenActiveBrowser;
         UrlSelectorMarker currentUrlMaker;
 
@@ -526,7 +569,8 @@ namespace Jade
                 Console.WriteLine(e.ToElement.ClientRectangle);
                 current.Style += "background-color:#9FC4E7;border:1px solid #0000CC;";
 
-                //this.currentTxtbox.Text = GetXmlPath(current);
+                //currentUrlMaker.Xpath = GetXmlPath(current);
+                currentUrlMaker.SetXPath(GetXmlPath(current));
             }
         }
 
@@ -696,6 +740,8 @@ namespace Jade
 
         HtmlElement last;
 
+        string lastXpath = "";
+
         void Document_Click(object sender, HtmlElementEventArgs e)
         {
             if (EnableSelect)
@@ -709,46 +755,70 @@ namespace Jade
 
                 var newPath = GetXmlPath(current);
 
-                //if (newPath == this.currentTxtbox.Text)
+                //if (newPath == currentUrlMaker.Xpath)
                 //{
                 //    return;
                 //}
-
-                this.currentTxtbox.Text = newPath;
-
+                //if (this.XMLPathSelectType == XMLPathSelectType.Multiple)
+                //{
+                //    currentUrlMaker.SetXPath(newPath);
+                //}
                 //if (XPathDic.ContainsKey(this.txtxmlpath.Text))
                 //{
                 //    this.treeXPath.SelectedNode = XPathDic[this.txtxmlpath.Text];
                 //}
-
+                currentUrlMaker.TipMessage = newPath;
                 if (this.XMLPathSelectType == XMLPathSelectType.Multiple)
                 {
                     SelectedCount++;
                     if (SelectedCount == 1)
                     {
-                        this.currentActiveLogLabel.Text = "你已经选择一次，请再选择和第一次选择同级的节点";
-                        firstXpath = this.currentTxtbox.Text;
+                        firstXpath = newPath;
+                        if (this.wizardControl1.SelectedPageIndex != 6)
+                        {
+                            currentUrlMaker.TipMessage = "你已经选择一次，请再选择和第一次选择同级的节点";
+                        }
+                        else
+                        {
+                            currentActiveLogLabel.Text = "你已经选择一次，请再选择和第一次选择同级的节点";
+                            currentTxtbox.Text = newPath;
+                        }
                     }
                     else
                     {
 
                         SelectedCount = 0;
-                        secondXpath = this.currentTxtbox.Text;
-
+                        secondXpath = newPath;
                         var commonPath = this.GetCommonXpath(firstXpath, secondXpath);
                         if (!string.IsNullOrEmpty(commonPath))
                         {
-                            this.currentActiveLogLabel.Text = "你已经选择两次，请测试是否正确";
-                            this.currentTxtbox.Text = commonPath;
+                            if (this.wizardControl1.SelectedPageIndex != 6)
+                            {
+                                currentUrlMaker.TipMessage = "你已经选择两次，请测试是否正确";
+                                currentUrlMaker.Xpath = commonPath;
+                            }
+                            else
+                            {
+                                currentActiveLogLabel.Text = "你已经选择两次，请测试是否正确";
+                                currentTxtbox.Text = commonPath;
+                            }
                         }
                         else
                         {
-                            this.currentActiveLogLabel.Text = "选择失败，必须选择同一级别的元素,不能是同一元素";
+                            if (this.wizardControl1.SelectedPageIndex != 6)
+                            {
+                                currentUrlMaker.TipMessage = "选择失败，必须选择同一级别的元素,不能是同一元素";
+                            }
+                            else
+                            {
+                                currentActiveLogLabel.Text = "选择失败，必须选择同一级别的元素,不能是同一元素";
+                            }
+
                         }
                         EnableSelect = false;
                         if (CurrentXPathSelected != null)
                         {
-                            CurrentXPathSelected(currentTxtbox.Text);
+                            CurrentXPathSelected(currentUrlMaker.Xpath);
                         }
                         current = null;
                     }
@@ -756,9 +826,14 @@ namespace Jade
                 else
                 {
                     EnableSelect = false;
+
+                    if (this.wizardControl1.SelectedPageIndex == 6)
+                    {
+                        currentTxtbox.Text = newPath;
+                    }
                     if (CurrentXPathSelected != null)
                     {
-                        CurrentXPathSelected(currentTxtbox.Text);
+                        CurrentXPathSelected(currentUrlMaker.Xpath);
                     }
                     current = null;
                 }
@@ -839,10 +914,13 @@ namespace Jade
 
         void OnBrowserLoaded()
         {
-            currenActiveBrowser.Document.Body.MouseOver -= new HtmlElementEventHandler(Body_MouseOver);
-            currenActiveBrowser.Document.Click -= new HtmlElementEventHandler(Document_Click);
-            currenActiveBrowser.Document.Body.MouseOver += new HtmlElementEventHandler(Body_MouseOver);
-            currenActiveBrowser.Document.Click += new HtmlElementEventHandler(Document_Click);
+            if (currenActiveBrowser.Document != null)
+            {
+                currenActiveBrowser.Document.Body.MouseOver -= new HtmlElementEventHandler(Body_MouseOver);
+                currenActiveBrowser.Document.Click -= new HtmlElementEventHandler(Document_Click);
+                currenActiveBrowser.Document.Body.MouseOver += new HtmlElementEventHandler(Body_MouseOver);
+                currenActiveBrowser.Document.Click += new HtmlElementEventHandler(Document_Click);
+            }
         }
 
         delegate void XPathSelected(string xpath);
@@ -852,21 +930,31 @@ namespace Jade
         public List<string> ExtractDataFromHtml()
         {
 
-            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.DocumentText, this.currentTxtbox.Text, XMLPathSelectType, XMLPathType);
+            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.DocumentText, currentUrlMaker.Xpath, XMLPathSelectType, XMLPathType);
+
+
+            var domain = this.txtHomePage.Text != "" ? new Uri(this.txtHomePage.Text).Host : new Uri(this.txtStartUrl.Text).Host;
+
+            var newResult = new List<string>();
 
             var pathType = this.XMLPathType;
-            var xpath = this.currentTxtbox.Text;
+            var xpath = currentUrlMaker.Xpath;
             switch (pathType)
             {
                 case XMLPathType.Href:
                 case XMLPathType.InnerLinks:
                     for (var i = 0; i < result.Count; i++)
                     {
-                        result[i] = RepairUrl(this.currenActiveBrowser.Url.AbsoluteUri, result[i]);
+                        var url = RepairUrl(this.currenActiveBrowser.Url.AbsoluteUri, result[i]);
+
+                        if (radioButtonNotWithSameDomain.Checked || url.Contains(domain))
+                        {
+                            newResult.Add(url);
+                        }
                     }
                     break;
             }
-            return result;
+            return newResult;
         }
 
         public static string RepairUrl(string baseUrl, string originalUrl)
@@ -932,7 +1020,7 @@ namespace Jade
             }
         }
 
-   
+
 
         #region IWorkingThread 成员
 
@@ -1058,7 +1146,7 @@ namespace Jade
             UpdateItemRule();
             this.XMLPathSelectType = CurrentItemRule.XMLPathSelectType;
             this.XMLPathType = CurrentItemRule.XMLPathType;
-            this.lblItemContentLog.Text = "请用鼠标选择，通过鼠标移动切换，左键点击选定";
+            currentUrlMaker.TipMessage = "请用鼠标选择，通过鼠标移动切换，左键点击选定";
         }
 
 
@@ -1150,34 +1238,86 @@ namespace Jade
                 // 首页 -列表 -列表分页-内容
                 if (radioButtonAllSite.Checked)
                 {
+                    this.currenActiveBrowser = startUrlWebBrowser;
                     if (this.txtStartUrl.Text != "")
                     {
                         this.enableNavigate = true;
                         this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
+                    }
+                    else
+                    {
+                        UpdateSiteRule();
+                        var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtHomePage.Text } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
+                        if (urlSet.ListPages.Count > 0)
+                        {
+                            this.txtStartUrl.Text = urlSet.ListPages[0];
+                            this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
+                        }
+                        else
+                        {
+                            e.Handled = true;
+                            MessageBox.Show("请限设置好规则再进入下一步！");
+                            return;
+                        }
                     }
                     this.currentUrlMaker = this.listPageUrlSelectorMarker;
                     this.wizardControl1.SelectedPage = startPage;
                     e.Handled = true;
                     return;
                 }
-                this.currenActiveBrowser = this.bwColumnPage;
-                this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
-                this.XMLPathType = Model.XMLPathType.Href;
-                this.currentUrlMaker = columnPageUrlSelectorMarker;
+
                 if (this.txtColumnPage.Text != "")
                 {
                     this.enableNavigate = true;
                     this.bwColumnPage.Navigate(txtColumnPage.Text);
                 }
+                else
+                {
+                    UpdateSiteRule();
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtHomePage.Text } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
+                    if (urlSet.ListPages.Count > 0)
+                    {
+                        this.txtColumnPage.Text = urlSet.ListPages[0];
+                        this.bwColumnPage.Navigate(txtColumnPage.Text);
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        MessageBox.Show("请限设置好规则再进入下一步！");
+                        return;
+                    }
+                }
+                this.currenActiveBrowser = this.bwColumnPage;
+                this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
+                this.XMLPathType = Model.XMLPathType.Href;
+                this.currentUrlMaker = columnPageUrlSelectorMarker;
             }
             else if (e.Page == this.columnPage)
             {
-                this.currentUrlMaker = this.listPageUrlSelectorMarker;
+
                 if (this.txtStartUrl.Text != "")
                 {
                     this.enableNavigate = true;
                     this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
                 }
+                else
+                {
+                    UpdateSiteRule();
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtColumnPage.Text } }, this.columnPageUrlSelectorMarker.CurrentUrlSelector);
+                    if (urlSet.ListPages.Count > 0)
+                    {
+                        this.txtStartUrl.Text = urlSet.ListPages[0];
+                        this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        MessageBox.Show("请限设置好规则再进入下一步！");
+                        return;
+                    }
+                }
+                this.currentUrlMaker = this.listPageUrlSelectorMarker;
+                this.currenActiveBrowser = startUrlWebBrowser;
             }
             else if (e.Page == this.startPage)
             {
@@ -1187,23 +1327,57 @@ namespace Jade
                     e.Handled = true;
                     return;
                 }
+                if (this.txtTestUrl.Text != "")
+                {
+                    this.contentBrowser.Navigate(this.txtTestUrl.Text);
+                }
+                else
+                {
+                    UpdateSiteRule();
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtStartUrl.Text } }, this.contentUrlSelectorMarker.CurrentUrlSelector);
+                    if (urlSet.ListPages.Count > 0)
+                    {
+                        this.txtTestUrl.Text = urlSet.ListPages[0];
+                        this.contentBrowser.Navigate(this.txtTestUrl.Text);
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        MessageBox.Show("请限设置好规则再进入下一步！");
+                        return;
+                    }
+                }
+
                 this.enableNavigate = true;
                 this.EnableSelect = false;
                 this.currenActiveBrowser = contentBrowser;
-                this.currentActiveLogLabel = lblContentTips;
-                this.currentTxtbox = txtLinkXPath;
                 this.XMLPathSelectType = Model.XMLPathSelectType.Multiple;
                 this.XMLPathType = Model.XMLPathType.Href;
-                this.contentBrowser.Navigate(this.txtStartUrl.Text);
+
+
                 this.isBindCompleted = false;
                 this.Url = new Uri(this.txtStartUrl.Text);
+                this.currentUrlMaker = contentUrlSelectorMarker;
                 isLink = true;
             }
             else if (e.Page == this.contentUrlPage)
             {
 
                 UpdateSiteRule();
-                List<Uri> urls = new List<Uri>();
+                //List<Uri> urls = new List<Uri>();
+
+                //if (!string.IsNullOrEmpty(CurrentSiteRule.ListPagePagerUrlSelector.DiyContentPageUrl))
+                //{
+                //    string[] rawUrls = CurrentSiteRule.ListPagePagerUrlSelector.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                //    if (rawUrls != null && rawUrls.Length > 0)
+                //    {
+                //        foreach (string url in rawUrls)
+                //        {
+                //            urls.Add(new Uri(url));
+                //        }
+                //    }
+                //}
+
                 //foreach (string sourceUrl in lbxUrls.Items)
                 //{
                 //    List<string> sourceUrls = new List<string>();
@@ -1227,13 +1401,6 @@ namespace Jade
                 //    }
                 //}
 
-                if (urls.Count == 0)
-                {
-                    MessageBox.Show(this, "没有合法的测试采集网址！", "测试采集网址错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    e.Handled = true;
-                    return;
-                }
-
                 itemRuleIndex = 0;
 
                 this.trvUrlTree.Nodes.Clear();
@@ -1245,56 +1412,247 @@ namespace Jade
 
                 var item = CurrentSiteRule;
 
+                var urlSet = new UrlSet();
+                TreeNode parentNode = null;
+                if (this.CurrentSiteRule.SiteExractMode == SiteExractMode.ListContent)
+                {
+                    urlSet.ListPages.Add(this.CurrentSiteRule.Referer);
+                    parentNode = new TreeNode(this.CurrentSiteRule.Referer);
+                }
+                else
+                {
+                    urlSet.ListPages.Add(this.CurrentSiteRule.IndexPage);
+                    parentNode = new TreeNode(this.CurrentSiteRule.IndexPage);
+                }
+
+                this.trvUrlTree.Nodes.Clear();
+                this.trvUrlTree.Nodes.Add(parentNode);
+
                 this.workingThread = new Thread(delegate()
                 {
-
-                    if (!string.IsNullOrEmpty(item.DiyContentPageUrl))
-                    {
-                        string[] dirBaseUrls = item.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
-                        List<string> dirUrls = new List<string>();
-                        if (urls != null && dirBaseUrls.Length > 0)
-                        {
-                            foreach (string url in dirBaseUrls)
-                            {
-                                dirUrls.AddRange(ExtractUrl.ParseUrlFromParameter(url));
-                            }
-                        }
-                        TreeNode parentNode = new TreeNode("用户自定义");
-                        BindUrlTree(dirUrls, parentNode);
-                    }
+                    //if (!string.IsNullOrEmpty(item.DiyContentPageUrl))
+                    //{
+                    //    string[] dirBaseUrls = item.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                    //    List<string> dirUrls = new List<string>();
+                    //    if (urls != null && dirBaseUrls.Length > 0)
+                    //    {
+                    //        foreach (string url in dirBaseUrls)
+                    //        {
+                    //            dirUrls.AddRange(ExtractUrl.ParseUrlFromParameter(url));
+                    //        }
+                    //    }
+                    //    TreeNode parentNode = new TreeNode("用户自定义");
+                    //    BindUrlTree(dirUrls, parentNode);
+                    //}
 
                     int i = 0;
-                    while (true)
+
+                    //while (true)
+                    //{
+                    //if (i == urls.Count)
+                    //{
+                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                     {
-                        if (i == urls.Count)
+                        loadingDialog.Percentage = 10;
+                        this.loadingDialog.Refresh();
+                    }));
+
+                    //    break;
+                    //}
+
+
+                    if (this.CurrentSiteRule.SiteExractMode != SiteExractMode.ListContent)
+                    {
+                        // 栏目页面
+                        urlSet = this.CurrentSiteRule.ProcessUrlSet(urlSet, CurrentSiteRule.ColumnUrlSelector);
+
+                        foreach (var sourceUrl in urlSet.ListPages)
                         {
+                            TreeNode node = new TreeNode(sourceUrl);
                             loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                             {
-                                loadingDialog.Percentage = 100;
+                                loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                                 this.loadingDialog.Refresh();
-                                this.loadingDialog.Close();
+                                parentNode.Nodes.Add(node);
                             }));
 
-                            break;
+                            if (CurrentSiteRule.SiteExractMode == SiteExractMode.HomeListContent)
+                            {
+                                // 列表分页
+                                var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { sourceUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
+                                foreach (var cUrl in childSet.ListPages)
+                                {
+
+                                    TreeNode cnode = new TreeNode(cUrl);
+
+                                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                    {
+                                        loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                        this.loadingDialog.Refresh();
+                                        node.Nodes.Add(cnode);
+                                    }));
+
+                                    // 列表
+                                    var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                    {
+                                        loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                        this.loadingDialog.Refresh();
+                                        foreach (var cUrl2 in childSet2.ListPages)
+                                        {
+                                            TreeNode cnode2 = new TreeNode(cUrl2);
+                                            cnode.Nodes.Add(cnode2);
+                                        }
+                                        foreach (var cUrl2 in childSet2.ContetnPages)
+                                        {
+                                            TreeNode cnode2 = new TreeNode(cUrl2);
+                                            cnode.Nodes.Add(cnode2);
+                                        } //  列表 end
+                                    }));
+                                }
+                                loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                {
+                                    loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                    this.loadingDialog.Refresh();
+                                    foreach (var cUrl in childSet.ContetnPages)
+                                    {
+                                        TreeNode cnode = new TreeNode(cUrl);
+                                        node.Nodes.Add(cnode);
+                                    } //  列表分页 end
+                                }));
+                            }
+                            else
+                            {
+                                // 列表页面
+                                var columnSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { sourceUrl } }, CurrentSiteRule.LisPageUrlSelector);
+
+                                foreach (var listUrl in columnSet.ContetnPages)
+                                {
+                                    TreeNode listNode = new TreeNode(listUrl);
+                                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                    {
+                                        loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                        this.loadingDialog.Refresh();
+                                        node.Nodes.Add(listNode);
+                                    }));
+
+                                    // 列表分页
+                                    var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { listUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
+
+                                    foreach (var cUrl in childSet.ListPages)
+                                    {
+                                        TreeNode cnode = new TreeNode(cUrl);
+                                        loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                        {
+                                            loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                            this.loadingDialog.Refresh();
+                                            listNode.Nodes.Add(cnode);
+                                        }));
+
+                                        // 列表
+                                        var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                                        loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                        {
+                                            foreach (var cUrl2 in childSet2.ListPages)
+                                            {
+                                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                                cnode.Nodes.Add(cnode2);
+                                            }
+                                            foreach (var cUrl2 in childSet2.ContetnPages)
+                                            {
+                                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                                cnode.Nodes.Add(cnode2);
+                                            } //  列表 end
+                                        }));
+                                    }
+                                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                    {
+                                        loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                        this.loadingDialog.Refresh();
+                                        foreach (var cUrl in childSet.ContetnPages)
+                                        {
+                                            TreeNode cnode = new TreeNode(cUrl);
+                                            node.Nodes.Add(cnode);
+                                        } //  列表分页 end
+                                    }));
+                                }
+                                loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                                {
+                                    loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                    this.loadingDialog.Refresh();
+                                    foreach (var cUrl in columnSet.ContetnPages)
+                                    {
+                                        TreeNode cnode = new TreeNode(cUrl);
+                                        node.Nodes.Add(cnode);
+                                    } //  列表分页 end
+                                }));
+                            }
+
+                            //BindUrlTree(urls, parentNode);
                         }
-                        var html = HtmlPicker.VisitUrl(urls[i],
-                                                           item.HttpMethod,
-                                                           null,
-                                                           string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                                       string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                                       string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
-                                                       string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
-                                                           System.Text.Encoding.GetEncoding(item.ListEncoding));
-
-                        SetExtractUrl(item, html, urls[i].AbsoluteUri, item.ListEncoding);
-                        i++;
-
                         loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                         {
-                            loadingDialog.Refresh();
-                            loadingDialog.Percentage = 100 * i / urls.Count;
+                            loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                            this.loadingDialog.Refresh();
+                            foreach (var url in urlSet.ContetnPages)
+                            {
+                                TreeNode node = new TreeNode(url);
+                                parentNode.Nodes.Add(node);
+                            }
                         }));
                     }
+                    else
+                    {
+                        urlSet = this.CurrentSiteRule.ProcessUrlSet(urlSet, CurrentSiteRule.ListPagePagerUrlSelector);
+                        foreach (var cUrl in urlSet.ListPages)
+                        {
+                            TreeNode cnode = new TreeNode(cUrl);
+
+                            // 列表
+                            var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                            foreach (var cUrl2 in childSet2.ListPages)
+                            {
+                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                cnode.Nodes.Add(cnode2);
+                            }
+                            foreach (var cUrl2 in childSet2.ContetnPages)
+                            {
+                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                cnode.Nodes.Add(cnode2);
+                            } //  列表 end
+
+                            loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                            {
+                                loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
+                                this.loadingDialog.Refresh();
+                                parentNode.Nodes.Add(cnode);
+                            }));
+                        }
+                        foreach (var cUrl in urlSet.ContetnPages)
+                        {
+                            TreeNode cnode = new TreeNode(cUrl);
+                            parentNode.Nodes.Add(cnode);
+                        } //  列表分页 end
+                    }
+
+                    //var html = HtmlPicker.VisitUrl(urls[i],
+                    //                                   item.HttpMethod,
+                    //                                   null,
+                    //                                   string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                    //                               string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                    //                               string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                    //                               string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                    //                                   System.Text.Encoding.GetEncoding(item.ListEncoding));
+
+                    //SetExtractUrl(item, html, urls[i].AbsoluteUri, item.ListEncoding);
+                    //i++;
+
+                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        loadingDialog.Refresh();
+                        loadingDialog.Close();
+                    }));
+
                 });
                 this.workingThread.Start();
                 isLink = false;
@@ -1410,6 +1768,8 @@ namespace Jade
             BindBrowseEvent(startUrlWebBrowser);
             BindBrowseEvent(contentBrowser);
             BindBrowseEvent(itemWebBrowser);
+            BindBrowseEvent(bwHomePage);
+            BindBrowseEvent(bwColumnPage);
         }
 
         /// <summary>
@@ -1665,6 +2025,9 @@ namespace Jade
             OnBrowserLoaded();
             this.enableNavigate = false;
             this.EnableSelect = true;
+            this.XMLPathSelectType = currentUrlMaker.CurrentXMLPathSelectType;
+            this.XMLPathType = currentUrlMaker.CurrentXMLPathType;
+
             this.CurrentXPathSelected = (xpath) =>
             {
                 currentUrlMaker.SetXPath(xpath);
@@ -1672,13 +2035,24 @@ namespace Jade
                 currentUrlMaker.SetUrlResult(Datas);
                 if (Datas.Count > 0)
                 {
-                    if (wizardControl1.SelectedPage == homePage && this.txtColumnPage.Text == "")
+                    if (wizardControl1.SelectedPage == homePage)
                     {
-                        this.txtColumnPage.Text = Datas[0];
+                        if (this.txtColumnPage.Text == "" && this.radioButtonAllSite2.Checked)
+                        {
+                            this.txtColumnPage.Text = Datas[0];
+                        }
+                        else if (this.txtStartUrl.Text == "" && this.radioButtonAllSite.Checked)
+                        {
+                            this.txtStartUrl.Text = Datas[0];
+                        }
                     }
                     else if (wizardControl1.SelectedPage == columnPage && this.txtStartUrl.Text == "")
                     {
                         this.txtStartUrl.Text = Datas[0];
+                    }
+                    else if (wizardControl1.SelectedPage == startPage && this.txtTestUrl.Text == "")
+                    {
+                        this.txtTestUrl.Text = Datas[0];
                     }
                 }
             };
@@ -1688,6 +2062,23 @@ namespace Jade
         {
             var Datas = ExtractDataFromHtml();
             currentUrlMaker.SetUrlResult(Datas);
+        }
+
+        private void UrlSelectorMarker_OnSelectUrlClick(object sender, EventArgs e)
+        {
+            OnBrowserLoaded();
+            this.enableNavigate = false;
+            this.EnableSelect = true;
+            this.XMLPathSelectType = Model.XMLPathSelectType.OnlyOne;
+            this.XMLPathType = Model.XMLPathType.Href;
+            this.CurrentXPathSelected = (xpath) =>
+            {
+                var Datas = ExtractDataFromHtml();
+                if (Datas.Count > 0)
+                {
+                    currentUrlMaker.SelectUrlClickFinish(Datas[0]);
+                }
+            };
         }
 
     }

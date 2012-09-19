@@ -234,6 +234,7 @@
       <DependentUpon>LoadingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\IHtmlFecter.cs" />
     <Compile Include="Model\IUrlFilter.cs" />
     <Compile Include="Model\KeyValue.cs" />
     <Compile Include="Model\KeyValueContent.cs" />

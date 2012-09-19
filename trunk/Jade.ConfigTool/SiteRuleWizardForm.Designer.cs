@@ -33,8 +33,8 @@
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
             this.groupControl9 = new DevExpress.XtraEditors.GroupControl();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButtonNotWithSameDomain = new System.Windows.Forms.RadioButton();
+            this.radioButtonWithSameDomain = new System.Windows.Forms.RadioButton();
             this.groupControl8 = new DevExpress.XtraEditors.GroupControl();
             this.radioButtonAllSite2 = new System.Windows.Forms.RadioButton();
             this.radioButtonListPage = new System.Windows.Forms.RadioButton();
@@ -65,19 +65,9 @@
             this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
-            this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.radioHref = new System.Windows.Forms.RadioButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblContentTips = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.radionInnerLinks = new System.Windows.Forms.RadioButton();
-            this.txtUrlResult = new System.Windows.Forms.RichTextBox();
+            this.contentUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.previewPage = new DevExpress.XtraWizard.WizardPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnFetchUrl = new DevExpress.XtraEditors.SimpleButton();
@@ -168,7 +158,6 @@
             this.contentUrlPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLinkXPath.Properties)).BeginInit();
             this.previewPage.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.contentDetailPage.SuspendLayout();
@@ -248,35 +237,35 @@
             // 
             // groupControl9
             // 
-            this.groupControl9.Controls.Add(this.radioButton3);
-            this.groupControl9.Controls.Add(this.radioButton4);
+            this.groupControl9.Controls.Add(this.radioButtonNotWithSameDomain);
+            this.groupControl9.Controls.Add(this.radioButtonWithSameDomain);
             this.groupControl9.Location = new System.Drawing.Point(357, 134);
             this.groupControl9.Name = "groupControl9";
             this.groupControl9.Size = new System.Drawing.Size(311, 85);
             this.groupControl9.TabIndex = 103;
             this.groupControl9.Text = "页面地址控制";
             // 
-            // radioButton3
+            // radioButtonNotWithSameDomain
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(25, 62);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(109, 18);
-            this.radioButton3.TabIndex = 100;
-            this.radioButton3.Text = "域名可以不一致";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButtonNotWithSameDomain.AutoSize = true;
+            this.radioButtonNotWithSameDomain.Location = new System.Drawing.Point(25, 62);
+            this.radioButtonNotWithSameDomain.Name = "radioButtonNotWithSameDomain";
+            this.radioButtonNotWithSameDomain.Size = new System.Drawing.Size(109, 18);
+            this.radioButtonNotWithSameDomain.TabIndex = 100;
+            this.radioButtonNotWithSameDomain.Text = "域名可以不一致";
+            this.radioButtonNotWithSameDomain.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radioButtonWithSameDomain
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(25, 34);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(253, 18);
-            this.radioButton4.TabIndex = 98;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "域名必须一致（内容页和列表页域名一致）";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButtonWithSameDomain.AutoSize = true;
+            this.radioButtonWithSameDomain.Checked = true;
+            this.radioButtonWithSameDomain.Location = new System.Drawing.Point(25, 34);
+            this.radioButtonWithSameDomain.Name = "radioButtonWithSameDomain";
+            this.radioButtonWithSameDomain.Size = new System.Drawing.Size(253, 18);
+            this.radioButtonWithSameDomain.TabIndex = 98;
+            this.radioButtonWithSameDomain.TabStop = true;
+            this.radioButtonWithSameDomain.Text = "域名必须一致（内容页和列表页域名一致）";
+            this.radioButtonWithSameDomain.UseVisualStyleBackColor = true;
             // 
             // groupControl8
             // 
@@ -501,9 +490,9 @@
             // 
             this.panel1.Controls.Add(this.listPageUrlSelectorMarker);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 86);
+            this.panel1.Location = new System.Drawing.Point(0, 163);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(859, 281);
+            this.panel1.Size = new System.Drawing.Size(859, 204);
             this.panel1.TabIndex = 108;
             // 
             // listPageUrlSelectorMarker
@@ -512,8 +501,13 @@
             this.listPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
             this.listPageUrlSelectorMarker.Name = "listPageUrlSelectorMarker";
-            this.listPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
+            this.listPageUrlSelectorMarker.OnlyShowList = false;
+            this.listPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 204);
             this.listPageUrlSelectorMarker.TabIndex = 0;
+            this.listPageUrlSelectorMarker.Xpath = "";
+            this.listPageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
+            this.listPageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
+            this.listPageUrlSelectorMarker.OnSelectUrlClick += new System.EventHandler(this.UrlSelectorMarker_OnSelectUrlClick);
             // 
             // simpleButton2
             // 
@@ -554,7 +548,7 @@
             this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.startUrlWebBrowser.Name = "startUrlWebBrowser";
             this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(837, 51);
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(837, 128);
             this.startUrlWebBrowser.TabIndex = 6;
             // 
             // completionWizardPage1
@@ -566,12 +560,35 @@
             // 
             // contentUrlPage
             // 
-            this.contentUrlPage.Controls.Add(this.contentBrowser);
             this.contentUrlPage.Controls.Add(this.panelControl1);
+            this.contentUrlPage.Controls.Add(this.contentBrowser);
             this.contentUrlPage.DescriptionText = "内容网址是指内容所在的网页网址，一般从列表页面获取，列表页面就是上一步设置的起始页面和选择的分页页面";
             this.contentUrlPage.Name = "contentUrlPage";
             this.contentUrlPage.Size = new System.Drawing.Size(859, 367);
             this.contentUrlPage.Text = "选取内容页";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.contentUrlSelectorMarker);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl1.Location = new System.Drawing.Point(0, 162);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(859, 205);
+            this.panelControl1.TabIndex = 98;
+            // 
+            // contentUrlSelectorMarker
+            // 
+            this.contentUrlSelectorMarker.CurrentUrlSelector = null;
+            this.contentUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentUrlSelectorMarker.Location = new System.Drawing.Point(2, 2);
+            this.contentUrlSelectorMarker.Name = "contentUrlSelectorMarker";
+            this.contentUrlSelectorMarker.OnlyShowList = false;
+            this.contentUrlSelectorMarker.Size = new System.Drawing.Size(855, 201);
+            this.contentUrlSelectorMarker.TabIndex = 0;
+            this.contentUrlSelectorMarker.Xpath = "";
+            this.contentUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
+            this.contentUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
+            this.contentUrlSelectorMarker.OnSelectUrlClick += new System.EventHandler(this.UrlSelectorMarker_OnSelectUrlClick);
             // 
             // contentBrowser
             // 
@@ -582,135 +599,8 @@
             this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.contentBrowser.Name = "contentBrowser";
             this.contentBrowser.ScriptErrorsSuppressed = true;
-            this.contentBrowser.Size = new System.Drawing.Size(850, 222);
+            this.contentBrowser.Size = new System.Drawing.Size(850, 162);
             this.contentBrowser.TabIndex = 97;
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.txtLinkXPath);
-            this.panelControl1.Controls.Add(this.linkUrlSeniorSetting);
-            this.panelControl1.Controls.Add(this.simpleButton4);
-            this.panelControl1.Controls.Add(this.radioHref);
-            this.panelControl1.Controls.Add(this.simpleButton1);
-            this.panelControl1.Controls.Add(this.label8);
-            this.panelControl1.Controls.Add(this.lblContentTips);
-            this.panelControl1.Controls.Add(this.label7);
-            this.panelControl1.Controls.Add(this.label6);
-            this.panelControl1.Controls.Add(this.radionInnerLinks);
-            this.panelControl1.Controls.Add(this.txtUrlResult);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 235);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(859, 132);
-            this.panelControl1.TabIndex = 0;
-            // 
-            // txtLinkXPath
-            // 
-            this.txtLinkXPath.Location = new System.Drawing.Point(122, 43);
-            this.txtLinkXPath.Name = "txtLinkXPath";
-            this.txtLinkXPath.Size = new System.Drawing.Size(493, 20);
-            this.txtLinkXPath.TabIndex = 109;
-            // 
-            // linkUrlSeniorSetting
-            // 
-            this.linkUrlSeniorSetting.AutoSize = true;
-            this.linkUrlSeniorSetting.Location = new System.Drawing.Point(12, 72);
-            this.linkUrlSeniorSetting.Name = "linkUrlSeniorSetting";
-            this.linkUrlSeniorSetting.Size = new System.Drawing.Size(55, 14);
-            this.linkUrlSeniorSetting.TabIndex = 108;
-            this.linkUrlSeniorSetting.TabStop = true;
-            this.linkUrlSeniorSetting.Text = "高级设置";
-            this.linkUrlSeniorSetting.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUrlSeniorSetting_LinkClicked);
-            // 
-            // simpleButton4
-            // 
-            this.simpleButton4.Location = new System.Drawing.Point(744, 9);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(101, 38);
-            this.simpleButton4.TabIndex = 107;
-            this.simpleButton4.Text = "点此开始选择";
-            this.simpleButton4.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // radioHref
-            // 
-            this.radioHref.AutoSize = true;
-            this.radioHref.Checked = true;
-            this.radioHref.Location = new System.Drawing.Point(187, 15);
-            this.radioHref.Name = "radioHref";
-            this.radioHref.Size = new System.Drawing.Size(73, 18);
-            this.radioHref.TabIndex = 106;
-            this.radioHref.TabStop = true;
-            this.radioHref.Text = "链接网址";
-            this.radioHref.UseVisualStyleBackColor = true;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(621, 41);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(72, 21);
-            this.simpleButton1.TabIndex = 105;
-            this.simpleButton1.Text = "测试";
-            this.simpleButton1.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 94);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(83, 14);
-            this.label8.TabIndex = 103;
-            this.label8.Text = "选择网址预览:";
-            // 
-            // lblContentTips
-            // 
-            this.lblContentTips.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblContentTips.AutoSize = true;
-            this.lblContentTips.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblContentTips.Location = new System.Drawing.Point(305, 18);
-            this.lblContentTips.Name = "lblContentTips";
-            this.lblContentTips.Size = new System.Drawing.Size(367, 14);
-            this.lblContentTips.TabIndex = 95;
-            this.lblContentTips.Text = "请用鼠标选择分页网址所在的框，鼠标移动选择，点击鼠标左键选定";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 14);
-            this.label7.TabIndex = 100;
-            this.label7.Text = "可视化路径：";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 14);
-            this.label6.TabIndex = 99;
-            this.label6.Text = "选择模式：";
-            // 
-            // radionInnerLinks
-            // 
-            this.radionInnerLinks.AutoSize = true;
-            this.radionInnerLinks.Location = new System.Drawing.Point(86, 14);
-            this.radionInnerLinks.Name = "radionInnerLinks";
-            this.radionInnerLinks.Size = new System.Drawing.Size(97, 18);
-            this.radionInnerLinks.TabIndex = 98;
-            this.radionInnerLinks.Text = "所选框内网址";
-            this.radionInnerLinks.UseVisualStyleBackColor = true;
-            // 
-            // txtUrlResult
-            // 
-            this.txtUrlResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUrlResult.Location = new System.Drawing.Point(122, 68);
-            this.txtUrlResult.Name = "txtUrlResult";
-            this.txtUrlResult.Size = new System.Drawing.Size(722, 61);
-            this.txtUrlResult.TabIndex = 97;
-            this.txtUrlResult.Text = "";
             // 
             // previewPage
             // 
@@ -1218,9 +1108,9 @@
             // 
             this.panel2.Controls.Add(this.homePageUrlSelectorMarker);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 91);
+            this.panel2.Location = new System.Drawing.Point(0, 168);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(859, 276);
+            this.panel2.Size = new System.Drawing.Size(859, 199);
             this.panel2.TabIndex = 106;
             // 
             // homePageUrlSelectorMarker
@@ -1229,10 +1119,13 @@
             this.homePageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.homePageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
             this.homePageUrlSelectorMarker.Name = "homePageUrlSelectorMarker";
-            this.homePageUrlSelectorMarker.Size = new System.Drawing.Size(859, 276);
+            this.homePageUrlSelectorMarker.OnlyShowList = false;
+            this.homePageUrlSelectorMarker.Size = new System.Drawing.Size(859, 199);
             this.homePageUrlSelectorMarker.TabIndex = 0;
+            this.homePageUrlSelectorMarker.Xpath = "";
             this.homePageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
             this.homePageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
+            this.homePageUrlSelectorMarker.OnSelectUrlClick += new System.EventHandler(this.UrlSelectorMarker_OnSelectUrlClick);
             // 
             // txtHomePage
             // 
@@ -1262,7 +1155,7 @@
             this.bwHomePage.MinimumSize = new System.Drawing.Size(20, 20);
             this.bwHomePage.Name = "bwHomePage";
             this.bwHomePage.ScriptErrorsSuppressed = true;
-            this.bwHomePage.Size = new System.Drawing.Size(853, 53);
+            this.bwHomePage.Size = new System.Drawing.Size(853, 140);
             this.bwHomePage.TabIndex = 103;
             // 
             // columnPage
@@ -1315,16 +1208,16 @@
             this.bwColumnPage.MinimumSize = new System.Drawing.Size(20, 20);
             this.bwColumnPage.Name = "bwColumnPage";
             this.bwColumnPage.ScriptErrorsSuppressed = true;
-            this.bwColumnPage.Size = new System.Drawing.Size(853, 45);
+            this.bwColumnPage.Size = new System.Drawing.Size(853, 123);
             this.bwColumnPage.TabIndex = 108;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.columnPageUrlSelectorMarker);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 86);
+            this.panel3.Location = new System.Drawing.Point(0, 164);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(859, 281);
+            this.panel3.Size = new System.Drawing.Size(859, 203);
             this.panel3.TabIndex = 107;
             // 
             // columnPageUrlSelectorMarker
@@ -1333,10 +1226,13 @@
             this.columnPageUrlSelectorMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.columnPageUrlSelectorMarker.Location = new System.Drawing.Point(0, 0);
             this.columnPageUrlSelectorMarker.Name = "columnPageUrlSelectorMarker";
-            this.columnPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 281);
+            this.columnPageUrlSelectorMarker.OnlyShowList = false;
+            this.columnPageUrlSelectorMarker.Size = new System.Drawing.Size(859, 203);
             this.columnPageUrlSelectorMarker.TabIndex = 0;
+            this.columnPageUrlSelectorMarker.Xpath = "";
             this.columnPageUrlSelectorMarker.OnXpathSelectorClick += new System.EventHandler(this.UrlSelectorMarker_OnXpathSelectorClick);
             this.columnPageUrlSelectorMarker.OnTestClick += new System.EventHandler(this.UrlSelectorMarker_OnTestClick);
+            this.columnPageUrlSelectorMarker.OnSelectUrlClick += new System.EventHandler(this.UrlSelectorMarker_OnSelectUrlClick);
             // 
             // startUrlmenu
             // 
@@ -1418,8 +1314,6 @@
             this.contentUrlPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLinkXPath.Properties)).EndInit();
             this.previewPage.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.contentDetailPage.ResumeLayout(false);
@@ -1480,14 +1374,6 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private DevExpress.XtraWizard.WizardPage contentUrlPage;
         private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser contentBrowser;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lblContentTips;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RadioButton radionInnerLinks;
-        private System.Windows.Forms.RichTextBox txtUrlResult;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraWizard.WizardPage previewPage;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -1520,9 +1406,6 @@
         private System.Windows.Forms.ToolStripMenuItem 浏览ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 清空ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查看代码ToolStripMenuItem;
-        private System.Windows.Forms.RadioButton radioHref;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private System.Windows.Forms.LinkLabel linkUrlSeniorSetting;
         private DevExpress.XtraTab.XtraTabControl itemRuleTab;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageTitle;
         private DevExpress.XtraEditors.PanelControl ItemContrainerPanel;
@@ -1536,7 +1419,6 @@
         private DevExpress.XtraEditors.TextEdit txtCXpath;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.TextEdit txtLinkXPath;
         private DevExpress.XtraEditors.TextEdit txtInterval;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private DevExpress.XtraEditors.GroupControl groupControl4;
@@ -1557,8 +1439,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraWizard.WizardPage homePage;
         private DevExpress.XtraEditors.GroupControl groupControl9;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButtonNotWithSameDomain;
+        private System.Windows.Forms.RadioButton radioButtonWithSameDomain;
         private DevExpress.XtraEditors.GroupControl groupControl8;
         private System.Windows.Forms.RadioButton radioButtonListPage;
         private System.Windows.Forms.RadioButton radioButtonAllSite;
@@ -1579,5 +1461,7 @@
         private ConfigTool.UrlSelectorMarker columnPageUrlSelectorMarker;
         private System.Windows.Forms.Panel panel1;
         private ConfigTool.UrlSelectorMarker listPageUrlSelectorMarker;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private ConfigTool.UrlSelectorMarker contentUrlSelectorMarker;
     }
 }
