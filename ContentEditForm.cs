@@ -301,12 +301,24 @@ namespace Jade
                 }
             }
 
-            CurrentData.news_source_name = this.txtnews_source_name.Text;
+            if (this.txtnews_source_name.Text != "")
+            {
+                CurrentData.news_source_name = this.txtnews_source_name.Text;
+            }
+            else
+            {
+                CurrentData.news_source_name = RemoteWebService.Instance.GetSource()[0].DisplayName;
+            }
 
             if (this.txt_news_template_file.SelectedItem != null)
             {
                 CurrentData.news_template_file = (this.txt_news_template_file.SelectedItem as DisplayNameValuePair).Value;
             }
+            else
+            {
+                CurrentData.news_template_file = (txt_news_template_file.Items[0] as DisplayNameValuePair).Value;
+            }
+
             CurrentData.IsEdit = true;
             CurrentData.EditTime = DateTime.Now;
             CurrentData.EditorUserName = CacheObject.CurrentUser.Name;
@@ -489,63 +501,7 @@ namespace Jade
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if (CacheObject.IsLognIn)
-            {
-
-                if (this.txt_tags.Text == "")
-                {
-                    MessageBox.Show("请选择标签！'");
-                    return;
-                }
-
-                if (this.txt_news_keywords.Text == "")
-                {
-                    MessageBox.Show("请填写关键字！'");
-                    return;
-                }
-
-                if (this.txt_news_keyword2.Text == "")
-                {
-                    MessageBox.Show("请填写SEO关键字！'");
-                    return;
-                }
-                loadingDialog = new LoadingDialog();
-                loadingDialog.Show();
-                loadingDialog.Message = "正在保存数据到服务器....";
-                loadingDialog.Refresh();
-
-                UpdateCurrentData();
-                if (RemoteAPI.Publish(CurrentData))
-                {
-                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
-                    {
-                        loadingDialog.Refresh();
-                        loadingDialog.Message = "保存成功，正在送签发....";
-                    }));
-                    RemoteAPI.SendNews(CurrentData.RemoteId, true);
-                    CurrentData.IsPublish = true;
-                    loadingDialog.BeginInvoke(new MethodInvoker(delegate()
-                    {
-                        loadingDialog.Refresh();
-                        loadingDialog.Message = "送签发成功，正在保存到数据库....";
-                    }));
-
-                    CacheObject.DownloadDataDAL.Update(CurrentData);
-
-                    loadingDialog.Close();
-
-                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("发布失败，服务器响应'修改失败！'");
-                }
-            }
-            else
-            {
-                MessageBox.Show("对不起，你还没有登录，不能往服务器发送内容");
-            }
+            PublishContent(true);
         }
 
         bool isProcess = false;
@@ -611,7 +567,11 @@ namespace Jade
         LoadingDialog loadingDialog;
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
+            PublishContent();
+        }
 
+        private void PublishContent(bool sendToCheck = false)
+        {
             if (CacheObject.IsLognIn)
             {
 
@@ -643,6 +603,15 @@ namespace Jade
 
                 if (RemoteAPI.Publish(CurrentData))
                 {
+                    if (sendToCheck)
+                    {
+                        loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                        {
+                            loadingDialog.Refresh();
+                            loadingDialog.Message = "保存成功，正在送签发....";
+                        }));
+                        RemoteAPI.SendNews(CurrentData.RemoteId, true);
+                    }
                     CurrentData.IsPublish = true;
 
                     loadingDialog.BeginInvoke(new MethodInvoker(delegate()
@@ -659,6 +628,7 @@ namespace Jade
                 }
                 else
                 {
+                    loadingDialog.Close();
                     MessageBox.Show("发布失败，服务器响应'修改失败！'");
                 }
             }

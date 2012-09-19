@@ -16,7 +16,7 @@ namespace Jade
 {
     public class CacheObject
     {
-        public static int MaxRequestCount = 10;
+        public static int MaxRequestCount = 20;
         public static int CurrentRequestCount = 0;
         static CacheObject()
         {
@@ -854,7 +854,7 @@ namespace Jade
                 {
                     lock (this)
                     {
-                        var file = this.Find(f => f.Status == 文件状态.排队中);
+                        var file = this.Find(f => f != null && f.Status == 文件状态.排队中);
                         if (file != null)
                         {
                             currentCount++;

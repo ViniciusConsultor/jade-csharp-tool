@@ -178,7 +178,8 @@ namespace XmlDatabase.Core
                     else if (pType.IsClass || pType.IsValueType)
                     {
                         object o = p.GetValue(instance, null);
-                        temp.Add(GetTypeElement(pType, o, p.Name, Guid.Empty));//进入递归
+                        if (o != null)
+                            temp.Add(GetTypeElement(pType, o, p.Name, Guid.Empty));//进入递归
                     }
                 }
                 else

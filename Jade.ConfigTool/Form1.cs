@@ -69,7 +69,7 @@ namespace Jade.ConfigTool
             }
         }
 
-        private void InitTree(TreeNode baseNode, Model.Category category)
+        private void InitTree(TreeNode baseNode, Category category)
         {
 
             TreeNode node = new TreeNode(category.Name, 0, 0);

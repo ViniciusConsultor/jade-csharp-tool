@@ -268,13 +268,13 @@ namespace Jade
         }
 
 
-        public static List<string> ExtractAccurateUrl(SiteRule siteRule, string html, string sourceUrl)
-        {
+        //public static List<string> ExtractAccurateUrl(SiteRule siteRule, string html, string sourceUrl)
+        //{
 
-            var result = ExtractDataFromHtml(html, siteRule.ListXPath, siteRule.ListXMLPathSelectType, siteRule.ListXMLPathType);
-            RepairUrls(sourceUrl, siteRule.IncludePart, siteRule.ExcludePart, result);
-            return result;
-        }
+        //    var result = ExtractDataFromHtml(html, siteRule.ListXPath, siteRule.ListXMLPathSelectType, siteRule.ListXMLPathType);
+        //    RepairUrls(sourceUrl, siteRule.IncludePart, siteRule.ExcludePart, result);
+        //    return result;
+        //}
 
         static string RemoveXml(string html)
         {

@@ -42,11 +42,16 @@ namespace Jade
             //ControlPaint.DrawBorder(e.Graphics, ClientRectangle, borderColor, ButtonBorderStyle.Solid);
             //e.Graphics.FillRectangle(new SolidBrush(headerColor), 1, 1, this.Size.Width - 2, 26);
         }
-
+        int percentage = 0;
         public int Percentage
         {
+            get
+            {
+                return percentage;
+            }
             set
             {
+                percentage = value;
                 this.lblMessage.Text = "处理中，当前进度" + value + "%";
             }
         }
