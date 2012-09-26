@@ -768,6 +768,7 @@ namespace Jade
                 //    this.treeXPath.SelectedNode = XPathDic[this.txtxmlpath.Text];
                 //}
                 currentUrlMaker.TipMessage = newPath;
+
                 if (this.XMLPathSelectType == XMLPathSelectType.Multiple)
                 {
                     SelectedCount++;
@@ -1327,27 +1328,9 @@ namespace Jade
                     e.Handled = true;
                     return;
                 }
-                if (this.txtTestUrl.Text != "")
-                {
-                    this.contentBrowser.Navigate(this.txtTestUrl.Text);
-                }
-                else
-                {
-                    UpdateSiteRule();
-                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtStartUrl.Text } }, this.contentUrlSelectorMarker.CurrentUrlSelector);
-                    if (urlSet.ListPages.Count > 0)
-                    {
-                        this.txtTestUrl.Text = urlSet.ListPages[0];
-                        this.contentBrowser.Navigate(this.txtTestUrl.Text);
-                    }
-                    else
-                    {
-                        e.Handled = true;
-                        MessageBox.Show("请限设置好规则再进入下一步！");
-                        return;
-                    }
-                }
 
+                this.contentBrowser.Navigate(this.txtStartUrl.Text);
+               
                 this.enableNavigate = true;
                 this.EnableSelect = false;
                 this.currenActiveBrowser = contentBrowser;
@@ -1364,6 +1347,9 @@ namespace Jade
             {
 
                 UpdateSiteRule();
+
+               
+
                 //List<Uri> urls = new List<Uri>();
 
                 //if (!string.IsNullOrEmpty(CurrentSiteRule.ListPagePagerUrlSelector.DiyContentPageUrl))
@@ -1603,7 +1589,9 @@ namespace Jade
                     }
                     else
                     {
-                        urlSet = this.CurrentSiteRule.ProcessUrlSet(urlSet, CurrentSiteRule.ListPagePagerUrlSelector);
+                     
+                        // 列表分页
+                        urlSet = this.CurrentSiteRule.ProcessUrlSet(urlSet, CurrentSiteRule.ListPagePagerUrlSelector, true, true);
                         foreach (var cUrl in urlSet.ListPages)
                         {
                             TreeNode cnode = new TreeNode(cUrl);
@@ -1665,13 +1653,35 @@ namespace Jade
                     workingThread.Abort();
                 }
 
+                if (this.txtTestUrl.Text != "")
+                {
+                    this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+                }
+                else
+                {
+                    UpdateSiteRule();
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtStartUrl.Text } }, this.contentUrlSelectorMarker.CurrentUrlSelector);
+                    if (urlSet.ListPages.Count > 0)
+                    {
+                        this.txtTestUrl.Text = urlSet.ListPages[0];
+                        this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+                    }
+                    else
+                    {
+                        //e.Handled = true;
+                        //MessageBox.Show("请限设置好规则再进入下一步！");
+                        //return;
+                    }
+                }
+
                 if (this.txtTestUrl.Text == "")
                 {
                     this.txtTestUrl.Text = forTestUrl;
                 }
                 this.enableNavigate = true;
                 this.Url = new Uri(this.txtTestUrl.Text);
-                this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+                //this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+
                 this.enableNavigate = true;
                 this.EnableSelect = false;
                 this.isBindCompleted = false;

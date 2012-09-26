@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{96867F39-1302-4088-A360-FC6E1C38F34A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jade.Core</RootNamespace>
+    <AssemblyName>Jade.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\release\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>..\release\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\RuleManager.cs" />
+    <Compile Include="CacheObject.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="Helper\AccessHelper.cs" />
+    <Compile Include="Helper\AutomaticTag.cs" />
+    <Compile Include="Helper\ExtensionMethods.cs" />
+    <Compile Include="Helper\ExtractUrl.cs" />
+    <Compile Include="Helper\FetchItem.cs" />
+    <Compile Include="Helper\HtmlPicker.cs" />
+    <Compile Include="Helper\HtmlTagCaching.cs" />
+    <Compile Include="Helper\HtmlTagProcessor.cs" />
+    <Compile Include="Helper\HttpHelper.cs" />
+    <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\IPersistStreamInit.cs" />
+    <Compile Include="Helper\LogManager.cs" />
+    <Compile Include="Helper\NiceWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helper\RssPicker.cs" />
+    <Compile Include="Helper\SgmlParser.cs" />
+    <Compile Include="Helper\SgmlReader.cs" />
+    <Compile Include="Helper\UIItemBuilder.cs" />
+    <Compile Include="Helper\UrlPicker.cs" />
+    <Compile Include="Helper\Utility.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\IHtmlFecter.cs" />
+    <Compile Include="Model\IUrlFilter.cs" />
+    <Compile Include="Model\KeyValue.cs" />
+    <Compile Include="Model\KeyValueContent.cs" />
+    <Compile Include="Model\SiteRule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XDatabase.Core\XMLDatabase.Core.csproj">
+      <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
+      <Name>XMLDatabase.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fetcher\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

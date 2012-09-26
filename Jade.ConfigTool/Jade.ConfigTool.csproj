@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jade.ConfigTool</RootNamespace>
     <AssemblyName>Jade.ConfigTool</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -30,6 +30,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +45,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\publish\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -81,8 +82,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\RuleManager.cs" />
-    <Compile Include="CacheObject.cs" />
     <Compile Include="CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,28 +203,6 @@
     <Compile Include="Forms\XmlPathSelector.Designer.cs">
       <DependentUpon>XmlPathSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\AccessHelper.cs" />
-    <Compile Include="Helper\AutomaticTag.cs" />
-    <Compile Include="Helper\ExtensionMethods.cs" />
-    <Compile Include="Helper\ExtractUrl.cs" />
-    <Compile Include="Helper\FetchItem.cs" />
-    <Compile Include="Helper\HtmlPicker.cs" />
-    <Compile Include="Helper\HtmlTagCaching.cs" />
-    <Compile Include="Helper\HtmlTagProcessor.cs" />
-    <Compile Include="Helper\HttpHelper.cs" />
-    <Compile Include="Helper\ImageHelper.cs" />
-    <Compile Include="Helper\IPersistStreamInit.cs" />
-    <Compile Include="Helper\LogManager.cs" />
-    <Compile Include="Helper\NiceWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Helper\RssPicker.cs" />
-    <Compile Include="Helper\SgmlParser.cs" />
-    <Compile Include="Helper\SgmlReader.cs" />
-    <Compile Include="Helper\UIItemBuilder.cs" />
-    <Compile Include="Helper\UrlPicker.cs" />
-    <Compile Include="Helper\Utility.cs" />
-    <Compile Include="ILog.cs" />
     <Compile Include="IWorkingThread.cs" />
     <Compile Include="LoadingDialog.cs">
       <SubType>Form</SubType>
@@ -233,12 +210,6 @@
     <Compile Include="LoadingDialog.Designer.cs">
       <DependentUpon>LoadingDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\IHtmlFecter.cs" />
-    <Compile Include="Model\IUrlFilter.cs" />
-    <Compile Include="Model\KeyValue.cs" />
-    <Compile Include="Model\KeyValueContent.cs" />
-    <Compile Include="Model\SiteRule.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -359,6 +330,7 @@
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Html.dtd" />
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -483,6 +455,12 @@
     <None Include="Resources\1.bmp" />
     <None Include="Resources\00.bmp" />
     <None Include="Resources\yiqianfapingtai.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jade.Core\Jade.Core.csproj">
+      <Project>{96867F39-1302-4088-A360-FC6E1C38F34A}</Project>
+      <Name>Jade.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
