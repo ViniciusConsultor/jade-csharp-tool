@@ -162,7 +162,7 @@ namespace Jade.AHExam
             {
                 timer = new System.Timers.Timer();
                 // 3分钟
-                timer.Interval = 1 * 60 * 1000;
+                timer.Interval = 3 * 60 * 1000;
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
                 timer.Start();
             }
@@ -182,9 +182,9 @@ namespace Jade.AHExam
             Success("正在打开 " + alive);
             var html = POST(alive, "_method=RefreshStudy&_session=r");
             int minute = 0;
-            if (int.TryParse(html.Replace("'","").Trim(), out minute))
+            if (int.TryParse(html.Replace("'", "").Trim(), out minute))
             {
-                Error("课程时间增加" + minute + "分钟");
+                Error(当前学习的课程.名称 + "的课程时间增加" + minute + "分钟");
                 当前学习的课程.已学习学时数 += minute;
                 if (当前学习的课程.已学习学时数 > 当前学习的课程.总学时)
                 {
@@ -310,11 +310,25 @@ namespace Jade.AHExam
             {
                 new System.Threading.Thread(Init).Start();
                 this.WindowState = FormWindowState.Maximized;
+                this.lblUser.Text = CacheObject.User;
+                this.lblPlanName.Text = CacheObject.课程计划.名称;
+                this.lblxueduan.Text = CacheObject.课程计划.所属学段;
+                this.lblxueke.Text = CacheObject.课程计划.所属学科;
+                this.lblxueshi.Text = CacheObject.课程计划.总学时.ToString() + "小时";
             }
             else
             {
                 this.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+            }
+            this.Close();
         }
     }
 }
