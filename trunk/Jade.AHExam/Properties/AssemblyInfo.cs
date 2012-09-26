@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Jade.AHExam")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("安徽省中小学教师网络教学平台外挂程序")]
+[assembly: AssemblyDescription("安徽省中小学教师网络教学平台外挂程序，自动识别学习未完成的学习任务，无须你手动点击")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("iflytek")]
-[assembly: AssemblyProduct("Jade.AHExam")]
-[assembly: AssemblyCopyright("Copyright © iflytek 2012")]
+[assembly: AssemblyCompany("jadepeng")]
+[assembly: AssemblyProduct("安徽省中小学教师网络教学平台外挂程序")]
+[assembly: AssemblyCopyright("Copyright © jadpeng 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
