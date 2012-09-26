@@ -19,9 +19,26 @@ namespace Jade.AHExam
         }
 
         string viewState = "";
-
+        Jade.AHExam.Properties.Settings setting;
         private void Form1_Load(object sender, EventArgs e)
         {
+            setting = Jade.AHExam.Properties.Settings.Default;
+            this.txtUser.Text = setting.UserName;
+            this.txtPassword.Text = setting.Password;
+
+            if (this.txtUser.Text == "")
+            {
+                this.txtUser.Focus();
+            }
+            else if (this.txtPassword.Text == "")
+            {
+                this.txtPassword.Focus();
+            }
+            else
+            {
+                this.txtValidCode.Focus();
+            }
+
             var login = GET("http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0");
             //<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjAwNDUzNDkwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUIQnRuTG9naW5SdzAxW8XVQ8JIw49RDcQhGkwhhg==" />
             viewState = login.Substring(login.IndexOf("id=\"__VIEWSTATE\" value=\"")).Replace("id=\"__VIEWSTATE\" value=\"", "");
@@ -34,8 +51,15 @@ namespace Jade.AHExam
             //System.Net.WebClient client = new System.Net.WebClient();
             //client.DownloadDataCompleted += new DownloadDataCompletedEventHandler(client_DownloadDataCompleted);
             //client.DownloadDataAsync(new Uri("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx"));
-            var d = GetStream("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx");
-            this.pictureBox1.Image = Image.FromStream(d);
+            try
+            {
+                var stream = GetStream("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx");
+                this.pictureBox1.Image = Image.FromStream(stream);
+            }
+            catch
+            {
+                MessageBox.Show("加载验证码出错");
+            }
         }
 
         string cookie = "";
@@ -54,6 +78,7 @@ namespace Jade.AHExam
                 catch
                 {
                     MessageBox.Show("加载验证码出错，请选择离线操作");
+                    DownloadValidCode();
                 }
             }
             else
@@ -100,10 +125,15 @@ namespace Jade.AHExam
             Console.WriteLine(response);
             if (response.IndexOf("<span style=\"font-weight:bold;\">进入</span>") > 0)
             {
+                //
+                setting.UserName = this.txtUser.Text;
+                setting.Password = this.txtPassword.Text;
+                setting.Save();
+
                 //<span id="LblLoginName" style="font-weight:bold;">Chenxiaoyu666</span>
                 var start = "<span id=\"LblLoginName\" style=\"font-weight:bold;\">";
                 response = response.Substring(response.IndexOf(start) + start.Length);
-                response = response.Substring(0, response.IndexOf("<span"));
+                response = response.Substring(0, response.IndexOf("</span"));
                 CacheObject.User = response;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -111,6 +141,7 @@ namespace Jade.AHExam
             else
             {
                 MessageBox.Show("登录失败");
+                DownloadValidCode();
             }
         }
 
@@ -118,12 +149,12 @@ namespace Jade.AHExam
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DownloadValidCode();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
 

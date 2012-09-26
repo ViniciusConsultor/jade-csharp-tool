@@ -48,6 +48,14 @@ namespace Jade.AHExam
                 CacheObject.课程计划.Url = new Uri(new Uri(url), tr.ChildNodes[5].ChildNodes[0].Attributes["href"].Value).AbsoluteUri;
                 Success("正在选择课程计划" + CacheObject.课程计划.Url);
                 var planHtml = GET(CacheObject.课程计划.Url);
+                this.lblUser.BeginInvoke(new MethodInvoker(() =>
+                {
+                    this.lblPlanName.Text = CacheObject.课程计划.名称;
+                    this.lblxueduan.Text = CacheObject.课程计划.所属学段;
+                    this.lblxueke.Text = CacheObject.课程计划.所属学科;
+                    this.lblxueshi.Text = CacheObject.课程计划.总学时.ToString() + "小时";
+                }));
+              
 
                 Console.WriteLine(planHtml);
                 Success("正在打开学习页面http://spcx.ahtvu.ah.cn/frameindex/frameNetWork.aspx");
@@ -83,6 +91,7 @@ namespace Jade.AHExam
                             course.链接地址 = new Uri(new Uri("http://spcx.ahtvu.ah.cn/CourseStudy/AllCourse.aspx"), course.链接地址).AbsoluteUri;
                             course.课程编号 = course.链接地址.Substring(course.链接地址.IndexOf("=") + 1);
                             course.教师 = tds[2].InnerText.Replace("&nbsp;", "  ");
+
                             Success("正在打开课程信息页面" + course.链接地址);
                             var detailHtml = GET(course.链接地址);
 
@@ -308,13 +317,9 @@ namespace Jade.AHExam
         {
             if (new Form1().ShowDialog() == DialogResult.OK)
             {
-                new System.Threading.Thread(Init).Start();
                 this.WindowState = FormWindowState.Maximized;
                 this.lblUser.Text = CacheObject.User;
-                this.lblPlanName.Text = CacheObject.课程计划.名称;
-                this.lblxueduan.Text = CacheObject.课程计划.所属学段;
-                this.lblxueke.Text = CacheObject.课程计划.所属学科;
-                this.lblxueshi.Text = CacheObject.课程计划.总学时.ToString() + "小时";
+                new System.Threading.Thread(Init).Start();
             }
             else
             {
@@ -328,7 +333,7 @@ namespace Jade.AHExam
             {
                 timer.Stop();
             }
-            this.Close();
+            System.Environment.Exit(0);
         }
     }
 }
