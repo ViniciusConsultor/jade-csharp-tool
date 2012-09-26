@@ -100,6 +100,11 @@ namespace Jade.AHExam
             Console.WriteLine(response);
             if (response.IndexOf("<span style=\"font-weight:bold;\">进入</span>") > 0)
             {
+                //<span id="LblLoginName" style="font-weight:bold;">Chenxiaoyu666</span>
+                var start = "<span id=\"LblLoginName\" style=\"font-weight:bold;\">";
+                response = response.Substring(response.IndexOf(start) + start.Length);
+                response = response.Substring(0, response.IndexOf("<span"));
+                CacheObject.User = response;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
