@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using Jade.Http;
+using System.Security.Cryptography;
+using Microsoft.Win32;
 
 namespace Jade.AHExam
 {
@@ -38,6 +40,59 @@ namespace Jade.AHExam
             {
                 this.txtValidCode.Focus();
             }
+
+            Microsoft.Win32.RegistryKey retkey = null;
+            try
+            {
+                retkey = Microsoft.Win32.Registry.CurrentUser.
+                             OpenSubKey("software", true).CreateSubKey("jadepeng");
+
+            }
+            catch
+            {
+                try
+                {
+                    retkey = Microsoft.Win32.Registry.CurrentUser.
+                         OpenSubKey("software", true).OpenSubKey("jadepeng");
+
+                }
+                catch
+                {
+                }
+            }
+
+
+
+            if (retkey != null)
+            {
+                if (IsRegeditExit("key"))
+                {
+                    keycode = retkey.GetValue("key").ToString();
+                }
+                else
+                {
+                    var reg = new Reg();
+                    if (reg.ShowDialog() == DialogResult.OK)
+                    {
+                        keycode = reg.RegCode;
+                        AddKey("key", reg.RegCode);
+                        this.txtUser.Text = reg.UserName;
+                        this.txtPassword.Focus();
+                    }
+                    else
+                    {
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("请允许读取注册表");
+            }
+
+
 
             var login = GET("http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0");
             //<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjAwNDUzNDkwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUIQnRuTG9naW5SdzAxW8XVQ8JIw49RDcQhGkwhhg==" />
@@ -118,8 +173,54 @@ namespace Jade.AHExam
 
         List<课程> Courses = new List<课程>();
 
+
+        void AddKey(string key, object value)
+        {
+            try
+            {
+                string[] subkeyNames;
+                RegistryKey hkml = Registry.CurrentUser;
+                RegistryKey software = hkml.OpenSubKey("software", true);
+                RegistryKey aimdir = software.OpenSubKey("jadepeng", true);
+                aimdir.SetValue(key, value);
+            }
+            catch(Exception ex)
+            { 
+            }
+        }
+
+        private bool IsRegeditExit(string name)
+        {
+            bool _exit = false;
+            try
+            {
+                string[] subkeyNames;
+                RegistryKey hkml = Registry.CurrentUser;
+                RegistryKey software = hkml.OpenSubKey("software", true);
+                RegistryKey aimdir = software.OpenSubKey("jadepeng", true);
+                subkeyNames = aimdir.GetValueNames();
+                foreach (string keyName in subkeyNames)
+                {
+                    if (keyName == name)
+                    {
+                        _exit = true;
+                        return _exit;
+                    }
+                }
+            }
+            catch
+            { }
+            return _exit;
+        }
+        string keycode = "";
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!KeyCodeHelper.IsValid(this.txtUser.Text, keycode))
+            {
+                MessageBox.Show("你的账号与注册码不匹配，不能登录！请先注册！");
+                return;
+            }
+
             var loginUrl = "http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0";
             var response = POST(loginUrl, "__VIEWSTATE=" + System.Web.HttpUtility.UrlEncode(viewState, Encoding.UTF8) + "&TxtName=" + this.txtUser.Text + "&TxtPw=" + this.txtPassword.Text + "&TxtYzm=" + this.txtValidCode.Text + "&BtnLogin.x=23&BtnLogin.y=6");
             Console.WriteLine(response);
@@ -158,6 +259,73 @@ namespace Jade.AHExam
         }
 
 
+    }
+
+    public class KeyCodeHelper
+    {
+        public static bool IsValid(string username, string keycode)
+        {
+            var code = username + md5(Encrypt(username, "12345678")).Replace("-", "");
+            return keycode == code;
+        }
+
+        /// <summary>
+        /// 进行DES加密。
+        /// </summary>
+        /// <param name="pToEncrypt">要加密的字符串。</param>
+        /// <param name="sKey">密钥，且必须为8位。</param>
+        /// <returns>以Base64格式返回的加密字符串。</returns>
+        public static string Encrypt(string pToEncrypt, string sKey)
+        {
+            using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
+            {
+                byte[] inputByteArray = Encoding.UTF8.GetBytes(pToEncrypt);
+                des.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+                des.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(inputByteArray, 0, inputByteArray.Length);
+                    cs.FlushFinalBlock();
+                    cs.Close();
+                }
+                string str = Convert.ToBase64String(ms.ToArray());
+                ms.Close();
+                return str;
+            }
+        }
+
+        /// <summary>
+        /// 进行DES解密。
+        /// </summary>
+        /// <param name="pToDecrypt">要解密的以Base64</param>
+        /// <param name="sKey">密钥，且必须为8位。</param>
+        /// <returns>已解密的字符串。</returns>
+        public static string Decrypt(string pToDecrypt, string sKey)
+        {
+            byte[] inputByteArray = Convert.FromBase64String(pToDecrypt);
+            using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
+            {
+                des.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+                des.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(inputByteArray, 0, inputByteArray.Length);
+                    cs.FlushFinalBlock();
+                    cs.Close();
+                }
+                string str = Encoding.UTF8.GetString(ms.ToArray());
+                ms.Close();
+                return str;
+            }
+        }
+        public static string md5(string str)
+        {
+            MD5 m = new MD5CryptoServiceProvider();
+            byte[] s = m.ComputeHash(UnicodeEncoding.UTF8.GetBytes(str));
+            return BitConverter.ToString(s);
+        }
     }
 
     public class 课程计划

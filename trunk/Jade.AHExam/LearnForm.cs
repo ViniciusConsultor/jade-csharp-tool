@@ -313,6 +313,7 @@ namespace Jade.AHExam
             return response;
         }
 
+      
         private void LearnForm_Load(object sender, EventArgs e)
         {
             if (new Form1().ShowDialog() == DialogResult.OK)
