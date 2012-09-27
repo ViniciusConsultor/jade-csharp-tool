@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Jade.Model
 {
@@ -553,84 +554,8 @@ namespace Jade.Model
         public abstract ILog Logger { get; set; }
     }
 
-    public class TaskRunner
+    public class SiteRunner
     {
-        public UrlSet ProcessUrlSet(UrlSet set, UrlSelector selector)
-        {
-            var result = new UrlSet();
-            result.ContetnPages.AddRange(set.ContetnPages);
-
-            // 内容页自定义项目
-            if (!string.IsNullOrEmpty(selector.ContentPageUrlSelector.DiyContentPageUrl))
-            {
-                string[] urls = selector.ContentPageUrlSelector.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
-                if (urls != null && urls.Length > 0)
-                {
-                    foreach (string url in urls)
-                    {
-                        result.ContetnPages.AddRange(ExtractUrl.ParseUrlFromParameter(url));
-                    }
-                }
-            }
-
-            // 列表页自定义项目
-            if (!string.IsNullOrEmpty(selector.DiyContentPageUrl))
-            {
-                string[] urls = selector.DiyContentPageUrl.Split(new string[] { BaseConfig.UrlSeparator }, StringSplitOptions.RemoveEmptyEntries);
-                if (urls != null && urls.Length > 0)
-                {
-                    foreach (string url in urls)
-                    {
-                        result.ListPages.AddRange(ExtractUrl.ParseUrlFromParameter(url));
-                    }
-                }
-            }
-
-            // 处理列表页
-            foreach (var listUrl in set.ListPages)
-            {
-                var html = this.Rule.FetchListPageHtml(listUrl);
-
-                // 选取listPage
-                selector.XPathList.ForEach(xpath =>
-                {
-                    result.ListPages.AddRange(xpath.ExtractDataFromHtml(html).Distinct().Where(u => !result.ListPages.Contains(u)));
-                });
-
-                // 添加内容页
-                selector.ContentPageUrlSelector.XPathList.ForEach(xpath =>
-                {
-                    result.ContetnPages.AddRange(xpath.ExtractDataFromHtml(html).Distinct().Where(u => !result.ContetnPages.Contains(u)));
-                });
-
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 获取列表页面集合
-        /// </summary>
-        /// <returns></returns>
-        public UrlSet ProcessUrlSelector()
-        {
-            var result = new UrlSet();
-
-            switch (this.Rule.SiteExractMode)
-            {
-                case SiteExractMode.ListContent:
-                    return ProcessUrlSet(new UrlSet(), this.Rule.ListPagePagerUrlSelector);
-                case SiteExractMode.HomeColumnListContent:
-                    result = ProcessUrlSet(result, this.Rule.ColumnUrlSelector);
-                    result = ProcessUrlSet(result, this.Rule.LisPageUrlSelector);
-                    result = ProcessUrlSet(result, this.Rule.ListPagePagerUrlSelector);
-                    return result;
-                case SiteExractMode.HomeListContent:
-                default:
-                    result = ProcessUrlSet(result, this.Rule.ColumnUrlSelector);
-                    result = ProcessUrlSet(result, this.Rule.ListPagePagerUrlSelector);
-                    return result;
-            }
-        }
 
         public SiteRule Rule { get; set; }
 
@@ -659,7 +584,7 @@ namespace Jade.Model
 
         bool isRunning = false;
 
-        public TaskRunner(SiteRule rule, ILog logger)
+        public SiteRunner(SiteRule rule, ILog logger)
         {
             Rule = rule;
             Logger = logger;
@@ -1419,16 +1344,22 @@ namespace Jade.Model
         /// <param name="url"></param>
         public void Add(string url)
         {
-            if (!this.Any(p=>p.Url == url))
+            if (!this.Any(p => p.Url == url))
             {
-                base.Add(new ListPage { Url = url});
+                base.Add(new ListPage { Url = url });
             }
+        }
+
+        public string TaskId
+        {
+            get;
+            set;
         }
 
         public ListPageCollection(string taskId)
             : base()
         {
-
+            TaskId = taskId;
         }
 
         /// <summary>
@@ -1438,11 +1369,27 @@ namespace Jade.Model
         /// <returns></returns>
         public static ListPageCollection Load(string taskId)
         {
+            var taskdir = CacheObject.GetTaskDir(taskId);
+            var data = taskdir + "\\ListPageCollection";
+            if (File.Exists(data))
+            {
+                FileStream ms = new FileStream(data, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                return (ListPageCollection)formatter.Deserialize(ms);
+            }
             return new ListPageCollection(taskId);
         }
 
         public void Save()
         {
+            var taskdir = CacheObject.GetTaskDir(this.TaskId);
+            var data = taskdir + "\\ListPageCollection";
+
+            FileStream ms = new FileStream(data, FileMode.OpenOrCreate, FileAccess.Write);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(ms, this);
+            ms.Close();
+
         }
     }
 
@@ -1460,7 +1407,7 @@ namespace Jade.Model
         /// <summary>
         /// 列表页类型
         /// </summary>
-        public ListPageType Type { get; set; }
+        public ListPageModelType Type { get; set; }
 
         /// <summary>
         /// 总共抓取次数
@@ -1487,7 +1434,7 @@ namespace Jade.Model
     /// 列表页类型
     /// </summary>
     [Serializable]
-    public enum ListPageType
+    public enum ListPageModelType
     {
         /// <summary>
         /// 传统 列表-内容页

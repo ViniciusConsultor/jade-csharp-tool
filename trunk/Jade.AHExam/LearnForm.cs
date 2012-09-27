@@ -55,7 +55,7 @@ namespace Jade.AHExam
                     this.lblxueke.Text = CacheObject.课程计划.所属学科;
                     this.lblxueshi.Text = CacheObject.课程计划.总学时.ToString() + "小时";
                 }));
-              
+
 
                 Console.WriteLine(planHtml);
                 Success("正在打开学习页面http://spcx.ahtvu.ah.cn/frameindex/frameNetWork.aspx");
@@ -120,7 +120,7 @@ namespace Jade.AHExam
                         {
                             if (toStudyCourse.已学习学时数 < toStudyCourse.总学时)
                             {
-                                Error(toStudyCourse.名称 + "还差" + (toStudyCourse.总学时 - toStudyCourse.已学习学时数) + "分钟");
+                                HighlightLog(toStudyCourse.名称 + "还差" + (toStudyCourse.总学时 - toStudyCourse.已学习学时数) + "分钟");
 
                                 if (c == null)
                                 {
@@ -129,7 +129,7 @@ namespace Jade.AHExam
                             }
                             else
                             {
-                                Error(toStudyCourse.名称 + "已学习完毕,跳过学习");
+                                HighlightLog(toStudyCourse.名称 + "已学习完毕,跳过学习");
                                 toStudyCourse.课程状态 = "已学习完毕";
                             }
                         }
@@ -156,67 +156,111 @@ namespace Jade.AHExam
             当前学习的课程 = 要学习的课程;
             当前学习的课程.课程状态 = "学习中";
             UpdateGrid();
-            Success("开始学习" + 当前学习的课程.名称);
-            Success("正在打开" + "http://spcx.ahtvu.ah.cn/CourseStudy/CourseStudy.aspx?Course=" + 要学习的课程.课程编号 + "&Resource=Resource%2fIndex.htm");
-            // 打开学习页面  将id写入cookie
-            var course = GET("http://spcx.ahtvu.ah.cn/CourseStudy/CourseStudy.aspx?Course=" + 要学习的课程.课程编号 + "&Resource=Resource%2fIndex.htm");
-            Console.WriteLine(course);
-            //http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=RefreshStudy&_session=r
-            // 开始学习
-            var alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=StartStudy&_session=r";
-            Success("正在打开" + alive);
-            var html = POST(alive, "");
-            Success("已经开始学习" + 当前学习的课程.名称 + ",开始时间:" + html);
+
+            StartStudy();
+
             if (timer == null)
             {
                 timer = new System.Timers.Timer();
                 // 3分钟
-                timer.Interval = 3 * 60 * 1000;
+                timer.Interval = 2 * 60 * 1000;
                 timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
                 timer.Start();
             }
         }
 
+        private void StartStudy()
+        {
+            Success("开始学习" + 当前学习的课程.名称);
+            Success("正在打开" + "http://spcx.ahtvu.ah.cn/CourseStudy/CourseStudy.aspx?Course=" + 当前学习的课程.课程编号 + "&Resource=Resource%2fIndex.htm");
+            // 打开学习页面  将id写入cookie
+            var course = GET("http://spcx.ahtvu.ah.cn/CourseStudy/CourseStudy.aspx?Course=" + 当前学习的课程.课程编号 + "&Resource=Resource%2fIndex.htm");
+            Console.WriteLine(course);
+            //http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=RefreshStudy&_session=r
+            // 开始学习
+            var alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=StartStudy&_session=r";
+            //Success("正在打开" + alive);
+            var html = POST(alive, "");
+            Success("已开始学习" + 当前学习的课程.名称 + ",开始时间:" + html);
+        }
+
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            RefreshCource();
+            RefreshStudy();
         }
 
 
+        int timerIndex = 0;
 
-        void RefreshCource()
+        void RefreshStudy()
         {
-            var alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=RefreshStudy&_session=r";
-            Success("已经刷新课程学习时间 " + 当前学习的课程.名称);
-            Success("正在打开 " + alive);
-            var html = POST(alive, "_method=RefreshStudy&_session=r");
-            int minute = 0;
-            if (int.TryParse(html.Replace("'", "").Trim(), out minute))
+            var refresh = "http://spcx.ahtvu.ah.cn/QueryStatManage/refresh.aspx";
+            Success("正在刷新登录信息");
+            var refreshData = POST(refresh, "");
+            if (refreshData.Contains("OK："))
             {
-                Error(当前学习的课程.名称 + "的课程时间增加" + minute + "分钟");
-                当前学习的课程.已学习学时数 += minute;
-                if (当前学习的课程.已学习学时数 > 当前学习的课程.总学时)
+                HighlightLog("刷新登录信息成功");
+            }
+
+            // 每两次刷新一次
+            if (timerIndex++ % 2 == 0)
+            {
+                var alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=RefreshStudy&_session=r";
+                Success("正在刷新课程学习时间 " + 当前学习的课程.名称);
+
+                //Success("正在打开 " + alive);
+                var html = POST(alive, "_method=RefreshStudy&_session=r");
+                int minute = 0;
+                if (int.TryParse(html.Replace("'", "").Trim(), out minute))
                 {
-                    当前学习的课程.课程状态 = "已学习完毕";
-                    // end
-                    alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=EndStudy&_session=r";
-                    POST(alive, "");
-                    foreach (var toStudyCourse in CacheObject.课程列表)
+                    HighlightLog(当前学习的课程.名称 + "的课程时间增加" + minute + "分钟");
+                    当前学习的课程.已学习学时数 += minute;
+
+                    // 检查是否已完成
+                    CheckCourseIsFinished();
+
+                    // 更新grid
+                    UpdateGrid();
+                }
+                else
+                {
+                    HighlightLog("刷新课程学习时间失败 " + 当前学习的课程.名称);
+                    HighlightLog(html);
+                }
+            }
+        }
+
+        private void CheckCourseIsFinished()
+        {
+            if (当前学习的课程.已学习学时数 > 当前学习的课程.总学时)
+            {
+                EndStudy();
+
+                foreach (var toStudyCourse in CacheObject.课程列表)
+                {
+                    if (toStudyCourse.已学习学时数 < toStudyCourse.总学时)
                     {
-                        if (toStudyCourse.已学习学时数 < toStudyCourse.总学时)
-                        {
-                            Success(toStudyCourse.名称 + "还差" + (toStudyCourse.总学时 - toStudyCourse.已学习学时数) + "分钟，马上开始自动学习");
-                            Study(toStudyCourse);
-                            break;
-                        }
-                        else
-                        {
-                            Success(toStudyCourse.名称 + "已学习完毕,跳过学习");
-                        }
+                        Success(toStudyCourse.名称 + "还差" + (toStudyCourse.总学时 - toStudyCourse.已学习学时数) + "分钟，马上开始自动学习");
+                        Study(toStudyCourse);
+                        break;
+                    }
+                    else
+                    {
+                        Success(toStudyCourse.名称 + "已学习完毕,跳过学习");
                     }
                 }
-                UpdateGrid();
             }
+        }
+
+        private void EndStudy()
+        {
+            当前学习的课程.课程状态 = "已学习完毕";
+            // end
+            var alive = "http://spcx.ahtvu.ah.cn/ajax/Discuz.Web.CourseStudy.CourseStudy,Discuz.Web.ashx?_method=EndStudy&_session=r";
+            var result = POST(alive, "");
+            HighlightLog("结束学习" + 当前学习的课程.名称);
+            // 清除当前课程编号
+            CacheObject.Cookie = CacheObject.Cookie.Replace("CourseCode=" + 当前学习的课程.课程编号 + ";", "");
         }
 
         void UpdateGrid()
@@ -258,7 +302,7 @@ namespace Jade.AHExam
             Log(msg, Color.Green);
         }
 
-        public void Error(string msg)
+        public void HighlightLog(string msg)
         {
             Log(msg, Color.Red);
 
@@ -275,7 +319,7 @@ namespace Jade.AHExam
             {
                 this.richTextBox1.BeginInvoke(new MethodInvoker(() =>
                 {
-                    InsertToRichTextbox(msg + "...", this.richTextBox1, color);
+                    InsertToRichTextbox(DateTime.Now.ToString() + " " + msg + "...", this.richTextBox1, color);
                 }));
             }
             catch
@@ -313,7 +357,7 @@ namespace Jade.AHExam
             return response;
         }
 
-      
+
         private void LearnForm_Load(object sender, EventArgs e)
         {
             if (new Form1().ShowDialog() == DialogResult.OK)
@@ -330,6 +374,7 @@ namespace Jade.AHExam
 
         private void button1_Click(object sender, EventArgs e)
         {
+            EndStudy();
             if (timer != null)
             {
                 timer.Stop();

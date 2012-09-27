@@ -52,6 +52,7 @@
     <Compile Include="Core.cs" />
     <Compile Include="Helper\AccessHelper.cs" />
     <Compile Include="Helper\AutomaticTag.cs" />
+    <Compile Include="Helper\BloomFilter.cs" />
     <Compile Include="Helper\ExtensionMethods.cs" />
     <Compile Include="Helper\ExtractUrl.cs" />
     <Compile Include="Helper\FetchItem.cs" />

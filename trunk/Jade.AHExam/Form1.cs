@@ -62,7 +62,6 @@ namespace Jade.AHExam
             }
 
 
-
             if (retkey != null)
             {
                 if (IsRegeditExit("key"))
@@ -91,8 +90,6 @@ namespace Jade.AHExam
             {
                 MessageBox.Show("请允许读取注册表");
             }
-
-
 
             var login = GET("http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0");
             //<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjAwNDUzNDkwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUIQnRuTG9naW5SdzAxW8XVQ8JIw49RDcQhGkwhhg==" />
