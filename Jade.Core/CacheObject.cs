@@ -39,7 +39,7 @@ namespace Jade
         public static string Cookie = "";
         public static bool IsDebug = false;
         public static bool IsTest = true;
-     
+
 
 
         /// <summary>
@@ -51,7 +51,21 @@ namespace Jade
             set;
         }
 
+        /// <summary>
+        /// 任务目录
+        /// </summary>
+        public static string GetTaskDir(string taskId)
+        {
+            var dir = AppDomain.CurrentDomain.BaseDirectory + "\\Task";
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+                Directory.CreateDirectory(dir + "\\" + taskId);
+            }
+            dir = "\\" + taskId;
+            return dir;
 
+        }
 
 
         public static string IconDir
