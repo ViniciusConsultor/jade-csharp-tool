@@ -146,7 +146,7 @@ namespace Jade.ConfigTool
             {
                 txt = "没有匹配结果";
             }
-            this.txtUrlResult.Text = txt;
+            //this.txtUrlResult.Text = txt;
             this.xtraTabControl1.SelectedTabPageIndex = 2;
         }
 

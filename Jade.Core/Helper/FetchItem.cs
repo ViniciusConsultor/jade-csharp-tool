@@ -12,10 +12,24 @@ namespace Jade
         string Fetch(string fetchStuff, bool repeat);
     }
 
+
     public static class BaseConfig
     {
         public const string UrlSeparator = "@@";
         public const string UrlTrimItemSeparator = "$$";
+
+        //public static string SaveFileDir = @"F:\jade\HFBBS\jade-csharp-tool\publish\Data";
+
+        /// <summary>
+        /// 文件保存路径
+        /// </summary>
+        public static string SaveFileDir = System.Configuration.ConfigurationManager.AppSettings["SaveFileDir"];
+
+        /// <summary>
+        /// 默认数据保存表
+        /// </summary>
+        public static string DefaultPageTable = System.Configuration.ConfigurationManager.AppSettings["DefaultPageTable"];
+
     }
 
     public class FetchItem : IFetcher

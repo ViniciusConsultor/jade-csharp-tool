@@ -46,6 +46,9 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.导出规则ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导入任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.全部运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inboxItem = new DevExpress.XtraNavBar.NavBarItem();
             this.outboxItem = new DevExpress.XtraNavBar.NavBarItem();
             this.draftsItem = new DevExpress.XtraNavBar.NavBarItem();
@@ -70,7 +73,17 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
+            this.hideContainerBottom = new DevExpress.XtraBars.Docking.AutoHideContainer();
+            this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.taskRunnerPanel1 = new Jade.TaskRunnerPanel();
+            this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.txtLog = new System.Windows.Forms.RichTextBox();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.bar1 = new DevExpress.XtraBars.Bar();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl)).BeginInit();
@@ -78,19 +91,25 @@
             this.navBarGroupControlContainer1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
+            this.hideContainerBottom.SuspendLayout();
+            this.dockPanel2.SuspendLayout();
+            this.dockPanel2_Container.SuspendLayout();
+            this.dockPanel1.SuspendLayout();
+            this.dockPanel1_Container.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerControl
             // 
             this.splitContainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl.Location = new System.Drawing.Point(0, 22);
+            this.splitContainerControl.Location = new System.Drawing.Point(0, 49);
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Padding = new System.Windows.Forms.Padding(6);
             this.splitContainerControl.Panel1.Controls.Add(this.navBarControl);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Controls.Add(this.baseWebBrowser1);
             this.splitContainerControl.Panel2.Text = "Panel2";
-            this.splitContainerControl.Size = new System.Drawing.Size(787, 400);
+            this.splitContainerControl.Size = new System.Drawing.Size(787, 349);
             this.splitContainerControl.SplitterPosition = 165;
             this.splitContainerControl.TabIndex = 0;
             this.splitContainerControl.Text = "splitContainerControl1";
@@ -114,7 +133,7 @@
             this.navBarControl.Name = "navBarControl";
             this.navBarControl.OptionsNavPane.ExpandedWidth = 165;
             this.navBarControl.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl.Size = new System.Drawing.Size(165, 388);
+            this.navBarControl.Size = new System.Drawing.Size(165, 337);
             this.navBarControl.SmallImages = this.navbarImageList;
             this.navBarControl.StoreDefaultPaintStyleName = true;
             this.navBarControl.TabIndex = 0;
@@ -136,7 +155,7 @@
             // 
             this.navBarGroupControlContainer1.Controls.Add(this.taskTree);
             this.navBarGroupControlContainer1.Name = "navBarGroupControlContainer1";
-            this.navBarGroupControlContainer1.Size = new System.Drawing.Size(165, 321);
+            this.navBarGroupControlContainer1.Size = new System.Drawing.Size(165, 270);
             this.navBarGroupControlContainer1.TabIndex = 0;
             // 
             // taskTree
@@ -153,7 +172,7 @@
             this.taskTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.taskTree.ShowRootLines = false;
-            this.taskTree.Size = new System.Drawing.Size(165, 321);
+            this.taskTree.Size = new System.Drawing.Size(165, 270);
             this.taskTree.TabIndex = 3;
             this.taskTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.taskTree_AfterSelect);
             this.taskTree.DoubleClick += new System.EventHandler(this.tasktree_DoubleClick);
@@ -170,9 +189,12 @@
             this.删除任务ToolStripMenuItem,
             this.toolStripMenuItem5,
             this.导出规则ToolStripMenuItem,
-            this.导入任务ToolStripMenuItem});
+            this.导入任务ToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.运行ToolStripMenuItem,
+            this.全部运行ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 192);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 242);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // 新建分组ToolStripMenuItem
@@ -239,6 +261,24 @@
             this.导入任务ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.导入任务ToolStripMenuItem.Text = "导入任务";
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(139, 6);
+            // 
+            // 运行ToolStripMenuItem
+            // 
+            this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.运行ToolStripMenuItem.Text = "运行";
+            this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
+            // 
+            // 全部运行ToolStripMenuItem
+            // 
+            this.全部运行ToolStripMenuItem.Name = "全部运行ToolStripMenuItem";
+            this.全部运行ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.全部运行ToolStripMenuItem.Text = "全部运行";
+            // 
             // inboxItem
             // 
             this.inboxItem.Caption = "Inbox";
@@ -300,17 +340,19 @@
             this.baseWebBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.baseWebBrowser1.Name = "baseWebBrowser1";
             this.baseWebBrowser1.ScriptErrorsSuppressed = true;
-            this.baseWebBrowser1.Size = new System.Drawing.Size(604, 388);
+            this.baseWebBrowser1.Size = new System.Drawing.Size(604, 337);
             this.baseWebBrowser1.TabIndex = 0;
             // 
             // barManager
             // 
             this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar2});
+            this.bar2,
+            this.bar1});
             this.barManager.DockControls.Add(this.barDockControlTop);
             this.barManager.DockControls.Add(this.barDockControlBottom);
             this.barManager.DockControls.Add(this.barDockControlLeft);
             this.barManager.DockControls.Add(this.barDockControlRight);
+            this.barManager.DockManager = this.dockManager1;
             this.barManager.Form = this;
             this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.mFile,
@@ -322,9 +364,10 @@
             this.iSaveAs,
             this.iExit,
             this.mHelp,
-            this.iAbout});
+            this.iAbout,
+            this.barButtonItem1});
             this.barManager.MainMenu = this.bar2;
-            this.barManager.MaxItemId = 12;
+            this.barManager.MaxItemId = 13;
             // 
             // bar2
             // 
@@ -407,7 +450,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(787, 22);
+            this.barDockControlTop.Size = new System.Drawing.Size(787, 49);
             // 
             // barDockControlBottom
             // 
@@ -420,15 +463,99 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 22);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 400);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 373);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(787, 22);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 400);
+            this.barDockControlRight.Location = new System.Drawing.Point(787, 49);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 373);
+            // 
+            // dockManager1
+            // 
+            this.dockManager1.AutoHideContainers.AddRange(new DevExpress.XtraBars.Docking.AutoHideContainer[] {
+            this.hideContainerBottom});
+            this.dockManager1.Form = this;
+            this.dockManager1.MenuManager = this.barManager;
+            this.dockManager1.TopZIndexControls.AddRange(new string[] {
+            "DevExpress.XtraBars.BarDockControl",
+            "DevExpress.XtraBars.StandaloneBarDockControl",
+            "System.Windows.Forms.StatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonStatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonControl"});
+            // 
+            // hideContainerBottom
+            // 
+            this.hideContainerBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(221)))), ((int)(((byte)(238)))));
+            this.hideContainerBottom.Controls.Add(this.dockPanel2);
+            this.hideContainerBottom.Controls.Add(this.dockPanel1);
+            this.hideContainerBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.hideContainerBottom.Location = new System.Drawing.Point(0, 398);
+            this.hideContainerBottom.Name = "hideContainerBottom";
+            this.hideContainerBottom.Size = new System.Drawing.Size(787, 24);
+            // 
+            // dockPanel2
+            // 
+            this.dockPanel2.Controls.Add(this.dockPanel2_Container);
+            this.dockPanel2.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel2.ID = new System.Guid("cf4ec808-8854-48ec-b746-cbe4c3b3844c");
+            this.dockPanel2.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel2.Name = "dockPanel2";
+            this.dockPanel2.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel2.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel2.SavedIndex = 1;
+            this.dockPanel2.Size = new System.Drawing.Size(787, 200);
+            this.dockPanel2.Text = "运行任务";
+            this.dockPanel2.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
+            // 
+            // dockPanel2_Container
+            // 
+            this.dockPanel2_Container.Controls.Add(this.taskRunnerPanel1);
+            this.dockPanel2_Container.Location = new System.Drawing.Point(4, 25);
+            this.dockPanel2_Container.Name = "dockPanel2_Container";
+            this.dockPanel2_Container.Size = new System.Drawing.Size(779, 171);
+            this.dockPanel2_Container.TabIndex = 0;
+            // 
+            // taskRunnerPanel1
+            // 
+            this.taskRunnerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.taskRunnerPanel1.Location = new System.Drawing.Point(0, 0);
+            this.taskRunnerPanel1.Name = "taskRunnerPanel1";
+            this.taskRunnerPanel1.Size = new System.Drawing.Size(779, 171);
+            this.taskRunnerPanel1.TabIndex = 0;
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Controls.Add(this.dockPanel1_Container);
+            this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel1.ID = new System.Guid("7269dd53-f4dc-440b-beb4-112082d47b2e");
+            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Bottom;
+            this.dockPanel1.SavedIndex = 0;
+            this.dockPanel1.Size = new System.Drawing.Size(787, 200);
+            this.dockPanel1.Text = "运行日志";
+            this.dockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
+            // 
+            // dockPanel1_Container
+            // 
+            this.dockPanel1_Container.Controls.Add(this.txtLog);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(4, 25);
+            this.dockPanel1_Container.Name = "dockPanel1_Container";
+            this.dockPanel1_Container.Size = new System.Drawing.Size(779, 171);
+            this.dockPanel1_Container.TabIndex = 0;
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 0);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(779, 171);
+            this.txtLog.TabIndex = 3;
+            this.txtLog.Text = "";
             // 
             // barButtonItem2
             // 
@@ -436,12 +563,30 @@
             this.barButtonItem2.Id = 2;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // bar1
+            // 
+            this.bar1.BarName = "Custom 3";
+            this.bar1.DockCol = 0;
+            this.bar1.DockRow = 1;
+            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
+            this.bar1.Text = "Custom 3";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "开始运行";
+            this.barButtonItem1.Id = 12;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 422);
             this.Controls.Add(this.splitContainerControl);
+            this.Controls.Add(this.hideContainerBottom);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -455,6 +600,12 @@
             this.navBarGroupControlContainer1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
+            this.hideContainerBottom.ResumeLayout(false);
+            this.dockPanel2.ResumeLayout(false);
+            this.dockPanel2_Container.ResumeLayout(false);
+            this.dockPanel1.ResumeLayout(false);
+            this.dockPanel1_Container.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -502,6 +653,19 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem 导出规则ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 导入任务ToolStripMenuItem;
+        private DevExpress.XtraBars.Docking.DockManager dockManager1;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
+        private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 运行ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 全部运行ToolStripMenuItem;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel2;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel2_Container;
+        private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerBottom;
+        private TaskRunnerPanel taskRunnerPanel1;
+        private DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
 
     }
 }

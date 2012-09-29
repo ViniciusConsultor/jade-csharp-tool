@@ -38,6 +38,7 @@
       <HintPath>..\release\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +51,7 @@
     <Compile Include="BLL\RuleManager.cs" />
     <Compile Include="CacheObject.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="DataSaver\IDataSaver.cs" />
     <Compile Include="Helper\AccessHelper.cs" />
     <Compile Include="Helper\AutomaticTag.cs" />
     <Compile Include="Helper\BloomFilter.cs" />
@@ -89,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fetcher\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Html.dtd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

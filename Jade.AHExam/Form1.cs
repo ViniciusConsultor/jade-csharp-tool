@@ -70,7 +70,7 @@ namespace Jade.AHExam
                 }
                 else
                 {
-                    var reg = new Reg();
+                    Reg reg = new Reg();
                     if (reg.ShowDialog() == DialogResult.OK)
                     {
                         keycode = reg.RegCode;
@@ -91,7 +91,7 @@ namespace Jade.AHExam
                 MessageBox.Show("请允许读取注册表");
             }
 
-            var login = GET("http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0");
+            string login = GET("http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0");
             //<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjAwNDUzNDkwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUIQnRuTG9naW5SdzAxW8XVQ8JIw49RDcQhGkwhhg==" />
             viewState = login.Substring(login.IndexOf("id=\"__VIEWSTATE\" value=\"")).Replace("id=\"__VIEWSTATE\" value=\"", "");
             viewState = viewState.Substring(0, viewState.IndexOf("\""));
@@ -105,7 +105,7 @@ namespace Jade.AHExam
             //client.DownloadDataAsync(new Uri("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx"));
             try
             {
-                var stream = GetStream("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx");
+                Stream stream = GetStream("http://spcx.ahtvu.ah.cn/NetWorkLogin/ValidateCode.aspx");
                 this.pictureBox1.Image = Image.FromStream(stream);
             }
             catch
@@ -141,34 +141,34 @@ namespace Jade.AHExam
 
         public static Stream GetStream(string url)
         {
-            var client = new Jade.Http.WebClient();
+            Jade.Http.WebClient client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
-            var response = client.GetStream(url);
+            Stream response = client.GetStream(url);
             CacheObject.Cookie = client.Cookie;
             return response;
         }
 
         public static string GET(string url)
         {
-            var client = new Jade.Http.WebClient();
+            Jade.Http.WebClient client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
             client.Encoding = Encoding.UTF8;
-            var response = client.OpenRead(url);
+            string response = client.OpenRead(url);
             CacheObject.Cookie = client.Cookie;
             return response;
         }
 
         public static string POST(string url, string data)
         {
-            var client = new Jade.Http.WebClient();
+            Jade.Http.WebClient client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
             client.Encoding = Encoding.UTF8;
-            var response = client.OpenRead(url, data);
+            string response = client.OpenRead(url, data);
             CacheObject.Cookie = client.Cookie;
             return response;
         }
 
-        List<课程> Courses = new List<课程>();
+        List<Course> Courses = new List<Course>();
 
 
         void AddKey(string key, object value)
@@ -218,8 +218,8 @@ namespace Jade.AHExam
                 return;
             }
 
-            var loginUrl = "http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0";
-            var response = POST(loginUrl, "__VIEWSTATE=" + System.Web.HttpUtility.UrlEncode(viewState, Encoding.UTF8) + "&TxtName=" + this.txtUser.Text + "&TxtPw=" + this.txtPassword.Text + "&TxtYzm=" + this.txtValidCode.Text + "&BtnLogin.x=23&BtnLogin.y=6");
+            string loginUrl = "http://spcx.ahtvu.ah.cn/MainForm/login.aspx?Platform=0";
+            string response = POST(loginUrl, "__VIEWSTATE=" + System.Web.HttpUtility.UrlEncode(viewState, Encoding.UTF8) + "&TxtName=" + this.txtUser.Text + "&TxtPw=" + this.txtPassword.Text + "&TxtYzm=" + this.txtValidCode.Text + "&BtnLogin.x=23&BtnLogin.y=6");
             Console.WriteLine(response);
             if (response.IndexOf("<span style=\"font-weight:bold;\">进入</span>") > 0)
             {
@@ -229,7 +229,7 @@ namespace Jade.AHExam
                 setting.Save();
 
                 //<span id="LblLoginName" style="font-weight:bold;">Chenxiaoyu666</span>
-                var start = "<span id=\"LblLoginName\" style=\"font-weight:bold;\">";
+                string start = "<span id=\"LblLoginName\" style=\"font-weight:bold;\">";
                 response = response.Substring(response.IndexOf(start) + start.Length);
                 response = response.Substring(0, response.IndexOf("</span"));
                 CacheObject.User = response;
@@ -255,6 +255,14 @@ namespace Jade.AHExam
             this.DialogResult = DialogResult.Cancel;
         }
 
+        private void txtValidCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(null, null);
+            }
+        }
+
 
     }
 
@@ -262,7 +270,7 @@ namespace Jade.AHExam
     {
         public static bool IsValid(string username, string keycode)
         {
-            var code = username + md5(Encrypt(username, "12345678")).Replace("-", "");
+            string code = username + md5(Encrypt(username, "12345678")).Replace("-", "");
             return keycode == code;
         }
 
@@ -327,39 +335,158 @@ namespace Jade.AHExam
 
     public class 课程计划
     {
-        public string 名称 { get; set; }
 
-        public int 总学时 { get; set; }
+		
+        public string 名称;
 
-        public string 所属学段 { get; set; }
+        public int 总学时;
 
-        public string 所属学科 { get; set; }
+        public string 所属学段;
 
-        public string Url { get; set; }
+        public string 所属学科;
+
+        public string Url;
     }
 
 
-    public class 课程
+    public class Course
     {
-        public 课程()
+        public Course()
         {
-            课程状态 = "未开始学习";
+            CourseStatus = "未开始学习";
         }
 
-        public string 名称 { get; set; }
+        public Image Status
+        {
+            get
+            {
+                if (CourseStatus == "未开始学习")
+                {
+                    return Jade.AHExam.Properties.Resources.PROCESS_READY;
+                }
+                else if (CourseStatus == "学习中")
+                {
+                    return Jade.AHExam.Properties.Resources.PROCESS_PROCESSING;
+                }
+                else
+                {
+                    return Jade.AHExam.Properties.Resources.PROCESS_RIGHT;
+                }
+            }
+        }
 
-        public string 教师 { get; set; }
 
-        public int 已学习学时数 { get; set; }
+        private string _Name;
 
-        public int 总学时 { get; set; }
+        private string _Teachers;
 
-        public int 学分 { get; set; }
+        private int _StudiedMinutes;
 
-        public string 链接地址 { get; set; }
+        private int _TotalMinutes;
 
-        public string 课程编号 { get; set; }
+        private int _Score;
 
-        public string 课程状态 { get; set; }
+        private string _Link;
+
+        private string _CouserNo;
+
+        private string _CourseStatus;
+
+
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+            }
+        }
+
+        public string Teachers
+        {
+            get
+            {
+                return _Teachers;
+            }
+            set
+            {
+                _Teachers = value;
+            }
+        }
+
+        public int StudiedMinutes
+        {
+            get
+            {
+                return _StudiedMinutes;
+            }
+            set
+            {
+                _StudiedMinutes = value;
+            }
+        }
+
+        public int TotalMinutes
+        {
+            get
+            {
+                return _TotalMinutes;
+            }
+            set
+            {
+                _TotalMinutes = value;
+            }
+        }
+
+        public int Score
+        {
+            get
+            {
+                return _Score;
+            }
+            set
+            {
+                _Score = value;
+            }
+        }
+
+        public string Link
+        {
+            get
+            {
+                return _Link;
+            }
+            set
+            {
+                _Link = value;
+            }
+        }
+
+        public string CouserNo
+        {
+            get
+            {
+                return _CouserNo;
+            }
+            set
+            {
+                _CouserNo = value;
+            }
+        }
+
+        public string CourseStatus
+        {
+            get
+            {
+                return _CourseStatus;
+            }
+            set
+            {
+                _CourseStatus = value;
+            }
+        }
     }
 }

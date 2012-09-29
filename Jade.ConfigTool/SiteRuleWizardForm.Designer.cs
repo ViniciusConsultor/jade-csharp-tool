@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -62,12 +61,12 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.contentUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.previewPage = new DevExpress.XtraWizard.WizardPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnFetchUrl = new DevExpress.XtraEditors.SimpleButton();
@@ -114,7 +113,7 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
             this.homePage = new DevExpress.XtraWizard.WizardPage();
@@ -123,15 +122,15 @@
             this.homePageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             this.txtHomePage = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.columnPage = new DevExpress.XtraWizard.WizardPage();
             this.btnGotoColumnPage = new DevExpress.XtraEditors.SimpleButton();
             this.txtColumnPage = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
             this.panel3 = new System.Windows.Forms.Panel();
             this.columnPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

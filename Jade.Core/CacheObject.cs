@@ -38,7 +38,7 @@ namespace Jade
 
         public static string Cookie = "";
         public static bool IsDebug = false;
-        public static bool IsTest = true;
+        public static bool IsTest = false;
 
 
 
@@ -56,13 +56,16 @@ namespace Jade
         /// </summary>
         public static string GetTaskDir(string taskId)
         {
-            var dir = AppDomain.CurrentDomain.BaseDirectory + "\\Task";
+            var dir = AppDomain.CurrentDomain.BaseDirectory + "Task";
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
-                Directory.CreateDirectory(dir + "\\" + taskId);
             }
-            dir = "\\" + taskId;
+            dir += "\\" + taskId; 
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
             return dir;
 
         }

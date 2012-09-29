@@ -102,7 +102,6 @@ namespace Jade
                     }
                     catch (Exception exception)
                     {
-                        Log.Exception(exception);
                     }
                     finally
                     {

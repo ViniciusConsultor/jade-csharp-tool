@@ -52,18 +52,37 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.BonusSkins.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraBars.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraNavBar.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.BonusSkins.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.XtraWizard.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\release\DevExpress.XtraWizard.v12.1.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\release\HtmlAgilityPack.dll</HintPath>
@@ -219,6 +238,12 @@
     <Compile Include="SiteRuleWizardForm.Designer.cs">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskRunnerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskRunnerPanel.Designer.cs">
+      <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UrlSelectorMarker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -316,6 +341,9 @@
     </Compile>
     <EmbeddedResource Include="SiteRuleWizardForm.resx">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskRunnerPanel.resx">
+      <DependentUpon>TaskRunnerPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UrlSelectorMarker.resx">
       <DependentUpon>UrlSelectorMarker.cs</DependentUpon>

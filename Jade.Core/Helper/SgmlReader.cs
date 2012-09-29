@@ -306,7 +306,7 @@ namespace Sgml {
                 if (this.syslit == null || this.syslit == "") {
                     if (this.docType != null && StringUtilities.EqualsIgnoreCase(this.docType, "html")) {
                         Assembly a = typeof(SgmlReader).Assembly;
-                        string name = "Jade.ConfigTool.Html.dtd";
+                        string name = "Jade.Core.Html.dtd";
                         Stream stm = a.GetManifestResourceStream(name);
                         if (stm != null){
                             StreamReader sr = new StreamReader(stm);

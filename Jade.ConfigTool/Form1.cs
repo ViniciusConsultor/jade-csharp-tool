@@ -12,18 +12,77 @@ using DevExpress.UserSkins;
 using DevExpress.XtraEditors;
 using Jade.Model;
 using Jade.ConfigTool.Properties;
+using System.Threading;
 
 
 namespace Jade.ConfigTool
 {
-    public partial class Form1 : XtraForm
+    public partial class Form1 : XtraForm, ILog
     {
         public Form1()
         {
             InitializeComponent();
             Init();
         }
+        #region ILog 成员
 
+
+        private void InsertToRichTextbox(string str, RichTextBox txtbox, Color color)
+        {
+            try
+            {
+                lock (this)
+                {
+                    int i = txtbox.SelectionStart;
+                    txtbox.Select(i, 0);
+                    txtbox.SelectionColor = color;
+                    txtbox.Focus();
+                    txtbox.AppendText(str + "\r\n");
+                    txtbox.Select(i + str.Length + 2, 0);
+                    txtbox.SelectionColor = Color.Black;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void Info(string msg)
+        {
+            Log(msg, Color.Black);
+        }
+
+        public void Success(string msg)
+        {
+            Log(msg, Color.Green);
+        }
+
+        public void Error(string msg)
+        {
+            Log(msg, Color.Red);
+
+        }
+
+        public void Warn(string msg)
+        {
+            Log(msg, Color.Yellow);
+        }
+
+        public void Log(string msg, Color color)
+        {
+            try
+            {
+                this.txtLog.BeginInvoke(new MethodInvoker(() =>
+                {
+                    InsertToRichTextbox(msg, this.txtLog, color);
+                }));
+            }
+            catch
+            {
+            }
+        }
+
+        #endregion
         void Init()
         {
             this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
@@ -237,6 +296,22 @@ namespace Jade.ConfigTool
                 this.taskTree.SelectedNode.SelectedImageIndex = GetImageIndex(siteRule.IconImage);
                 editForm.Dispose();
             }
+        }
+
+        private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var siteRule = this.taskTree.SelectedNode.Tag as SiteRule;
+            if (siteRule != null)
+            {
+                var process = new SiteProcessor(siteRule, this);
+                process.OnDataFetched += new SiteProcessor.DataFetched(TaskManager.process_OnDataFetched);
+                new Thread(process.Start).Start();
+            }
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            TaskManager.Start((SiteRule rule) => { return true; }, this);
         }
 
     }
