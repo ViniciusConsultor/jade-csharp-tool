@@ -302,13 +302,13 @@ namespace Jade
                     CurrentSiteRule.Cookie = this.startUrlWebBrowser.Document.Cookie;
 
                 CurrentSiteRule.ListEncoding = this.startUrlWebBrowser.Document.Encoding;
-                if (contentBrowser.Document != null)
-                {
-                    CurrentSiteRule.Encoding = this.contentBrowser.Document.Encoding;
-                }
+              
                 CurrentSiteRule.UserAgent = GetDefaultUserAgent();
             }
-
+            if (itemWebBrowser.Document != null)
+            {
+                CurrentSiteRule.Encoding = this.itemWebBrowser.Document.Encoding;
+            }
             //if (this.lbxUrls.Items != null || this.lbxUrls.Items.Count > 0)
             //{
             //    string tempUrl = string.Empty;
@@ -832,9 +832,12 @@ namespace Jade
                     {
                         currentTxtbox.Text = newPath;
                     }
-                    if (CurrentXPathSelected != null)
+                    else
                     {
-                        CurrentXPathSelected(currentUrlMaker.Xpath);
+                        if (CurrentXPathSelected != null)
+                        {
+                            CurrentXPathSelected(currentUrlMaker.Xpath);
+                        }
                     }
                     current = null;
                 }
@@ -1248,10 +1251,10 @@ namespace Jade
                     else
                     {
                         UpdateSiteRule();
-                        var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtHomePage.Text } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
+                        var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(this.txtHomePage.Text) } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
                         if (urlSet.ListPages.Count > 0)
                         {
-                            this.txtStartUrl.Text = urlSet.ListPages[0];
+                            this.txtStartUrl.Text = urlSet.ListPages[0].Url;
                             this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
                         }
                         else
@@ -1275,10 +1278,10 @@ namespace Jade
                 else
                 {
                     UpdateSiteRule();
-                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtHomePage.Text } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(this.txtHomePage.Text) } }, this.homePageUrlSelectorMarker.CurrentUrlSelector);
                     if (urlSet.ListPages.Count > 0)
                     {
-                        this.txtColumnPage.Text = urlSet.ListPages[0];
+                        this.txtColumnPage.Text = urlSet.ListPages[0].Url;
                         this.bwColumnPage.Navigate(txtColumnPage.Text);
                     }
                     else
@@ -1304,10 +1307,10 @@ namespace Jade
                 else
                 {
                     UpdateSiteRule();
-                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtColumnPage.Text } }, this.columnPageUrlSelectorMarker.CurrentUrlSelector);
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(this.txtColumnPage.Text) } }, this.columnPageUrlSelectorMarker.CurrentUrlSelector);
                     if (urlSet.ListPages.Count > 0)
                     {
-                        this.txtStartUrl.Text = urlSet.ListPages[0];
+                        this.txtStartUrl.Text = urlSet.ListPages[0].Url;
                         this.startUrlWebBrowser.Navigate(txtStartUrl.Text);
                     }
                     else
@@ -1330,7 +1333,7 @@ namespace Jade
                 }
 
                 this.contentBrowser.Navigate(this.txtStartUrl.Text);
-               
+
                 this.enableNavigate = true;
                 this.EnableSelect = false;
                 this.currenActiveBrowser = contentBrowser;
@@ -1348,7 +1351,7 @@ namespace Jade
 
                 UpdateSiteRule();
 
-               
+
 
                 //List<Uri> urls = new List<Uri>();
 
@@ -1402,12 +1405,12 @@ namespace Jade
                 TreeNode parentNode = null;
                 if (this.CurrentSiteRule.SiteExractMode == SiteExractMode.ListContent)
                 {
-                    urlSet.ListPages.Add(this.CurrentSiteRule.Referer);
+                    urlSet.ListPages.Add(new UrlWrapper(this.CurrentSiteRule.Referer));
                     parentNode = new TreeNode(this.CurrentSiteRule.Referer);
                 }
                 else
                 {
-                    urlSet.ListPages.Add(this.CurrentSiteRule.IndexPage);
+                    urlSet.ListPages.Add(new UrlWrapper(this.CurrentSiteRule.IndexPage));
                     parentNode = new TreeNode(this.CurrentSiteRule.IndexPage);
                 }
 
@@ -1454,7 +1457,7 @@ namespace Jade
 
                         foreach (var sourceUrl in urlSet.ListPages)
                         {
-                            TreeNode node = new TreeNode(sourceUrl);
+                            TreeNode node = new TreeNode(sourceUrl.Url);
                             loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                             {
                                 loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
@@ -1465,11 +1468,11 @@ namespace Jade
                             if (CurrentSiteRule.SiteExractMode == SiteExractMode.HomeListContent)
                             {
                                 // 列表分页
-                                var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { sourceUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
+                                var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { sourceUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
                                 foreach (var cUrl in childSet.ListPages)
                                 {
 
-                                    TreeNode cnode = new TreeNode(cUrl);
+                                    TreeNode cnode = new TreeNode(cUrl.Url);
 
                                     loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                                     {
@@ -1479,19 +1482,19 @@ namespace Jade
                                     }));
 
                                     // 列表
-                                    var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                                    var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
                                     loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                                     {
                                         loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                                         this.loadingDialog.Refresh();
                                         foreach (var cUrl2 in childSet2.ListPages)
                                         {
-                                            TreeNode cnode2 = new TreeNode(cUrl2);
+                                            TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                             cnode.Nodes.Add(cnode2);
                                         }
-                                        foreach (var cUrl2 in childSet2.ContetnPages)
+                                        foreach (var cUrl2 in childSet2.ContentPages)
                                         {
-                                            TreeNode cnode2 = new TreeNode(cUrl2);
+                                            TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                             cnode.Nodes.Add(cnode2);
                                         } //  列表 end
                                     }));
@@ -1500,9 +1503,9 @@ namespace Jade
                                 {
                                     loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                                     this.loadingDialog.Refresh();
-                                    foreach (var cUrl in childSet.ContetnPages)
+                                    foreach (var cUrl in childSet.ContentPages)
                                     {
-                                        TreeNode cnode = new TreeNode(cUrl);
+                                        TreeNode cnode = new TreeNode(cUrl.Url);
                                         node.Nodes.Add(cnode);
                                     } //  列表分页 end
                                 }));
@@ -1510,11 +1513,11 @@ namespace Jade
                             else
                             {
                                 // 列表页面
-                                var columnSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { sourceUrl } }, CurrentSiteRule.LisPageUrlSelector);
+                                var columnSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { sourceUrl } }, CurrentSiteRule.LisPageUrlSelector);
 
-                                foreach (var listUrl in columnSet.ContetnPages)
+                                foreach (var listUrl in columnSet.ListPages)
                                 {
-                                    TreeNode listNode = new TreeNode(listUrl);
+                                    TreeNode listNode = new TreeNode(listUrl.Url);
                                     loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                                     {
                                         loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
@@ -1523,11 +1526,11 @@ namespace Jade
                                     }));
 
                                     // 列表分页
-                                    var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { listUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
+                                    var childSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { listUrl } }, CurrentSiteRule.ListPagePagerUrlSelector);
 
                                     foreach (var cUrl in childSet.ListPages)
                                     {
-                                        TreeNode cnode = new TreeNode(cUrl);
+                                        TreeNode cnode = new TreeNode(cUrl.Url);
                                         loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                                         {
                                             loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
@@ -1536,17 +1539,17 @@ namespace Jade
                                         }));
 
                                         // 列表
-                                        var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                                        var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
                                         loadingDialog.BeginInvoke(new MethodInvoker(delegate()
                                         {
                                             foreach (var cUrl2 in childSet2.ListPages)
                                             {
-                                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                                TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                                 cnode.Nodes.Add(cnode2);
                                             }
-                                            foreach (var cUrl2 in childSet2.ContetnPages)
+                                            foreach (var cUrl2 in childSet2.ContentPages)
                                             {
-                                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                                TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                                 cnode.Nodes.Add(cnode2);
                                             } //  列表 end
                                         }));
@@ -1555,9 +1558,9 @@ namespace Jade
                                     {
                                         loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                                         this.loadingDialog.Refresh();
-                                        foreach (var cUrl in childSet.ContetnPages)
+                                        foreach (var cUrl in childSet.ContentPages)
                                         {
-                                            TreeNode cnode = new TreeNode(cUrl);
+                                            TreeNode cnode = new TreeNode(cUrl.Url);
                                             node.Nodes.Add(cnode);
                                         } //  列表分页 end
                                     }));
@@ -1566,9 +1569,9 @@ namespace Jade
                                 {
                                     loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                                     this.loadingDialog.Refresh();
-                                    foreach (var cUrl in columnSet.ContetnPages)
+                                    foreach (var cUrl in columnSet.ContentPages)
                                     {
-                                        TreeNode cnode = new TreeNode(cUrl);
+                                        TreeNode cnode = new TreeNode(cUrl.Url);
                                         node.Nodes.Add(cnode);
                                     } //  列表分页 end
                                 }));
@@ -1580,32 +1583,32 @@ namespace Jade
                         {
                             loadingDialog.Percentage = Math.Min(100, loadingDialog.Percentage + 1);
                             this.loadingDialog.Refresh();
-                            foreach (var url in urlSet.ContetnPages)
+                            foreach (var url in urlSet.ContentPages)
                             {
-                                TreeNode node = new TreeNode(url);
+                                TreeNode node = new TreeNode(url.Url);
                                 parentNode.Nodes.Add(node);
                             }
                         }));
                     }
                     else
                     {
-                     
+
                         // 列表分页
                         urlSet = this.CurrentSiteRule.ProcessUrlSet(urlSet, CurrentSiteRule.ListPagePagerUrlSelector, true, true);
                         foreach (var cUrl in urlSet.ListPages)
                         {
-                            TreeNode cnode = new TreeNode(cUrl);
+                            TreeNode cnode = new TreeNode(cUrl.Url);
 
                             // 列表
-                            var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<string> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
+                            var childSet2 = this.CurrentSiteRule.ProcessUrlSet(new UrlSet { ListPages = new List<UrlWrapper> { cUrl } }, CurrentSiteRule.ContentUrlSelector);
                             foreach (var cUrl2 in childSet2.ListPages)
                             {
-                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                 cnode.Nodes.Add(cnode2);
                             }
-                            foreach (var cUrl2 in childSet2.ContetnPages)
+                            foreach (var cUrl2 in childSet2.ContentPages)
                             {
-                                TreeNode cnode2 = new TreeNode(cUrl2);
+                                TreeNode cnode2 = new TreeNode(cUrl2.Url);
                                 cnode.Nodes.Add(cnode2);
                             } //  列表 end
 
@@ -1616,9 +1619,9 @@ namespace Jade
                                 parentNode.Nodes.Add(cnode);
                             }));
                         }
-                        foreach (var cUrl in urlSet.ContetnPages)
+                        foreach (var cUrl in urlSet.ContentPages)
                         {
-                            TreeNode cnode = new TreeNode(cUrl);
+                            TreeNode cnode = new TreeNode(cUrl.Url);
                             parentNode.Nodes.Add(cnode);
                         } //  列表分页 end
                     }
@@ -1660,10 +1663,10 @@ namespace Jade
                 else
                 {
                     UpdateSiteRule();
-                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<string> { this.txtStartUrl.Text } }, this.contentUrlSelectorMarker.CurrentUrlSelector);
+                    var urlSet = this.CurrentSiteRule.ProcessUrlSet(new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(this.txtStartUrl.Text) } }, this.contentUrlSelectorMarker.CurrentUrlSelector);
                     if (urlSet.ListPages.Count > 0)
                     {
-                        this.txtTestUrl.Text = urlSet.ListPages[0];
+                        this.txtTestUrl.Text = urlSet.ListPages[0].Url;
                         this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
                     }
                     else

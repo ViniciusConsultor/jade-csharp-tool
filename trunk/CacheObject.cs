@@ -751,7 +751,7 @@ namespace Jade
                 if (instance == null)
                 {
                     instance = new RunningTaskCollection();
-                    instance.Add(new RunningTask { TaskName = "test0", Status = TaskStatus.运行中, StartTime = DateTime.Now, EndTime = DateTime.MaxValue });
+                    //instance.Add(new RunningTask { TaskName = "test0", Status = TaskStatus.运行中, StartTime = DateTime.Now, EndTime = DateTime.MaxValue });
                 }
                 return instance;
             }

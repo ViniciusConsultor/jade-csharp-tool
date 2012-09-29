@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using Jade.BLL;
 
 namespace Jade.Model
 {
@@ -396,7 +397,7 @@ namespace Jade.Model
             }
             if (processContent)
             {
-                result.ContetnPages.AddRange(set.ContetnPages);
+                result.ContentPages.AddRange(set.ContentPages);
                 // 内容页自定义项目
                 if (!string.IsNullOrEmpty(selector.ContentPageUrlSelector.DiyContentPageUrl))
                 {
@@ -405,7 +406,11 @@ namespace Jade.Model
                     {
                         foreach (string url in urls)
                         {
-                            result.ContetnPages.AddRange(ExtractUrl.ParseUrlFromParameter(url));
+                            var parsedUrls = ExtractUrl.ParseUrlFromParameter(url);
+                            parsedUrls.ForEach(u =>
+                            {
+                                result.ContentPages.Add(new UrlWrapper(url));
+                            });
                         }
                     }
                 }
@@ -419,7 +424,11 @@ namespace Jade.Model
                 {
                     foreach (string url in urls)
                     {
-                        result.ListPages.AddRange(ExtractUrl.ParseUrlFromParameter(url));
+                        var parsedUrls = ExtractUrl.ParseUrlFromParameter(url);
+                        parsedUrls.ForEach(u =>
+                        {
+                            result.ListPages.Add(new UrlWrapper(url) { IsContentPage = false });
+                        });
                     }
                 }
             }
@@ -428,12 +437,13 @@ namespace Jade.Model
             // 处理列表页
             foreach (var listUrl in set.ListPages)
             {
-                var html = this.FetchListPageHtml(listUrl);
+                var html = this.FetchListPageHtml(listUrl.Url);
 
                 // 选取listPage
                 selector.XPathList.ForEach(xpath =>
                 {
-                    result.ListPages.AddRange(selector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl).Distinct().Where(u => !result.ListPages.Contains(u)));
+                    var parsedUrls = selector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl.Url).Distinct().Where(u => !result.ListPages.Any(l => l.Url == u)).Select(l => new UrlWrapper(listUrl, l) { IsContentPage = false });
+                    result.ListPages.AddRange(parsedUrls);
                 });
 
                 if (processContent)
@@ -441,7 +451,8 @@ namespace Jade.Model
                     // 添加内容页
                     selector.ContentPageUrlSelector.XPathList.ForEach(xpath =>
                     {
-                        result.ContetnPages.AddRange(selector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl).Distinct().Where(u => !result.ContetnPages.Contains(u)));
+                        var parsedUrls = selector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl.Url).Distinct().Where(u => !result.ContentPages.Any(l => l.Url == u)).Select(l => new UrlWrapper(listUrl, l));
+                        result.ContentPages.AddRange(parsedUrls);
                     });
                 }
 
@@ -455,7 +466,7 @@ namespace Jade.Model
         /// <returns></returns>
         public UrlSet ProcessUrlSelector()
         {
-            var result = SiteExractMode == Model.SiteExractMode.ListContent ? new UrlSet() { ListPages = new List<string> { this.Referer } } : new UrlSet() { ListPages = new List<string> { this.IndexPage } };
+            var result = SiteExractMode == Model.SiteExractMode.ListContent ? new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(Referer) } } : new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(IndexPage) } };
 
             switch (this.SiteExractMode)
             {
@@ -467,8 +478,8 @@ namespace Jade.Model
                     result = ProcessUrlSet(result, this.ColumnUrlSelector);
                     break;
             }
-            ProcessUrlSet(new UrlSet(), this.ListPagePagerUrlSelector, true);
-            ProcessUrlSet(new UrlSet(), this.ContentUrlSelector);
+            result = ProcessUrlSet(new UrlSet(), this.ListPagePagerUrlSelector, true);
+            result = ProcessUrlSet(new UrlSet(), this.ContentUrlSelector);
             return result;
         }
 
@@ -481,11 +492,60 @@ namespace Jade.Model
             var set = this.ProcessUrlSelector();
 
             // 处理最后的列表页
-            return set.ContetnPages;
+            return set.ContentPages.Select(u => u.Url).ToList();
         }
 
     }
 
+    /// <summary>
+    /// 爬虫爬行过程中的URL包装
+    /// </summary>
+    public class UrlWrapper
+    {
+        public string Title { get; set; }
+
+        public string ReferUrl
+        {
+            get;
+            set;
+        }
+
+        public string Url
+        {
+            get;
+            set;
+        }
+
+        public int Depth
+        {
+            get;
+            set;
+        }
+
+        public bool IsContentPage
+        {
+            get;
+            set;
+        }
+
+        public UrlWrapper(string url)
+        {
+            this.Url = url;
+            this.Depth = 1;
+            this.ReferUrl = "";
+            this.IsContentPage = true;
+            this.Title = "";
+        }
+
+        public UrlWrapper(UrlWrapper wrapper, string url)
+        {
+            this.Url = url;
+            this.Depth = wrapper.Depth + 1;
+            this.ReferUrl = wrapper.Url;
+            this.IsContentPage = true;
+            this.Title = "";
+        }
+    }
 
     /// <summary>
     /// Url 选择器
@@ -554,19 +614,240 @@ namespace Jade.Model
         public abstract ILog Logger { get; set; }
     }
 
-    public class SiteRunner
+    /// <summary>
+    /// 数据抓取参数
+    /// </summary>
+    public class DataFetchedArgs : EventArgs
     {
+        public KeyValueContent Data
+        {
+            get;
+            set;
+        }
+
+        public SiteRule Site
+        {
+            get;
+            set;
+        }
+
+        public string Url
+        {
+            get;
+            set;
+        }
+    }
+
+    public class TaskManager
+    {
+        static XMLFileSave fileSaver = new XMLFileSave();
+
+        public static void Start(Func<SiteRule, bool> predicate, ILog log)
+        {
+            // 
+            new RuleManager().GetSiteRules().Where(predicate).ToList().ForEach(r =>
+            {
+                var process = new SiteProcessor(r, log);
+                process.OnDataFetched += new SiteProcessor.DataFetched(process_OnDataFetched);
+                new System.Threading.Thread(process.Start).Start();
+            });
+        }
+
+        public static void process_OnDataFetched(object sender, DataFetchedArgs e)
+        {
+            // 保存数据
+            fileSaver.SaveContentPage(e.Data);
+        }
+    }
+
+    public class RunningTask
+    {
+        public int TaskId { get; set; }
+        public string TaskName { get; set; }
+        public string UrlCount { get; set; }
+        public string ContentCount { get; set; }
+        public TaskStatus Status { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        public SiteProcessor runner { get; set; }
+
+        public SiteRule Rule { get; set; }
+
+        public System.Timers.Timer timer;
+
+        public void StarTimer()
+        {
+            if (timer == null)
+            {
+                timer = new System.Timers.Timer(Rule.AutoRunInterval * 60 * 1000);
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
+            }
+            else
+            {
+                timer.Stop();
+            }
+            timer.Start();
+        }
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (runner != null)
+            {
+                StartWork();
+            }
+        }
+
+        public void StartWork()
+        {
+            new Thread(runner.Start).Start();
+        }
+
+        public void StopWork()
+        {
+            runner.Stop();
+        }
+
+        public void StopTimer()
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+            }
+        }
+    }
+
+    public enum TaskStatus
+    {
+        运行中,
+        停止,
+        休眠
+    }
+
+    public class RunningTaskCollection : List<RunningTask>
+    {
+        /// <summary>
+        /// 数据变化
+        /// </summary>
+        public event Change OnChange;
+
+        static RunningTaskCollection instance;
+
+        /// <summary>
+        /// 唯一实例
+        /// </summary>
+        public static RunningTaskCollection Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new RunningTaskCollection();
+                    //instance.Add(new RunningTask { TaskName = "test0", Status = TaskStatus.运行中, StartTime = DateTime.Now, EndTime = DateTime.MaxValue });
+                }
+                return instance;
+            }
+        }
+
+        void NotifyChange()
+        {
+            if (this.OnChange != null)
+            {
+                this.OnChange(this, new EventArgs());
+            }
+        }
+
+        public void AddTask(RunningTask task)
+        {
+            this.Add(task);
+            this.NotifyChange();
+        }
+
+        public void Update()
+        {
+            this.NotifyChange();
+        }
+
+        public void TaskFinish(RunningTask task)
+        {
+            if (task.Status == TaskStatus.休眠)
+            {
+                // 休眠
+                task.StarTimer();
+            }
+
+            this.NotifyChange();
+        }
+    }
+
+    /// <summary>
+    /// 站点处理器
+    /// </summary>
+    public class SiteProcessor
+    {
+        /// <summary>
+        /// 抓取到一条数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void DataFetched(object sender, DataFetchedArgs e);
+
+        /// <summary>
+        /// 抓取到一条数据
+        /// </summary>
+        public event DataFetched OnDataFetched;
 
         public SiteRule Rule { get; set; }
 
         public ILog Logger { get; set; }
 
+        /// <summary>
+        /// 内容页队列
+        /// </summary>
+        Queue<string> ContentQueque = new Queue<string>();
+
+        SiteUrlFilter UrlFilter
+        {
+            get;
+            set;
+        }
 
         public event TaskStateChange StateChange;
 
         public List<DownloadFile> DownloadFiles { get; set; }
 
-        public List<string> OldUrls = new List<string>();
+        RunningTask runningTaskModel;
+        public RunningTask RunningTaskModel
+        {
+            get
+            {
+                if (runningTaskModel == null)
+                {
+                    runningTaskModel = RunningTaskCollection.Instance.SingleOrDefault(r => r.TaskId == Rule.SiteRuleId);
+                }
+
+                if (runningTaskModel == null)
+                {
+                    runningTaskModel = new RunningTask
+                    {
+                        ContentCount = "0/0",
+                        TaskId = Rule.SiteRuleId,
+                        TaskName = Rule.Name,
+                        Status = TaskStatus.运行中,
+                        StartTime = DateTime.Now,
+                        runner = this,
+                        Rule = Rule,
+                        EndTime = DateTime.MinValue
+                    };
+                    RunningTaskCollection.Instance.AddTask(this.runningTaskModel);
+                }
+                return runningTaskModel;
+            }
+            set
+            {
+                runningTaskModel = value;
+            }
+        }
 
         public Dictionary<string, string> DownloadedPics = new Dictionary<string, string>();
 
@@ -584,10 +865,12 @@ namespace Jade.Model
 
         bool isRunning = false;
 
-        public SiteRunner(SiteRule rule, ILog logger)
+        public SiteProcessor(SiteRule rule, ILog logger)
         {
             Rule = rule;
             Logger = logger;
+
+
         }
 
         /// <summary>
@@ -596,10 +879,13 @@ namespace Jade.Model
         public void Stop()
         {
             isForceStop = true;
+            this.RunningTaskModel.Status = TaskStatus.运行中;
+            this.RunningTaskModel.StartTime = DateTime.Now;
+            RunningTaskCollection.Instance.Update();
 
             if (this.StateChange != null)
             {
-                this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                this.StateChange(this, new SiteRuningEventArgs(new SiteRunningState
                 {
                     CurrentCount = 100,
                     StepName = "采集完成",
@@ -610,40 +896,67 @@ namespace Jade.Model
         }
 
         bool isForceStop = false;
+        ListPageCollection listPages;
+
+        Dictionary<string, bool> haveNewPageListPages = new Dictionary<string, bool>();
 
         public void Start()
         {
             if (!isRunning)
             {
+                // 分析列表页
+                listPages = ListPageCollection.Load(Rule.SiteRuleId.ToString());
+
+                UrlFilter = new SiteUrlFilter(CacheObject.GetTaskDir(Rule.SiteRuleId.ToString()) + "\\UrlFilter.bin");
+
                 isRunning = true;
 
                 Status = "正在启动";
 
                 Logger.Info("[" + Rule.Name + "] 正在初始化配置,请稍等...");
 
+                // 每10次更新一次列表页
+                if (listPages.Count == 0 || listPages.RunningTimes % 10 == 0)
+                {
+                    ProcessAllUrls();
+                }
+                else
+                {
+                    // 从已有列表页抓取
+                    ProcessExistListPages();
+                }
+
+                UpdateListPage();
+
                 List<Uri> uris = new List<Uri>();
 
-                var urls = this.Rule.GetContetPages();
-
-
-                if (urls.Count > 0)
+                if (this.ContentQueque.Count > 0)
                 {
-                    urls.ForEach(url =>
+                    while (ContentQueque.Count > 0)
                     {
-                        try { uris.Add(new Uri(url)); }
+                        try { uris.Add(new Uri(ContentQueque.Dequeue())); }
                         catch { }
-                    });
-
+                    };
                     DownloadDetail(uris);
                 }
                 else
                 {
                     this.Logger.Error("[" + Rule.Name + "] 没有采集到新网址，采集完成！");
                 }
+                if (Rule.EnableAutoRun)
+                {
+                    this.RunningTaskModel.Status = TaskStatus.休眠;
+                }
+                else
+                {
+                    this.RunningTaskModel.Status = TaskStatus.停止;
+                }
+
+                RunningTaskCollection.Instance.TaskFinish(RunningTaskModel);
 
                 if (this.StateChange != null)
                 {
-                    this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                    this.StateChange(this, new SiteRuningEventArgs(new SiteRunningState
                     {
                         CurrentCount = 100,
                         StepName = "采集完成",
@@ -654,6 +967,152 @@ namespace Jade.Model
                 // 
                 isRunning = false;
                 this.Logger.Success("[" + Rule.Name + "] 采集完成");
+
+                this.UrlFilter.SaveFilter();
+                this.UrlFilter.Dispose();
+                this.listPages = null;
+            }
+        }
+
+        /// <summary>
+        /// 从历史里选择  上次有新网页 或者  每6次抓取一次连续6次以上20次以下没有新网页的列表页   或者每3次抓取一次连续6次以下没有新网页的列表页  连续20次以上没有新网页的列表页不予以抓取
+        /// </summary>
+        private void ProcessExistListPages()
+        {
+            // 从历史里选择  上次有新网页 或者  每6次抓取一次连续6次以上20次以下没有新网页的列表页   或者每3次抓取一次连续6次以下没有新网页的列表页  连续20次以上没有新网页的列表页不予以抓取
+            var todoPages = this.listPages.Where(l => l.NoNewPageCountRencently == 0 || (l.TotalCount % 6 == 0 && l.NoNewPageCountRencently > 6 && l.NoNewPageCountRencently < 20) || (l.TotalCount % 3 == 0 && l.NoNewPageCountRencently < 6));
+
+            UrlSet result = new UrlSet();
+            var homePage = todoPages.Where(l => l.Type == ListPageModelType.HomePage).Select(l => new UrlWrapper(l.Url)).ToList();
+            if (homePage.Count > 0)
+            {
+                result.ListPages = homePage;
+                result = Rule.ProcessUrlSet(result, Rule.ColumnUrlSelector.ContentPageUrlSelector, false, false);
+                FilterUrls(result, ListPageModelType.None);
+            }
+
+            var columnPage = todoPages.Where(l => l.Type == ListPageModelType.ColumnPage).Select(l => new UrlWrapper(l.Url)).ToList();
+            if (columnPage.Count > 0)
+            {
+                result.ListPages = columnPage;
+                result = Rule.ProcessUrlSet(result, Rule.LisPageUrlSelector.ContentPageUrlSelector, false, false);
+                FilterUrls(result, ListPageModelType.None);
+            }
+
+            var listPage = todoPages.Where(l => l.Type == ListPageModelType.ListPage).Select(l => new UrlWrapper(l.Url)).ToList();
+            if (listPage.Count > 0)
+            {
+                result.ListPages = listPage;
+                result = Rule.ProcessUrlSet(result, Rule.ContentUrlSelector.ContentPageUrlSelector, false, false);
+                FilterUrls(result, ListPageModelType.None);
+            }
+        }
+
+        /// <summary>
+        /// 处理所有网页
+        /// </summary>
+        private void ProcessAllUrls()
+        {
+            // crawl list page
+            var result = Rule.SiteExractMode == Model.SiteExractMode.ListContent ? new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(Rule.Referer) } } : new UrlSet() { ListPages = new List<UrlWrapper> { new UrlWrapper(Rule.IndexPage) } };
+
+            switch (Rule.SiteExractMode)
+            {
+                case SiteExractMode.HomeColumnListContent:
+                    FilterUrls(result, ListPageModelType.HomePage);
+                    // ColumnUrl
+                    result = Rule.ProcessUrlSet(result, Rule.ColumnUrlSelector);
+                    var type = ListPageModelType.ColumnPage;
+                    FilterUrls(result, type);
+                    result.ContentPages.Clear();
+                    // 选取列表页
+                    result = Rule.ProcessUrlSet(result, Rule.LisPageUrlSelector);
+                    type = ListPageModelType.ListPage;
+                    FilterUrls(result, type);
+                    result.ContentPages.Clear();
+                    break;
+                case SiteExractMode.HomeListContent:
+                    result = Rule.ProcessUrlSet(result, Rule.ColumnUrlSelector);
+                    type = ListPageModelType.ListPage;
+                    FilterUrls(result, type);
+                    break;
+                case SiteExractMode.ListContent:
+                    FilterUrls(result, ListPageModelType.ListPage);
+                    break;
+            }
+
+            result = Rule.ProcessUrlSet(result, Rule.ListPagePagerUrlSelector, true);
+            FilterUrls(result, ListPageModelType.ListPage);
+            result = Rule.ProcessUrlSet(result, Rule.ContentUrlSelector);
+            FilterUrls(result, ListPageModelType.None);
+        }
+
+        /// <summary>
+        /// 更新列表页
+        /// </summary>
+        private void UpdateListPage()
+        {
+            foreach (var listPage in this.listPages)
+            {
+                listPage.LastRunTime = DateTime.Now;
+                listPage.TotalCount++;
+                if (!haveNewPageListPages.ContainsKey(listPage.Url))
+                {
+                    listPage.NoNewPageCount++;
+                    listPage.NoNewPageCountRencently++;
+                }
+                else
+                {
+                    // 有新列表
+                    listPage.NoNewPageCountRencently = 0;
+                }
+            }
+            this.listPages.Save();
+        }
+
+
+        /// <summary>
+        /// 过滤url
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="type"></param>
+        private void FilterUrls(UrlSet result, ListPageModelType type)
+        {
+            if (type != ListPageModelType.None)
+            {
+                // 添加列表页
+                foreach (var listUrl in result.ListPages)
+                {
+                    if (!listPages.Any(l => l.Url == listUrl.Url))
+                    {
+                        listPages.Add(new ListPage { Url = listUrl.Url, Type = type, LastRunTime = DateTime.Now });
+                    }
+                }
+            }
+            else
+            {
+                FilterContentPages(result.ListPages);
+            }
+
+            FilterContentPages(result.ContentPages);
+
+            result.ContentPages.Clear();
+        }
+
+        private void FilterContentPages(List<UrlWrapper> pages)
+        {
+            foreach (var contentPage in pages)
+            {
+                if (!this.UrlFilter.IsContentPageExist(contentPage.Url, false))
+                {
+                    this.ContentQueque.Enqueue(contentPage.Url);
+                    if (!string.IsNullOrEmpty(contentPage.ReferUrl))
+                    {
+                        // 添加到有新网页的列表
+                        if (!haveNewPageListPages.ContainsKey(contentPage.ReferUrl))
+                            haveNewPageListPages.Add(contentPage.ReferUrl, true);
+                    }
+                }
             }
         }
 
@@ -703,12 +1162,18 @@ namespace Jade.Model
                     Logger.Success("[" + Rule.Name + "] 成功采集【" + url + "】");
                     index++;
 
-                    //this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
-                    //RunningTaskCollection.Instance.Update();
+                    if (OnDataFetched != null)
+                    {
+                        OnDataFetched(this, new DataFetchedArgs() { Data = data, Site = this.Rule, Url = url.AbsoluteUri });
+                    }
 
+                    this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
+                    RunningTaskCollection.Instance.Update();
+
+                    this.UrlFilter.AddContentPage(url.AbsoluteUri);
                     if (this.StateChange != null)
                     {
-                        this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                        this.StateChange(this, new SiteRuningEventArgs(new SiteRunningState
                         {
                             CurrentCount = index,
                             StepName = "采集内容",
@@ -724,6 +1189,7 @@ namespace Jade.Model
         }
 
         int picIndex = 0;
+
 
         private void CheckExtractUrlIsAvailable(List<string> seedUlrs, out List<Uri> urls)
         {
@@ -752,8 +1218,10 @@ namespace Jade.Model
 
     }
 
-
-    public class RunnerState
+    /// <summary>
+    /// 站点运行状态
+    /// </summary>
+    public class SiteRunningState
     {
         public string StepName { get; set; }
 
@@ -767,17 +1235,17 @@ namespace Jade.Model
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    public delegate void TaskStateChange(object sender, TaskRunnerEventArgs e);
+    public delegate void TaskStateChange(object sender, SiteRuningEventArgs e);
 
-    public class TaskRunnerEventArgs : EventArgs
+    public class SiteRuningEventArgs : EventArgs
     {
-        public RunnerState CurrentState
+        public SiteRunningState CurrentState
         {
             get;
             set;
         }
 
-        public TaskRunnerEventArgs(RunnerState state)
+        public SiteRuningEventArgs(SiteRunningState state)
         {
             CurrentState = state;
         }
@@ -1064,13 +1532,13 @@ namespace Jade.Model
     {
         public UrlSet()
         {
-            ListPages = new List<string>();
-            ContetnPages = new List<string>();
+            ListPages = new List<UrlWrapper>();
+            ContentPages = new List<UrlWrapper>();
         }
 
-        public List<string> ListPages { get; set; }
+        public List<UrlWrapper> ListPages { get; set; }
 
-        public List<string> ContetnPages { get; set; }
+        public List<UrlWrapper> ContentPages { get; set; }
     }
 
     /// <summary>
@@ -1338,6 +1806,21 @@ namespace Jade.Model
     [Serializable]
     public class ListPageCollection : List<ListPage>
     {
+        public bool IsExist(string url)
+        {
+            return this.Any(u => u.Url == url);
+        }
+
+        public ListPage Get(string url)
+        {
+            return this.FirstOrDefault(u => u.Url == url);
+        }
+
+        /// <summary>
+        /// 运行次数
+        /// </summary>
+        public int RunningTimes { get; set; }
+
         /// <summary>
         /// 添加
         /// </summary>
@@ -1449,6 +1932,7 @@ namespace Jade.Model
         /// <summary>
         /// 首页-列表页
         /// </summary>
-        ListPage = 2
+        ListPage = 2,
+        None
     }
 }

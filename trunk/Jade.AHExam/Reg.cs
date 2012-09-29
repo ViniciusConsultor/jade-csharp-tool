@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace Jade.AHExam
 {
@@ -20,9 +22,26 @@ namespace Jade.AHExam
             this.DialogResult = DialogResult.Cancel;
         }
 
+
         private void Reg_Load(object sender, EventArgs e)
         {
-            this.webBrowser1.DocumentText = "<html><HEAD><STYLE>body {MARGIN: 0px;padding:0px; border:0px;}IMG {MARGIN: 0px; border:0px;}A {MARGIN: 0px;border：0px;}</STYLE></HEAD><BODY><A href=\"http://me.alipay.com/jadepeng\" target=_blank><IMG src=\"https://img.alipay.com/sys/personalprod/style/mc/btn-index.png\"> </A></BODY></html>";
+            try
+            {
+                this.pictureBox1.Image = Jade.AHExam.Properties.Resources.btn_index;
+            }
+            catch
+            {
+            }
+
+            //try
+            //{
+            //    this.webBrowser1.Navigate("about:blank;");
+            //    System.Threading.Thread.Sleep(2000);
+            //    this.webBrowser1.DocumentText = "<html><HEAD><STYLE>body {MARGIN: 0px;padding:0px; border:0px;}IMG {MARGIN: 0px; border:0px;}A {MARGIN: 0px;border：0px;}</STYLE></HEAD><BODY><A href=\"http://me.alipay.com/jadepeng\" target=_blank><IMG src=\"https://img.alipay.com/sys/personalprod/style/mc/btn-index.png\"> </A></BODY></html>";
+            //}
+            //catch
+            //{
+            //}
         }
 
         public string UserName
@@ -59,6 +78,11 @@ namespace Jade.AHExam
             catch
             {
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://me.alipay.com/jadepeng");
         }
     }
 }

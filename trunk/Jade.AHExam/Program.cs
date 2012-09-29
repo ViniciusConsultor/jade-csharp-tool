@@ -20,12 +20,12 @@ namespace Jade.AHExam
 
     public class CacheObject
     {
-        public static string User { get; set; }
+        public static string User;
 
-        public static string Cookie { get; set; }
+        public static string Cookie;
 
-        public static List<课程> 课程列表 { get; set; }
+        public static List<Course> 课程列表;
 
-        public static 课程计划 课程计划 { get; set; }
+        public static 课程计划 课程计划;
     }
 }
