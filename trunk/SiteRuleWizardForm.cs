@@ -763,7 +763,7 @@ namespace Jade
                         {
                             CurrentXPathSelected(currentTxtbox.Text);
                         }
-                        current = null;
+                        //current = null;
                     }
                 }
                 else
@@ -773,7 +773,7 @@ namespace Jade
                     {
                         CurrentXPathSelected(currentTxtbox.Text);
                     }
-                    current = null;
+                    //current = null;
                 }
 
             }
@@ -813,6 +813,7 @@ namespace Jade
             browser.NewWindow += new CancelEventHandler(Browser_NewWindow);
             browser.Navigating += new WebBrowserNavigatingEventHandler(Browser_Navigating);
             browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
+            browser.ContextMenuStrip = this.xpathContextMenu;
         }
 
         public Uri Url
@@ -850,10 +851,13 @@ namespace Jade
 
         void OnBrowserLoaded()
         {
-            currenActiveBrowser.Document.Body.MouseOver -= new HtmlElementEventHandler(Body_MouseOver);
-            currenActiveBrowser.Document.Click -= new HtmlElementEventHandler(Document_Click);
-            currenActiveBrowser.Document.Body.MouseOver += new HtmlElementEventHandler(Body_MouseOver);
-            currenActiveBrowser.Document.Click += new HtmlElementEventHandler(Document_Click);
+            if (currenActiveBrowser.Document.Body != null)
+            {
+                currenActiveBrowser.Document.Body.MouseOver -= new HtmlElementEventHandler(Body_MouseOver);
+                currenActiveBrowser.Document.Click -= new HtmlElementEventHandler(Document_Click);
+                currenActiveBrowser.Document.Body.MouseOver += new HtmlElementEventHandler(Body_MouseOver);
+                currenActiveBrowser.Document.Click += new HtmlElementEventHandler(Document_Click);
+            }
         }
 
         delegate void XPathSelected(string xpath);
@@ -1358,8 +1362,14 @@ namespace Jade
                     this.txtTestUrl.Text = forTestUrl;
                 }
                 this.enableNavigate = true;
-                this.Url = new Uri(this.txtTestUrl.Text);
-                this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+                try
+                {
+                    this.Url = new Uri(this.txtTestUrl.Text);
+                    this.itemWebBrowser.Navigate(this.txtTestUrl.Text);
+                }
+                catch
+                {
+                }
                 this.enableNavigate = true;
                 this.EnableSelect = false;
                 this.isBindCompleted = false;
@@ -1641,6 +1651,18 @@ namespace Jade
                 this.txtCategory.Text += " " + label.Text;
             }
             this.txtCategory.Text = this.txtCategory.Text.Trim();
+        }
+
+        private void 选择上一级ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (current != null && current.Parent != null)
+            {
+                current.Style = current.Style.Replace("BORDER-BOTTOM: #0000cc 1px solid;", "").Replace("BORDER-LEFT: #0000cc 1px solid;", "").Replace("BACKGROUND-COLOR: #9fc4e7;", "").Replace("BORDER-TOP: #0000cc 1px solid;", "").Replace("BORDER-RIGHT: #0000cc 1px solid", "");
+                current = current.Parent;
+                current.Style += "background-color:#9FC4E7;border:1px solid #0000CC;";
+                EnableSelect = true;
+                Document_Click(null, null);
+            }
         }
 
     }

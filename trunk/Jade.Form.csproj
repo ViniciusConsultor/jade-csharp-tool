@@ -707,6 +707,7 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\btnSearch.png" />
     <None Include="Resources\recent_documents.png" />
     <None Include="Resources\drive_remote.png" />
     <None Include="Resources\attachment_yellow.png" />

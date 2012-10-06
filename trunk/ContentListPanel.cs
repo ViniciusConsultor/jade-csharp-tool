@@ -71,6 +71,13 @@ namespace Jade
                 var category = CacheObject.Categories.SingleOrDefault(c => c.ID == CacheObject.Rules.SingleOrDefault(r => r.SiteRuleId == data.TaskId).CategoryID);
                 e.DisplayText = category.Name;
             }
+            else if (e.Column.Equals(EndTime))
+            {
+                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                var data = dataTable[e.RowHandle];
+                if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
+                    e.DisplayText = "----";
+            }
         }
 
         void gridView1_StartSorting(object sender, EventArgs e)
@@ -452,7 +459,15 @@ namespace Jade
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            toolStripButton1_Click(null, null);
+            if (MessageBox.Show(this,
+                      "您确定要删除所选新闻？",
+                      "清空采集数据",
+                      MessageBoxButtons.YesNo,
+                      MessageBoxIcon.Question,
+                      MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                toolStripButton1_Click(null, null);
+            }
         }
 
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -511,6 +526,11 @@ namespace Jade
             {
                 cmbTags_TextChanged(null, null);
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            cmbTags_TextChanged(null, null);
         }
     }
 }
