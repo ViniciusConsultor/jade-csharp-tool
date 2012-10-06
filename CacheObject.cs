@@ -612,6 +612,13 @@ namespace Jade
 
     public class RunningTask
     {
+        public RunningTask()
+        {
+            StartTime = DateTime.Now;
+            EndTime = DateTime.MaxValue;
+        }
+
+
         public int TaskId { get; set; }
         public string TaskName { get; set; }
         public string UrlCount { get; set; }

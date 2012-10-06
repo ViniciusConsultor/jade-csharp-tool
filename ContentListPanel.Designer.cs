@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentListPanel));
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -35,7 +36,7 @@
             this.taskName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Edited = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Editor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IsPublish = new DevExpress.XtraGrid.Columns.GridColumn();
             this.GroupName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,10 +50,16 @@
             this.CreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1 = new DevExpress.XtraEditors.PanelControl();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtKeyword = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.cmbTags = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
@@ -62,10 +69,10 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.comboBoxEdit1 = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtKeyword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.devPager1 = new Jade.Control.DevPager();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -74,9 +81,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -91,7 +103,7 @@
             this.repositoryItemImageComboBox1,
             this.repositoryItemHyperLinkEdit1,
             this.repositoryItemHyperLinkEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(810, 320);
+            this.gridControl1.Size = new System.Drawing.Size(919, 320);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -274,6 +286,9 @@
             this.CreateTime.Caption = "发布时间";
             this.CreateTime.FieldName = "CreateTime";
             this.CreateTime.Name = "CreateTime";
+            this.CreateTime.OptionsColumn.AllowEdit = false;
+            this.CreateTime.OptionsFilter.AllowAutoFilter = false;
+            this.CreateTime.OptionsFilter.AllowFilter = false;
             this.CreateTime.Visible = true;
             this.CreateTime.VisibleIndex = 12;
             // 
@@ -284,25 +299,80 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cmbTags);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.chkOnlyMyContent);
-            this.panel1.Controls.Add(this.comboBoxEdit1);
-            this.panel1.Controls.Add(this.txtKeyword);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(813, 65);
+            this.panel1.Size = new System.Drawing.Size(922, 65);
             this.panel1.TabIndex = 7;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnSearch, 2, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(918, 61);
+            this.tableLayoutPanel1.TabIndex = 103;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.txtKeyword);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(403, 24);
+            this.panel2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 14);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "关键字：";
+            // 
+            // txtKeyword
+            // 
+            this.txtKeyword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtKeyword.Location = new System.Drawing.Point(64, 2);
+            this.txtKeyword.Name = "txtKeyword";
+            this.txtKeyword.Size = new System.Drawing.Size(336, 22);
+            this.txtKeyword.TabIndex = 3;
+            this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.cmbTags);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 33);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(403, 25);
+            this.panel3.TabIndex = 1;
             // 
             // cmbTags
             // 
+            this.cmbTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTags.FormattingEnabled = true;
-            this.cmbTags.Location = new System.Drawing.Point(70, 40);
+            this.cmbTags.Location = new System.Drawing.Point(64, 1);
             this.cmbTags.Name = "cmbTags";
-            this.cmbTags.Size = new System.Drawing.Size(280, 22);
+            this.cmbTags.Size = new System.Drawing.Size(336, 22);
             this.cmbTags.TabIndex = 7;
             this.cmbTags.TextChanged += new System.EventHandler(this.cmbTags_TextChanged);
             this.cmbTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbTags_KeyDown);
@@ -310,21 +380,36 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 43);
+            this.label3.Location = new System.Drawing.Point(3, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "标签：";
             // 
-            // chkOnlyMyContent
+            // panel4
             // 
-            this.chkOnlyMyContent.Location = new System.Drawing.Point(375, 39);
-            this.chkOnlyMyContent.MenuManager = this.barManager1;
-            this.chkOnlyMyContent.Name = "chkOnlyMyContent";
-            this.chkOnlyMyContent.Properties.Caption = "仅显示我编辑的内容";
-            this.chkOnlyMyContent.Size = new System.Drawing.Size(146, 19);
-            this.chkOnlyMyContent.TabIndex = 5;
-            this.chkOnlyMyContent.CheckedChanged += new System.EventHandler(this.chkOnlyMyContent_CheckedChanged);
+            this.panel4.Controls.Add(this.comboBoxEdit1);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(412, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(403, 24);
+            this.panel4.TabIndex = 2;
+            // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxEdit1.Location = new System.Drawing.Point(79, 2);
+            this.comboBoxEdit1.MenuManager = this.barManager1;
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "任务名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SiteRuleId", "任务编号")});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(321, 20);
+            this.comboBoxEdit1.TabIndex = 4;
             // 
             // barManager1
             // 
@@ -395,14 +480,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(813, 24);
+            this.barDockControlTop.Size = new System.Drawing.Size(922, 24);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 453);
-            this.barDockControlBottom.Size = new System.Drawing.Size(813, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(922, 0);
             // 
             // barDockControlLeft
             // 
@@ -415,47 +500,48 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(813, 24);
+            this.barDockControlRight.Location = new System.Drawing.Point(922, 24);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 429);
-            // 
-            // comboBoxEdit1
-            // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(457, 13);
-            this.comboBoxEdit1.MenuManager = this.barManager1;
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "任务名称"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SiteRuleId", "任务编号")});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(292, 20);
-            this.comboBoxEdit1.TabIndex = 4;
-            // 
-            // txtKeyword
-            // 
-            this.txtKeyword.Location = new System.Drawing.Point(70, 13);
-            this.txtKeyword.Name = "txtKeyword";
-            this.txtKeyword.Size = new System.Drawing.Size(280, 22);
-            this.txtKeyword.TabIndex = 3;
-            this.txtKeyword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyword_KeyDown);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 14);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "关键字：";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(376, 15);
+            this.label1.Location = new System.Drawing.Point(6, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "所属任务：";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.chkOnlyMyContent);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(412, 33);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(403, 25);
+            this.panel5.TabIndex = 3;
+            // 
+            // chkOnlyMyContent
+            // 
+            this.chkOnlyMyContent.Location = new System.Drawing.Point(7, 5);
+            this.chkOnlyMyContent.MenuManager = this.barManager1;
+            this.chkOnlyMyContent.Name = "chkOnlyMyContent";
+            this.chkOnlyMyContent.Properties.Caption = "仅显示我编辑的内容";
+            this.chkOnlyMyContent.Size = new System.Drawing.Size(146, 19);
+            this.chkOnlyMyContent.TabIndex = 5;
+            this.chkOnlyMyContent.CheckedChanged += new System.EventHandler(this.chkOnlyMyContent_CheckedChanged);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(821, 33);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(94, 24);
+            this.btnSearch.TabIndex = 102;
+            this.btnSearch.Text = " 搜索";
+            this.btnSearch.ToolTip = "搜索";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // devPager1
             // 
@@ -465,7 +551,7 @@
             this.devPager1.Name = "devPager1";
             this.devPager1.PageCount = 0;
             this.devPager1.PageSize = 15;
-            this.devPager1.Size = new System.Drawing.Size(813, 32);
+            this.devPager1.Size = new System.Drawing.Size(922, 32);
             this.devPager1.TabIndex = 10;
             this.devPager1.TotalCount = 0;
             // 
@@ -481,7 +567,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "ContentListPanel";
-            this.Size = new System.Drawing.Size(813, 453);
+            this.Size = new System.Drawing.Size(922, 453);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
@@ -489,10 +575,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkOnlyMyContent.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -537,6 +630,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbTags;
         private DevExpress.XtraGrid.Columns.GridColumn GroupName;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
 
     }
 }

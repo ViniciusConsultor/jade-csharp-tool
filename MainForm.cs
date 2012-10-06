@@ -697,7 +697,7 @@ namespace Jade
             {
                 lock (this)
                 {
-                    int i = txtbox.SelectionStart;
+                    int i = txtbox.TextLength - 1;
                     txtbox.Select(i, 0);
                     txtbox.SelectionColor = color;
                     txtbox.Focus();
@@ -850,7 +850,7 @@ namespace Jade
                 dialog.Description = "请选择存储规则的文件夹";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var files = Directory.GetFiles(dialog.SelectedPath, "*.task",SearchOption.AllDirectories);
+                    var files = Directory.GetFiles(dialog.SelectedPath, "*.task", SearchOption.AllDirectories);
                     foreach (var file in files)
                     {
                         try

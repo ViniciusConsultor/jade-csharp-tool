@@ -82,6 +82,8 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.xpathContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.选择上一级ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
             this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
@@ -109,6 +111,7 @@
             this.xtraTabPageTitle = new DevExpress.XtraTab.XtraTabPage();
             this.ItemContrainerPanel = new DevExpress.XtraEditors.PanelControl();
             this.panelxPath = new System.Windows.Forms.Panel();
+            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
             this.txtReplace = new DevExpress.XtraEditors.MemoEdit();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
@@ -163,6 +166,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtStartUrlXPath.Properties)).BeginInit();
             this.startUrlmenu.SuspendLayout();
+            this.xpathContextMenu.SuspendLayout();
             this.contentUrlPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -647,40 +651,40 @@
             this.清空ToolStripMenuItem,
             this.查看代码ToolStripMenuItem});
             this.startUrlmenu.Name = "startUrlmenu";
-            this.startUrlmenu.Size = new System.Drawing.Size(119, 114);
+            this.startUrlmenu.Size = new System.Drawing.Size(125, 114);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // 编辑ToolStripMenuItem
             // 
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.编辑ToolStripMenuItem.Text = "编辑";
             this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
             // 
             // 浏览ToolStripMenuItem
             // 
             this.浏览ToolStripMenuItem.Name = "浏览ToolStripMenuItem";
-            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.浏览ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.浏览ToolStripMenuItem.Text = "浏览";
             this.浏览ToolStripMenuItem.Click += new System.EventHandler(this.浏览ToolStripMenuItem_Click);
             // 
             // 清空ToolStripMenuItem
             // 
             this.清空ToolStripMenuItem.Name = "清空ToolStripMenuItem";
-            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.清空ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.清空ToolStripMenuItem.Text = "清空";
             this.清空ToolStripMenuItem.Click += new System.EventHandler(this.清空ToolStripMenuItem_Click);
             // 
             // 查看代码ToolStripMenuItem
             // 
             this.查看代码ToolStripMenuItem.Name = "查看代码ToolStripMenuItem";
-            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.查看代码ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.查看代码ToolStripMenuItem.Text = "查看代码";
             this.查看代码ToolStripMenuItem.Click += new System.EventHandler(this.查看代码ToolStripMenuItem_Click);
             // 
@@ -741,12 +745,27 @@
             this.startUrlWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.startUrlWebBrowser.ContextMenuStrip = this.xpathContextMenu;
             this.startUrlWebBrowser.Location = new System.Drawing.Point(3, 29);
             this.startUrlWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.startUrlWebBrowser.Name = "startUrlWebBrowser";
             this.startUrlWebBrowser.ScriptErrorsSuppressed = true;
-            this.startUrlWebBrowser.Size = new System.Drawing.Size(837, 193);
+            this.startUrlWebBrowser.Size = new System.Drawing.Size(852, 193);
             this.startUrlWebBrowser.TabIndex = 6;
+            // 
+            // xpathContextMenu
+            // 
+            this.xpathContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.选择上一级ToolStripMenuItem});
+            this.xpathContextMenu.Name = "xpa";
+            this.xpathContextMenu.Size = new System.Drawing.Size(153, 48);
+            // 
+            // 选择上一级ToolStripMenuItem
+            // 
+            this.选择上一级ToolStripMenuItem.Name = "选择上一级ToolStripMenuItem";
+            this.选择上一级ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.选择上一级ToolStripMenuItem.Text = "选择上一级";
+            this.选择上一级ToolStripMenuItem.Click += new System.EventHandler(this.选择上一级ToolStripMenuItem_Click);
             // 
             // completionWizardPage1
             // 
@@ -769,6 +788,7 @@
             this.contentBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.contentBrowser.ContextMenuStrip = this.xpathContextMenu;
             this.contentBrowser.Location = new System.Drawing.Point(6, 6);
             this.contentBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.contentBrowser.Name = "contentBrowser";
@@ -1026,6 +1046,7 @@
             // 
             // panelxPath
             // 
+            this.panelxPath.Controls.Add(this.simpleButton5);
             this.panelxPath.Controls.Add(this.groupControl6);
             this.panelxPath.Controls.Add(this.groupControl3);
             this.panelxPath.Controls.Add(this.groupControl2);
@@ -1040,6 +1061,15 @@
             this.panelxPath.Name = "panelxPath";
             this.panelxPath.Size = new System.Drawing.Size(849, 175);
             this.panelxPath.TabIndex = 6;
+            // 
+            // simpleButton5
+            // 
+            this.simpleButton5.Location = new System.Drawing.Point(482, 3);
+            this.simpleButton5.Name = "simpleButton5";
+            this.simpleButton5.Size = new System.Drawing.Size(92, 23);
+            this.simpleButton5.TabIndex = 115;
+            this.simpleButton5.Text = "选择上一级";
+            this.simpleButton5.Click += new System.EventHandler(this.选择上一级ToolStripMenuItem_Click);
             // 
             // groupControl6
             // 
@@ -1295,7 +1325,7 @@
             // 
             this.lblItemContentLog.AutoSize = true;
             this.lblItemContentLog.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblItemContentLog.Location = new System.Drawing.Point(480, 8);
+            this.lblItemContentLog.Location = new System.Drawing.Point(595, 7);
             this.lblItemContentLog.Name = "lblItemContentLog";
             this.lblItemContentLog.Size = new System.Drawing.Size(15, 14);
             this.lblItemContentLog.TabIndex = 98;
@@ -1386,6 +1416,7 @@
             this.itemWebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemWebBrowser.ContextMenuStrip = this.xpathContextMenu;
             this.itemWebBrowser.Location = new System.Drawing.Point(5, 32);
             this.itemWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.itemWebBrowser.Name = "itemWebBrowser";
@@ -1442,6 +1473,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtStartUrlXPath.Properties)).EndInit();
             this.startUrlmenu.ResumeLayout(false);
+            this.xpathContextMenu.ResumeLayout(false);
             this.contentUrlPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -1602,5 +1634,8 @@
         private DevExpress.XtraEditors.TextEdit txtCategory;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl4;
+        private System.Windows.Forms.ContextMenuStrip xpathContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem 选择上一级ToolStripMenuItem;
+        private DevExpress.XtraEditors.SimpleButton simpleButton5;
     }
 }
