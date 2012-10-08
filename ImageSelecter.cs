@@ -18,6 +18,8 @@ namespace Jade
 {
     public partial class ImageSelecter : DevExpress.XtraEditors.XtraForm
     {
+        string desktop = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
+        string MyPictures = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures);
         public ImageSelecter(bool onlyRemote = false)
         {
             InitializeComponent();
@@ -41,13 +43,22 @@ namespace Jade
 
                 dir = "Pic";
                 InitDir(mainGallery.Gallery.Groups[1], dir);
+                InitDir(mainGallery.Gallery.Groups[4], desktop);
+                InitDir(mainGallery.Gallery.Groups[5], MyPictures);
+
+                InitDisk();
             }
             else
             {
                 mainGallery.Gallery.Groups[0].Visible = false;
                 mainGallery.Gallery.Groups[1].Visible = false;
+                mainGallery.Gallery.Groups[3].Visible = false;
+                mainGallery.Gallery.Groups[4].Visible = false;
+                mainGallery.Gallery.Groups[5].Visible = false;
+
                 this.navBarRencent.Visible = false;
                 this.navBarItemDownload.Visible = false;
+                navBarGroup1.Visible = false;
             }
             this.lblStatus.Text = "正在加载远程图片......";
             new Thread(() =>
@@ -111,18 +122,55 @@ namespace Jade
             return item;
         }
 
+        void InitDisk()
+        {
+            var group = mainGallery.Gallery.Groups[3];
+            var disks = Directory.GetLogicalDrives();
+            group.Items.Clear();
+            foreach (var parent in disks)
+            {
+                GalleryItem item = new GalleryItem();
+                item.Caption = parent;
+                item.Hint = "磁盘" + parent;
+                item.Image = Properties.Resources.hdd;
+                item.Tag = parent;
+                group.Items.Add(item);
+            }
+        }
 
         private void InitDir(GalleryItemGroup group, string dir)
         {
             group.Items.Clear();
+
+            if (dir == "我的磁盘")
+            {
+                InitDisk();
+                return;
+            }
+
             if (Directory.Exists(dir))
             {
-                if (!(dir == "Pic" || dir == "Rencenty"))
+                if (!(dir == "Pic" || dir == "Rencenty" || dir == desktop || dir == MyPictures || (dir.Length == 3 && dir.Substring(1, 2) == ":\\")))
                 {
-                    var parent = dir.Substring(0, dir.LastIndexOf('\\'));
-                    // 添加上一
-                    group.Items.Add(CreateParentItem(parent));
+                    
+                    if (dir.Length == 3 && dir.Substring(1, 2) == ":\\")
+                    {
+                        GalleryItem item = new GalleryItem();
+                        item.Caption = "我的磁盘";
+                        item.Hint = "我的磁盘";
+                        item.Image = Properties.Resources.hdd;
+                        item.Tag = "我的磁盘";
+                        // 添加上一
+                        group.Items.Add(item);
+                    }
+                    else
+                    {
+                        var parent = dir.Substring(0, dir.LastIndexOf('\\'));
+                        // 添加上一
+                        group.Items.Add(CreateParentItem(parent));
+                    }
                 }
+              
 
                 var dirs = Directory.GetDirectories(dir);
                 foreach (var pData in dirs)
@@ -167,7 +215,7 @@ namespace Jade
         private GalleryItem CreatePhotoGalleryItem(string fileName)
         {
             GalleryItem item = new GalleryItem();
-            item.Caption = Path.GetFileName(fileName);
+            item.Caption = substring(Path.GetFileName(fileName));
             item.Hint = fileName;
             item.Image = ThumbnailHelper.Default.GetThumbnail(fileName, 208, ThumbPath);
             item.Tag = fileName;
@@ -177,7 +225,7 @@ namespace Jade
         private GalleryItem CreateDirItem(string dirName)
         {
             GalleryItem item = new GalleryItem();
-            item.Caption = Path.GetFileNameWithoutExtension(dirName + ".txt");
+            item.Caption = substring(Path.GetFileNameWithoutExtension(dirName + ".txt"));
             item.Hint = "文件夹：" + dirName;
             item.Image = Properties.Resources.dir;
             item.Tag = dirName;
@@ -188,7 +236,7 @@ namespace Jade
         private GalleryItem CreateParentItem(string dirName)
         {
             GalleryItem item = new GalleryItem();
-            item.Caption = Path.GetDirectoryName(dirName);
+            item.Caption = "返回..";
             item.Hint = "文件夹：" + dirName;
             item.Image = Properties.Resources.folder_yellow_parent;
             item.Tag = dirName;
@@ -230,12 +278,18 @@ namespace Jade
             set;
         }
 
+
+        string substring(string title, int length = 10)
+        {
+            return title.Length > 10 ? title.Substring(0, 10) + ".." : title;
+        }
+
         private void galleryControlGallery1_ItemDoubleClick(object sender, GalleryItemClickEventArgs e)
         {
             e.Item.Checked = true;
             var file = e.Item.Tag.ToString();
 
-            if (file.StartsWith("http:") || !e.Item.Hint.Contains("文件夹"))
+            if (file.StartsWith("http:") || !(e.Item.Hint.Contains("文件夹") || e.Item.Hint.Contains("磁盘")))
             {
                 if (file.StartsWith("http:"))
                 {
@@ -266,6 +320,21 @@ namespace Jade
             {
                 InitDir(e.Item.GalleryGroup, file);
             }
+        }
+
+        private void navBarDeskTop_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            this.mainGallery.Gallery.ScrollTo(this.mainGallery.Gallery.Groups[4], true);
+        }
+
+        private void navBarLocalDisk_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            this.mainGallery.Gallery.ScrollTo(this.mainGallery.Gallery.Groups[3], true);
+        }
+
+        private void navBarMyPic_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            this.mainGallery.Gallery.ScrollTo(this.mainGallery.Gallery.Groups[5], true);
         }
 
 

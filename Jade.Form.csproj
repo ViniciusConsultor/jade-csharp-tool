@@ -622,7 +622,9 @@
     <EmbeddedResource Include="WelcomePanel.resx">
       <DependentUpon>WelcomePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <EmbeddedResource Include="Html.dtd" />
     <None Include="ClassDiagram1.cd" />
     <None Include="Jade.Form_TemporaryKey.pfx" />
@@ -707,6 +709,10 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\hdd.png" />
+    <None Include="Resources\my_pictures.png" />
+    <None Include="Resources\hdd32.png" />
+    <None Include="Resources\desktop.png" />
     <None Include="Resources\btnSearch.png" />
     <None Include="Resources\recent_documents.png" />
     <None Include="Resources\drive_remote.png" />
