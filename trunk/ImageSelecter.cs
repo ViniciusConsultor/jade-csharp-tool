@@ -150,9 +150,8 @@ namespace Jade
 
             if (Directory.Exists(dir))
             {
-                if (!(dir == "Pic" || dir == "Rencenty" || dir == desktop || dir == MyPictures || (dir.Length == 3 && dir.Substring(1, 2) == ":\\")))
+                if (!(dir == "Pic" || dir == "Rencenty" || dir == desktop || dir == MyPictures) || (dir.Length == 3 && dir.Substring(1, 2) == ":\\"))
                 {
-                    
                     if (dir.Length == 3 && dir.Substring(1, 2) == ":\\")
                     {
                         GalleryItem item = new GalleryItem();
@@ -170,7 +169,7 @@ namespace Jade
                         group.Items.Add(CreateParentItem(parent));
                     }
                 }
-              
+
 
                 var dirs = Directory.GetDirectories(dir);
                 foreach (var pData in dirs)
@@ -297,7 +296,14 @@ namespace Jade
                 }
                 else
                 {
-                    SelectedFile = AppDomain.CurrentDomain.BaseDirectory + "\\" + file;
+                    if (file.Contains(":"))
+                    {
+                        SelectedFile = file;
+                    }
+                    else
+                    {
+                        SelectedFile = AppDomain.CurrentDomain.BaseDirectory + "\\" + file;
+                    }
 
                     try
                     {

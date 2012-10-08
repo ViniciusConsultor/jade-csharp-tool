@@ -697,17 +697,18 @@ namespace Jade
             {
                 lock (this)
                 {
-                    int i = txtbox.TextLength - 1;
+                    int i = txtbox.TextLength + 1;
                     txtbox.Select(i, 0);
                     txtbox.SelectionColor = color;
                     txtbox.Focus();
                     txtbox.AppendText(str + "\r\n");
                     txtbox.Select(i + str.Length + 2, 0);
-                    txtbox.SelectionColor = Color.Black;
+                    //txtbox.SelectionColor = Color.Black;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -881,6 +882,11 @@ namespace Jade
         private void 编辑分组ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             编辑分组ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void txtLog_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
