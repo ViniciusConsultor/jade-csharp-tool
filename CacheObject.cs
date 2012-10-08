@@ -16,7 +16,7 @@ namespace Jade
 {
     public class CacheObject
     {
-        public static int MaxRequestCount = 20;
+        public static int MaxRequestCount = 40;
         public static int CurrentRequestCount = 0;
         static CacheObject()
         {

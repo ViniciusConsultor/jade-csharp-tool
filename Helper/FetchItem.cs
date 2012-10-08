@@ -212,10 +212,13 @@ namespace Jade
                 {
                     return result;
                 }
-                if (this.TrimHtml)
+                //if (this.TrimHtml)
+                //{
+                if (CurrentItemRule.ItemName == "ÄÚÈÝ")
                 {
-                    result = this.HtmToTxt(result);
+                    result =ExtractUrl.NoHTML(result);
                 }
+                //}
 
                 if (this.HtmlTagCleanerList != null)
                 {
