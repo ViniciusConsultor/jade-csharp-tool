@@ -251,6 +251,7 @@ namespace Jade.AHExam
                     else
                     {
                         Success(toStudyCourse.Name + "已学习完毕,跳过学习");
+                        timer.Stop();
                     }
                 }
             }

@@ -28,13 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup2 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup3 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup19 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup20 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup21 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup22 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup23 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup24 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageSelecter));
             this.mainGallery = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
+            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarDeskTop = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarLocalDisk = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarMyPic = new DevExpress.XtraNavBar.NavBarItem();
             this.albumGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarRencent = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemDownload = new DevExpress.XtraNavBar.NavBarItem();
@@ -56,13 +63,19 @@
             // 
             // galleryControlGallery1
             // 
-            galleryItemGroup1.Caption = "最近使用";
-            galleryItemGroup2.Caption = "附件库";
-            galleryItemGroup3.Caption = "远程图片";
+            galleryItemGroup19.Caption = "最近使用";
+            galleryItemGroup20.Caption = "附件库";
+            galleryItemGroup21.Caption = "远程图片";
+            galleryItemGroup22.Caption = "本地磁盘";
+            galleryItemGroup23.Caption = "桌面";
+            galleryItemGroup24.Caption = "我的图片";
             this.mainGallery.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup1,
-            galleryItemGroup2,
-            galleryItemGroup3});
+            galleryItemGroup19,
+            galleryItemGroup20,
+            galleryItemGroup21,
+            galleryItemGroup22,
+            galleryItemGroup23,
+            galleryItemGroup24});
             this.mainGallery.Gallery.ItemDoubleClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.galleryControlGallery1_ItemDoubleClick);
             this.mainGallery.Location = new System.Drawing.Point(223, 0);
             this.mainGallery.Name = "mainGallery";
@@ -78,16 +91,20 @@
             // 
             // navBarControl1
             // 
-            this.navBarControl1.ActiveGroup = this.albumGroup;
+            this.navBarControl1.ActiveGroup = this.navBarGroup1;
             this.navBarControl1.AllowSelectedLink = true;
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.navBarControl1.DragDropFlags = DevExpress.XtraNavBar.NavBarDragDrop.None;
             this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            this.albumGroup});
+            this.albumGroup,
+            this.navBarGroup1});
             this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarRencent,
             this.navBarItemDownload,
-            this.navBarItemRemote});
+            this.navBarItemRemote,
+            this.navBarLocalDisk,
+            this.navBarMyPic,
+            this.navBarDeskTop});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 217;
@@ -98,6 +115,39 @@
             this.navBarControl1.TabIndex = 2;
             this.navBarControl1.Text = "navBarControl1";
             this.navBarControl1.Click += new System.EventHandler(this.navBarControl1_Click);
+            // 
+            // navBarGroup1
+            // 
+            this.navBarGroup1.Caption = "我的电脑";
+            this.navBarGroup1.Expanded = true;
+            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarDeskTop),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarLocalDisk),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarMyPic)});
+            this.navBarGroup1.Name = "navBarGroup1";
+            this.navBarGroup1.SelectedLinkIndex = 0;
+            // 
+            // navBarDeskTop
+            // 
+            this.navBarDeskTop.Caption = "桌面";
+            this.navBarDeskTop.LargeImage = global::Jade.Properties.Resources.desktop;
+            this.navBarDeskTop.Name = "navBarDeskTop";
+            this.navBarDeskTop.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarDeskTop_LinkClicked);
+            // 
+            // navBarLocalDisk
+            // 
+            this.navBarLocalDisk.Caption = "本地磁盘";
+            this.navBarLocalDisk.LargeImage = global::Jade.Properties.Resources.hdd32;
+            this.navBarLocalDisk.Name = "navBarLocalDisk";
+            this.navBarLocalDisk.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarLocalDisk_LinkClicked);
+            // 
+            // navBarMyPic
+            // 
+            this.navBarMyPic.Caption = "我的图片";
+            this.navBarMyPic.LargeImage = global::Jade.Properties.Resources.my_pictures;
+            this.navBarMyPic.Name = "navBarMyPic";
+            this.navBarMyPic.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarMyPic_LinkClicked);
             // 
             // albumGroup
             // 
@@ -110,7 +160,6 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemDownload),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemRemote)});
             this.albumGroup.Name = "albumGroup";
-            this.albumGroup.SelectedLinkIndex = 0;
             // 
             // navBarRencent
             // 
@@ -175,5 +224,9 @@
         private DevExpress.XtraNavBar.NavBarItem navBarItemDownload;
         private DevExpress.XtraNavBar.NavBarItem navBarItemRemote;
         private System.Windows.Forms.Label lblStatus;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
+        private DevExpress.XtraNavBar.NavBarItem navBarDeskTop;
+        private DevExpress.XtraNavBar.NavBarItem navBarLocalDisk;
+        private DevExpress.XtraNavBar.NavBarItem navBarMyPic;
     }
 }
