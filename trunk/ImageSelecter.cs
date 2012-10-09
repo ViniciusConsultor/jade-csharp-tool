@@ -33,7 +33,7 @@ namespace Jade
             //group.CaptionControl = CreateAlbumGroupCaptionControl(albumData);
             //return group;
             //mainGallery.Gallery.Groups.Add(group);
-            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            //SplashScreenManager.ShowForm(typeof(WaitForm1));
 
             if (!onlyRemote)
             {
@@ -101,14 +101,20 @@ namespace Jade
                         catch
                         {
                         }
+                    } 
+                    try
+                    {
+                        this.lblStatus.Text = "加载图片完毕";
                     }
-                    this.lblStatus.Text = "加载图片完毕";
+                    catch
+                    {
+                    }
                 }));
             }
             catch
             {
             }
-            SplashScreenManager.CloseForm();
+            // SplashScreenManager.CloseForm();
         }
         private GalleryItem CreateRemotePhotoGalleryItem(string fileName)
         {

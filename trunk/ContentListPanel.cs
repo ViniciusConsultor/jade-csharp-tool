@@ -77,6 +77,8 @@ namespace Jade
                 var data = dataTable[e.RowHandle];
                 if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
                     e.DisplayText = "----";
+                else
+                    e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd hh:mm:ss");
             }
         }
 
