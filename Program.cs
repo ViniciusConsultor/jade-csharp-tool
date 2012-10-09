@@ -88,7 +88,7 @@ namespace Jade
         {
             Exception ex = exceptionobj as Exception;
             Log4Log.Exception(ex);
-            Log4Log.Close();
+            //Log4Log.Close();
             //MessageBox.Show(ex.Message);
             //MessageBox.Show(ex.StackTrace);
             //if (ex.InnerException != null)

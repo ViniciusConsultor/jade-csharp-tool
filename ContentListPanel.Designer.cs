@@ -162,7 +162,7 @@
             this.Edited.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
             this.Edited.Visible = true;
             this.Edited.VisibleIndex = 2;
-            this.Edited.Width = 36;
+            this.Edited.Width = 29;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -205,7 +205,7 @@
             this.IsPublish.OptionsColumn.AllowEdit = false;
             this.IsPublish.Visible = true;
             this.IsPublish.VisibleIndex = 4;
-            this.IsPublish.Width = 38;
+            this.IsPublish.Width = 30;
             // 
             // GroupName
             // 
@@ -247,12 +247,14 @@
             // StartTime
             // 
             this.StartTime.Caption = "采集时间";
+            this.StartTime.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            this.StartTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.StartTime.FieldName = "DownloadTime";
             this.StartTime.Name = "StartTime";
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
             this.StartTime.VisibleIndex = 9;
-            this.StartTime.Width = 100;
+            this.StartTime.Width = 140;
             // 
             // EndTime
             // 
@@ -274,7 +276,7 @@
             this.Url.OptionsColumn.AllowEdit = false;
             this.Url.Visible = true;
             this.Url.VisibleIndex = 11;
-            this.Url.Width = 200;
+            this.Url.Width = 129;
             // 
             // repositoryItemHyperLinkEdit1
             // 

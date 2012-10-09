@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.开始采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.停止采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runningTaskCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.taskName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -38,13 +41,10 @@
             this.ContentCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.StartTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.EndTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.开始采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.停止采集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.runningTaskCollectionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -59,6 +59,28 @@
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始采集ToolStripMenuItem,
+            this.停止采集ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            // 
+            // 开始采集ToolStripMenuItem
+            // 
+            this.开始采集ToolStripMenuItem.Name = "开始采集ToolStripMenuItem";
+            this.开始采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.开始采集ToolStripMenuItem.Text = "开始采集";
+            this.开始采集ToolStripMenuItem.Click += new System.EventHandler(this.开始采集ToolStripMenuItem_Click);
+            // 
+            // 停止采集ToolStripMenuItem
+            // 
+            this.停止采集ToolStripMenuItem.Name = "停止采集ToolStripMenuItem";
+            this.停止采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.停止采集ToolStripMenuItem.Text = "停止采集";
+            this.停止采集ToolStripMenuItem.Click += new System.EventHandler(this.停止采集ToolStripMenuItem_Click);
             // 
             // runningTaskCollectionBindingSource
             // 
@@ -86,6 +108,7 @@
             this.taskName.OptionsColumn.AllowEdit = false;
             this.taskName.Visible = true;
             this.taskName.VisibleIndex = 0;
+            this.taskName.Width = 100;
             // 
             // status
             // 
@@ -96,6 +119,7 @@
             this.status.OptionsFilter.AllowFilter = false;
             this.status.Visible = true;
             this.status.VisibleIndex = 1;
+            this.status.Width = 100;
             // 
             // UrlCount
             // 
@@ -105,6 +129,7 @@
             this.UrlCount.OptionsColumn.AllowEdit = false;
             this.UrlCount.Visible = true;
             this.UrlCount.VisibleIndex = 2;
+            this.UrlCount.Width = 100;
             // 
             // ContentCount
             // 
@@ -114,47 +139,32 @@
             this.ContentCount.OptionsColumn.AllowEdit = false;
             this.ContentCount.Visible = true;
             this.ContentCount.VisibleIndex = 3;
+            this.ContentCount.Width = 100;
             // 
             // StartTime
             // 
             this.StartTime.Caption = "开始时间";
+            this.StartTime.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            this.StartTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.StartTime.FieldName = "StartTime";
             this.StartTime.Name = "StartTime";
             this.StartTime.OptionsColumn.AllowEdit = false;
             this.StartTime.Visible = true;
             this.StartTime.VisibleIndex = 4;
+            this.StartTime.Width = 140;
             // 
             // EndTime
             // 
             this.EndTime.Caption = "结束时间";
+            this.EndTime.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            this.EndTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.EndTime.FieldName = "EndTime";
             this.EndTime.Name = "EndTime";
             this.EndTime.OptionsColumn.AllowEdit = false;
             this.EndTime.UnboundType = DevExpress.Data.UnboundColumnType.DateTime;
             this.EndTime.Visible = true;
             this.EndTime.VisibleIndex = 5;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.开始采集ToolStripMenuItem,
-            this.停止采集ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
-            // 
-            // 开始采集ToolStripMenuItem
-            // 
-            this.开始采集ToolStripMenuItem.Name = "开始采集ToolStripMenuItem";
-            this.开始采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.开始采集ToolStripMenuItem.Text = "开始采集";
-            this.开始采集ToolStripMenuItem.Click += new System.EventHandler(this.开始采集ToolStripMenuItem_Click);
-            // 
-            // 停止采集ToolStripMenuItem
-            // 
-            this.停止采集ToolStripMenuItem.Name = "停止采集ToolStripMenuItem";
-            this.停止采集ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.停止采集ToolStripMenuItem.Text = "停止采集";
-            this.停止采集ToolStripMenuItem.Click += new System.EventHandler(this.停止采集ToolStripMenuItem_Click);
+            this.EndTime.Width = 140;
             // 
             // TaskRunnerPanel
             // 
@@ -164,9 +174,9 @@
             this.Name = "TaskRunnerPanel";
             this.Size = new System.Drawing.Size(618, 357);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.runningTaskCollectionBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
