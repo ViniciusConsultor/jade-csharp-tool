@@ -302,7 +302,7 @@ namespace Jade
                     CurrentSiteRule.Cookie = this.startUrlWebBrowser.Document.Cookie;
 
                 CurrentSiteRule.ListEncoding = this.startUrlWebBrowser.Document.Encoding;
-              
+
                 CurrentSiteRule.UserAgent = GetDefaultUserAgent();
             }
             if (itemWebBrowser.Document != null)
@@ -1619,11 +1619,14 @@ namespace Jade
                                 parentNode.Nodes.Add(cnode);
                             }));
                         }
-                        foreach (var cUrl in urlSet.ContentPages)
-                        {
-                            TreeNode cnode = new TreeNode(cUrl.Url);
-                            parentNode.Nodes.Add(cnode);
-                        } //  列表分页 end
+                        loadingDialog.BeginInvoke(new MethodInvoker(delegate()
+                           {
+                               foreach (var cUrl in urlSet.ContentPages)
+                               {
+                                   TreeNode cnode = new TreeNode(cUrl.Url);
+                                   parentNode.Nodes.Add(cnode);
+                               } //  列表分页 end 
+                           }));
                     }
 
                     //var html = HtmlPicker.VisitUrl(urls[i],

@@ -42,9 +42,10 @@ namespace Jade.Model.Access
             where += args.TaskId != 0 ? " and TaskId  = " + args.TaskId : "";
             where += !string.IsNullOrEmpty(args.Keyword) ? " and Title like '%" + args.Keyword + "%'" : "";
             where += !string.IsNullOrEmpty(args.EditorName) ? " and EditorUserName = '" + args.EditorName + "'" : "";
-            where += args.TaskIds.Count > 0 ? " and TaskId in (" + string.Join(",",args.TaskIds.Select(t=>t.ToString()).ToArray()) + ")" : "";
+            where += args.TaskIds.Count > 0 ? " and TaskId in (" + string.Join(",", args.TaskIds.Select(t => t.ToString()).ToArray()) + ")" : "";
             totalCount = GetRecordCount(where);
-            var sql = string.Format(@"select * from (select top {0} * from (select top {1} * from [DownloadData] {2} order by EditTime DESC,ID DESC) order by EditTime ) order by EditTime DESC", args.PageSzie, args.PageIndex * args.PageSzie, "where " + where);
+
+            var sql = string.Format(@"select top {0} * from [DownloadData] where id <= (select min (id) from (select top {1} id from [DownloadData] {2} order by id desc) as T) order by id desc", args.PageSzie, (args.PageIndex - 1) * args.PageSzie + 1, "where " + where);
             var rows = DbHelperOleDb.Query(sql).Tables[0].Rows;
 
             var result = new List<IDownloadData>();

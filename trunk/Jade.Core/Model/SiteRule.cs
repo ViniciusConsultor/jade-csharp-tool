@@ -409,7 +409,7 @@ namespace Jade.Model
                             var parsedUrls = ExtractUrl.ParseUrlFromParameter(url);
                             parsedUrls.ForEach(u =>
                             {
-                                result.ContentPages.Add(new UrlWrapper(url));
+                                result.ContentPages.Add(new UrlWrapper(u));
                             });
                         }
                     }
@@ -427,7 +427,7 @@ namespace Jade.Model
                         var parsedUrls = ExtractUrl.ParseUrlFromParameter(url);
                         parsedUrls.ForEach(u =>
                         {
-                            result.ListPages.Add(new UrlWrapper(url) { IsContentPage = false });
+                            result.ListPages.Add(new UrlWrapper(u) { IsContentPage = false });
                         });
                     }
                 }
@@ -642,15 +642,29 @@ namespace Jade.Model
     {
         static XMLFileSave fileSaver = new XMLFileSave();
 
+        public static void StartTask(SiteRule site, ILog log)
+        {
+            var process = new SiteProcessor(site, log);
+            process.OnDataFetched += new SiteProcessor.DataFetched(process_OnDataFetched);
+            process.StateChange += new TaskStateChange(process_StateChange);
+            new System.Threading.Thread(process.Start).Start();
+        }
+
         public static void Start(Func<SiteRule, bool> predicate, ILog log)
         {
             // 
             new RuleManager().GetSiteRules().Where(predicate).ToList().ForEach(r =>
             {
-                var process = new SiteProcessor(r, log);
-                process.OnDataFetched += new SiteProcessor.DataFetched(process_OnDataFetched);
-                new System.Threading.Thread(process.Start).Start();
+                StartTask(r, log);
             });
+        }
+
+        static void process_StateChange(object sender, SiteRuningEventArgs e)
+        {
+            if (e.CurrentState.CurrentCount == e.CurrentState.TotalCount)
+            {
+                fileSaver.ForceSave();
+            }
         }
 
         public static void process_OnDataFetched(object sender, DataFetchedArgs e)
@@ -1019,8 +1033,10 @@ namespace Jade.Model
             switch (Rule.SiteExractMode)
             {
                 case SiteExractMode.HomeColumnListContent:
+                    Logger.Info("[" + Rule.Name + "] FilterUrls(result, ListPageModelType.HomePage)...");
                     FilterUrls(result, ListPageModelType.HomePage);
                     // ColumnUrl
+                    Logger.Info("[" + Rule.Name + "] result = Rule.ProcessUrlSet(result, Rule.ColumnUrlSelector);...");
                     result = Rule.ProcessUrlSet(result, Rule.ColumnUrlSelector);
                     var type = ListPageModelType.ColumnPage;
                     FilterUrls(result, type);
