@@ -386,6 +386,7 @@
             this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLog.Location = new System.Drawing.Point(0, 20);
             this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
             this.txtLog.Size = new System.Drawing.Size(997, 151);
             this.txtLog.TabIndex = 2;
             this.txtLog.Text = "";

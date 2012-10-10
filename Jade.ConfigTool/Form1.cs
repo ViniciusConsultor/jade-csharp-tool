@@ -297,15 +297,13 @@ namespace Jade.ConfigTool
                 editForm.Dispose();
             }
         }
-
+        
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var siteRule = this.taskTree.SelectedNode.Tag as SiteRule;
             if (siteRule != null)
             {
-                var process = new SiteProcessor(siteRule, this);
-                process.OnDataFetched += new SiteProcessor.DataFetched(TaskManager.process_OnDataFetched);
-                new Thread(process.Start).Start();
+                TaskManager.StartTask(siteRule, this);
             }
         }
 

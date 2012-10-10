@@ -133,6 +133,11 @@ namespace Jade
             //SolrUtility.Add(content);
         }
 
+        public void ForceSave()
+        {
+            SaveCache();
+        }
+
         public void SaveContentPages(List<KeyValueContent> cachedNews)
         {
             lock (xmlLocker)
@@ -143,24 +148,29 @@ namespace Jade
 
                 if (Cache.Count > 10)
                 {
-                    visFile(path);
-                    AutoFragmentation();
-                    StringBuilder text = new StringBuilder();
-                    foreach (var kv in Cache)
-                    {
-                        text.AppendLine("   <result>");
-                        foreach (var column in kv.KeyValue)
-                        {
-                            text.AppendLine(String.Format("     <{0}>{1}</{0}>", column.Key, column.Value.Replace('<', '＜').Replace('>', '＞').Replace("&", "＆")));
-                        }
-                        text.AppendLine(String.Format("     <{0}>{1}</{0}>", "CreateTime", DateTime.Now.ToString()));
-                        text.AppendLine("   </result>");
-                    }
-                    FileLength += text.Length;
-                    File.AppendAllText(currentFileName, text.ToString(), Encoding.GetEncoding("gb2312"));
-                    Cache.Clear();
+                    SaveCache();
                 }
             }
+        }
+
+        private void SaveCache()
+        {
+            visFile(path);
+            AutoFragmentation();
+            StringBuilder text = new StringBuilder();
+            foreach (var kv in Cache)
+            {
+                text.AppendLine("   <result>");
+                foreach (var column in kv.KeyValue)
+                {
+                    text.AppendLine(String.Format("     <{0}>{1}</{0}>", column.Key, column.Value.Replace('<', '＜').Replace('>', '＞').Replace("&", "＆")));
+                }
+                text.AppendLine(String.Format("     <{0}>{1}</{0}>", "CreateTime", DateTime.Now.ToString()));
+                text.AppendLine("   </result>");
+            }
+            FileLength += text.Length;
+            File.AppendAllText(currentFileName, text.ToString(), Encoding.GetEncoding("gb2312"));
+            Cache.Clear();
         }
 
         private void CheckNewDate()
