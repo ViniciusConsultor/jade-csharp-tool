@@ -68,16 +68,26 @@ namespace Jade
             }).Start();
         }
 
+        class ImageDownloader
+        {
+            public string url;
+            public GalleryItem item;
+        }
+
         delegate void DownloadImage(string url, GalleryItem item);
 
-        void DownloadImageForItem(string url, GalleryItem item)
+        void DownloadImageForItem(object obj)
         {
             try
             {
+                var item = (ImageDownloader)obj;
                 NiceWebClient client = new NiceWebClient();
-                var bytes = client.DownloadData(url);
+                var bytes = client.DownloadData(item.url);
                 Image img = Image.FromStream(new MemoryStream(bytes));
-                item.Image = img;
+                this.mainGallery.BeginInvoke(new MethodInvoker(() =>
+                {
+                    item.item.Image = img;
+                }));
             }
             catch
             {
@@ -101,7 +111,7 @@ namespace Jade
                         catch
                         {
                         }
-                    } 
+                    }
                     try
                     {
                         this.lblStatus.Text = "加载图片完毕";
@@ -121,9 +131,11 @@ namespace Jade
             GalleryItem item = new GalleryItem();
             item.Caption = Path.GetFileName(fileName);
             item.Hint = fileName;
+            item.Image = Jade.Properties.Resources.loading;
             //item.Image = ThumbnailHelper.Default.GetThumbnail(fileName, 208, ThumbPath);
-            DownloadImage downloader = this.DownloadImageForItem;
-            downloader.BeginInvoke(fileName, item, null, null);
+            //DownloadImage downloader = this.DownloadImageForItem;
+            new Thread(new ParameterizedThreadStart(DownloadImageForItem)).Start(new ImageDownloader() { item = item, url = fileName });
+            //downloader.BeginInvoke(fileName, item, null, null);
             item.Tag = fileName;
             return item;
         }
