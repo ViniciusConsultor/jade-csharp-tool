@@ -101,7 +101,7 @@ namespace Jade.Control
 
             var status = "当前第{0}页 / 共{1}页   |  当前显示{3}~{4}条 / 共{2}条";
 
-            this.lblStatus.Caption = string.Format(status, CurrentPageIndex, PageCount, TotalCount, (CurrentPageIndex - 1) * PageSize + 1, CurrentPageIndex * PageSize);
+            this.lblStatus.Caption = string.Format(status, CurrentPageIndex, PageCount, TotalCount, Math.Max(0, (CurrentPageIndex - 1) * PageSize + 1),Math.Min(TotalCount,  CurrentPageIndex * PageSize));
 
             if (this.CurrentPageIndex == 1)
             {

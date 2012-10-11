@@ -709,6 +709,7 @@
     <Content Include="release\SiteConfig\SystemLogs\2012-07-18.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-19.xml" />
     <Content Include="release\SiteConfig\SystemLogs\2012-07-20.xml" />
+    <None Include="Resources\loading.gif" />
     <None Include="Resources\hdd.png" />
     <None Include="Resources\my_pictures.png" />
     <None Include="Resources\hdd32.png" />

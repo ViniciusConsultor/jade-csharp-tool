@@ -45,7 +45,7 @@ namespace Jade.Model.Access
             where += args.TaskIds.Count > 0 ? " and TaskId in (" + string.Join(",", args.TaskIds.Select(t => t.ToString()).ToArray()) + ")" : "";
             totalCount = GetRecordCount(where);
 
-            var sql = string.Format(@"select top {0} * from [DownloadData] where id <= (select min (id) from (select top {1} id from [DownloadData] {2} order by id desc) as T) order by id desc", args.PageSzie, (args.PageIndex - 1) * args.PageSzie + 1, "where " + where);
+            var sql = string.Format(@"select top {0} * from [DownloadData] {2} and id <= (select min (id) from (select top {1} id from [DownloadData] {2} order by id desc) as T)  order by id desc", args.PageSzie, (args.PageIndex - 1) * args.PageSzie + 1, "where " + where);
             var rows = DbHelperOleDb.Query(sql).Tables[0].Rows;
 
             var result = new List<IDownloadData>();
@@ -140,5 +140,6 @@ namespace Jade.Model.Access
         }
 
         #endregion
+
     }
 }
