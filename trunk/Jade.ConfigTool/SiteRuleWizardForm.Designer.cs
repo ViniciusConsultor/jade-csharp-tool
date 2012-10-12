@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -61,12 +62,12 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtStartUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.contentUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.previewPage = new DevExpress.XtraWizard.WizardPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnFetchUrl = new DevExpress.XtraEditors.SimpleButton();
@@ -104,16 +105,10 @@
             this.lblItemContentLog = new System.Windows.Forms.Label();
             this.lblItemLog = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.xtraTabPageSubtitle = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPageTime = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPageSource = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPageSummary = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPageContent = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPageOther = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
             this.homePage = new DevExpress.XtraWizard.WizardPage();
@@ -122,15 +117,15 @@
             this.homePageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
             this.txtHomePage = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.bwHomePage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.columnPage = new DevExpress.XtraWizard.WizardPage();
             this.btnGotoColumnPage = new DevExpress.XtraEditors.SimpleButton();
             this.txtColumnPage = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.bwColumnPage = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
             this.columnPageUrlSelectorMarker = new Jade.ConfigTool.UrlSelectorMarker();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -697,13 +692,7 @@
             this.itemRuleTab.Size = new System.Drawing.Size(859, 195);
             this.itemRuleTab.TabIndex = 13;
             this.itemRuleTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageTitle,
-            this.xtraTabPageSubtitle,
-            this.xtraTabPageTime,
-            this.xtraTabPageSource,
-            this.xtraTabPageSummary,
-            this.xtraTabPageContent,
-            this.xtraTabPageOther});
+            this.xtraTabPageTitle});
             this.itemRuleTab.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.itemRuleTab_SelectedPageChanged);
             // 
             // xtraTabPageTitle
@@ -986,42 +975,6 @@
             this.label9.Size = new System.Drawing.Size(51, 14);
             this.label9.TabIndex = 0;
             this.label9.Text = "XPath：";
-            // 
-            // xtraTabPageSubtitle
-            // 
-            this.xtraTabPageSubtitle.Name = "xtraTabPageSubtitle";
-            this.xtraTabPageSubtitle.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageSubtitle.Text = "副标题";
-            // 
-            // xtraTabPageTime
-            // 
-            this.xtraTabPageTime.Name = "xtraTabPageTime";
-            this.xtraTabPageTime.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageTime.Text = "时间";
-            // 
-            // xtraTabPageSource
-            // 
-            this.xtraTabPageSource.Name = "xtraTabPageSource";
-            this.xtraTabPageSource.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageSource.Text = "来源";
-            // 
-            // xtraTabPageSummary
-            // 
-            this.xtraTabPageSummary.Name = "xtraTabPageSummary";
-            this.xtraTabPageSummary.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageSummary.Text = "摘要";
-            // 
-            // xtraTabPageContent
-            // 
-            this.xtraTabPageContent.Name = "xtraTabPageContent";
-            this.xtraTabPageContent.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageContent.Text = "内容";
-            // 
-            // xtraTabPageOther
-            // 
-            this.xtraTabPageOther.Name = "xtraTabPageOther";
-            this.xtraTabPageOther.Size = new System.Drawing.Size(853, 166);
-            this.xtraTabPageOther.Text = "其他";
             // 
             // simpleButton3
             // 
@@ -1408,12 +1361,6 @@
         private DevExpress.XtraTab.XtraTabControl itemRuleTab;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageTitle;
         private DevExpress.XtraEditors.PanelControl ItemContrainerPanel;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageSubtitle;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageTime;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageSource;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageSummary;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageContent;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageOther;
         private DevExpress.XtraEditors.SimpleButton btnCXPath;
         private DevExpress.XtraEditors.TextEdit txtCXpath;
         private DevExpress.XtraEditors.GroupControl groupControl2;

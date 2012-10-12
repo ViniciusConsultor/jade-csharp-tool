@@ -29,7 +29,7 @@ namespace Jade.ConfigTool
         /// 选择URL
         /// </summary>
         public event EventHandler OnSelectUrlClick;
-
+     
         /// <summary>
         /// 选择URL完毕
         /// </summary>
@@ -134,18 +134,37 @@ namespace Jade.ConfigTool
         /// <param name="datas"></param>
         public void SetUrlResult(List<string> datas)
         {
-            StringBuilder sb = new StringBuilder();
-            var index = 1;
+            //StringBuilder sb = new StringBuilder();
+            //var index = 1;
+            //foreach (var r in datas)
+            //{
+            //    if (!r.Contains("javascript:"))
+            //        sb.AppendFormat("【第{0}条结果】:{1}\r\n", index++, r);
+            //}
+            //var txt = sb.ToString();
+            //if (txt == "")
+            this.treeView1.Nodes.Clear();
+            //{
+            //    txt = "没有匹配结果";
+            //}
+
+            if (datas.Count == 0)
+                return;
+            ExtractUrl.RepairUrls(datas[0], this.tbxUrlInclude.Text, this.tbxUrlExclude.Text, datas);
+            if (datas.Count == 0)
+                return;
+           
+            var node = new TreeNode("Result");
             foreach (var r in datas)
             {
                 if (!r.Contains("javascript:"))
-                    sb.AppendFormat("【第{0}条结果】:{1}\r\n", index++, r);
+                {
+                    var leaf = new TreeNode(r);
+                    node.Nodes.Add(leaf);
+                }
             }
-            var txt = sb.ToString();
-            if (txt == "")
-            {
-                txt = "没有匹配结果";
-            }
+            this.treeView1.Nodes.Add(node);
+            this.treeView1.ExpandAll();
             //this.txtUrlResult.Text = txt;
             this.xtraTabControl1.SelectedTabPageIndex = 2;
         }

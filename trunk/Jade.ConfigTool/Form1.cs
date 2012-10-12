@@ -33,17 +33,18 @@ namespace Jade.ConfigTool
             {
                 lock (this)
                 {
-                    int i = txtbox.SelectionStart;
+                    int i = txtbox.TextLength + 1;
                     txtbox.Select(i, 0);
                     txtbox.SelectionColor = color;
                     txtbox.Focus();
                     txtbox.AppendText(str + "\r\n");
                     txtbox.Select(i + str.Length + 2, 0);
-                    txtbox.SelectionColor = Color.Black;
+                    //txtbox.SelectionColor = Color.Black;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Jade.ConfigTool
             {
                 this.txtLog.BeginInvoke(new MethodInvoker(() =>
                 {
-                    InsertToRichTextbox(msg, this.txtLog, color);
+                    InsertToRichTextbox(DateTime.Now.ToString() + " " + msg, this.txtLog, color);
                 }));
             }
             catch
@@ -297,7 +298,7 @@ namespace Jade.ConfigTool
                 editForm.Dispose();
             }
         }
-        
+
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var siteRule = this.taskTree.SelectedNode.Tag as SiteRule;
@@ -310,6 +311,28 @@ namespace Jade.ConfigTool
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             TaskManager.Start((SiteRule rule) => { return true; }, this);
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+
+            CurrentCategory = this.taskTree.SelectedNode.Tag as Category;
+            var siteRule = SiteRule.CreateZhidao();
+            siteRule.CategoryID = this.CurrentCategory.ID;
+            // var ruleForm = new SiteRuleEditForm(siteRule);
+            var ruleForm = new SiteRuleWizardForm(siteRule);
+            //new TaskWizardForm(siteRule);
+            //CacheObject.BLL.AddSite(siteRule);
+            if (ruleForm.ShowDialog() == DialogResult.OK)
+            {
+                siteRule = ruleForm.CurrentSiteRule;
+                CacheObject.RuleManager.AddSite(siteRule);
+                var index = GetImageIndex(siteRule.IconImage);
+                TreeNode leaf = new TreeNode(siteRule.Name, index, index);
+                leaf.Tag = siteRule;
+                this.CurrentCategoryNode.Nodes.Add(leaf);
+                ruleForm.Dispose();
+            }
         }
 
     }
