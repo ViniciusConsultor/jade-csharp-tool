@@ -379,12 +379,12 @@ namespace Jade
                 //}
 
                 // check html
-                var checkRegex = new Regex("<body[^>]*>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                var checkResults = checkRegex.Matches(html);
-                if (checkResults.Count > 1)
-                {
-                    html = "<html>" + html.Substring(checkResults[checkResults.Count - 1].Index);
-                }
+                //var checkRegex = new Regex("<body[^>]*>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                //var checkResults = checkRegex.Matches(html);
+                //if (checkResults.Count > 1)
+                //{
+                //    html = "<html>" + html.Substring(checkResults[checkResults.Count - 1].Index);
+                //}
 
                 File.WriteAllText("html.xml", html);
 
@@ -396,7 +396,7 @@ namespace Jade
                     var findNodes = doc.SelectNodes(xpath);
 
                     // Ìæ»»XPATH
-                    if (findNodes == null && anotherXPath != "")
+                    if ((findNodes == null || findNodes.Count == 0) && anotherXPath != "")
                     {
                         findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
                     }

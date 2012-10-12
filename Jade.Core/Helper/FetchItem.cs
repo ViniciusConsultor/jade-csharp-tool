@@ -187,8 +187,8 @@ namespace Jade
                 switch (CurrentItemRule.FetchType)
                 {
                     case ItemFetchType.XPath:
-                        var xpathResult = ExtractUrl.ExtractDataFromHtml(fetchStuff, CurrentItemRule.XPath, CurrentItemRule.XMLPathSelectType, CurrentItemRule.XMLPathType);
-                        result = string.Join(" ", xpathResult.ToArray());
+                        var xpathResult = ExtractUrl.ExtractDataFromHtml(fetchStuff, CurrentItemRule.XPath, CurrentItemRule.XMLPathSelectType, CurrentItemRule.XMLPathType, CurrentItemRule.AnotherXPath);
+                        result = string.Join(CurrentItemRule.SeparateString, xpathResult.ToArray());
                         break;
                     case ItemFetchType.UserDiy:
                         if (CurrentItemRule.DiyType == UserDiyType.Datetime)

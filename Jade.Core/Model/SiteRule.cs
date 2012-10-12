@@ -10,6 +10,11 @@ using Jade.BLL;
 
 namespace Jade.Model
 {
+    public class LogUtil
+    {
+
+    }
+
     /// <summary>
     /// 任务规则
     /// </summary>
@@ -96,6 +101,73 @@ namespace Jade.Model
             return rule;
         }
 
+        public static SiteRule CreateZhidao()
+        {
+            var rule = new SiteRule()
+            {
+                ColumnUrlSelector = new UrlSelector(),
+                ContentUrlSelector = new UrlSelector(),
+                LisPageUrlSelector = new UrlSelector(),
+                ListPagePagerUrlSelector = new UrlSelector()
+            };
+
+            rule.ItemRules.AddRange(new List<ItemRule>() { 
+                new ItemRule() {
+                CloumnName = "Title",
+                ItemName="标题",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XMLPathType = XMLPathType.InnerText,
+                XPath="//h1",
+                AnotherXPath="//title",
+                XMLPathSelectType = XMLPathSelectType.OnlyOne      
+                },  new ItemRule() {
+                CloumnName = "QuestionContent",
+                ItemName="问题内容",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XPath="",
+                },  new ItemRule() {
+                CloumnName = "QuestionTime",
+                ItemName="提问时间",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XPath="",  
+                }, 
+              new ItemRule() {
+                CloumnName = "QuestionUser",
+                ItemName="提问人",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XMLPathType = XMLPathType.InnerText,
+                XPath="",
+                XMLPathSelectType = XMLPathSelectType.OnlyOne      
+                }, new ItemRule() {
+                CloumnName = "BestAnswer",
+                ItemName="最佳答案",
+                XMLPathType = XMLPathType.InnerText,
+                XPath="",
+                XMLPathSelectType = XMLPathSelectType.OnlyOne  
+                }, new ItemRule() {
+                CloumnName = "Answers",
+                ItemName="其他答案",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = true,
+                XMLPathType = XMLPathType.InnerTextWithPic,
+                XPath="//div[@class='content']/pre",
+                XMLPathSelectType = XMLPathSelectType.OnlyOne      
+                }, new ItemRule() {
+                CloumnName = "Category",
+                ItemName="问题分类",
+                FetchType = ItemFetchType.XPath,
+                IsDownloadPic = false,
+                XMLPathType = XMLPathType.InnerText,
+                XPath="",
+                XMLPathSelectType = XMLPathSelectType.OnlyOne      
+                }
+            });
+            return rule;
+        }
         /// <summary>
         /// 分类ID
         /// </summary>
@@ -451,7 +523,7 @@ namespace Jade.Model
                     // 添加内容页
                     selector.ContentPageUrlSelector.XPathList.ForEach(xpath =>
                     {
-                        var parsedUrls = selector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl.Url).Distinct().Where(u => !result.ContentPages.Any(l => l.Url == u)).Select(l => new UrlWrapper(listUrl, l));
+                        var parsedUrls = selector.ContentPageUrlSelector.RepairUrls(xpath.ExtractDataFromHtml(html), listUrl.Url).Distinct().Where(u => !result.ContentPages.Any(l => l.Url == u)).Select(l => new UrlWrapper(listUrl, l));
                         result.ContentPages.AddRange(parsedUrls);
                     });
                 }
@@ -911,17 +983,15 @@ namespace Jade.Model
 
         bool isForceStop = false;
         ListPageCollection listPages;
-
+        bool isFetchUrlFinish = false;
         Dictionary<string, bool> haveNewPageListPages = new Dictionary<string, bool>();
 
         public void Start()
         {
             if (!isRunning)
             {
-                // 分析列表页
-                listPages = ListPageCollection.Load(Rule.SiteRuleId.ToString());
-
-                UrlFilter = new SiteUrlFilter(CacheObject.GetTaskDir(Rule.SiteRuleId.ToString()) + "\\UrlFilter.bin");
+                // 配置
+                LoadlConfig();
 
                 isRunning = true;
 
@@ -929,63 +999,106 @@ namespace Jade.Model
 
                 Logger.Info("[" + Rule.Name + "] 正在初始化配置,请稍等...");
 
-                // 每10次更新一次列表页
-                if (listPages.Count == 0 || listPages.RunningTimes % 10 == 0)
-                {
-                    ProcessAllUrls();
-                }
-                else
-                {
-                    // 从已有列表页抓取
-                    ProcessExistListPages();
-                }
+                // 分析列表页
+                new Thread(GetContentPages).Start();
 
-                UpdateListPage();
-
-                List<Uri> uris = new List<Uri>();
-
-                if (this.ContentQueque.Count > 0)
+                new Thread(() =>
                 {
-                    while (ContentQueque.Count > 0)
+                    while (true)
                     {
-                        try { uris.Add(new Uri(ContentQueque.Dequeue())); }
-                        catch { }
-                    };
-                    DownloadDetail(uris);
-                }
-                else
-                {
-                    this.Logger.Error("[" + Rule.Name + "] 没有采集到新网址，采集完成！");
-                }
-                if (Rule.EnableAutoRun)
-                {
-                    this.RunningTaskModel.Status = TaskStatus.休眠;
-                }
-                else
-                {
-                    this.RunningTaskModel.Status = TaskStatus.停止;
-                }
+                        List<Uri> uris = new List<Uri>();
 
-                RunningTaskCollection.Instance.TaskFinish(RunningTaskModel);
-
-                if (this.StateChange != null)
-                {
-                    this.StateChange(this, new SiteRuningEventArgs(new SiteRunningState
-                    {
-                        CurrentCount = 100,
-                        StepName = "采集完成",
-                        TotalCount = 100
-                    }));
-                }
-
-                // 
-                isRunning = false;
-                this.Logger.Success("[" + Rule.Name + "] 采集完成");
-
-                this.UrlFilter.SaveFilter();
-                this.UrlFilter.Dispose();
-                this.listPages = null;
+                        if (this.ContentQueque.Count > 0)
+                        {
+                            lock (ContentQueque)
+                            {
+                                while (ContentQueque.Count > 0)
+                                {
+                                    try { uris.Add(new Uri(ContentQueque.Dequeue())); }
+                                    catch { }
+                                };
+                            }
+                            DownloadDetail(uris);
+                        }
+                        else
+                        {     
+                            if (isFetchUrlFinish)
+                            {
+                                this.Finish();
+                                break;
+                            }
+                            this.Logger.Error("[" + Rule.Name + "] 暂未发现新网址！");
+                            Thread.Sleep(5000);
+                        }
+                    }
+                }).Start();
+               
             }
+        }
+
+        private void LoadlConfig()
+        {
+            listPages = ListPageCollection.Load(Rule.SiteRuleId.ToString());
+
+            UrlFilter = new SiteUrlFilter(CacheObject.GetTaskDir(Rule.SiteRuleId.ToString()) + "\\UrlFilter.bin");
+        }
+
+
+
+        private void GetContentPages()
+        {
+            // 每10次更新一次列表页
+            if (listPages.Count == 0 || listPages.RunningTimes % 10 == 0)
+            {
+                ProcessAllUrls();
+            }
+            else
+            {
+                // 从已有列表页抓取
+                ProcessExistListPages();
+            }
+
+            UpdateListPage();
+
+            isFetchUrlFinish = true;
+        }
+
+        private void Finish()
+        {
+            if (Rule.EnableAutoRun)
+            {
+                this.RunningTaskModel.Status = TaskStatus.休眠;
+            }
+            else
+            {
+                this.RunningTaskModel.Status = TaskStatus.停止;
+            }
+
+            RunningTaskCollection.Instance.TaskFinish(RunningTaskModel);
+
+            if (this.StateChange != null)
+            {
+                this.StateChange(this, new SiteRuningEventArgs(new SiteRunningState
+                {
+                    CurrentCount = 100,
+                    StepName = "采集完成",
+                    TotalCount = 100
+                }));
+            }
+
+            // 
+            isRunning = false;
+            this.Logger.Success("[" + Rule.Name + "] 采集完成");
+
+            //保存配置
+            SaveConfig();
+        }
+
+        private void SaveConfig()
+        {
+            this.UrlFilter.SaveFilter();
+            this.UrlFilter.Dispose();
+            this.listPages = null;
         }
 
         /// <summary>
@@ -1156,8 +1269,10 @@ namespace Jade.Model
                                              item.HttpMethod,
                                                        null,
                                                        string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                                   string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                                   string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                       null,
+                                                   //string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                   //string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                   "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
                                                    string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
                                                        System.Text.Encoding.GetEncoding(item.Encoding));
                     KeyValueContent data = new KeyValueContent();
@@ -1196,6 +1311,7 @@ namespace Jade.Model
                             TotalCount = total
                         }));
                     }
+                    Thread.Sleep(500);
                 }
                 else
                 {
@@ -1628,6 +1744,20 @@ namespace Jade.Model
     [Serializable]
     public class ItemRule
     {
+
+        public ItemRule()
+        {
+            SeparateString = "\n";
+        }
+        
+        /// <summary>
+        /// 多个记录的分割字符串
+        /// </summary>
+        public string SeparateString
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 多相匹配

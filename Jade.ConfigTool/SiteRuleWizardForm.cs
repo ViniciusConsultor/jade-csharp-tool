@@ -38,6 +38,15 @@ namespace Jade
                 {
                     this.InitializeItemRuleDetail(CurrentItemRule);
                 }
+
+                foreach (var itemRule in CurrentSiteRule.ItemRules)
+                {
+                    if (itemRule.ItemName != "标题")
+                    {
+                        this.itemRuleTab.TabPages.Add(itemRule.ItemName);
+                    }
+                }
+                this.itemRuleTab.SelectedTabPageIndex = 0;
             }
         }
         #region InitializeUIItem
@@ -934,7 +943,7 @@ namespace Jade
         public List<string> ExtractDataFromHtml()
         {
 
-            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.DocumentText, currentUrlMaker.Xpath, XMLPathSelectType, XMLPathType);
+            var result = ExtractUrl.ExtractDataFromHtml(this.currenActiveBrowser.Document.Body.OuterHtml, currentUrlMaker.Xpath, XMLPathSelectType, XMLPathType);
 
 
             var domain = this.txtHomePage.Text != "" ? new Uri(this.txtHomePage.Text).Host : new Uri(this.txtStartUrl.Text).Host;
@@ -951,7 +960,7 @@ namespace Jade
                     {
                         var url = RepairUrl(this.currenActiveBrowser.Url.AbsoluteUri, result[i]);
 
-                        if (radioButtonNotWithSameDomain.Checked || url.Contains(domain))
+                        if (!string.IsNullOrEmpty(url) && (radioButtonNotWithSameDomain.Checked || url.Contains(domain)))
                         {
                             newResult.Add(url);
                         }
@@ -965,7 +974,7 @@ namespace Jade
         {
             try
             {
-                if (originalUrl.StartsWith("javas"))
+                if (originalUrl.StartsWith("javas") || originalUrl.Contains("#"))
                 {
                     return string.Empty; ;
                 }
@@ -1920,7 +1929,6 @@ namespace Jade
             if (this.itemRuleTab.SelectedTabPage.Text == "内容")
             {
                 this.chkDownloadPic.Enabled = true;
-
             }
             else
             {
