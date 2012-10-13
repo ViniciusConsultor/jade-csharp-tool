@@ -6,7 +6,6 @@ using Jade.Model;
 using Jade.BLL;
 using System.Threading;
 using System.IO;
-using Jade.Model.MySql;
 
 namespace Jade
 {
@@ -172,11 +171,11 @@ namespace Jade
             var index = 0;
 
             if (CacheObject.IsTest)
-                Logger.Error("[" + Rule.Name + "] 开始采集，试用版本只能采集50条");
+                Logger.Error("[" + Rule.Name + "] 你使用的是适用版本");
 
             var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
 
-            var max = CacheObject.IsTest ? Math.Min(50, urls.Count) : urls.Count;
+            var max =  urls.Count;
 
             //foreach (var url in urls)
             for (var i = 0; i < max; i++)

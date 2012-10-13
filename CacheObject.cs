@@ -6,7 +6,7 @@ using Jade.Model;
 using Jade.BLL;
 using System.Threading;
 using System.IO;
-using Jade.Model.MySql;
+using Jade.Model.Access;
 using Jade.DAL;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -73,8 +73,6 @@ namespace Jade
         public static bool IsDebug = false;
         public static bool IsTest = true;
         public static MainForm MainForm { get; set; }
-
-        public static NewsDAL NewsDAL = new NewsDAL();
 
         public static RuleManager RuleManager { get; set; }
 

@@ -5,7 +5,6 @@ using System.Text;
 using Jade.Helper;
 using System.Data;
 using Jade.Model;
-using Jade.Model.MySql;
 
 namespace Jade.BLL
 {

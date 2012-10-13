@@ -30,6 +30,8 @@
         {
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.urlSettingBox = new DevExpress.XtraEditors.GroupControl();
+            this.txtPageSize = new DevExpress.XtraEditors.TextEdit();
+            this.label2 = new System.Windows.Forms.Label();
             this.lookUpEditLabel = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditTemplete = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditSource = new DevExpress.XtraEditors.LookUpEdit();
@@ -39,14 +41,12 @@
             this.lblUrlExclude = new System.Windows.Forms.Label();
             this.lblUrlInclude = new System.Windows.Forms.Label();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtPageSize = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.urlSettingBox)).BeginInit();
             this.urlSettingBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPageSize.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLabel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPageSize.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButton3
@@ -77,6 +77,24 @@
             this.urlSettingBox.Size = new System.Drawing.Size(439, 159);
             this.urlSettingBox.TabIndex = 95;
             this.urlSettingBox.Text = "表单默认项设置";
+            // 
+            // txtPageSize
+            // 
+            this.txtPageSize.EditValue = "20";
+            this.txtPageSize.Location = new System.Drawing.Point(115, 125);
+            this.txtPageSize.Name = "txtPageSize";
+            this.txtPageSize.Size = new System.Drawing.Size(271, 20);
+            this.txtPageSize.TabIndex = 101;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(19, 130);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.TabIndex = 100;
+            this.label2.Text = "每页条数:";
             // 
             // lookUpEditLabel
             // 
@@ -170,24 +188,6 @@
             this.simpleButton4.Text = "取消";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(19, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 100;
-            this.label2.Text = "每页条数:";
-            // 
-            // txtPageSize
-            // 
-            this.txtPageSize.EditValue = "20";
-            this.txtPageSize.Location = new System.Drawing.Point(115, 125);
-            this.txtPageSize.Name = "txtPageSize";
-            this.txtPageSize.Size = new System.Drawing.Size(271, 20);
-            this.txtPageSize.TabIndex = 101;
-            // 
             // EditDefaultSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -197,14 +197,15 @@
             this.Controls.Add(this.urlSettingBox);
             this.Controls.Add(this.simpleButton4);
             this.Name = "EditDefaultSettingForm";
-            this.Text = "EditDefaultSettingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "编辑默认设置";
             ((System.ComponentModel.ISupportInitialize)(this.urlSettingBox)).EndInit();
             this.urlSettingBox.ResumeLayout(false);
             this.urlSettingBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPageSize.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditLabel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTemplete.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSource.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPageSize.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

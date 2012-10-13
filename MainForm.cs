@@ -15,6 +15,7 @@ using DevExpress.XtraSplashScreen;
 using System.Threading;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Jade
 {
@@ -479,7 +480,9 @@ namespace Jade
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
             if (CacheObject.IsTest)
             {
-                this.Text += " (试用版）- （每次限采集50篇新闻，允许多次采集)";
+                var left = (new DateTime(2012, 10, 13).AddDays(10) - DateTime.Now).Days;
+                     
+                this.Text += string.Format(" (试用版 - 还可以使用 {0} 天)",left);
             }
 
             if (Properties.Settings.Default.IsEditModel)
@@ -887,6 +890,11 @@ namespace Jade
         private void txtLog_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("客户端使用说明.pdf");
         }
     }
 }

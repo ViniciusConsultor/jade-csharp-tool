@@ -11,7 +11,6 @@ using System.Security.Permissions;
 using System.Threading;
 using System.Runtime.InteropServices;
 using PresentationControls;
-using Jade.Model.MySql;
 using DevExpress.XtraSplashScreen;
 
 namespace Jade
@@ -29,13 +28,6 @@ namespace Jade
             InitializeComponent();
             this.DoubleBuffered = true;
             BindSelector();
-
-            SpecilTags = RemoteWebService.Instance.GetSpecilTags();
-            StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
-            this.txt_tags.DataSource = StatusSelections;
-            txt_tags.DisplayMemberSingleItem = "Name";
-            this.txt_tags.DisplayMember = "NameConcatenated";
-            this.txt_tags.ValueMember = "Selected";
             //StatusSelections[0].Selected = true;
 
             //this.cmbSearchLabel.DataSource = SpecilTags;
@@ -49,13 +41,22 @@ namespace Jade
 
         private void BindSelector()
         {
+            this.txtnews_source_name.DataSource = null;
             this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
             this.txtnews_source_name.DisplayMember = "DisplayName";
-            this.txtnews_source_name.ValueMember = "Value";
-
+            this.txtnews_source_name.ValueMember = "Value"
+                ;
+            this.txt_news_template_file.DataSource = null;
             this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
             this.txt_news_template_file.DisplayMember = "DisplayName";
             this.txt_news_template_file.ValueMember = "Value";
+
+            SpecilTags = RemoteWebService.Instance.GetSpecilTags();
+            StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
+            this.txt_tags.DataSource = StatusSelections;
+            txt_tags.DisplayMemberSingleItem = "Name";
+            this.txt_tags.DisplayMember = "NameConcatenated";
+            this.txt_tags.ValueMember = "Selected";
         }
 
         void cmbSearchLabel_SelectedIndexChanged(object sender, EventArgs e)
@@ -652,6 +653,11 @@ namespace Jade
                     this.txtContent.PageTitles = this.txt_news_left.Text;
                 }
             }
+        }
+
+        private void ContentEditForm_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

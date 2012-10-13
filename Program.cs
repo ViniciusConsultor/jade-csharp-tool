@@ -54,6 +54,12 @@ namespace Jade
             //            }
 
 
+            if (new DateTime(2012, 10, 13).AddDays(10) < DateTime.Now)
+            {
+                MessageBox.Show("试用期已过，请联系jadepeng提供正式版本");
+                return;
+            }
+
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             //处理UI线程异常 
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
