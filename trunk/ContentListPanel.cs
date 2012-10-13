@@ -11,7 +11,6 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraGrid.Columns;
 using Jade.Model;
-using Jade.Model.MySql;
 using DevExpress.XtraGrid.Views.Grid;
 namespace Jade
 {
@@ -42,7 +41,7 @@ namespace Jade
             this.comboBoxEdit1.EditValue = "全部任务";
             this.comboBoxEdit1.ItemIndex = 0;
             this.devPager1.PageChange += new EventPagingHandler(pager1_PageChange);
-            CacheObject.ContentForm.InitDownloadData(new downloaddata());
+            CacheObject.ContentForm.InitDownloadData(new Jade.Model.Access.DownloadData());
             currentPageSize = Properties.Settings.Default.PageSize;
 
             var tags = CacheObject.GetTaskTags();
@@ -190,7 +189,7 @@ namespace Jade
         }
         private void DraftBoxForm_Load(object sender, EventArgs e)
         {
-            CacheObject.ContentForm.InitDownloadData(new downloaddata());
+            CacheObject.ContentForm.InitDownloadData(new Jade.Model.Access.DownloadData());
             //this.dataGridView1.Columns[0].HeaderCell = new DataGridViewCheckBoxColumnHeeaderCell();
         }
 

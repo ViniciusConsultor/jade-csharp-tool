@@ -33,13 +33,13 @@
       <Value Profile="(Default)">5809</Value>
     </Setting>
     <Setting Name="Name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">张阳</Value>
+      <Value Profile="(Default)">用户</Value>
     </Setting>
     <Setting Name="UserName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">zhangyang</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UserPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">House365</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DefaultTag" Type="System.String" Scope="User">
       <Value Profile="(Default)">资讯中心</Value>

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Jade.Model;
-using Jade.Model.MySql;
 
 namespace Jade
 {
@@ -111,7 +110,7 @@ namespace Jade
 
         private void DraftBoxForm_Load(object sender, EventArgs e)
         {
-            CacheObject.ContentForm.InitDownloadData(new downloaddata());
+            CacheObject.ContentForm.InitDownloadData(new Jade.Model.Access.DownloadData());
             //this.dataGridView1.Columns[0].HeaderCell = new DataGridViewCheckBoxColumnHeeaderCell();
         }
 

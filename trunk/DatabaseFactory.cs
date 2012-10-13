@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Jade.Model;
 using Jade.Model.Access;
+using Jade.DAL;
 
 namespace Jade
 {
+
     public class DatabaseFactory : IDataFactory
     {
         static DatabaseFactory instance;
