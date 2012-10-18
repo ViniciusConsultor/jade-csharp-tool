@@ -1,14 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Jade.ConfigTool
+namespace Jade.CQA.Model
 {
+    /// <summary>
+    /// 知识类型
+    /// </summary>
     public enum KnowedgeType
     {
+        /// <summary>
+        /// 百度知道
+        /// </summary>
         BaiduZhidao = 0,
-        SosoWenwen = 1
+        /// <summary>
+        /// 搜搜问问
+        /// </summary>
+        SosoWenwen = 1,
+
+        /// <summary>
+        /// 新浪爱问
+        /// </summary>
+        iAsk = 2
     }
 
+    /// <summary>
+    /// 基础对象
+    /// </summary>
     public class BaseModel
     {
         public KnowedgeType KnowedgeType
@@ -18,6 +37,9 @@ namespace Jade.ConfigTool
         }
     }
 
+    /// <summary>
+    /// 问题
+    /// </summary>
     public class Question : BaseModel
     {
         private string _id;
@@ -39,31 +61,55 @@ namespace Jade.ConfigTool
             get { return _id; }
             set { _id = value; }
         }
+
+        /// <summary>
+        /// 问题标题
+        /// </summary>
         public string Title
         {
             get { return _title; }
             set { _title = value; }
         }
+
+        /// <summary>
+        /// 问题内容、补充内容
+        /// </summary>
         public string Content
         {
             get { return _content; }
             set { _content = value; }
         }
+
+        /// <summary>
+        /// 查看次数
+        /// </summary>
         public string ViewCount
         {
             get { return _viewCount; }
             set { _viewCount = value; }
         }
+        
+        /// <summary>
+        /// 问题提问时间
+        /// </summary>
         public DateTime CreateTime
         {
             get { return _createTime; }
             set { _createTime = value; }
         }
+
+        /// <summary>
+        /// 分类
+        /// </summary>
         public string Category
         {
             get { return _category; }
             set { _category = value; }
         }
+
+        /// <summary>
+        /// 问题标签
+        /// </summary>
         public string Tags
         {
             get { return _tags; }
@@ -89,7 +135,10 @@ namespace Jade.ConfigTool
         }
     }
 
-    public class Answer:BaseModel
+    /// <summary>
+    /// 答案
+    /// </summary>
+    public class Answer : BaseModel
     {
         private string _answerId;
         private string _userName;
@@ -109,31 +158,54 @@ namespace Jade.ConfigTool
             set { _answerId = value; }
         }
 
+        /// <summary>
+        /// 回答人
+        /// </summary>
         public string UserName
         {
             get { return _userName; }
             set { _userName = value; }
         }
+
+        /// <summary>
+        /// 回答时间
+        /// </summary>
         public DateTime CreateTime
         {
             get { return _createTime; }
             set { _createTime = value; }
         }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
         public string Content
         {
             get { return _content; }
             set { _content = value; }
         }
+
+        /// <summary>
+        /// 赞同数目
+        /// </summary>
         public int Up
         {
             get { return _up; }
             set { _up = value; }
         }
+        
+        /// <summary>
+        /// 踩数目
+        /// </summary>
         public int Down
         {
             get { return _down; }
             set { _down = value; }
         }
+
+        /// <summary>
+        /// 评论数目
+        /// </summary>
         public int CommentCount
         {
             get { return _commentCount; }
@@ -141,6 +213,9 @@ namespace Jade.ConfigTool
         }
     }
 
+    /// <summary>
+    /// 问题与答案
+    /// </summary>
     public class QuestionAnswer : BaseModel
     {
         private string _questionId;
@@ -189,6 +264,9 @@ namespace Jade.ConfigTool
         }
     }
 
+    /// <summary>
+    /// 用户
+    /// </summary>
     public class User : BaseModel
     {
         private string _displayName;
@@ -256,39 +334,4 @@ namespace Jade.ConfigTool
             set { _userStage = value; }
         }
     }
-
-    class Person
-    {
-
-        string firstName;
-        string secondName;
-        string comments;
-        public Person(string firstName, string secondName)
-        {
-            this.firstName = firstName;
-            this.secondName = secondName;
-            comments = String.Empty;
-        }
-        public Person(string firstName, string secondName, string comments)
-            : this(firstName, secondName)
-        {
-            this.comments = comments;
-        }
-        public string FirstName
-        {
-            get { return firstName; }
-            set { firstName = value; }
-        }
-        public string SecondName
-        {
-            get { return secondName; }
-            set { secondName = value; }
-        }
-        public string Comments
-        {
-            get { return comments; }
-            set { comments = value; }
-        }
-    }
-
 }
