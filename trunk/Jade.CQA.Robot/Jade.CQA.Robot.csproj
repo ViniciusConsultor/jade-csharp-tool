@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{582823CF-5750-4A0D-82B0-474C00F01B20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jade.CQA.Robot</RootNamespace>
+    <AssemblyName>Jade.CQA.Robot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Autofac.2.4.5.724\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=2.4.5.724, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Autofac.2.4.5.724\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Robot\CoreObjects.cs" />
+    <Compile Include="Robot\Crawler.cs" />
+    <Compile Include="Robot\Crawler.Events.cs" />
+    <Compile Include="Robot\Crawler.Properties.cs" />
+    <Compile Include="Robot\CrawlerModule.cs" />
+    <Compile Include="Robot\CrawlerQueueEntry.cs" />
+    <Compile Include="Robot\CrawlStep.cs" />
+    <Compile Include="Robot\Event\AfterDownloadEventArgs.cs" />
+    <Compile Include="Robot\Event\BeforeDownloadEventArgs.cs" />
+    <Compile Include="Robot\Event\CrawlFinishedEventArgs.cs" />
+    <Compile Include="Robot\Event\DownloadExceptionEventArgs.cs" />
+    <Compile Include="Robot\Event\DownloadProgressEventArgs.cs" />
+    <Compile Include="Robot\Event\PipelineExceptionEventArgs.cs" />
+    <Compile Include="Robot\Extensions\AspectExtensions.cs" />
+    <Compile Include="Robot\Extensions\EventHandlerExtensions.cs" />
+    <Compile Include="Robot\Extensions\Extensions.cs" />
+    <Compile Include="Robot\Extensions\IAsyncResultExtensions.cs" />
+    <Compile Include="Robot\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Robot\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Robot\Extensions\StreamExtensions.cs" />
+    <Compile Include="Robot\Extensions\StringExtensions.cs" />
+    <Compile Include="Robot\Extensions\UriExtensions.cs" />
+    <Compile Include="Robot\Extensions\UrlExtensions.cs" />
+    <Compile Include="Robot\Interfaces\ICache.cs" />
+    <Compile Include="Robot\Interfaces\ICrawlerHistory.cs" />
+    <Compile Include="Robot\Interfaces\ICrawlerQueue.cs" />
+    <Compile Include="Robot\Interfaces\ICrawlerRules.cs" />
+    <Compile Include="Robot\Interfaces\IFilter.cs" />
+    <Compile Include="Robot\Interfaces\ILog.cs" />
+    <Compile Include="Robot\Interfaces\IPipelineStep.cs" />
+    <Compile Include="Robot\Interfaces\IPipelineStepWithTimeout.cs" />
+    <Compile Include="Robot\Interfaces\IRobot.cs" />
+    <Compile Include="Robot\Interfaces\ITaskRunner.cs" />
+    <Compile Include="Robot\Interfaces\IWebDownloader.cs" />
+    <Compile Include="Robot\PropertyBag.cs" />
+    <Compile Include="Robot\RequestState.cs" />
+    <Compile Include="Robot\Services\CrawlerRulesService.cs" />
+    <Compile Include="Robot\Services\DummyRobot.cs" />
+    <Compile Include="Robot\Services\InMemoryCrawlerHistoryService.cs" />
+    <Compile Include="Robot\Services\InMemoryCrawlerQueueService.cs" />
+    <Compile Include="Robot\Services\LambdaFilter.cs" />
+    <Compile Include="Robot\Services\NativeTaskRunnerService.cs" />
+    <Compile Include="Robot\Services\RegexFilter.cs" />
+    <Compile Include="Robot\Services\RobotService.cs" />
+    <Compile Include="Robot\Services\SystemTraceLoggerService.cs" />
+    <Compile Include="Robot\Services\ThreadTaskRunnerService.cs" />
+    <Compile Include="Robot\Services\WebDownloaderV2.cs" />
+    <Compile Include="Robot\Util\AspectF.cs" />
+    <Compile Include="Robot\Util\ColorConsoleTraceListener.cs" />
+    <Compile Include="Robot\Util\CrawlerQueueServiceBase.cs" />
+    <Compile Include="Robot\Util\DictionaryCache.cs" />
+    <Compile Include="Robot\Util\DisposableBase.cs" />
+    <Compile Include="Robot\Util\FileSystemHelpers.cs" />
+    <Compile Include="Robot\Util\HistoryServiceBase.cs" />
+    <Compile Include="Robot\Util\MemoryStreamWithFileBackingStore.cs" />
+    <Compile Include="Robot\Util\TempFile.cs" />
+    <Compile Include="Robot\Util\ThreadSafeCounter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\Autofac.2.4.5.724\Autofac.Configuration.dll" />
+    <Content Include="Lib\Autofac.2.4.5.724\Autofac.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Robot\App\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
