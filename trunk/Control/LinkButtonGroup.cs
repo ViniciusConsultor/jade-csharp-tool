@@ -19,6 +19,7 @@ namespace Jade.Control
         public LinkButtonGroup()
         {
             InitializeComponent();
+            Labels = new List<LinkLabel>();
         }
 
         public List<string> DataSource
@@ -29,7 +30,7 @@ namespace Jade.Control
 
         public void DataBind()
         {
-            if (this.Labels.Count != 0)
+            if (this.Labels != null && this.Labels.Count != 0)
             {
                 foreach (var label in this.Labels)
                 {
@@ -40,6 +41,7 @@ namespace Jade.Control
 
             var left = 10;
 
+            this.Labels = new List<LinkLabel>();
             foreach (var tag in this.DataSource)
             {
                 var label = new LinkLabel();

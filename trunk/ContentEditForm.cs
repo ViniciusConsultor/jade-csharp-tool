@@ -724,8 +724,8 @@ namespace Jade
 
         private void linkButtonGroup1_OnClick(object sender, Control.GroupClickArgs args)
         {
-            var tag = args.Tag;
-            var item = StatusSelections.Find(o => o.Item.DisplayName == tag);
+            var tag = args.Tag.Trim();
+            var item = StatusSelections.Find(o => o.Name == tag);
             if (item != null)
             {
                 item.Selected = true;

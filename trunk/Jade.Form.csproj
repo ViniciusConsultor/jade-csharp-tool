@@ -29,7 +29,7 @@
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
-	<ResGenToolArchitecture>Managed32Bit</ResGenToolArchitecture>
+    <ResGenToolArchitecture>Managed32Bit</ResGenToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -123,9 +123,6 @@
       <HintPath>Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
-    <Reference Include="Jade.Form, Version=1.0.0.1, Culture=neutral, processorArchitecture=x86">
-      <ExecutableExtension>.exe</ExecutableExtension>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
