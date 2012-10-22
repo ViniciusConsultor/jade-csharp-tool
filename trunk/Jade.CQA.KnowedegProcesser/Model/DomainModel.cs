@@ -5,6 +5,17 @@ using System.Text;
 
 namespace Jade.CQA.Model
 {
+    public class FetchResult
+    {
+        public Question Question { get; set; }
+
+        public List<Answer> Answers { get; set; }
+
+        public QuestionAnswer QuestionAnswer { get; set; }
+
+        public User User { get; set; }
+    }
+
     /// <summary>
     /// 知识类型
     /// </summary>
@@ -18,11 +29,35 @@ namespace Jade.CQA.Model
         /// 搜搜问问
         /// </summary>
         SosoWenwen = 1,
-
         /// <summary>
         /// 新浪爱问
         /// </summary>
         iAsk = 2
+    }
+
+
+    public enum QuestionStatus
+    {
+        /// <summary>
+        /// 无答案
+        /// </summary>
+        NoAnswer = 0,
+
+        /// <summary>
+        /// 无满意答案
+        /// </summary>
+        NoSatisfiedAnwser = 1,
+
+        /// <summary>
+        /// 有满意答案
+        /// </summary>
+        WithSatisfiedAnwser = 2,
+
+
+        /// <summary>
+        /// 有推荐答案
+        /// </summary>
+        WithRecommendedAnwser = 3
     }
 
     /// <summary>
@@ -45,12 +80,12 @@ namespace Jade.CQA.Model
         private string _id;
         private string _title;
         private string _content;
-        private string _viewCount;
+        private int _viewCount;
         private DateTime _createTime;
         private string _category;
         private string _tags;
         private string _url;
-        private string _state;
+        private QuestionStatus _state;
 
         override public string ToString()
         {
@@ -64,7 +99,7 @@ namespace Jade.CQA.Model
             str = String.Concat(str, "Category = ", Category, "\r\n");
             str = String.Concat(str, "Tags = ", Tags, "\r\n");
             str = String.Concat(str, "Url = ", Url, "\r\n");
-            str = String.Concat(str, "State = ", State, "\r\n");
+            str = String.Concat(str, "State = ", Status, "\r\n");
             return str;
         }
 
@@ -99,12 +134,12 @@ namespace Jade.CQA.Model
         /// <summary>
         /// 查看次数
         /// </summary>
-        public string ViewCount
+        public int ViewCount
         {
             get { return _viewCount; }
             set { _viewCount = value; }
         }
-        
+
         /// <summary>
         /// 问题提问时间
         /// </summary>
@@ -144,7 +179,7 @@ namespace Jade.CQA.Model
         /// <summary>
         /// 问题状态
         /// </summary>
-        public string State
+        public QuestionStatus Status
         {
             get { return _state; }
             set { _state = value; }
@@ -209,7 +244,7 @@ namespace Jade.CQA.Model
             get { return _up; }
             set { _up = value; }
         }
-        
+
         /// <summary>
         /// 踩数目
         /// </summary>
@@ -226,6 +261,41 @@ namespace Jade.CQA.Model
         {
             get { return _commentCount; }
             set { _commentCount = value; }
+        }
+
+        public bool IsBestAnwser
+        {
+            get;
+            set;
+        }
+
+        public bool IsRecommendAnwser
+        {
+            get;
+            set;
+        }
+
+        public string QuestionId
+        {
+            get;
+            set;
+        }
+
+        override public string ToString()
+        {
+            string str = String.Empty;
+            str = String.Concat(str, "KnowedgeType = ", KnowedgeType, "\r\n");
+            str = String.Concat(str, "AnswerId = ", AnswerId, "\r\n");
+            str = String.Concat(str, "UserName = ", UserName, "\r\n");
+            str = String.Concat(str, "CreateTime = ", CreateTime, "\r\n");
+            str = String.Concat(str, "Content = ", Content, "\r\n");
+            str = String.Concat(str, "Up = ", Up, "\r\n");
+            str = String.Concat(str, "Down = ", Down, "\r\n");
+            str = String.Concat(str, "CommentCount = ", CommentCount, "\r\n");
+            str = String.Concat(str, "IsBestAnwser = ", IsBestAnwser, "\r\n");
+            str = String.Concat(str, "IsRecommendAnwser = ", IsRecommendAnwser, "\r\n");
+            str = String.Concat(str, "QuestionId = ", QuestionId, "\r\n");
+            return str;
         }
     }
 
@@ -252,6 +322,15 @@ namespace Jade.CQA.Model
             set { _questionId = value; }
         }
 
+
+        /// <summary>
+        /// 满意答案（用户标记）
+        /// </summary>
+        public List<string> AnswerIds
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// 满意答案（用户标记）
         /// </summary>
@@ -277,6 +356,18 @@ namespace Jade.CQA.Model
         {
             get { return _relatedQuestionIds; }
             set { _relatedQuestionIds = value; }
+        }
+
+        override public string ToString()
+        {
+            string str = String.Empty;
+            str = String.Concat(str, "KnowedgeType = ", KnowedgeType, "\r\n");
+            str = String.Concat(str, "QuestionId = ", QuestionId, "\r\n");
+            str = String.Concat(str, "AnswerIds = ", string.Join(",", AnswerIds.ToArray()), "\r\n");
+            str = String.Concat(str, "SatisfiedAnswerIds = ", string.Join(",",SatisfiedAnswerIds.ToArray()), "\r\n");
+            str = String.Concat(str, "RecommendedAnswerIds = ",string.Join(",",RecommendedAnswerIds.ToArray()) , "\r\n");
+            str = String.Concat(str, "RelatedQuestionIds = ", string.Join(",", RelatedQuestionIds.ToArray()), "\r\n");
+            return str;
         }
     }
 

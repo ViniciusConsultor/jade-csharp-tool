@@ -39,13 +39,20 @@ namespace Jade.CQA.Robot.Services
         #region ICrawlerRules Members
 
         /// <summary>
-        /// 	Checks if the crawler should follow an url
+        /// 检查URL是否需要抓取	
+        /// Checks if the crawler should follow an url
         /// </summary>
         /// <param name = "uri">Url to check</param>
         /// <param name = "referrer"></param>
         /// <returns>True if the crawler should follow the url, else false</returns>
         public virtual bool IsAllowedUrl(Uri uri, CrawlStep referrer)
         {
+            // 来源为空，允许抓取
+            if (referrer == null)
+            {
+                return true;
+            }
+
             if (m_Crawler.MaximumUrlSize.HasValue && m_Crawler.MaximumUrlSize.Value > 10 &&
                 uri.ToString().Length > m_Crawler.MaximumUrlSize.Value)
             {
@@ -70,7 +77,7 @@ namespace Jade.CQA.Robot.Services
             //todo
             return false;
 
-           
+
             return !m_Crawler.AdhereToRobotRules || m_Robot.IsAllowed(m_Crawler.UserAgent, uri);
         }
 

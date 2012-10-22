@@ -15,12 +15,26 @@ namespace Jade.Model.Access
 
         public void Add(IDownloadData data)
         {
-            this.Add(data as DownloadData);
+            try
+            {
+                this.Add(data as DownloadData);
+            }
+            catch
+            {
+            }
         }
 
         public void Delete(IDownloadData data)
         {
-            this.Delete((data as DownloadData).ID);
+            try
+            {
+
+                this.Delete((data as DownloadData).ID);
+            }
+            catch
+            {
+                
+            }
         }
 
         public IDownloadData Get(int id)
@@ -102,7 +116,13 @@ namespace Jade.Model.Access
 
         public void Update(IDownloadData data)
         {
-            this.Update(data as DownloadData);
+            try
+            {
+                this.Update(data as DownloadData);
+            }
+            catch
+            {
+            }
         }
 
         #endregion

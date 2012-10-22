@@ -15,6 +15,7 @@ using System.IO;
 using Jade.CQA.Robot.Utils;
 using System.Threading;
 using Jade.CQA.Model;
+using Jade.CQA.KnowedegProcesser.DataSave;
 
 namespace Jade.CQA
 {
@@ -60,13 +61,34 @@ namespace Jade.CQA
             lock (this)
             {
                 Console.Out.WriteLine(ConsoleColor.Gray, "Url: {0}", propertyBag.Step.Uri);
-                Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent type: {0}", propertyBag.ContentType);
-                Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent length: {0}",
-                    propertyBag.Text.IsNull() ? 0 : propertyBag.Text.Length);
+                //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent type: {0}", propertyBag.ContentType);
+                //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent length: {0}",
+                //    propertyBag.Text.IsNull() ? 0 : propertyBag.Text.Length);
                 Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tDepth: {0}", propertyBag.Step.Depth);
-                Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tCulture: {0}", cultureDisplayValue);
-                Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThreadId: {0}", Thread.CurrentThread.ManagedThreadId);
-                Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThread Count: {0}", crawler.ThreadsInUse);
+                //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tCulture: {0}", cultureDisplayValue);
+                //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThreadId: {0}", Thread.CurrentThread.ManagedThreadId);
+                //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tThread Count: {0}", crawler.ThreadsInUse);
+
+                var fetchResult = (FetchResult)propertyBag["fetchResult"].Value;
+                if (fetchResult != null)
+                {
+                    CQASaver.SaveFetchResult(fetchResult);
+                    if (fetchResult.User == null)
+                    {
+                        Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题：");
+                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.Question);
+                        Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题与答案：");
+                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.QuestionAnswer);
+                        Console.Out.WriteLine(ConsoleColor.Red, "{0}", "答案：");
+                        foreach (var anwser in fetchResult.Answers)
+                        {
+                            Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", anwser);
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
                 Console.Out.WriteLine();
             }
         }
@@ -74,7 +96,7 @@ namespace Jade.CQA
         #endregion
     }
 
-  
+
 
     internal class BaiduUrlFilter : IFilter
     {
@@ -93,8 +115,8 @@ namespace Jade.CQA
                 return false;
             }
             if (
-                uri.AbsoluteUri.Contains("/question/") 
-                //|| uri.AbsoluteUri.Contains("/browse/") || uri.AbsoluteUri.Contains("/p/")
+                uri.AbsoluteUri.Contains("/question/")
+                || uri.AbsoluteUri.Contains("/browse/") || uri.AbsoluteUri.Contains("/p/")
                 )
             {
                 return true;
@@ -146,7 +168,8 @@ namespace Jade.CQA
             {
                 // Custom step to visualize crawl
                 MaximumThreadCount = 1,
-                MaximumCrawlDepth = 5,
+                MaximumCrawlDepth = 10,
+                UserAgent = "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
                 IncludeFilter = Program.ExtensionsMustContain
                 //ExcludeFilter = Program.ExtensionsToSkip,
             })
