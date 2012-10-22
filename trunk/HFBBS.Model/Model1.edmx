@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hfbbsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+    <Schema Namespace="hfbbsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="hfbbsModelStoreContainer">
-          <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" />
-          <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
         </EntityContainer>
         <EntityType Name="downloaddata">
           <Key>
@@ -66,7 +66,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Jade.Model.MySql" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+      <Schema Namespace="Jade.Model.MySql" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="HFBBSEntities">
           <EntitySet Name="user" EntityType="Jade.Model.MySql.user" />
           <EntitySet Name="downloaddata" EntityType="Jade.Model.MySql.downloaddata" />
@@ -76,14 +76,14 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="IsAdmin" Type="Boolean" />
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="UserName" Type="String" />
         </EntityType>
         <EntityType Name="downloaddata">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="TaskId" />
           <Property Type="String" Name="Title" />
           <Property Type="String" Name="SubTitle" />
@@ -129,7 +129,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="hfbbsModelStoreContainer" CdmEntityContainer="HFBBSEntities">
           <EntitySetMapping Name="user"><EntityTypeMapping TypeName="Jade.Model.MySql.user"><MappingFragment StoreEntitySet="user">
             <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
@@ -188,7 +188,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
