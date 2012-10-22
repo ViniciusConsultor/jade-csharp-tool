@@ -41,6 +41,8 @@ namespace Jade.CQA
     {
         #region IPipelineStep Members
 
+        public static Regex IdRegex = new Regex("(\\d+)\\.html");
+
         /// <summary>
         /// </summary>
         /// <param name = "crawler">
@@ -73,17 +75,19 @@ namespace Jade.CQA
                 if (fetchResult != null)
                 {
                     CQASaver.SaveFetchResult(fetchResult);
+
                     if (fetchResult.User == null)
                     {
                         Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题：");
-                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.Question);
-                        Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题与答案：");
-                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.QuestionAnswer);
-                        Console.Out.WriteLine(ConsoleColor.Red, "{0}", "答案：");
-                        foreach (var anwser in fetchResult.Answers)
-                        {
-                            Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", anwser);
-                        }
+                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.Question.Title);
+                        Cache.filter.AddContentPage(fetchResult.Question.Id);
+                        //Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题与答案：");
+                        // Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.QuestionAnswer);
+                        // Console.Out.WriteLine(ConsoleColor.Red, "{0}", "答案：");
+                        //foreach (var anwser in fetchResult.Answers)
+                        //{
+                        //    Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", anwser);
+                        //}
                     }
                     else
                     {

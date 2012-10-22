@@ -15,6 +15,7 @@ using Jade.CQA.Model;
 using Jade.CQA.Robot.Extensions;
 using System.Globalization;
 using System.Threading;
+using Jade.CQA.Robot.Services;
 
 namespace Jade.CQA.KnowedegProcesser
 {
@@ -172,6 +173,11 @@ namespace Jade.CQA.KnowedegProcesser
         #endregion
     }
 
+    public class Cache
+    {
+        public static SiteUrlFilter filter = new SiteUrlFilter("filter.bin");
+    }
+
     public class HtmlDocumentProcessor : ContentCrawlerRules, IPipelineStep
     {
         #region Constructors
@@ -197,6 +203,11 @@ namespace Jade.CQA.KnowedegProcesser
         }
 
         #endregion
+
+        public virtual bool IsAllowedUrl(string url)
+        {
+            return true;
+        }
 
         #region IPipelineStep Members
 
@@ -298,7 +309,8 @@ namespace Jade.CQA.KnowedegProcesser
                     FirstOrDefault();
             }
 
-            Thread.Sleep(500);
+            // 300 ms
+            Thread.Sleep(300);
 
             // Extract Links
             DocumentWithLinks links = htmlDoc.GetLinks();
@@ -308,6 +320,10 @@ namespace Jade.CQA.KnowedegProcesser
             {
 
                 if (link.IsNullOrEmpty())
+                {
+                    continue;
+                }
+                if (!this.IsAllowedUrl(link))
                 {
                     continue;
                 }
@@ -342,6 +358,25 @@ namespace Jade.CQA.KnowedegProcesser
 
     public class BadiduDocumentProcessor : HtmlDocumentProcessor
     {
+        public static Regex IdRegex = new Regex("(\\d+)\\.html");
+
+        public override bool IsAllowedUrl(string url)
+        {
+
+            if (url.Contains("/question/")
+                || url.Contains("/browse/") || url.Contains("/p/")
+                )
+            {
+                //url = "http://zhidao.baidu.com/question/11921534.html"
+                if (url.Contains("/question/"))
+                {
+                    url = IdRegex.Match(url).Groups[1].Value;
+                    return !Cache.filter.IsContentPageExist(url, false);
+                }
+                return true;
+            }
+            return false;
+        }
 
         public string GetHtml(string url)
         {
@@ -499,7 +534,7 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.KnowedgeType = KnowedgeType.BaiduZhidao;
                         answser.Content = recommond.SelectSingleNode("./div[2]/div[1]/pre").InnerText;
                         ////*[@id="recommend-answer-panel"]/div[1]/div/span[3]
-                        answser.CreateTime = ParseDatetime(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[1]/div/span[3]"));
+                        answser.CreateTime = ParseDatetime(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[1]/div/span[1]"));
                         answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
                         //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
@@ -511,7 +546,7 @@ namespace Jade.CQA.KnowedegProcesser
                         anwsers.Add(answser);
                         question.Status = QuestionStatus.WithRecommendedAnwser;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -524,13 +559,13 @@ namespace Jade.CQA.KnowedegProcesser
                 {
                     foreach (var reply in replyies)
                     {
-                        if (reply.Attributes["class"].Value.Contains("entry clf"))
+                        if (reply.Attributes["class"] != null && reply.Attributes["class"].Value.Contains("entry clf"))
                         {
                             try
                             {
                                 var anwser = new Answer();
                                 anwser.KnowedgeType = KnowedgeType.BaiduZhidao;
-                                anwser.UserName = reply.SelectSingleNode("./div/div[1]/a").Attributes["uname"].Value;
+                                anwser.UserName = userNames[index];
                                 anwser.Content = reply.SelectSingleNode("./div/div[2]/pre").InnerText;
                                 anwser.CreateTime = ParseDatetime(reply.SelectSingleNode("./div/div[1]/span[1]/text()").InnerText.Trim());
                                 anwser.AnswerId = answerIds[index];
