@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jade</RootNamespace>
     <AssemblyName>Jade.Form</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -32,7 +32,7 @@
     <ResGenToolArchitecture>Managed32Bit</ResGenToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -126,6 +126,7 @@
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -807,6 +808,10 @@
     <ProjectReference Include="Jade.Model.Access\Jade.Model.Access.csproj">
       <Project>{EB80F962-0359-49B0-8B22-234959701181}</Project>
       <Name>Jade.Model.Access</Name>
+    </ProjectReference>
+    <ProjectReference Include="XDatabase.Core\XMLDatabase.Core.csproj">
+      <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
+      <Name>XMLDatabase.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
