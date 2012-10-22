@@ -25,38 +25,52 @@ namespace Jade
         List<DisplayNameValuePair> SpecilTags;
         public ContentEditForm()
         {
-            InitializeComponent();
-            this.DoubleBuffered = true;
-            BindSelector();
-            //StatusSelections[0].Selected = true;
+            try
+            {
+                InitializeComponent();
+                this.DoubleBuffered = true;
+                BindSelector();
+                //StatusSelections[0].Selected = true;
 
-            //this.cmbSearchLabel.DataSource = SpecilTags;
-            this.cmbSearchLabel.DisplayMember = "DisplayName";
-            this.cmbSearchLabel.ValueMember = "Value";
-            this.cmbSearchLabel.SelectedIndexChanged += new EventHandler(cmbSearchLabel_SelectedIndexChanged);
-            this.cmbSearchLabel.Text = "";
-            this.txtContent.SetScriptingForm(this);
-
+                //this.cmbSearchLabel.DataSource = SpecilTags;
+                this.cmbSearchLabel.DisplayMember = "DisplayName";
+                this.cmbSearchLabel.ValueMember = "Value";
+                this.cmbSearchLabel.SelectedIndexChanged += new EventHandler(cmbSearchLabel_SelectedIndexChanged);
+                this.cmbSearchLabel.Text = "";
+                this.txtContent.SetScriptingForm(this);
+            }
+            catch
+            {
+            }
         }
 
         private void BindSelector()
         {
-            this.txtnews_source_name.DataSource = null;
-            this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
-            this.txtnews_source_name.DisplayMember = "DisplayName";
-            this.txtnews_source_name.ValueMember = "Value"
-                ;
-            this.txt_news_template_file.DataSource = null;
-            this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
-            this.txt_news_template_file.DisplayMember = "DisplayName";
-            this.txt_news_template_file.ValueMember = "Value";
+            try
+            {
+                this.txtnews_source_name.DataSource = null;
+                this.txtnews_source_name.DataSource = RemoteWebService.Instance.GetSource();
+                this.txtnews_source_name.DisplayMember = "DisplayName";
+                this.txtnews_source_name.ValueMember = "Value"
+                    ;
+                this.txt_news_template_file.DataSource = null;
+                this.txt_news_template_file.DataSource = RemoteWebService.Instance.GetTemplate();
+                this.txt_news_template_file.DisplayMember = "DisplayName";
+                this.txt_news_template_file.ValueMember = "Value";
 
-            SpecilTags = RemoteWebService.Instance.GetSpecilTags();
-            StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
-            this.txt_tags.DataSource = StatusSelections;
-            txt_tags.DisplayMemberSingleItem = "Name";
-            this.txt_tags.DisplayMember = "NameConcatenated";
-            this.txt_tags.ValueMember = "Selected";
+                SpecilTags = RemoteWebService.Instance.GetSpecilTags();
+                StatusSelections = new ListSelectionWrapper<DisplayNameValuePair>(SpecilTags, "DisplayName");
+                this.txt_tags.DataSource = StatusSelections;
+                txt_tags.DisplayMemberSingleItem = "Name";
+                this.txt_tags.DisplayMember = "NameConcatenated";
+                this.txt_tags.ValueMember = "Selected";
+
+                this.linkButtonGroup1.DataSource = RemoteWebService.Instance.GetCommonTags();
+                this.linkButtonGroup1.DataBind();
+            }
+            catch
+            {
+            }
         }
 
         void cmbSearchLabel_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,7 +184,8 @@ namespace Jade
                 this.txt_row_news_abstract.Text = data.Summary;
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
-                StatusSelections.ForEach(item => item.Selected = false);
+                if (StatusSelections != null)
+                    StatusSelections.ForEach(item => item.Selected = false);
 
                 if (!string.IsNullOrEmpty(data.label_base))
                 {
@@ -660,5 +675,63 @@ namespace Jade
 
         }
 
+        private void txt_news_title_TextChanged(object sender, EventArgs e)
+        {
+            this.lblWordCount.Text = "共" + GetLength(this.txt_news_title.Text) + "字";
+        }
+
+        public static double GetLength(string str)
+        {
+            if (str.Length == 0) return 0;
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            double tempLen = 0;
+            byte[] s = ascii.GetBytes(str);
+            for (int i = 0; i < s.Length; i++)
+            {
+                if ((int)s[i] == 63)
+                {
+                    tempLen += 1;
+                }
+                else
+                {
+                    tempLen += 0.5;
+                }
+            }
+            return tempLen;
+        }
+
+        private void txt_news_keywords_OnChange(object sender, EventArgs e)
+        {
+            foreach (var keyword in this.txt_news_keywords.Keywords)
+            {
+                if (!this.txt_news_keyword2.Keywords.Contains(keyword))
+                {
+                    this.txt_news_keyword2.AddWord(keyword);
+                }
+            }
+        }
+
+        private void txt_news_keyword2_OnChange(object sender, EventArgs e)
+        {
+            foreach (var keyword in this.txt_news_keyword2.Keywords)
+            {
+                if (!this.txt_news_keywords.Keywords.Contains(keyword))
+                {
+                    this.txt_news_keywords.AddWord(keyword);
+                }
+            }
+        }
+
+        private void linkButtonGroup1_OnClick(object sender, Control.GroupClickArgs args)
+        {
+            var tag = args.Tag;
+            var item = StatusSelections.Find(o => o.Item.DisplayName == tag);
+            if (item != null)
+            {
+                item.Selected = true;
+                txt_tags.RefreshTxt();
+            }
+
+        }
     }
 }

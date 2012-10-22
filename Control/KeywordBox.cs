@@ -12,6 +12,8 @@ namespace Jade.Control
     public partial class KeywordBox : UserControl
     {
 
+        public event Change OnChange;
+
         public List<string> keywords;
 
         /// <summary>
@@ -241,6 +243,11 @@ namespace Jade.Control
                 isNew = false;
             }
             Bind();
+
+            if (this.OnChange != null)
+            {
+                this.OnChange(this, new EventArgs());
+            }
 
         }
 

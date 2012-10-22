@@ -1665,5 +1665,36 @@ namespace Jade
             }
         }
 
+        private void btnSelectAnotherXpath_Click_1(object sender, EventArgs e)
+        {
+            current = null;
+            last = null;
+            //force bind
+            OnBrowserLoaded();
+            this.EnableSelect = true;
+            this.currentTxtbox = this.txtAnotherXPath;
+            this.currentActiveLogLabel = this.lblItemContentLog;
+            UpdateItemRule();
+            this.XMLPathSelectType = CurrentItemRule.XMLPathSelectType;
+            this.XMLPathType = CurrentItemRule.XMLPathType;
+            this.lblItemContentLog.Text = "请用鼠标选择，通过鼠标移动切换，左键点击选定";
+        }
+
+        private void btnSelectPager_Click_1(object sender, EventArgs e)
+        {
+            current = null;
+            last = null;
+            //force bind
+            OnBrowserLoaded();
+            this.EnableSelect = true;
+            this.currentTxtbox = this.txtPageXPath;
+            this.XMLPathSelectType = Model.XMLPathSelectType.OnlyOne;
+            this.XMLPathType = Model.XMLPathType.InnerLinks;
+            UpdateItemRule();
+            this.XMLPathSelectType = CurrentItemRule.XMLPathSelectType;
+            this.XMLPathType = CurrentItemRule.XMLPathType;
+            this.lblItemContentLog.Text = "请用鼠标选择，通过鼠标移动切换，左键点击选定";
+        }
+
     }
 }

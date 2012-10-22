@@ -279,7 +279,15 @@ namespace Jade
                 var pragrah = p.Trim();
                 if (!string.IsNullOrEmpty(pragrah))
                 {
-                    sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                    // Ð¡±êÌâ
+                    if (pragrah.Length < 15 && !pragrah.Contains("£¬") && !pragrah.Contains("¡£"))
+                    {
+                        sb.AppendFormat("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                    }
                 }
             }
             return sb.ToString();
@@ -414,7 +422,7 @@ namespace Jade
                     var findNodes = doc.SelectNodes(xpath);
 
                     // Ìæ»»XPATH
-                    if (findNodes == null && anotherXPath != "")
+                    if ((findNodes == null || findNodes.Count == 0) && anotherXPath != "")
                     {
                         findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
                     }

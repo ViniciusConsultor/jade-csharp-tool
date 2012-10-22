@@ -10,26 +10,27 @@ namespace Jade
     public static class ExtensionMethods
     {
         public const string HostUrlMath = "[^//]*?\\.(com|cn|net|org|biz|info|cc|tv)";
-        public static List<ItemRule> FindItemRule(this List<SiteRule> siteRuleList, string url)
-        {
-            List<ItemRule> rule = new List<ItemRule>();
 
-            string lastUrl = null;
-            int lastIndex = 0;
-            for (int i = 0; i < siteRuleList.Count; i++)
-            {
-                if (url.Approximation(lastUrl, siteRuleList[i].ForTestUrl) == ApproximationValue.BThanA)
-                {
-                    lastUrl = siteRuleList[i].ForTestUrl;
-                    lastIndex = i;
-                }
-            }
+        //public static List<ItemRule> FindItemRule(this List<SiteRule> siteRuleList, string url)
+        //{
+        //    List<ItemRule> rule = new List<ItemRule>();
 
-            rule = siteRuleList[lastIndex].ItemRules;
-            //int appValue = url.ApproximationLength(lastUrl);
+        //    string lastUrl = null;
+        //    int lastIndex = 0;
+        //    for (int i = 0; i < siteRuleList.Count; i++)
+        //    {
+        //        if (url.Approximation(lastUrl, siteRuleList[i].ForTestUrl) == ApproximationValue.BThanA)
+        //        {
+        //            lastUrl = siteRuleList[i].ForTestUrl;
+        //            lastIndex = i;
+        //        }
+        //    }
 
-            return rule;
-        }
+        //    rule = siteRuleList[lastIndex].ItemRules;
+        //    //int appValue = url.ApproximationLength(lastUrl);
+
+        //    return rule;
+        //}
 
         /// <summary>
         /// 返回与当前字符串最接近的字符串索

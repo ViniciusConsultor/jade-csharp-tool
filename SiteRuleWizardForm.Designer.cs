@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiteRuleWizardForm));
             this.wizardControl1 = new DevExpress.XtraWizard.WizardControl();
             this.welcomeWizardPage1 = new DevExpress.XtraWizard.WelcomeWizardPage();
@@ -69,7 +70,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.lblStartUrlLoger = new System.Windows.Forms.Label();
             this.lbxUrls = new System.Windows.Forms.ListBox();
-            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip();
+            this.startUrlmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,12 +81,12 @@
             this.radioInnerLinks = new System.Windows.Forms.RadioButton();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
-            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
-            this.xpathContextMenu = new System.Windows.Forms.ContextMenuStrip();
+            this.startUrlWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.xpathContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.选择上一级ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completionWizardPage1 = new DevExpress.XtraWizard.CompletionWizardPage();
             this.contentUrlPage = new DevExpress.XtraWizard.WizardPage();
-            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.contentBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.txtLinkXPath = new DevExpress.XtraEditors.TextEdit();
             this.linkUrlSeniorSetting = new System.Windows.Forms.LinkLabel();
@@ -148,7 +149,7 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtTestUrl = new DevExpress.XtraEditors.TextEdit();
-            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser();
+            this.itemWebBrowser = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.wizardPage3 = new DevExpress.XtraWizard.WizardPage();
             this.tbxResult = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
@@ -1148,6 +1149,7 @@
             this.btnSelectAnotherXpath.Size = new System.Drawing.Size(92, 23);
             this.btnSelectAnotherXpath.TabIndex = 115;
             this.btnSelectAnotherXpath.Text = "点此开始选择";
+            this.btnSelectAnotherXpath.Click += new System.EventHandler(this.btnSelectAnotherXpath_Click_1);
             // 
             // label4
             // 
@@ -1172,6 +1174,7 @@
             this.btnSelectPager.Size = new System.Drawing.Size(92, 23);
             this.btnSelectPager.TabIndex = 103;
             this.btnSelectPager.Text = "点此开始选择";
+            this.btnSelectPager.Click += new System.EventHandler(this.btnSelectPager_Click_1);
             // 
             // chkDownloadPic
             // 

@@ -206,4 +206,18 @@
       <Value>/hfestate/template/gqvideo_tiaozhuan.htm</Value>
     </DisplayNameValuePair>
   </Template>
+  <CommonTags>
+    <CommonTag>
+      <Tag>资讯中心 </Tag>
+      <Count>1</Count>
+    </CommonTag>
+    <CommonTag>
+      <Tag> 市政建设 </Tag>
+      <Count>1</Count>
+    </CommonTag>
+    <CommonTag>
+      <Tag> 购房小贴士</Tag>
+      <Count>1</Count>
+    </CommonTag>
+  </CommonTags>
 </RemoteWebService>

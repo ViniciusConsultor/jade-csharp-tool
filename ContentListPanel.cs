@@ -203,40 +203,53 @@ namespace Jade
         }
         private void DraftBoxForm_Load(object sender, EventArgs e)
         {
-            CacheObject.ContentForm.InitDownloadData(new Jade.Model.Access.DownloadData());
-            //this.dataGridView1.Columns[0].HeaderCell = new DataGridViewCheckBoxColumnHeeaderCell();
+            try
+            {
+                CacheObject.ContentForm.InitDownloadData(new Jade.Model.Access.DownloadData());
+                //this.dataGridView1.Columns[0].HeaderCell = new DataGridViewCheckBoxColumnHeeaderCell();
+            }
+            catch
+            {
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxEdit1.ItemIndex == -1)
+            try
             {
-                comboBoxEdit1.ItemIndex = 0;
+                if (comboBoxEdit1.ItemIndex == -1)
+                {
+                    comboBoxEdit1.ItemIndex = 0;
+                }
+
+                if (comboBoxEdit1.ItemIndex > -1)
+                {
+                    var task = tasks[comboBoxEdit1.ItemIndex];
+                    this.gridControl1.DataSource = null;
+
+                    int totalCount;
+
+                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(), out totalCount);
+
+                    //if (task.Name == "全部任务")
+                    //{
+                    //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True" : "IsPublish = False"), out totalCount, 1, currentPageSize).Tables[0];
+                    //}
+                    //else
+                    //{
+                    //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
+                    //}
+
+                    this.devPager1.CurrentPageIndex = 1;
+                    this.devPager1.PageSize = currentPageSize;
+                    this.devPager1.TotalCount = totalCount;
+                    this.devPager1.Bind();
+                    //this.pager1.InitPageInfo(totalCount, currentPageSize);
+                }
             }
-
-            if (comboBoxEdit1.ItemIndex > -1)
+            catch (Exception ex)
             {
-                var task = tasks[comboBoxEdit1.ItemIndex];
-                this.gridControl1.DataSource = null;
-
-                int totalCount;
-
-                this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(), out totalCount);
-
-                //if (task.Name == "全部任务")
-                //{
-                //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True" : "IsPublish = False"), out totalCount, 1, currentPageSize).Tables[0];
-                //}
-                //else
-                //{
-                //    this.dataGridView1.DataSource = new HFBBS.Model.DownloadData().GetList((IsPublished ? "IsPublish = True AND " : "IsPublish = False AND ") + "TaskID=" + task.SiteRuleId, out totalCount, 1, currentPageSize).Tables[0];
-                //}
-
-                this.devPager1.CurrentPageIndex = 1;
-                this.devPager1.PageSize = currentPageSize;
-                this.devPager1.TotalCount = totalCount;
-                this.devPager1.Bind();
-                //this.pager1.InitPageInfo(totalCount, currentPageSize);
+                Log4Log.Exception(ex);
             }
         }
 

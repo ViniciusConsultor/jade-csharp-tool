@@ -175,118 +175,125 @@ namespace Jade
 
             var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
 
-            var max =  urls.Count;
+            var max = urls.Count;
 
             //foreach (var url in urls)
             for (var i = 0; i < max; i++)
             {
-                var url = urls[i];
-                if (!isForceStop)
+                try
                 {
-                    var html = HtmlPicker.VisitUrl(
-                                            url,
-                                             item.HttpMethod,
-                                                       null,
-                                                       string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                                   string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                                   string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
-                                                   string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
-                                                       System.Text.Encoding.GetEncoding(item.Encoding));
+                    var url = urls[i];
+                    if (!isForceStop)
+                    {
+                        var html = HtmlPicker.VisitUrl(
+                                                url,
+                                                 item.HttpMethod,
+                                                           null,
+                                                           string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                                                       string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                       string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                       string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                                                           System.Text.Encoding.GetEncoding(item.Encoding));
 
-                    var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri);
-                    if (data == null)
-                    {
-                        continue;
-                    }
-                    data.IsDownload = true;
-                    foreach (var itemRule in item.ItemRules)
-                    {
-                        IFetcher fetcher = new FetchItem(itemRule);
-                        var result = fetcher.Fetch(html);
-                        if (result == null)
+                        var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri);
+                        if (data == null)
                         {
-                            result = "";
+                            continue;
                         }
-                        switch (itemRule.CloumnName)
+                        data.IsDownload = true;
+                        foreach (var itemRule in item.ItemRules)
                         {
-                            case "Title":
-                                data.Title = result;
-                                //File.AppendAllText("user.txt", result);
-                                break;
-                            case "Summary":
-                                data.Summary = result;
-                                break;
-                            case "Other":
-                                data.Other = result;
-                                break;
-                            case "Content":
-                                // todo 分析图片
-                                if (itemRule.IsDownloadPic)
-                                {
-                                    //
-                                    var pics = UrlPicker.GetImagesUrls(ref result, taskImageDir);
-
-                                    foreach (var key in pics)
+                            IFetcher fetcher = new FetchItem(itemRule);
+                            var result = fetcher.Fetch(html);
+                            if (result == null)
+                            {
+                                result = "";
+                            }
+                            switch (itemRule.CloumnName)
+                            {
+                                case "Title":
+                                    data.Title = result;
+                                    //File.AppendAllText("user.txt", result);
+                                    break;
+                                case "Summary":
+                                    data.Summary = result;
+                                    break;
+                                case "Other":
+                                    data.Other = result;
+                                    break;
+                                case "Content":
+                                    // todo 分析图片
+                                    if (itemRule.IsDownloadPic)
                                     {
-                                        var imageUrl = key.Key;
-                                        if (!imageUrl.Contains("http://"))
+                                        //
+                                        var pics = UrlPicker.GetImagesUrls(ref result, taskImageDir);
+
+                                        foreach (var key in pics)
                                         {
-                                            imageUrl = ExtractUrl.RepairUrl(url.AbsoluteUri, imageUrl);
-                                        }
-                                        if (!this.DownloadedPics.ContainsKey(imageUrl))
-                                        {
-                                            this.DownloadedPics.Add(imageUrl, key.Value);
-                                            DownloadFile file = new DownloadFile()
+                                            var imageUrl = key.Key;
+                                            if (!imageUrl.Contains("http://"))
                                             {
-                                                TaskId = Rule.SiteRuleId,
-                                                FileName = key.Value,
-                                                Url = imageUrl,
-                                                Progress = 0,
-                                                TotalSize = 0,
-                                                Number = DownloadFileCollection.Instance.GetDownloadFiles(Rule.SiteRuleId).Count + 1
-                                            };
-                                            DownloadFileCollection.Instance.AddFile(file);
+                                                imageUrl = ExtractUrl.RepairUrl(url.AbsoluteUri, imageUrl);
+                                            }
+                                            if (!this.DownloadedPics.ContainsKey(imageUrl))
+                                            {
+                                                this.DownloadedPics.Add(imageUrl, key.Value);
+                                                DownloadFile file = new DownloadFile()
+                                                {
+                                                    TaskId = Rule.SiteRuleId,
+                                                    FileName = key.Value,
+                                                    Url = imageUrl,
+                                                    Progress = 0,
+                                                    TotalSize = 0,
+                                                    Number = DownloadFileCollection.Instance.GetDownloadFiles(Rule.SiteRuleId).Count + 1
+                                                };
+                                                DownloadFileCollection.Instance.AddFile(file);
+                                            }
                                         }
                                     }
-                                }
-                                data.Content = result;
-                                break;
-                            case "Time":
-                                data.CreateTime = result;
-                                break;
-                            case "Source":
-                                data.Source = result;
-                                break;
-                            case "SubTitle":
-                                data.SubTitle = result;
-                                //File.AppendAllText("item.txt", result);
-                                break;
-                            case "Keywords":
-                                data.Keywords = result;
-                                break;
+                                    data.Content = result;
+                                    break;
+                                case "Time":
+                                    data.CreateTime = result;
+                                    break;
+                                case "Source":
+                                    data.Source = result;
+                                    break;
+                                case "SubTitle":
+                                    data.SubTitle = result;
+                                    //File.AppendAllText("item.txt", result);
+                                    break;
+                                case "Keywords":
+                                    data.Keywords = result;
+                                    break;
+                            }
+                            //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                         }
-                        //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
-                    }
-                    DataSaver.Update(data);
-                    Logger.Success("[" + Rule.Name + "] 成功采集并更新数据到数据库【" + data.Title + "】");
-                    index++;
+                        DataSaver.Update(data);
+                        Logger.Success("[" + Rule.Name + "] 成功采集并更新数据到数据库【" + data.Title + "】");
+                        index++;
 
-                    this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
-                    RunningTaskCollection.Instance.Update();
+                        this.RunningTaskModel.ContentCount = index + "/" + urls.Count;
+                        RunningTaskCollection.Instance.Update();
 
-                    if (this.StateChange != null)
-                    {
-                        this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                        if (this.StateChange != null)
                         {
-                            CurrentCount = index,
-                            StepName = "采集内容",
-                            TotalCount = total
-                        }));
+                            this.StateChange(this, new TaskRunnerEventArgs(new RunnerState
+                            {
+                                CurrentCount = index,
+                                StepName = "采集内容",
+                                TotalCount = total
+                            }));
+                        }
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return;
+                    Log4Log.Exception(ex);
                 }
             }
         }
@@ -391,24 +398,31 @@ namespace Jade
             string html, string sourceUrl,
             string encoding, List<Uri> uris)
         {
-
-            List<string> urls;
-
-            if (Rule.ListPageType == ListPageType.Html)
+            try
             {
-                if (Rule.ListFetchType == ItemFetchType.XPath)
+
+                List<string> urls;
+
+                if (Rule.ListPageType == ListPageType.Html)
                 {
-                    urls = ExtractUrl.ExtractAccurateUrl(Rule, html, sourceUrl);
+                    if (Rule.ListFetchType == ItemFetchType.XPath)
+                    {
+                        urls = ExtractUrl.ExtractAccurateUrl(Rule, html, sourceUrl);
+                    }
+                    else
+                    {
+                        urls = ExtractUrl.ExtractAccurateUrl(sourceUrl, html, item.PageStartAt, item.PageEndAt, item.IncludePart, item.ExcludePart, "", new List<string>());
+                    }
                 }
                 else
-                {
-                    urls = ExtractUrl.ExtractAccurateUrl(sourceUrl, html, item.PageStartAt, item.PageEndAt, item.IncludePart, item.ExcludePart, "", new List<string>());
-                }
-            }
-            else
-                urls = ExtractUrl.ExtractAccurateRssUrl(RssPicker.GetRssLinks(html, Encoding.GetEncoding(encoding)), item.IncludePart, item.ExcludePart);
+                    urls = ExtractUrl.ExtractAccurateRssUrl(RssPicker.GetRssLinks(html, Encoding.GetEncoding(encoding)), item.IncludePart, item.ExcludePart);
 
-            AddUrls(uris, urls);
+                AddUrls(uris, urls);
+            }
+            catch(Exception ex)
+            {
+                Log4Log.Exception(ex);
+            }
         }
 
         private void AddUrls(List<Uri> uris, List<string> urls)
@@ -426,7 +440,7 @@ namespace Jade
                             DataSaver.Add(DatabaseFactory.Instance.CreateDownloadData(url, Rule.SiteRuleId));
                             Logger.Success("[" + Rule.Name + "] 成功采集网址并保存到数据库中" + url);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Log4Log.Exception(url, ex);
                         }
