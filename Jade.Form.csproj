@@ -808,10 +808,6 @@
       <Project>{EB80F962-0359-49B0-8B22-234959701181}</Project>
       <Name>Jade.Model.Access</Name>
     </ProjectReference>
-    <ProjectReference Include="XDatabase.Core\XMLDatabase.Core.csproj">
-      <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
-      <Name>XMLDatabase.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="release\SiteConfig\Entities\Jade.Model.Category\Index\" />
