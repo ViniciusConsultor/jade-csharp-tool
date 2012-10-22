@@ -51,33 +51,40 @@ namespace Jade
 
         void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
-            if (e.Column.Equals(SiteRuleName))
+            try
             {
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                var data = dataTable[e.RowHandle];
-                e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Name;
+                if (e.Column.Equals(SiteRuleName))
+                {
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[e.RowHandle];
+                    e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Name;
+                }
+                else if (e.Column.Equals(Category))
+                {
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[e.RowHandle];
+                    e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Tags;
+                }
+                else if (e.Column.Equals(GroupName))
+                {
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[e.RowHandle];
+                    var category = CacheObject.Categories.SingleOrDefault(c => c.ID == CacheObject.Rules.SingleOrDefault(r => r.SiteRuleId == data.TaskId).CategoryID);
+                    e.DisplayText = category.Name;
+                }
+                else if (e.Column.Equals(EndTime))
+                {
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[e.RowHandle];
+                    if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
+                        e.DisplayText = "----";
+                    else
+                        e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd hh:mm:ss");
+                }
             }
-            else if (e.Column.Equals(Category))
+            catch (Exception ex)
             {
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                var data = dataTable[e.RowHandle];
-                e.DisplayText = CacheObject.Rules.SingleOrDefault(c => c.SiteRuleId == data.TaskId).Tags;
-            }
-            else if (e.Column.Equals(GroupName))
-            {
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                var data = dataTable[e.RowHandle];
-                var category = CacheObject.Categories.SingleOrDefault(c => c.ID == CacheObject.Rules.SingleOrDefault(r => r.SiteRuleId == data.TaskId).CategoryID);
-                e.DisplayText = category.Name;
-            }
-            else if (e.Column.Equals(EndTime))
-            {
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                var data = dataTable[e.RowHandle];
-                if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
-                    e.DisplayText = "----";
-                else
-                    e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd hh:mm:ss");
+                Log4Log.Exception(ex);
             }
         }
 
@@ -103,19 +110,26 @@ namespace Jade
 
         void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
-            Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
-            info = gridView1.CalcHitInfo(pt);
-            if (info.InRowCell)
+            try
             {
-                rowIndex = info.RowHandle;
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                CacheObject.ContentForm.InitDownloadData(dataTable[rowIndex]);
-                if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+                Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+                info = gridView1.CalcHitInfo(pt);
+                if (info.InRowCell)
                 {
-                    int totalCount;
-                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.devPager1.CurrentPageIndex), out totalCount);
+                    rowIndex = info.RowHandle;
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    CacheObject.ContentForm.InitDownloadData(dataTable[rowIndex]);
+                    if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+                    {
+                        int totalCount;
+                        this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.devPager1.CurrentPageIndex), out totalCount);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
         }
 
@@ -244,12 +258,19 @@ namespace Jade
         /// <param name="e"></param>
         private void gridView1_CustomDrawColumnHeader(object sender, DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e)
         {
-            if (e.Column != null && e.Column.FieldName == "IsChecked")
+            try
             {
-                e.Info.InnerElements.Clear();
-                e.Painter.DrawObject(e.Info);
-                DrawCheckBox(e, m_checkStatus);
-                e.Handled = true;
+                if (e.Column != null && e.Column.FieldName == "IsChecked")
+                {
+                    e.Info.InnerElements.Clear();
+                    e.Painter.DrawObject(e.Info);
+                    DrawCheckBox(e, m_checkStatus);
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
         }
 
@@ -260,50 +281,72 @@ namespace Jade
         /// <param name="e"></param>
         void gridView1_DataSourceChanged(object sender, EventArgs e)
         {
-            GridColumn column = this.gridView1.Columns.ColumnByFieldName("IsChecked");
-            if (column != null)
+            try
             {
-                column.Width = 30;
-                column.OptionsColumn.ShowCaption = false;
-                var c = new RepositoryItemCheckEdit();
-                c.CheckedChanged += new EventHandler(c_CheckedChanged);
-                column.ColumnEdit = c;
+                GridColumn column = this.gridView1.Columns.ColumnByFieldName("IsChecked");
+                if (column != null)
+                {
+                    column.Width = 30;
+                    column.OptionsColumn.ShowCaption = false;
+                    var c = new RepositoryItemCheckEdit();
+                    c.CheckedChanged += new EventHandler(c_CheckedChanged);
+                    column.ColumnEdit = c;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
         }
 
         void c_CheckedChanged(object sender, EventArgs e)
         {
-            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
-            Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
-            info = gridView1.CalcHitInfo(pt);
-            if (info.InRowCell)
+            try
             {
-                rowIndex = info.RowHandle;
-                var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
-                gridView1.SetRowCellValue(rowIndex, "IsChecked", !dataTable[rowIndex].IsChecked);
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+                Point pt = gridView1.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+                info = gridView1.CalcHitInfo(pt);
+                if (info.InRowCell)
+                {
+                    rowIndex = info.RowHandle;
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    gridView1.SetRowCellValue(rowIndex, "IsChecked", !dataTable[rowIndex].IsChecked);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
         }
 
         public static void DrawCheckBox(DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventArgs e, bool chk)
         {
-            RepositoryItemCheckEdit repositoryCheck = e.Column.ColumnEdit as RepositoryItemCheckEdit;
-            if (repositoryCheck != null)
+            try
             {
-                Graphics g = e.Graphics;
-                Rectangle r = e.Bounds;
+                RepositoryItemCheckEdit repositoryCheck = e.Column.ColumnEdit as RepositoryItemCheckEdit;
+                if (repositoryCheck != null)
+                {
+                    Graphics g = e.Graphics;
+                    Rectangle r = e.Bounds;
 
-                DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo info;
-                DevExpress.XtraEditors.Drawing.CheckEditPainter painter;
-                DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs args;
-                info = repositoryCheck.CreateViewInfo() as DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo;
+                    DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo info;
+                    DevExpress.XtraEditors.Drawing.CheckEditPainter painter;
+                    DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs args;
+                    info = repositoryCheck.CreateViewInfo() as DevExpress.XtraEditors.ViewInfo.CheckEditViewInfo;
 
-                painter = repositoryCheck.CreatePainter() as DevExpress.XtraEditors.Drawing.CheckEditPainter;
-                info.EditValue = chk;
-                info.Bounds = r;
-                info.CalcViewInfo(g);
-                args = new DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs(info, new DevExpress.Utils.Drawing.GraphicsCache(g), r);
-                painter.Draw(args);
-                args.Cache.Dispose();
+                    painter = repositoryCheck.CreatePainter() as DevExpress.XtraEditors.Drawing.CheckEditPainter;
+                    info.EditValue = chk;
+                    info.Bounds = r;
+                    info.CalcViewInfo(g);
+                    args = new DevExpress.XtraEditors.Drawing.ControlGraphicsInfoArgs(info, new DevExpress.Utils.Drawing.GraphicsCache(g), r);
+                    painter.Draw(args);
+                    args.Cache.Dispose();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
         }
 
@@ -330,22 +373,30 @@ namespace Jade
         public static bool ClickGridCheckBox(DevExpress.XtraGrid.Views.Grid.GridView gridView, string fieldName, bool currentStatus)
         {
             bool result = false;
-            if (gridView != null)
+            try
             {
-                gridView.ClearSorting();//禁止排序
 
-                gridView.PostEditor();
-                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
-                Point pt = gridView.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
-                info = gridView.CalcHitInfo(pt);
-                if (info.InColumn && info.Column != null && info.Column.FieldName == fieldName)
+                if (gridView != null)
                 {
-                    for (int i = 0; i < gridView.RowCount; i++)
+                    gridView.ClearSorting();//禁止排序
+
+                    gridView.PostEditor();
+                    DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo info;
+                    Point pt = gridView.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+                    info = gridView.CalcHitInfo(pt);
+                    if (info.InColumn && info.Column != null && info.Column.FieldName == fieldName)
                     {
-                        gridView.SetRowCellValue(i, fieldName, !currentStatus);
+                        for (int i = 0; i < gridView.RowCount; i++)
+                        {
+                            gridView.SetRowCellValue(i, fieldName, !currentStatus);
+                        }
+                        return true;
                     }
-                    return true;
                 }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
             }
             return result;
         }

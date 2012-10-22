@@ -387,10 +387,6 @@ namespace Jade.CQA.KnowedegProcesser
                 KnowedgeType = KnowedgeType.BaiduZhidao
             };
 
-
-
-
-
             // html = html.Substring("\"tplContent\":\"", "});");
 
             var result = html.SubstringAll("<b class=zhidao-basic-num>", "<\\/b>");
@@ -418,7 +414,7 @@ namespace Jade.CQA.KnowedegProcesser
         {
             if (html.Contains("您的访问出错了"))
             {
-
+                Console.WriteLine("访问出错了");
             }
 
             var question = new Question();
@@ -470,40 +466,56 @@ namespace Jade.CQA.KnowedegProcesser
 
                 if (bestAnswer != null)
                 {
-                    var answser = new Answer();
-                    answser.KnowedgeType = KnowedgeType.BaiduZhidao;
-                    answser.Content = htmlDoc.ExtractData("//pre[@id=\"best-answer-content\"]");
-                    answser.CreateTime = ParseDatetime(bestAnswer.SelectSingleNode("./div[1]/div[1]/span").InnerText.Trim());
-                    answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
-                    //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
-                    answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
-                    answser.AnswerId = answerIds[index];
-                    answser.UserName = userNames[index++];
-                    answser.QuestionId = question.Id;
-                    answser.IsBestAnwser = true;
-                    anwsers.Add(answser);
-                    question.Status = QuestionStatus.WithSatisfiedAnwser;
+                    try
+                    {
+                        var answser = new Answer();
+                        answser.KnowedgeType = KnowedgeType.BaiduZhidao;
+                        answser.Content = htmlDoc.ExtractData("//pre[@id=\"best-answer-content\"]");
+                        answser.CreateTime = ParseDatetime(bestAnswer.SelectSingleNode("./div[1]/div[1]/span").InnerText.Trim());
+                        answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
+                        answser.AnswerId = answerIds[index];
+                        answser.UserName = userNames[index];
+                        answser.QuestionId = question.Id;
+                        answser.IsBestAnwser = true;
+                        anwsers.Add(answser);
+                        question.Status = QuestionStatus.WithSatisfiedAnwser;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    index++;
                 }
 
                 var recommond = htmlDoc.DocumentNode.SelectSingleNode("//div[@id='recommend-answer-panel']");
-
-
                 if (recommond != null)
                 {
-                    var answser = new Answer();
-                    answser.KnowedgeType = KnowedgeType.BaiduZhidao;
-                    answser.Content = recommond.SelectSingleNode("./div[2]/div[1]/pre").InnerText;
-                    answser.CreateTime = ParseDatetime(bestAnswer.SelectSingleNode("./div[1]/div/span[3]").InnerText.Trim());
-                    answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
-                    //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
-                    answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
-                    answser.AnswerId = answerIds[index];
-                    answser.UserName = userNames[index++];
-                    answser.QuestionId = question.Id;
-                    answser.IsBestAnwser = false;
-                    answser.IsRecommendAnwser = true;
-                    anwsers.Add(answser);
-                    question.Status = QuestionStatus.WithRecommendedAnwser;
+                    try
+                    {
+                        var answser = new Answer();
+                        answser.KnowedgeType = KnowedgeType.BaiduZhidao;
+                        answser.Content = recommond.SelectSingleNode("./div[2]/div[1]/pre").InnerText;
+                        ////*[@id="recommend-answer-panel"]/div[1]/div/span[3]
+                        answser.CreateTime = ParseDatetime(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[1]/div/span[3]"));
+                        answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
+                        answser.AnswerId = answerIds[index];
+                        answser.UserName = userNames[index];
+                        answser.QuestionId = question.Id;
+                        answser.IsBestAnwser = false;
+                        answser.IsRecommendAnwser = true;
+                        anwsers.Add(answser);
+                        question.Status = QuestionStatus.WithRecommendedAnwser;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    index++;
                 }
 
                 var replyies = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"reply-panel\"]//div");
@@ -528,8 +540,9 @@ namespace Jade.CQA.KnowedegProcesser
 
                                 anwsers.Add(anwser);
                             }
-                            catch
+                            catch (Exception ex)
                             {
+                                Console.WriteLine(ex.Message);
                             }
                             index++;
                         }
