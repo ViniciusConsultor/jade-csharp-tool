@@ -54,7 +54,7 @@ namespace Jade
             //            }
 
 
-            if (new DateTime(2012, 10, 13).AddDays(10) < DateTime.Now)
+            if (new DateTime(2012, 10, 22).AddDays(10) < DateTime.Now)
             {
                 MessageBox.Show("试用期已过，请联系jadepeng提供正式版本");
                 return;

@@ -29,6 +29,7 @@
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+	<ResGenToolArchitecture>Managed32Bit</ResGenToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -122,6 +123,9 @@
       <HintPath>Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3437, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL" />
+    <Reference Include="Jade.Form, Version=1.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <ExecutableExtension>.exe</ExecutableExtension>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\workspace\soft\Model\_DLL\log4net.dll</HintPath>
     </Reference>
@@ -294,6 +298,12 @@
     </Compile>
     <Compile Include="Control\KeywordBox.Designer.cs">
       <DependentUpon>KeywordBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\LinkButtonGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\LinkButtonGroup.Designer.cs">
+      <DependentUpon>LinkButtonGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\Pager.cs">
       <SubType>UserControl</SubType>
@@ -527,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\KeywordBox.resx">
       <DependentUpon>KeywordBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\LinkButtonGroup.resx">
+      <DependentUpon>LinkButtonGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\Pager.resx">
       <DependentUpon>Pager.cs</DependentUpon>

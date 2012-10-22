@@ -129,8 +129,10 @@ namespace Jade
                         result += "&label_id%5B%5D=" + specialTag.Value;
                         GET("http://newscms.house365.com/newCMS/news/ajax_lable.php?channel_id=" + specialTag.Value + "&news_id=" + newsid + "&pub_date=&list_order=&ty=add");
                     }
+                    RemoteWebService.Instance.AddTag(tag);
                 }
             }
+            RemoteWebService.Instance.Save();
             return result;
         }
 

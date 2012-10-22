@@ -26,6 +26,7 @@ namespace Jade
         /// </summary>
         /// <returns></returns>
         List<DisplayNameValuePair> GetTemplate();
+
     }
 
     public class DisplayNameValuePair
@@ -34,6 +35,8 @@ namespace Jade
 
         public string Value { get; set; }
     }
+
+
 
     public interface INews
     {
@@ -154,6 +157,17 @@ namespace Jade
                     if (File.Exists("api.xml"))
                     {
                         instance = Load();
+                        if (instance == null)
+                        {
+                            instance = new RemoteWebService();
+                        }
+                        if (instance.SpecilTags == null)
+                        {
+                            instance.SpecilTags = new List<DisplayNameValuePair>();
+                            instance.Template = new List<DisplayNameValuePair>();
+                            instance.Source = new List<DisplayNameValuePair>();
+                            instance.CommonTags = new List<CommonTag>();
+                        }
                     }
                     else
                     {
@@ -161,6 +175,7 @@ namespace Jade
                         instance.SpecilTags = new List<DisplayNameValuePair>();
                         instance.Template = new List<DisplayNameValuePair>();
                         instance.Source = new List<DisplayNameValuePair>();
+                        instance.CommonTags = new List<CommonTag>();
 
                     }
                 }
@@ -198,6 +213,36 @@ namespace Jade
         //   new DisplayNameValuePair(){DisplayName="来源3",Value = "来源3"}
         //};
 
+        public void AddTag(string tag)
+        {
+            if (this.CommonTags == null)
+            {
+                this.CommonTags = new List<CommonTag>();
+                this.CommonTags.Add(new CommonTag { Tag = tag, Count = 1 });
+            }
+            else
+            {
+                if (this.CommonTags.Any(t => t.Tag == tag))
+                {
+                    this.CommonTags.FirstOrDefault(t => t.Tag == tag).Count++;
+                }
+                else
+                {
+                    this.CommonTags.Add(new CommonTag { Tag = tag, Count = 1 });
+                }
+            }
+        }
+
+        public List<string> GetCommonTags()
+        {
+            if (CommonTags != null)
+            {
+                return this.CommonTags.OrderByDescending(d => d.Count).Select(d => d.Tag).Take(5).ToList();
+            }
+
+            return new List<string> { Jade.Properties.Settings.Default.DefaultTag };
+        }
+
         public List<DisplayNameValuePair> GetSource()
         {
             return Source;
@@ -217,10 +262,31 @@ namespace Jade
 
         public static RemoteWebService Load()
         {
-            return CommXmlSerialize.XmlDeserializeObject<RemoteWebService>("api.xml");
+            try
+            {
+                return CommXmlSerialize.XmlDeserializeObject<RemoteWebService>("api.xml");
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         #endregion
+
+
+        public List<CommonTag> CommonTags
+        {
+            get;
+            set;
+        }
+    }
+
+    public class CommonTag
+    {
+        public string Tag { get; set; }
+
+        public int Count { get; set; }
     }
 
     public class CommXmlSerialize

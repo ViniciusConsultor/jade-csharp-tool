@@ -166,22 +166,22 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 7);
-            this.barDockControlBottom.Size = new System.Drawing.Size(700, 25);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 5);
+            this.barDockControlBottom.Size = new System.Drawing.Size(700, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 7);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 5);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(700, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 7);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 5);
             // 
             // imageList1
             // 
