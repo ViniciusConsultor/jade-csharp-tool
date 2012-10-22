@@ -34,4 +34,34 @@ namespace Jade.CQA.Robot.Services
 
 		#endregion
 	}
+
+    public class BloomFilterHistoryService : HistoryServiceBase
+    {
+        SiteUrlFilter fiter;
+        public BloomFilterHistoryService()
+        {
+            fiter = new SiteUrlFilter("Filter.bin"); 
+        }
+
+        protected override void Add(string key)
+        {
+            fiter.AddContentPage(key);
+        }
+
+        protected override bool Exists(string key)
+        {
+            return fiter.IsContentPageExist(key, false);
+        }
+
+        protected override long GetRegisteredCount()
+        {
+            return 0;
+        }
+
+        protected override void Cleanup()
+        {
+            base.Cleanup();
+            fiter.Dispose();
+        }
+    }
 }

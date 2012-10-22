@@ -227,7 +227,7 @@ namespace Jade.CQA.Robot
 		/// <param name = "depth">url深度</param>
 		/// <param name = "referrer">Step which the url was located</param>
 		/// <param name = "properties">Custom properties</param>
-		public void AddStep(Uri uri, int depth, CrawlStep referrer, Dictionary<string, object> properties)
+		public void AddStep(Uri uri, int depth, CrawlStep referrer, Dictionary<string, object> properties,bool force = false)
 		{
 			if (!m_Crawling)
 			{
@@ -239,19 +239,24 @@ namespace Jade.CQA.Robot
 				return;
 			}
 
-            // 过滤URL 
-			if ((uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp) || // Only accept http(s) schema
-				(MaximumCrawlDepth.HasValue && MaximumCrawlDepth.Value > 0 && depth >= MaximumCrawlDepth.Value) ||
-				!m_CrawlerRules.IsAllowedUrl(uri, referrer) ||
-				!m_CrawlerHistory.Register(uri.GetUrlKeyString(UriSensitivity)))
-			{
-				if (depth == 0)
-				{
-					StopCrawl();
-				}
+            if (!force)
+            {
+                // 过滤URL 
+                if ((uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp) || // Only accept http(s) schema
+                    (MaximumCrawlDepth.HasValue && MaximumCrawlDepth.Value > 0 && depth >= MaximumCrawlDepth.Value) ||
+                    // 规则
+                    !m_CrawlerRules.IsAllowedUrl(uri, referrer) ||
+                    // 抓取历史
+                    !m_CrawlerHistory.Register(uri.GetUrlKeyString(UriSensitivity)))
+                {
+                    if (depth == 0)
+                    {
+                        StopCrawl();
+                    }
 
-				return;
-			}
+                    return;
+                }
+            }
 
 			// Make new crawl step
 			CrawlStep crawlStep = new CrawlStep(uri, depth)
