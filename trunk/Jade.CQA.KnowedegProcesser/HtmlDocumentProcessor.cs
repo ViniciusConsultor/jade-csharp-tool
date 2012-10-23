@@ -236,7 +236,8 @@ namespace Jade.CQA.KnowedegProcesser
             };
             using (Stream reader = propertyBag.GetResponse())
             {
-                Encoding documentEncoding = htmlDoc.DetectEncoding(reader);
+                Encoding documentEncoding = Encoding.GetEncoding("gb2312");
+                //htmlDoc.DetectEncoding(reader);
                 reader.Seek(0, SeekOrigin.Begin);
                 if (!documentEncoding.IsNull())
                 {
@@ -325,6 +326,7 @@ namespace Jade.CQA.KnowedegProcesser
                 }
                 if (!this.IsAllowedUrl(link))
                 {
+                    //Console.WriteLine("跳过" + link);
                     continue;
                 }
 
@@ -371,7 +373,7 @@ namespace Jade.CQA.KnowedegProcesser
                 if (url.Contains("/question/"))
                 {
                     url = IdRegex.Match(url).Groups[1].Value;
-                    return !Cache.filter.IsContentPageExist(url, false);
+                    return !Cache.filter.IsContentPageExist(url, true);
                 }
                 return true;
             }
@@ -454,11 +456,21 @@ namespace Jade.CQA.KnowedegProcesser
 
             var question = new Question();
             question.KnowedgeType = KnowedgeType.BaiduZhidao;
-            question.Title = html.Substring("<title>", "_百度知道");
+            question.Title = html.Substring("<title>", "百度知道").Replace("_", "");
 
+            ////*[@id="question-box"]/div[2]/div[1]/div/div/div/span[3]
             var time = htmlDoc.ExtractData("//div[@id=\"question-box\"]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]");
             // 2009-1-23 18:34
-            question.CreateTime = ParseDatetime(time); ;
+
+            if (time == "")
+            {
+                time = htmlDoc.ExtractData("//*[@id=\"question-box\"]/div[2]/div[1]/div/div/div/span[3]");
+            }
+            if (time != "")
+            {
+                question.CreateTime = ParseDatetime(time);
+            }
+
             question.Content = htmlDoc.ExtractData("//pre[@id=\"question-content\"]").Trim();
             question.Category = htmlDoc.ExtractData("//div[@id=\"body\"]/div[1]").Trim();
             question.Id = propertyBag.OriginalUrl.Substring("question/", ".html");
@@ -532,10 +544,37 @@ namespace Jade.CQA.KnowedegProcesser
                     {
                         var answser = new Answer();
                         answser.KnowedgeType = KnowedgeType.BaiduZhidao;
-                        answser.Content = recommond.SelectSingleNode("./div[2]/div[1]/pre").InnerText;
+
+                        var contentNode = recommond.SelectSingleNode("./div[2]/div[1]/pre");
+                        if (contentNode == null)
+                        {
+                            contentNode = recommond.SelectSingleNode("./div[2]/div[1]");
+                        }
+                        if (contentNode != null)
+                        {
+                            answser.Content = contentNode.InnerText;
+                        }
+
                         ////*[@id="recommend-answer-panel"]/div[1]/div/span[3]
                         answser.CreateTime = ParseDatetime(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[1]/div/span[1]"));
-                        answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        var up = htmlDoc.ExtractData("//*[@id=\"recommend-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]");
+                        if (up == "")
+                        {
+                            up = htmlDoc.ExtractData("//div[@class=\"value-num value-num-fixed\"]").Trim();
+                        }
+
+                        try
+                        {
+                            if (up != "")
+                            {
+                                answser.Up = int.Parse(up);
+                            }
+
+                        }
+                        catch
+                        {
+                        }
+
                         //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
@@ -566,7 +605,20 @@ namespace Jade.CQA.KnowedegProcesser
                                 var anwser = new Answer();
                                 anwser.KnowedgeType = KnowedgeType.BaiduZhidao;
                                 anwser.UserName = userNames[index];
-                                anwser.Content = reply.SelectSingleNode("./div/div[2]/pre").InnerText;
+
+                                var contentNode = reply.SelectSingleNode("./div/div[2]/pre");
+                                if (contentNode == null)
+                                {
+                                    contentNode = reply.SelectSingleNode("./div//pre");
+                                    if (contentNode == null)
+                                    {
+                                        contentNode = reply.SelectSingleNode("./div[@class='content']");
+                                    }
+                                }
+                                if (contentNode != null)
+                                {
+                                    anwser.Content = contentNode.InnerText;
+                                }
                                 anwser.CreateTime = ParseDatetime(reply.SelectSingleNode("./div/div[1]/span[1]/text()").InnerText.Trim());
                                 anwser.AnswerId = answerIds[index];
                                 anwser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
@@ -631,10 +683,20 @@ namespace Jade.CQA.KnowedegProcesser
         private static DateTime ParseDatetime(string time)
         {
             DateTime createTime = DateTime.Now;
+            int minutes = 0;
             if (time.Contains("分钟前"))
             {
                 time = time.Replace("分钟前", "").Trim();
                 createTime.AddMinutes(-int.Parse(time));
+            }
+            if (time.Contains("小时前"))
+            {
+                time = time.Replace("小时前", "").Trim();
+                createTime.AddMinutes(-int.Parse(time) * 60);
+            }
+            else if (int.TryParse(time.Trim(), out minutes))
+            {
+                createTime.AddMinutes(-minutes);
             }
             else
             {
@@ -648,11 +710,18 @@ namespace Jade.CQA.KnowedegProcesser
                             "yyyy-MM-dd HH:mm" 
                         };
 
-                createTime = DateTime.ParseExact(time,
-                                                  DateTimeList,
-                                                  CultureInfo.InvariantCulture,
-                                                  DateTimeStyles.AllowWhiteSpaces
-                                                  );
+                try
+                {
+                    createTime = DateTime.ParseExact(time,
+                                                      DateTimeList,
+                                                      CultureInfo.InvariantCulture,
+                                                      DateTimeStyles.AllowWhiteSpaces
+                                                      );
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             return createTime;
         }

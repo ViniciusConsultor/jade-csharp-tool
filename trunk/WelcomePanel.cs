@@ -19,6 +19,7 @@ namespace Jade
         {
             parentBrowser = parent;
             InitializeComponent();
+            this.browserToolStrip1.WbForm = this;
             //this.webBrowser1.Parent 
             //this.webBrowser1.Navigate("http://www.iflytek.com");
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
@@ -233,6 +234,7 @@ namespace Jade
             {
                 tempUrl = this.browserToolStrip1.UrlCombo.Text;
             }
+            this.webBrowser1.Navigate(tempUrl);
         }
     }
 }
