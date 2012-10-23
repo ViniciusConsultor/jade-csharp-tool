@@ -243,42 +243,7 @@ namespace Jade
             //return;
             if (data != null)
             {
-                if (data.Content.IndexOf("<img") > -1 || data.Content.IndexOf("<IMG") > -1)
-                {
-                    HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
-                    HtmlDoc.OptionAutoCloseOnEnd = true;
-
-                    HtmlDoc.LoadHtml(data.Content);
-                    var nodes = HtmlDoc.DocumentNode.SelectNodes("//img");
-                    if (nodes != null)
-                    {
-                        foreach (HtmlAgilityPack.HtmlNode node in nodes)
-                        {
-                            var src = node.Attributes["src"].Value;
-                            if (!src.Contains("http://"))
-                            {
-                                //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
-                                src = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
-                                if (System.IO.File.Exists(src))
-                                {
-                                    try
-                                    {
-                                        var real = UploadImage(src);
-                                        if (real != "")
-                                        {
-                                            data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Log4Log.Error("上传图片" + src + "失败");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    HtmlDoc = null;
-                }
+                PrepareImage(data);
 
                 try
                 {
@@ -335,6 +300,50 @@ namespace Jade
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// 准备图片
+        /// </summary>
+        /// <param name="data"></param>
+        public static void PrepareImage(Model.IDownloadData data)
+        {
+            if (data.Content.IndexOf("<img") > -1 || data.Content.IndexOf("<IMG") > -1)
+            {
+                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                HtmlDoc.OptionAutoCloseOnEnd = true;
+
+                HtmlDoc.LoadHtml(data.Content);
+                var nodes = HtmlDoc.DocumentNode.SelectNodes("//img");
+                if (nodes != null)
+                {
+                    foreach (HtmlAgilityPack.HtmlNode node in nodes)
+                    {
+                        var src = node.Attributes["src"].Value;
+                        if (!src.Contains("http://"))
+                        {
+                            //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
+                            src = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
+                            if (System.IO.File.Exists(src))
+                            {
+                                try
+                                {
+                                    var real = UploadImage(src);
+                                    if (real != "")
+                                    {
+                                        data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log4Log.Error("上传图片" + src + "失败");
+                                }
+                            }
+                        }
+                    }
+                }
+                HtmlDoc = null;
+            }
         }
     }
 }

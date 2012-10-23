@@ -19,9 +19,14 @@ namespace Jade
         {
             parentBrowser = parent;
             InitializeComponent();
-            this.browserToolStrip1.WbForm = this;
+            this.favoriteBox1.FavoriteLinkClick += new EventHandler(favoriteBox1_FavoriteLinkClick);
+            this.favoriteBox1.Hide();
+
+            this.browserToolStrip1.WbForm = this;                      
+            this.browserToolStrip1.FavoriteClick += new EventHandler(browserToolStrip1_FavoriteClick);
             //this.webBrowser1.Parent 
             //this.webBrowser1.Navigate("http://www.iflytek.com");
+            this.webBrowser1.ProgressChanged += new WebBrowserProgressChangedEventHandler(webBrowser1_ProgressChanged);
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
             webBrowser1.StartNewWindow += new EventHandler<Com.iFLYTEK.WinForms.Browser.BrowserExtendedNavigatingEventArgs>(webBrowser1_StartNewWindow);
             this.webBrowser1.AllowWebBrowserDrop = false;
@@ -31,6 +36,39 @@ namespace Jade
 
             SHDocVw.WebBrowser wb = (SHDocVw.WebBrowser)this.webBrowser1.ActiveXInstance;
             wb.BeforeNavigate2 += new SHDocVw.DWebBrowserEvents2_BeforeNavigate2EventHandler(wb_BeforeNavigate2);
+        }
+
+        void webBrowser1_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
+        {
+            try
+            {
+                this.lblStatus.Text = this.webBrowser1.StatusText;
+                //this.toolStripProgressBar1.Maximum = (int)e.MaximumProgress;
+               // this.toolStripProgressBar1.Value = (int)e.CurrentProgress;
+                this.lbllProgress.Text = (e.CurrentProgress * 100 / e.MaximumProgress).ToString("0") + "%";
+            }
+            catch
+            {
+            }
+        }
+
+        void favoriteBox1_FavoriteLinkClick(object sender, EventArgs e)
+        {
+            this.webBrowser1.Navigate(favoriteBox1.Url);
+            this.browserToolStrip1.UrlCombo.Text = favoriteBox1.Url;
+            this.favoriteBox1.Hide();
+        }
+
+        void browserToolStrip1_FavoriteClick(object sender, EventArgs e)
+        {
+            if (this.favoriteBox1.Visible)
+            {
+                this.favoriteBox1.Hide();
+            }
+            else
+            {
+                this.favoriteBox1.Show();
+            }
         }
 
         // My most favorite method :)
@@ -91,23 +129,26 @@ namespace Jade
         {
             if (e.Url == this.webBrowser1.Url)
             {
-                this.document.Caption = this.webBrowser1.Document.Title;
-                if (this.parentBrowser != null)
+                if (this.document != null)
                 {
-                    this.SetOpener(this.parentBrowser, this.webBrowser1);
-                }
+                    this.document.Caption = this.webBrowser1.Document.Title;
+                    if (this.parentBrowser != null)
+                    {
+                        this.SetOpener(this.parentBrowser, this.webBrowser1);
+                    }
 
-                if (autoClose)
-                {
-                    CacheObject.MainForm.CloseDoc(this.document);
-                }
+                    if (autoClose)
+                    {
+                        CacheObject.MainForm.CloseDoc(this.document);
+                    }
 
-                if (autoRedirect)
-                {
-                    CacheObject.MainForm.CloseDoc(this.document);
-                    return;
-                    autoRedirect = false;
-                    this.webBrowser1.Navigate(redirecUrl);
+                    if (autoRedirect)
+                    {
+                        CacheObject.MainForm.CloseDoc(this.document);
+                        return;
+                        autoRedirect = false;
+                        this.webBrowser1.Navigate(redirecUrl);
+                    }
                 }
             }
         }
@@ -234,6 +275,7 @@ namespace Jade
             {
                 tempUrl = this.browserToolStrip1.UrlCombo.Text;
             }
+            
             this.webBrowser1.Navigate(tempUrl);
         }
     }

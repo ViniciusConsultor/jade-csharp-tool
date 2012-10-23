@@ -236,6 +236,12 @@
     <Compile Include="Control\Browser\ExtendedWebBrowser.Designer.cs">
       <DependentUpon>ExtendedWebBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\Browser\FavoriteBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\Browser\FavoriteBox.Designer.cs">
+      <DependentUpon>FavoriteBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\Browser\IBaseBrowserForm.cs" />
     <Compile Include="Control\Browser\IWebBrowser2.cs" />
     <Compile Include="Control\Browser\NativeMethods.cs" />
@@ -519,6 +525,9 @@
     <EmbeddedResource Include="Control\Browser\ExtendedWebBrowser.resx">
       <DependentUpon>ExtendedWebBrowser.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\Browser\FavoriteBox.resx">
+      <DependentUpon>FavoriteBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\CheckBoxComboBox\PopupComboBox.resx">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
