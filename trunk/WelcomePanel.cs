@@ -8,10 +8,11 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Docking2010.Views;
 using System.Reflection;
+using Com.iFLYTEK.WinForms.Browser;
 
 namespace Jade
 {
-    public partial class WelcomePanel : DevExpress.XtraEditors.XtraUserControl
+    public partial class WelcomePanel : DevExpress.XtraEditors.XtraUserControl, IBaseBrowserForm
     {
         WebBrowser parentBrowser;
         public WelcomePanel(WebBrowser parent = null)
@@ -134,6 +135,7 @@ namespace Jade
 
             this.webBrowser1.Navigate(url);
             this.document = document;
+            this.browserToolStrip1.UrlCombo.Text = url;
         }
 
         bool autoClose = false;
@@ -182,6 +184,55 @@ namespace Jade
             InternetSetCookie(url, null, CacheObject.Cookie);
 
             this.webBrowser1.Navigate(url);
+        }
+
+
+        /// <summary>
+        /// 后退
+        /// </summary>
+        public void GoBack()
+        {
+            this.webBrowser1.GoBack();
+        }
+
+        /// <summary>
+        /// 向前
+        /// </summary>
+        public void GoForward()
+        {
+            this.webBrowser1.GoForward();
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        public void RefreshBrowser()
+        {
+            this.webBrowser1.Refresh();
+        }
+
+        /// <summary>
+        /// 停止
+        /// </summary>
+        public void Stop()
+        {
+            this.webBrowser1.Stop();
+        }
+
+        /// <summary>
+        /// 导航至当前的地址栏的地址
+        /// </summary>
+        public void GoNavigate()
+        {
+            string tempUrl = "";
+            if (this.browserToolStrip1.UrlCombo.Text.IndexOf("://") == -1)
+            {
+                tempUrl = "http://" + this.browserToolStrip1.UrlCombo.Text;
+            }
+            else
+            {
+                tempUrl = this.browserToolStrip1.UrlCombo.Text;
+            }
         }
     }
 }

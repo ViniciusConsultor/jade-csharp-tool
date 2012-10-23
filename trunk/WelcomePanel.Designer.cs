@@ -30,30 +30,45 @@
         {
             this.components = new System.ComponentModel.Container();
             this.webBrowser1 = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
+            this.browserToolStrip1 = new Com.iFLYTEK.WinForms.Browser.BrowserToolStrip(this.components);
             this.SuspendLayout();
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser1.Location = new System.Drawing.Point(0, 28);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(518, 355);
+            this.webBrowser1.Size = new System.Drawing.Size(518, 327);
             this.webBrowser1.TabIndex = 1;
+            // 
+            // browserToolStrip1
+            // 
+            this.browserToolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.browserToolStrip1.Name = "browserToolStrip1";
+            this.browserToolStrip1.Size = new System.Drawing.Size(518, 25);
+            this.browserToolStrip1.TabIndex = 2;
+            this.browserToolStrip1.Text = "browserToolStrip1";
+            this.browserToolStrip1.WbForm = null;
             // 
             // WelcomePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.browserToolStrip1);
             this.Controls.Add(this.webBrowser1);
             this.Name = "WelcomePanel";
             this.Size = new System.Drawing.Size(518, 355);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private Com.iFLYTEK.WinForms.Browser.BaseWebBrowser webBrowser1;
+        private Com.iFLYTEK.WinForms.Browser.BrowserToolStrip browserToolStrip1;
     }
 }
