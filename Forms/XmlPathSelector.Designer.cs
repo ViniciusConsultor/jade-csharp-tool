@@ -61,6 +61,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.browserToolStrip1 = new Com.iFLYTEK.WinForms.Browser.BrowserToolStrip(this.components);
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -78,7 +79,7 @@
             this.文件ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(989, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(989, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,21 +88,21 @@
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.文件ToolStripMenuItem.Text = "文件";
             this.文件ToolStripMenuItem.Click += new System.EventHandler(this.文件ToolStripMenuItem_Click);
             // 
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.打开ToolStripMenuItem.Text = "打开";
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 50);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -112,8 +113,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(989, 550);
-            this.splitContainer1.SplitterDistance = 268;
+            this.splitContainer1.Size = new System.Drawing.Size(989, 549);
+            this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.TabIndex = 2;
             // 
             // iReaperWebBrowser
@@ -123,7 +124,7 @@
             this.iReaperWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.iReaperWebBrowser.Name = "iReaperWebBrowser";
             this.iReaperWebBrowser.ScriptErrorsSuppressed = true;
-            this.iReaperWebBrowser.Size = new System.Drawing.Size(989, 268);
+            this.iReaperWebBrowser.Size = new System.Drawing.Size(989, 267);
             this.iReaperWebBrowser.TabIndex = 0;
             this.iReaperWebBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.iReaperWebBrowser_DocumentCompleted);
             // 
@@ -144,10 +145,10 @@
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.toolStrip1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(981, 253);
+            this.tabPage1.Size = new System.Drawing.Size(981, 252);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "可视化选择";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -156,7 +157,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 228);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 227);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(975, 22);
             this.statusStrip1.TabIndex = 4;
@@ -206,7 +207,7 @@
             // lblLog
             // 
             this.lblLog.AutoSize = true;
-            this.lblLog.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblLog.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblLog.ForeColor = System.Drawing.Color.Red;
             this.lblLog.Location = new System.Drawing.Point(22, 86);
             this.lblLog.Name = "lblLog";
@@ -342,7 +343,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(29, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(32, 28);
             this.toolStripLabel1.Text = "点击";
             // 
             // toolStripButton1
@@ -358,7 +359,7 @@
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(53, 28);
+            this.toolStripLabel2.Size = new System.Drawing.Size(56, 28);
             this.toolStripLabel2.Text = "开始选择";
             // 
             // txtxmlpath
@@ -371,7 +372,7 @@
             this.toolStripButton3.Image = global::Jade.Properties.Resources.laboratory;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(57, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(60, 28);
             this.toolStripButton3.Text = "测试";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -380,13 +381,13 @@
             this.toolStripButton2.Image = global::Jade.Properties.Resources.select__1_;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(57, 28);
+            this.toolStripButton2.Size = new System.Drawing.Size(60, 28);
             this.toolStripButton2.Text = "选定";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // browserToolStrip1
             // 
-            this.browserToolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.browserToolStrip1.Location = new System.Drawing.Point(0, 25);
             this.browserToolStrip1.Name = "browserToolStrip1";
             this.browserToolStrip1.Size = new System.Drawing.Size(989, 25);
             this.browserToolStrip1.TabIndex = 1;
@@ -411,6 +412,7 @@
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
