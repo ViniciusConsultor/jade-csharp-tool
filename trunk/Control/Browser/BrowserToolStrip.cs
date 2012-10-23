@@ -58,13 +58,14 @@ namespace Com.iFLYTEK.WinForms.Browser
             ImageList tpList = new ImageList();
             tpList.ImageSize = new Size(16, 16);
             tpList.Images.AddStrip(source);
+            tpList.Images.Add(Jade.Properties.Resources.favorite);
             this.prevToolStripButton.Image = tpList.Images[0];
             this.nextToolStripButton.Image = tpList.Images[1];
             this.stopToolStripButton.Image = tpList.Images[2];
             this.refreshToolStripButton.Image = tpList.Images[4];
             this.goToolStripButton.Image = tpList.Images[10];
-
-            this.UrlCombo.Width = this.Width - 160;
+            this.favoriteStripButton.Image = tpList.Images[tpList.Images.Count - 1];
+            this.UrlCombo.Width = this.Width - 190;
 
             this.Resize += new EventHandler(BrowserToolStrip_Resize);
         }
@@ -74,7 +75,10 @@ namespace Com.iFLYTEK.WinForms.Browser
             this.UrlCombo.Size = new Size(this.Width - 180, this.urlCombo.Height);
         }
 
-       
+        void prevToolStripButton_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }  
 
         void controlToolStripButton_Click(object sender, System.EventArgs e)
         {
