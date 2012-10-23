@@ -237,11 +237,13 @@ namespace Jade
             return links.Where(l => l.InnerText != null && texts.Contains(l.InnerText)).ToList();
         }
 
+        //(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)
 
+        //(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)(?<html>(?!<ps|(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br)|(<[/]?strong))<[^>]+>)
         private static string html2TextPattern =
 @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)" +
-@"|(?<html>(?!<ps|(<p>)|(<img)|(<br)|(strong))" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
-   @"<[^>]+>)" + // HTML标记
+@"|(?<html>(?!(<p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)|(<[/]?strong>))<[^>]+>)|(\s+)" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
+//   @"<[^>]+>)" + // HTML标记
 @"|(?<quot>&(quot|#34);)" + // 符号: "
 @"|(?<amp>&(amp|#38);)" + // 符号: &
 @"|(?<end>(?!(</strong)|(</p>))</[^>]+>)" +        //HTML闭合标签 保留</A>,</STRONG>,</P>
@@ -277,16 +279,24 @@ namespace Jade
             foreach (var p in ps)
             {
                 var pragrah = p.Trim();
+                
                 if (!string.IsNullOrEmpty(pragrah))
                 {
-                    // 小标题
-                    if (pragrah.Length < 15 && !pragrah.Contains("，") && !pragrah.Contains("。"))
-                    {
-                        sb.AppendFormat("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah);
+                    if (!pragrah.Contains("<img"))
+                    {                        
+                        // 小标题
+                        if (pragrah.Length < 15 && !pragrah.Contains("，") && !pragrah.Contains("。"))
+                        {
+                            sb.AppendFormat("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                        }
                     }
                     else
                     {
-                        sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                        sb.Append(pragrah);
                     }
                 }
             }

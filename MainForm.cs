@@ -896,5 +896,10 @@ namespace Jade
         {
             Process.Start("客户端使用说明.pdf");
         }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.OpenNewUrl("about:blank");
+        }
     }
 }

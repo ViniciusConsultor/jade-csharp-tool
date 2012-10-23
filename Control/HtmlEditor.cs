@@ -114,7 +114,8 @@ namespace Jade
                 {
                     try
                     {
-                        var html = value.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
+                        var html = value;
+                        //.Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").Replace("\r\n", "</br>");
 
                         var pages = html.Split(new string[] { "<hr class=enorth_new_page>" }, StringSplitOptions.RemoveEmptyEntries);
 

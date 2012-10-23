@@ -172,10 +172,85 @@ namespace Jade
             }
         }
 
+
+        public void Log(string msg)
+        {
+            try
+            {
+                this.BeginInvoke(new MethodInvoker(() =>
+                {
+                    lblStatus.Text = msg;
+                }));
+            }
+            catch
+            {
+            }
+        }
+
+        public void UploadImage()
+        {
+            if (!CacheObject.IsLognIn)
+            {
+                return;
+            }
+            Log("上传图片中...");
+            var data = CurrentData;
+            if (data.Content.IndexOf("<img") > -1 || data.Content.IndexOf("<IMG") > -1)
+            {
+                HtmlAgilityPack.HtmlDocument HtmlDoc = new HtmlAgilityPack.HtmlDocument();
+                HtmlDoc.OptionAutoCloseOnEnd = true;
+
+                HtmlDoc.LoadHtml(data.Content);
+                var nodes = HtmlDoc.DocumentNode.SelectNodes("//img");
+                if (nodes != null)
+                {
+                    foreach (HtmlAgilityPack.HtmlNode node in nodes)
+                    {
+                        var src = node.Attributes["src"].Value;
+                        if (!src.Contains("http://"))
+                        {
+                            //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
+                            src = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
+                            if (System.IO.File.Exists(src))
+                            {
+                                try
+                                {
+                                    Log("上传" + src + "中...");
+                                    var real = RemoteAPI.UploadImage(src);
+                                    if (real != "")
+                                    {
+                                        data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
+
+                                        this.BeginInvoke(new MethodInvoker(() =>
+                                        {
+                                            Log("上传图片" + src + "成功，正在替换...");
+                                            data.Content = this.txtContent.Html;
+                                            data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
+                                            this.txtContent.Html = data.Content;
+                                            Log("替换" + src + "成功");
+                                        }));
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log("上传图片" + src + "失败...");
+                                    Log4Log.Error("上传图片" + src + "失败");
+                                }
+                            }
+                        }
+                    }
+                }
+                HtmlDoc = null;
+            }
+            Log("上传图片完毕");
+        }
+
         public void InitDownloadData(IDownloadData data)
         {
             BindSelector();
             CurrentData = data;
+
+            
             if (data.Content != null)
             {
                 this.txt_news_title.Text = data.Title;
@@ -284,7 +359,7 @@ namespace Jade
                 this.panelkgbm.Visible = chkISkfbm.Checked;
                 this.panelgfbm.Visible = chkISgfbm.Checked;
 
-
+                new Thread(UploadImage).Start();
             }
         }
 
