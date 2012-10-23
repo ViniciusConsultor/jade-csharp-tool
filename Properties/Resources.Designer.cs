@@ -249,6 +249,13 @@ namespace Jade.Properties {
             }
         }
         
+        internal static System.Drawing.Icon favorite {
+            get {
+                object obj = ResourceManager.GetObject("favorite", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap folder_yellow_parent {
             get {
                 object obj = ResourceManager.GetObject("folder_yellow_parent", resourceCulture);

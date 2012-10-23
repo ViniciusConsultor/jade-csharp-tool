@@ -29,6 +29,7 @@ namespace Com.iFLYTEK.WinForms.Browser
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserToolStrip));
+            this.favoriteStripButton = new System.Windows.Forms.ToolStripButton();
             this.prevToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.nextToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.stopToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -45,6 +46,12 @@ namespace Com.iFLYTEK.WinForms.Browser
             resources.ApplyResources(this.prevToolStripButton, "prevToolStripButton");
             this.prevToolStripButton.Name = "prevToolStripButton";
             this.prevToolStripButton.Click += new System.EventHandler(this.controlToolStripButton_Click);
+
+            this.favoriteStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.favoriteStripButton, "favoriteStripButton");
+            this.favoriteStripButton.Name = "favoriteStripButton";
+            this.favoriteStripButton.Click += new System.EventHandler(prevToolStripButton_Click);
+            this.favoriteStripButton.ToolTipText = "IE ’≤ÿº–";
             // 
             // nextToolStripButton
             // 
@@ -95,6 +102,7 @@ namespace Com.iFLYTEK.WinForms.Browser
             // BrowserToolStrip
             // 
             this.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.favoriteStripButton,
             this.prevToolStripButton,
             this.nextToolStripButton,
             this.stopToolStripButton,
@@ -105,10 +113,13 @@ namespace Com.iFLYTEK.WinForms.Browser
             this.goToolStripButton});
             this.ResumeLayout(false);
 
-        }        
+        }
+
+
 
         #endregion
 
+        private System.Windows.Forms.ToolStripButton favoriteStripButton;
         private System.Windows.Forms.ToolStripButton prevToolStripButton;
         private System.Windows.Forms.ToolStripButton nextToolStripButton;
         private System.Windows.Forms.ToolStripButton stopToolStripButton;
