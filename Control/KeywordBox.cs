@@ -37,6 +37,7 @@ namespace Jade.Control
                 {
                     return "";
                 }
+
                 return string.Join(SplitWord, keywords.Select(w => w.Trim()).ToArray());
             }
             set

@@ -172,7 +172,7 @@ namespace Jade.CQA
             {
                 // Custom step to visualize crawl
                 MaximumThreadCount = 1,
-                MaximumCrawlDepth = 10,
+                MaximumCrawlDepth = 8,
                 UserAgent = "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
                 IncludeFilter = Program.ExtensionsMustContain
                 //ExcludeFilter = Program.ExtensionsToSkip,

@@ -28,6 +28,8 @@ namespace Jade
             try
             {
                 InitializeComponent();
+                this.txt_news_keywords.SplitWord = "|";
+                this.txt_news_keyword2.SplitWord = ",";
                 this.DoubleBuffered = true;
                 BindSelector();
                 //StatusSelections[0].Selected = true;
