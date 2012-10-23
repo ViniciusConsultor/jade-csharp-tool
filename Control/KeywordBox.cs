@@ -37,7 +37,7 @@ namespace Jade.Control
                 {
                     return "";
                 }
-                return string.Join(SplitWord, keywords.ToArray());
+                return string.Join(SplitWord, keywords.Select(w => w.Trim()).ToArray());
             }
             set
             {
@@ -232,16 +232,17 @@ namespace Jade.Control
             if (!isNew)
             {
                 if (txtKeyword.Text != "")
-                    this.Keywords[keywordIndex] = txtKeyword.Text;
+                    this.Keywords[keywordIndex] = txtKeyword.Text.Trim();
                 else
                     this.Keywords.RemoveAt(keywordIndex);
             }
             else
             {
                 if (txtKeyword.Text != "")
-                    this.Keywords.Add(txtKeyword.Text);
+                    this.Keywords.Add(txtKeyword.Text.Trim());
                 isNew = false;
             }
+
             Bind();
 
             if (this.OnChange != null)

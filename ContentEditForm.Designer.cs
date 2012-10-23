@@ -185,7 +185,7 @@
             this.linkButtonGroup1.Labels = null;
             this.linkButtonGroup1.Location = new System.Drawing.Point(144, 97);
             this.linkButtonGroup1.Name = "linkButtonGroup1";
-            this.linkButtonGroup1.Size = new System.Drawing.Size(915, 19);
+            this.linkButtonGroup1.Size = new System.Drawing.Size(1024, 19);
             this.linkButtonGroup1.TabIndex = 30;
             this.linkButtonGroup1.OnClick += new Jade.Control.GroupClick(this.linkButtonGroup1_OnClick);
             // 
@@ -220,7 +220,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.PageTitles = "";
             this.txtContent.SelectedText = null;
-            this.txtContent.Size = new System.Drawing.Size(1044, 527);
+            this.txtContent.Size = new System.Drawing.Size(1153, 510);
             this.txtContent.TabIndex = 27;
             // 
             // contextMenuStrip1
@@ -336,7 +336,7 @@
             this.txt_news_keyword2.Location = new System.Drawing.Point(550, 37);
             this.txt_news_keyword2.Name = "txt_news_keyword2";
             this.txt_news_keyword2.Size = new System.Drawing.Size(400, 19);
-            this.txt_news_keyword2.SplitWord = "#";
+            this.txt_news_keyword2.SplitWord = ",";
             this.txt_news_keyword2.TabIndex = 24;
             this.txt_news_keyword2.OnChange += new Jade.Change(this.txt_news_keyword2_OnChange);
             // 
@@ -368,7 +368,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 690);
+            this.label10.Location = new System.Drawing.Point(14, 673);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 12);
             this.label10.TabIndex = 20;

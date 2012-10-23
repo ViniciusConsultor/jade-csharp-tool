@@ -269,9 +269,9 @@ namespace Jade
                                             data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
                                         }
                                     }
-                                    catch
+                                    catch (Exception ex)
                                     {
-
+                                        Log4Log.Error("上传图片" + src + "失败");
                                     }
                                 }
                             }
@@ -293,7 +293,7 @@ namespace Jade
                          encoding(data.SubTitle),
                        getLabelData(data.label_base, newsid),
                         data.cmspinglun ? "1" : "0", "", "", data.kfbm_id, data.kfbm_link, data.gfbm_id, data.gfbm_link,
-                        CacheObject.IsTest ? encoding(data.Content+"<p style='text-indent: 28px;color:white;'>本文由客户端采编工具试用版发出 &copy;2012 jadpeng保留所有权利</p>") : encoding("" + data.Content),
+                        CacheObject.IsTest ? encoding(data.Content + "<p style='text-indent: 28px;color:white;'>本文由客户端采编工具试用版发出 &copy;2012 jadpeng保留所有权利</p>") : encoding("" + data.Content),
                         encoding(data.news_abs), encoding(data.news_top), data.news_guideimage, data.news_guideimage2, encoding(data.Summary), encoding(data.news_description),
                         data.news_link, encoding(data.news_down),
                          encoding(data.news_left), encoding(data.news_right), data.comment_url, data.news_video, newsid,
