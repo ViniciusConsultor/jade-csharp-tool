@@ -288,7 +288,7 @@ namespace Jade
 
             Regex biaodian = new Regex(@"[,，。；]");
 
-            var removes = new List<string> { "记者", "编辑", "新安晚报", "晚报", "新华网" };
+            var removes = new List<string> { "记者", "编辑", "新安晚报", "晚报", "新华网", "实习", "通讯员" };
 
             for (var i = 0; i < ps.Length; i++)
             {
@@ -355,7 +355,7 @@ namespace Jade
             }
 
             var lastP = result[result.Count - 1];
-            var text = new Regex("<[^>]+>").Replace(lastP, "");
+            var text = new Regex("<[^>]+>").Replace(lastP, "").Trim();
             if (text.Length < 20)
             {
                 foreach (var remove in removes)
@@ -365,6 +365,11 @@ namespace Jade
                         result.RemoveAt(result.Count - 1);
                         break;
                     }
+                }
+
+                if ((text.StartsWith("(") && text.EndsWith(")")) || (text.StartsWith("（") && text.EndsWith("）")))
+                {
+                    result.RemoveAt(result.Count - 1);
                 }
             }
             var r = string.Join("", result.ToArray());
