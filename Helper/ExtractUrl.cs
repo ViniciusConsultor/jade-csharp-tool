@@ -242,8 +242,8 @@ namespace Jade
         //(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)(?<html>(?!<ps|(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br)|(<[/]?strong))<[^>]+>)
         private static string html2TextPattern =
 @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)" +
-@"|(?<html>(?!(<p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)|(<[/]?strong>))<[^>]+>)|(\s+)" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
-//   @"<[^>]+>)" + // HTML标记
+@"|(?<html>(?!(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)|(<[/]?strong>))<[^>]+>)" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
+            //   @"<[^>]+>)" + // HTML标记  |(\s+)
 @"|(?<quot>&(quot|#34);)" + // 符号: "
 @"|(?<amp>&(amp|#38);)" + // 符号: &
 @"|(?<end>(?!(</strong)|(</p>))</[^>]+>)" +        //HTML闭合标签 保留</A>,</STRONG>,</P>
@@ -272,35 +272,103 @@ namespace Jade
         public static string RepairHtml(string html)
         {
 
-            var ps = html.Split(new string[] { "<p>", "</p>", "<P>", "</P>", "<BR/>", "<br/>", "<br>", "<BR>", "<br />", "<BR />" }, StringSplitOptions.RemoveEmptyEntries);
+            var regex = new Regex(@"(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)", RegexOptions.IgnoreCase);
 
-            StringBuilder sb = new StringBuilder();
+            var ps = regex.Split(html);
+            //html.Split(new string[] { "<p>", "</p>", "<P>", "</P>", "<BR/>", "<br/>", "<br>", "<BR>", "<br />", "<BR />" }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var p in ps)
+            //<p style='text-align:center'><img src='{0}' alt='{1}' title='{2}' /><br/><span class='title'>{2}</span></p>
+            /*
+             * <p style=\"text-align: center;\"><img src=\"http://upload.ahwang.cn/2012/1024/1351046451701.jpg\" border=\"0\" /></p>
+<p style=\"text-align: center;\">交警为路面环卫工支招安全作业</p>
+             * */
+            //StringBuilder sb = new StringBuilder();
+
+            var result = new List<string>();
+
+            Regex biaodian = new Regex(@"[,，。；]");
+
+            var removes = new List<string> { "记者", "编辑", "新安晚报", "晚报", "新华网" };
+
+            for (var i = 0; i < ps.Length; i++)
             {
+                var p = ps[i];
                 var pragrah = p.Trim();
-                
+
                 if (!string.IsNullOrEmpty(pragrah))
                 {
-                    if (!pragrah.Contains("<img"))
-                    {                        
-                        // 小标题
-                        if (pragrah.Length < 15 && !pragrah.Contains("，") && !pragrah.Contains("。"))
+                    // p continue
+                    //if (pragrah.ToLower().StartsWith("<p") || pragrah.ToLower().StartsWith("</p"))
+                    //{
+                    //    continue;
+                    //}
+                    // 图片
+                    if (pragrah.Contains("img"))
+                    {
+                        var image = pragrah;
+
+                        while (i < ps.Length - 1)
                         {
-                            sb.AppendFormat("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah);
+                            i++;
+                            pragrah = ps[i].Trim();
+                            if (!string.IsNullOrEmpty(pragrah) && !regex.IsMatch(pragrah))
+                            {
+                                if (pragrah.Length > 2 && pragrah.Length < 20)
+                                {
+                                    // 生成图片格式
+                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, pragrah));
+                                }
+                                else
+                                {
+                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, ""));
+                                    i--;
+                                }
+                                break;
+                            }
+                            // var next = ps[i].to
                         }
-                        else
+
+                        if (i == ps.Length - 1)
                         {
-                            sb.AppendFormat("<p style='text-indent: 28px;'>{0}</p>", pragrah);
+                            result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, ""));
                         }
+                    }
+                    else if (regex.IsMatch(pragrah))
+                    {
+                        // br center strong 原样返回
+                        continue;
                     }
                     else
                     {
-                        sb.Append(pragrah);
+                        // 小标题
+                        if (pragrah.Length > 4 && pragrah.Length < 15 && !biaodian.IsMatch(pragrah))
+                        {
+                            result.Add(string.Format("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah));
+                        }
+                        else
+                        {
+                            result.Add(string.Format("<p style='text-indent: 28px;'>{0}</p>", pragrah));
+                        }
+
                     }
                 }
             }
-            return sb.ToString();
+
+            var lastP = result[result.Count - 1];
+            var text = new Regex("<[^>]+>").Replace(lastP, "");
+            if (text.Length < 20)
+            {
+                foreach (var remove in removes)
+                {
+                    if (lastP.Contains(remove))
+                    {
+                        result.RemoveAt(result.Count - 1);
+                        break;
+                    }
+                }
+            }
+            var r = string.Join("", result.ToArray());
+            return r;
         }
 
 

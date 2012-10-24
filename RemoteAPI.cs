@@ -165,15 +165,22 @@ namespace Jade
 
         public static string UploadImage(string filename)
         {
+            Log4Log.Error("开始上传" + filename);
             var client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
             var response = client.UploadFile("http://newscms.house365.com/newCMS/news/addpic_save.php", "shuiyin=ok&sywz_ty=cb", @"filename=" + filename);
             // "附件保存成功!\r\n<script type=\"text/javascript\">\r\n\r\n\r\nfunction returnValue()\r\n{\r\nwindow.opener.document.all.src.value='http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png';    //地址\r\nthis.close();\r\n}\r\n\r\nfunction returnValue2()\r\n{\r\nwindow.opener.ksfj('http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png','','',0,'');\r\nthis.close();\r\n}\r\n\r\n\r\n\r\nvar refresh = \"list_pic.php?user_id=5809&parent_channel_id=&bjq=\";\r\nfunction myrefresh()\r\n{\r\nwindow.location.href=refresh;\r\n}\r\nsetTimeout('myrefresh()',1000); //指定1秒刷新一次\r\n</script>"
             if (response.Contains("附件保存成功"))
-            {
+            {              
                 var regex = new System.Text.RegularExpressions.Regex("value='([^']+)'");
                 var url = regex.Match(response).Groups[1].Value;
+                Log4Log.Error("上传" + filename + "成功，url为" + url);
                 return url;
+            }
+            else
+            {
+                Log4Log.Error("附件保存失败");
+                Log4Log.Error(response);
             }
             return "";
         }
@@ -236,6 +243,7 @@ namespace Jade
             CacheObject.MainForm.OpenNewUrlAndClose(url);
             return true;
         }
+
         public static bool Publish(Model.IDownloadData data = null)
         {
             CacheObject.CurrentRequestCount++;
@@ -323,21 +331,25 @@ namespace Jade
                         if (!src.Contains("http://"))
                         {
                             //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
-                            src = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
-                            if (System.IO.File.Exists(src))
+                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
+                            if (System.IO.File.Exists(file))
                             {
                                 try
                                 {
-                                    var real = UploadImage(src);
+                                    var real = UploadImage(file);
                                     if (real != "")
                                     {
-                                        data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
+                                        data.Content = data.Content.Replace(src, real);
                                     }
                                 }
                                 catch (Exception ex)
                                 {
                                     Log4Log.Error("上传图片" + src + "失败");
                                 }
+                            }
+                            else
+                            {
+                                Log4Log.Error("图片" + src + "不存在");
                             }
                         }
                     }

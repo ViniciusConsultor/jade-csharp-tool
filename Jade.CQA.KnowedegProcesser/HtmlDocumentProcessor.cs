@@ -176,6 +176,8 @@ namespace Jade.CQA.KnowedegProcesser
     public class Cache
     {
         public static SiteUrlFilter filter = new SiteUrlFilter("filter.bin");
+
+        public static SiteUrlFilter wenwenFilter = new SiteUrlFilter("wenwenFilter.bin");
     }
 
     public class HtmlDocumentProcessor : ContentCrawlerRules, IPipelineStep
@@ -657,6 +659,261 @@ namespace Jade.CQA.KnowedegProcesser
                 if (question.Status == QuestionStatus.NoAnswer)
                 {
                     question.Status = QuestionStatus.WithRecommendedAnwser;
+                }
+            }
+
+            var questionAndAnswer = new QuestionAnswer();
+            questionAndAnswer.KnowedgeType = KnowedgeType.BaiduZhidao;
+            questionAndAnswer.QuestionId = question.Id;
+            questionAndAnswer.SatisfiedAnswerIds = anwsers.Where(a => a.IsBestAnwser).Select(a => a.AnswerId).ToList();
+            questionAndAnswer.RecommendedAnswerIds = anwsers.Where(a => a.IsRecommendAnwser).Select(a => a.AnswerId).ToList();
+            questionAndAnswer.RelatedQuestionIds = relativeQuestions;
+            questionAndAnswer.AnswerIds = anwsers.Select(a => a.AnswerId).ToList();
+
+
+            var fetchResult = new FetchResult
+            {
+                Question = question,
+                QuestionAnswer = questionAndAnswer,
+                Answers = anwsers
+            };
+
+            propertyBag["fetchResult"].Value = fetchResult;
+
+        }
+
+        private static DateTime ParseDatetime(string time)
+        {
+            DateTime createTime = DateTime.Now;
+            int minutes = 0;
+            if (time.Contains("分钟前"))
+            {
+                time = time.Replace("分钟前", "").Trim();
+                createTime.AddMinutes(-int.Parse(time));
+            }
+            if (time.Contains("小时前"))
+            {
+                time = time.Replace("小时前", "").Trim();
+                createTime.AddMinutes(-int.Parse(time) * 60);
+            }
+            else if (int.TryParse(time.Trim(), out minutes))
+            {
+                createTime.AddMinutes(-minutes);
+            }
+            else
+            {
+                if (time.Contains("今天"))
+                    time = time.Replace("今天", DateTime.Now.ToString("yyyy-MM-dd"));
+
+                //createTime = DateTime.ParseExact(time, "y-M-d H:m", null);
+
+                string[] DateTimeList = { 
+                            "yyyy-M-d HH:mm", 
+                            "yyyy-MM-dd HH:mm" 
+                        };
+
+                try
+                {
+                    createTime = DateTime.ParseExact(time,
+                                                      DateTimeList,
+                                                      CultureInfo.InvariantCulture,
+                                                      DateTimeStyles.AllowWhiteSpaces
+                                                      );
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return createTime;
+        }
+    }
+
+    public class WenwenDocumentProcessor : HtmlDocumentProcessor
+    {
+        public static Regex IdRegex = new Regex("z/c(\\d+)\\.htm");
+
+        public override bool IsAllowedUrl(string url)
+        {
+            // /z/ShowUser.e  /z/q /z/c
+            if (url.Contains("/z/c")
+                || url.Contains("/z/q") || url.Contains("/z/ShowUser.e")
+                )
+            {
+                //url = "http://zhidao.baidu.com/question/11921534.html"
+                if (url.Contains("/z/q"))
+                {
+                    url = IdRegex.Match(url).Groups[1].Value;
+                    return !Cache.wenwenFilter.IsContentPageExist(url, true);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public string GetHtml(string url)
+        {
+            WebClient client = new WebClient();
+            return client.DownloadString(url);
+        }
+
+        public override void Process(Crawler crawler, PropertyBag propertyBag)
+        {
+            base.Process(crawler, propertyBag);
+
+            var htmlDoc = (HtmlDocument)propertyBag["HtmlDoc"].Value;
+            var html = htmlDoc.DocumentNode.OuterHtml;
+            // 用户
+            if (propertyBag.OriginalUrl.Contains("/z/ShowUser.e"))
+            {
+                ExtractUser(html);
+            }
+            else if (propertyBag.OriginalUrl.Contains("/z/q"))
+            {
+                ExtractQuestion(propertyBag, htmlDoc, html);
+            }
+        }
+
+        private static void ExtractUser(string html)
+        {
+            /*
+            姓名：
+//*[@id="1000001"]/div[2]/div[1]/h2
+
+采纳率：//*[@id="1000003"]/div[2]/ul/li[1]/b
+
+回答数：//*[@id="1000003"]/div[2]/ul/li[2]/b
+
+被赞同数：//*[@id="1000003"]/div[2]/ul/li[3]/b
+
+擅长领域：
+//*[@id="1000003"]/div[3]/ul
+            */
+
+            var user = new User()
+            {
+                KnowedgeType = KnowedgeType.BaiduZhidao
+            };
+
+            // html = html.Substring("\"tplContent\":\"", "});");
+
+            var result = html.SubstringAll("<b class=zhidao-basic-num>", "<\\/b>");
+
+            if (result.Count == 6)
+            {
+                //html = html.Replace("\\x22", "\"");
+                user.AdoptionRate = double.Parse(result[0].Replace("%", ""));
+                // <li class=first> <span>回答采纳率<\/span> <b class=zhidao-basic-num>0%<\/b>  <li> <span>回答数<\/span> <b class=zhidao-basic-num>18<\/b>  <li> <span>回答被赞同数<\/span> <b class=zhidao-basic-num>3<\/b>  <li> <span>经验值<\/span> <b class=zhidao-basic-num>95<\/b>  <li> <span>财富值<\/span> <b class=zhidao-basic-num>90<\/b>  <li> <span>提问数<\/span> <b class=zhidao-basic-num>1<\/b>
+                user.AnwserCount = int.Parse(result[1]);
+                user.AdoptionCount = int.Parse(result[2]);
+            }
+            var area = html.Substring("<label>擅长领域：<\\/label>", "<\\/ul>").HtmToTxt().Replace("\\", "").Trim();
+            user.ExpertArea = area;
+
+            user.UserStage = html.Substring("<h2 class=\\x22headline yahei\\x22>他的知道形象<\\/h2>", "<\\/div>").HtmToTxt().Trim();
+            //Console.WriteLine(html);
+
+            user.UserName = html.Substring("<title>", "的百度个人主页</title>");
+
+            Console.WriteLine(user.ToString());
+        }
+
+        private void ExtractQuestion(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)
+        {
+            if (html.Contains("您的访问出错了"))
+            {
+                Console.WriteLine("访问出错了");
+            }
+
+            var question = new Question();
+            question.KnowedgeType = KnowedgeType.SosoWenwen;
+            question.Title = htmlDoc.ExtractDataById("questionTitle");
+            var time = htmlDoc.ExtractDataById("question_time");
+            if (time != "")
+            {
+                question.CreateTime = ParseDatetime(time);
+            }
+
+            question.Content = htmlDoc.ExtractDataById("questionContent");
+            question.Category = htmlDoc.ExtractDataById("questionCategory").Trim();
+            question.Id = propertyBag.OriginalUrl.Substring("/z/q", ".htm");
+            question.Url = propertyBag.OriginalUrl;
+            question.ViewCount = 0;
+            //int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=").Trim());
+            //Console.WriteLine(question.ToString());
+
+            // 回复数目
+
+            // http://comment.api.baidu.com/api?pid=iknow&tk=iknow&service=Comment&method=get_reply_count_batch&query_mask=999&data=
+            //[{%22thread_id%22:2458732005,%22reply_id%22:0,%22query_mask%22:999},{%22thread_id%22:2458558657,%22reply_id%22:0,%22query_mask%22:999},{%22thread_id%22:2458568821,%22reply_id%22:0,%22query_mask%22:999}]
+            //&callback=bd__cbs__ds972m
+
+            // 答案id
+            var anwsers = new List<Answer>();
+
+
+            var best = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"sloved_answer\"]");
+            if (best != null)
+            {
+                var answer = new Answer
+                {
+                    IsBestAnwser = true,
+                    Content = htmlDoc.ExtractData("//div[@class=\"sloved_answer\"]/div[1]"),
+                    KnowedgeType = KnowedgeType.SosoWenwen
+                };
+
+                var id = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"sloved_answer\"]//div[2]//div[1]");
+                if (id != null)
+                {
+                    answer.AnswerId = id.Attributes["id"].Value.Replace("solveDIV", "");
+                    if (answer.AnswerId != "")
+                    {
+                        answer.Up = int.Parse("solvedNum" + answer.AnswerId);
+                        answer.Down = int.Parse("notSolvedNum" + answer.AnswerId);
+                    }
+                }
+
+                var user = best.SelectSingleNode(".//div[@class='user_sign']/a[2]");
+                if (user != null)
+                {
+                    answer.UserName = user.InnerText;
+                }
+                anwsers.Add(answer);
+            }
+
+            var default_answers = htmlDoc.DocumentNode.SelectNodes("//div[@class='default_answer']");
+            foreach (HtmlNode defaultAnswer in default_answers)
+            {
+                var answer = new Answer
+                {
+                    IsBestAnwser = true,
+                    Content = defaultAnswer.SelectSingleNode("./div[1]").InnerText,
+                    KnowedgeType = KnowedgeType.SosoWenwen
+                };
+            }
+
+
+            // 获取相关问题
+
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='relative-panel']//li/a");
+            var relativeQuestions = nodes != null ? nodes.Select(n => n.Attributes["href"].Value.Replace("/question/", "").Replace(".html", "")).ToList() : new List<string>();
+            /*
+             *  <li>
+               <span class="details">2012-4-22</span>
+                
+                <a log="relative.title.click" href="/question/413824351.html" onclick="log.send(this.href,2033,{fr:'qrl',cid:'1040',index:3})" target="_blank">htc g12 为什么手机满电的，关机过了一个早上后电量只剩下30％，而...</a>
+                
+                
+                
+            </li>
+             * */
+
+
+            if (anwsers.Count > 0)
+            {
+                if (question.Status == QuestionStatus.NoAnswer)
+                {
+                    question.Status = QuestionStatus.NoSatisfiedAnwser; ;
                 }
             }
 
