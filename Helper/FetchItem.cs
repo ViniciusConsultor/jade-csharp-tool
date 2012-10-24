@@ -78,12 +78,12 @@ namespace Jade
 
             if (this.StartTag != null)
             {
-                this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+                this.startTags = this.StartTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
             }
 
             if (this.EndTag != null)
             {
-                this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+                this.endTags = this.EndTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
             }
         }
 
@@ -100,8 +100,8 @@ namespace Jade
             this.PageStart = pageStart;
             this.PageEnd = pageEnd;
             this.ReplaceString = replaceString;
-            this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
-            this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.startTags = this.StartTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.endTags = this.EndTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public FetchItem(string itemName, string startTag, string endTag, bool isUseRegex, string regexText, bool trim, bool identifyPage, string pageStart, string pageEnd, List<HtmlTagType> htmlTagCleanerList)
@@ -116,8 +116,8 @@ namespace Jade
             this.IsIdentifyPage = identifyPage;
             this.PageStart = pageStart;
             this.PageEnd = pageEnd;
-            this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
-            this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.startTags = this.StartTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.endTags = this.EndTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public FetchItem(string itemName, string startTag, string endTag, bool isUseRegex, string regexText, bool trim, List<HtmlTagType> htmlTagCleanerList)
@@ -129,8 +129,8 @@ namespace Jade
             this.RegexText = regexText;
             this.HtmlTagCleanerList = htmlTagCleanerList;
             this.TrimHtml = trim;
-            this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
-            this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.startTags = this.StartTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.endTags = this.EndTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public FetchItem(string itemName, string startTag, string endTag, bool isUseRegex, string regexText, List<HtmlTagType> htmlTagCleanerList)
@@ -141,8 +141,8 @@ namespace Jade
             this.IsUseRegex = isUseRegex;
             this.RegexText = regexText;
             this.HtmlTagCleanerList = htmlTagCleanerList;
-            this.startTags = this.StartTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
-            this.endTags = this.EndTag.Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.startTags = this.StartTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
+            this.endTags = this.EndTag.Replace("\r", "").Replace("\n", "").Split(new string[] { "||" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         string[] startTags = null;
@@ -206,7 +206,7 @@ namespace Jade
 
             if (CurrentItemRule.FetchType == ItemFetchType.FromHTML)
             {
-                result = SubString(fetchStuff, this.StartTag.Replace("\r\n", ""), this.EndTag.Replace("\r\n", ""));
+                result = SubString(fetchStuff, this.StartTag.Replace("\r", "").Replace("\n", ""), this.EndTag.Replace("\r", "").Replace("\n", ""));
 
                 if (string.IsNullOrEmpty(result))
                 {
@@ -216,7 +216,7 @@ namespace Jade
                 //{
                 if (CurrentItemRule.ItemName == "ÄÚÈÝ")
                 {
-                    result =ExtractUrl.NoHTML(result);
+                    result = ExtractUrl.NoHTML(result);
                 }
                 //}
 
@@ -258,7 +258,7 @@ namespace Jade
                 }
             }
 
-            return result;
+            return result.Replace("\r", "").Replace("\n", "").Trim();
         }
 
 
@@ -327,6 +327,9 @@ namespace Jade
                 endIndex = -1;
 
                 var lastIndex = 0;
+
+                var fistEnd = 0;
+
                 while (!isEnd)
                 {
                     string start = "";
@@ -362,6 +365,13 @@ namespace Jade
                                 {
                                     end = tag;
                                     lastIndex = endIndex + end.Length;
+                                    if (lastIndex > fistEnd)
+                                        fistEnd = lastIndex;
+                                    else
+                                    {
+                                        isEnd = true;
+                                        break;
+                                    }
                                     break;
                                 }
                             }
@@ -369,18 +379,21 @@ namespace Jade
 
                         //endIndex = this.GetEndIndex(startIndex, fetchStuff, out eindex);
 
-                        if (endIndex == -1)
+                        if (!isEnd)
                         {
-                            isEnd = true;
-                            //result = fetchStuff.Substring(startIndex + startTag.Length);
-                        }
-                        else if (endIndex < startIndex)
-                        {
-                            isEnd = true;
-                        }
-                        else
-                        {
-                            result += fetchStuff.Substring(startIndex + start.Length, endIndex - startIndex - start.Length) + " ";
+                            if (endIndex == -1)
+                            {
+                                isEnd = true;
+                                //result = fetchStuff.Substring(startIndex + startTag.Length);
+                            }
+                            else if (endIndex < startIndex)
+                            {
+                                isEnd = true;
+                            }
+                            else
+                            {
+                                result += fetchStuff.Substring(startIndex + start.Length, endIndex - startIndex - start.Length) + " ";
+                            }
                         }
                     }
                 }
