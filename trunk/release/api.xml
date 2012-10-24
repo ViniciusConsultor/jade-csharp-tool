@@ -325,7 +325,7 @@
   <CommonTags>
     <CommonTag>
       <Tag>资讯中心 </Tag>
-      <Count>2</Count>
+      <Count>3</Count>
     </CommonTag>
     <CommonTag>
       <Tag> 市政建设 </Tag>
@@ -345,6 +345,10 @@
     </CommonTag>
     <CommonTag>
       <Tag> 国内资讯</Tag>
+      <Count>1</Count>
+    </CommonTag>
+    <CommonTag>
+      <Tag> 合肥网事</Tag>
       <Count>1</Count>
     </CommonTag>
   </CommonTags>

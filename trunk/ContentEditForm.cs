@@ -180,12 +180,15 @@ namespace Jade
                 this.BeginInvoke(new MethodInvoker(() =>
                 {
                     lblStatus.Text = msg;
+                    Log4Log.Error(msg);
                 }));
             }
             catch
             {
             }
         }
+
+        delegate void ReplaceImage(string old, string newUrl);
 
         public void UploadImage()
         {
@@ -210,25 +213,31 @@ namespace Jade
                         if (!src.Contains("http://"))
                         {
                             //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
-                            src = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
-                            if (System.IO.File.Exists(src))
+                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
+                            if (System.IO.File.Exists(file))
                             {
                                 try
                                 {
-                                    Log("上传" + src + "中...");
-                                    var real = RemoteAPI.UploadImage(src);
+                                    Log("上传" + file + "中...");
+                                    var real = RemoteAPI.UploadImage(file);
                                     if (real != "")
                                     {
-                                        data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
 
-                                        this.BeginInvoke(new MethodInvoker(() =>
+                                        this.BeginInvoke(new ReplaceImage((string old,string newUrl) =>
                                         {
-                                            Log("上传图片" + src + "成功，正在替换...");
-                                            data.Content = this.txtContent.Html;
-                                            data.Content = data.Content.Replace(node.Attributes["src"].Value, real);
-                                            this.txtContent.Html = data.Content;
-                                            Log("替换" + src + "成功");
-                                        }));
+                                            try
+                                            {
+                                                Log("上传图片" + src + "成功，正在替换...");
+                                                this.txtContent.Html = this.txtContent.Html.Replace(old, newUrl);
+                                                Log("替换" + src + "成功");
+                                            }
+                                            catch
+                                            {
+                                                Log("替换" + src + "失败");
+                                            }
+                                        }), src, real);
+
+                                        Thread.Sleep(2000);
                                     }
                                 }
                                 catch (Exception ex)
@@ -358,6 +367,8 @@ namespace Jade
 
                 this.panelkgbm.Visible = chkISkfbm.Checked;
                 this.panelgfbm.Visible = chkISgfbm.Checked;
+
+                data.Content = this.txtContent.Html;
 
                 new Thread(UploadImage).Start();
             }

@@ -97,7 +97,7 @@ namespace Jade
                     }
                     urlList.Add(src, fileName);
                     var newImage = match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName);
-                    newImage = "<p style='text-align:center'>" + newImage + "</p>";
+                    //newImage = "<p style='text-align:center'>" + newImage + "</p>";
                     html = html.Replace(match.Value, newImage);
                 }
             }

@@ -247,9 +247,22 @@ namespace Jade
                 }
             }
 
+            // Çå³ýhtml¶àÓà¿Õ¸ñ (<[^>+]>)(\s+)
+
+            if (removeUnUsedSpace.IsMatch(result))
+            {
+                var matches = removeUnUsedSpace.Matches(result);
+                foreach (Match match in matches)
+                {
+                    result = result.Replace(match.Value, match.Groups[1].Value);
+                }
+            }
+
             return result;
         }
 
+
+        Regex removeUnUsedSpace = new Regex(@"(<[^>]+>)(\s+)");
 
         int GetStartIndex(string fetchStuff, out int endIndex)
         {
