@@ -12,6 +12,7 @@ using DevExpress.LookAndFeel;
 using DevExpress.XtraGrid.Columns;
 using Jade.Model;
 using DevExpress.XtraGrid.Views.Grid;
+using System.Text.RegularExpressions;
 namespace Jade
 {
     public partial class ContentListPanel : DevExpress.XtraEditors.XtraUserControl
@@ -48,11 +49,29 @@ namespace Jade
             tags.Insert(0, "全部");
             this.cmbTags.DataSource = tags;
         }
+        public string HtmToTxt(string input)
+        {
+            input = new Regex(@"(?m)<script[^>]*>(\w|\W)*?</script[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
+            input = new Regex(@"(?m)<style[^>]*>(\w|\W)*?</style[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
+            input = new Regex(@"(?m)<select[^>]*>(\w|\W)*?</select[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
+            //input = new Regex(@"(?m)<a[^>]*>(\w|\W)*?</a[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
+            Regex objReg = new System.Text.RegularExpressions.Regex("(<[^>]+?>)| ", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            input = objReg.Replace(input, "");
+            Regex objReg2 = new System.Text.RegularExpressions.Regex("(\\s)+", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            input = objReg2.Replace(input, " ");
+            return input.Replace("&nbsp;", " ");
+        }
 
         void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
             try
             {
+                if (e.Column.Equals(Content))
+                {
+                    var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[e.RowHandle];
+                    e.DisplayText = HtmToTxt(data.Content);
+                }
                 if (e.Column.Equals(SiteRuleName))
                 {
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
