@@ -480,7 +480,7 @@ namespace Jade
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
             if (CacheObject.IsTest)
             {
-                var left = (new DateTime(2012, 10, 13).AddDays(10) - DateTime.Now).Days;
+                var left = (new DateTime(2012, 10, 22).AddDays(10) - DateTime.Now).Days;
                      
                 this.Text += string.Format(" (试用版 - 还可以使用 {0} 天)",left);
             }
