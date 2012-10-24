@@ -197,7 +197,7 @@ namespace Jade
 
         private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var runnerForm = new TaskRunForm(this.taskTree.SelectedNode.Tag as SiteRule);
+            //var runnerForm = new TaskRunForm(this.taskTree.SelectedNode.Tag as SiteRule);
             //CacheObject.MainForm.AddDock(runnerForm, WeifenLuo.WinFormsUI.Docking.DockState.Document);
         }
 

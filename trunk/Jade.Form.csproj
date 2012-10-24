@@ -84,9 +84,6 @@
     <Reference Include="DevExpress.Persistent.Base.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Printing.v12.1.Core, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="DevExpress.Utils.v12.1, Version=12.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -132,10 +129,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Users\Administrator\Desktop\samfisher83-HTML-Agility-xpath-finder-0834a9b\samfisher83-HTML-Agility-xpath-finder-0834a9b\Html_Agil_Xpath\Microsoft.mshtml.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="ObjectListView, Version=2.5.0.29838, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\ObjectListView.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
@@ -487,12 +480,6 @@
     <Compile Include="TaskQueqeForm.Designer.cs">
       <DependentUpon>TaskQueqeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TaskRunForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TaskRunForm.Designer.cs">
-      <DependentUpon>TaskRunForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="TaskRunner.cs" />
     <Compile Include="WelcomePanel.cs">
       <SubType>UserControl</SubType>
@@ -636,9 +623,6 @@
     <EmbeddedResource Include="TaskQueqeForm.resx">
       <DependentUpon>TaskQueqeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TaskRunForm.resx">
-      <DependentUpon>TaskRunForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WelcomePanel.resx">
       <DependentUpon>WelcomePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -699,33 +683,6 @@
     <Content Include="Pic\favicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="release\DevExpress.Data.v12.1.dll" />
-    <Content Include="release\DevExpress.Data.v12.1.xml" />
-    <Content Include="release\DevExpress.DemoData.v12.1.Core.dll" />
-    <Content Include="release\DevExpress.DemoData.v12.1.dll" />
-    <Content Include="release\DevExpress.Office.v12.1.Core.dll" />
-    <Content Include="release\DevExpress.Office.v12.1.Core.xml" />
-    <Content Include="release\DevExpress.Printing.v12.1.Core.dll" />
-    <Content Include="release\DevExpress.Printing.v12.1.Core.xml" />
-    <Content Include="release\DevExpress.RichEdit.v12.1.Core.dll" />
-    <Content Include="release\DevExpress.RichEdit.v12.1.Core.xml" />
-    <Content Include="release\DevExpress.Tutorials.v12.1.dll" />
-    <Content Include="release\DevExpress.Utils.v12.1.dll" />
-    <Content Include="release\DevExpress.Utils.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraBars.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraBars.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraEditors.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraEditors.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraLayout.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraLayout.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraNavBar.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraNavBar.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraRichEdit.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraRichEdit.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraVerticalGrid.v12.1.xml" />
-    <Content Include="release\DevExpress.XtraWizard.v12.1.dll" />
-    <Content Include="release\DevExpress.XtraWizard.v12.1.xml" />
     <Content Include="release\SiteConfig\core.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.Category\Data\Jade.Model.Category.xml" />
     <Content Include="release\SiteConfig\Entities\Jade.Model.SiteRule\Data\Jade.Model.SiteRule.xml" />
@@ -822,6 +779,7 @@
     <ProjectReference Include="XDatabase.Core\XMLDatabase.Core.csproj">
       <Project>{71DA40A9-971B-47D7-9565-725F35A8C4A5}</Project>
       <Name>XMLDatabase.Core</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
