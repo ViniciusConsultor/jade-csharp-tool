@@ -138,6 +138,31 @@ namespace Jade
                 {
                     rowIndex = info.RowHandle;
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
+                    var data = dataTable[rowIndex];
+                    data = CacheObject.DownloadDataDAL.Get(data.ID);
+                    if (!string.IsNullOrEmpty(data.EditorUserName) && data.EditorUserName != CacheObject.CurrentUser.Name)
+                    {
+                        MessageBox.Show("该新闻已被被人占有，你不能再编辑!");
+                        return;
+                    }
+
+                    if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            data.EditorUserName = CacheObject.CurrentUser.Name;
+                            data.EditTime = DateTime.Now;
+                            data.IsEdit = true;
+                            CacheObject.DownloadDataDAL.Update(data);
+                            comboBox1_SelectedIndexChanged(null, null);
+                        }
+                        catch(Exception ze)
+                        {
+                            MessageBox.Show("占有失败");
+                            Log4Log.Exception(ze);
+                        }
+                    }
+
                     CacheObject.ContentForm.InitDownloadData(dataTable[rowIndex]);
                     if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
                     {
@@ -479,7 +504,7 @@ namespace Jade
                     {
                         data.news_source_name = Properties.Settings.Default.DefaultTemplate;
                     }
-
+                    data.SubTitle = "";
                     RemoteAPI.Publish(data);
                     CacheObject.DownloadDataDAL.Update(data);
                 }
@@ -615,6 +640,56 @@ namespace Jade
         private void btnSearch_Click(object sender, EventArgs e)
         {
             cmbTags_TextChanged(null, null);
+        }
+
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (MessageBox.Show(this,
+                        "您确定要占有所选新闻？",
+                        "抢占新闻",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                var rowIndexes = GetSelectedRows();
+                if (rowIndexes.Count == 0)
+                {
+                    MessageBox.Show("请至少选中一行");
+                }
+                else
+                {
+                    string msg = "";
+
+                    foreach (var edit in rowIndexes)
+                    {
+                        var data = CacheObject.DownloadDataDAL.Get(edit.ID);
+                        if (!string.IsNullOrEmpty(data.EditorUserName) && data.EditorUserName != CacheObject.CurrentUser.Name)
+                        {
+                            msg += data.Title + (" 已被被人占有，占有失败!\r\n");
+                            continue;
+                        }
+
+                        // data = dataTable[index];
+                        data.EditorUserName = CacheObject.CurrentUser.Name;
+                        data.EditTime = DateTime.Now;
+                        data.IsEdit = true;
+                        CacheObject.DownloadDataDAL.Update(data);
+                    }
+
+                    comboBox1_SelectedIndexChanged(null, null);
+
+                    if (msg != "")
+                    {
+                        MessageBox.Show(msg);
+                    }
+                    else
+                    {
+                        MessageBox.Show("占有成功！");
+                    }
+                }
+
+            }
+
         }
     }
 }

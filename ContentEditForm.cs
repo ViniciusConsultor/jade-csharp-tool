@@ -263,7 +263,7 @@ namespace Jade
             if (data.Content != null)
             {
                 this.txt_news_title.Text = data.Title;
-                this.txt_news_subtitle.Text = data.SubTitle;
+                this.txt_news_subtitle.Text = "";
                 this.txt_news_keywords.Text = data.Keywords;
                 this.txtContent.Html = data.Content;
                 this.txtContent.PageTitles = data.news_left;
@@ -431,8 +431,8 @@ namespace Jade
 
             CurrentData.Title = this.txt_news_title.Text;
 
-            CurrentData.SubTitle =
-                       this.txt_news_subtitle.Text;
+            CurrentData.SubTitle = "";
+                //this.txt_news_subtitle.Text;
 
             CurrentData.Keywords =
                        this.txt_news_keywords.Text;

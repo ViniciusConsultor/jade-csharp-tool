@@ -168,6 +168,10 @@ namespace Jade
                             instance.Source = new List<DisplayNameValuePair>();
                             instance.CommonTags = new List<CommonTag>();
                         }
+                        else
+                        {
+                            instance.CommonTags = instance.CommonTags.Select(t => new CommonTag { Tag = t.Tag.Trim(), Count = t.Count }).ToList();
+                        }
                     }
                     else
                     {
@@ -215,6 +219,7 @@ namespace Jade
 
         public void AddTag(string tag)
         {
+            tag = tag.Trim();
             if (this.CommonTags == null)
             {
                 this.CommonTags = new List<CommonTag>();
@@ -222,9 +227,9 @@ namespace Jade
             }
             else
             {
-                if (this.CommonTags.Any(t => t.Tag == tag))
+                if (this.CommonTags.Any(t => t.Tag.Trim() == tag))
                 {
-                    this.CommonTags.FirstOrDefault(t => t.Tag == tag).Count++;
+                    this.CommonTags.FirstOrDefault(t => t.Tag.Trim() == tag).Count++;
                 }
                 else
                 {
@@ -237,7 +242,7 @@ namespace Jade
         {
             if (CommonTags != null)
             {
-                return this.CommonTags.OrderByDescending(d => d.Count).Select(d => d.Tag).Take(5).ToList();
+                return this.CommonTags.OrderByDescending(d => d.Count).Select(d => d.Tag.Trim()).Distinct().Take(5).ToList();
             }
 
             return new List<string> { Jade.Properties.Settings.Default.DefaultTag };
