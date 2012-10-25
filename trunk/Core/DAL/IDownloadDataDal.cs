@@ -9,6 +9,7 @@ namespace Jade.DAL
         void Delete(IDownloadData data);
         IDownloadData Get(int id);
         IDownloadData Get(string url);
+        IDownloadData Get(string url,int siteRuleId);
         global::System.Collections.Generic.List<IDownloadData> GetList(SearchArgs args, out int totalCount);
         global::System.Collections.Generic.List<string> GetTaskUrls(int taskId);
         global::System.Collections.Generic.List<string> GetUnFetchedUrlList(int taskId);

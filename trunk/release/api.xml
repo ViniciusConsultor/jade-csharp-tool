@@ -2,98 +2,6 @@
 <RemoteWebService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SpecilTags>
     <DisplayNameValuePair>
-      <DisplayName>资讯中心</DisplayName>
-      <Value>8010100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>本地资讯</DisplayName>
-      <Value>8020100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>国内资讯</DisplayName>
-      <Value>8020800</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>今日关注</DisplayName>
-      <Value>8010200</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>楼盘速递</DisplayName>
-      <Value>8030400</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>项目动态</DisplayName>
-      <Value>8030500</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>人物专访</DisplayName>
-      <Value>8031600</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>地产观点</DisplayName>
-      <Value>8030100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>优惠信息</DisplayName>
-      <Value>8032300</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>每天行情</DisplayName>
-      <Value>8031200</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>专题-热点专题</DisplayName>
-      <Value>8040100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>视频频道</DisplayName>
-      <Value>8050100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>专题-楼市热点</DisplayName>
-      <Value>8040200</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>土地信息</DisplayName>
-      <Value>8020500</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>首页图片资讯</DisplayName>
-      <Value>8021100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>市政建设</DisplayName>
-      <Value>8020200</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>购房小贴士</DisplayName>
-      <Value>8021300</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>二手房资讯</DisplayName>
-      <Value>8060100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>租赁资讯</DisplayName>
-      <Value>8060800</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>商铺资讯</DisplayName>
-      <Value>8070100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>别墅资讯</DisplayName>
-      <Value>8090100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>写字楼资讯</DisplayName>
-      <Value>8080100</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>精华大图集</DisplayName>
-      <Value>8021900</Value>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
       <DisplayName>焦点资讯</DisplayName>
       <Value>12020500</Value>
     </DisplayNameValuePair>
@@ -220,12 +128,102 @@
       <Value>中安在线</Value>
     </DisplayNameValuePair>
     <DisplayNameValuePair>
+      <DisplayName>中新网</DisplayName>
+      <Value>中新网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>人民网</DisplayName>
+      <Value>人民网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>凤凰网</DisplayName>
+      <Value>凤凰网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>千龙网</DisplayName>
+      <Value>千龙网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
       <DisplayName>合肥日报</DisplayName>
       <Value>合肥日报</Value>
     </DisplayNameValuePair>
     <DisplayNameValuePair>
       <DisplayName>合肥晚报</DisplayName>
       <Value>合肥晚报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>合肥热线</DisplayName>
+      <Value>合肥热线</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>和讯网</DisplayName>
+      <Value>和讯网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>安徽商报</DisplayName>
+      <Value>安徽商报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>市场星报</DisplayName>
+      <Value>市场星报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>广州日报</DisplayName>
+      <Value>广州日报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>扬子晚报</DisplayName>
+      <Value>扬子晚报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>新华网</DisplayName>
+      <Value>新华网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>新安传媒网</DisplayName>
+      <Value>新安传媒网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>新安晚报</DisplayName>
+      <Value>新安晚报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>新民网</DisplayName>
+      <Value>新民网</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>江淮晨报</DisplayName>
+      <Value>江淮晨报</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>香港文汇报</DisplayName>
+      <Value>香港文汇报</Value>
+    </DisplayNameValuePair>
+  </Source>
+  <Template>
+    <DisplayNameValuePair>
+      <DisplayName>合肥热线正文模板</DisplayName>
+      <Value>/hfccbbs/template/bbsestate.htm</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>图片模板</DisplayName>
+      <Value>/hfccbbs/template/picture.htm</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>测试模板</DisplayName>
+      <Value>/hfccbbs/template/test.htm</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>财经资讯模板</DisplayName>
+      <Value>/hfccbbs/template/moneyestate_cj.htm</Value>
+    </DisplayNameValuePair>
+    <DisplayNameValuePair>
+      <DisplayName>跳转模板</DisplayName>
+      <Value>/hfccbbs/template/mod_tiaozhuan.htm</Value>
+    </DisplayNameValuePair>
+  </Template>
+  <CommonTags />
+</RemoteWebService>
     </DisplayNameValuePair>
     <DisplayNameValuePair>
       <DisplayName>安徽商报</DisplayName>
@@ -324,15 +322,15 @@
   </Template>
   <CommonTags>
     <CommonTag>
-      <Tag>资讯中心 </Tag>
+      <Tag>资讯中心</Tag>
       <Count>3</Count>
     </CommonTag>
     <CommonTag>
-      <Tag> 市政建设 </Tag>
+      <Tag>市政建设</Tag>
       <Count>1</Count>
     </CommonTag>
     <CommonTag>
-      <Tag> 购房小贴士</Tag>
+      <Tag>购房小贴士</Tag>
       <Count>1</Count>
     </CommonTag>
     <CommonTag>
@@ -340,16 +338,16 @@
       <Count>1</Count>
     </CommonTag>
     <CommonTag>
-      <Tag> 本地资讯 </Tag>
+      <Tag>本地资讯</Tag>
       <Count>1</Count>
     </CommonTag>
     <CommonTag>
-      <Tag> 国内资讯</Tag>
+      <Tag>国内资讯</Tag>
       <Count>1</Count>
     </CommonTag>
     <CommonTag>
-      <Tag> 合肥网事</Tag>
+      <Tag>合肥网事</Tag>
       <Count>1</Count>
     </CommonTag>
   </CommonTags>
-</RemoteWebService>
+</RemoteWebService>Service>

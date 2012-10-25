@@ -18,6 +18,9 @@ namespace Jade
     {
         public static int MaxRequestCount = 40;
         public static int CurrentRequestCount = 0;
+
+        public static List<string> CommonReplaces = new List<string> { "新安晚报", "新安晚报、", "安徽网记者", "合肥晚报", "安徽网" };
+
         static CacheObject()
         {
             RuleManager = new RuleManager();
@@ -847,6 +850,7 @@ namespace Jade
 
         public void AddFile(DownloadFile file)
         {
+            CacheObject.MainForm.Success(file.Url + "加入队列");
             this.Add(file);
             this.NotifyChange();
         }
@@ -879,6 +883,12 @@ namespace Jade
 
         void downloader_OnDownLoadComplete(object sender, FileDownloadFinishedArgs e)
         {
+            var d = (Downloader)sender;
+
+            if (d != null)
+            {
+                CacheObject.MainForm.Success(d.result.Url + " " + e.状态);
+            }
             sender = null;
             currentCount--;
             this.NotifyChange();
@@ -886,6 +896,12 @@ namespace Jade
 
         void downloader_OnDownloadProcess(object sender, Downloader.DownloadEventArgs e)
         {
+            var d = (Downloader)sender;
+
+            if (d != null)
+            {
+                CacheObject.MainForm.Success(d.result.Url + " " + e.Current + " " + e.Speed + "kb/s");
+            }
             this.NotifyChange();
         }
 

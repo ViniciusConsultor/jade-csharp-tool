@@ -161,5 +161,27 @@ namespace Jade.Model.Access
 
         #endregion
 
+
+
+        public IDownloadData Get(string url, int siteRuleId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select RemoteId,ID,TaskId,Title,SubTitle,Keywords,news_source_name,news_template_file,news_top,news_guideimage,news_guideimage2,news_description,news_link,news_down,news_right,news_left,comment_url,news_video,news_keywords2,label_base,cmspinglun,bbspinglun,ISkfbm,kfbm_id,kfbm_link,ISgfbm,gfbm_id,gfbm_link,news_abs,Content,Summary,Source,CreateTime,Other,Url,DownloadTime,EditorUserName,IsEdit,EditTime,IsDownload,IsPublish from DownloadData ");
+            strSql.Append(" where Url=@Url and TaskId=@TaskId");
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Url", OleDbType.VarChar,0),
+                    new OleDbParameter("@TaskId", OleDbType.Integer)
+			};
+            parameters[0].Value = url;
+            parameters[1].Value = siteRuleId;
+            DataSet ds = DbHelperOleDb.Query(strSql.ToString(), parameters);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return GetModel(ds.Tables[0].Rows[0]);
+            }
+
+            return null;
+        }
     }
 }

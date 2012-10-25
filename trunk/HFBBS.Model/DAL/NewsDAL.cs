@@ -171,6 +171,12 @@ namespace Jade.Model.MySql
         }
 
         #endregion
+
+
+        public IDownloadData Get(string url, int siteRuleId)
+        {
+            return Repository.downloaddata.First(d => d.Url == url && d.TaskId == siteRuleId);
+        }
     }
 
     public partial class downloaddata

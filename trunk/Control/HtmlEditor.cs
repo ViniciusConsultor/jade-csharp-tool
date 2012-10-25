@@ -110,7 +110,7 @@ namespace Jade
             }
             set
             {
-                if (value != null)
+                if (!string.IsNullOrEmpty(value))
                 {
                     try
                     {
@@ -125,6 +125,10 @@ namespace Jade
                     {
                         MessageBox.Show(ex.Message);
                     }
+                }
+                else
+                {
+                    webBrowserBody.Document.InvokeScript("InitPages", new string[] { "<p style='text-indent: 28px;'>&nbsp;</p>" });
                 }
             }
         }

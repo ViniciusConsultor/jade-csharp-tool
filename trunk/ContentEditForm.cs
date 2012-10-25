@@ -213,7 +213,7 @@ namespace Jade
                         if (!src.Contains("http://"))
                         {
                             //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
-                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\");
+                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\").Replace("%20", " ");
                             if (System.IO.File.Exists(file))
                             {
                                 try
@@ -790,24 +790,12 @@ namespace Jade
 
         private void txt_news_keywords_OnChange(object sender, EventArgs e)
         {
-            foreach (var keyword in this.txt_news_keywords.Keywords)
-            {
-                if (!this.txt_news_keyword2.Keywords.Contains(keyword))
-                {
-                    this.txt_news_keyword2.AddWord(keyword);
-                }
-            }
+            this.txt_news_keyword2.Keywords = this.txt_news_keywords.Keywords;
         }
 
         private void txt_news_keyword2_OnChange(object sender, EventArgs e)
         {
-            foreach (var keyword in this.txt_news_keyword2.Keywords)
-            {
-                if (!this.txt_news_keywords.Keywords.Contains(keyword))
-                {
-                    this.txt_news_keywords.AddWord(keyword);
-                }
-            }
+            this.txt_news_keywords.Keywords = this.txt_news_keyword2.Keywords;
         }
 
         private void linkButtonGroup1_OnClick(object sender, Control.GroupClickArgs args)

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XMLDatabase-Entities>
-  <SiteRule _uuid="5d84c6bc-4a38-43f3-8bda-dd9efa2379c3" CategoryID="1" Tags="社会新闻" CreateTime="2012-10-24T14:51:05.21875+08:00" IconImage="favicon.ico" SiteRuleId="1" Name="中安在线-社会万象" StartUrl="http://ah.anhuinews.com/shdg/wx/" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="__utma=183531257.1642055322.1347246790.1351054713.1351061392.4; __utmb=183531257.3.10.1351061392; __utmz=183531257.1347246790.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); wdcid=79bc508ad1f61988; __utmc=183531257; wdlast=1351061416" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://ah.anhuinews.com/shdg/wx/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+  <SiteRule _uuid="5d84c6bc-4a38-43f3-8bda-dd9efa2379c3" CategoryID="1" Tags="社会新闻" CreateTime="2012-10-25T21:53:17.7665513+08:00" IconImage="favicon.ico" SiteRuleId="1" Name="中安在线-社会万象" StartUrl="http://ah.anhuinews.com/shdg/wx/" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="wdcid=74d158b50db00060; pgv_pvi=8106833920; __utma=183531257.688484856.1348675211.1348675211.1351173069.2; __utmz=183531257.1348675211.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E5%90%88%E8%82%A5%E6%B0%B8%E5%92%8C%E5%AD%A6%E6%A0%A1%20%20%20%20%E7%8E%8B%E4%BC%A0%E6%A0%91; __utmb=183531257.12.10.1351173069; __utmc=183531257; wdlast=1351173188" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://ah.anhuinews.com/shdg/wx/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
       <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[@id=&quot;Cleft&quot;]/div[4]/span[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
@@ -27,7 +27,7 @@
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;Cleft&quot;]/div[6]/div[1]/div[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -56,7 +56,7 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
-  <SiteRule _uuid="598d9fb0-7ef7-4768-a771-46142d6d6c38" CategoryID="1" Tags="" CreateTime="2012-10-24T14:48:11.46875+08:00" IconImage="favicon.ico" SiteRuleId="2" Name="中安在线-经济新闻-舆论监督-社会大观" StartUrl="http://ah.anhuinews.com/jhcj/cj/@@http://ah.anhuinews.com/shdg/fz@@http://ah.anhuinews.com/yl/ylqd/index.shtml" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="__utma=183531257.1642055322.1347246790.1347246790.1347246790.1; __utmb=183531257.13.10.1347246790; __utmz=183531257.1347246790.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); wdcid=79bc508ad1f61988; __utmc=183531257; wdlast=1347248247" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://ah.anhuinews.com/jhcj/cj/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+  <SiteRule _uuid="598d9fb0-7ef7-4768-a771-46142d6d6c38" CategoryID="1" Tags="" CreateTime="2012-10-25T21:52:57.3313825+08:00" IconImage="favicon.ico" SiteRuleId="2" Name="中安在线-经济新闻-舆论监督-社会大观" StartUrl="http://ah.anhuinews.com/jhcj/cj/@@http://ah.anhuinews.com/shdg/fz@@http://ah.anhuinews.com/yl/ylqd/index.shtml" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="wdcid=74d158b50db00060; pgv_pvi=8106833920; __utma=183531257.688484856.1348675211.1348675211.1351173069.2; __utmz=183531257.1348675211.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E5%90%88%E8%82%A5%E6%B0%B8%E5%92%8C%E5%AD%A6%E6%A0%A1%20%20%20%20%E7%8E%8B%E4%BC%A0%E6%A0%91; __utmb=183531257.9.10.1351173069; __utmc=183531257; wdlast=1351173163" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://ah.anhuinews.com/jhcj/cj/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
       <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[@id=&quot;Cleft&quot;]/div[4]/span[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
@@ -83,7 +83,7 @@
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;Cleft&quot;]/div[6]/div[1]/div[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -112,7 +112,7 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
-  <SiteRule _uuid="2dab6716-f442-4f09-80b6-67326ad3c87d" CategoryID="1" Tags="" CreateTime="2012-10-24T14:48:12.59375+08:00" IconImage="favicon.ico" SiteRuleId="3" Name="中安在线合肥新闻" StartUrl="http://ah.anhuinews.com/jhdd/index.shtml" DiyContentPageUrl="" Encoding="GB2312" HttpMethod="GET" HttpPostData="" Cookie="__utma=183531257.1642055322.1347246790.1347246790.1347246790.1; __utmb=183531257.10.10.1347246790; __utmz=183531257.1347246790.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); wdcid=79bc508ad1f61988; __utmc=183531257; wdlast=1347247976" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://ah.anhuinews.com/jhdd/index.shtml" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="GB2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+  <SiteRule _uuid="2dab6716-f442-4f09-80b6-67326ad3c87d" CategoryID="1" Tags="" CreateTime="2012-10-25T21:52:23.1404269+08:00" IconImage="favicon.ico" SiteRuleId="3" Name="中安在线合肥新闻" StartUrl="http://ah.anhuinews.com/jhdd/index.shtml" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="wdcid=74d158b50db00060; pgv_pvi=8106833920; __utma=183531257.688484856.1348675211.1348675211.1351173069.2; __utmz=183531257.1348675211.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E5%90%88%E8%82%A5%E6%B0%B8%E5%92%8C%E5%AD%A6%E6%A0%A1%20%20%20%20%E7%8E%8B%E4%BC%A0%E6%A0%91; __utmb=183531257.6.10.1351173069; __utmc=183531257; wdlast=1351173117" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://ah.anhuinews.com/jhdd/index.shtml" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
       <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[@id=&quot;Cleft&quot;]/div[4]/span[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
@@ -139,7 +139,7 @@
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;Cleft&quot;]/div[6]/div[1]/div[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -168,7 +168,7 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
-  <SiteRule _uuid="1db92056-be1e-4884-a9f3-25a4b7b83972" CategoryID="1" Tags="" CreateTime="2012-10-24T14:48:18.34375+08:00" IconImage="favicon.ico" SiteRuleId="4" Name="中安在线法制新闻" StartUrl="http://ah.anhuinews.com/shdg/fz/" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="__utma=183531257.1642055322.1347246790.1347246790.1347246790.1; __utmb=183531257.5.10.1347246790; __utmz=183531257.1347246790.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); wdcid=79bc508ad1f61988; __utmc=183531257; wdlast=1347247891" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://ah.anhuinews.com/shdg/fz/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
+  <SiteRule _uuid="1db92056-be1e-4884-a9f3-25a4b7b83972" CategoryID="1" Tags="" CreateTime="2012-10-25T21:51:45.3582659+08:00" IconImage="favicon.ico" SiteRuleId="4" Name="中安在线法制新闻" StartUrl="http://ah.anhuinews.com/shdg/fz/" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="wdcid=74d158b50db00060; pgv_pvi=8106833920; __utma=183531257.688484856.1348675211.1348675211.1351173069.2; __utmz=183531257.1348675211.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E5%90%88%E8%82%A5%E6%B0%B8%E5%92%8C%E5%AD%A6%E6%A0%A1%20%20%20%20%E7%8E%8B%E4%BC%A0%E6%A0%91; __utmb=183531257.3.10.1351173069; __utmc=183531257; wdlast=1351173075" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://ah.anhuinews.com/shdg/fz/" ForTestUrl="http://ah.anhuinews.com/system/2012/08/09/005135642.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//td[@class=&quot;l4&quot;]/div[1]//li/a[1]" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
       <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[@id=&quot;Cleft&quot;]/div[4]/span[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
@@ -195,7 +195,7 @@
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;Cleft&quot;]/div[6]/div[1]/div[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -280,10 +280,10 @@
     <ListXMLPathType Enum="Href" />
     <ListXMLPathSelectType Enum="Multiple" />
   </SiteRule>
-  <SiteRule _uuid="9282eaea-fa1e-46bd-a8f7-73f9898ee7e5" CategoryID="1" Tags="合肥新闻 安徽新闻" CreateTime="2012-10-24T15:32:08.0625+08:00" IconImage="news.hf365.com.ico" SiteRuleId="6" Name="合肥在线" StartUrl="http://news.hf365.com/hfxw/hfwx/index.shtml@@http://news.hf365.com/hfxw/hfxw/index.shtml@@http://news.hf365.com/ahxw/ahxw/index.shtml" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="CNZZDATA2709518=cnzz_eid=73672991-1347248141-http%253A%252F%252Fwww.cnblogs.com%252Fshe27%252Farticles%252F1377089.html&amp;ntime=1351063729&amp;cnzz_a=5&amp;retime=1351063892453&amp;sin=&amp;ltime=1351063892453&amp;rtime=2; __utma=199134640.1020157386.1347248397.1347248397.1347248397.1; __utmz=199134640.1347248397.1.1.utmccn=(direct)|utmcsr=(direct)|utmcmd=(none); Hm_lvt_f9c99524d8cf6cc6b51eade30dd95437=1351045004453,1351063791359; Hm_lpvt_f9c99524d8cf6cc6b51eade30dd95437=1351063802734" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://news.hf365.com/hfxw/hfwx/index.shtml" ForTestUrl="http://news.hf365.com/system/2012/10/24/012691841.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//li/a" EnableAutoRun="false" AutoRunInterval="60">
+  <SiteRule _uuid="9282eaea-fa1e-46bd-a8f7-73f9898ee7e5" CategoryID="1" Tags="合肥新闻 安徽新闻" CreateTime="2012-10-25T21:55:27.0589464+08:00" IconImage="news.hf365.com.ico" SiteRuleId="6" Name="合肥在线" StartUrl="http://news.hf365.com/hfxw/hfwx/index.shtml@@http://news.hf365.com/hfxw/hfxw/index.shtml@@http://news.hf365.com/ahxw/ahxw/index.shtml" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="CNZZDATA2709518=cnzz_eid=15493820-1350893590-&amp;ntime=1351172626&amp;cnzz_a=10&amp;retime=1351173308249&amp;sin=&amp;ltime=1351173308249&amp;rtime=2; __utma=53942711.1470053587.1348675234.1348675234.1348675234.1; __utmz=53942711.1348675234.1.1.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=%E5%90%88%E8%82%A5%E6%B0%B8%E5%92%8C%E5%AD%A6%E6%A0%A1%20%20%20%20%E7%8E%8B%E4%BC%A0%E6%A0%91; Hm_lvt_f9c99524d8cf6cc6b51eade30dd95437=1351157156763,1351172651684,1351173206669,1351173307150; Hm_lpvt_f9c99524d8cf6cc6b51eade30dd95437=1351173308212" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://news.hf365.com/hfxw/hfwx/index.shtml" ForTestUrl="http://news.hf365.com/system/2012/10/24/012691841.shtml" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//li/a" EnableAutoRun="false" AutoRunInterval="60">
     <ListPageType Enum="Html" />
     <ItemRules>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/h1[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="合肥在线&#xA;&#xD;&#xA;稿源:&#xA;&#xD;&#xA;合肥在线&#xA;-江淮晨报&#xA;" DefaultValue="" DateTimeFormatString="">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/h1[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -307,75 +307,19 @@
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[3]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="合肥在线&#xA;&#xD;&#xA;稿源:&#xA;&#xD;&#xA;合肥在线&#xA;-江淮晨报&#xA;" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[3]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="合肥在线&#xA;&#xD;&#xA;稿源:&#xA;&#xD;&#xA;合肥在线&#xA;&#xD;&#xA;江淮晨报&#xD;&#xA;&#xA;合肥晚报" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="Datetime" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[4]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="晨报讯&#xA;&#xD;&#xA;本报记者&#xA;&#xD;&#xA;吴洋&#xD;&#xA;晨报讯" DefaultValue="" DateTimeFormatString="">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[4]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerTextWithPic" />
         <XMLPathSelectType Enum="OnlyOne" />
         <DiyType Enum="DefaultValue" />
       </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[4]/p[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="晨报讯" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-    </ItemRules>
-    <ListFetchType Enum="XPath" />
-    <ListXMLPathType Enum="Href" />
-    <ListXMLPathSelectType Enum="Multiple" />
-  </SiteRule>
-  <SiteRule _uuid="f49ad227-0466-4c9d-a364-85d40105edae" CategoryID="1" Tags="安徽新闻 合肥新闻" CreateTime="2012-10-24T15:37:00.1875+08:00" IconImage="news.ahwang.cn.ico" SiteRuleId="7" Name="安徽网直播" StartUrl="http://news.ahwang.cn/roll/@@http://news.ahwang.cn/roll/1.shtml@@http://news.ahwang.cn/roll/2.shtml@@http://news.ahwang.cn/roll/3.shtml@@http://news.ahwang.cn/roll/4.shtml@@http://news.ahwang.cn/roll/5.shtml@@http://news.ahwang.cn/roll/6.shtml" DiyContentPageUrl="" Encoding="utf-8" HttpMethod="GET" HttpPostData="" Cookie="CNZZDATA4394793=cnzz_eid=56464376-1347248339-&amp;ntime=1351063652&amp;cnzz_a=7&amp;retime=1351064197562&amp;sin=&amp;ltime=1351064197562&amp;rtime=5; Hm_lvt_8240e34bda939a1edb552c0c469c81ff=1351063714078,1351064188906; Hm_lpvt_8240e34bda939a1edb552c0c469c81ff=1351064197625; Hm_lvt_716bef8857b6b3abef2452e04a9d0691=1351063713718,1351064188703; Hm_lpvt_716bef8857b6b3abef2452e04a9d0691=1351064197515" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; InfoPath.3)" Referer="http://news.ahwang.cn/roll/" ForTestUrl="http://news.ahwang.cn/roll/2012/1024/1207781.shtml" ListEncoding="utf-8" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//div[@class=&quot;articlelist clearfix&quot;]//a" EnableAutoRun="false" AutoRunInterval="60">
-    <ListPageType Enum="Html" />
-    <ItemRules>
-      <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/h1[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/div[1]/span[2]/a[1]" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/div[1]/span[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
-        <FetchType Enum="UserDiy" />
-        <XMLPathType Enum="InnerText" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="Datetime" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;ctrlfscont&quot;]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="安徽网讯&#xA;新安晚报、安徽网记者" DefaultValue="" DateTimeFormatString="">
-        <FetchType Enum="XPath" />
-        <XMLPathType Enum="InnerTextWithPic" />
-        <XMLPathSelectType Enum="OnlyOne" />
-        <DiyType Enum="DefaultValue" />
-      </ItemRule>
-      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/p[1]/span[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="核心提示：" DefaultValue="" DateTimeFormatString="">
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;con&quot;]/div[6]/div[3]/div[4]/p[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
@@ -432,6 +376,118 @@
         <DiyType Enum="DefaultValue" />
       </ItemRule>
       <ItemRule MulityMatch="false" AnotherXPath="" XPath="//table[8]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[1]/td[1]/table[2]/tbody[1]/tr[7]/td[1]/p[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
+  <SiteRule _uuid="baa3e67d-96f2-4b5e-b209-cfa3d7dcc940" CategoryID="1" Tags="合肥新闻 安徽新闻" CreateTime="2012-10-25T21:46:50.9824285+08:00" IconImage="ah.sina.com.cn.ico" SiteRuleId="9" Name="新浪安徽" StartUrl="http://ah.sina.com.cn/news/hefei/list.html@@http://ah.sina.com.cn/news/hefei/list.html@@http://ah.sina.com.cn/news/g/list.html@@http://ah.sina.com.cn/news/m/list.html@@http://ah.sina.com.cn/news/s/list.html@@http://ah.sina.com.cn/news/wltx/list.html@@http://ah.sina.com.cn/news/xiaoyuan/list.html@@http://ah.sina.com.cn/news/shenghuo/list.html@@http://ah.sina.com.cn/news/xwj/list.html@@http://ah.sina.com.cn/news/hscj/list.html@@http://ah.sina.com.cn/news/economy/list.html@@http://ah.sina.com.cn/news/xiaofei/list.html@@http://ah.sina.com.cn/news/photo/list.html@@http://ah.sina.com.cn/news/shenbian/list.html@@http://ah.sina.com.cn/news/topic/list.html@@http://ah.sina.com.cn/news/fangtan/list.html" DiyContentPageUrl="" Encoding="gb2312" HttpMethod="GET" HttpPostData="" Cookie="SINAGLOBAL=00000025.9f95946.501509bd.db78ee69; U_TRS1=000000aa.17494313.501a4d79.90c32edf; UOR=www.soso.com,iask.sina.com.cn,; vjuids=-15dde2f64.1395bfa6361.0.90df758d; lxlrtst=1347581251_o; SINA_NEWS_CUSTOMIZE_city=%u5317%u4EAC; vjlast=1351172794; lxlrttp=1348623077; ALLYESID4=0012100114305858795968; ULV=1351172794707:13:5:2:5903253060185.103.1351172790350:1351126821712; FSINAGLOBAL=00000025.9f95946.501509bd.db78ee69; Apache=5903253060185.103.1351172790350; ULOGIN_IMG=2df058c7c6ab1e98f6c70289d7f8aaaf336b; U_TRS2=00000041.10035524.508942a1.bded9309; _s_upa=1; Hm_lvt_f9a7fa9928d48fd2fb822d0c72fba924=1351126822602,1351172792573; Hm_lpvt_f9a7fa9928d48fd2fb822d0c72fba924=1351172797700" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://ah.sina.com.cn/news/hefei/list.html" ForTestUrl="http://ah.sina.com.cn/news/hscj/2012-10-23/151816703.html" ListEncoding="gb2312" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//*[@id='pagecontent']//a" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule MulityMatch="false" AnotherXPath="//title" XPath="//div[5]/div[1]/div[1]/h2[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[5]/div[1]/div[1]/p[1]/span[1]/span[1]" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[5]/div[1]/div[1]/p[1]/span[2]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[5]/div[1]/div[3]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerTextWithPic" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[5]/div[1]/div[3]/p[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="其他" CloumnName="Other" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+    </ItemRules>
+    <ListFetchType Enum="XPath" />
+    <ListXMLPathType Enum="Href" />
+    <ListXMLPathSelectType Enum="Multiple" />
+  </SiteRule>
+  <SiteRule _uuid="2d339bcd-8275-45f0-9b80-3fd3a886ade9" CategoryID="1" Tags="安徽新闻 合肥新闻" CreateTime="2012-10-25T21:43:18.4282711+08:00" IconImage="news.ahwang.cn.ico" SiteRuleId="12" Name="安徽网" StartUrl="http://news.ahwang.cn/roll/@@http://news.ahwang.cn/roll/1.shtml@@http://news.ahwang.cn/roll/2.shtml@@http://news.ahwang.cn/roll/3.shtml@@http://news.ahwang.cn/roll/4.shtml@@http://news.ahwang.cn/roll/5.shtml@@http://news.ahwang.cn/roll/6.shtml" DiyContentPageUrl="" Encoding="utf-8" HttpMethod="GET" HttpPostData="" Cookie="Hm_lvt_8240e34bda939a1edb552c0c469c81ff=1348907908209,1351146571021,1351154824523,1351172519779; CNZZDATA4394793=cnzz_eid=79604102-1344495025-&amp;ntime=1351172493&amp;cnzz_a=15&amp;retime=1351172548313&amp;sin=&amp;ltime=1351172548313&amp;rtime=4; Hm_lpvt_8240e34bda939a1edb552c0c469c81ff=1351172548440; Hm_lvt_716bef8857b6b3abef2452e04a9d0691=1348907907571,1351146570657,1351154823966,1351172519358; Hm_lpvt_716bef8857b6b3abef2452e04a9d0691=1351172548242" Depth="1" ListIncludePart="" ListExcludePart="" IncludePart="" ExcludePart="" ListPageStartAt="" ListPageEndAt="" PageStartAt="" PageEndAt="" UserAgent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; 4399Box.1272; 4399Box.1272)" Referer="http://news.ahwang.cn/roll/" ForTestUrl="http://news.ahwang.cn/roll/2012/1024/1207947.shtml" ListEncoding="utf-8" HostUrl="" UrlTrim="" TableName="NewsTab" ListXPath="//div[@class=&quot;articlelist clearfix&quot;]//a" EnableAutoRun="false" AutoRunInterval="60">
+    <ListPageType Enum="Html" />
+    <ItemRules>
+      <ItemRule MulityMatch="false" AnotherXPath="//div[7]/div[1]/div[2]/p[1]" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/h1[1]" ItemName="标题" CloumnName="Title" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="安徽网讯&#xA;新安晚报、安徽网记者" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="副标题" CloumnName="SubTitle" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="" ItemName="关键字" CloumnName="Keywords" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/div[1]/span[2]/a[1]" ItemName="来源" CloumnName="Source" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/div[1]/span[1]" ItemName="时间" CloumnName="Time" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="yyyy-MM-dd hh:mm">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerText" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="Datetime" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="//div[7]/div[1]/div[2]/p[1]" XPath="//div[@id=&quot;ctrlfscont&quot;]" ItemName="内容" CloumnName="Content" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="true" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="" DefaultValue="" DateTimeFormatString="">
+        <FetchType Enum="XPath" />
+        <XMLPathType Enum="InnerTextWithPic" />
+        <XMLPathSelectType Enum="OnlyOne" />
+        <DiyType Enum="DefaultValue" />
+      </ItemRule>
+      <ItemRule MulityMatch="false" AnotherXPath="//div[7]/div[1]/div[2]/p[1]" XPath="//div[@id=&quot;leftbox&quot;]/div[1]/p[1]/span[1]" ItemName="摘要" CloumnName="Summary" StartTarget="" EndTarget="" RegexText="" IsExtractText="false" IsDownloadPic="false" IdentifyPage="false" PageStart="" PageEnd="" PageXPath="" ReplaceString="核心提示：" DefaultValue="" DateTimeFormatString="">
         <FetchType Enum="XPath" />
         <XMLPathType Enum="InnerText" />
         <XMLPathSelectType Enum="OnlyOne" />
