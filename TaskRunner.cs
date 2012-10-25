@@ -166,6 +166,8 @@ namespace Jade
 
         private void DownloadDetail(List<Uri> urls)
         {
+            urls.Reverse();
+
             var item = Rule;
             var total = urls.Count;
             var index = 0;
@@ -195,7 +197,8 @@ namespace Jade
                                                        string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
                                                            System.Text.Encoding.GetEncoding(item.Encoding));
 
-                        var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri);
+                        // 唯一
+                        var data = CacheObject.DownloadDataDAL.Get(url.AbsoluteUri, Rule.SiteRuleId);
                         if (data == null)
                         {
                             continue;

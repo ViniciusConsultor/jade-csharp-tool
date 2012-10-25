@@ -22,13 +22,14 @@ namespace Jade
             this.favoriteBox1.FavoriteLinkClick += new EventHandler(favoriteBox1_FavoriteLinkClick);
             this.favoriteBox1.Hide();
 
-            this.browserToolStrip1.WbForm = this;                      
+            this.browserToolStrip1.WbForm = this;
             this.browserToolStrip1.FavoriteClick += new EventHandler(browserToolStrip1_FavoriteClick);
             //this.webBrowser1.Parent 
             //this.webBrowser1.Navigate("http://www.iflytek.com");
             this.webBrowser1.ProgressChanged += new WebBrowserProgressChangedEventHandler(webBrowser1_ProgressChanged);
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
             webBrowser1.StartNewWindow += new EventHandler<Com.iFLYTEK.WinForms.Browser.BrowserExtendedNavigatingEventArgs>(webBrowser1_StartNewWindow);
+            webBrowser1.StatusTextChanged += new EventHandler(webBrowser1_StatusTextChanged);
             this.webBrowser1.AllowWebBrowserDrop = false;
             this.webBrowser1.WebBrowserShortcutsEnabled = true;
             this.webBrowser1.IsWebBrowserContextMenuEnabled = true;
@@ -38,14 +39,25 @@ namespace Jade
             wb.BeforeNavigate2 += new SHDocVw.DWebBrowserEvents2_BeforeNavigate2EventHandler(wb_BeforeNavigate2);
         }
 
+        void webBrowser1_StatusTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.lblStatus.Text = this.webBrowser1.StatusText;
+            }
+            catch
+            {
+            }
+        }
+
         void webBrowser1_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
         {
             try
             {
                 this.lblStatus.Text = this.webBrowser1.StatusText;
                 //this.toolStripProgressBar1.Maximum = (int)e.MaximumProgress;
-               // this.toolStripProgressBar1.Value = (int)e.CurrentProgress;
-                this.lbllProgress.Text = (e.CurrentProgress * 100 / e.MaximumProgress).ToString("0") + "%";
+                // this.toolStripProgressBar1.Value = (int)e.CurrentProgress;
+                this.lbllProgress.Text = Math.Min(100, (e.CurrentProgress * 100 / e.MaximumProgress)).ToString("0") + "%";
             }
             catch
             {
@@ -114,10 +126,10 @@ namespace Jade
         }
 
         void webBrowser1_StartNewWindow(object sender, Com.iFLYTEK.WinForms.Browser.BrowserExtendedNavigatingEventArgs e)
-        {   
+        {
             e.Cancel = true;
             var href = e.Url.AbsoluteUri;
-            CacheObject.MainForm.OpenNewUrl(href,this.webBrowser1);     
+            CacheObject.MainForm.OpenNewUrl(href, this.webBrowser1);
         }
 
         void webBrowser1_NewWindow(object sender, CancelEventArgs e)
@@ -159,7 +171,7 @@ namespace Jade
 
 
         BaseDocument document;
-        public void Navigate(string url, BaseDocument document,string cookies ="")
+        public void Navigate(string url, BaseDocument document, string cookies = "")
         {
             if (cookies == "")
             {
@@ -181,7 +193,7 @@ namespace Jade
         }
 
         bool autoClose = false;
-        bool autoRedirect =  false;
+        bool autoRedirect = false;
         string redirecUrl = "";
         public void NavigateAndClose(string url, BaseDocument document, string cookies = "")
         {
@@ -275,7 +287,7 @@ namespace Jade
             {
                 tempUrl = this.browserToolStrip1.UrlCombo.Text;
             }
-            
+
             this.webBrowser1.Navigate(tempUrl);
         }
     }

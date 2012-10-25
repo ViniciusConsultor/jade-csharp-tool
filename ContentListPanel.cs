@@ -98,7 +98,7 @@ namespace Jade
                     if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
                         e.DisplayText = "----";
                     else
-                        e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd hh:mm:ss");
+                        e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd HH:mm:ss");
                 }
             }
             catch (Exception ex)
@@ -146,20 +146,23 @@ namespace Jade
                         return;
                     }
 
-                    if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (Jade.Properties.Settings.Default.IsOnline)
                     {
-                        try
+                        if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            data.EditorUserName = CacheObject.CurrentUser.Name;
-                            data.EditTime = DateTime.Now;
-                            data.IsEdit = true;
-                            CacheObject.DownloadDataDAL.Update(data);
-                            comboBox1_SelectedIndexChanged(null, null);
-                        }
-                        catch(Exception ze)
-                        {
-                            MessageBox.Show("占有失败");
-                            Log4Log.Exception(ze);
+                            try
+                            {
+                                data.EditorUserName = CacheObject.CurrentUser.Name;
+                                data.EditTime = DateTime.Now;
+                                data.IsEdit = true;
+                                CacheObject.DownloadDataDAL.Update(data);
+                                comboBox1_SelectedIndexChanged(null, null);
+                            }
+                            catch (Exception ze)
+                            {
+                                MessageBox.Show("占有失败");
+                                Log4Log.Exception(ze);
+                            }
                         }
                     }
 
@@ -690,6 +693,22 @@ namespace Jade
 
             }
 
+        }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var data = DatabaseFactory.Instance.CreateDownloadData("about:blank;", 1);
+            new BLL.DataSaverManager().Add(data);
+            CacheObject.ContentForm.InitDownloadData(data);
+            if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
+            {
+                int totalCount;
+                this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.devPager1.CurrentPageIndex), out totalCount);
+            }
+            else
+            {
+                CacheObject.DownloadDataDAL.Delete(data);
+            }
         }
     }
 }

@@ -83,6 +83,7 @@ namespace Jade.Control
             {
                 isNew = true;
                 this.txtKeyword.Left = lastLeft;
+                this.txtKeyword.Width = 300;
                 this.txtKeyword.Text = "";
                 this.txtKeyword.Show();
                 this.txtKeyword.Focus();
@@ -92,9 +93,14 @@ namespace Jade.Control
 
         void KeywordBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (selectedLabel != null && e.KeyCode == Keys.Delete)
+            if (selectedLabel != null && e.KeyCode == Keys.Back)
             {
                 this.keywords.Remove(this.selectedLabel.Text);
+                if (this.OnChange != null)
+                {
+                    this.OnChange(this, new EventArgs());
+                }
+
                 this.Bind();
             }
         }
@@ -138,6 +144,7 @@ namespace Jade.Control
                 label.MouseLeave += new EventHandler(lblText_MouseLeave);
                 label.Click += new EventHandler(label_Click);
                 label.DoubleClick += new EventHandler(lblText_DoubleClick);
+                label.PreviewKeyDown += new PreviewKeyDownEventHandler(label_PreviewKeyDown);
                 label.Left = lastLeft;
                 label.Top = 3;
                 this.Controls.Add(label);
@@ -157,6 +164,19 @@ namespace Jade.Control
                 }
 
                 this.lastLabel = label;
+            }
+        }
+
+        void label_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (sender == this.currentLabel)
+            {
+                if (e.KeyCode == Keys.Delete)
+                {
+                    // keywordIndex = Keywords.FindIndex(delegate(string s) { return s == currentLabel.Text; });
+                    this.keywords.Remove(currentLabel.Text);
+                    this.Bind();
+                }
             }
         }
 
@@ -233,14 +253,35 @@ namespace Jade.Control
             if (!isNew)
             {
                 if (txtKeyword.Text != "")
-                    this.Keywords[keywordIndex] = txtKeyword.Text.Trim();
+                {
+                    var words = txtKeyword.Text.Split(new string[] { this.SplitWord, " ", ",", "，" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (words.Length > 1)
+                    {
+                        this.Keywords[keywordIndex] = words[0];
+                        for (var i = 1; i < words.Length; i++)
+                        {
+                            this.Keywords.Add(words[i]);
+                        }
+                    }
+                    else
+                    {
+                        this.Keywords[keywordIndex] = txtKeyword.Text.Trim();
+                    }
+                }
                 else
                     this.Keywords.RemoveAt(keywordIndex);
             }
             else
             {
                 if (txtKeyword.Text != "")
-                    this.Keywords.Add(txtKeyword.Text.Trim());
+                {
+                    var words = txtKeyword.Text.Split(new string[] { this.SplitWord }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var word in words)
+                    {
+                        if (!string.IsNullOrEmpty(word.Trim()))
+                            this.Keywords.Add(word.Trim());
+                    }
+                }
                 isNew = false;
             }
 
@@ -264,11 +305,11 @@ namespace Jade.Control
 
         private void txtKeyword_MouseLeave(object sender, EventArgs e)
         {
-            if (isEdit)
-            {
-                isEdit = false;
-                KeywordLeave();
-            }
+            //if (isEdit)
+            //{
+            //    isEdit = false;
+            //    KeywordLeave();
+            //}
         }
     }
 }

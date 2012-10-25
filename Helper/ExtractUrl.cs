@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -155,7 +155,7 @@ namespace Jade
                     }
                     else if (checkUrlInclude)
                     {
-                        //  ±ØĞë°üº¬
+                        //  å¿…é¡»åŒ…å«
                         remove = includeRegex == null ? (urls[i].IndexOf(urlInclude) == -1) : includeRegex.Match(urls[i]).Length == 0;
 
                     }
@@ -224,10 +224,10 @@ namespace Jade
 
 
         /// <summary>
-        /// ´Óhtml»ñÈ¡Á´½Ó
+        /// ä»htmlè·å–é“¾æ¥
         /// </summary>
         /// <param name="html"></param>
-        /// <param name="containText">Á´½ÓÎÄ±¾°üº¬µÄ</param>
+        /// <param name="containText">é“¾æ¥æ–‡æœ¬åŒ…å«çš„</param>
         /// <returns></returns>
         public static List<HtmlAgilityPack.HtmlNode> GetLinkNodes(string html, params string[] texts)
         {
@@ -242,30 +242,30 @@ namespace Jade
         //(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)(?<html>(?!<ps|(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br)|(<[/]?strong))<[^>]+>)
         private static string html2TextPattern =
 @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)" +
-@"|(?<html>(?!(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)|(<[/]?strong>))<[^>]+>)" +   //±£ÁôµÄhtml±ê¼ÇÇ°×º,<a>,<p>,<img><br><STRONG>
-            //   @"<[^>]+>)" + // HTML±ê¼Ç  |(\s+)
-@"|(?<quot>&(quot|#34);)" + // ·ûºÅ: "
-@"|(?<amp>&(amp|#38);)" + // ·ûºÅ: &
-@"|(?<end>(?!(</strong)|(</p>))</[^>]+>)" +        //HTML±ÕºÏ±êÇ© ±£Áô</A>,</STRONG>,</P>
-@"|(?<iexcl>&(iexcl|#161);)" + // ·ûºÅ: (char)161
-@"|(?<cent>&(cent|#162);)" + // ·ûºÅ: (char)162
-@"|(?<pound>&(pound|#163);)" + // ·ûºÅ: (char)163
-@"|(?<copy>&(copy|#169);)" + // ·ûºÅ: (char)169
-@"|(?<others>&(d+);)"; // ·ûºÅ: ÆäËû
+@"|(?<html>(?!(<[/]?p[^>]*>)|(<img[^>]*>)|(<[/]?center[^>]*>)|(<br[/]?>)|(<[/]?strong>))<[^>]+>)" +   //ä¿ç•™çš„htmlæ ‡è®°å‰ç¼€,<a>,<p>,<img><br><STRONG>
+            //   @"<[^>]+>)" + // HTMLæ ‡è®°  |(\s+)
+@"|(?<quot>&(quot|#34);)" + // ç¬¦å·: "
+@"|(?<amp>&(amp|#38);)" + // ç¬¦å·: &
+@"|(?<end>(?!(</strong)|(</p>))</[^>]+>)" +        //HTMLé—­åˆæ ‡ç­¾ ä¿ç•™</A>,</STRONG>,</P>
+@"|(?<iexcl>&(iexcl|#161);)" + // ç¬¦å·: (char)161
+@"|(?<cent>&(cent|#162);)" + // ç¬¦å·: (char)162
+@"|(?<pound>&(pound|#163);)" + // ç¬¦å·: (char)163
+@"|(?<copy>&(copy|#169);)" + // ç¬¦å·: (char)169
+@"|(?<others>&(d+);)"; // ç¬¦å·: å…¶ä»–
 
-        private static string removeNoUsedHtml = @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)"; // ·ûºÅ: ÆäËû
+        private static string removeNoUsedHtml = @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)"; // ç¬¦å·: å…¶ä»–
 
-        public static string NoHTML(string Htmlstring) //È¥³ıHTML±ê¼Ç  
+        public static string NoHTML(string Htmlstring) //å»é™¤HTMLæ ‡è®°  
         {
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
-            //É¾³ı½Å±¾  
+            //åˆ é™¤è„šæœ¬  
             Htmlstring = Regex.Replace(Htmlstring, html2TextPattern, "", options);
 
             return RepairHtml(Htmlstring);
         }
 
         /// <summary>
-        /// ĞŞ¸´html
+        /// ä¿®å¤html
         /// </summary>
         /// <param name="html"></param>
         /// <returns></returns>
@@ -280,15 +280,17 @@ namespace Jade
             //<p style='text-align:center'><img src='{0}' alt='{1}' title='{2}' /><br/><span class='title'>{2}</span></p>
             /*
              * <p style=\"text-align: center;\"><img src=\"http://upload.ahwang.cn/2012/1024/1351046451701.jpg\" border=\"0\" /></p>
-<p style=\"text-align: center;\">½»¾¯ÎªÂ·Ãæ»·ÎÀ¹¤Ö§ÕĞ°²È«×÷Òµ</p>
+<p style=\"text-align: center;\">äº¤è­¦ä¸ºè·¯é¢ç¯å«å·¥æ”¯æ‹›å®‰å…¨ä½œä¸š</p>
              * */
             //StringBuilder sb = new StringBuilder();
 
             var result = new List<string>();
 
-            Regex biaodian = new Regex(@"[,£¬¡££»]");
+            Regex biaodian = new Regex(@"[,ï¼Œã€‚ï¼›]");
 
-            var removes = new List<string> { "¼ÇÕß", "±à¼­", "ĞÂ°²Íí±¨", "Íí±¨", "ĞÂ»ªÍø", "ÊµÏ°", "Í¨Ñ¶Ô±" };
+            var removes = new List<string> { "è®°è€…", "ç¼–è¾‘", "æ–°å®‰æ™šæŠ¥", "æ™šæŠ¥", "æ–°åç½‘", "å®ä¹ ", "é€šè®¯å‘˜" };
+
+            var isFist = false;
 
             for (var i = 0; i < ps.Length; i++)
             {
@@ -302,7 +304,7 @@ namespace Jade
                     //{
                     //    continue;
                     //}
-                    // Í¼Æ¬
+                    // å›¾ç‰‡
                     if (pragrah.Contains("img"))
                     {
                         var image = pragrah;
@@ -315,7 +317,7 @@ namespace Jade
                             {
                                 if (pragrah.Length > 2 && pragrah.Length < 20)
                                 {
-                                    // Éú³ÉÍ¼Æ¬¸ñÊ½
+                                    // ç”Ÿæˆå›¾ç‰‡æ ¼å¼
                                     result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, pragrah));
                                 }
                                 else
@@ -335,12 +337,25 @@ namespace Jade
                     }
                     else if (regex.IsMatch(pragrah))
                     {
-                        // br center strong Ô­Ñù·µ»Ø
+                        // br center strong åŸæ ·è¿”å›
                         continue;
                     }
                     else
                     {
-                        // Ğ¡±êÌâ
+                        var startIndex = pragrah.IndexOf("ç”µ");
+                        if (startIndex > -1 && startIndex < 10)
+                        {
+                            pragrah = pragrah.Substring(startIndex + 2).Trim();
+                        }
+
+                        startIndex = pragrah.IndexOf("è®¯");
+                        if (startIndex > -1 && startIndex < 10)
+                        {
+                            pragrah = pragrah.Substring(startIndex + 2).Trim();
+                        }
+
+
+                        // å°æ ‡é¢˜
                         if (pragrah.Length > 4 && pragrah.Length < 15 && !biaodian.IsMatch(pragrah))
                         {
                             result.Add(string.Format("<p style='text-indent: 28px;'><strong>{0}</strong></p>", pragrah));
@@ -349,7 +364,6 @@ namespace Jade
                         {
                             result.Add(string.Format("<p style='text-indent: 28px;'>{0}</p>", pragrah));
                         }
-
                     }
                 }
             }
@@ -358,18 +372,25 @@ namespace Jade
             var text = new Regex("<[^>]+>").Replace(lastP, "").Trim();
             if (text.Length < 20)
             {
-                foreach (var remove in removes)
+                if (text.IndexOf("è®°è€…") > -1)
                 {
-                    if (lastP.Contains(remove))
+                    text = text.Substring(text.IndexOf("è®°è€…") + 2).Trim();
+                    if (text.Contains(")"))
                     {
-                        result.RemoveAt(result.Count - 1);
-                        break;
+                        text = "(" + text;
                     }
+                    if (text.Contains("ï¼‰"))
+                    {
+                        text = "ï¼ˆ" + text;
+                    }
+                    result[result.Count - 1] = string.Format("<p style='text-indent: 28px;'>{0}</p>", text);
                 }
-
-                if ((text.StartsWith("(") && text.EndsWith(")")) || (text.StartsWith("£¨") && text.EndsWith("£©")))
+                else
                 {
-                    result.RemoveAt(result.Count - 1);
+                    foreach (var replace in CacheObject.CommonReplaces)
+                    {
+                        result[result.Count - 1] = result[result.Count - 1].Replace(replace, "");
+                    }
                 }
             }
             var r = string.Join("", result.ToArray());
@@ -446,7 +467,7 @@ namespace Jade
         }
 
         /// <summary>
-        /// Ê¹ÓÃxpath´ÓhtmlÌáÈ¡ÄÚÈİ
+        /// ä½¿ç”¨xpathä»htmlæå–å†…å®¹
         /// </summary>
         /// <param name="html"></param>
         /// <param name="xpath"></param>
@@ -504,7 +525,7 @@ namespace Jade
 
                     var findNodes = doc.SelectNodes(xpath);
 
-                    // Ìæ»»XPATH
+                    // æ›¿æ¢XPATH
                     if ((findNodes == null || findNodes.Count == 0) && anotherXPath != "")
                     {
                         findNodes = doc.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));
@@ -588,7 +609,7 @@ namespace Jade
                     HtmlDoc.LoadHtml(html);
                     var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
 
-                    // Ìæ»»XPATH
+                    // æ›¿æ¢XPATH
                     if (nodes == null && anotherXPath != "")
                     {
                         nodes = HtmlDoc.DocumentNode.SelectNodes(anotherXPath.Replace("/tbody[1]", ""));

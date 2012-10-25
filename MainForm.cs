@@ -29,8 +29,9 @@ namespace Jade
             CacheObject.MainForm = this;
 
             this.DoubleBuffered = true;
-            this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
-            this.imageList1.Images.Add(Resources.sites);
+            //this.imageList1.Images.Add(Resources.scheduled_tasks__1_);
+            //this.imageList1.Images.Add(Resources.sites);
+
             ImageIndexDic.Add("sites", this.imageList1.Images.Count - 1);
             WelcomePanel form = new WelcomePanel();
             tabbedView1.BeginUpdate();
@@ -57,7 +58,7 @@ namespace Jade
         {
             if (string.IsNullOrEmpty(icon))
             {
-                icon = "favicon.ico";
+                return 1;
             }
 
             if (ImageIndexDic.ContainsKey(icon))
@@ -74,7 +75,7 @@ namespace Jade
                 }
                 catch
                 {
-                    return 0;
+                    return 2;
                 }
             }
         }
@@ -82,7 +83,7 @@ namespace Jade
         private void InitTree(TreeNode baseNode, Model.Category category)
         {
 
-            TreeNode node = new TreeNode(category.Name, 0, 0);
+            TreeNode node = new TreeNode(category.Name, 1, 1);
             node.Tag = category;
             var childCategories = CacheObject.Categories.Where(c => c.ParentCategoryID == category.ID);
             foreach (var childCategory in childCategories)
