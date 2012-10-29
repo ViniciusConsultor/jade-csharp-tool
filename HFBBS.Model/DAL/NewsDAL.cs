@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Jade;
+using System.IO;
 
 namespace Jade.Model.MySql
 {
@@ -193,5 +194,35 @@ namespace Jade.Model.MySql
         }
     }
 
+    public partial class imagefiles : IImageFile
+    {
+    }
 
+    public class ImageSaver : IImageSaver
+    {
+        HFBBSEntities Repository = new HFBBSEntities();
+
+        public IImageFile Save(string url, string fileName)
+        {
+            imagefiles image = new imagefiles();
+            image.FileName = Path.GetFileName(fileName);
+            image.Url = url;
+            image.Data = File.ReadAllBytes(fileName);
+
+            Repository.imagefiles.AddObject(image);
+            Repository.SaveChanges();
+            return image;
+
+        }
+
+        public IImageFile Get(string url)
+        {
+            return Repository.imagefiles.FirstOrDefault(i => i.Url == url);
+        }
+
+        public bool Exist(string url)
+        {
+            return Repository.imagefiles.Any(i => i.Url == url);
+        }
+    }
 }

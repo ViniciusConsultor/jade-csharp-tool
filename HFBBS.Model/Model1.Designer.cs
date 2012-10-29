@@ -93,6 +93,22 @@ namespace Jade.Model.MySql
             }
         }
         private ObjectSet<downloaddata> _downloaddata;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<imagefiles> imagefiles
+        {
+            get
+            {
+                if ((_imagefiles == null))
+                {
+                    _imagefiles = base.CreateObjectSet<imagefiles>("imagefiles");
+                }
+                return _imagefiles;
+            }
+        }
+        private ObjectSet<imagefiles> _imagefiles;
 
         #endregion
         #region AddTo Methods
@@ -111,6 +127,14 @@ namespace Jade.Model.MySql
         public void AddTodownloaddata(downloaddata downloaddata)
         {
             base.AddObject("downloaddata", downloaddata);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the imagefiles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToimagefiles(imagefiles imagefiles)
+        {
+            base.AddObject("imagefiles", imagefiles);
         }
 
         #endregion
@@ -1147,6 +1171,137 @@ namespace Jade.Model.MySql
         private global::System.Int32 _RemoteId;
         partial void OnRemoteIdChanging(global::System.Int32 value);
         partial void OnRemoteIdChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Jade.Model.MySql", Name="imagefiles")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class imagefiles : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new imagefiles object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="fileName">Initial value of the FileName property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        public static imagefiles Createimagefiles(global::System.Int32 id, global::System.String fileName, global::System.String url)
+        {
+            imagefiles imagefiles = new imagefiles();
+            imagefiles.Id = id;
+            imagefiles.FileName = fileName;
+            imagefiles.Url = url;
+            return imagefiles;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FileName
+        {
+            get
+            {
+                return _FileName;
+            }
+            set
+            {
+                OnFileNameChanging(value);
+                ReportPropertyChanging("FileName");
+                _FileName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FileName");
+                OnFileNameChanged();
+            }
+        }
+        private global::System.String _FileName;
+        partial void OnFileNameChanging(global::System.String value);
+        partial void OnFileNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] Data
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_Data);
+            }
+            set
+            {
+                OnDataChanging(value);
+                ReportPropertyChanging("Data");
+                _Data = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Data");
+                OnDataChanged();
+            }
+        }
+        private global::System.Byte[] _Data;
+        partial void OnDataChanging(global::System.Byte[] value);
+        partial void OnDataChanged();
 
         #endregion
     

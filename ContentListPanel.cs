@@ -51,6 +51,7 @@ namespace Jade
         }
         public string HtmToTxt(string input)
         {
+            var isImage = input.Contains("<img");
             input = new Regex(@"(?m)<script[^>]*>(\w|\W)*?</script[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
             input = new Regex(@"(?m)<style[^>]*>(\w|\W)*?</style[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
             input = new Regex(@"(?m)<select[^>]*>(\w|\W)*?</select[^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase).Replace(input, "");
@@ -59,7 +60,7 @@ namespace Jade
             input = objReg.Replace(input, "");
             Regex objReg2 = new System.Text.RegularExpressions.Regex("(\\s)+", RegexOptions.Multiline | RegexOptions.IgnoreCase);
             input = objReg2.Replace(input, " ");
-            return input.Replace("&nbsp;", " ");
+            return isImage ? "(带图片)" + input.Replace("&nbsp;", " ") : input.Replace("&nbsp;", " ");
         }
 
         void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
@@ -146,7 +147,7 @@ namespace Jade
                         return;
                     }
 
-                    if (Jade.Properties.Settings.Default.IsOnline)
+                    if (Jade.Properties.Settings.Default.IsOnline && data.EditorUserName != CacheObject.CurrentUser.Name)
                     {
                         if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {

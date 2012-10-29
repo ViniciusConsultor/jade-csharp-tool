@@ -33,6 +33,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentEditForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.linkButtonGroup1 = new Jade.Control.LinkButtonGroup();
             this.label33 = new System.Windows.Forms.Label();
             this.lblWordCount = new System.Windows.Forms.Label();
@@ -122,10 +124,9 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -133,7 +134,6 @@
             this.panelgfbm.SuspendLayout();
             this.panelkgbm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -179,6 +179,21 @@
             this.tabPage1.Text = "基本信息";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 632);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1089, 22);
+            this.statusStrip1.TabIndex = 31;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // linkButtonGroup1
             // 
             this.linkButtonGroup1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -187,7 +202,7 @@
             this.linkButtonGroup1.Labels = null;
             this.linkButtonGroup1.Location = new System.Drawing.Point(144, 95);
             this.linkButtonGroup1.Name = "linkButtonGroup1";
-            this.linkButtonGroup1.Size = new System.Drawing.Size(834, 19);
+            this.linkButtonGroup1.Size = new System.Drawing.Size(943, 19);
             this.linkButtonGroup1.TabIndex = 30;
             this.linkButtonGroup1.OnClick += new Jade.Control.GroupClick(this.linkButtonGroup1_OnClick);
             // 
@@ -222,7 +237,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.PageTitles = "";
             this.txtContent.SelectedText = null;
-            this.txtContent.Size = new System.Drawing.Size(935, 507);
+            this.txtContent.Size = new System.Drawing.Size(1044, 490);
             this.txtContent.TabIndex = 27;
             // 
             // contextMenuStrip1
@@ -1024,21 +1039,6 @@
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 632);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1089, 22);
-            this.statusStrip1.TabIndex = 31;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 17);
-            // 
             // ContentEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1050,10 +1050,13 @@
             this.Name = "ContentEditForm";
             this.Text = "内容编辑";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ContentEditForm_FormClosing);
             this.Load += new System.EventHandler(this.ContentEditForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -1066,8 +1069,6 @@
             this.panelkgbm.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
