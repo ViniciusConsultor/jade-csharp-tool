@@ -12,6 +12,8 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using PresentationControls;
 using DevExpress.XtraSplashScreen;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Jade
 {
@@ -223,7 +225,7 @@ namespace Jade
                                     if (real != "")
                                     {
 
-                                        this.BeginInvoke(new ReplaceImage((string old,string newUrl) =>
+                                        this.BeginInvoke(new ReplaceImage((string old, string newUrl) =>
                                         {
                                             try
                                             {
@@ -256,10 +258,46 @@ namespace Jade
 
         public void InitDownloadData(IDownloadData data)
         {
+            isSaving = false;
+            if (Jade.Properties.Settings.Default.IsOnline && data.Content.Contains("db://"))
+            {
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + data.TaskId;
+
+                var regex = new Regex("<img[^>]+src=[',\"]?(?<src>[^\",',>]+)[',\"][^>]*>", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+                var matches = regex.Matches(data.Content);
+
+                foreach (Match match in matches)
+                {
+                    if (!string.IsNullOrEmpty(match.Groups["src"].Value))
+                    {
+                        var url = match.Groups["src"].Value.Replace("db://", "");
+                        try
+                        {
+                            var image = CacheObject.ImageSaver.Get(url);
+                            if (image != null)
+                            {
+                                var fileName = baseDir + image.FileName;
+                                if (!File.Exists(fileName))
+                                {
+                                    File.WriteAllBytes(fileName, image.Data);
+                                }
+                                data.Content = data.Content.Replace(match.Groups["src"].Value, fileName);
+                            }
+                            else
+                            {
+                                data.Content = data.Content.Replace(match.Groups["src"].Value, url);
+                            }
+                        }
+                        catch
+                        {
+                            Log4Log.Error("读取图片失败。。。");
+                        }
+                    }
+                }
+            }
             BindSelector();
             CurrentData = data;
-
-            
             if (data.Content != null)
             {
                 this.txt_news_title.Text = data.Title;
@@ -378,6 +416,7 @@ namespace Jade
         {
             UpdateCurrentData();
             CacheObject.DownloadDataDAL.Update(CurrentData);
+            isSaving = true;
             MessageBox.Show("保存成功");
         }
 
@@ -388,7 +427,7 @@ namespace Jade
                 this.txt_news_left.Text = this.txtContent.PageTitles;
             }
 
-            if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount)
+            if (CacheObject.IsTest && CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount * 2)
             {
                 //throw new Exception(
                 // MessageBox.Show("已超过限定使用次数，程序自动退出");
@@ -396,13 +435,13 @@ namespace Jade
                 //System.Environment.Exit(0);
                 MessageBox.Show("你使用的是试用版，有问题请及时反馈！~");
 
-                if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount * 2)
-                {
-                    //throw new Exception(
-                    MessageBox.Show("已超过限定使用次数，程序自动退出");
-                    Thread.Sleep(2000);
-                    System.Environment.Exit(0);
-                }
+                //if (CacheObject.CurrentRequestCount > CacheObject.MaxRequestCount * 2)
+                //{
+                //    //throw new Exception(
+                //    MessageBox.Show("已超过限定使用次数，程序自动退出");
+                //    Thread.Sleep(2000);
+                //    System.Environment.Exit(0);
+                //}
             }
 
             if (this.txtnews_source_name.Text != "")
@@ -420,7 +459,8 @@ namespace Jade
             }
             else
             {
-                CurrentData.news_template_file = (txt_news_template_file.Items[0] as DisplayNameValuePair).Value;
+                if (txt_news_template_file.Items.Count > 0)
+                    CurrentData.news_template_file = (txt_news_template_file.Items[0] as DisplayNameValuePair).Value;
             }
 
             CurrentData.IsEdit = true;
@@ -432,7 +472,7 @@ namespace Jade
             CurrentData.Title = this.txt_news_title.Text;
 
             CurrentData.SubTitle = "";
-                //this.txt_news_subtitle.Text;
+            //this.txt_news_subtitle.Text;
 
             CurrentData.Keywords =
                        this.txt_news_keywords.Text;
@@ -490,6 +530,7 @@ namespace Jade
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            isSaving = true;
             btnSave_Click(null, null);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
@@ -605,6 +646,7 @@ namespace Jade
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            isSaving = true;
             PublishContent(true);
         }
 
@@ -671,7 +713,9 @@ namespace Jade
         LoadingDialog loadingDialog;
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
+            isSaving = true;
             PublishContent();
+
         }
 
         private void PublishContent(bool sendToCheck = false)
@@ -808,6 +852,25 @@ namespace Jade
                 txt_tags.RefreshTxt();
             }
 
+        }
+
+        bool isSaving = false;
+
+        private void ContentEditForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!isSaving)
+            {
+                var result = MessageBox.Show("亲，你有修改未保存，是否保存并退出？点取消继续编辑", "友情提示", MessageBoxButtons.YesNoCancel);
+                if (result == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+                else if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    toolStripButton1_Click(sender, null);
+                }
+            }
         }
     }
 }

@@ -53,15 +53,15 @@ namespace Jade
             this.toolStripButtonHyperlink = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPicture = new System.Windows.Forms.ToolStripButton();
             this.btnInsetPage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabEditor = new System.Windows.Forms.TabPage();
             this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.tabSource = new System.Windows.Forms.TabPage();
             this.txtSource = new ICSharpCode.TextEditor.TextEditorControl();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripToolBar.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -295,6 +295,31 @@ namespace Jade
             this.btnInsetPage.Text = "插入分页";
             this.btnInsetPage.Click += new System.EventHandler(this.btnInsetPage_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Jade.Properties.Resources._08;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.Text = "撤销";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::Jade.Properties.Resources._05;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton2.Text = "重做";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -346,7 +371,7 @@ namespace Jade
             this.tabSource.Location = new System.Drawing.Point(4, 25);
             this.tabSource.Name = "tabSource";
             this.tabSource.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSource.Size = new System.Drawing.Size(592, 394);
+            this.tabSource.Size = new System.Drawing.Size(706, 394);
             this.tabSource.TabIndex = 1;
             this.tabSource.Text = "源代码";
             this.tabSource.UseVisualStyleBackColor = true;
@@ -359,31 +384,6 @@ namespace Jade
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(586, 389);
             this.txtSource.TabIndex = 0;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Jade.Properties.Resources._08;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.Text = "撤销";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::Jade.Properties.Resources._05;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton2.Text = "重做";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // HtmlEditor
             // 

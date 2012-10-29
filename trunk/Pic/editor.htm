@@ -390,9 +390,9 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
                         if (title != "") {
                             var next = $(image).parent().find("span.title");
                             if (next.length > 0) {
-                                next.text(title);
+                                next.html("<strong>" + title + "</strong>");
                             } else {
-                                $(image).after("<br /><span class='title' style='text-align:center;'>" + title + "</span");
+                                $(image).after("<br /><span class='title' style='text-align:center;'><strong>" + title + "</strong></span");
                             }
                         }
                     }

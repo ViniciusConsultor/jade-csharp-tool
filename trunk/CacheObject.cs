@@ -11,6 +11,7 @@ using Jade.DAL;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using Jade.Model.MySql;
 
 namespace Jade
 {
@@ -28,7 +29,9 @@ namespace Jade
             Categories = RuleManager.GetCategories();
             RunningTasks = new List<RunningTask>();
             DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
+            ImageSaver = new ImageSaver();
         }
+
 
         /// <summary>
         /// 获取tags
@@ -83,6 +86,8 @@ namespace Jade
         /// 下载数据DAL
         /// </summary>
         public static IDownloadDataDAL DownloadDataDAL { get; set; }
+
+        public static IImageSaver ImageSaver { get; set; }
 
         static DraftBoxForm draftForm;
 
@@ -891,6 +896,16 @@ namespace Jade
             }
             sender = null;
             currentCount--;
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                try
+                {
+                    CacheObject.ImageSaver.Save(d.result.Url, d.result.GetLocalFilePath());
+                }
+                catch
+                {
+                }
+            }
             this.NotifyChange();
         }
 

@@ -173,7 +173,7 @@ namespace Jade
             var index = 0;
 
             if (CacheObject.IsTest)
-                Logger.Error("[" + Rule.Name + "] 你使用的是适用版本");
+                Logger.Error("[" + Rule.Name + "] 你使用的是试用版本");
 
             var taskImageDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + this.Rule.SiteRuleId;
 
@@ -253,7 +253,7 @@ namespace Jade
                                     if (itemRule.IsDownloadPic)
                                     {
                                         //
-                                        var pics = UrlPicker.GetImagesUrls(ref result, taskImageDir);
+                                        var pics = UrlPicker.GetImagesUrls(ref result, taskImageDir, url);
 
                                         foreach (var key in pics)
                                         {

@@ -49,4 +49,22 @@ namespace Jade.Model
         string Url { get; set; }
         int RemoteId { get; set; }
     }
+
+    /// <summary>
+    /// 图片文件
+    /// </summary>
+    public interface IImageFile
+    {
+        int Id { get; set; }
+        string FileName { get; set; }
+        string Url { get; set; }
+        Byte[] Data { get; set; }
+    }
+
+    public interface IImageSaver
+    {
+        IImageFile Save(string url, string fileName);
+        IImageFile Get(string url);
+        bool Exist(string url);
+    }
 }

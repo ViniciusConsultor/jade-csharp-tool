@@ -72,7 +72,7 @@ namespace Jade
 
         static List<string> AllowedExtensions = new List<string>() { ".gif", ".jpg", ".png", ".bmp" };
 
-        public static Dictionary<string, string> GetImagesUrls(ref string html, string baseDir)
+        public static Dictionary<string, string> GetImagesUrls(ref string html, string baseDir,Uri baseUrl)
         {
             Dictionary<string, string> urlList = new Dictionary<string, string>();
 
@@ -96,9 +96,18 @@ namespace Jade
                         fileName += ".jpg";
                     }
                     urlList.Add(src, fileName);
-                    var newImage = match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName);
-                    //newImage = "<p style='text-align:center'>" + newImage + "</p>";
-                    html = html.Replace(match.Value, newImage);
+                    if (Jade.Properties.Settings.Default.IsOnline)
+                    {
+                        var newImage = match.Value.Replace(match.Groups["src"].Value, "db://" + new Uri(baseUrl, match.Groups["src"].Value).AbsoluteUri);
+                        //newImage = "<p style='text-align:center'>" + newImage + "</p>";
+                        html = html.Replace(match.Value, newImage);
+                    }
+                    else
+                    {
+                        var newImage = match.Value.Replace(match.Groups["src"].Value, baseDir + "\\" + fileName);
+                        //newImage = "<p style='text-align:center'>" + newImage + "</p>";
+                        html = html.Replace(match.Value, newImage);
+                    }
                 }
             }
 

@@ -318,11 +318,11 @@ namespace Jade
                                 if (pragrah.Length > 2 && pragrah.Length < 20)
                                 {
                                     // 生成图片格式
-                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, pragrah));
+                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'><strong>{1}</strong></span></p>", image, pragrah));
                                 }
                                 else
                                 {
-                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, ""));
+                                    result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'><strong>{1}</strong></span></p>", image, ""));
                                     i--;
                                 }
                                 break;
@@ -332,7 +332,7 @@ namespace Jade
 
                         if (i == ps.Length - 1)
                         {
-                            result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'>{1}</span></p>", image, ""));
+                            result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'><strong>{1}</strong></span></p>", image, ""));
                         }
                     }
                     else if (regex.IsMatch(pragrah))

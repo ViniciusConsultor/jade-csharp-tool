@@ -4,10 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hfbbsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="hfbbsModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="hfbbsModelStoreContainer">
-          <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="imagefiles" EntityType="hfbbsModel.Store.imagefiles" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" />
         </EntityContainer>
         <EntityType Name="downloaddata">
           <Key>
@@ -55,6 +56,15 @@
           <Property Name="EditTime" Type="datetime" />
           <Property Name="RemoteId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="imagefiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="text" Nullable="false" />
+          <Property Name="Url" Type="text" Nullable="false" />
+          <Property Name="Data" Type="longblob" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="UserID" />
@@ -70,6 +80,7 @@
         <EntityContainer Name="HFBBSEntities">
           <EntitySet Name="user" EntityType="Jade.Model.MySql.user" />
           <EntitySet Name="downloaddata" EntityType="Jade.Model.MySql.downloaddata" />
+          <EntitySet Name="imagefiles" EntityType="Jade.Model.MySql.imagefiles" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -124,6 +135,15 @@
           <Property Type="Boolean" Name="IsPublish" Nullable="false" />
           <Property Type="DateTime" Name="EditTime" />
           <Property Type="Int32" Name="RemoteId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="imagefiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="FileName" Nullable="false" />
+          <Property Type="String" Name="Url" Nullable="false" />
+          <Property Type="Binary" Name="Data" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -183,6 +203,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="imagefiles">
+            <EntityTypeMapping TypeName="Jade.Model.MySql.imagefiles">
+              <MappingFragment StoreEntitySet="imagefiles">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -206,6 +236,7 @@
       <Diagram Name="Model1" ZoomLevel="108">
         <EntityTypeShape EntityType="Jade.Model.MySql.user" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
         <EntityTypeShape EntityType="Jade.Model.MySql.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
+        <EntityTypeShape EntityType="Jade.Model.MySql.imagefiles" Width="1.5" PointX="0.75" PointY="3.75" Height="1.6079931640624992" />
       </Diagram>
     </Diagrams>
   </Designer>
