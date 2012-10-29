@@ -208,10 +208,34 @@ namespace Jade
                         {
                             IFetcher fetcher = new FetchItem(itemRule);
                             var result = fetcher.Fetch(html);
+
                             if (result == null)
                             {
                                 result = "";
                             }
+
+                            if (itemRule.IdentifyPage && itemRule.PageXPath != "")
+                            {
+                                var pageLinks = ExtractUrl.ExtractDataFromHtml(html, itemRule.PageXPath, XMLPathSelectType.Multiple, XMLPathType.Href).Distinct().ToList();
+                                ExtractUrl.RepairUrls(url.AbsoluteUri, "", "#", pageLinks.ToList());
+                                foreach (var link in pageLinks)
+                                {
+                                    if (link != url.AbsoluteUri)
+                                    {
+                                        var pageHtml = HtmlPicker.VisitUrl(
+                                                    new Uri(link),
+                                                     item.HttpMethod,
+                                                               null,
+                                                               string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                                                           string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                           string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                           string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                                                               System.Text.Encoding.GetEncoding(item.Encoding));
+                                        result += fetcher.Fetch(pageHtml);
+                                    }
+                                }
+                            }
+
                             switch (itemRule.CloumnName)
                             {
                                 case "Title":

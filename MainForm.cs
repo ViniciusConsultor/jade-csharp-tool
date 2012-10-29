@@ -46,8 +46,8 @@ namespace Jade
             {
                 InitTree(baseNode, category);
             }
-            this.taskTree.ExpandAll();
-
+            this.taskTree.Nodes[0].Expand();
+            this.taskTree.Nodes[0].LastNode.Expand();
             //throw new Exception("test");
 
         }

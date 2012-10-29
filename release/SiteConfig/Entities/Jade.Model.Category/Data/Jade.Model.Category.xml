@@ -1,4 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XMLDatabase-Entities>
-  <Category _uuid="4ea7ca02-8ea8-45be-bee9-8c59bb70d0d3" ID="1" ParentCategoryID="0" Name="本地报媒" />
+  <Category _uuid="ca19e93f-0001-4252-aa8f-597c8e094a92" ID="1" ParentCategoryID="0" Name="党群机构" />
+  <Category _uuid="91ddc370-4264-43c3-b167-2c7a1fceade9" ID="2" ParentCategoryID="0" Name="地方都市报" />
+  <Category _uuid="b89fa3b2-6904-4235-a927-b6526f4a67f3" ID="3" ParentCategoryID="0" Name="政府机构网站" />
+  <Category _uuid="128a742a-a18a-49cf-82ed-71e3f7bd6975" ID="4" ParentCategoryID="0" Name="县、区、开发区网站" />
+  <Category _uuid="fd32fc1b-a3e2-40b8-93c5-2682790d6ef9" ID="5" ParentCategoryID="0" Name="其他机构网站" />
+  <Category _uuid="5fe94286-04ae-4922-b0b5-e244c3b3d87d" ID="6" ParentCategoryID="0" Name="伦敦奥运" />
+  <Category _uuid="c01bd8e4-145f-4451-af3d-c48e26c5687d" ID="7" ParentCategoryID="0" Name="本地报媒" />
 </XMLDatabase-Entities>

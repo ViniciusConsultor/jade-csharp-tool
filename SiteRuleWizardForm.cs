@@ -419,11 +419,40 @@ namespace Jade
 
         private void SetFetchResult(string html)
         {
+            Uri uri;
+            if (!Uri.TryCreate(this.txtTestUrl.Text, UriKind.Absolute, out uri))
+            {
+                MessageBox.Show(this, "非法测试采集地址！", "测试采集设置错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             this.tbxResult.Clear();
             foreach (var itemRule in this.CurrentSiteRule.ItemRules)
             {
                 IFetcher fetcher = new FetchItem(itemRule);
                 var result = fetcher.Fetch(html);
+                if (itemRule.IdentifyPage && itemRule.PageXPath != "")
+                {
+                    var pageLinks = ExtractUrl.ExtractDataFromHtml(html, itemRule.PageXPath, XMLPathSelectType.Multiple, XMLPathType.Href).Distinct().ToList();
+                    ExtractUrl.RepairUrls(uri.AbsoluteUri, "", "#", pageLinks.ToList());
+                    foreach (var link in pageLinks)
+                    {
+                        if (link != uri.AbsoluteUri)
+                        {
+                            var pageHtml = HtmlPicker.VisitUrl(
+                                             new Uri(link),
+                                             "GET",
+                                             null,
+                                              CurrentSiteRule.Referer,
+                                              Utility.GetCookies(CurrentSiteRule.Cookie),
+                                             CurrentSiteRule.UserAgent,
+                                             "",
+                                            Encoding.GetEncoding(CurrentSiteRule.Encoding));
+                            result += fetcher.Fetch(pageHtml);
+                        }
+                    }
+                }
                 this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
             }
         }
