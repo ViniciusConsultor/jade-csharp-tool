@@ -274,7 +274,7 @@ namespace Jade
                 mshtml.IHTMLDocument2 document = (mshtml.IHTMLDocument2)webBrowserBody.Document.DomDocument;
 
                 toolStripComboBoxName.Text = document.queryCommandValue("FontName").ToString();
-                toolStripComboBoxSize.SelectedItem = FontSize.Find((int)document.queryCommandValue("FontSize"));
+              
                 toolStripButtonBold.Checked = document.queryCommandState("Bold");
                 toolStripButtonItalic.Checked = document.queryCommandState("Italic");
                 toolStripButtonUnderline.Checked = document.queryCommandState("Underline");
@@ -288,6 +288,8 @@ namespace Jade
                 toolStripButtonFull.Checked = document.queryCommandState("JustifyFull");
 
                 SelectedText = (document.selection.createRange() as mshtml.IHTMLTxtRange).text;
+
+                toolStripComboBoxSize.SelectedItem = FontSize.Find((int)document.queryCommandValue("FontSize"));
             }
             catch (Exception e)
             {
@@ -458,7 +460,8 @@ namespace Jade
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand("JustifyCenter", false, null);
+           // webBrowserBody.Document.ExecCommand("JustifyCenter", false, null);
+            webBrowserBody.Document.InvokeScript("JustifyCenter");
             RefreshToolBar();
         }
         private void toolStripButtonRight_Click(object sender, EventArgs e)
@@ -671,6 +674,16 @@ namespace Jade
         internal void DeleteSelect()
         {
             this.webBrowserBody.Document.InvokeScript("deleteText");
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            webBrowserBody.Document.ExecCommand("Undo", false, null);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            webBrowserBody.Document.ExecCommand("redo", false, null);
         }
     }
 }

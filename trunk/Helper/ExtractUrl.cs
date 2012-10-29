@@ -355,6 +355,11 @@ namespace Jade
                         }
 
 
+                        if (pragrah.StartsWith("前一页") || pragrah.StartsWith("[1]") || pragrah.StartsWith("首页") || pragrah.StartsWith("第一页"))
+                        {
+                            continue;
+                        }
+
                         // 小标题
                         if (pragrah.Length > 4 && pragrah.Length < 15 && !biaodian.IsMatch(pragrah))
                         {

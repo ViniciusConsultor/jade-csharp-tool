@@ -233,6 +233,25 @@ b[0] && b[0].ownerDocument || c); var h = [], i; for (var j = 0, k; (k = a[j]) !
             return "";
 
         }
+        function GetBlock(oEl) {
+            var sBlocks = "|H1|H2|H3|H4|H5|H6|P|PRE|LI|TD|DIV|BLOCKQUOTE|DT|DD|TABLE|HR|IMG|";
+            while ((oEl != null) && (sBlocks.indexOf("|" + oEl.tagName + "|") == -1))
+                oEl = oEl.parentElement;
+            return oEl;
+        }
+        function JustifyCenter() {
+            var oSel = document.selection.createRange();
+            var sType = document.selection.type;
+            var oTarget = oSel;
+            var oBlock = (oSel.parentElement != null ? GetBlock(oSel.parentElement()) : oSel.item(0));
+            if (oBlock) {
+                oBlock.style.textAlign = "center";
+                oBlock.align = "center";
+            }
+            else {
+                document.execCommand("JustifyCenter",false,null);
+            }         
+        }
 
         function InitTitles() {
             var args = arguments;

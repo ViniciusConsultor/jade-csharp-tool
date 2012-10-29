@@ -59,6 +59,9 @@ namespace Jade
             this.webBrowserBody = new Com.iFLYTEK.WinForms.Browser.BaseWebBrowser(this.components);
             this.tabSource = new System.Windows.Forms.TabPage();
             this.txtSource = new ICSharpCode.TextEditor.TextEditorControl();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripToolBar.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -90,10 +93,13 @@ namespace Jade
             this.toolStripButtonLine,
             this.toolStripButtonHyperlink,
             this.toolStripButtonPicture,
-            this.btnInsetPage});
+            this.btnInsetPage,
+            this.toolStripSeparator1,
+            this.toolStripButton1,
+            this.toolStripButton2});
             this.toolStripToolBar.Location = new System.Drawing.Point(0, 0);
             this.toolStripToolBar.Name = "toolStripToolBar";
-            this.toolStripToolBar.Size = new System.Drawing.Size(600, 27);
+            this.toolStripToolBar.Size = new System.Drawing.Size(714, 27);
             this.toolStripToolBar.TabIndex = 1;
             this.toolStripToolBar.Text = "Tool Bar";
             // 
@@ -305,7 +311,7 @@ namespace Jade
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(600, 423);
+            this.tabControl1.Size = new System.Drawing.Size(714, 423);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -315,7 +321,7 @@ namespace Jade
             this.tabEditor.Location = new System.Drawing.Point(4, 25);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(592, 394);
+            this.tabEditor.Size = new System.Drawing.Size(706, 394);
             this.tabEditor.TabIndex = 0;
             this.tabEditor.Text = "±à¼­Æ÷";
             this.tabEditor.UseVisualStyleBackColor = true;
@@ -329,7 +335,7 @@ namespace Jade
             this.webBrowserBody.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserBody.Name = "webBrowserBody";
             this.webBrowserBody.ScriptErrorsSuppressed = true;
-            this.webBrowserBody.Size = new System.Drawing.Size(586, 388);
+            this.webBrowserBody.Size = new System.Drawing.Size(700, 388);
             this.webBrowserBody.TabIndex = 0;
             this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
             this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
@@ -354,13 +360,38 @@ namespace Jade
             this.txtSource.Size = new System.Drawing.Size(586, 389);
             this.txtSource.TabIndex = 0;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Jade.Properties.Resources._08;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.Text = "³·Ïú";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::Jade.Properties.Resources._05;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton2.Text = "ÖØ×ö";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // HtmlEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolStripToolBar);
             this.Name = "HtmlEditor";
-            this.Size = new System.Drawing.Size(600, 450);
+            this.Size = new System.Drawing.Size(714, 450);
             this.toolStripToolBar.ResumeLayout(false);
             this.toolStripToolBar.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -401,5 +432,8 @@ namespace Jade
         private System.Windows.Forms.TabPage tabEditor;
         private System.Windows.Forms.TabPage tabSource;
         private ICSharpCode.TextEditor.TextEditorControl txtSource;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
     }
 }
