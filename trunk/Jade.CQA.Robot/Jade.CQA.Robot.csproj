@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Net\ADSL.cs" />
+    <Compile Include="Net\RAS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robot\BloomFilter.cs" />
     <Compile Include="Robot\CoreObjects.cs" />

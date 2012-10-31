@@ -28,8 +28,15 @@ namespace Jade
             Rules = RuleManager.GetSiteRules();
             Categories = RuleManager.GetCategories();
             RunningTasks = new List<RunningTask>();
-            DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
-            ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
+            try
+            {
+                DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
+                ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
+            }
+            catch(Exception ex)
+            {
+                Log4Log.Exception(ex);
+            }
         }
 
 

@@ -867,8 +867,9 @@ namespace Jade
                 }
                 else if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    e.Cancel = true;
-                    toolStripButton1_Click(sender, null);
+                    UpdateCurrentData();
+                    CacheObject.DownloadDataDAL.Update(CurrentData);
+                    isSaving = true;
                 }
             }
         }

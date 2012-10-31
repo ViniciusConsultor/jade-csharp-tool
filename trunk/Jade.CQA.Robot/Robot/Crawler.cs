@@ -310,7 +310,7 @@ namespace Jade.CQA.Robot
             m_Logger.Verbose("{0} endDownload", requestState.CrawlStep.Uri.AbsoluteUri);
             using (requestState.State)
             {
-                if (requestState.Request.Proxy != null)
+                if (IsUserProxy && requestState.Request.Proxy != null)
                 {
                     if (requestState.Request.Proxy is WebProxy)
                     {
@@ -326,11 +326,11 @@ namespace Jade.CQA.Robot
                         }
                     }
                 }
-                else
+ 
+                if (this.DownloadInterval.HasValue)
                 {
-                    Thread.Sleep(300);
+                    Thread.Sleep(DownloadInterval.Value);
                 }
-
                 // ”–“Ï≥£
                 if (requestState.Exception != null)
                 {

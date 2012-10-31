@@ -17,6 +17,8 @@ using System.Threading;
 using Jade.CQA.Model;
 using Jade.CQA.KnowedegProcesser.DataSave;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Net.Sockets;
 
 namespace Jade.CQA
 {
@@ -131,6 +133,8 @@ namespace Jade.CQA
     class Program
     {
 
+
+
         static Regex ProxyExp = new Regex(@"(\d+\.\d+\.\d+\.\d+)\s+(\d+)");
 
         public static string GetHtml(string url)
@@ -210,7 +214,7 @@ namespace Jade.CQA
 
                                 Proxyes.Add(model);
                                 timer.Stop();
-                               
+
                                 if (timer.Elapsed.TotalSeconds < 1)
                                 {
                                     Console.WriteLine(model.IP + "验证成功,耗时" + timer.Elapsed.TotalSeconds);
@@ -223,7 +227,7 @@ namespace Jade.CQA
                         }
                         catch
                         {
-                           //Console.WriteLine(model.IP + "验证失败！");
+                            //Console.WriteLine(model.IP + "验证失败！");
                         }
                         finally
                         {
@@ -234,7 +238,7 @@ namespace Jade.CQA
             }
             catch (Exception ex)
             {
-               // Console.WriteLine(model.IP + "验证失败！");
+                // Console.WriteLine(model.IP + "验证失败！");
             }
         }
 
@@ -248,9 +252,84 @@ namespace Jade.CQA
 			{
 				new BaiduUrlFilter()
             };
+        [DllImport("wininet.dll")]
+        private extern static bool InternetAutodial(int dwFlags, System.IntPtr hwndParent);
 
+        [DllImport("wininet.dll")]
+        private extern static bool InternetAutodialHangup(int dwReserved);
+
+        static IPAddress[] GetAddresses(AddressFamily af)
+        {
+            System.Net.IPHostEntry _IPHostEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            return (from i in _IPHostEntry.AddressList where i.AddressFamily == af select i).ToArray();
+        }
+        public static IPEndPoint BindIPEndPointCallback(ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount)
+        {
+            List<IPEndPoint> ipep = new List<IPEndPoint>();
+            foreach (var i in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+            {
+                foreach (var ua in i.GetIPProperties().UnicastAddresses)
+                    ipep.Add(new IPEndPoint(ua.Address, 0));
+            }
+            return new IPEndPoint(ipep[1].Address, ipep[1].Port);
+        }
+
+        public static IPEndPoint BindIPEndPointCallback2(ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount)
+        {
+            Console.WriteLine("BindIPEndpoint called");
+            return new IPEndPoint(IPAddress.Parse("192.168.28.75"), 0);
+        }
+
+        public static IPEndPoint BindIPEndPointCallback3(ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount)
+        {
+            Console.WriteLine("BindIPEndpoint called");
+            return new IPEndPoint(IPAddress.Parse("36.4.196.164"), 0);
+        }
         static void Main(string[] args)
         {
+           
+
+            HttpWebRequest request;
+            HttpWebResponse response;
+            StreamReader sr;
+            string str;
+
+            request = (HttpWebRequest)WebRequest.Create("http://iframe.ip138.com/ic.asp");
+            request.KeepAlive = false;
+            request.ServicePoint.BindIPEndPointDelegate = new BindIPEndPoint(BindIPEndPointCallback3);
+            request.ServicePoint.ConnectionLeaseTimeout = 0;
+            response = (HttpWebResponse)request.GetResponse();
+            sr = new StreamReader(response.GetResponseStream(),Encoding.GetEncoding("gb2312"));
+            str = sr.ReadToEnd();
+            Console.WriteLine(str);
+            test1();
+            //RasManager myRas = new RasManager();
+
+            //myRas.EntryName = "#777";          // entry name in phonebook 
+            //myRas.UserName = "ctnet@mycdma.cn";
+            //myRas.Password = "vnet.mobi";
+            //myRas.Connect();
+
+
+            //Console.Read();
+
+            //while (true)
+            //{
+            //    Console.WriteLine("按任意键连接网络...");
+
+            //    Console.ReadLine();
+
+            //    Console.WriteLine(ADSL.ResetNetwork());
+            //}
+
+
+
+
+
+            //Console.Read();
+            //ras.Disconnect();
+
+            //Console.Read();
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
             //getProxy();
@@ -264,10 +343,10 @@ namespace Jade.CQA
             //}
             //else
             //{
-            Console.Out.WriteLine("获取代理中....");
-            getProxy();
+            //Console.Out.WriteLine("获取代理中....");
+            //getProxy();
 
-           //Console.Read();
+            //Console.Read();
             //}
 
 
@@ -288,6 +367,22 @@ namespace Jade.CQA
             StartCrawler();
         }
 
+        private static void test1()
+        {
+            HttpWebRequest request;
+            HttpWebResponse response;
+            StreamReader sr;
+            string str;
+            request = (HttpWebRequest)WebRequest.Create("http://iframe.ip138.com/ic.asp");
+            request.KeepAlive = false;
+            request.ServicePoint.BindIPEndPointDelegate = new BindIPEndPoint(BindIPEndPointCallback2);
+            request.ServicePoint.ConnectionLeaseTimeout = 0;
+            response = (HttpWebResponse)request.GetResponse();
+            sr = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("gb2312"));
+            str = sr.ReadToEnd();
+            Console.WriteLine(str);
+        }
+
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Console.WriteLine(e.ExceptionObject);
@@ -304,7 +399,8 @@ namespace Jade.CQA
                 new BadiduDocumentProcessor(), new DumperStep()
                 )// Process html)
             {
-                Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
+                IsUserProxy = false,
+                //Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
                 // Custom step to visualize crawl
                 DownloadRetryCount = 0,
                 MaximumThreadCount = 20,

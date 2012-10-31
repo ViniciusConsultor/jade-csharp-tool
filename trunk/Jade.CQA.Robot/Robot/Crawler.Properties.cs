@@ -92,6 +92,18 @@ namespace Jade.CQA.Robot
 		/// </summary>
 		public int? DownloadRetryCount { get; set; }
 
+        public bool IsUserProxy
+        {
+            get;
+            set;
+        }
+
+        public int? DownloadInterval
+        {
+            get;
+            set;
+        }
+
 		/// <summary>
 		/// How long the crawler should wait before retrying a download
 		/// </summary>

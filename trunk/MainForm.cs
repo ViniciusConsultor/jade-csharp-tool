@@ -564,7 +564,16 @@ namespace Jade
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Environment.Exit(0);
+            var result = MessageBox.Show("确定退出？", "友情提示", MessageBoxButtons.YesNo);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Environment.Exit(0);
+            }
+            else if (result == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }     
         }
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)

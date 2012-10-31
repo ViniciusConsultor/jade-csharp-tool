@@ -42,10 +42,15 @@ namespace Jade.Control
             }
             set
             {
-                if (value != null)
+                if (!string.IsNullOrEmpty(value))
                 {
                     this.keywords = new List<string>();
                     this.keywords.AddRange(value.Split(new string[] { this.SplitWord }, StringSplitOptions.RemoveEmptyEntries));
+                    this.Bind();
+                }
+                else
+                {
+                    this.keywords = new List<string>();
                     this.Bind();
                 }
             }
@@ -275,7 +280,7 @@ namespace Jade.Control
             {
                 if (txtKeyword.Text != "")
                 {
-                    var words = txtKeyword.Text.Split(new string[] { this.SplitWord }, StringSplitOptions.RemoveEmptyEntries);
+                    var words = txtKeyword.Text.Split(new string[] { this.SplitWord, " ", ",", "，" }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var word in words)
                     {
                         if (!string.IsNullOrEmpty(word.Trim()))
