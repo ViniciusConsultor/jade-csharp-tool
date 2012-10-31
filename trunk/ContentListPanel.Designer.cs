@@ -66,6 +66,7 @@
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -75,7 +76,6 @@
             this.chkOnlyMyContent = new DevExpress.XtraEditors.CheckEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.devPager1 = new Jade.Control.DevPager();
-            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -492,6 +492,14 @@
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "新增原创新闻";
+            this.barButtonItem6.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.Glyph")));
+            this.barButtonItem6.Id = 5;
+            this.barButtonItem6.Name = "barButtonItem6";
+            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -571,14 +579,6 @@
             this.devPager1.Size = new System.Drawing.Size(922, 32);
             this.devPager1.TabIndex = 10;
             this.devPager1.TotalCount = 0;
-            // 
-            // barButtonItem6
-            // 
-            this.barButtonItem6.Caption = "新增原创新闻";
-            this.barButtonItem6.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.Glyph")));
-            this.barButtonItem6.Id = 5;
-            this.barButtonItem6.Name = "barButtonItem6";
-            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
             // 
             // ContentListPanel
             // 

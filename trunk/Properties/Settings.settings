@@ -18,13 +18,13 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ServerIp" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">192.168.2.205</Value>
     </Setting>
     <Setting Name="ServerUser" Type="System.String" Scope="User">
       <Value Profile="(Default)">root</Value>
     </Setting>
     <Setting Name="ServerPasword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">111111</Value>
+      <Value Profile="(Default)">root</Value>
     </Setting>
     <Setting Name="ServerDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)">hfbbs</Value>

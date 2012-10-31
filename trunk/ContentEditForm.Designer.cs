@@ -202,7 +202,7 @@
             this.linkButtonGroup1.Labels = null;
             this.linkButtonGroup1.Location = new System.Drawing.Point(144, 95);
             this.linkButtonGroup1.Name = "linkButtonGroup1";
-            this.linkButtonGroup1.Size = new System.Drawing.Size(943, 19);
+            this.linkButtonGroup1.Size = new System.Drawing.Size(1052, 19);
             this.linkButtonGroup1.TabIndex = 30;
             this.linkButtonGroup1.OnClick += new Jade.Control.GroupClick(this.linkButtonGroup1_OnClick);
             // 
@@ -237,7 +237,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.PageTitles = "";
             this.txtContent.SelectedText = null;
-            this.txtContent.Size = new System.Drawing.Size(1044, 490);
+            this.txtContent.Size = new System.Drawing.Size(935, 473);
             this.txtContent.TabIndex = 27;
             // 
             // contextMenuStrip1
