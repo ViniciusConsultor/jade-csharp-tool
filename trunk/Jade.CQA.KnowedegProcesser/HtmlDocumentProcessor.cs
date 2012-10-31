@@ -238,8 +238,7 @@ namespace Jade.CQA.KnowedegProcesser
             };
             using (Stream reader = propertyBag.GetResponse())
             {
-                Encoding documentEncoding = Encoding.GetEncoding("gb2312");
-                //htmlDoc.DetectEncoding(reader);
+                Encoding documentEncoding = htmlDoc.DetectEncoding(reader);
                 reader.Seek(0, SeekOrigin.Begin);
                 if (!documentEncoding.IsNull())
                 {
@@ -313,7 +312,7 @@ namespace Jade.CQA.KnowedegProcesser
             }
 
             // 300 ms
-            Thread.Sleep(300);
+            //Thread.Sleep(100);
 
             // Extract Links
             DocumentWithLinks links = htmlDoc.GetLinks();
@@ -454,6 +453,7 @@ namespace Jade.CQA.KnowedegProcesser
             if (html.Contains("您的访问出错了"))
             {
                 Console.WriteLine("访问出错了");
+                Thread.Sleep(5000);
             }
 
             var question = new Question();
@@ -521,7 +521,8 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.KnowedgeType = KnowedgeType.BaiduZhidao;
                         answser.Content = htmlDoc.ExtractData("//pre[@id=\"best-answer-content\"]");
                         answser.CreateTime = ParseDatetime(bestAnswer.SelectSingleNode("./div[1]/div[1]/span").InnerText.Trim());
-                        answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+                        
+                        
                         //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
@@ -530,6 +531,8 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.IsBestAnwser = true;
                         anwsers.Add(answser);
                         question.Status = QuestionStatus.WithSatisfiedAnwser;
+                        answser.Up = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
+
                     }
                     catch (Exception ex)
                     {
@@ -736,15 +739,17 @@ namespace Jade.CQA.KnowedegProcesser
         public override bool IsAllowedUrl(string url)
         {
             // /z/ShowUser.e  /z/q /z/c
-            if (url.Contains("/z/c")
-                || url.Contains("/z/q") || url.Contains("/z/ShowUser.e")
+            if (
+              url.Contains("/z/c") ||
+              url.Contains("/z/q") ||
+              url.Contains("/z/ShowUser.e")
                 )
             {
                 //url = "http://zhidao.baidu.com/question/11921534.html"
                 if (url.Contains("/z/q"))
                 {
                     url = IdRegex.Match(url).Groups[1].Value;
-                    return !Cache.wenwenFilter.IsContentPageExist(url, true);
+                    return !Cache.wenwenFilter.IsContentPageExist(url, false);
                 }
                 return true;
             }
@@ -761,20 +766,23 @@ namespace Jade.CQA.KnowedegProcesser
         {
             base.Process(crawler, propertyBag);
 
-            var htmlDoc = (HtmlDocument)propertyBag["HtmlDoc"].Value;
-            var html = htmlDoc.DocumentNode.OuterHtml;
-            // 用户
-            if (propertyBag.OriginalUrl.Contains("/z/ShowUser.e"))
+            if (propertyBag.OriginalUrl != null)
             {
-                ExtractUser(html);
-            }
-            else if (propertyBag.OriginalUrl.Contains("/z/q"))
-            {
-                ExtractQuestion(propertyBag, htmlDoc, html);
+                var htmlDoc = (HtmlDocument)propertyBag["HtmlDoc"].Value;
+                var html = htmlDoc.DocumentNode.OuterHtml;
+                // 用户
+                if (propertyBag.OriginalUrl.Contains("/z/ShowUser.e"))
+                {
+                    ExtractUser(html, htmlDoc);
+                }
+                else if (propertyBag.OriginalUrl.Contains("/z/q"))
+                {
+                    ExtractQuestion(propertyBag, htmlDoc, html);
+                }
             }
         }
 
-        private static void ExtractUser(string html)
+        private static void ExtractUser(string html, HtmlDocument htmlDoc)
         {
             /*
             姓名：
@@ -792,47 +800,47 @@ namespace Jade.CQA.KnowedegProcesser
 
             var user = new User()
             {
-                KnowedgeType = KnowedgeType.BaiduZhidao
+                KnowedgeType = KnowedgeType.SosoWenwen
             };
 
-            // html = html.Substring("\"tplContent\":\"", "});");
+            var total = new Regex("回答数：(\\d+)", RegexOptions.Compiled);
+            var manyi = new Regex("满意数：(\\d+)", RegexOptions.Compiled);
+            var AdoptionRate = new Regex("采纳率：(\\d+\\.\\d+)", RegexOptions.Compiled);
 
-            var result = html.SubstringAll("<b class=zhidao-basic-num>", "<\\/b>");
+            var level = new Regex(@"lv_(\d+)\.gif", RegexOptions.Compiled);
+            user.AdoptionRate = double.Parse(AdoptionRate.Match(html).Groups[1].Value);
+            // <li class=first> <span>回答采纳率<\/span> <b class=zhidao-basic-num>0%<\/b>  <li> <span>回答数<\/span> <b class=zhidao-basic-num>18<\/b>  <li> <span>回答被赞同数<\/span> <b class=zhidao-basic-num>3<\/b>  <li> <span>经验值<\/span> <b class=zhidao-basic-num>95<\/b>  <li> <span>财富值<\/span> <b class=zhidao-basic-num>90<\/b>  <li> <span>提问数<\/span> <b class=zhidao-basic-num>1<\/b>
+            user.AnwserCount = int.Parse(total.Match(html).Groups[1].Value);
+            user.AdoptionCount = int.Parse(manyi.Match(html).Groups[1].Value);
 
-            if (result.Count == 6)
-            {
-                //html = html.Replace("\\x22", "\"");
-                user.AdoptionRate = double.Parse(result[0].Replace("%", ""));
-                // <li class=first> <span>回答采纳率<\/span> <b class=zhidao-basic-num>0%<\/b>  <li> <span>回答数<\/span> <b class=zhidao-basic-num>18<\/b>  <li> <span>回答被赞同数<\/span> <b class=zhidao-basic-num>3<\/b>  <li> <span>经验值<\/span> <b class=zhidao-basic-num>95<\/b>  <li> <span>财富值<\/span> <b class=zhidao-basic-num>90<\/b>  <li> <span>提问数<\/span> <b class=zhidao-basic-num>1<\/b>
-                user.AnwserCount = int.Parse(result[1]);
-                user.AdoptionCount = int.Parse(result[2]);
-            }
-            var area = html.Substring("<label>擅长领域：<\\/label>", "<\\/ul>").HtmToTxt().Replace("\\", "").Trim();
-            user.ExpertArea = area;
+            user.ExpertArea = htmlDoc.ExtractData("//*[@id=\"R\"]/table[2]/tr/td[3]/table[1]/tr/td/table//tr/td[2]/span/a");
 
-            user.UserStage = html.Substring("<h2 class=\\x22headline yahei\\x22>他的知道形象<\\/h2>", "<\\/div>").HtmToTxt().Trim();
-            //Console.WriteLine(html);
+            user.UserStage = level.Match(html).Groups[1].Value;
 
-            user.UserName = html.Substring("<title>", "的百度个人主页</title>");
-
+            user.UserName = htmlDoc.DocumentNode.SelectSingleNode("//title").InnerText.Trim().Replace("- 用户信息 - 搜搜问问", "");
             Console.WriteLine(user.ToString());
         }
+
+        Regex dateTime = new Regex(@"\d{4}-\d+-\d+\s+\d+:\d+");
 
         private void ExtractQuestion(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)
         {
             if (html.Contains("您的访问出错了"))
             {
                 Console.WriteLine("访问出错了");
+
+                Thread.Sleep(60 * 3600 * 1000);
             }
 
             var question = new Question();
             question.KnowedgeType = KnowedgeType.SosoWenwen;
             question.Title = htmlDoc.ExtractDataById("questionTitle");
-            var time = htmlDoc.ExtractDataById("question_time");
+            var time = htmlDoc.ExtractData("//span[@class='question_time']");
             if (time != "")
             {
                 question.CreateTime = ParseDatetime(time);
             }
+            question.Tags = htmlDoc.ExtractDataById("questionTag");
 
             question.Content = htmlDoc.ExtractDataById("questionContent");
             question.Category = htmlDoc.ExtractDataById("questionCategory").Trim();
@@ -865,38 +873,78 @@ namespace Jade.CQA.KnowedegProcesser
                 var id = htmlDoc.DocumentNode.SelectSingleNode("//div[@class=\"sloved_answer\"]//div[2]//div[1]");
                 if (id != null)
                 {
-                    answer.AnswerId = id.Attributes["id"].Value.Replace("solveDIV", "");
-                    if (answer.AnswerId != "")
+                    try
                     {
-                        answer.Up = int.Parse("solvedNum" + answer.AnswerId);
-                        answer.Down = int.Parse("notSolvedNum" + answer.AnswerId);
+                        answer.AnswerId = id.Attributes["id"].Value.Replace("solveDIV", "");
+                        if (answer.AnswerId != "")
+                        {
+                            answer.Up = int.Parse(htmlDoc.ExtractDataById("solvedNum" + answer.AnswerId));
+                            answer.Down = int.Parse(htmlDoc.ExtractDataById("notSolvedNum" + answer.AnswerId));
+                        }
+                    }
+                    catch
+                    {
                     }
                 }
 
-                var user = best.SelectSingleNode(".//div[@class='user_sign']/a[2]");
+                var user = best.SelectSingleNode(".//div[@class='user_sign']/a[1]");
                 if (user != null)
                 {
                     answer.UserName = user.InnerText;
                 }
                 anwsers.Add(answer);
+                question.Status = QuestionStatus.WithSatisfiedAnwser;
             }
 
-            var default_answers = htmlDoc.DocumentNode.SelectNodes("//div[@class='default_answer']");
-            foreach (HtmlNode defaultAnswer in default_answers)
+            var default_answers = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'default_answe')]");
+            if (default_answers != null)
             {
-                var answer = new Answer
+                foreach (HtmlNode defaultAnswer in default_answers)
                 {
-                    IsBestAnwser = true,
-                    Content = defaultAnswer.SelectSingleNode("./div[1]").InnerText,
-                    KnowedgeType = KnowedgeType.SosoWenwen
-                };
+                    var answer = new Answer
+                    {
+                        IsBestAnwser = false,
+                        KnowedgeType = KnowedgeType.SosoWenwen
+                    };
+                    var c = defaultAnswer.SelectSingleNode("./div[1]/pre");
+                    if (c == null)
+                    {
+                        c = defaultAnswer.SelectSingleNode("./div[1]");
+                    }
+                    if (c != null)
+                        answer.Content = c.InnerText;
+                    var u = defaultAnswer.SelectSingleNode(".//div[class='user_sign']/a[1]");
+                    if (u != null)
+                    {
+                        answer.UserName = u.InnerText;
+                    }
+
+                    var t = dateTime.Match(defaultAnswer.InnerText).Value;
+                    if (t != "")
+                    {
+                        answer.CreateTime = ParseDatetime(t);
+                    }
+
+                }
             }
 
 
+            var related = "http://wenwen.soso.com/z/async/Async.htm?id=Lion&qid=" + question.Id + "&rw=&r=0.7012521030846983&rightRegionRefactor=false&rnd=1351132790753";
+
+            var relatedHtml = GetHtml(related);
             // 获取相关问题
 
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='relative-panel']//li/a");
-            var relativeQuestions = nodes != null ? nodes.Select(n => n.Attributes["href"].Value.Replace("/question/", "").Replace(".html", "")).ToList() : new List<string>();
+            var relatedDoc = new HtmlDocument();
+            relatedDoc.LoadHtml("<html><body>" + relatedHtml + "</body></html>");
+
+            var nodes = relatedDoc.DocumentNode.SelectNodes("//ul[@id='relateQuestionBlock']//a[@href]");
+
+            var rIdRegex = new Regex(@"/z/q(\d+)\.htm");
+
+            // /z/q233400709.htm?sp=1002&amp;pid=ask.xgzs.lddj
+            var relativeQuestions = nodes != null ?
+                nodes.Select(n => rIdRegex.Match(n.Attributes["href"].Value).Groups[1].Value).ToList() :
+                new List<string>();
             /*
              *  <li>
                <span class="details">2012-4-22</span>

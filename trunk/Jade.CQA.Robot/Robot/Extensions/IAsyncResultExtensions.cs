@@ -21,6 +21,7 @@ namespace Jade.CQA.Robot.Extensions
                 timeoutValue = Convert.ToInt32(timeout.Value.TotalMilliseconds);
             }
 
+            // 放入线程池子执行
             ThreadPool.RegisterWaitForSingleObject(asyncResult.AsyncWaitHandle,
                 (s, isTimedout) => endMethod(asyncResult, isTimedout), null,
                 timeoutValue, true);

@@ -74,10 +74,6 @@ namespace Jade.CQA.Robot.Services
                 return true;
             }
 
-            //todo
-            return false;
-
-
             return !m_Crawler.AdhereToRobotRules || m_Robot.IsAllowed(m_Crawler.UserAgent, uri);
         }
 
