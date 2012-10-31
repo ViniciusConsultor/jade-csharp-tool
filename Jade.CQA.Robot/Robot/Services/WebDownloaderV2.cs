@@ -83,16 +83,25 @@ namespace Jade.CQA.Robot.Services
                 requestState.Clean();
                 requestState.Request = (HttpWebRequest)WebRequest.Create(requestState.CrawlStep.Uri);
                 requestState.Request.Method = requestState.Method.ToString();
+                if (this.Proxy != null)
+                {
+                    requestState.Request.Proxy = this.Proxy;
+                }
                 SetDefaultRequestProperties(requestState.Request);
+                //异步调用并不是要减少线程的开销, 它的主要目的是让调用方法的主线程不需要同步等待在这个函数调用上, 从而可以让主线程继续执行它下面的代码.
+                //与此同时, 系统会通过从ThreadPool中取一个线程来执行,帮助我们将我们要写/读的数据发送到网卡.
                 IAsyncResult asyncResult = requestState.Request.BeginGetResponse(null, requestState);
                 asyncResult.FromAsync((ia, isTimeout) =>
                 {
+                    // 超时
                     if (isTimeout)
                     {
+                        // 重试下载
                         DownloadAsync(requestState, new TimeoutException("Connection Timeout"));
                     }
                     else
                     {
+                        // 读取成功
                         ResponseCallback<T>(ia);
                     }
                 }, ConnectionTimeout);
@@ -158,6 +167,11 @@ namespace Jade.CQA.Robot.Services
             return result;
         }
 
+        /// <summary>
+        /// 结果回调
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="asynchronousResult"></param>
         private void ResponseCallback<T>(IAsyncResult asynchronousResult)
         {
             RequestState<T> requestState = (RequestState<T>)asynchronousResult.AsyncState;
@@ -317,6 +331,17 @@ namespace Jade.CQA.Robot.Services
                         DownloadTime = requestState.DownloadTimer.Elapsed,
                     }, null);
             }
+        }
+
+        #endregion
+
+        #region IWebDownloader 成员
+
+
+        public WebProxy Proxy
+        {
+            get;
+            set;
         }
 
         #endregion

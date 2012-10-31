@@ -2,6 +2,7 @@ using System;
 
 using Jade.CQA.Robot.Event;
 using Jade.CQA.Robot.Services;
+using System.Net;
 
 namespace Jade.CQA.Robot.Interfaces
 {
@@ -57,6 +58,11 @@ namespace Jade.CQA.Robot.Interfaces
         /// 使用的UserAgent头
         /// </summary>
         string UserAgent { get; set; }
+
+        /// <summary>
+        /// 代理
+        /// </summary>
+        WebProxy Proxy { get; set; }
 
         #endregion
 

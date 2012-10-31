@@ -14,7 +14,7 @@ namespace Jade.CQA.Robot
 
 
     /// <summary>
-    /// 队列
+    /// 爬虫等待队列元素
     /// </summary>
     [DataContract]
     [Serializable]

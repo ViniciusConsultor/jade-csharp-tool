@@ -94,7 +94,7 @@ namespace Jade.CQA.Robot
 		/// </summary>
 		private void OnDownloadProgress(DownloadProgressEventArgs downloadProgressEventArgs)
 		{
-			m_Logger.Error("Download progress for step {0}", downloadProgressEventArgs.Step.Uri);
+            m_Logger.Error("Download progress for step {0} Percent:{1}", downloadProgressEventArgs.Step.Uri, downloadProgressEventArgs.PercentCompleted);
 			DownloadProgress.ExecuteEvent(this, () => downloadProgressEventArgs);
 		}
 

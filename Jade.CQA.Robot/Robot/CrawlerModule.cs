@@ -28,7 +28,7 @@ namespace Jade.CQA.Robot
             // 默认使用BloomFilterHistoryService
             builder.Register(c => new InMemoryCrawlerHistoryService()).As<ICrawlerHistory>().InstancePerDependency();
 			builder.Register(c => new InMemoryCrawlerQueueService()).As<ICrawlerQueue>().InstancePerDependency();
-			builder.Register(c => new SystemTraceLoggerService()).As<ILog>().InstancePerDependency();
+            builder.Register(c => new ConsoleLoggerService()).As<ILog>().InstancePerDependency();
 #if !DOTNET4
 			builder.Register(c => new ThreadTaskRunnerService()).As<ITaskRunner>().InstancePerDependency();
 #else
