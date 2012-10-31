@@ -27,7 +27,7 @@ namespace Jade.CQA.Robot
 			builder.Register(c => new WebDownloaderV2()).As<IWebDownloader>().SingleInstance().ExternallyOwned();
             // 默认使用BloomFilterHistoryService
             builder.Register(c => new InMemoryCrawlerHistoryService()).As<ICrawlerHistory>().InstancePerDependency();
-			builder.Register(c => new InMemoryCrawlerQueueService()).As<ICrawlerQueue>().InstancePerDependency();
+            builder.Register(c => new InMemoryFIFOCrawlerQueueService()).As<ICrawlerQueue>().InstancePerDependency();
             builder.Register(c => new ConsoleLoggerService()).As<ILog>().InstancePerDependency();
 #if !DOTNET4
 			builder.Register(c => new ThreadTaskRunnerService()).As<ITaskRunner>().InstancePerDependency();

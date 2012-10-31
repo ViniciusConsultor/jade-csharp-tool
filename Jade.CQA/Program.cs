@@ -285,54 +285,29 @@ namespace Jade.CQA
             Console.WriteLine("BindIPEndpoint called");
             return new IPEndPoint(IPAddress.Parse("36.4.196.164"), 0);
         }
+
+
+        static bool userProxy = true;
+
         static void Main(string[] args)
         {
-           
 
-            HttpWebRequest request;
-            HttpWebResponse response;
-            StreamReader sr;
-            string str;
+           // testip();
 
-            request = (HttpWebRequest)WebRequest.Create("http://iframe.ip138.com/ic.asp");
-            request.KeepAlive = false;
-            request.ServicePoint.BindIPEndPointDelegate = new BindIPEndPoint(BindIPEndPointCallback3);
-            request.ServicePoint.ConnectionLeaseTimeout = 0;
-            response = (HttpWebResponse)request.GetResponse();
-            sr = new StreamReader(response.GetResponseStream(),Encoding.GetEncoding("gb2312"));
-            str = sr.ReadToEnd();
-            Console.WriteLine(str);
-            test1();
-            //RasManager myRas = new RasManager();
-
-            //myRas.EntryName = "#777";          // entry name in phonebook 
-            //myRas.UserName = "ctnet@mycdma.cn";
-            //myRas.Password = "vnet.mobi";
-            //myRas.Connect();
-
-
-            //Console.Read();
-
-            //while (true)
-            //{
-            //    Console.WriteLine("按任意键连接网络...");
-
-            //    Console.ReadLine();
-
-            //    Console.WriteLine(ADSL.ResetNetwork());
-            //}
-
-
-
-
-
-            //Console.Read();
-            //ras.Disconnect();
-
-            //Console.Read();
+          
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
-            //getProxy();
+            if (userProxy)
+            {
+                Console.Out.WriteLine("获取代理中....");
+
+                getProxy();
+
+                Console.Out.WriteLine("等待5秒开始抓取");
+
+                Thread.Sleep(5000);
+            }
+
             //if (File.Exists("proxy.txt"))
             //{
             //    Proxyes.AddRange(File.ReadAllLines("proxy.txt").ToList().Select(l =>
@@ -349,12 +324,6 @@ namespace Jade.CQA
             //Console.Read();
             //}
 
-
-
-            //WebDownloaderV2 downloader = new WebDownloaderV2();
-            //var result = downloader.Download(new CrawlStep(new Uri("http://www.baidu.com"), 0), null, DownloadMethod.GET);
-            //Console.WriteLine(result.Text);
-            //Console.ReadLine();
             // Remove limits from Service Point Manager
             ServicePointManager.MaxServicePoints = 999999;
             ServicePointManager.DefaultConnectionLimit = 999999;
@@ -365,6 +334,25 @@ namespace Jade.CQA
             Console.Out.WriteLine("CQA Crawler");
 
             StartCrawler();
+        }
+
+        private static void testip()
+        {
+
+            HttpWebRequest request;
+            HttpWebResponse response;
+            StreamReader sr;
+            string str;
+
+            request = (HttpWebRequest)WebRequest.Create("http://iframe.ip138.com/ic.asp");
+            request.KeepAlive = false;
+            request.ServicePoint.BindIPEndPointDelegate = new BindIPEndPoint(BindIPEndPointCallback3);
+            request.ServicePoint.ConnectionLeaseTimeout = 0;
+            response = (HttpWebResponse)request.GetResponse();
+            sr = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("gb2312"));
+            str = sr.ReadToEnd();
+            Console.WriteLine(str);
+            test1();
         }
 
         private static void test1()
@@ -386,6 +374,7 @@ namespace Jade.CQA
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Console.WriteLine(e.ExceptionObject);
+            Console.ReadLine();
         }
 
         private static void StartCrawler()
@@ -399,7 +388,7 @@ namespace Jade.CQA
                 new BadiduDocumentProcessor(), new DumperStep()
                 )// Process html)
             {
-                IsUserProxy = false,
+                IsUserProxy = userProxy,
                 //Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
                 // Custom step to visualize crawl
                 DownloadRetryCount = 0,
