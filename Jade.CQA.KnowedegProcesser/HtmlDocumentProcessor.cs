@@ -16,6 +16,7 @@ using Jade.CQA.Robot.Extensions;
 using System.Globalization;
 using System.Threading;
 using Jade.CQA.Robot.Services;
+using System.Net.Sockets;
 
 namespace Jade.CQA.KnowedegProcesser
 {
@@ -453,7 +454,24 @@ namespace Jade.CQA.KnowedegProcesser
             if (html.Contains("您的访问出错了"))
             {
                 Console.WriteLine("访问出错了");
-                Thread.Sleep(5000);
+
+                RASDisplay ras = new RASDisplay();
+                Console.WriteLine("等待重拨号中。。。");
+                ras.Disconnect();              
+                Thread.Sleep(10000);
+                Console.WriteLine("重新拨号中。。。");
+                ras.Connect("3G");
+                Thread.Sleep(1000);
+                IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+                foreach (IPAddress ip in arrIPAddresses)
+                {
+                    if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+                    {
+                        Console.WriteLine("新ip" + ip.ToString());
+                    }
+                }
+
+                //todo 重拨号
             }
 
             var question = new Question();
@@ -521,8 +539,8 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.KnowedgeType = KnowedgeType.BaiduZhidao;
                         answser.Content = htmlDoc.ExtractData("//pre[@id=\"best-answer-content\"]");
                         answser.CreateTime = ParseDatetime(bestAnswer.SelectSingleNode("./div[1]/div[1]/span").InnerText.Trim());
-                        
-                        
+
+
                         //answser.CommentCount = int.Parse(htmlDoc.ExtractData("//*[@id=\"best-answer-panel\"]/div[2]/div[1]/div/div/div/div[2]"));
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];

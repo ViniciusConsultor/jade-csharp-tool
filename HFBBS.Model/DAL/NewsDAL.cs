@@ -37,7 +37,7 @@ namespace Jade.Model.MySql
             sqlBuilder.IntegratedSecurity = false;
             sqlBuilder.UserID = user;
             sqlBuilder.Password = pwd;
-            sqlBuilder.MultipleActiveResultSets = true;
+            //sqlBuilder.MultipleActiveResultSets = true;
             // Build the SqlConnection connection string.
             string providerString = sqlBuilder.ToString();
 
@@ -59,7 +59,9 @@ namespace Jade.Model.MySql
             res://*/Model1.ssdl|
             res://*/Model1.msl";
             connectionString = entityBuilder.ToString();
+
             Repository = new HFBBSEntities(connectionString);
+
         }
 
         public List<string> GetTaskUrls(int taskId)
@@ -312,7 +314,7 @@ namespace Jade.Model.MySql
             sqlBuilder.IntegratedSecurity = false;
             sqlBuilder.UserID = user;
             sqlBuilder.Password = pwd;
-            sqlBuilder.MultipleActiveResultSets = true;
+            //sqlBuilder.MultipleActiveResultSets = true;
             // Build the SqlConnection connection string.
             string providerString = sqlBuilder.ToString();
 
@@ -334,7 +336,9 @@ namespace Jade.Model.MySql
             res://*/Model1.ssdl|
             res://*/Model1.msl";
             connectionString = entityBuilder.ToString();
+
             Repository = new HFBBSEntities(connectionString);
+
         }
         public IImageFile Save(string url, string fileName)
         {
