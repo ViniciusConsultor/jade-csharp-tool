@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jade.CQA.Robot.Crawler" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iIQoDoPqQCEyACQhgUQAAQI0NAAAAggjoJwBBUWBMUA=</HashCode>
+      <FileName>Robot\Crawler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.ProxyModel" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Crawler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.CrawlStep" Collapsed="true">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEgAAAAAAAAAAAAIAgCAAAAAAABiA=</HashCode>
+      <FileName>Robot\CrawlStep.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.PropertyBag" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgAAAAQAAGQAiAAgEAAKGAAEAIAQIAAWCgACAiA=</HashCode>
+      <FileName>Robot\PropertyBag.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.CrawlerQueueEntry" Collapsed="true">
+    <Position X="2" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEoAAAAAAAAAAAAIAAAAAAAAACAiA=</HashCode>
+      <FileName>Robot\CrawlerQueueEntry.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>

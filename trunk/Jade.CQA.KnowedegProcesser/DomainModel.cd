@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jade.CQA.Model.FetchResult" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAQ=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Model.BaseModel" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Model.Question" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAEAoAABEAFAABACAAAAAWAAEAACAAAAAAACAI=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Model.Answer" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAICIAAgACAABFAAAAAAAQAAEAAAABAQIAAAQAQAI=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Model.QuestionAnswer" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAAAQAAAAAAAAEQAgAAAAAAEAAAAAAAAAAACQBAAA=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Model.User" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAEAAAAAAEACBAIASAEAAAAAAAAQAAACAgACA=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Jade.CQA.Model.KnowedgeType">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAACA=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Jade.CQA.Model.QuestionStatus">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAABAQAAQAAAAAAAA=</HashCode>
+      <FileName>Model\DomainModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>

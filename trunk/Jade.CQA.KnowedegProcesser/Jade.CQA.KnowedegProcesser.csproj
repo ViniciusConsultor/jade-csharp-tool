@@ -67,6 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DocumentProcessor.cd" />
+    <None Include="DomainModel.cd" />
     <None Include="CSharpDriver-1.6.0.4624\CSharpDriverDocs.chm" />
   </ItemGroup>
   <ItemGroup>
