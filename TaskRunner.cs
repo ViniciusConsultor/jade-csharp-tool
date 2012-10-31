@@ -78,7 +78,15 @@ namespace Jade
             Rule = rule;
             Logger = logger;
             DataSaver = dataSaver;
-            OldUrls = CacheObject.DownloadDataDAL.GetTaskUrls(rule.SiteRuleId);
+            try
+            {
+                OldUrls = CacheObject.DownloadDataDAL.GetTaskUrls(rule.SiteRuleId);
+            }
+            catch(Exception ex)
+            {
+                Log4Log.Error("加载OldUrls出错" + ex.Message);
+                Log4Log.Exception(ex);
+            }
         }
 
         /// <summary>
@@ -296,6 +304,8 @@ namespace Jade
                             }
                             //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                         }
+                        data.DownloadTime = DateTime.Now; 
+                        
                         DataSaver.Update(data);
                         Logger.Success("[" + Rule.Name + "] 成功采集并更新数据到数据库【" + data.Title + "】");
                         index++;
@@ -416,8 +426,15 @@ namespace Jade
                 }
             }
 
-            var unFinisedUrls = CacheObject.DownloadDataDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
-            unFinisedUrls.ForEach(u => urls.Add(new Uri(u)));
+            try
+            {
+                var unFinisedUrls = CacheObject.DownloadDataDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
+                unFinisedUrls.ForEach(u => urls.Add(new Uri(u)));
+            }
+            catch(Exception ex)
+            {
+                Log4Log.Exception(ex);
+            }
         }
 
         private void SetExtractUrl(

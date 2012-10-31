@@ -85,7 +85,7 @@ namespace Jade.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.205")]
         public string ServerIp {
             get {
                 return ((string)(this["ServerIp"]));
@@ -109,7 +109,7 @@ namespace Jade.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("111111")]
+        [global::System.Configuration.DefaultSettingValueAttribute("root")]
         public string ServerPasword {
             get {
                 return ((string)(this["ServerPasword"]));

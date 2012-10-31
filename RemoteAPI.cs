@@ -171,7 +171,7 @@ namespace Jade
             var response = client.UploadFile("http://newscms.house365.com/newCMS/news/addpic_save.php", "shuiyin=ok&sywz_ty=cb", @"filename=" + filename);
             // "附件保存成功!\r\n<script type=\"text/javascript\">\r\n\r\n\r\nfunction returnValue()\r\n{\r\nwindow.opener.document.all.src.value='http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png';    //地址\r\nthis.close();\r\n}\r\n\r\nfunction returnValue2()\r\n{\r\nwindow.opener.ksfj('http://pic.house365.com/newcms/2012/07/26/13432723935010b5c97c647.png','','',0,'');\r\nthis.close();\r\n}\r\n\r\n\r\n\r\nvar refresh = \"list_pic.php?user_id=5809&parent_channel_id=&bjq=\";\r\nfunction myrefresh()\r\n{\r\nwindow.location.href=refresh;\r\n}\r\nsetTimeout('myrefresh()',1000); //指定1秒刷新一次\r\n</script>"
             if (response.Contains("附件保存成功"))
-            {              
+            {
                 var regex = new System.Text.RegularExpressions.Regex("value='([^']+)'");
                 var url = regex.Match(response).Groups[1].Value;
                 Log4Log.Error("上传" + filename + "成功，url为" + url);
@@ -266,7 +266,7 @@ namespace Jade
                          encoding(data.SubTitle),
                        getLabelData(data.label_base, newsid),
                         data.cmspinglun ? "1" : "0", "", "", data.kfbm_id, data.kfbm_link, data.gfbm_id, data.gfbm_link,
-                        CacheObject.IsTest ? encoding(data.Content + "") : encoding("" + data.Content),
+                        CacheObject.IsTest ? encoding("<!-- news begin-->" + data.Content + "<!-- news end-->") : encoding("" + data.Content),
                         encoding(data.news_abs), encoding(data.news_top), data.news_guideimage, data.news_guideimage2, encoding(data.Summary), encoding(data.news_description),
                         data.news_link, encoding(data.news_down),
                          encoding(data.news_left), encoding(data.news_right), data.comment_url, data.news_video, newsid,
@@ -331,7 +331,7 @@ namespace Jade
                         if (!src.Contains("http://"))
                         {
                             //"file:///D:/project/Client-1.2R2/HFBBS/release//Pic/5/n14290497.jpg"
-                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\").Replace("%20"," ");
+                            var file = src.Replace("file:///", "").Replace("//", "\\").Replace("/", "\\").Replace("%20", " ");
                             if (System.IO.File.Exists(file))
                             {
                                 try

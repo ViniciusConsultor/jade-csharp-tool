@@ -5,6 +5,7 @@ using System.Text;
 using Jade.Model;
 using Jade.Model.Access;
 using Jade.DAL;
+using Jade.Model.MySql;
 
 namespace Jade
 {
@@ -27,12 +28,12 @@ namespace Jade
 
         #region IDataFactory 成员
 
-        public  Model.IDownloadData CreateDownloadData(int id)
+        public Model.IDownloadData CreateDownloadData(int id)
         {
             return CacheObject.DownloadDataDAL.Get(id);
         }
 
-        public  Model.IDownloadData CreateDownloadData(string url, int taskId)
+        public Model.IDownloadData CreateDownloadData(string url, int taskId)
         {
             if (Properties.Settings.Default.IsOnline)
             {
@@ -41,11 +42,12 @@ namespace Jade
             return new Model.Access.DownloadData(taskId, url);
         }
 
-        public  Jade.DAL.IDownloadDataDAL CreateDAL()
+        public Jade.DAL.IDownloadDataDAL CreateDAL()
         {
             if (Properties.Settings.Default.IsOnline)
             {
-                return new Model.MySql.NewsDAL();
+               CacheObject.ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
+                return new Model.MySql.NewsDAL(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
             }
             return new Model.Access.DownloadDataDAL();
         }

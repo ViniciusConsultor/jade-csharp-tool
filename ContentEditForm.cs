@@ -259,7 +259,7 @@ namespace Jade
         public void InitDownloadData(IDownloadData data)
         {
             isSaving = false;
-            if (Jade.Properties.Settings.Default.IsOnline && data.Content.Contains("db://"))
+            if (Jade.Properties.Settings.Default.IsOnline && data.Content != null && data.Content.Contains("db://"))
             {
                 var baseDir = AppDomain.CurrentDomain.BaseDirectory + "\\Pic\\" + data.TaskId;
 

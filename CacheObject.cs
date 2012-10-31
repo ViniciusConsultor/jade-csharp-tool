@@ -29,7 +29,7 @@ namespace Jade
             Categories = RuleManager.GetCategories();
             RunningTasks = new List<RunningTask>();
             DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
-            ImageSaver = new ImageSaver();
+            ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
         }
 
 

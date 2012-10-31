@@ -4,89 +4,163 @@ using System.Linq;
 using System.Text;
 using Jade;
 using System.IO;
+using System.Data.SqlClient;
+using System.Data.EntityClient;
 
 namespace Jade.Model.MySql
 {
     public class NewsDAL : Jade.DAL.IDownloadDataDAL
     {
-        HFBBSEntities Repository = new HFBBSEntities();
+        HFBBSEntities Repository;
+
+        string connectionString = "";
+
+        public NewsDAL(string ip, string database, string user, string pwd)
+        {
+            //    <add name="HFBBSEntities" 
+            //connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;
+            //provider=MySql.Data.MySqlClient;provider connection string=&quot;server=127.0.0.1;User Id=root;password=111111;Persist Security Info=True;database=hfbbs&quot;"
+            //providerName="System.Data.EntityClient" />
+
+            string providerName = "MySql.Data.MySqlClient";
+            string serverName = ip;
+            string databaseName = database;
+
+            // Initialize the connection string builder for the
+            // underlying provider.
+            SqlConnectionStringBuilder sqlBuilder =
+                new SqlConnectionStringBuilder();
+
+            // Set the properties for the data source.
+            sqlBuilder.DataSource = serverName;
+            sqlBuilder.InitialCatalog = databaseName;
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.UserID = user;
+            sqlBuilder.Password = pwd;
+            sqlBuilder.MultipleActiveResultSets = true;
+            // Build the SqlConnection connection string.
+            string providerString = sqlBuilder.ToString();
+
+            // Initialize the EntityConnectionStringBuilder.
+            EntityConnectionStringBuilder entityBuilder =
+                new EntityConnectionStringBuilder();
+
+            //Set the provider name.
+            entityBuilder.Provider = providerName;
+
+            // Set the provider-specific connection string.
+            entityBuilder.ProviderConnectionString = providerString;
+
+            entityBuilder.Provider = providerName;
+
+            // Set the Metadata location.
+            entityBuilder.Metadata = //@"res://*"; //或从.config文件中copy
+            @"res://*/Model1.csdl|
+            res://*/Model1.ssdl|
+            res://*/Model1.msl";
+            connectionString = entityBuilder.ToString();
+            Repository = new HFBBSEntities(connectionString);
+        }
 
         public List<string> GetTaskUrls(int taskId)
         {
-            return Repository.downloaddata.Where(d => d.TaskId == taskId).Select(d => d.Url).ToList();
+            lock (Repository)
+            {
+                return Repository.downloaddata.Where(d => d.TaskId == taskId).Select(d => d.Url).ToList();
+            }
         }
 
         public List<string> GetUnFetchedUrlList(int taskId)
         {
-            return Repository.downloaddata.Where(d => d.TaskId == taskId && !d.IsDownload).Select(d => d.Url).ToList();
+            lock (Repository)
+            {
+                return Repository.downloaddata.Where(d => d.TaskId == taskId && !d.IsDownload).Select(d => d.Url).ToList();
+            }
         }
 
         public downloaddata Get(string url)
         {
-            return Repository.downloaddata.First(d => d.Url == url);
+            lock (Repository)
+            {
+                return Repository.downloaddata.First(d => d.Url == url);
+            }
         }
 
         public downloaddata Get(int id)
         {
-            return Repository.downloaddata.First(d => d.ID == id);
+            lock (Repository)
+            {
+                return Repository.downloaddata.First(d => d.ID == id);
+            }
         }
 
         public void Add(downloaddata data)
         {
-            try
+            lock (Repository)
             {
-                Repository.AddTodownloaddata(data);
-                Repository.SaveChanges();
-            }
-            catch
-            {
+                try
+                {
+                    Repository.AddTodownloaddata(data);
+                    Repository.SaveChanges();
+                }
+                catch
+                {
+                }
             }
         }
 
         public void Update(downloaddata data)
         {
-            try
+            lock (Repository)
             {
-                if (data.EntityState == System.Data.EntityState.Detached)
+                try
                 {
-                    Repository.Attach(data);
+                    if (data.EntityState == System.Data.EntityState.Detached)
+                    {
+                        Repository.Attach(data);
+                    }
+                    Repository.SaveChanges();
                 }
-                Repository.SaveChanges();
-            }
-            catch
-            {
+                catch
+                {
+                }
             }
         }
 
         public void Delete(downloaddata data)
         {
-            Repository.DeleteObject(data);
-            Repository.SaveChanges();
+            lock (Repository)
+            {
+                Repository.DeleteObject(data);
+                Repository.SaveChanges();
+            }
         }
 
         public List<downloaddata> GetList(SearchArgs args, out int totalCount)
         {
-            //totalCount = 10;
+            lock (Repository)
+            {
+                //totalCount = 10;
 
-            //return new List<downloaddata> { 
-            //    new downloaddata(){Title="test 1", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false},
-            //     new downloaddata(){Title="test 2", IsDownload = true,IsEdit = false,EditorUserName="xxx",IsPublish= true},
-            //      new downloaddata(){Title="test3 ", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false}
-            //};
+                //return new List<downloaddata> { 
+                //    new downloaddata(){Title="test 1", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false},
+                //     new downloaddata(){Title="test 2", IsDownload = true,IsEdit = false,EditorUserName="xxx",IsPublish= true},
+                //      new downloaddata(){Title="test3 ", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false}
+                //};
 
-            var query = Repository.downloaddata.Where(
-                t => (args.IsDownload ? t.IsDownload == true : true) &&
-                    (args.IsEdit ? t.IsEdit == true : true) &&
-                    (args.IsPublish ? t.IsPublish == true : true) &&
-                     (args.TaskId != 0 ? t.TaskId == args.TaskId : true) &&
-                      (args.TaskIds.Count != 0 ? args.TaskIds.Contains((int)t.TaskId) : true) &&
-                     (!string.IsNullOrEmpty(args.EditorName) ? t.EditorUserName == args.EditorName : true) &&
-                    (!string.IsNullOrEmpty(args.Keyword) ? t.Title.Contains(args.Keyword) : true)
-                );
-            totalCount = query.Count();
+                var query = Repository.downloaddata.Where(
+                    t => (args.IsDownload ? t.IsDownload == true : true) &&
+                        (args.IsEdit ? t.IsEdit == true : true) &&
+                        (args.IsPublish ? t.IsPublish == true : true) &&
+                         (args.TaskId != 0 ? t.TaskId == args.TaskId : true) &&
+                          (args.TaskIds.Count != 0 ? args.TaskIds.Contains((int)t.TaskId) : true) &&
+                         (!string.IsNullOrEmpty(args.EditorName) ? t.EditorUserName == args.EditorName : true) &&
+                        (!string.IsNullOrEmpty(args.Keyword) ? t.Title.Contains(args.Keyword) : true)
+                    );
+                totalCount = query.Count();
 
-            return query.OrderByDescending(t => t.EditTime).OrderByDescending(t => t.ID).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
-
+                return query.OrderByDescending(t => t.EditTime).OrderByDescending(t => t.DownloadTime).Skip((args.PageIndex - 1) * args.PageSzie).Take(args.PageSzie).ToList();
+            }
         }
 
 
@@ -113,16 +187,19 @@ namespace Jade.Model.MySql
 
         List<IDownloadData> DAL.IDownloadDataDAL.GetList(SearchArgs args, out int totalCount)
         {
-            var result = new List<IDownloadData>();
-
-            var datas = this.GetList(args, out totalCount);
-
-            foreach (var row in datas)
+            lock (Repository)
             {
-                result.Add(row);
-            }
+                var result = new List<IDownloadData>();
 
-            return result;
+                var datas = this.GetList(args, out totalCount);
+
+                foreach (var row in datas)
+                {
+                    result.Add(row);
+                }
+
+                return result;
+            }
         }
 
         public void Update(IDownloadData data)
@@ -135,11 +212,14 @@ namespace Jade.Model.MySql
 
         public void DeleteAll()
         {
-            foreach (var data in Repository.downloaddata)
+            lock (Repository)
             {
-                Repository.DeleteObject(data);
+                foreach (var data in Repository.downloaddata)
+                {
+                    Repository.DeleteObject(data);
+                }
+                Repository.SaveChanges();
             }
-            Repository.SaveChanges();
         }
 
         #endregion
@@ -149,7 +229,10 @@ namespace Jade.Model.MySql
 
         public List<downloaddata> GetAll()
         {
-            return Repository.downloaddata.ToList();
+            lock (Repository)
+            {
+                return Repository.downloaddata.ToList();
+            }
         }
 
         #endregion
@@ -176,7 +259,10 @@ namespace Jade.Model.MySql
 
         public IDownloadData Get(string url, int siteRuleId)
         {
-            return Repository.downloaddata.First(d => d.Url == url && d.TaskId == siteRuleId);
+            lock (Repository)
+            {
+                return Repository.downloaddata.First(d => d.Url == url && d.TaskId == siteRuleId);
+            }
         }
     }
 
@@ -200,29 +286,86 @@ namespace Jade.Model.MySql
 
     public class ImageSaver : IImageSaver
     {
-        HFBBSEntities Repository = new HFBBSEntities();
+        HFBBSEntities Repository;
 
+        string connectionString = "";
+
+        public ImageSaver(string ip, string database, string user, string pwd)
+        {
+            //    <add name="HFBBSEntities" 
+            //connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;
+            //provider=MySql.Data.MySqlClient;provider connection string=&quot;server=127.0.0.1;User Id=root;password=111111;Persist Security Info=True;database=hfbbs&quot;"
+            //providerName="System.Data.EntityClient" />
+
+            string providerName = "MySql.Data.MySqlClient";
+            string serverName = ip;
+            string databaseName = database;
+
+            // Initialize the connection string builder for the
+            // underlying provider.
+            SqlConnectionStringBuilder sqlBuilder =
+                new SqlConnectionStringBuilder();
+
+            // Set the properties for the data source.
+            sqlBuilder.DataSource = serverName;
+            sqlBuilder.InitialCatalog = databaseName;
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.UserID = user;
+            sqlBuilder.Password = pwd;
+            sqlBuilder.MultipleActiveResultSets = true;
+            // Build the SqlConnection connection string.
+            string providerString = sqlBuilder.ToString();
+
+            // Initialize the EntityConnectionStringBuilder.
+            EntityConnectionStringBuilder entityBuilder =
+                new EntityConnectionStringBuilder();
+
+            //Set the provider name.
+            entityBuilder.Provider = providerName;
+
+            // Set the provider-specific connection string.
+            entityBuilder.ProviderConnectionString = providerString;
+
+            entityBuilder.Provider = providerName;
+
+            // Set the Metadata location.
+            entityBuilder.Metadata = //@"res://*"; //或从.config文件中copy
+            @"res://*/Model1.csdl|
+            res://*/Model1.ssdl|
+            res://*/Model1.msl";
+            connectionString = entityBuilder.ToString();
+            Repository = new HFBBSEntities(connectionString);
+        }
         public IImageFile Save(string url, string fileName)
         {
-            imagefiles image = new imagefiles();
-            image.FileName = Path.GetFileName(fileName);
-            image.Url = url;
-            image.Data = File.ReadAllBytes(fileName);
+            lock (Repository)
+            {
+                imagefiles image = new imagefiles();
+                image.FileName = Path.GetFileName(fileName);
+                image.Url = url;
+                image.Data = File.ReadAllBytes(fileName);
 
-            Repository.imagefiles.AddObject(image);
-            Repository.SaveChanges();
-            return image;
+                Repository.imagefiles.AddObject(image);
+                Repository.SaveChanges();
+                return image;
+            }
 
         }
 
         public IImageFile Get(string url)
         {
-            return Repository.imagefiles.FirstOrDefault(i => i.Url == url);
+            lock (Repository)
+            {
+                return Repository.imagefiles.FirstOrDefault(i => i.Url == url);
+            }
         }
 
         public bool Exist(string url)
         {
-            return Repository.imagefiles.Any(i => i.Url == url);
+            lock (Repository)
+            {
+                return Repository.imagefiles.Any(i => i.Url == url);
+            }
         }
     }
 }

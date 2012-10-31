@@ -71,7 +71,8 @@ namespace Jade
                 {
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
                     var data = dataTable[e.RowHandle];
-                    e.DisplayText = HtmToTxt(data.Content);
+                    if (data.Content != null)
+                        e.DisplayText = HtmToTxt(data.Content);
                 }
                 if (e.Column.Equals(SiteRuleName))
                 {
@@ -96,10 +97,17 @@ namespace Jade
                 {
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
                     var data = dataTable[e.RowHandle];
-                    if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
-                        e.DisplayText = "----";
+                    if (data.EditTime != null)
+                    {
+                        if (data.EditTime < new DateTime(2012, 1, 1, 0, 0, 0, 0))
+                            e.DisplayText = "----";
+                        else
+                            e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd HH:mm:ss");
+                    }
                     else
-                        e.DisplayText = ((DateTime)data.EditTime).ToString("yyyy-MM-dd HH:mm:ss");
+                    {
+                        e.DisplayText = "----";
+                    }
                 }
             }
             catch (Exception ex)
@@ -141,13 +149,13 @@ namespace Jade
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
                     var data = dataTable[rowIndex];
                     data = CacheObject.DownloadDataDAL.Get(data.ID);
-                    if (!string.IsNullOrEmpty(data.EditorUserName) && data.EditorUserName != CacheObject.CurrentUser.Name)
+                    if (!string.IsNullOrEmpty(data.EditorUserName) && data.EditorUserName != CacheObject.CurrentUser.Name && data.EditorUserName != "用户")
                     {
                         MessageBox.Show("该新闻已被被人占有，你不能再编辑!");
                         return;
                     }
 
-                    if (Jade.Properties.Settings.Default.IsOnline && data.EditorUserName != CacheObject.CurrentUser.Name)
+                    if (Jade.Properties.Settings.Default.IsOnline && data.EditorUserName != CacheObject.CurrentUser.Name && CacheObject.IsLognIn)
                     {
                         if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -648,6 +656,14 @@ namespace Jade
 
         private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!CacheObject.IsLognIn)
+            {
+                MessageBox.Show(this,
+                           "你需要先登录！请退出程序登录进入！",
+                           "抢占新闻");
+                return;
+
+            }
             if (MessageBox.Show(this,
                         "您确定要占有所选新闻？",
                         "抢占新闻",
