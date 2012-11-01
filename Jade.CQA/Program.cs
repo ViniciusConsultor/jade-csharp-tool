@@ -46,6 +46,8 @@ namespace Jade.CQA
 
         public static Regex IdRegex = new Regex("(\\d+)\\.html");
 
+        public static int Count = 0;
+
         /// <summary>
         /// </summary>
         /// <param name = "crawler">
@@ -75,7 +77,11 @@ namespace Jade.CQA
                 var fetchResult = (FetchResult)propertyBag["fetchResult"].Value;
                 if (fetchResult != null)
                 {
-                    CQASaver.SaveFetchResult(fetchResult);
+                    // CQASaver.SaveFetchResult(fetchResult);
+
+                    Count++;
+
+                    Console.WriteLine("已累积抓取" + Count + "，耗时" + crawler.ElapsedTime.ToString());
 
                     if (fetchResult.User == null)
                     {
@@ -90,6 +96,7 @@ namespace Jade.CQA
                     }
                     else
                     {
+                        Console.Out.WriteLine(ConsoleColor.DarkGreen, "用户：{0}", fetchResult.User.ToString());
                     }
                 }
                 Console.Out.WriteLine();
@@ -132,9 +139,6 @@ namespace Jade.CQA
 
     class Program
     {
-
-
-
         static Regex ProxyExp = new Regex(@"(\d+\.\d+\.\d+\.\d+)\s+(\d+)");
 
         public static string GetHtml(string url)
@@ -287,14 +291,17 @@ namespace Jade.CQA
         }
 
 
-        static bool userProxy = true;
+        /// <summary>
+        /// 是否启用proxy
+        /// </summary>
+        static bool userProxy = false;
 
         static void Main(string[] args)
         {
 
-           // testip();
+            // testip();
 
-          
+
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
             if (userProxy)
@@ -391,8 +398,9 @@ namespace Jade.CQA
                 IsUserProxy = userProxy,
                 //Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
                 // Custom step to visualize crawl
+
                 DownloadRetryCount = 0,
-                MaximumThreadCount = 20,
+                MaximumThreadCount = 10,
                 MaximumCrawlDepth = 8,
                 UserAgent = "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
                 //IncludeFilter = Program.ExtensionsMustContain

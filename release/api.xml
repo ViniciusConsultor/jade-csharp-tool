@@ -223,10 +223,11 @@
     </DisplayNameValuePair>
   </Template>
   <CommonTags />
+</RemoteWebService>  <Tag>社会资讯</Tag>
+      <Count>2</Count>
+    </CommonTag>
+  </CommonTags>
 </RemoteWebService>
-    </DisplayNameValuePair>
-    <DisplayNameValuePair>
-      <DisplayName>安徽商报</DisplayName>
       <Value>安徽商报</Value>
     </DisplayNameValuePair>
     <DisplayNameValuePair>

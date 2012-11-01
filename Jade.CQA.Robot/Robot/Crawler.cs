@@ -102,6 +102,18 @@ namespace Jade.CQA.Robot
         /// </summary>
         private bool m_OnlyOneCrawlPerInstance;
 
+
+        /// <summary>
+        /// 总抓取时间
+        /// </summary>
+        public TimeSpan ElapsedTime
+        {
+            get
+            {
+                return m_Runtime.Elapsed;
+            }
+        }
+
         #endregion
 
         #region Constructors

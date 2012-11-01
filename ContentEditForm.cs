@@ -305,7 +305,20 @@ namespace Jade
                 this.txt_news_keywords.Text = data.Keywords;
                 this.txtContent.Html = data.Content;
                 this.txtContent.PageTitles = data.news_left;
-                this.txt_row_news_abstract.Text = data.Summary;
+
+                if (!string.IsNullOrEmpty(data.Summary))
+                {
+                    // 同步
+                    this.txt_row_news_abstract.Text = data.Summary;
+                    this.txt_news_description.Text = data.Summary;
+                }
+                else
+                {
+                    this.txt_row_news_abstract.Text = data.news_description;
+                    this.txt_news_description.Text = data.news_description;
+                }
+
+
                 this.txt_news_keyword2.Text = data.news_keywords2;
 
                 if (StatusSelections != null)
@@ -391,7 +404,7 @@ namespace Jade
                 this.txt_kfbm_link.Text = data.kfbm_link;
                 this.txt_kfbm_id.Text = data.kfbm_id;
                 this.txt_news_abs.Text = data.news_abs;
-                this.txt_news_description.Text = data.news_description;
+
                 this.txt_news_down.Text = data.news_down;
                 this.txt_news_guideimage.Text = data.news_guideimage;
                 this.txt_news_guideimage2.Text = data.news_guideimage2;
@@ -550,7 +563,8 @@ namespace Jade
 
         private void 设为ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.txt_row_news_abstract.Text = this.txtContent.SelectedText;
+            this.txt_news_description.Text = this.txtContent.SelectedText;
+            this.txt_news_abs.Text = this.txtContent.SelectedText;
         }
 
         private void 添加为关键字ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -600,6 +614,7 @@ namespace Jade
         private void 设为SEO描述ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.txt_news_description.Text = this.txtContent.SelectedText;
+            this.txt_news_abs.Text = this.txtContent.SelectedText;
             //this.tabControl1.SelectedIndex = 1;
             this.txt_news_description.Focus();
         }
