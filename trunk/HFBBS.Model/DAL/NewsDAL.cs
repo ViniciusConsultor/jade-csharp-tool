@@ -6,9 +6,50 @@ using Jade;
 using System.IO;
 using System.Data.SqlClient;
 using System.Data.EntityClient;
+using Jade.DAL;
 
 namespace Jade.Model.MySql
 {
+
+    public class UnitOfWork : IUnitOfWork
+    {
+        HFBBSEntities Repository;
+
+        HFBBSEntities CreateRepository()
+        {
+            return new HFBBSEntities(Setting.ConnectionString);
+        }
+
+        public UnitOfWork()
+        {
+            Repository = CreateRepository();
+        }
+
+        public void Commit()
+        {
+            Repository.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+    }
+
+    public class DataBaseFactory
+    {
+
+    }
+
+    public class Setting
+    {
+        public static string ConnectionString
+        {
+            get;
+            set;
+        }
+    }
+
     public class NewsDAL : Jade.DAL.IDownloadDataDAL
     {
         HFBBSEntities Repository;
@@ -59,24 +100,24 @@ namespace Jade.Model.MySql
             res://*/Model1.ssdl|
             res://*/Model1.msl";
             connectionString = entityBuilder.ToString();
-
+            Setting.ConnectionString = connectionString;
             Repository = new HFBBSEntities(connectionString);
 
         }
 
         public List<string> GetTaskUrls(int taskId)
         {
-            lock (Repository)
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
             {
-                return Repository.downloaddata.Where(d => d.TaskId == taskId).Select(d => d.Url).ToList();
+                return repository.downloaddata.Where(d => d.TaskId == taskId).Select(d => d.Url).ToList();
             }
         }
 
         public List<string> GetUnFetchedUrlList(int taskId)
         {
-            lock (Repository)
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
             {
-                return Repository.downloaddata.Where(d => d.TaskId == taskId && !d.IsDownload).Select(d => d.Url).ToList();
+                return repository.downloaddata.Where(d => d.TaskId == taskId && !d.IsDownload).Select(d => d.Url).ToList();
             }
         }
 
@@ -140,7 +181,7 @@ namespace Jade.Model.MySql
 
         public List<downloaddata> GetList(SearchArgs args, out int totalCount)
         {
-            lock (Repository)
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
             {
                 //totalCount = 10;
 
@@ -150,7 +191,7 @@ namespace Jade.Model.MySql
                 //      new downloaddata(){Title="test3 ", IsDownload = true,IsEdit = true,EditorUserName="xxx",IsPublish= false}
                 //};
 
-                var query = Repository.downloaddata.Where(
+                var query = repository.downloaddata.Where(
                     t => (args.IsDownload ? t.IsDownload == true : true) &&
                         (args.IsEdit ? t.IsEdit == true : true) &&
                         (args.IsPublish ? t.IsPublish == true : true) &&
@@ -189,19 +230,16 @@ namespace Jade.Model.MySql
 
         List<IDownloadData> DAL.IDownloadDataDAL.GetList(SearchArgs args, out int totalCount)
         {
-            lock (Repository)
+            var result = new List<IDownloadData>();
+
+            var datas = this.GetList(args, out totalCount);
+
+            foreach (var row in datas)
             {
-                var result = new List<IDownloadData>();
-
-                var datas = this.GetList(args, out totalCount);
-
-                foreach (var row in datas)
-                {
-                    result.Add(row);
-                }
-
-                return result;
+                result.Add(row);
             }
+
+            return result;
         }
 
         public void Update(IDownloadData data)

@@ -23,6 +23,13 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
                         helper.Database.GetCollection("QuestionAnswer").Insert(result.QuestionAnswer);
                     }
                 }
+                else
+                {
+                    using (MongdbHelper helper = new MongdbHelper("User"))
+                    {
+                        helper.DataSet.Insert(result.User);
+                    }
+                }
             }
         }
     }

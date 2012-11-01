@@ -165,7 +165,7 @@ namespace Jade
                                 data.EditTime = DateTime.Now;
                                 data.IsEdit = true;
                                 CacheObject.DownloadDataDAL.Update(data);
-                                comboBox1_SelectedIndexChanged(null, null);
+                                //comboBox1_SelectedIndexChanged(null, null);
                             }
                             catch (Exception ze)
                             {
@@ -174,13 +174,12 @@ namespace Jade
                             }
                         }
                     }
-
-                    CacheObject.ContentForm.InitDownloadData(dataTable[rowIndex]);
-                    if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
-                    {
-                        int totalCount;
-                        this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(this.devPager1.CurrentPageIndex), out totalCount);
-                    }
+                    var currentPage = this.devPager1.CurrentPageIndex;
+                    CacheObject.ContentForm.InitDownloadData(data);
+                    CacheObject.ContentForm.ShowDialog();
+                    int totalCount;
+                    this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(currentPage), out totalCount);
+                    this.devPager1.InitPageInfo(currentPage, totalCount, currentPageSize);
                 }
             }
             catch (Exception ex)

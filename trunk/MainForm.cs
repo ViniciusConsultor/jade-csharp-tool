@@ -471,7 +471,7 @@ namespace Jade
 
                 if (dr == DialogResult.Cancel)
                 {
-                    this.Close();
+                    System.Environment.Exit(0);
                 }
             }
             // CacheObject.NavForm.UpdateUI();

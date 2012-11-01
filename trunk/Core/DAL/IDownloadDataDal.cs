@@ -3,6 +3,11 @@ using Jade.Model;
 using System.Collections.Generic;
 namespace Jade.DAL
 {
+    public interface IUnitOfWork : IDisposable
+    {
+        void Commit();
+    }
+
     public interface IDownloadDataDAL
     {
         void Add(IDownloadData data);
