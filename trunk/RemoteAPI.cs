@@ -300,6 +300,10 @@ namespace Jade
                         //Console.WriteLine(result);
                         return true;
                     }
+                    else
+                    {
+                        Log4Log.Error(result);
+                    }
                 }
                 catch (Exception ex)
                 {
