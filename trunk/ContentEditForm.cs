@@ -893,5 +893,39 @@ namespace Jade
                 }
             }
         }
+        bool isloadingrelated = false;
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateCurrentData();
+                if (CurrentData.RemoteId == 0)
+                {
+                    string newsid = RemoteAPI.GetNewsId();
+                    CurrentData.RemoteId = int.Parse(newsid);
+                    CacheObject.DownloadDataDAL.Update(CurrentData);
+                }
+                if (!isloadingrelated)
+                {
+                    isloadingrelated = true;
+                    var related = new RelatedNews() { Data = CurrentData };
+                    if (related.ShowDialog() == DialogResult.OK)
+                    {
+                        this.txt_news_link.Text = related.SelectNewsStr;
+                    }
+                    isloadingrelated = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4Log.Exception(ex);
+            }
+        }
+
+        private void txt_news_link_TextChanged(object sender, EventArgs e)
+        {
+            label34_Click(null, null);
+        }
     }
 }
