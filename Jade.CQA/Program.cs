@@ -386,11 +386,6 @@ namespace Jade.CQA
 
         private static void StartCrawler()
         {
-            // Setup crawler to crawl http://ncrawler.codeplex.com
-            // with 1 thread adhering to robot rules, and maximum depth
-            // of 2 with 4 pipeline steps:
-            //	* Step 1 - The Html Processor, parses and extracts links, text and more from html
-            //  * Step 2 - Dump the information to the console, this is a custom step, see the DumperStep class
             using (Crawler c = new Crawler(new Uri("http://zhidao.baidu.com"),
                 new BadiduDocumentProcessor(), new DumperStep()
                 )// Process html)
@@ -400,7 +395,7 @@ namespace Jade.CQA
                 // Custom step to visualize crawl
 
                 DownloadRetryCount = 0,
-                MaximumThreadCount = 10,
+                MaximumThreadCount = 20,
                 MaximumCrawlDepth = 8,
                 UserAgent = "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
                 //IncludeFilter = Program.ExtensionsMustContain

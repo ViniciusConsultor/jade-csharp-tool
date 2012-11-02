@@ -1,42 +1,234 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Jade.CQA.Robot.Crawler" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>iIQoDoPqQCEyACQhgUQAAQI0NAAAAggjoJwBBUWBMUA=</HashCode>
+      <HashCode>iIQpDoPqQCEyACQhgUQAAQI0NAAAAggjoJwBBUWBMUA=</HashCode>
       <FileName>Robot\Crawler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jade.CQA.Robot.ProxyModel" Collapsed="true">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="9" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Robot\Crawler.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jade.CQA.Robot.CrawlStep" Collapsed="true">
-    <Position X="2" Y="2.25" Width="1.5" />
+  <Class Name="Jade.CQA.Robot.CrawlStep" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQEgAAAAAAAAAAAAIAgCAAAAAAABiA=</HashCode>
       <FileName>Robot\CrawlStep.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Jade.CQA.Robot.PropertyBag" Collapsed="true">
-    <Position X="4.25" Y="2.75" Width="1.5" />
+  <Class Name="Jade.CQA.Robot.PropertyBag" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAgAAAAQAAGQAiAAgEAAKGAAEAIAQIAAWCgACAiA=</HashCode>
       <FileName>Robot\PropertyBag.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Jade.CQA.Robot.CrawlerQueueEntry" Collapsed="true">
-    <Position X="2" Y="3.75" Width="1.5" />
+  <Class Name="Jade.CQA.Robot.CrawlerQueueEntry" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQEoAAAAAAAAAAAAIAAAAAAAAACAiA=</HashCode>
       <FileName>Robot\CrawlerQueueEntry.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="Jade.CQA.Robot.Services.CrawlerRulesService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAACAAAAAAAAAAACAAgCAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\CrawlerRulesService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.WebDownloaderV2" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAIAIAACAASAiIQJgAAgAAAAAAQAABAIAEAAAABAAA=</HashCode>
+      <FileName>Robot\Services\WebDownloaderV2.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.DummyRobot" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Robot\Services\DummyRobot.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.InMemoryCrawlerHistoryService" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAEAAAA=</HashCode>
+      <FileName>Robot\Services\InMemoryCrawlerHistoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.BloomFilterHistoryService" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAEEAAAA=</HashCode>
+      <FileName>Robot\Services\InMemoryCrawlerHistoryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.InMemoryCrawlerQueueService" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAQAA=</HashCode>
+      <FileName>Robot\Services\InMemoryCrawlerQueueService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.InMemoryFIFOCrawlerQueueService" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAQAA=</HashCode>
+      <FileName>Robot\Services\InMemoryCrawlerQueueService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.LambdaFilter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAIAAAgAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\LambdaFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.NativeTaskRunnerService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Robot\Services\NativeTaskRunnerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.RegexFilter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\RegexFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.RobotService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAABAQAgIAAAAAAAAAAAAAAAAAAAAAACBAA=</HashCode>
+      <FileName>Robot\Services\RobotService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.SystemTraceLoggerService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAAYAAAAAAABAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\SystemTraceLoggerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.ConsoleLoggerService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAAYAIAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\SystemTraceLoggerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jade.CQA.Robot.Services.ThreadTaskRunnerService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Robot\Services\ThreadTaskRunnerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ICache" Collapsed="true">
+    <Position X="7.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAABABAAAAABAAAAAAAAAAAAAAAAAAYAAA=</HashCode>
+      <FileName>Robot\Interfaces\ICache.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.IWebDownloader">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAIAIAACAASAiAAIAAAAAAAAAAQAAAAIAEAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\IWebDownloader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ICrawlerHistory" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\ICrawlerHistory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ICrawlerQueue" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAACAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Robot\Interfaces\ICrawlerQueue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ICrawlerRules" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\ICrawlerRules.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.IFilter" Collapsed="true">
+    <Position X="10.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\IFilter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ILog" Collapsed="true">
+    <Position X="11" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAAYAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\ILog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.IPipelineStep" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\IPipelineStep.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.IPipelineStepWithTimeout" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Interfaces\IPipelineStepWithTimeout.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.IRobot" Collapsed="true">
+    <Position X="5.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Robot\Interfaces\IRobot.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jade.CQA.Robot.Interfaces.ITaskRunner" Collapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Robot\Interfaces\ITaskRunner.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Jade.CQA.Robot.Services.DownloadMethod" Collapsed="true">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAACAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Robot\Services\WebDownloaderV2.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Microsoft YaHei" Size="9" />
 </ClassDiagram>

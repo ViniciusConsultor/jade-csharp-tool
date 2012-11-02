@@ -67,7 +67,7 @@ namespace Jade.CQA.Robot.Services
 
         public void Verbose(string format, params object[] parameters)
         {
-            WriteLine(ConsoleColor.White, format, parameters);
+            //WriteLine(ConsoleColor.White, format, parameters);
         }
 
         public void Warning(string format, params object[] parameters)
