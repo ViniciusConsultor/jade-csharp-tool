@@ -15,7 +15,12 @@ namespace Jade
     public partial class WelcomePanel : DevExpress.XtraEditors.XtraUserControl, IBaseBrowserForm
     {
         WebBrowser parentBrowser;
-        public WelcomePanel(WebBrowser parent = null)
+        public WelcomePanel()
+            : this(null)
+        {
+        }
+
+        public WelcomePanel(WebBrowser parent)
         {
             parentBrowser = parent;
             InitializeComponent();

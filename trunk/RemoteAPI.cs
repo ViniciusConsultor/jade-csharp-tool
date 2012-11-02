@@ -117,22 +117,25 @@ namespace Jade
         static string getLabelData(string labels, string newsid)
         {
             var result = "";
-            var tags = labels.Replace("\"", "").Split('&', ',');
-            foreach (var tag in tags)
+            if (labels != null)
             {
-                if (tag != "")
+                var tags = labels.Replace("\"", "").Split('&', ',');
+                foreach (var tag in tags)
                 {
-                    var specialTag = RemoteWebService.Instance.SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(tag.Trim()));
-                    if (specialTag != null)
+                    if (tag != "")
                     {
-                        //encoding("label_id[]")
-                        result += "&label_id%5B%5D=" + specialTag.Value;
-                        GET("http://newscms.house365.com/newCMS/news/ajax_lable.php?channel_id=" + specialTag.Value + "&news_id=" + newsid + "&pub_date=&list_order=&ty=add");
+                        var specialTag = RemoteWebService.Instance.SpecilTags.FirstOrDefault(t => t.DisplayName.Equals(tag.Trim()));
+                        if (specialTag != null)
+                        {
+                            //encoding("label_id[]")
+                            result += "&label_id%5B%5D=" + specialTag.Value;
+                            GET("http://newscms.house365.com/newCMS/news/ajax_lable.php?channel_id=" + specialTag.Value + "&news_id=" + newsid + "&pub_date=&list_order=&ty=add");
+                        }
+                        RemoteWebService.Instance.AddTag(tag);
                     }
-                    RemoteWebService.Instance.AddTag(tag);
                 }
+                RemoteWebService.Instance.Save();
             }
-            RemoteWebService.Instance.Save();
             return result;
         }
 
