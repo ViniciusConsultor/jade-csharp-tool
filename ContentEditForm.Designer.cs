@@ -124,6 +124,9 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.tex_news_title = new System.Windows.Forms.TextBox();
             this.text_news_subtitle = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_news_link = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -202,7 +205,7 @@
             this.linkButtonGroup1.Labels = null;
             this.linkButtonGroup1.Location = new System.Drawing.Point(144, 95);
             this.linkButtonGroup1.Name = "linkButtonGroup1";
-            this.linkButtonGroup1.Size = new System.Drawing.Size(1052, 19);
+            this.linkButtonGroup1.Size = new System.Drawing.Size(1161, 19);
             this.linkButtonGroup1.TabIndex = 30;
             this.linkButtonGroup1.OnClick += new Jade.Control.GroupClick(this.linkButtonGroup1_OnClick);
             // 
@@ -237,7 +240,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.PageTitles = "";
             this.txtContent.SelectedText = null;
-            this.txtContent.Size = new System.Drawing.Size(935, 473);
+            this.txtContent.Size = new System.Drawing.Size(940, 456);
             this.txtContent.TabIndex = 27;
             // 
             // contextMenuStrip1
@@ -457,6 +460,9 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.label34);
+            this.tabPage2.Controls.Add(this.txt_news_link);
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.panelControl1);
             this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.txt_row_news_abstract);
@@ -784,7 +790,7 @@
             // 
             this.txt_row_news_abstract.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_row_news_abstract.Location = new System.Drawing.Point(75, 170);
+            this.txt_row_news_abstract.Location = new System.Drawing.Point(73, 165);
             this.txt_row_news_abstract.Multiline = true;
             this.txt_row_news_abstract.Name = "txt_row_news_abstract";
             this.txt_row_news_abstract.Size = new System.Drawing.Size(879, 123);
@@ -828,7 +834,7 @@
             // 
             this.txt_news_left.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_left.Location = new System.Drawing.Point(75, 528);
+            this.txt_news_left.Location = new System.Drawing.Point(73, 555);
             this.txt_news_left.Multiline = true;
             this.txt_news_left.Name = "txt_news_left";
             this.txt_news_left.Size = new System.Drawing.Size(874, 95);
@@ -837,7 +843,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(3, 558);
+            this.label25.Location = new System.Drawing.Point(2, 584);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(71, 24);
             this.label25.TabIndex = 46;
@@ -916,7 +922,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 397);
+            this.label13.Location = new System.Drawing.Point(9, 339);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 24);
             this.label13.TabIndex = 26;
@@ -926,10 +932,10 @@
             // 
             this.txt_news_description.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_news_description.Location = new System.Drawing.Point(75, 326);
+            this.txt_news_description.Location = new System.Drawing.Point(73, 309);
             this.txt_news_description.Multiline = true;
             this.txt_news_description.Name = "txt_news_description";
-            this.txt_news_description.Size = new System.Drawing.Size(874, 179);
+            this.txt_news_description.Size = new System.Drawing.Size(874, 112);
             this.txt_news_description.TabIndex = 23;
             // 
             // toolStrip1
@@ -1038,6 +1044,36 @@
             this.text_news_subtitle.Name = "text_news_subtitle";
             this.text_news_subtitle.Size = new System.Drawing.Size(400, 21);
             this.text_news_subtitle.TabIndex = 13;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 464);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 12);
+            this.label10.TabIndex = 60;
+            this.label10.Text = "相关新闻：";
+            // 
+            // txt_news_link
+            // 
+            this.txt_news_link.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_news_link.Location = new System.Drawing.Point(72, 429);
+            this.txt_news_link.Multiline = true;
+            this.txt_news_link.Name = "txt_news_link";
+            this.txt_news_link.Size = new System.Drawing.Size(874, 112);
+            this.txt_news_link.TabIndex = 61;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label34.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label34.Location = new System.Drawing.Point(9, 487);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(53, 12);
+            this.label34.TabIndex = 62;
+            this.label34.Text = "点击设置";
             // 
             // ContentEditForm
             // 
@@ -1169,5 +1205,8 @@
         private Control.LinkButtonGroup linkButtonGroup1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.TextBox txt_news_link;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label34;
     }
 }

@@ -300,6 +300,8 @@ namespace Jade
             CurrentData = data;
             if (data.Content != null)
             {
+                // 相关新闻
+                this.txt_news_link.Text = data.news_link;
                 this.txt_news_title.Text = data.Title;
                 this.txt_news_subtitle.Text = "";
                 this.txt_news_keywords.Text = data.Keywords;
@@ -483,6 +485,9 @@ namespace Jade
             CurrentData.Summary = this.txt_row_news_abstract.Text;
 
             CurrentData.Title = this.txt_news_title.Text;
+
+            // 相关新闻
+            CurrentData.news_link = this.txt_news_link.Text;
 
             CurrentData.SubTitle = "";
             //this.txt_news_subtitle.Text;
