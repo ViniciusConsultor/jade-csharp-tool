@@ -104,7 +104,6 @@ namespace Jade
                     this.BeginInvoke(new MethodInvoker(() =>
                     {
                         isInit = true;
-                        this.checkedListBox1.Items.Clear();
                         checkedListBox1.DisplayMember = "Title";
                         checkedListBox1.ValueMember = "Id";
                         checkedListBox1.DataSource = null;

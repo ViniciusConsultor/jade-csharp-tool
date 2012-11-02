@@ -393,7 +393,17 @@ namespace Jade.CQA.KnowedegProcesser
             base.Process(crawler, propertyBag);
 
             var htmlDoc = (HtmlDocument)propertyBag["HtmlDoc"].Value;
+
+            if (htmlDoc == null || htmlDoc.DocumentNode == null)
+            {
+                ReConnectNetWork();
+            }
             var html = htmlDoc.DocumentNode.OuterHtml;
+            if (html.Contains("您的访问出错了"))
+            {
+                // todo 重拨号
+                ReConnectNetWork();
+            }
             // 用户
             if (propertyBag.OriginalUrl.Contains("/p/"))
             {
@@ -402,6 +412,41 @@ namespace Jade.CQA.KnowedegProcesser
             else if (propertyBag.OriginalUrl.Contains("/question/"))
             {
                 ExtractQuestion(propertyBag, htmlDoc, html);
+            }
+        }
+
+        static bool isUser3G = false;
+
+
+        /// <summary>
+        /// 重新连接网络
+        /// </summary>
+        private static void ReConnectNetWork()
+        {
+            if (!isUser3G)
+            {
+                Console.WriteLine("访问出错了， 暂停30分钟。。。");
+
+                // 暂停30分钟
+                Thread.Sleep(1000 * 60 * 30);
+            }
+            else
+            {
+                RASDisplay ras = new RASDisplay();
+                Console.WriteLine("等待重拨号中。。。");
+                ras.Disconnect();
+                Thread.Sleep(10000);
+                Console.WriteLine("重新拨号中。。。");
+                ras.Connect("3G");
+                Thread.Sleep(1000);
+                IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+                foreach (IPAddress ip in arrIPAddresses)
+                {
+                    if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+                    {
+                        Console.WriteLine("新ip" + ip.ToString());
+                    }
+                }
             }
         }
 
@@ -451,28 +496,7 @@ namespace Jade.CQA.KnowedegProcesser
 
         private void ExtractQuestion(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)
         {
-            if (html.Contains("您的访问出错了"))
-            {
-                Console.WriteLine("访问出错了");
 
-                RASDisplay ras = new RASDisplay();
-                Console.WriteLine("等待重拨号中。。。");
-                ras.Disconnect();              
-                Thread.Sleep(10000);
-                Console.WriteLine("重新拨号中。。。");
-                ras.Connect("3G");
-                Thread.Sleep(1000);
-                IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
-                foreach (IPAddress ip in arrIPAddresses)
-                {
-                    if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
-                    {
-                        Console.WriteLine("新ip" + ip.ToString());
-                    }
-                }
-
-                //todo 重拨号
-            }
 
             var question = new Question();
             question.KnowedgeType = KnowedgeType.BaiduZhidao;
