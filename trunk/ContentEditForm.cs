@@ -925,7 +925,7 @@ namespace Jade
 
         private void txt_news_link_TextChanged(object sender, EventArgs e)
         {
-            label34_Click(null, null);
+            //label34_Click(null, null);
         }
     }
 }
