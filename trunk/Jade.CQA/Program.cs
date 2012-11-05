@@ -19,6 +19,8 @@ using Jade.CQA.KnowedegProcesser.DataSave;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.ComTypes;
+
 
 namespace Jade.CQA
 {
@@ -300,6 +302,25 @@ namespace Jade.CQA
         static void Main(string[] args)
         {
 
+
+
+
+            //RASDisplay ras = new RASDisplay();
+            //Console.WriteLine("等待重拨号中。。。");
+            //ras.Disconnect();
+            ////Thread.Sleep(10000);
+            //Console.WriteLine("重新拨号中。。。");
+            //ras.Connect("UNICOM");
+            //Thread.Sleep(1000);
+            //IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+            //foreach (IPAddress ip in arrIPAddresses)
+            //{
+            //    if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+            //    {
+            //        Console.WriteLine("新ip" + ip.ToString());
+            //    }
+            //}
+
             // testip();
 
 
@@ -394,11 +415,10 @@ namespace Jade.CQA
                 IsUserProxy = userProxy,
                 //Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
                 // Custom step to visualize crawl
-
                 DownloadRetryCount = 0,
                 MaximumThreadCount = 20,
-                MaximumCrawlDepth = 8,
-                UserAgent = "Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)",
+                MaximumCrawlDepth = 5,
+                UserAgent = "Googlebot/2.1 (+http://www.googlebot.com/bot.html)",
                 //IncludeFilter = Program.ExtensionsMustContain
                 //ExcludeFilter = Program.ExtensionsToSkip,
             })

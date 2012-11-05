@@ -130,6 +130,7 @@ namespace Jade
                 {
                     webBrowserBody.Document.InvokeScript("InitPages", new string[] { "<p style='text-indent: 28px;'>&nbsp;</p>" });
                 }
+                this.txtSource.Text = this.Html;
             }
         }
 

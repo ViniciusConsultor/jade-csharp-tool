@@ -407,7 +407,7 @@ namespace Jade.CQA.KnowedegProcesser
             // 用户
             if (propertyBag.OriginalUrl.Contains("/p/"))
             {
-                ExtractUser(html);
+                ExtractUser(propertyBag, html);
             }
             else if (propertyBag.OriginalUrl.Contains("/question/"))
             {
@@ -415,7 +415,7 @@ namespace Jade.CQA.KnowedegProcesser
             }
         }
 
-        static bool isUser3G = false;
+        static bool isUser3G = true;
 
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace Jade.CQA.KnowedegProcesser
             }
         }
 
-        private static void ExtractUser(string html)
+        private static void ExtractUser(PropertyBag propertyBag, string html)
         {
             /*
             姓名：
@@ -491,7 +491,14 @@ namespace Jade.CQA.KnowedegProcesser
 
             user.UserName = html.Substring("<title>", "的百度个人主页</title>");
 
-            Console.WriteLine(user.ToString());
+
+            var fetchResult = new FetchResult
+            {
+                User = user
+            };
+
+            propertyBag["fetchResult"].Value = fetchResult;
+
         }
 
         private void ExtractQuestion(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)

@@ -82,7 +82,7 @@ namespace Jade
             {
                 OldUrls = CacheObject.DownloadDataDAL.GetTaskUrls(rule.SiteRuleId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log4Log.Error("加载OldUrls出错" + ex.Message);
                 Log4Log.Exception(ex);
@@ -222,25 +222,45 @@ namespace Jade
                                 result = "";
                             }
 
-                            if (itemRule.IdentifyPage && itemRule.PageXPath != "")
+                            if (itemRule.IdentifyPage || itemRule.CloumnName == "Content")
                             {
-                                var pageLinks = ExtractUrl.ExtractDataFromHtml(html, itemRule.PageXPath, XMLPathSelectType.Multiple, XMLPathType.Href).Distinct().ToList();
-                                ExtractUrl.RepairUrls(url.AbsoluteUri, "", "#", pageLinks.ToList());
-                                foreach (var link in pageLinks)
+                                try
                                 {
-                                    if (link != url.AbsoluteUri)
+                                    string pageXpath = "";
+                                    if (itemRule.PageXPath != "")
                                     {
-                                        var pageHtml = HtmlPicker.VisitUrl(
-                                                    new Uri(link),
-                                                     item.HttpMethod,
-                                                               null,
-                                                               string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
-                                                           string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
-                                                           string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
-                                                           string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
-                                                               System.Text.Encoding.GetEncoding(item.Encoding));
-                                        result += fetcher.Fetch(pageHtml);
+                                        pageXpath = itemRule.PageXPath;
                                     }
+                                    else
+                                    {
+                                        pageXpath = GetPagerXPATH(html, pageXpath);
+                                    }
+                                    if (pageXpath != "")
+                                    {
+                                        var pageLinks = ExtractUrl.ExtractDataFromHtml(html, itemRule.PageXPath, XMLPathSelectType.Multiple, XMLPathType.Href).Distinct().ToList();
+                                        ExtractUrl.RepairUrls(url.AbsoluteUri, "", "#", pageLinks);
+                                        foreach (var link in pageLinks)
+                                        {
+                                            if (link != url.AbsoluteUri)
+                                            {
+                                                var pageHtml = HtmlPicker.VisitUrl(
+                                                            new Uri(link),
+                                                             item.HttpMethod,
+                                                                       null,
+                                                                       string.IsNullOrEmpty(item.Referer) ? null : item.Referer,
+                                                                   string.IsNullOrEmpty(item.Cookie) ? null : Utility.GetCookies(item.Cookie),
+                                                                   string.IsNullOrEmpty(item.UserAgent) ? null : item.UserAgent,
+                                                                   string.IsNullOrEmpty(item.HttpPostData) ? null : item.HttpPostData,
+                                                                       System.Text.Encoding.GetEncoding(item.Encoding));
+                                                result += "<hr class=enorth_new_page>" + fetcher.Fetch(pageHtml);
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception pex)
+                                {
+                                    Log4Log.Error("提取分页失败");
+                                    Log4Log.Exception(pex);
                                 }
                             }
 
@@ -304,8 +324,8 @@ namespace Jade
                             }
                             //this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
                         }
-                        data.DownloadTime = DateTime.Now; 
-                        
+                        data.DownloadTime = DateTime.Now;
+
                         DataSaver.Update(data);
                         Logger.Success("[" + Rule.Name + "] 成功采集并更新数据到数据库【" + data.Title + "】");
                         index++;
@@ -333,6 +353,80 @@ namespace Jade
                     Log4Log.Exception(ex);
                 }
             }
+        }
+
+        public static string GetPagerXPATH(string html, string pageXpath)
+        {
+            var linkNodes = ExtractUrl.GetLinkNodes(html, "下一页", "Next", "Next &gt;", "下页", "Last", "末页", "尾页", "2", "3");
+
+            bool hasLast = false;
+
+            if (linkNodes.Count != 0)
+            {
+                var linkTexts = linkNodes.Select(t => t.InnerText).ToList();
+
+                // 下一页
+                HtmlAgilityPack.HtmlNode next = null;
+
+                if (linkTexts.Contains("下一页"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "下一页");
+                }
+                else if (linkTexts.Contains("下页"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "下页");
+                }
+                else if (linkTexts.Contains("Next"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "Next");
+                }
+                else if (linkTexts.Contains("Next &gt;"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "Next &gt;");
+                }
+                else if (linkTexts.Contains("2"))
+                {
+                    next = linkNodes.FirstOrDefault(n => n.InnerText == "2");
+                }
+
+                // 尾页
+                HtmlAgilityPack.HtmlNode last = null;
+                if (linkTexts.Contains("尾页"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "尾页");
+                }
+                else if (linkTexts.Contains("末页"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "末页");
+                }
+                else if (linkTexts.Contains("Last"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "Last");
+                }
+                else if (linkTexts.Contains("3"))
+                {
+                    last = linkNodes.FirstOrDefault(n => n.InnerText == "3");
+                }
+
+
+                if (last != null && next != null)
+                {
+                    pageXpath = SiteRuleWizardForm.GetCommonXpath(next.XPath, last.XPath);
+
+                }
+                else
+                {
+                    // 只有下一页
+                    pageXpath = linkNodes[0].XPath;
+                    pageXpath = pageXpath.Substring(0, pageXpath.LastIndexOf("a") + 1);
+                    //pageXpath = pageXpath.Insert(pageXpath.LastIndexOf("/"), "/");
+                }
+
+                // get 下一页
+
+
+            }
+            return pageXpath;
         }
 
         int picIndex = 0;
@@ -431,7 +525,7 @@ namespace Jade
                 var unFinisedUrls = CacheObject.DownloadDataDAL.GetUnFetchedUrlList(Rule.SiteRuleId);
                 unFinisedUrls.ForEach(u => urls.Add(new Uri(u)));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log4Log.Exception(ex);
             }
@@ -463,7 +557,7 @@ namespace Jade
 
                 AddUrls(uris, urls);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log4Log.Exception(ex);
             }
