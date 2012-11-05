@@ -37,7 +37,7 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
 
         public static bool IsUserExist(string userName)
         {
-            using (MongdbHelper helper = new MongdbHelper("User"))
+            using (MongdbHelper helper = new MongdbHelper("CQAUser"))
             {
                 IMongoQuery query = new QueryDocument()
                         {
@@ -64,7 +64,7 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
                       }
                       else
                       {
-                          using (MongdbHelper helper = new MongdbHelper("User"))
+                          using (MongdbHelper helper = new MongdbHelper("CQAUser"))
                           {
                               IMongoQuery query = new QueryDocument()
                         {

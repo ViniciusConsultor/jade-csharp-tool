@@ -385,14 +385,8 @@ namespace Jade.CQA.Model
 
         public User()
         {
-            IsDownload = false;
         }
 
-        public bool IsDownload
-        {
-            get;
-            set;
-        }
         /// <summary>
         /// 用户姓名
         /// </summary>

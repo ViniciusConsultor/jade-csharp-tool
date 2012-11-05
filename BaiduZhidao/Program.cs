@@ -18,6 +18,7 @@ using System.Threading;
 using Jade.CQA.Robot.Services;
 using System.Net.Sockets;
 using Jade.CQA.KnowedegProcesser.DataSave;
+using System.Diagnostics;
 
 namespace BaiduZhidao
 {
@@ -49,6 +50,10 @@ namespace BaiduZhidao
 
         static void Main(string[] args)
         {
+
+            var timer = new Stopwatch();
+            timer.Start();
+
             int start = 493326325;
 
             start = int.Parse(System.Configuration.ConfigurationManager.AppSettings["Start"]);
@@ -101,7 +106,7 @@ namespace BaiduZhidao
 
                             Count++;
 
-                            Console.WriteLine("已累积抓取" + Count);
+                            Console.WriteLine("已累积抓取" + Count + " " + timer.Elapsed.ToString());
 
                             if (fetchResult.User == null)
                             {
@@ -241,30 +246,6 @@ namespace BaiduZhidao
         {
 
             // User
-
-            var userLinks = htmlDoc.DocumentNode.SelectNodes("//a[starts-with(@href,'http://www.baidu.com/p/')]");
-
-            // "<a alog-action=\"qb-username\" log=\"replyer.username.click\" href=\"http://www.baidu.com/p/一帆风顺h3?from=zhidao\" target=\"_blank\" uid=\"ae48d2bbb7abb7e7cbb368339b1b\" uname=\"一帆风顺h3\" class=\"user-name\">一帆风顺h3</a>"
-            if (userLinks.Count > 0)
-            {
-                // 分析用户
-                foreach (HtmlNode userLink in userLinks)
-                {
-                    var userName = userLink.InnerText;
-                    if (!UserCache.ContainsKey(userName) && !CQASaver.IsUserExist(userName))
-                    {
-                        var url = userLink.Attributes["href"].Value;
-
-                        var userHtml = Program.GetHtml(url);
-
-                        var user = ExtractUser(userHtml);
-
-                        CQASaver.SaveFetchResult(user);
-
-                        UserCache.Add(userName, true);
-                    }
-                }
-            }
 
             var question = new Question();
             question.KnowedgeType = KnowedgeType.BaiduZhidao;
@@ -483,6 +464,29 @@ namespace BaiduZhidao
             questionAndAnswer.RelatedQuestionIds = relativeQuestions;
             questionAndAnswer.AnswerIds = anwsers.Select(a => a.AnswerId).ToList();
 
+            var userLinks = htmlDoc.DocumentNode.SelectNodes("//a[starts-with(@href,'http://www.baidu.com/p/')]");
+
+            // "<a alog-action=\"qb-username\" log=\"replyer.username.click\" href=\"http://www.baidu.com/p/一帆风顺h3?from=zhidao\" target=\"_blank\" uid=\"ae48d2bbb7abb7e7cbb368339b1b\" uname=\"一帆风顺h3\" class=\"user-name\">一帆风顺h3</a>"
+            if (userLinks != null && userLinks.Count > 0)
+            {
+                // 分析用户
+                foreach (HtmlNode userLink in userLinks)
+                {
+                    var userName = userLink.InnerText;
+                    if (!UserCache.ContainsKey(userName) && !CQASaver.IsUserExist(userName))
+                    {
+                        var url = userLink.Attributes["href"].Value;
+
+                        var userHtml = Program.GetHtml(url);
+
+                        var user = ExtractUser(userHtml);
+
+                        CQASaver.SaveFetchResult(user);
+
+                        UserCache.Add(userName, true);
+                    }
+                }
+            }
 
             var fetchResult = new FetchResult
             {
@@ -490,6 +494,7 @@ namespace BaiduZhidao
                 QuestionAnswer = questionAndAnswer,
                 Answers = anwsers
             };
+
 
             return fetchResult;
 
