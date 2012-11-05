@@ -267,6 +267,7 @@ namespace Jade.CQA
             System.Net.IPHostEntry _IPHostEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
             return (from i in _IPHostEntry.AddressList where i.AddressFamily == af select i).ToArray();
         }
+
         public static IPEndPoint BindIPEndPointCallback(ServicePoint servicePoint, IPEndPoint remoteEndPoint, int retryCount)
         {
             List<IPEndPoint> ipep = new List<IPEndPoint>();

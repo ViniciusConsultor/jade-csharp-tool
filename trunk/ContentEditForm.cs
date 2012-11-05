@@ -927,5 +927,10 @@ namespace Jade
         {
             //label34_Click(null, null);
         }
+
+        private void txt_news_link_Click(object sender, EventArgs e)
+        {
+            label34_Click(null, null);
+        }
     }
 }
