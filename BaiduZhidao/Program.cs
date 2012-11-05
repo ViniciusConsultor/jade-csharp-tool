@@ -42,51 +42,230 @@ namespace BaiduZhidao
 
     class Program
     {
-        public static string GetHtml(string url)
+        static Regex ProxyExp = new Regex(@"(\d+\.\d+\.\d+\.\d+)\s+(\d+)");
+
+        public static string GetHtml(string url, WebProxy proxy = null)
         {
             WebClient client = new WebClient();
+            if (proxy != null)
+            {
+                client.Proxy = proxy;
+            }
             return client.DownloadString(url);
         }
+
+        public static void getProxy()
+        {
+            var listUrls = new string[] { "http://sooip.cn/QQdailiIP/", "http://sooip.cn/QQdailiIP/", "http://sooip.cn/zuixindaili/" };
+            var proxyes = new List<string>();
+            foreach (var listUrl in listUrls)
+            {
+                var list = GetHtml(listUrl);
+
+                var regex = new Regex("href=\"(/zuixindaili/[^\"]+)\"");
+
+                var listPages = regex.Matches(list);
+
+                foreach (Match listPage in listPages)
+                {
+                    try
+                    {
+                        var html = GetHtml("http://sooip.cn" + listPage.Groups[1].Value);
+                        var results = ProxyExp.Matches(html);
+                        foreach (Match match in results)
+                        {
+                            if (!proxyes.Contains(match.Groups[1].Value))
+                            {
+                                proxyes.Add(match.Groups[1].Value);
+                                new Thread(new ParameterizedThreadStart(yanzhen)).Start(new ProxyModel
+                                {
+                                    IP = match.Groups[1].Value,
+                                    Port = int.Parse(match.Groups[2].Value)
+                                });
+                            }
+                            //yanzhen(match.Groups[1].Value, int.Parse(match.Groups[2].Value));
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
+
+        public static List<ProxyModel> Proxyes = new List<ProxyModel>();
+
+        static object locker = new object();
+
+        public static void yanzhen(object o)
+        {
+            ProxyModel model = (ProxyModel)o;
+            var str = model.IP;
+            //Console.WriteLine("验证" + str + "中");
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            try
+            {
+                WebProxy proxyObject = new WebProxy(str, model.Port);//str为IP地址 port为端口号
+                HttpWebRequest Req = (HttpWebRequest)WebRequest.Create("http://zhidao.baidu.com/question/3911114.html");
+                Req.Proxy = proxyObject; //设置代理 
+                HttpWebResponse Resp = (HttpWebResponse)Req.GetResponse();
+                Encoding code = Encoding.GetEncoding("gb2312");
+                using (StreamReader sr = new StreamReader(Resp.GetResponseStream(), code))
+                {
+                    if (sr != null)
+                    {
+                        try
+                        {
+                            str = sr.ReadToEnd();
+                            if (str.Contains("百度知道"))
+                            {
+
+                                Proxyes.Add(model);
+                                timer.Stop();
+
+                                if (timer.Elapsed.TotalSeconds < 1)
+                                {
+                                    Console.WriteLine(model.IP + "验证成功,耗时" + timer.Elapsed.TotalSeconds);
+                                    lock (locker)
+                                    {
+                                        File.WriteAllText("proxy.txt", string.Join("\r\n", Proxyes.Select(p => p.IP + " " + p.Port).ToArray()));
+                                    }
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            //Console.WriteLine(model.IP + "验证失败！");
+                        }
+                        finally
+                        {
+                            sr.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Console.WriteLine(model.IP + "验证失败！");
+            }
+        }
+        public static int start = int.Parse(System.Configuration.ConfigurationManager.AppSettings["Start"]);
+
+        public static int end = int.Parse(System.Configuration.ConfigurationManager.AppSettings["End"]);
+
+        public static string GetTaskUrl()
+        {
+            lock (locker)
+            {
+                if (start > end)
+                {
+                    File.WriteAllText("index.bin", start.ToString());
+                    return string.Format("http://zhidao.baidu.com/question/{0}.html", start--);
+                }
+                return "";
+            }
+        }
+
+        public static int proxyIndex = 0;
+
+        public static WebProxy GetProxy()
+        {
+            lock (locker)
+            {
+                if (Proxyes.Count > 0)
+                {
+                    if (proxyIndex < Proxyes.Count)
+                    {
+                        return new WebProxy(Proxyes[proxyIndex].IP, Proxyes[proxyIndex++].Port);
+                    }
+                    else
+                    {
+                        proxyIndex = 0;
+                        return new WebProxy(Proxyes[proxyIndex].IP, Proxyes[proxyIndex++].Port);
+                    }
+                }
+                return null;
+            }
+        }
+
+        public static int ThreadCount = 0;
+
+        public static int ErrorSleep = int.Parse(System.Configuration.ConfigurationManager.AppSettings["ErrorSleep"]);
+
+        public static int NomalSleep = int.Parse(System.Configuration.ConfigurationManager.AppSettings["NomalSleep"]);
+
+        public static int MaxThread = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxThread"]);
+
+        public static int Count = 0;
+
+        static Stopwatch timer;
 
         static void Main(string[] args)
         {
 
-            var timer = new Stopwatch();
+            getProxy();
+
+            timer = new Stopwatch();
             timer.Start();
 
-            int start = 493326325;
+            //int start = 493326325;
 
-            start = int.Parse(System.Configuration.ConfigurationManager.AppSettings["Start"]);
 
-            int end = int.Parse(System.Configuration.ConfigurationManager.AppSettings["End"]);
-
-            int ErrorSleep = int.Parse(System.Configuration.ConfigurationManager.AppSettings["ErrorSleep"]);
-
-            int NomalSleep = int.Parse(System.Configuration.ConfigurationManager.AppSettings["NomalSleep"]);
 
             if (System.IO.File.Exists("index.bin"))
             {
                 start = int.Parse(System.IO.File.ReadAllText("index.bin"));
             }
 
-            BadiduProcessor procesor = new BadiduProcessor();
 
-            int Count = 0;
+            for (var i = 0; i < MaxThread; i++)
+            {
+                DoWork();
+            }
 
-            while (start > end)
+            //while (start > end)
+            //{
+            //    try
+            //    {
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.Write(ex.Message);
+            //        Console.WriteLine();
+            //    }
+            //    finally
+            //    {
+            //        start--;
+            //        File.WriteAllText("index.bin", start.ToString());
+            //        Thread.Sleep(NomalSleep);
+            //    }
+            //}
+        }
+
+        private static void DoWork(bool useProxy = true)
+        {
+            while (true)
             {
                 try
                 {
-                    var url = string.Format("http://zhidao.baidu.com/question/{0}.html", start);
-                    var html = GetHtml(url);
-                    var result = procesor.Fetch(html, start.ToString());
+                    var url = GetTaskUrl();
+
+                    if (url == "")
+                    {
+                        break;
+                    }
+
+                    WebProxy proxy = useProxy ? GetProxy() : null;
+
+                    var html = useProxy ? GetHtml(url) : GetHtml(url, proxy);
+
+                    BadiduProcessor procesor = new BadiduProcessor();
+
+                    var result = procesor.Fetch(html, start.ToString(), proxy);
 
                     Console.Out.WriteLine(ConsoleColor.DarkYellow, "Url: {0}", url);
-                    //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent type: {0}", propertyBag.ContentType);
-                    //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tContent length: {0}",
-                    //    propertyBag.Text.IsNull() ? 0 : propertyBag.Text.Length);
-                    //Console.Out.WriteLine(ConsoleColor.DarkGreen, "Depth: {0} ThreadId: {1} Thread Count: {2} Download Time:{3}s", propertyBag.Step.Depth, Thread.CurrentThread.ManagedThreadId, crawler.ThreadsInUse, propertyBag.DownloadTime.TotalSeconds);
-                    //Console.Out.WriteLine(ConsoleColor.DarkGreen, "\tCulture: {0}", cultureDisplayValue);
 
                     if (html.Contains("您的访问出错了"))
                     {
@@ -126,14 +305,14 @@ namespace BaiduZhidao
                 }
                 catch (Exception ex)
                 {
-                    Console.Write(ex.Message);
-                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    start--;
-                    File.WriteAllText("index.bin", start.ToString());
-                    Thread.Sleep(NomalSleep);
+                    if (!useProxy)
+                    {
+                        Thread.Sleep(NomalSleep);
+                    }
                 }
             }
         }
@@ -152,14 +331,14 @@ namespace BaiduZhidao
             return client.DownloadString(url);
         }
 
-        public FetchResult Fetch(string html, string id)
+        public FetchResult Fetch(string html, string id, WebProxy proxy)
         {
 
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             //(HtmlDocument)propertyBag["HtmlDoc"].Value;
             htmlDoc.LoadHtml(html);
 
-            return ExtractQuestion(htmlDoc, html, id);
+            return ExtractQuestion(htmlDoc, html, id, proxy);
 
         }
 
@@ -242,7 +421,7 @@ namespace BaiduZhidao
         //            Console.WriteLine(user.ToString());
         //        }
 
-        private FetchResult ExtractQuestion(HtmlDocument htmlDoc, string html, string id)
+        private FetchResult ExtractQuestion(HtmlDocument htmlDoc, string html, string id, WebProxy proxy)
         {
 
             // User
@@ -477,7 +656,7 @@ namespace BaiduZhidao
                     {
                         var url = userLink.Attributes["href"].Value;
 
-                        var userHtml = Program.GetHtml(url);
+                        var userHtml = Program.GetHtml(url, proxy);
 
                         var user = ExtractUser(userHtml);
 
