@@ -221,9 +221,15 @@ namespace BaiduZhidao
 
             for (var i = 0; i < MaxThread; i++)
             {
-                DoWork();
+                new Thread(DoWork).Start(true);
+
+                //DoWork();
             }
 
+            //DoWork(false);
+            new Thread(DoWork).Start();
+
+            Console.ReadLine();
             //while (start > end)
             //{
             //    try
@@ -244,10 +250,12 @@ namespace BaiduZhidao
             //}
         }
 
-        private static void DoWork(bool useProxy = true)
+        private static void DoWork(object state = null)
         {
             while (true)
             {
+                var useProxy = state != null;
+
                 try
                 {
                     var url = GetTaskUrl();
@@ -257,9 +265,10 @@ namespace BaiduZhidao
                         break;
                     }
 
+
                     WebProxy proxy = useProxy ? GetProxy() : null;
 
-                    var html = useProxy ? GetHtml(url) : GetHtml(url, proxy);
+                    var html = useProxy ? GetHtml(url,proxy) : GetHtml(url);
 
                     BadiduProcessor procesor = new BadiduProcessor();
 
