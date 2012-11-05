@@ -72,7 +72,7 @@ namespace Jade
 
         static List<string> AllowedExtensions = new List<string>() { ".gif", ".jpg", ".png", ".bmp" };
 
-        public static Dictionary<string, string> GetImagesUrls(ref string html, string baseDir,Uri baseUrl)
+        public static Dictionary<string, string> GetImagesUrls(ref string html, string baseDir, Uri baseUrl)
         {
             Dictionary<string, string> urlList = new Dictionary<string, string>();
 
@@ -91,9 +91,14 @@ namespace Jade
                     {
                         fileName = fileName.Substring(slashIndex + 1);
                     }
-                    if (!fileName.Contains("."))
+
+                    // http://218.22.17.85:7001/cj/photoinfo/binary_middle.do?TableName=DOM_IMAGE&KeyName=REFID&FieldName=IMG_MIDDLE&KeyID=30251
+
+                    var realFileName = fileName.ToLower();
+
+                    if (!(realFileName.Contains(".jpg") || realFileName.Contains(".gif") || realFileName.Contains(".png") || realFileName.Contains(".bmp")))
                     {
-                        fileName += ".jpg";
+                        fileName = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
                     }
                     urlList.Add(src, fileName);
                     if (Jade.Properties.Settings.Default.IsOnline)

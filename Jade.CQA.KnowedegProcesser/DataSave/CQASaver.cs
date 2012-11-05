@@ -49,6 +49,7 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
 
         public static void SaveFetchResult(FetchResult result, bool isNew = true)
         {
+            return;
             new Thread(() =>
               {
                   if (isNew)

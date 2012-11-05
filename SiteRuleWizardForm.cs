@@ -575,7 +575,7 @@ namespace Jade
         HtmlElement current;
 
 
-        string GetCleanXpathName(string path)
+       public static string GetCleanXpathName(string path)
         {
             var index = path.IndexOf("[");
             if (index != -1)
@@ -585,7 +585,7 @@ namespace Jade
             return path;
         }
 
-        public string GetCommonXpath(string path1, string path2)
+        public static  string GetCommonXpath(string path1, string path2)
         {
             if (path1 == path2)
             {
@@ -777,7 +777,7 @@ namespace Jade
                         SelectedCount = 0;
                         secondXpath = this.currentTxtbox.Text;
 
-                        var commonPath = this.GetCommonXpath(firstXpath, secondXpath);
+                        var commonPath = GetCommonXpath(firstXpath, secondXpath);
                         if (!string.IsNullOrEmpty(commonPath))
                         {
                             this.currentActiveLogLabel.Text = "你已经选择两次，请测试是否正确";
@@ -1560,7 +1560,7 @@ namespace Jade
 
                 if (last != null && next != null)
                 {
-                    pageXpath = this.GetCommonXpath(next.XPath, last.XPath);
+                    pageXpath = GetCommonXpath(next.XPath, last.XPath);
 
                 }
                 else

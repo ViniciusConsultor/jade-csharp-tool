@@ -257,6 +257,8 @@ namespace Jade
 
         public static string NoHTML(string Htmlstring) //去除HTML标记  
         {
+            Htmlstring = Htmlstring.Replace("&amp;", "&");
+            // url
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
             //删除脚本  
             Htmlstring = Regex.Replace(Htmlstring, html2TextPattern, "", options);
@@ -307,6 +309,11 @@ namespace Jade
                     // 图片
                     if (pragrah.Contains("img"))
                     {
+                        if (pragrah.Contains("title=\"上一页") || pragrah.Contains("title=\"下一页") || pragrah.Contains("title=\"上页") || pragrah.Contains("title=\"下页"))
+                        {
+                            continue;
+                        }
+
                         var image = pragrah;
 
                         while (i < ps.Length - 1)
@@ -325,6 +332,13 @@ namespace Jade
                                     result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'><strong>{1}</strong></span></p>", image, ""));
                                     i--;
                                 }
+                                break;
+                            }
+                            else if (pragrah.ToLower().Contains("<img"))
+                            {
+                                // 包含图片
+                                result.Add(string.Format("<p style='text-align:center'>{0}<br/><span class='title'><strong>{1}</strong></span></p>", image, ""));
+                                i--;
                                 break;
                             }
                             // var next = ps[i].to
@@ -355,7 +369,7 @@ namespace Jade
                         }
 
 
-                        if (pragrah.StartsWith("前一页") || pragrah.StartsWith("[1]") || pragrah.StartsWith("首页") || pragrah.StartsWith("第一页"))
+                        if (pragrah.StartsWith("前一页") || pragrah.StartsWith("[1]") || pragrah.StartsWith("首页") || pragrah.StartsWith("第一页") || pragrah.EndsWith("下一页") || pragrah.EndsWith("[下一页]"))
                         {
                             continue;
                         }
@@ -481,8 +495,13 @@ namespace Jade
         /// <returns></returns>
         public static List<string> ExtractDataFromHtml(string html, string xpath, XMLPathSelectType selectType, XMLPathType pathType, string anotherXPath = "")
         {
+            html = html.Replace("&amp;", "&");
+
+
+            var old = html;
 
             var result = new List<string>();
+
             if (xpath == "" || html == "")
             {
                 return result;
@@ -611,7 +630,7 @@ namespace Jade
                     //HtmlDoc.OptionAutoCloseOnEnd = true;
                     HtmlDoc.OptionFixNestedTags = true;
                     HtmlDoc.OptionOutputAsXml = true;
-                    HtmlDoc.LoadHtml(html);
+                    HtmlDoc.LoadHtml(old);
                     var nodes = HtmlDoc.DocumentNode.SelectNodes(xpath);
 
                     // 替换XPATH

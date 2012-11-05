@@ -1134,6 +1134,53 @@ namespace Jade
             {
                 IFetcher fetcher = new FetchItem(itemRule);
                 var result = fetcher.Fetch(html);
+                if (itemRule.IdentifyPage || itemRule.CloumnName == "Content")
+                {
+                    try
+                    {
+                        string pageXpath = "";
+                        if (itemRule.PageXPath != "")
+                        {
+                            pageXpath = itemRule.PageXPath;
+                        }
+                        else
+                        {
+                            pageXpath = TaskRunner.GetPagerXPATH(html, pageXpath);
+                        }
+                        if (pageXpath != "")
+                        {
+                            var pageLinks = ExtractUrl.ExtractDataFromHtml(html, itemRule.PageXPath, XMLPathSelectType.Multiple, XMLPathType.Href).Distinct().ToList();
+                            Uri uri;
+                            if (!Uri.TryCreate(this.tbxItemUrl.Text, UriKind.Absolute, out uri))
+                            {
+                                MessageBox.Show(this, "非法测试采集地址！", "测试采集设置错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            ExtractUrl.RepairUrls(uri.AbsoluteUri, "", "#", pageLinks);
+                            foreach (var link in pageLinks)
+                            {
+                                if (link != uri.AbsoluteUri)
+                                {
+                                    var pageHtml = HtmlPicker.VisitUrl(
+                                     new Uri(link),
+                                     (string)this.cbbMethod.SelectedItem != "POST" ? "GET" : "POST",
+                                     null,
+                                      string.IsNullOrEmpty(this.tbxReferer.Text) ? null : this.tbxReferer.Text,
+                                     string.IsNullOrEmpty(this.tbxCookie.Text) ? null : Utility.GetCookies(this.tbxCookie.Text),
+                                     string.IsNullOrEmpty(this.tbxUserAgent.Text) ? null : this.tbxUserAgent.Text,
+                                     string.IsNullOrEmpty(this.tbxPostData.Text) ? null : this.tbxPostData.Text,
+                                     System.Text.Encoding.GetEncoding((string)this.cbbEncoding.SelectedItem));
+                                    result += "<hr class=enorth_new_page>" + fetcher.Fetch(pageHtml);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception pex)
+                    {
+                        Log4Log.Error("提取分页失败");
+                        Log4Log.Exception(pex);
+                    }
+                }
                 this.tbxResult.Text += string.Format("【{0}】: {1}\r\n", itemRule.ItemName, result);
             }
         }

@@ -19,6 +19,7 @@ using Jade.CQA.Robot.Services;
 using System.Net.Sockets;
 using Jade.CQA.KnowedegProcesser.DataSave;
 using System.Diagnostics;
+//using MbnApi;
 
 namespace BaiduZhidao
 {
@@ -201,33 +202,82 @@ namespace BaiduZhidao
 
         static Stopwatch timer;
 
+        #region mbnAPI
+        //class to keep global variables
+        //class Global
+        //{
+        //    public static IMbnRadio g_IMbnRadio = null;
+        //}
+
+        ////implement the required IMbnXXXEvents
+        //class RadioEventsSink : IMbnRadioEvents
+        //{
+        //    public RadioEventsSink() { }
+        //    public void OnRadioStateChange(IMbnRadio newInterface)
+        //    {
+
+        //    }
+
+        //    public void OnSetSoftwareRadioStateComplete(IMbnRadio newInterface, uint requestID, int Status)
+        //    {
+        //        Global.g_IMbnRadio = newInterface;
+        //    }
+        //}
+        #endregion
+
         static void Main(string[] args)
         {
+            #region mbnAPI
+            //MbnConnectionManager mbnConnMgr =
+            //new MbnConnectionManager();
+            //IMbnConnectionManager connMgr =
+            //(IMbnConnectionManager)mbnConnMgr;
 
-            getProxy();
+            //try
+            //{
+            //    // enumerate the connections using GetConnections   
+            //    IMbnConnection[] arrConn =
+            //    (IMbnConnection[])connMgr.GetConnections();
+
+
+            //    foreach (IMbnConnection conn in arrConn)
+            //    {
+            //        uint requestId;
+            //        conn.Connect(MBN_CONNECTION_MODE.MBN_CONNECTION_MODE_PROFILE, "",out requestId);
+            //        Console.WriteLine("Connection ID = " + conn.ConnectionID);
+            //    }
+            //}
+
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //    throw e;
+            //}
+            #endregion
+
+
+            //getProxy();
 
             timer = new Stopwatch();
             timer.Start();
 
             //int start = 493326325;
 
-
-
             if (System.IO.File.Exists("index.bin"))
             {
                 start = int.Parse(System.IO.File.ReadAllText("index.bin"));
             }
 
-
             for (var i = 0; i < MaxThread; i++)
             {
-                new Thread(DoWork).Start(true);
+                new Thread(DoWork).Start();
 
+                Thread.Sleep(1000);
                 //DoWork();
             }
 
             //DoWork(false);
-            new Thread(DoWork).Start();
+            // new Thread(DoWork).Start();
 
             Console.ReadLine();
             //while (start > end)
@@ -268,7 +318,7 @@ namespace BaiduZhidao
 
                     WebProxy proxy = useProxy ? GetProxy() : null;
 
-                    var html = useProxy ? GetHtml(url,proxy) : GetHtml(url);
+                    var html = useProxy ? GetHtml(url, proxy) : GetHtml(url);
 
                     BadiduProcessor procesor = new BadiduProcessor();
 
@@ -320,7 +370,7 @@ namespace BaiduZhidao
                 {
                     if (!useProxy)
                     {
-                        Thread.Sleep(NomalSleep);
+                        //Thread.Sleep(NomalSleep);
                     }
                 }
             }
@@ -334,9 +384,13 @@ namespace BaiduZhidao
         public static Dictionary<string, bool> UserCache = new Dictionary<string, bool>();
 
 
-        public string GetHtml(string url)
+        public static string GetHtml(string url, WebProxy proxy = null)
         {
             WebClient client = new WebClient();
+            if (proxy != null)
+            {
+                client.Proxy = proxy;
+            }
             return client.DownloadString(url);
         }
 
@@ -456,7 +510,7 @@ namespace BaiduZhidao
             question.Category = htmlDoc.ExtractData("//div[@id=\"body\"]/div[1]").Trim();
             question.Id = id;
             question.Url = "http://zhidao.baidu.com/question/" + id + ".html";
-            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=").Trim());
+            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=", proxy).Trim());
             //Console.WriteLine(question.ToString());
 
             // 回复数目
@@ -481,7 +535,7 @@ namespace BaiduZhidao
 
                 var regex = new Regex("total_count\":\"(\\d+)\"");
 
-                var commentApi = GetHtml(commentUrl);
+                var commentApi = GetHtml(commentUrl, proxy);
                 var commentCounts = regex.Matches(commentApi);
 
                 var userNames = htmlDoc.DocumentNode.SelectNodes("//input[@name=\"userName\"]").Select(n => n.Attributes["value"].Value).ToList();
