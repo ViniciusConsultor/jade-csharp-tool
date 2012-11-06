@@ -233,6 +233,15 @@ namespace Jade.CQA.Robot
             AddStep(uri, depth, null, null);
         }
 
+
+        public void AddListStep(string urlFormat, int start, int end, int depth = 1)
+        {
+            for (var i = start; i < end; i++)
+            {
+                AddStep(new Uri(string.Format(urlFormat, i)), depth);
+            }
+        }
+
         /// <summary>
         /// 	添加一个任务进抓取队列
         /// </summary>
@@ -338,7 +347,7 @@ namespace Jade.CQA.Robot
                         }
                     }
                 }
- 
+
                 if (this.DownloadInterval.HasValue)
                 {
                     Thread.Sleep(DownloadInterval.Value);

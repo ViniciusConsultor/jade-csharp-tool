@@ -417,7 +417,7 @@ namespace Jade.CQA
                 // Custom step to visualize crawl
                 DownloadRetryCount = 0,
                 MaximumThreadCount = 20,
-                MaximumCrawlDepth = 5,
+                MaximumCrawlDepth = 2,
                 UserAgent = "Googlebot/2.1 (+http://www.googlebot.com/bot.html)",
                 //IncludeFilter = Program.ExtensionsMustContain
                 //ExcludeFilter = Program.ExtensionsToSkip,
