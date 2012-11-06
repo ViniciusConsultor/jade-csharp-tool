@@ -253,17 +253,59 @@ namespace Jade
 @"|(?<copy>&(copy|#169);)" + // 符号: (char)169
 @"|(?<others>&(d+);)"; // 符号: 其他
 
+        // <!--function pub_date() parse begin-->
         private static string removeNoUsedHtml = @"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)"; // 符号: 其他
+
+        private static string cleanTxtPatten =
+@"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)" +
+@"|(?<html><[^>]+>)" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
+            //   @"<[^>]+>)" + // HTML标记  |(\s+)
+@"|(?<quot>&(quot|#34);)" + // 符号: "
+@"|(?<amp>&(amp|#38);)" + // 符号: &
+@"|(?<iexcl>&(iexcl|#161);)" + // 符号: (char)161
+@"|(?<cent>&(cent|#162);)" + // 符号: (char)162
+@"|(?<pound>&(pound|#163);)" + // 符号: (char)163
+@"|(?<copy>&(copy|#169);)" + // 符号: (char)169
+@"|(?<others>&(d+);)"; // 符号: 其他
+
+        public static string CleanText(string source)
+        {
+            source = source.Replace("&nbsp;", "");
+            RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
+            //删除脚本  
+            return Regex.Replace(source, cleanTxtPatten, "", options);
+        }
 
         public static string NoHTML(string Htmlstring) //去除HTML标记  
         {
-            Htmlstring = Htmlstring.Replace("&amp;", "&");
+            Htmlstring = Htmlstring.Replace("&amp;", "&").Replace("&nbsp;", "");
             // url
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
             //删除脚本  
             Htmlstring = Regex.Replace(Htmlstring, html2TextPattern, "", options);
 
             return RepairHtml(Htmlstring);
+        }
+
+        /// <summary>
+        /// 修复摘要
+        /// </summary>
+        /// <param name="summary"></param>
+        /// <returns></returns>
+        public static string RepairSummary(string summary)
+        {
+            var startIndex = summary.IndexOf("电");
+            if (startIndex > -1 && startIndex < 10)
+            {
+                summary = summary.Substring(startIndex + 2).Trim();
+            }
+
+            startIndex = summary.IndexOf("讯");
+            if (startIndex > -1 && startIndex < 10)
+            {
+                summary = summary.Substring(startIndex + 2).Trim();
+            }
+            return summary;
         }
 
         /// <summary>
@@ -655,7 +697,7 @@ namespace Jade
                                         result.Add(node.InnerHtml);
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText.Trim());
+                                        result.Add(CleanText(node.InnerText.Trim()));
                                         break;
                                     case XMLPathType.InnerLinks:
                                         result.AddRange(GetLinks(node));
@@ -681,7 +723,7 @@ namespace Jade
                                         result.Add(node.InnerHtml);
                                         break;
                                     case XMLPathType.InnerText:
-                                        result.Add(node.InnerText.Trim());
+                                        result.Add(CleanText(node.InnerText.Trim()));
                                         break;
                                     case XMLPathType.InnerLinks:
                                         result.AddRange(GetLinks(node));

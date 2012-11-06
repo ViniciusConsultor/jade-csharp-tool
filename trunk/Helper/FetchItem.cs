@@ -175,6 +175,10 @@ namespace Jade
                     case ItemFetchType.XPath:
                         var xpathResult = ExtractUrl.ExtractDataFromHtml(fetchStuff, CurrentItemRule.XPath, CurrentItemRule.XMLPathSelectType, CurrentItemRule.XMLPathType, CurrentItemRule.AnotherXPath);
                         result = string.Join(" ", xpathResult.ToArray());
+                        if (CurrentItemRule.CloumnName == "Summary")
+                        {
+                            result = ExtractUrl.RepairSummary(result);
+                        }
                         break;
                     case ItemFetchType.UserDiy:
                         if (CurrentItemRule.DiyType == UserDiyType.Datetime)
