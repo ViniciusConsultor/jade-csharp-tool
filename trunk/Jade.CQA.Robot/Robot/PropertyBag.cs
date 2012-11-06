@@ -126,7 +126,7 @@ namespace Jade.CQA.Robot
         /// 原始URL
         /// </summary>
         [DataMember]
-        public string OriginalUrl { get; internal set; }
+        public string OriginalUrl { get;  set; }
 
         [DataMember]
         public Version ProtocolVersion { get; internal set; }

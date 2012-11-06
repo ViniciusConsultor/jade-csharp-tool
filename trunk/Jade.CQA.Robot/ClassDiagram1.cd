@@ -3,15 +3,15 @@
   <Class Name="Jade.CQA.Robot.Crawler" Collapsed="true">
     <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>iIQpDoPqQCEyACQhgUQAAQI0NAAAAggjoJwBBUWBMUA=</HashCode>
-      <FileName>Robot\Crawler.cs</FileName>
+      <HashCode>iIQpDoPqQCEyACQhgUQAAQI0NAAAAgkjoJwBBUWBMUA=</HashCode>
+      <FileName>Robot\Services\Crawler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jade.CQA.Robot.ProxyModel" Collapsed="true">
     <Position X="9" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Robot\Crawler.cs</FileName>
+      <FileName>Robot\Services\Crawler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jade.CQA.Robot.CrawlStep" Collapsed="true" BaseTypeListCollapsed="true">

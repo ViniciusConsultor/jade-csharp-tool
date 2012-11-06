@@ -42,6 +42,7 @@
       <HintPath>..\Jade.CQA.Robot\Lib\Autofac.2.4.5.724\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +64,9 @@
       <Project>{582823CF-5750-4A0D-82B0-474C00F01B20}</Project>
       <Name>Jade.CQA.Robot</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
