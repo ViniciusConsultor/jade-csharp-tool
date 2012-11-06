@@ -46,7 +46,7 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
         public MongdbHelper(string tableName)
         {
             Server = MongoServer.Create(BaseConfig.DBConnectionString);
-            Database = Server.GetDatabase("CQA");
+            Database = Server.GetDatabase("CQA2");
             DataSet = Database.GetCollection(tableName);
         }
 

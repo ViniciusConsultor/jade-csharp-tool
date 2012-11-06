@@ -17,6 +17,7 @@ using System.Globalization;
 using System.Threading;
 using Jade.CQA.Robot.Services;
 using System.Net.Sockets;
+using Jade.CQA.KnowedegProcesser.DataSave;
 
 namespace Jade.CQA.KnowedegProcesser
 {
@@ -367,10 +368,19 @@ namespace Jade.CQA.KnowedegProcesser
         public override bool IsAllowedUrl(string url)
         {
 
-            if (url.Contains("/question/")
-                || url.Contains("/browse/") || url.Contains("/p/")
+            if (//url.Contains("/question/")
+                //|| url.Contains("/browse/") || 
+                url.Contains("/p/")
                 )
             {
+                //http://www.baidu.com/p/顺其自然amu?from=zhidao"
+                var key = url.Substring(url.IndexOf("/p/") + "/p/".Length).Replace("?from=zhidao", "");
+                if (!UserCache.ContainsKey(key) && !CQASaver.IsUserExist(key))
+                {
+                    UserCache.Add(url, true);
+
+                    return true;
+                }
                 //url = "http://zhidao.baidu.com/question/11921534.html"
                 if (url.Contains("/question/"))
                 {
@@ -404,18 +414,29 @@ namespace Jade.CQA.KnowedegProcesser
                 // todo 重拨号
                 ReConnectNetWork();
             }
-            // 用户
-            if (propertyBag.OriginalUrl.Contains("/p/"))
+
+            if (propertyBag.OriginalUrl == null)
             {
-                ExtractUser(propertyBag, html);
+                propertyBag.OriginalUrl = propertyBag.ResponseUri.AbsoluteUri;
             }
-            else if (propertyBag.OriginalUrl.Contains("/question/"))
+
+            if (propertyBag.OriginalUrl != null)
             {
-                ExtractQuestion(propertyBag, htmlDoc, html);
+                // 用户
+                if (propertyBag.OriginalUrl.Contains("/p/"))
+                {
+                    ExtractUser(propertyBag, html);
+                }
+                else if (propertyBag.OriginalUrl.Contains("/question/"))
+                {
+                    ExtractQuestion(propertyBag, htmlDoc, html);
+                }
             }
         }
 
         static bool isUser3G = true;
+
+        public static Dictionary<string, bool> UserCache = new Dictionary<string, bool>();
 
 
         /// <summary>

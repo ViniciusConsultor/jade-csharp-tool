@@ -37,44 +37,61 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
 
         public static bool IsUserExist(string userName)
         {
-            using (MongdbHelper helper = new MongdbHelper("CQAUser"))
+            try
             {
-                IMongoQuery query = new QueryDocument()
+                using (MongdbHelper helper = new MongdbHelper("CQAUser"))
+                {
+                    IMongoQuery query = new QueryDocument()
                         {
                             {"UserName",userName}
                          };
-                return helper.DataSet.FindOne(query) != null;
+                    var user = helper.DataSet.FindOne(query);
+                    return user != null;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
         }
 
         public static void SaveFetchResult(FetchResult result, bool isNew = true)
         {
-            return;
             new Thread(() =>
               {
-                  if (isNew)
+                  try
                   {
-                      if (result.User == null)
+                      if (isNew)
                       {
-                          using (MongdbHelper helper = new MongdbHelper("Question"))
+                          if (result.User == null)
                           {
-                              helper.DataSet.Insert(result.Question);
-                              helper.Database.GetCollection("Answer").InsertBatch<Answer>(result.Answers);
-                              helper.Database.GetCollection("QuestionAnswer").Insert(result.QuestionAnswer);
+                              using (MongdbHelper helper = new MongdbHelper("Question"))
+                              {
+                                  helper.DataSet.Insert(result.Question);
+                                  helper.Database.GetCollection("Answer").InsertBatch<Answer>(result.Answers);
+                                  helper.Database.GetCollection("QuestionAnswer").Insert(result.QuestionAnswer);
+                              }
                           }
-                      }
-                      else
-                      {
-                          using (MongdbHelper helper = new MongdbHelper("CQAUser"))
+                          else
                           {
-                              IMongoQuery query = new QueryDocument()
+                              using (MongdbHelper helper = new MongdbHelper("CQAUser"))
+                              {
+                                  IMongoQuery query = new QueryDocument()
                         {
                             {"UserName",result.User.UserName}
                          };
-                              if (helper.DataSet.FindOne(query) == null)
-                                  helper.DataSet.Insert(result.User);
+                                  if (helper.DataSet.FindOne(query) == null)
+                                      helper.DataSet.Insert(result.User);
+                              }
                           }
                       }
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine(ex.Message);
+                      SaveFetchResult(result);
                   }
               }).Start();
         }

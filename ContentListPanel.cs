@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Columns;
 using Jade.Model;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 namespace Jade
 {
     public partial class ContentListPanel : DevExpress.XtraEditors.XtraUserControl
@@ -145,6 +146,9 @@ namespace Jade
                 info = gridView1.CalcHitInfo(pt);
                 if (info.InRowCell)
                 {
+                    Stopwatch watch = new Stopwatch();
+                    watch.Start();
+
                     rowIndex = info.RowHandle;
                     var dataTable = (List<IDownloadData>)this.gridView1.DataSource;
                     var data = dataTable[rowIndex];
@@ -152,19 +156,25 @@ namespace Jade
                     if (!string.IsNullOrEmpty(data.EditorUserName) && data.EditorUserName != CacheObject.CurrentUser.Name && data.EditorUserName != "用户")
                     {
                         MessageBox.Show("该新闻已被被人占有，你不能再编辑!");
+                        watch.Stop();
                         return;
                     }
-
+                    watch.Stop();
+                    Log4Log.Error("获取新闻" + watch.Elapsed.TotalSeconds + "s");
+                    watch.Restart();
                     if (Jade.Properties.Settings.Default.IsOnline && data.EditorUserName != CacheObject.CurrentUser.Name && CacheObject.IsLognIn)
                     {
                         if (MessageBox.Show("是否占有该新闻，以防止别人同时修改?", "系统提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             try
                             {
+
                                 data.EditorUserName = CacheObject.CurrentUser.Name;
                                 data.EditTime = DateTime.Now;
                                 data.IsEdit = true;
                                 CacheObject.DownloadDataDAL.Update(data);
+                                watch.Stop();
+                                Log4Log.Error("占有该新闻耗时" + watch.Elapsed.TotalSeconds + "s");
                                 //comboBox1_SelectedIndexChanged(null, null);
                             }
                             catch (Exception ze)
@@ -174,8 +184,11 @@ namespace Jade
                             }
                         }
                     }
+                    watch.Restart();
                     var currentPage = this.devPager1.CurrentPageIndex;
                     CacheObject.ContentForm.InitDownloadData(data);
+                    watch.Stop();
+                    Log4Log.Error("初始化新闻耗时" + watch.Elapsed.TotalSeconds + "s");
                     CacheObject.ContentForm.ShowDialog();
                     int totalCount;
                     this.gridControl1.DataSource = CacheObject.DownloadDataDAL.GetList(GetArgs(currentPage), out totalCount);

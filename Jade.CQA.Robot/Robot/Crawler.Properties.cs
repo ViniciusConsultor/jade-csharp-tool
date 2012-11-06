@@ -98,6 +98,12 @@ namespace Jade.CQA.Robot
             set;
         }
 
+        public bool IsAllowExternalUrl
+        {
+            get;
+            set;
+        }
+
         public int? DownloadInterval
         {
             get;

@@ -79,14 +79,15 @@ namespace Jade.CQA
                 var fetchResult = (FetchResult)propertyBag["fetchResult"].Value;
                 if (fetchResult != null)
                 {
-                    // CQASaver.SaveFetchResult(fetchResult);
+                    CQASaver.SaveFetchResult(fetchResult);
 
-                    Count++;
 
                     Console.WriteLine("已累积抓取" + Count + "，耗时" + crawler.ElapsedTime.ToString());
 
                     if (fetchResult.User == null)
                     {
+                        Count++;
+
                         Console.Out.WriteLine(ConsoleColor.DarkGreen, "问题：{0}", fetchResult.Question.Title);
                         //Console.Out.WriteLine(ConsoleColor.Red, "{0}", "问题与答案：");
                         // Console.Out.WriteLine(ConsoleColor.DarkGreen, "{0}", fetchResult.QuestionAnswer);
@@ -108,8 +109,6 @@ namespace Jade.CQA
         #endregion
     }
 
-
-
     internal class BaiduUrlFilter : IFilter
     {
 
@@ -127,8 +126,9 @@ namespace Jade.CQA
                 return false;
             }
             if (
-                uri.AbsoluteUri.Contains("/question/")
-                || uri.AbsoluteUri.Contains("/browse/") || uri.AbsoluteUri.Contains("/p/")
+                //uri.AbsoluteUri.Contains("/question/")
+                //|| uri.AbsoluteUri.Contains("/browse/") || 
+                uri.AbsoluteUri.Contains("/p/")
                 )
             {
                 return true;
@@ -302,9 +302,6 @@ namespace Jade.CQA
         static void Main(string[] args)
         {
 
-
-
-
             //RASDisplay ras = new RASDisplay();
             //Console.WriteLine("等待重拨号中。。。");
             //ras.Disconnect();
@@ -416,10 +413,11 @@ namespace Jade.CQA
                 //Proxyes = Proxyes.Select(p => new WebProxy(p.IP, p.Port)).ToList(),
                 // Custom step to visualize crawl
                 DownloadRetryCount = 0,
-                MaximumThreadCount = 20,
+                MaximumThreadCount = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxThread"]),
                 MaximumCrawlDepth = 2,
                 UserAgent = "Googlebot/2.1 (+http://www.googlebot.com/bot.html)",
-                //IncludeFilter = Program.ExtensionsMustContain
+                IsAllowExternalUrl = true,
+                IncludeFilter = Program.ExtensionsMustContain
                 //ExcludeFilter = Program.ExtensionsToSkip,
             })
             {

@@ -59,7 +59,7 @@ namespace Jade.CQA.Robot.Services
                 return false;
             }
 
-            if (IsExternalUrl(uri))
+            if (!m_Crawler.IsAllowExternalUrl && IsExternalUrl(uri))
             {
                 return false;
             }
