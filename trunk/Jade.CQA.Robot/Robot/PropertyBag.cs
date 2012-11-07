@@ -334,7 +334,7 @@ namespace Jade.CQA.Robot
             public object Owner { get; private set; }
 
             /// <summary>
-            /// The property value
+            /// 属性值
             /// </summary>
             public object Value
             {

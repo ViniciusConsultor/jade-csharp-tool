@@ -335,7 +335,7 @@ namespace Jade.CQA.Robot.Services
 
         #endregion
 
-        #region IWebDownloader ≥…‘±
+        #region Proxy
 
 
         public WebProxy Proxy

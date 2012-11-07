@@ -12,13 +12,13 @@ namespace Jade.CQA.Robot.Extensions
         #region Class Methods
 
         /// <summary>
-        /// Dynamically retrieves a property value.
+        /// 动态获取属性值
         /// </summary>
-        /// <typeparam name="T">The expected return data type</typeparam>
-        /// <param name="obj">The object to perform on.</param>
-        /// <param name="propertyName">The Name of the property.</param>
-        /// <param name="defaultValue">The default value to return.</param>
-        /// <returns>The property value.</returns>
+        /// <typeparam name="T">返回数据类型</typeparam>
+        /// <param name="obj">执行对象</param>
+        /// <param name="propertyName">属性名称.</param>
+        /// <param name="defaultValue">默认值.</param>
+        /// <returns>属性值.</returns>
         /// <example>
         /// <code>
         /// var type = Type.GetType("System.IO.FileInfo, mscorlib");

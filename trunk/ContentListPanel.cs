@@ -184,6 +184,7 @@ namespace Jade
                             }
                         }
                     }
+                    GC.Collect();
                     watch.Restart();
                     var currentPage = this.devPager1.CurrentPageIndex;
                     CacheObject.ContentForm.InitDownloadData(data);

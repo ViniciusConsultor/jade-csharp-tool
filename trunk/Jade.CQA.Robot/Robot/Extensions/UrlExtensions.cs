@@ -20,6 +20,11 @@ namespace Jade.CQA.Robot.Extensions
 				return baseUrl;
 			}
 
+            if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                return url;
+            }
+
 			if (url.IndexOf("..") != -1 ||
 				url.StartsWith("/") ||
 				!url.StartsWith(s_HttpScheme, StringComparison.OrdinalIgnoreCase) ||

@@ -14,14 +14,14 @@
       <FileName>Model\DomainModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jade.CQA.Model.Question" Collapsed="true">
+  <Class Name="Jade.CQA.Model.Question">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACACAEAoAABEAFAABACAAAAAWAAEAACAAAAAAACAI=</HashCode>
+      <HashCode>AAACAiAEAoAABEAFEABACAAAAAWAAEAACAAAAAAACAI=</HashCode>
       <FileName>Model\DomainModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jade.CQA.Model.Answer" Collapsed="true">
+  <Class Name="Jade.CQA.Model.Answer">
     <Position X="7.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAICIAAgACAABFAAAAAAAQAAEAAAABAQIAAAQAQAI=</HashCode>
@@ -38,7 +38,7 @@
   <Class Name="Jade.CQA.Model.User" Collapsed="true">
     <Position X="5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAEAAAAAAEACBAIASAEAAAAAAAAQAAACAgACA=</HashCode>
+      <HashCode>QAAAAgAAEAAAAAAEECBAIASAEAAAAAAACQAAACAgACA=</HashCode>
       <FileName>Model\DomainModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -50,7 +50,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jade.CQA.Model.QuestionStatus">
-    <Position X="2.75" Y="3" Width="1.5" />
+    <Position X="5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAABAQAAQAAAAAAAA=</HashCode>
       <FileName>Model\DomainModel.cs</FileName>
