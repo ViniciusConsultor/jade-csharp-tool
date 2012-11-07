@@ -80,7 +80,7 @@ namespace Jade.CQA
                 if (fetchResult != null)
                 {
                     CQASaver.SaveFetchResult(fetchResult);
-
+                    HBASEDATASAVER.HBASESaver.SaveFetchResult(fetchResult);
 
                     Console.WriteLine("已累积抓取" + Count + "，耗时" + crawler.ElapsedTime.ToString());
 

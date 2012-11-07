@@ -425,7 +425,7 @@ namespace Jade.CQA.KnowedegProcesser
                 // 用户
                 if (propertyBag.OriginalUrl.Contains("/p/"))
                 {
-                    ExtractUser(propertyBag, html);
+                    ExtractUser(propertyBag,htmlDoc, html);
                 }
                 else if (propertyBag.OriginalUrl.Contains("/question/"))
                 {
@@ -471,7 +471,7 @@ namespace Jade.CQA.KnowedegProcesser
             }
         }
 
-        private static void ExtractUser(PropertyBag propertyBag, string html)
+        private static void ExtractUser(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)
         {
             /*
             姓名：
@@ -512,6 +512,8 @@ namespace Jade.CQA.KnowedegProcesser
 
             user.UserName = html.Substring("<title>", "的百度个人主页</title>");
 
+            user.RawText = htmlDoc.DocumentNode.InnerText;
+
 
             var fetchResult = new FetchResult
             {
@@ -529,7 +531,7 @@ namespace Jade.CQA.KnowedegProcesser
             var question = new Question();
             question.KnowedgeType = KnowedgeType.BaiduZhidao;
             question.Title = html.Substring("<title>", "百度知道").Replace("_", "");
-
+            question.RawText = htmlDoc.DocumentNode.InnerText;
             ////*[@id="question-box"]/div[2]/div[1]/div/div/div/span[3]
             var time = htmlDoc.ExtractData("//div[@id=\"question-box\"]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]");
             // 2009-1-23 18:34

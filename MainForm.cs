@@ -578,19 +578,26 @@ namespace Jade
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var task = this.taskTree.SelectedNode.Tag as SiteRule;
-
-            if (task != null)
+            if (this.taskTree.SelectedNode != null)
             {
-                var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
-                new System.Threading.Thread(taskRunner.Start).Start();
-                dockManager1.ActivePanel = this.dockPanel4;
-                //var runnerForm = new TaskRunForm(task);
-                //tabbedView1.BeginUpdate();
-                //var document = tabbedView1.Controller.AddDocument(runnerForm);
-                //document.Form.Text = task.Name;
-                //document.Caption = task.Name + "[运行中]";
-                //tabbedView1.EndUpdate();
+                var task = this.taskTree.SelectedNode.Tag as SiteRule;
+
+                if (task != null)
+                {
+                    var taskRunner = new TaskRunner(task, this, new BLL.DataSaverManager());
+                    new System.Threading.Thread(taskRunner.Start).Start();
+                    dockManager1.ActivePanel = this.dockPanel4;
+                    //var runnerForm = new TaskRunForm(task);
+                    //tabbedView1.BeginUpdate();
+                    //var document = tabbedView1.Controller.AddDocument(runnerForm);
+                    //document.Form.Text = task.Name;
+                    //document.Caption = task.Name + "[运行中]";
+                    //tabbedView1.EndUpdate();
+                }
+                else
+                {
+                    MessageBox.Show("请选择一个任务");
+                }
             }
             else
             {

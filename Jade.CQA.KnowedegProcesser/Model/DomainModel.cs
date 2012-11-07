@@ -65,16 +65,28 @@ namespace Jade.CQA.Model
     /// </summary>
     public class BaseModel
     {
+        /// <summary>
+        /// 数据类型
+        /// </summary>
         public KnowedgeType KnowedgeType
         {
             get;
             set;
+        }
+
+        protected string ReverseUrl(string url)
+        {
+            var uri = new Uri(url);
+            //com.baidu.zhidao/1.html
+            var top = string.Join(".", uri.Host.Split('.').Reverse());
+            return top + uri.PathAndQuery;
         }
     }
 
     /// <summary>
     /// 问题
     /// </summary>
+    [Serializable]
     public class Question : BaseModel
     {
         private string _id;
@@ -105,6 +117,26 @@ namespace Jade.CQA.Model
 
         public Question()
         {
+        }
+
+        /// <summary>
+        /// 原始内容(去除html标签后的内容)
+        /// </summary>
+        public string RawText
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 反转Url
+        /// </summary>
+        public string ReversedUrl
+        {
+            get
+            {
+                return this.ReverseUrl(this.Url);
+            }
         }
 
         public string Id
@@ -189,6 +221,7 @@ namespace Jade.CQA.Model
     /// <summary>
     /// 答案
     /// </summary>
+    [Serializable]
     public class Answer : BaseModel
     {
         private string _answerId;
@@ -302,6 +335,7 @@ namespace Jade.CQA.Model
     /// <summary>
     /// 问题与答案
     /// </summary>
+    [Serializable]
     public class QuestionAnswer : BaseModel
     {
         private string _questionId;
@@ -364,8 +398,8 @@ namespace Jade.CQA.Model
             str = String.Concat(str, "KnowedgeType = ", KnowedgeType, "\r\n");
             str = String.Concat(str, "QuestionId = ", QuestionId, "\r\n");
             str = String.Concat(str, "AnswerIds = ", string.Join(",", AnswerIds.ToArray()), "\r\n");
-            str = String.Concat(str, "SatisfiedAnswerIds = ", string.Join(",",SatisfiedAnswerIds.ToArray()), "\r\n");
-            str = String.Concat(str, "RecommendedAnswerIds = ",string.Join(",",RecommendedAnswerIds.ToArray()) , "\r\n");
+            str = String.Concat(str, "SatisfiedAnswerIds = ", string.Join(",", SatisfiedAnswerIds.ToArray()), "\r\n");
+            str = String.Concat(str, "RecommendedAnswerIds = ", string.Join(",", RecommendedAnswerIds.ToArray()), "\r\n");
             str = String.Concat(str, "RelatedQuestionIds = ", string.Join(",", RelatedQuestionIds.ToArray()), "\r\n");
             return str;
         }
@@ -374,6 +408,7 @@ namespace Jade.CQA.Model
     /// <summary>
     /// 用户
     /// </summary>
+    [Serializable]
     public class User : BaseModel
     {
         private string _displayName;
@@ -385,6 +420,37 @@ namespace Jade.CQA.Model
 
         public User()
         {
+        }
+
+        /// <summary>
+        /// 原始内容(去除html标签后的内容)
+        /// </summary>
+        public string RawText
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 反转Url
+        /// </summary>
+        public string ReversedUrl
+        {
+            get
+            {
+                return this.ReverseUrl(this.Url);
+            }
+        }
+
+        /// <summary>
+        /// 用户Url
+        /// </summary>
+        public string Url
+        {
+            get
+            {
+                return string.Format("http://www.baidu.com/p/{0}?from=zhidao", this.UserName);
+            }
         }
 
         /// <summary>

@@ -37,8 +37,10 @@ namespace Jade.CQA.KnowedegProcesser.DataSave
 
         public static bool IsUserExist(string userName)
         {
+            return false;
             try
             {
+
                 using (MongdbHelper helper = new MongdbHelper("CQAUser"))
                 {
                     IMongoQuery query = new QueryDocument()
