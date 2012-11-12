@@ -33,7 +33,7 @@ namespace Jade
                 DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
                 ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log4Log.Exception(ex);
             }
@@ -1095,6 +1095,8 @@ namespace Jade
             System.Net.ServicePointManager.Expect100Continue = false;
             var request = (HttpWebRequest)WebRequest.Create(this.Url);
             request.Headers[HttpRequestHeader.Cookie] = this.Cookie;
+            //request.Headers[HttpRequestHeader.Referer] = "http://newscms.house365.com/newCMS/news/editlist.php?channel_id=12000000";
+            //request.Headers[HttpRequestHeader.UserAgent] = "Mozilla/5.0 (Windows NT 5.2) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.6 Safari/535.11";
             if (this.RequestData.IsMultipart)
             {
                 request.ContentType = this.multipart;
@@ -1243,6 +1245,29 @@ namespace Jade
             return ResponseMessage;
         }
 
+        private Dictionary<string, string> GetKeyValueDictionFromCookie(string cookie)
+        {
+            //var regex = new Regex(@"expires=\w+, \d+-\w+-\d+ \d+:\d+:\d+ GMT,*");
+            //cookie = regex.Replace(cookie, "");
+            var results = cookie.Split(';');
+            var ResponseDictionary = new Dictionary<string, string>();
+            foreach (var result in results)
+            {
+                var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                if (keyvaluepair.Length == 2)
+                {
+                    if (!ResponseDictionary.ContainsKey(keyvaluepair[0].Trim()))
+                    {
+                        ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
+                    }
+                    else
+                    {
+                        ResponseDictionary[keyvaluepair[0].Trim()] = keyvaluepair[1].Trim();
+                    }
+                }
+            }
+            return ResponseDictionary;
+        }
 
 
         public string Get()
@@ -1270,8 +1295,24 @@ namespace Jade
             if (_myHttpWebResponse.Headers[HttpResponseHeader.SetCookie] != null)
             {
                 var regex = new Regex(@"expires=\w+, \d+-\w+-\d+ \d+:\d+:\d+ GMT;*");
-                this.Cookie = _myHttpWebResponse.Headers[HttpResponseHeader.SetCookie].Replace("path=/,", "").Replace("path=/", "");
-                this.Cookie = regex.Replace(Cookie, "");
+
+                var old = GetKeyValueDictionFromCookie(this.Cookie);
+
+                var newCookies = GetKeyValueDictionFromCookie(regex.Replace(_myHttpWebResponse.Headers[HttpResponseHeader.SetCookie].Replace("path=/,", "").Replace("path=/", ""),""));
+
+                foreach (KeyValuePair<string, string> pari in newCookies)
+                {
+                    if (old.ContainsKey(pari.Key))
+                    {
+                        old[pari.Key] = pari.Value;
+                    }
+                    else
+                    {
+                        old.Add(pari.Key, pari.Value);
+                    }
+                }
+
+                this.Cookie = string.Join(";", old.Select(p => p.Key + "=" + p.Value));
             }
         }
 

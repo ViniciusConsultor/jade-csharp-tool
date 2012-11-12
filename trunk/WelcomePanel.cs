@@ -148,6 +148,7 @@ namespace Jade
             {
                 if (this.document != null)
                 {
+                    // CacheObject.Cookie = this.webBrowser1.Document.Cookie;
                     this.document.Caption = this.webBrowser1.Document.Title;
                     if (this.parentBrowser != null)
                     {
@@ -187,8 +188,9 @@ namespace Jade
                 var cookie = GetKeyValueDictionFromCookie(cookies);
                 foreach (var pair in cookie)
                 {
-                    //InternetSetCookie("house365.com", pair.Key, pair.Value);
-                    InternetSetCookie("http://newscms.house365.com", pair.Key, pair.Value);
+                    //http://newscms.house365.com/newCMS/index.php
+                    //InternetSetCookie("newscms.house365.com", pair.Key, pair.Value);
+                    InternetSetCookie(url, pair.Key, pair.Value);
                 }
             }
 
@@ -225,7 +227,14 @@ namespace Jade
                 var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
                 if (keyvaluepair.Length == 2)
                 {
-                    ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
+                    if (!ResponseDictionary.ContainsKey(keyvaluepair[0].Trim()))
+                    {
+                        ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
+                    }
+                    else
+                    {
+                        ResponseDictionary[keyvaluepair[0].Trim()] = keyvaluepair[1].Trim();
+                    }
                 }
             }
             return ResponseDictionary;
