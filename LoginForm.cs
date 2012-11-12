@@ -96,6 +96,9 @@ namespace Jade
 
             request.Cookie = cookie;
             var result = request.Post();
+
+            //var result = RemoteAPI.POST("http://newscms.house365.com/newCMS/chk_log.php", "user_name=" + this.txtUserName.Text + "&pass_word=" + this.txtPassword.Text + "&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32");
+
             Console.WriteLine(result);
             CacheObject.Cookie = request.Cookie;
 
@@ -148,6 +151,8 @@ namespace Jade
             };
 
             CacheObject.IsLognIn = true;
+
+            RemoteAPI.GetNewsId();
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 

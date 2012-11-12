@@ -240,7 +240,7 @@ namespace Jade
 
         public List<string> GetCommonTags()
         {
-            if (CommonTags != null)
+            if (CommonTags != null && CommonTags.Count > 0)
             {
                 return this.CommonTags.OrderByDescending(d => d.Count).Select(d => d.Tag.Trim()).Distinct().Take(5).ToList();
             }

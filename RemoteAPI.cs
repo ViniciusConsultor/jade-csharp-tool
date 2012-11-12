@@ -12,23 +12,25 @@ namespace Jade
 
         public static string GetNewsId()
         {
-            var request = CacheObject.WebRequset;
-            request.Url = "http://newscms.house365.com/newCMS/news/news_mod.php?action=add";
-            request.Cookie = CacheObject.Cookie;
-            request.RequestData = new RequestPostData()
-            {
-                PostDatas = new List<PostDataItem> { new PostDataItem{
-                        Data = "channel_id="+CacheObject.channelid+"\0"
-                    }}
-            };
-            var result = request.Post();
+            var postResult = POST("http://newscms.house365.com/newCMS/news/news_mod.php?action=add", "channel_id=" + CacheObject.channelid);
+            //Console.WriteLine(postResult);
+            //var request = CacheObject.WebRequset;
+            //request.Url = "http://newscms.house365.com/newCMS/news/news_mod.php?action=add";
+            //request.Cookie = CacheObject.Cookie;
+            //request.RequestData = new RequestPostData()
+            //{
+            //    PostDatas = new List<PostDataItem> { new PostDataItem{
+            //            Data = "channel_id="+CacheObject.channelid+"\0"
+            //        }}
+            //};
+            //var result = request.Post();
             // &news_id=020625642&
 
-            var newsId = Substring(result, "&news_id=", "&");
+            var newsId = Substring(postResult, "&news_id=", "&");
             if (!IsInitAPI)
             {
                 IsInitAPI = true;
-                InitAPI(result);
+                InitAPI(postResult);
             }
 
             return newsId;
@@ -193,7 +195,33 @@ namespace Jade
             var client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
             var response = client.OpenRead(url);
+            CacheObject.Cookie = RepairCookie(client.Cookie);
             return response;
+        }
+
+        public static string RepairCookie(string cookie)
+        {
+            //var regex = new Regex(@"expires=\w+, \d+-\w+-\d+ \d+:\d+:\d+ GMT,*");
+            //cookie = regex.Replace(cookie, "");
+            var results = cookie.Split(';');
+            var ResponseDictionary = new Dictionary<string, string>();
+            foreach (var result in results)
+            {
+                var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                if (keyvaluepair.Length == 2)
+                {
+                    if (!ResponseDictionary.ContainsKey(keyvaluepair[0].Trim()))
+                    {
+                        ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
+                    }
+                    else
+                    {
+                        ResponseDictionary[keyvaluepair[0].Trim()] = keyvaluepair[1].Trim();
+                    }
+                }
+            }
+
+            return string.Join(";", ResponseDictionary.Select(p => p.Key + "=" + p.Value));
         }
 
         public static string POST(string url, string data)
@@ -201,6 +229,7 @@ namespace Jade
             var client = new Jade.Http.WebClient();
             client.Cookie = CacheObject.Cookie;
             var response = client.OpenRead(url, data);
+            CacheObject.Cookie = RepairCookie(client.Cookie);
             return response;
         }
 
