@@ -137,6 +137,7 @@ namespace Jade
             setting.Name = trueName;
             setting.Save();
 
+            CacheObject.DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
 
             CacheObject.CurrentUser = new User
             {
@@ -220,6 +221,8 @@ namespace Jade
             setting.IsEditModel = this.rblEdit.Checked;
             setting.IsOnline = this.rblServer.Checked;
             setting.Save();
+            // 重新设置DAL
+            CacheObject.DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

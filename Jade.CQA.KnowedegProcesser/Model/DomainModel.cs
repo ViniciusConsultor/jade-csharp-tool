@@ -14,6 +14,7 @@ namespace Jade.CQA.Model
         public QuestionAnswer QuestionAnswer { get; set; }
 
         public User User { get; set; }
+
     }
 
     /// <summary>

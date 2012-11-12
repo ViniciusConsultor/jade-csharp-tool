@@ -32,20 +32,22 @@ namespace Jade
         {
             Update();
 
-            try
+            if (setting.IsOnline)
             {
-                if (!InitDataBase())
+                try
                 {
+                    if (!InitDataBase())
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log4Log.Exception(ex);
+                    MessageBox.Show("数据库连接失败，请确认用户名密码是是否正确");
                     return;
                 }
             }
-            catch (Exception ex)
-            {
-                Log4Log.Exception(ex);
-                MessageBox.Show("数据库连接失败，请确认用户名密码是是否正确");
-                return;
-            }
-
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
