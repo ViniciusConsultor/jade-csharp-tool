@@ -19,6 +19,7 @@ using Jade.CQA.Robot.Services;
 using System.Net.Sockets;
 using Jade.CQA.KnowedegProcesser.DataSave;
 using System.Diagnostics;
+using System.Linq.Expressions;
 //using MbnApi;
 
 namespace BaiduZhidao
@@ -227,6 +228,26 @@ namespace BaiduZhidao
 
         static void Main(string[] args)
         {
+            ParameterExpression paraLeft = Expression.Parameter(typeof(int), "a");
+            ParameterExpression paraRight = Expression.Parameter(typeof(int), "b");
+
+            BinaryExpression binaryLeft = Expression.Multiply(paraLeft, paraRight);
+            ConstantExpression conRight = Expression.Constant(2, typeof(int));
+
+            BinaryExpression binaryBody = Expression.Add(binaryLeft, conRight);
+
+            LambdaExpression lambda =
+                Expression.Lambda<Func<int, int, int>>(binaryBody, paraLeft, paraRight);
+
+            Console.WriteLine(lambda.ToString());
+
+
+            //Console.Read();
+
+            Expression<Func<FetchResult, bool>> where = (t) => t.Question.Url != "";
+
+            Console.WriteLine(Never.ExpressionProvider.ToSql(where));
+
             #region mbnAPI
             //MbnConnectionManager mbnConnMgr =
             //new MbnConnectionManager();

@@ -46,7 +46,7 @@ namespace Jade
         {
             if (Properties.Settings.Default.IsOnline)
             {
-               CacheObject.ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
+                CacheObject.ImageSaver = new ImageSaver(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
                 return new Model.MySql.NewsDAL(Properties.Settings.Default.ServerIp, Properties.Settings.Default.ServerDatabase, Properties.Settings.Default.ServerUser, Properties.Settings.Default.ServerPasword);
             }
             return new Model.Access.DownloadDataDAL();
