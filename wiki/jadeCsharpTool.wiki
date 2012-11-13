@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#summary Introduction TO jade-csharp-tool
 
 = Introduction =
 
-this is jade's tool
+this is jade's c# project since 2012
 
 
 = Details =
