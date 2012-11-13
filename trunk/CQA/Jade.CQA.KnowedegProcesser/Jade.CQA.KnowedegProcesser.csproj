@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\release\HtmlAgilityPack.dll</HintPath>
+      <HintPath>Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Bson, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -80,6 +80,9 @@
     <Content Include="CSharpDriver-1.6.0.4624\MongoDB.Driver.pdb" />
     <Content Include="CSharpDriver-1.6.0.4624\MongoDB.Driver.XML" />
     <Content Include="CSharpDriver-1.6.0.4624\Release Notes v1.6.txt" />
+    <Content Include="Lib\HtmlAgilityPack.dll" />
+    <Content Include="Lib\HtmlAgilityPack.pdb" />
+    <Content Include="Lib\HtmlAgilityPack.XML" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
