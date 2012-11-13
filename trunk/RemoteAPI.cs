@@ -276,8 +276,27 @@ namespace Jade
             return true;
         }
 
+        public class ResultInfo
+        {
+            public bool IsSuccess
+            {
+                get;
+                set;
+            }
+
+            public string ErrorMessage
+            {
+                get;
+                set;
+            }
+            
+        }
+
         public static bool Publish(Model.IDownloadData data = null)
         {
+
+           // ResultInfo resultInfo = new ResultInfo() { IsSuccess = true };
+
             CacheObject.CurrentRequestCount++;
             //UploadImage();
             //return;
