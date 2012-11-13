@@ -358,6 +358,7 @@ namespace Jade
                 else if (!string.IsNullOrEmpty(data.Source))
                 {
                     this.txtnews_source_name.Text = data.Source;
+                    Log4Log.Error("采用" + data.Source + "作为来源");
                 }
                 else
                 {

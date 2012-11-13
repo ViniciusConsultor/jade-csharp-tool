@@ -45,7 +45,7 @@
       <Value Profile="(Default)">资讯中心</Value>
     </Setting>
     <Setting Name="DefaultSource" Type="System.String" Scope="User">
-      <Value Profile="(Default)">365地产家居网</Value>
+      <Value Profile="(Default)">合肥热线</Value>
     </Setting>
     <Setting Name="DefaultTemplate" Type="System.String" Scope="User">
       <Value Profile="(Default)">/hfestate/template/estate.htm</Value>

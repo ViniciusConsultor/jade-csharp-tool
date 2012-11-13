@@ -172,10 +172,14 @@ namespace Jade.Model.MySql
 
         public void Delete(downloaddata data)
         {
-            lock (Repository)
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
             {
-                Repository.DeleteObject(data);
-                Repository.SaveChanges();
+                var d = repository.downloaddata.First(da => da.ID == data.ID);
+                if (d != null)
+                {
+                    repository.DeleteObject(d);
+                    repository.SaveChanges();
+                }
             }
         }
 
@@ -193,6 +197,7 @@ namespace Jade.Model.MySql
 
                 var query = repository.downloaddata.Where(
                     t => (args.IsDownload ? t.IsDownload == true : true) &&
+                        t.Title != "" &&
                         (args.IsEdit ? t.IsEdit == true : true) &&
                         (args.IsPublish ? t.IsPublish == true : true) &&
                          (args.TaskId != 0 ? t.TaskId == args.TaskId : true) &&
