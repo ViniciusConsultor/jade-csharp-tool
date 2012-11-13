@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <RemoteWebService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SpecilTags>
-    <DisplayNameValuePair>
-      <DisplayName>焦点资讯</DisplayName>
+  <SpecilTags />
+  <Source />
+  <Template />
+  <CommonTags />
+</RemoteWebService>ame>
       <Value>12020500</Value>
     </DisplayNameValuePair>
     <DisplayNameValuePair>

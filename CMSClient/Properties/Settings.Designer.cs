@@ -193,7 +193,7 @@ namespace Jade.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("365地产家居网")]
+        [global::System.Configuration.DefaultSettingValueAttribute("合肥热线")]
         public string DefaultSource {
             get {
                 return ((string)(this["DefaultSource"]));
