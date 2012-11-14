@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
 
 namespace Jade
 {
@@ -84,6 +85,7 @@ namespace Jade
 
         void remoteLogin()
         {
+
             System.Net.ServicePointManager.Expect100Continue = false;
             MyWebRequest request = CacheObject.WebRequset;
             request.Url = "http://newscms.house365.com/newCMS/chk_log.php";
@@ -95,7 +97,16 @@ namespace Jade
             };
 
             request.Cookie = cookie;
-            var result = request.Post();
+            var result = "";
+            try
+            {
+                result = request.Post();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("连接CMS服务器失败，错误信息为：" + ex.Message + "\n你可以选择离线模式");
+                Log4Log.Exception(ex);
+            }
 
             //var result = RemoteAPI.POST("http://newscms.house365.com/newCMS/chk_log.php", "user_name=" + this.txtUserName.Text + "&pass_word=" + this.txtPassword.Text + "&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32");
 
@@ -140,6 +151,25 @@ namespace Jade
             setting.Name = trueName;
             setting.Save();
 
+
+            if (setting.IsOnline)
+            {
+                try
+                {
+                    if (!InitDataBase())
+                    {
+                        MessageBox.Show("启用工作组模式失败——数据库初始化失败，请选择本地模式！");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log4Log.Exception(ex);
+                    MessageBox.Show("启用工作组模式失败，数据库连接失败，请确认用户名密码是是否正确\n你可以先选择单机模式，然后在系统设置里配置数据库连接参数");
+                    return;
+                }
+            }
+
             CacheObject.DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
 
             CacheObject.CurrentUser = new User
@@ -152,7 +182,17 @@ namespace Jade
 
             CacheObject.IsLognIn = true;
 
-            RemoteAPI.GetNewsId();
+            try
+            {
+                if (setting.IsOnline)
+                {
+                    RemoteAPI.GetNewsId();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("获取CMS系统参数失败！");
+            }
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
@@ -164,6 +204,160 @@ namespace Jade
             //client.Headers[HttpRequestHeader.Cookie] = cookie;
             //client.UploadDataCompleted += new UploadDataCompletedEventHandler(client_UploadDataCompleted);
             //client.UploadDataAsync(new Uri("http://newscms.house365.com/newCMS/chk_log.php"), "POST", System.Text.Encoding.GetEncoding("GB2312").GetBytes("user_name=zhangyang&pass_word=House365&yzmcode=" + this.textBox1.Text + "&login.x=47&login.y=32"));
+
+        }
+
+        bool InitDataBase()
+        {
+            string serverName = setting.ServerIp;
+            string databaseName = setting.ServerDatabase;
+
+            // Initialize the connection string builder for the
+            // underlying provider.
+            SqlConnectionStringBuilder sqlBuilder =
+                new SqlConnectionStringBuilder();
+
+            // Set the properties for the data source.
+            sqlBuilder.DataSource = serverName;
+            sqlBuilder.InitialCatalog = "INFORMATION_SCHEMA";
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.UserID = setting.ServerUser;
+            sqlBuilder.Password = setting.ServerPasword;
+            // Build the SqlConnection connection string.
+            MySqlHelper.DBConnectionString = sqlBuilder.ToString();
+            var checkDatabase = "SELECT * FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + setting.ServerDatabase + "'";
+            var reader = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkDatabase);
+            if (reader.Tables.Count == 0 || reader.Tables[0].Rows.Count == 0)
+            {
+                //$$
+                if (MessageBox.Show("检测到不存在数据库" + setting.ServerDatabase + "，是否创建?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    MySqlHelper.ExecuteNonQuery(MySqlHelper.DBConnectionString, CommandType.Text, "CREATE DATABASE `" + setting.ServerDatabase + "` /*!40100 DEFAULT CHARACTER SET utf8 */");
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+            sqlBuilder.InitialCatalog = setting.ServerDatabase;
+            MySqlHelper.DBConnectionString = sqlBuilder.ToString(); ;
+            var checkTable = " SELECT * FROM information_schema.tables where table_type = 'BASE TABLE' AND TABLE_SCHEMA = '" + setting.ServerDatabase + "' AND TABLE_NAME = 'downloaddata'";
+            var tables = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkTable);
+            if (tables.Tables.Count > 0 && tables.Tables[0].Rows.Count == 1)
+            {
+
+            }
+            else
+            {
+                if (MessageBox.Show("检测到不存在数据表downloaddata,是否自动创建?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    //
+                    var sql = @"CREATE TABLE `downloaddata` (
+  `ID` int(11) NOT NULL auto_increment,
+  `TaskId` int(11) default NULL,
+  `Title` text,
+  `SubTitle` text,
+  `Keywords` text,
+  `news_source_name` text,
+  `news_template_file` text,
+  `news_top` text,
+  `news_guideimage` text,
+  `news_guideimage2` text,
+  `news_description` text,
+  `news_link` text,
+  `news_down` text,
+  `news_right` text,
+  `news_left` text,
+  `comment_url` text,
+  `news_video` text,
+  `news_keywords2` text,
+  `label_base` text,
+  `cmspinglun` bit(1) NOT NULL default '\0',
+  `bbspinglun` bit(1) NOT NULL default '\0',
+  `ISkfbm` bit(1) NOT NULL default '\0',
+  `kfbm_id` text,
+  `kfbm_link` text,
+  `ISgfbm` bit(1) NOT NULL default '\0',
+  `gfbm_id` text,
+  `gfbm_link` text,
+  `news_abs` text,
+  `Content` text,
+  `Summary` text,
+  `Source` text,
+  `CreateTime` text,
+  `Other` text,
+  `Url` text,
+  `IsEdit` bit(1) NOT NULL default '\0',
+  `EditorUserName` text,
+  `DownloadTime` datetime default NULL,
+  `IsDownload` bit(1) NOT NULL default '\0',
+  `IsPublish` bit(1) NOT NULL default '\0',
+  `EditTime` datetime default NULL,
+  `RemoteId` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+                    MySqlHelper.ExecuteNonQuery(MySqlHelper.DBConnectionString, CommandType.Text, sql);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            checkTable = " SELECT * FROM information_schema.tables where table_type = 'BASE TABLE' AND TABLE_SCHEMA = '" + setting.ServerDatabase + "' AND TABLE_NAME = 'imagefiles'";
+            tables = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkTable);
+            if (tables.Tables.Count > 0 && tables.Tables[0].Rows.Count == 1)
+            {
+
+            }
+            else
+            {
+                if (MessageBox.Show("检测到不存在数据表imagefiles，是否自动创建?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var sql = @"CREATE TABLE `imagefiles` (
+  `Id` int(11) NOT NULL auto_increment,
+  `FileName` text NOT NULL,
+  `Url` text NOT NULL,
+  `Data` longblob,
+  PRIMARY KEY  (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+
+                    MySqlHelper.ExecuteNonQuery(MySqlHelper.DBConnectionString, CommandType.Text, sql);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            checkTable = " SELECT * FROM information_schema.tables where table_type = 'BASE TABLE' AND TABLE_SCHEMA = '" + setting.ServerDatabase + "' AND TABLE_NAME = 'userlog'";
+            tables = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkTable);
+            if (tables.Tables.Count > 0 && tables.Tables[0].Rows.Count == 1)
+            {
+
+            }
+            else
+            {
+                if (MessageBox.Show("检测到不存在数据表userlog，是否自动创建?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var sql = @"CREATE TABLE `userlog` (
+  `Id` int(11) NOT NULL auto_increment,
+  `UserName` varchar(100) default NULL,
+  `LogType` varchar(100) default '登录',
+  `Description` varchar(200) default '',
+  `CreateTime` datetime default NULL,
+  PRIMARY KEY  (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户操作日志'";
+
+                    MySqlHelper.ExecuteNonQuery(MySqlHelper.DBConnectionString, CommandType.Text, sql);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
 
         }
 
@@ -226,8 +420,33 @@ namespace Jade
             setting.IsEditModel = this.rblEdit.Checked;
             setting.IsOnline = this.rblServer.Checked;
             setting.Save();
+
+
+            if (setting.IsOnline)
+            {
+                try
+                {
+                    if (!InitDataBase())
+                    {
+                        MessageBox.Show("启用工作组模式失败——数据库初始化失败，请选择本地模式！");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log4Log.Exception(ex);
+                    MessageBox.Show("启用工作组模式失败，数据库连接失败，请确认用户名密码是是否正确\n你可以先选择单机模式，然后在系统设置里配置数据库连接参数");
+                    return;
+                }
+            }
+
             // 重新设置DAL
             CacheObject.DownloadDataDAL = DatabaseFactory.Instance.CreateDAL();
+
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "登录CMS Client");
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

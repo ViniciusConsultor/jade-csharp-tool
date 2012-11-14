@@ -358,7 +358,7 @@ namespace Jade
                 else if (!string.IsNullOrEmpty(data.Source))
                 {
                     this.txtnews_source_name.Text = data.Source;
-                    Log4Log.Error("采用" + data.Source + "作为来源");
+                    Log4Log.Debug(data.Title + "采用" + data.Source + "作为来源");
                 }
                 else
                 {
@@ -366,6 +366,7 @@ namespace Jade
                     {
                         var defaultSouce = Properties.Settings.Default.DefaultSource.Trim();
                         this.txtnews_source_name.SelectedValue = defaultSouce;
+                        Log4Log.Debug(data.Title + "采用默认来源" + defaultSouce + "作为来源");
                     }
                     catch
                     {
@@ -432,6 +433,11 @@ namespace Jade
         {
             UpdateCurrentData();
             CacheObject.DownloadDataDAL.Update(CurrentData);
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                if ((CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL) != null)
+                    (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "保存新闻——" + CurrentData.Title + "(" + CurrentData.RemoteId + ")", "保存新闻");
+            }
             isSaving = true;
             MessageBox.Show("保存成功");
         }
@@ -551,6 +557,10 @@ namespace Jade
         {
             isSaving = true;
             btnSave_Click(null, null);
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "保存新闻——" + CurrentData.Title + "(" + CurrentData.RemoteId + ")", "保存新闻");
+            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
 
@@ -762,6 +772,12 @@ namespace Jade
                     return;
                 }
 
+                if (!this.txt_news_template_file.Text.Contains("正文"))
+                {
+                    if (MessageBox.Show("你选择的模板文件是否不是正文模板，是否继续发布！'", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+                        return;
+                }
+
                 this.loadingDialog = new LoadingDialog();
 
                 loadingDialog.Show();
@@ -789,6 +805,13 @@ namespace Jade
                         loadingDialog.Message = "保存成功，正在保存到数据库....";
                     }));
                     CacheObject.DownloadDataDAL.Update(CurrentData);
+
+
+                    if (Jade.Properties.Settings.Default.IsOnline)
+                    {
+                        if ((CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL) != null)
+                            (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "发布新闻——" + CurrentData.Title + "(" + CurrentData.RemoteId + ")", "发布新闻");
+                    }
 
                     loadingDialog.Close();
 

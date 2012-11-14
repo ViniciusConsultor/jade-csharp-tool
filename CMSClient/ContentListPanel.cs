@@ -319,7 +319,12 @@ namespace Jade
             catch (Exception ex)
             {
                 Log4Log.Exception(ex);
+                if (isClickSearch)
+                {
+                    MessageBox.Show("获取数据失败," + ex.Message);
+                }
             }
+            isClickSearch = false;
         }
 
 
@@ -662,8 +667,11 @@ namespace Jade
             }
         }
 
+        bool isClickSearch = false;
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            isClickSearch = true;
             cmbTags_TextChanged(null, null);
         }
 
