@@ -56,6 +56,16 @@ namespace Jade.Model.MySql
 
         string connectionString = "";
 
+        public List<userlog> GetUserLogs(string userName, int page, int pageSize, out int totalCount)
+        {
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
+            {
+                var querey = repository.userlog.Where(t => !string.IsNullOrEmpty(userName) ? t.UserName.Contains(userName) : true);
+                totalCount = querey.Count();
+                return querey.OrderByDescending(l=>l.Id).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            }
+        }
+
         public List<userlogsta> GetUserLogSta(DateTime startTime, DateTime endTime)
         {
             using (var repository = new HFBBSEntities(Setting.ConnectionString))
@@ -220,9 +230,9 @@ namespace Jade.Model.MySql
                     repository.SaveChanges();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
         }
 

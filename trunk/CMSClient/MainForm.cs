@@ -933,5 +933,27 @@ namespace Jade
         {
             this.OpenNewUrl("about:blank");
         }
+
+        private void barButtonItem9_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var sta = new LogListPanel();
+            tabbedView1.BeginUpdate();
+            var stad = tabbedView1.Controller.AddDocument(sta);
+            stad.Form.Text = "操作日志";
+            stad.Caption = "操作日志";
+            tabbedView1.EndUpdate();
+            tabbedView1.Controller.Activate(stad);
+        }
+
+        private void barButtonItem10_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var sta = new StaForm();
+            tabbedView1.BeginUpdate();
+            var stad = tabbedView1.Controller.AddDocument(sta);
+            stad.Form.Text = "新闻发布统计";
+            stad.Caption = "新闻发布统计";
+            tabbedView1.EndUpdate();
+            tabbedView1.Controller.Activate(stad);
+        }
     }
 }
