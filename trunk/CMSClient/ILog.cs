@@ -73,18 +73,21 @@ namespace Jade
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        [DebuggerStepThrough]
         public static void Exception(Exception exception)
         {
-            errorLog.Fatal(exception);
-            if (Jade.Properties.Settings.Default.IsOnline)
+            if (!exception.Message.Contains("对象当前正在其他地方使用"))
             {
-                try
+                errorLog.Fatal(exception);
+
+                if (Jade.Properties.Settings.Default.IsOnline)
                 {
-                    (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "Message:" + exception.Message + "\r\nStackTrace:" + exception.StackTrace, "未处理异常");
-                }
-                catch
-                {
+                    try
+                    {
+                        (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "Message:" + exception.Message + "\r\nStackTrace:" + exception.StackTrace, "未处理异常");
+                    }
+                    catch
+                    {
+                    }
                 }
             }
         }

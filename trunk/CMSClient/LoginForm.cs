@@ -345,7 +345,7 @@ namespace Jade
   `Id` int(11) NOT NULL auto_increment,
   `UserName` varchar(100) default NULL,
   `LogType` varchar(100) default '登录',
-  `Description` varchar(200) default '',
+  `Description` TEXT default '',
   `CreateTime` datetime default NULL,
   PRIMARY KEY  (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户操作日志'";

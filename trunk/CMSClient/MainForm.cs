@@ -571,7 +571,7 @@ namespace Jade
                 {
                     if ((CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL) != null)
                     {
-                        (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "", "退出CMS Client");
+                        (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "退出CMS Client", "退出");
                     }
                 }
                 System.Environment.Exit(0);

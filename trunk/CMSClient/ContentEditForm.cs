@@ -557,10 +557,6 @@ namespace Jade
         {
             isSaving = true;
             btnSave_Click(null, null);
-            if (Jade.Properties.Settings.Default.IsOnline)
-            {
-                (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "保存新闻——" + CurrentData.Title + "(" + CurrentData.RemoteId + ")", "保存新闻");
-            }
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
 
