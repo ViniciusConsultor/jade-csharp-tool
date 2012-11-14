@@ -1249,20 +1249,24 @@ namespace Jade
         {
             //var regex = new Regex(@"expires=\w+, \d+-\w+-\d+ \d+:\d+:\d+ GMT,*");
             //cookie = regex.Replace(cookie, "");
-            var results = cookie.Split(';');
             var ResponseDictionary = new Dictionary<string, string>();
-            foreach (var result in results)
+            if (cookie != null)
             {
-                var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
-                if (keyvaluepair.Length == 2)
+                var results = cookie.Split(';');
+
+                foreach (var result in results)
                 {
-                    if (!ResponseDictionary.ContainsKey(keyvaluepair[0].Trim()))
+                    var keyvaluepair = result.Split(new string[] { "=" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                    if (keyvaluepair.Length == 2)
                     {
-                        ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
-                    }
-                    else
-                    {
-                        ResponseDictionary[keyvaluepair[0].Trim()] = keyvaluepair[1].Trim();
+                        if (!ResponseDictionary.ContainsKey(keyvaluepair[0].Trim()))
+                        {
+                            ResponseDictionary.Add(keyvaluepair[0].Trim(), keyvaluepair[1].Trim());
+                        }
+                        else
+                        {
+                            ResponseDictionary[keyvaluepair[0].Trim()] = keyvaluepair[1].Trim();
+                        }
                     }
                 }
             }
