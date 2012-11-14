@@ -365,6 +365,10 @@ namespace Jade.CQA.KnowedegProcesser
     {
         public static Regex IdRegex = new Regex("(\\d+)\\.html");
 
+        public static bool IsReconect = false;
+
+        public static object locker = new object();
+
         public override bool IsAllowedUrl(string url)
         {
 
@@ -404,16 +408,21 @@ namespace Jade.CQA.KnowedegProcesser
 
             var htmlDoc = (HtmlDocument)propertyBag["HtmlDoc"].Value;
 
-            if (htmlDoc == null || htmlDoc.DocumentNode == null)
+            if (htmlDoc == null || htmlDoc.DocumentNode == null || htmlDoc.DocumentNode.OuterHtml.Contains("您的访问出错了"))
             {
                 ReConnectNetWork();
+
+                // 重新抓取
+                crawler.AddStep(propertyBag.ResponseUri, propertyBag.Step.Depth,
+                    propertyBag.Step, new Dictionary<string, object>
+						{
+							{"OriginalUrl", propertyBag.ResponseUri.AbsoluteUri},
+							{"OriginalReferrerUrl", propertyBag.ResponseUri}
+						}, true);
+                return;
             }
+
             var html = htmlDoc.DocumentNode.OuterHtml;
-            if (html.Contains("您的访问出错了"))
-            {
-                // todo 重拨号
-                ReConnectNetWork();
-            }
 
             if (propertyBag.OriginalUrl == null)
             {
@@ -425,7 +434,7 @@ namespace Jade.CQA.KnowedegProcesser
                 // 用户
                 if (propertyBag.OriginalUrl.Contains("/p/"))
                 {
-                    ExtractUser(propertyBag,htmlDoc, html);
+                    ExtractUser(propertyBag, htmlDoc, html);
                 }
                 else if (propertyBag.OriginalUrl.Contains("/question/"))
                 {
@@ -444,29 +453,47 @@ namespace Jade.CQA.KnowedegProcesser
         /// </summary>
         private static void ReConnectNetWork()
         {
-            if (!isUser3G)
+            if (IsReconect)
             {
-                Console.WriteLine("访问出错了， 暂停30分钟。。。");
-
-                // 暂停30分钟
-                Thread.Sleep(1000 * 60 * 30);
-            }
-            else
-            {
-                RASDisplay ras = new RASDisplay();
-                Console.WriteLine("等待重拨号中。。。");
-                ras.Disconnect();
-                Thread.Sleep(10000);
-                Console.WriteLine("重新拨号中。。。");
-                ras.Connect("3G");
-                Thread.Sleep(1000);
-                IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
-                foreach (IPAddress ip in arrIPAddresses)
+                while (IsReconect)
                 {
-                    if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+                    // 等待20秒
+                    Thread.Sleep(20000);
+                }
+                return;
+            }
+
+            lock (locker)
+            {
+                if (!IsReconect)
+                {
+                    IsReconect = true;
+                    if (!isUser3G)
                     {
-                        Console.WriteLine("新ip" + ip.ToString());
+                        Console.WriteLine("访问出错了， 暂停30分钟。。。");
+
+                        // 暂停30分钟
+                        Thread.Sleep(1000 * 60 * 30);
                     }
+                    else
+                    {
+                        RASDisplay ras = new RASDisplay();
+                        Console.WriteLine("等待重拨号中。。。");
+                        ras.Disconnect();
+                        Thread.Sleep(10000);
+                        Console.WriteLine("重新拨号中。。。");
+                        ras.Connect("ADSL");
+                        Thread.Sleep(1000);
+                        IPAddress[] arrIPAddresses = Dns.GetHostAddresses(Dns.GetHostName());
+                        foreach (IPAddress ip in arrIPAddresses)
+                        {
+                            if (ip.AddressFamily.Equals(AddressFamily.InterNetwork))
+                            {
+                                Console.WriteLine("新ip" + ip.ToString());
+                            }
+                        }
+                    }
+                    IsReconect = false;
                 }
             }
         }
