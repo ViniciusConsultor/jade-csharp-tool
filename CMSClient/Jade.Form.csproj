@@ -363,6 +363,12 @@
     <Compile Include="SiteRuleWizardForm.Designer.cs">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaForm.Designer.cs">
+      <DependentUpon>StaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -560,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SiteRuleWizardForm.resx">
       <DependentUpon>SiteRuleWizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaForm.resx">
+      <DependentUpon>StaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
