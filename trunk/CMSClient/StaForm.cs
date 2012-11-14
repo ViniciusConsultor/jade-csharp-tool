@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraCharts;
+using System.Linq;
+using System.Data.SqlClient;
 
 namespace Jade
 {
@@ -15,48 +17,72 @@ namespace Jade
         public StaForm()
         {
             InitializeComponent();
+            this.startTime.Value = DateTime.Now.AddDays(-10);
+            this.endTime.Value = DateTime.Now.AddDays(1);
         }
 
         private void StaForm_Load(object sender, EventArgs e)
         {
-            ChartTitle title = new ChartTitle();
-            title.Text = "编辑新闻发布量统计";
-            chartControl1.Titles.Clear();
-            chartControl1.Titles.Add(title);
+            /*
+             * CREATE VIEW `hfbbs`.`userLogSta` AS
+SELECT Count(*) as TotalCount,DATE(CreateTime),UserName FROM hfbbs.userlog
+where LogType='发布新闻'
+group by UserName,DATE(CreateTime)
+             * */
 
-            Series series1 = new Series("王伟伟", ViewType.Line);
-            series1.ArgumentScaleType = ScaleType.DateTime;
-            var i = 1;
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 10 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 12 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 14 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 17 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 21 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 26 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 29 }));
-            series1.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 30 }));
-            series1.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            ((PointSeriesView)series1.View).PointMarkerOptions.Kind = MarkerKind.Triangle;
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                var setting = Jade.Properties.Settings.Default;
+                SqlConnectionStringBuilder sqlBuilder =
+                    new SqlConnectionStringBuilder();
 
-            i = 1;
-            Series series2 = new Series("王雨", ViewType.Line);
-            series2.ArgumentScaleType = ScaleType.DateTime; //这句话必须有,否则点画不出来.
-            ((LineSeriesView)series2.View).LineStyle.DashStyle = DashStyle.Solid;
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 4 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 14 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 17 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 22 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 20 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 15 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 18 }));
-            series2.Points.Add(new SeriesPoint(DateTime.Now.Date.AddDays(i++), new double[] { 11 }));
-            series2.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            ((PointSeriesView)series2.View).PointMarkerOptions.Kind = MarkerKind.Cross;
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = setting.ServerIp;
+                sqlBuilder.InitialCatalog = setting.ServerDatabase;
+                sqlBuilder.IntegratedSecurity = false;
+                sqlBuilder.UserID = setting.ServerUser;
+                sqlBuilder.Password = setting.ServerPasword;
+                // Build the SqlConnection connection string.
+                MySqlHelper.DBConnectionString = sqlBuilder.ToString();
 
-            chartControl1.Series.Clear();
-            chartControl1.Series.Add(series1);
-            chartControl1.Series.Add(series2);
+                //var dal = (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL);
+                //if (dal != null)
+                //{
+                ChartTitle title = new ChartTitle();
+                title.Text = "编辑新闻发布量统计";
+                chartControl1.Titles.Clear();
+                chartControl1.Titles.Add(title);
+                chartControl1.Series.Clear();
+                //var stas = dal.GetUserLogSta(this.startTime.Value, this.endTime.Value);
+
+                //var userNames = stas.Select(t => t.UserName).ToList();
+
+                var checkDatabase = "SELECT * FROM hfbbs.userlogsta where WorkDate > '" + this.startTime.Value.ToString("yyyy-MM-dd") + "' and WorkDate<'" + this.endTime.Value.ToString("yyyy-MM-dd") + "' ";
+                var results = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkDatabase);
+
+                var userNames = results.Tables[0].Rows.Cast<DataRow>().Select(r => r["UserName"].ToString()).ToList();
+
+                foreach (var userName in userNames)
+                {
+                    Series series = new Series(userName, ViewType.Line);
+                    series.ArgumentScaleType = ScaleType.DateTime;
+                    var datas = results.Tables[0].Rows.Cast<DataRow>().Where(r => r["UserName"] == userName).ToList();
+                    foreach (var data in datas)
+                    {
+                        series.Points.Add(new SeriesPoint(DateTime.Parse(data["WorkDate"].ToString()), new double[] { int.Parse(data["TotalCount"].ToString()) }));
+                    }
+                    series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+                    ((PointSeriesView)series.View).PointMarkerOptions.Kind = MarkerKind.Circle;
+                    chartControl1.Series.Add(series);
+                }
+                //}
+            }
             chartControl1.Legend.Visible = true;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            StaForm_Load(null, null);
         }
     }
 }

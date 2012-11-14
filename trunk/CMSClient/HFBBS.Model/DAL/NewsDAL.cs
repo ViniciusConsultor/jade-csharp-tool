@@ -56,6 +56,16 @@ namespace Jade.Model.MySql
 
         string connectionString = "";
 
+        public List<userlogsta> GetUserLogSta(DateTime startTime, DateTime endTime)
+        {
+            using (var repository = new HFBBSEntities(Setting.ConnectionString))
+            {
+
+                return repository.userlogsta.Where(t => t.WorkDate >= startTime && t.WorkDate < endTime).ToList();
+            }
+
+        }
+
         public NewsDAL(string ip, string database, string user, string pwd)
         {
             //    <add name="HFBBSEntities" 
@@ -172,14 +182,20 @@ namespace Jade.Model.MySql
 
         public void Delete(downloaddata data)
         {
-            using (var repository = new HFBBSEntities(Setting.ConnectionString))
+            try
             {
-                var d = repository.downloaddata.First(da => da.ID == data.ID);
-                if (d != null)
+                using (var repository = new HFBBSEntities(Setting.ConnectionString))
                 {
-                    repository.DeleteObject(d);
-                    repository.SaveChanges();
+                    var d = repository.downloaddata.FirstOrDefault(da => da.ID == data.ID);
+                    if (d != null)
+                    {
+                        repository.DeleteObject(d);
+                        repository.SaveChanges();
+                    }
                 }
+            }
+            catch
+            {
             }
         }
 

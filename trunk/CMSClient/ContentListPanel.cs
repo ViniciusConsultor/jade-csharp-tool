@@ -736,7 +736,9 @@ namespace Jade
         private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var data = DatabaseFactory.Instance.CreateDownloadData("about:blank;", 1);
-            new BLL.DataSaverManager().Add(data);
+            data.Content = "<p style='text-indent: 28px;'>&nbsp;</p>";
+            data.Title = CacheObject.CurrentUser.Name + "的原创新闻";
+            CacheObject.DownloadDataDAL.Add(data);
             CacheObject.ContentForm.InitDownloadData(data);
             if (CacheObject.ContentForm.ShowDialog() == DialogResult.OK)
             {

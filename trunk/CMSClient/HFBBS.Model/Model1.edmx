@@ -10,6 +10,13 @@
           <EntitySet Name="imagefiles" EntityType="hfbbsModel.Store.imagefiles" store:Type="Tables" Schema="hfbbs" />
           <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" />
           <EntitySet Name="userlog" EntityType="hfbbsModel.Store.userlog" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="userlogsta" EntityType="hfbbsModel.Store.userlogsta" store:Type="Views" store:Schema="hfbbs" store:Name="userlogsta">
+            <DefiningQuery>SELECT
+      `userlogsta`.`TotalCount`, 
+      `userlogsta`.`WorkDate`, 
+      `userlogsta`.`UserName`
+      FROM `userlogsta` AS `userlogsta`</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
         <EntityType Name="downloaddata">
           <Key>
@@ -81,8 +88,19 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="varchar" MaxLength="100" />
           <Property Name="LogType" Type="varchar" MaxLength="100" />
-          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="text" />
           <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'hfbbs.userlogsta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="userlogsta">
+          <Key>
+            <PropertyRef Name="TotalCount" />
+          </Key>
+          <Property Name="TotalCount" Type="bigint" Nullable="false" />
+          <Property Name="WorkDate" Type="date" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -93,6 +111,7 @@
           <EntitySet Name="downloaddata" EntityType="Jade.Model.MySql.downloaddata" />
           <EntitySet Name="imagefiles" EntityType="Jade.Model.MySql.imagefiles" />
           <EntitySet Name="userlog" EntityType="Jade.Model.MySql.userlog" />
+          <EntitySet Name="userlogsta" EntityType="Jade.Model.MySql.userlogsta" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -166,6 +185,14 @@
           <Property Type="String" Name="LogType" />
           <Property Type="String" Name="Description" />
           <Property Type="DateTime" Name="CreateTime" />
+        </EntityType>
+        <EntityType Name="userlogsta">
+          <Key>
+            <PropertyRef Name="TotalCount" />
+          </Key>
+          <Property Type="Int64" Name="TotalCount" Nullable="false" />
+          <Property Type="String" Name="UserName" />
+          <Property Type="DateTime" Name="WorkDate" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -246,6 +273,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="userlogsta">
+            <EntityTypeMapping TypeName="Jade.Model.MySql.userlogsta">
+              <MappingFragment StoreEntitySet="userlogsta">
+                <ScalarProperty Name="WorkDate" ColumnName="WorkDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -271,6 +307,7 @@
         <EntityTypeShape EntityType="Jade.Model.MySql.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
         <EntityTypeShape EntityType="Jade.Model.MySql.imagefiles" Width="1.5" PointX="0.75" PointY="3.75" Height="1.6079931640624992" />
         <EntityTypeShape EntityType="Jade.Model.MySql.userlog" Width="1.5" PointX="5.375" PointY="0.75" Height="1.9700325520833335" />
+        <EntityTypeShape EntityType="Jade.Model.MySql.userlogsta" Width="1.5" PointX="5.375" PointY="3.75" Height="1.5879931640624996" />
       </Diagram>
     </Diagrams>
   </Designer>

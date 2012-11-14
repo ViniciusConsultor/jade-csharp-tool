@@ -768,11 +768,12 @@ namespace Jade
                     return;
                 }
 
-                if (!this.txt_news_template_file.Text.Contains("正文"))
-                {
-                    if (MessageBox.Show("你选择的模板文件是否不是正文模板，是否继续发布！'", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
-                        return;
-                }
+                //bbsestate
+                //if (!this.txt_news_template_file.SelectedText.Contains("正文"))
+                //{
+                //    if (MessageBox.Show("你选择的模板文件是否不是正文模板，是否继续发布！'", "提示", MessageBoxButtons.YesNo) == DialogResult.No)
+                //        return;
+                //}
 
                 this.loadingDialog = new LoadingDialog();
 
