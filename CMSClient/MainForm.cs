@@ -40,12 +40,12 @@ namespace Jade
             d.Caption = "WelcomeForm";
             tabbedView1.EndUpdate();
 
-            var sta = new StaForm();
-            tabbedView1.BeginUpdate();
-            var stad = tabbedView1.Controller.AddDocument(sta);
-            stad.Form.Text = "统计";
-            stad.Caption = "统计";
-            tabbedView1.EndUpdate();
+            //var sta = new StaForm();
+            //tabbedView1.BeginUpdate();
+            //var stad = tabbedView1.Controller.AddDocument(sta);
+            //stad.Form.Text = "统计";
+            //stad.Caption = "统计";
+            //tabbedView1.EndUpdate();
 
             var categories = CacheObject.Categories.Where(c => c.ParentCategoryID == 0);
             var baseNode = this.taskTree.Nodes[0];

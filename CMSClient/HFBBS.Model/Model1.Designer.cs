@@ -125,6 +125,22 @@ namespace Jade.Model.MySql
             }
         }
         private ObjectSet<userlog> _userlog;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<userlogsta> userlogsta
+        {
+            get
+            {
+                if ((_userlogsta == null))
+                {
+                    _userlogsta = base.CreateObjectSet<userlogsta>("userlogsta");
+                }
+                return _userlogsta;
+            }
+        }
+        private ObjectSet<userlogsta> _userlogsta;
 
         #endregion
         #region AddTo Methods
@@ -159,6 +175,14 @@ namespace Jade.Model.MySql
         public void AddTouserlog(userlog userlog)
         {
             base.AddObject("userlog", userlog);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the userlogsta EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTouserlogsta(userlogsta userlogsta)
+        {
+            base.AddObject("userlogsta", userlogsta);
         }
 
         #endregion
@@ -1580,6 +1604,109 @@ namespace Jade.Model.MySql
         private Nullable<global::System.DateTime> _CreateTime;
         partial void OnCreateTimeChanging(Nullable<global::System.DateTime> value);
         partial void OnCreateTimeChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Jade.Model.MySql", Name="userlogsta")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class userlogsta : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new userlogsta object.
+        /// </summary>
+        /// <param name="totalCount">Initial value of the TotalCount property.</param>
+        public static userlogsta Createuserlogsta(global::System.Int64 totalCount)
+        {
+            userlogsta userlogsta = new userlogsta();
+            userlogsta.TotalCount = totalCount;
+            return userlogsta;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 TotalCount
+        {
+            get
+            {
+                return _TotalCount;
+            }
+            set
+            {
+                if (_TotalCount != value)
+                {
+                    OnTotalCountChanging(value);
+                    ReportPropertyChanging("TotalCount");
+                    _TotalCount = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("TotalCount");
+                    OnTotalCountChanged();
+                }
+            }
+        }
+        private global::System.Int64 _TotalCount;
+        partial void OnTotalCountChanging(global::System.Int64 value);
+        partial void OnTotalCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> WorkDate
+        {
+            get
+            {
+                return _WorkDate;
+            }
+            set
+            {
+                OnWorkDateChanging(value);
+                ReportPropertyChanging("WorkDate");
+                _WorkDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WorkDate");
+                OnWorkDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _WorkDate;
+        partial void OnWorkDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnWorkDateChanged();
 
         #endregion
     
