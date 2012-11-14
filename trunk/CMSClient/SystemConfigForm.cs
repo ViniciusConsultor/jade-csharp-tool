@@ -175,7 +175,32 @@ namespace Jade
                     return false;
                 }
             }
+            checkTable = " SELECT * FROM information_schema.tables where table_type = 'BASE TABLE' AND TABLE_SCHEMA = '" + setting.ServerDatabase + "' AND TABLE_NAME = 'userlog'";
+            tables = MySqlHelper.ExecuteDataSet(MySqlHelper.DBConnectionString, CommandType.Text, checkTable);
+            if (tables.Tables.Count > 0 && tables.Tables[0].Rows.Count == 1)
+            {
 
+            }
+            else
+            {
+                if (MessageBox.Show("检测到不存在数据表userlog，是否自动创建?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var sql = @"CREATE TABLE `userlog` (
+  `Id` int(11) NOT NULL auto_increment,
+  `UserName` varchar(100) default NULL,
+  `LogType` varchar(100) default '登录',
+  `Description` varchar(200) default '',
+  `CreateTime` datetime default NULL,
+  PRIMARY KEY  (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户操作日志'";
+
+                    MySqlHelper.ExecuteNonQuery(MySqlHelper.DBConnectionString, CommandType.Text, sql);
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
             return true;
 

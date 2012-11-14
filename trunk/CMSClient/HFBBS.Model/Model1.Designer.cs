@@ -109,6 +109,22 @@ namespace Jade.Model.MySql
             }
         }
         private ObjectSet<imagefiles> _imagefiles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<userlog> userlog
+        {
+            get
+            {
+                if ((_userlog == null))
+                {
+                    _userlog = base.CreateObjectSet<userlog>("userlog");
+                }
+                return _userlog;
+            }
+        }
+        private ObjectSet<userlog> _userlog;
 
         #endregion
         #region AddTo Methods
@@ -135,6 +151,14 @@ namespace Jade.Model.MySql
         public void AddToimagefiles(imagefiles imagefiles)
         {
             base.AddObject("imagefiles", imagefiles);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the userlog EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTouserlog(userlog userlog)
+        {
+            base.AddObject("userlog", userlog);
         }
 
         #endregion
@@ -1405,6 +1429,157 @@ namespace Jade.Model.MySql
         private global::System.String _UserName;
         partial void OnUserNameChanging(global::System.String value);
         partial void OnUserNameChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Jade.Model.MySql", Name="userlog")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class userlog : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new userlog object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static userlog Createuserlog(global::System.Int32 id)
+        {
+            userlog userlog = new userlog();
+            userlog.Id = id;
+            return userlog;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LogType
+        {
+            get
+            {
+                return _LogType;
+            }
+            set
+            {
+                OnLogTypeChanging(value);
+                ReportPropertyChanging("LogType");
+                _LogType = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LogType");
+                OnLogTypeChanged();
+            }
+        }
+        private global::System.String _LogType;
+        partial void OnLogTypeChanging(global::System.String value);
+        partial void OnLogTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreateTime
+        {
+            get
+            {
+                return _CreateTime;
+            }
+            set
+            {
+                OnCreateTimeChanging(value);
+                ReportPropertyChanging("CreateTime");
+                _CreateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateTime");
+                OnCreateTimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreateTime;
+        partial void OnCreateTimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreateTimeChanged();
 
         #endregion
     

@@ -183,6 +183,33 @@ namespace Jade.Model.MySql
             }
         }
 
+        /// <summary>
+        /// 添加日志
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="type"></param>
+        /// <param name="description"></param>
+        public void AddLog(string userName, string description, string type = "登录")
+        {
+            try
+            {
+                using (var repository = new HFBBSEntities(Setting.ConnectionString))
+                {
+                    var log = new userlog();
+                    log.UserName = userName;
+                    log.LogType = type;
+                    log.Description = description;
+                    log.CreateTime = DateTime.Now;
+                    repository.userlog.AddObject(log);
+                    repository.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
+        }
+
         public List<downloaddata> GetList(SearchArgs args, out int totalCount)
         {
             using (var repository = new HFBBSEntities(Setting.ConnectionString))

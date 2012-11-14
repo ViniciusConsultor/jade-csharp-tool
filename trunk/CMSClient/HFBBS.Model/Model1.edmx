@@ -9,6 +9,7 @@
           <EntitySet Name="downloaddata" EntityType="hfbbsModel.Store.downloaddata" store:Type="Tables" Schema="hfbbs" />
           <EntitySet Name="imagefiles" EntityType="hfbbsModel.Store.imagefiles" store:Type="Tables" Schema="hfbbs" />
           <EntitySet Name="user" EntityType="hfbbsModel.Store.user" store:Type="Tables" Schema="hfbbs" />
+          <EntitySet Name="userlog" EntityType="hfbbsModel.Store.userlog" store:Type="Tables" Schema="hfbbs" />
         </EntityContainer>
         <EntityType Name="downloaddata">
           <Key>
@@ -73,6 +74,16 @@
           <Property Name="UserName" Type="text" />
           <Property Name="IsAdmin" Type="bit" />
         </EntityType>
+        <EntityType Name="userlog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="LogType" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -81,6 +92,7 @@
           <EntitySet Name="user" EntityType="Jade.Model.MySql.user" />
           <EntitySet Name="downloaddata" EntityType="Jade.Model.MySql.downloaddata" />
           <EntitySet Name="imagefiles" EntityType="Jade.Model.MySql.imagefiles" />
+          <EntitySet Name="userlog" EntityType="Jade.Model.MySql.userlog" />
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -144,6 +156,16 @@
           <Property Type="String" Name="FileName" Nullable="false" />
           <Property Type="String" Name="Url" Nullable="false" />
           <Property Type="Binary" Name="Data" />
+        </EntityType>
+        <EntityType Name="userlog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="UserName" />
+          <Property Type="String" Name="LogType" />
+          <Property Type="String" Name="Description" />
+          <Property Type="DateTime" Name="CreateTime" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -213,6 +235,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="userlog">
+            <EntityTypeMapping TypeName="Jade.Model.MySql.userlog">
+              <MappingFragment StoreEntitySet="userlog">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -237,6 +270,7 @@
         <EntityTypeShape EntityType="Jade.Model.MySql.user" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5879931640625" IsExpanded="true" />
         <EntityTypeShape EntityType="Jade.Model.MySql.downloaddata" Width="1.5" PointX="3.375" PointY="0.75" Height="8.6557218424479156" />
         <EntityTypeShape EntityType="Jade.Model.MySql.imagefiles" Width="1.5" PointX="0.75" PointY="3.75" Height="1.6079931640624992" />
+        <EntityTypeShape EntityType="Jade.Model.MySql.userlog" Width="1.5" PointX="5.375" PointY="0.75" Height="1.9700325520833335" />
       </Diagram>
     </Diagrams>
   </Designer>

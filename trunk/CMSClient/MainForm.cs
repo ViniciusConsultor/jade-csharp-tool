@@ -481,9 +481,9 @@ namespace Jade
             this.Text += " 欢迎你," + CacheObject.CurrentUser.Name;
             if (CacheObject.IsTest)
             {
-                var left = (new DateTime(2012, 11, 12).AddDays(3) - DateTime.Now).Days;
-                     
-                this.Text += string.Format(" (试用版 - 还可以使用 {0} 天)",left);
+                var left = (new DateTime(2012, 11, 13).AddDays(3) - DateTime.Now).Days;
+
+                this.Text += string.Format(" (试用版 - 还可以使用 {0} 天)", left);
             }
 
             if (Properties.Settings.Default.IsEditModel)
@@ -500,10 +500,10 @@ namespace Jade
             if (CacheObject.IsLognIn)
             {
                 // 更新API数据
-                new System.Threading.Thread(() =>
-                {
-                    RemoteAPI.GetNewsId();
-                }).Start();
+                //new System.Threading.Thread(() =>
+                //{
+                //    RemoteAPI.GetNewsId();
+                //}).Start();
 
                 if (d == null || d.Control == null)
                 {
@@ -567,13 +567,20 @@ namespace Jade
             var result = MessageBox.Show("确定退出？", "友情提示", MessageBoxButtons.YesNo);
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
+                if (Jade.Properties.Settings.Default.IsOnline)
+                {
+                    if ((CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL) != null)
+                    {
+                        (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "", "退出CMS Client");
+                    }
+                }
                 System.Environment.Exit(0);
             }
             else if (result == System.Windows.Forms.DialogResult.No)
             {
                 e.Cancel = true;
                 return;
-            }     
+            }
         }
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)

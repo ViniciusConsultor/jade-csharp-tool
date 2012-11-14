@@ -16,6 +16,14 @@ namespace Jade
         static log4net.ILog log = log4net.LogManager.GetLogger("ConsoleLog");
         static log4net.ILog errorLog = log4net.LogManager.GetLogger("ErrorLog");
 
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        [DebuggerStepThrough]
+        public static void Debug(string message)
+        {
+            log.Debug(message);
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         [DebuggerStepThrough]
         public static void Info(string message)
@@ -69,6 +77,16 @@ namespace Jade
         public static void Exception(Exception exception)
         {
             errorLog.Fatal(exception);
+            if (Jade.Properties.Settings.Default.IsOnline)
+            {
+                try
+                {
+                    (CacheObject.DownloadDataDAL as Jade.Model.MySql.NewsDAL).AddLog(Jade.Properties.Settings.Default.Name, "Message:" + exception.Message + "\r\nStackTrace:" + exception.StackTrace, "未处理异常");
+                }
+                catch
+                {
+                }
+            }
         }
         [MethodImpl(MethodImplOptions.NoInlining)]
         [DebuggerStepThrough]
