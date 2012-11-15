@@ -20,6 +20,7 @@ using System.Net.Sockets;
 using Jade.CQA.KnowedegProcesser.DataSave;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Drawing;
 //using MbnApi;
 
 namespace BaiduZhidao
@@ -228,6 +229,14 @@ namespace BaiduZhidao
 
         static void Main(string[] args)
         {
+            Bitmap image = new Bitmap("eurotext.tif");//识别图像
+            tessnet2.Tesseract ocr = new tessnet2.Tesseract();//声明一个OCR类
+            ocr.SetVariable("tessedit_char_whitelist", "0123456789"); //设置识别变量，当前只能识别数字。
+            ocr.Init(@"c:\temp", "fra", false); //应用当前语言包。注，Tessnet2是支持多国语的。语言包下载链接：http://code.google.com/p/tesseract-ocr/downloads/list
+            List<tessnet2.Word> result = ocr.DoOCR(image, Rectangle.Empty);//执行识别操作
+            foreach (tessnet2.Word word in result) //遍历识别结果。
+                Console.WriteLine("{0} : {1}", word.Confidence, word.Text);
+
             ParameterExpression paraLeft = Expression.Parameter(typeof(int), "a");
             ParameterExpression paraRight = Expression.Parameter(typeof(int), "b");
 
@@ -529,9 +538,9 @@ namespace BaiduZhidao
 
             question.Content = htmlDoc.ExtractData("//pre[@id=\"question-content\"]").Trim();
             question.Category = htmlDoc.ExtractData("//div[@id=\"body\"]/div[1]").Trim();
-            question.Id = id;
+            question.QuestionId = id;
             question.Url = "http://zhidao.baidu.com/question/" + id + ".html";
-            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=", proxy).Trim());
+            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.QuestionId + "&callback=", proxy).Trim());
             //Console.WriteLine(question.ToString());
 
             // 回复数目
@@ -581,7 +590,7 @@ namespace BaiduZhidao
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
                         answser.UserName = userNames[index];
-                        answser.QuestionId = question.Id;
+                        answser.QuestionId = question.QuestionId;
                         answser.IsBestAnwser = true;
                         anwsers.Add(answser);
                         question.Status = QuestionStatus.WithSatisfiedAnwser;
@@ -638,7 +647,7 @@ namespace BaiduZhidao
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
                         answser.UserName = userNames[index];
-                        answser.QuestionId = question.Id;
+                        answser.QuestionId = question.QuestionId;
                         answser.IsBestAnwser = false;
                         answser.IsRecommendAnwser = true;
                         anwsers.Add(answser);
@@ -681,7 +690,7 @@ namespace BaiduZhidao
                                 anwser.CreateTime = ParseDatetime(reply.SelectSingleNode("./div/div[1]/span[1]/text()").InnerText.Trim());
                                 anwser.AnswerId = answerIds[index];
                                 anwser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
-                                anwser.QuestionId = question.Id;
+                                anwser.QuestionId = question.QuestionId;
                                 anwser.IsBestAnwser = false;
 
                                 anwsers.Add(anwser);
@@ -721,7 +730,7 @@ namespace BaiduZhidao
 
             var questionAndAnswer = new QuestionAnswer();
             questionAndAnswer.KnowedgeType = KnowedgeType.BaiduZhidao;
-            questionAndAnswer.QuestionId = question.Id;
+            questionAndAnswer.QuestionId = question.QuestionId;
             questionAndAnswer.SatisfiedAnswerIds = anwsers.Where(a => a.IsBestAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RecommendedAnswerIds = anwsers.Where(a => a.IsRecommendAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RelatedQuestionIds = relativeQuestions;

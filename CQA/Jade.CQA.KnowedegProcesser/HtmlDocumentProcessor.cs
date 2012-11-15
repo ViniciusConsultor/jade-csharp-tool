@@ -539,7 +539,7 @@ namespace Jade.CQA.KnowedegProcesser
 
             user.UserName = html.Substring("<title>", "的百度个人主页</title>");
 
-            user.RawText = htmlDoc.DocumentNode.InnerText;
+            user.RawText = CleanText(html);
 
 
             var fetchResult = new FetchResult
@@ -550,6 +550,25 @@ namespace Jade.CQA.KnowedegProcesser
             propertyBag["fetchResult"].Value = fetchResult;
 
         }
+        private static string cleanTxtPatten =
+@"(?<script><script[^>]*?>.*?</script>)|(?<style><style[^>]*>.*?</style>)|(?<comment><!--.*?-->)";
+//+
+//@"|(?<html><[^>]+>)" +   //保留的html标记前缀,<a>,<p>,<img><br><STRONG>
+//            //   @"<[^>]+>)" + // HTML标记  |(\s+)
+//@"|(?<quot>&(quot|#34);)" + // 符号: "
+//@"|(?<amp>&(amp|#38);)" + // 符号: &
+//@"|(?<iexcl>&(iexcl|#161);)" + // 符号: (char)161
+//@"|(?<cent>&(cent|#162);)" + // 符号: (char)162
+//@"|(?<pound>&(pound|#163);)" + // 符号: (char)163
+//@"|(?<copy>&(copy|#169);)" + // 符号: (char)169
+//@"|(?<others>&(d+);)"; // 符号: 其他
+
+        public static string CleanText(string source)
+        {
+            RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled;
+            //删除脚本  
+            return Regex.Replace(source, cleanTxtPatten, "", options);
+        }
 
         private void ExtractQuestion(PropertyBag propertyBag, HtmlDocument htmlDoc, string html)
         {
@@ -558,7 +577,7 @@ namespace Jade.CQA.KnowedegProcesser
             var question = new Question();
             question.KnowedgeType = KnowedgeType.BaiduZhidao;
             question.Title = html.Substring("<title>", "百度知道").Replace("_", "");
-            question.RawText = htmlDoc.DocumentNode.InnerText;
+            question.RawText = CleanText(html);
             ////*[@id="question-box"]/div[2]/div[1]/div/div/div/span[3]
             var time = htmlDoc.ExtractData("//div[@id=\"question-box\"]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]");
             // 2009-1-23 18:34
@@ -574,9 +593,9 @@ namespace Jade.CQA.KnowedegProcesser
 
             question.Content = htmlDoc.ExtractData("//pre[@id=\"question-content\"]").Trim();
             question.Category = htmlDoc.ExtractData("//div[@id=\"body\"]/div[1]").Trim();
-            question.Id = propertyBag.OriginalUrl.Substring("question/", ".html");
+            question.QuestionId = propertyBag.OriginalUrl.Substring("question/", ".html");
             question.Url = propertyBag.OriginalUrl;
-            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=").Trim());
+            question.ViewCount = int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.QuestionId + "&callback=").Trim());
             //Console.WriteLine(question.ToString());
 
             // 回复数目
@@ -626,7 +645,7 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
                         answser.UserName = userNames[index];
-                        answser.QuestionId = question.Id;
+                        answser.QuestionId = question.QuestionId;
                         answser.IsBestAnwser = true;
                         anwsers.Add(answser);
                         question.Status = QuestionStatus.WithSatisfiedAnwser;
@@ -683,7 +702,7 @@ namespace Jade.CQA.KnowedegProcesser
                         answser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
                         answser.AnswerId = answerIds[index];
                         answser.UserName = userNames[index];
-                        answser.QuestionId = question.Id;
+                        answser.QuestionId = question.QuestionId;
                         answser.IsBestAnwser = false;
                         answser.IsRecommendAnwser = true;
                         anwsers.Add(answser);
@@ -726,7 +745,7 @@ namespace Jade.CQA.KnowedegProcesser
                                 anwser.CreateTime = ParseDatetime(reply.SelectSingleNode("./div/div[1]/span[1]/text()").InnerText.Trim());
                                 anwser.AnswerId = answerIds[index];
                                 anwser.CommentCount = int.Parse(commentCounts[index].Groups[1].Value);
-                                anwser.QuestionId = question.Id;
+                                anwser.QuestionId = question.QuestionId;
                                 anwser.IsBestAnwser = false;
 
                                 anwsers.Add(anwser);
@@ -766,7 +785,7 @@ namespace Jade.CQA.KnowedegProcesser
 
             var questionAndAnswer = new QuestionAnswer();
             questionAndAnswer.KnowedgeType = KnowedgeType.BaiduZhidao;
-            questionAndAnswer.QuestionId = question.Id;
+            questionAndAnswer.QuestionId = question.QuestionId;
             questionAndAnswer.SatisfiedAnswerIds = anwsers.Where(a => a.IsBestAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RecommendedAnswerIds = anwsers.Where(a => a.IsRecommendAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RelatedQuestionIds = relativeQuestions;
@@ -943,7 +962,7 @@ namespace Jade.CQA.KnowedegProcesser
 
             question.Content = htmlDoc.ExtractDataById("questionContent");
             question.Category = htmlDoc.ExtractDataById("questionCategory").Trim();
-            question.Id = propertyBag.OriginalUrl.Substring("/z/q", ".htm");
+            question.QuestionId = propertyBag.OriginalUrl.Substring("/z/q", ".htm");
             question.Url = propertyBag.OriginalUrl;
             question.ViewCount = 0;
             //int.Parse(GetHtml("http://cp.zhidao.baidu.com/v.php?q=" + question.Id + "&callback=").Trim());
@@ -1028,7 +1047,7 @@ namespace Jade.CQA.KnowedegProcesser
             }
 
 
-            var related = "http://wenwen.soso.com/z/async/Async.htm?id=Lion&qid=" + question.Id + "&rw=&r=0.7012521030846983&rightRegionRefactor=false&rnd=1351132790753";
+            var related = "http://wenwen.soso.com/z/async/Async.htm?id=Lion&qid=" + question.QuestionId + "&rw=&r=0.7012521030846983&rightRegionRefactor=false&rnd=1351132790753";
 
             var relatedHtml = GetHtml(related);
             // 获取相关问题
@@ -1066,7 +1085,7 @@ namespace Jade.CQA.KnowedegProcesser
 
             var questionAndAnswer = new QuestionAnswer();
             questionAndAnswer.KnowedgeType = KnowedgeType.BaiduZhidao;
-            questionAndAnswer.QuestionId = question.Id;
+            questionAndAnswer.QuestionId = question.QuestionId;
             questionAndAnswer.SatisfiedAnswerIds = anwsers.Where(a => a.IsBestAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RecommendedAnswerIds = anwsers.Where(a => a.IsRecommendAnwser).Select(a => a.AnswerId).ToList();
             questionAndAnswer.RelatedQuestionIds = relativeQuestions;
