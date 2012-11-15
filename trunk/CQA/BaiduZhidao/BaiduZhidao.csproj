@@ -35,15 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\release\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\Jade.CQA.KnowedegProcesser\Lib\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="tessnet2_32">
+      <HintPath>..\..\..\..\..\QQPCmgr\Desktop\tesseract-3.02.02-win32-lib-include-dirs\tesseract-3.02.02-win32-lib-include-dirs\lib\tessnet2_32.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />

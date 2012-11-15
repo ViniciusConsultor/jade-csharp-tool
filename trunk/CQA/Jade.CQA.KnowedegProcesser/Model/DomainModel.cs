@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Jade.CQA.Model
 {
@@ -104,7 +106,7 @@ namespace Jade.CQA.Model
         {
             string str = String.Empty;
             str = String.Concat(str, "KnowedgeType = ", KnowedgeType, "\r\n");
-            str = String.Concat(str, "Id = ", Id, "\r\n");
+            str = String.Concat(str, "Id = ", QuestionId, "\r\n");
             str = String.Concat(str, "Title = ", Title, "\r\n");
             str = String.Concat(str, "Content = ", Content, "\r\n");
             str = String.Concat(str, "ViewCount = ", ViewCount, "\r\n");
@@ -118,6 +120,7 @@ namespace Jade.CQA.Model
 
         public Question()
         {
+            Tags = "";
         }
 
         /// <summary>
@@ -140,7 +143,7 @@ namespace Jade.CQA.Model
             }
         }
 
-        public string Id
+        public string QuestionId
         {
             get { return _id; }
             set { _id = value; }
@@ -330,6 +333,19 @@ namespace Jade.CQA.Model
             str = String.Concat(str, "IsRecommendAnwser = ", IsRecommendAnwser, "\r\n");
             str = String.Concat(str, "QuestionId = ", QuestionId, "\r\n");
             return str;
+        }
+
+        public string ToXml()
+        { 
+            MemoryStream ms = new MemoryStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(Answer));
+            serializer.Serialize(ms, this);
+            var xmlReader = new StreamReader(ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            var result = xmlReader.ReadToEnd();
+            ms.Close();
+            xmlReader.Close();
+            return result;
         }
     }
 

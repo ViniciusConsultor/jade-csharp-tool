@@ -7,6 +7,8 @@ using Thrift.Transport;
 using Thrift.Protocol;
 using Jade.CQA.Model;
 using System.Threading;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace HBASEDATASAVER
 {
@@ -16,6 +18,7 @@ namespace HBASEDATASAVER
         static readonly byte[] ID = Encoding.UTF8.GetBytes("p");
         static readonly byte[] NAME = Encoding.UTF8.GetBytes("Name");
         static int i = 0;
+        static readonly byte[] KnowedgeType = Encoding.UTF8.GetBytes("KnowedgeType");
 
 
         static byte[] UserTable = Encoding.UTF8.GetBytes("User");
@@ -27,21 +30,34 @@ namespace HBASEDATASAVER
         static readonly byte[] UserStage = Encoding.UTF8.GetBytes("UserStage");
 
         static byte[] QuestionTable = Encoding.UTF8.GetBytes("Question");
-        static readonly byte[] QuestionId = Encoding.UTF8.GetBytes("ID");
-        static readonly byte[] Question = Encoding.UTF8.GetBytes("Question");
+        static readonly byte[] QuestionId = Encoding.UTF8.GetBytes("Question:ID");
+        static readonly byte[] Question = Encoding.UTF8.GetBytes("Question:Title");
         static readonly byte[] Content = Encoding.UTF8.GetBytes("Question:Content");
-        static readonly byte[] Detail = Encoding.UTF8.GetBytes("Question:Detail");
-        static readonly byte[] Anwsers = Encoding.UTF8.GetBytes("Anwsers");
-        static readonly byte[] QuestionAndAnwsers = Encoding.UTF8.GetBytes("QuestionAndAnwsers");
+        static readonly byte[] Category = Encoding.UTF8.GetBytes("Question:Category");
+        static readonly byte[] ViewCount = Encoding.UTF8.GetBytes("Question:ViewCount");
+        static readonly byte[] CreateTime = Encoding.UTF8.GetBytes("Question:CreateTime");
+        static readonly byte[] RawText = Encoding.UTF8.GetBytes("RawText:Content");
+        static readonly byte[] Tags = Encoding.UTF8.GetBytes("Question:Tags");
+        static readonly byte[] Url = Encoding.UTF8.GetBytes("Question:Url");
+        static readonly byte[] State = Encoding.UTF8.GetBytes("Question:State");
+        static readonly byte[] Anwsers = Encoding.UTF8.GetBytes("Question:Anwsers");
+        static readonly byte[] SatisfiedAnswerIds = Encoding.UTF8.GetBytes("Question:SatisfiedAnswerIds");
+        static readonly byte[] RecommendedAnswerIds = Encoding.UTF8.GetBytes("Question:RecommendedAnswerIds");
+        static readonly byte[] RelatedQuestionIds = Encoding.UTF8.GetBytes("Question:RelatedQuestionIds");
+        static readonly byte[] QuestionAndAnwsers = Encoding.UTF8.GetBytes("Question:QuestionAndAnwsers");
 
         static HBASESaver()
         {
-            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.123", 9090));
+            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.41", 9090));
             try
             {
                 TBinaryProtocol protocol = new TBinaryProtocol(transport);
                 Hbase.Client client = new Hbase.Client(protocol);
                 transport.Open();
+                //client.disableTable(QuestionTable);
+                //client.disableTable(UserTable);
+                //client.deleteTable(QuestionTable);
+                //client.deleteTable(UserTable);
 
                 var tables = client.getTableNames().Select(t => Encoding.UTF8.GetString(t)).ToList();
 
@@ -51,11 +67,13 @@ namespace HBASEDATASAVER
                         UserTable,
                         new List<ColumnDescriptor>()
                         {
+                            new ColumnDescriptor {Name = RawText, InMemory = true},
                             new ColumnDescriptor {Name = UserName, InMemory = true},
                             new ColumnDescriptor {Name = AdoptionRate, InMemory = true},
                             new ColumnDescriptor {Name = AnwserCount, InMemory = true},
                             new ColumnDescriptor {Name = AdoptionCount, InMemory = true},
                             new ColumnDescriptor {Name = ExpertArea, InMemory = true},
+                            new ColumnDescriptor {Name = KnowedgeType, InMemory = true},
                             new ColumnDescriptor {Name = UserStage, InMemory = true}
                         });
                 }
@@ -66,12 +84,21 @@ namespace HBASEDATASAVER
                         QuestionTable,
                         new List<ColumnDescriptor>()
                         {
+                            new ColumnDescriptor {Name = RawText, InMemory = true},
+                            new ColumnDescriptor {Name = KnowedgeType, InMemory = true},
                             new ColumnDescriptor {Name = QuestionId, InMemory = true},
                             new ColumnDescriptor {Name = Question, InMemory = true},
                             new ColumnDescriptor {Name = Content, InMemory = true},
+                            new ColumnDescriptor {Name = Category, InMemory = true},
+                            new ColumnDescriptor {Name = ViewCount, InMemory = true},
+                            new ColumnDescriptor {Name = CreateTime, InMemory = true},
+                            new ColumnDescriptor {Name = Tags, InMemory = true},
+                            new ColumnDescriptor {Name = Url, InMemory = true},
+                            new ColumnDescriptor {Name = State, InMemory = true},
                             new ColumnDescriptor {Name = Anwsers, InMemory = true},
-                            new ColumnDescriptor {Name = QuestionAndAnwsers, InMemory = true},
-                            new ColumnDescriptor {Name = Detail, InMemory = true}
+                            new ColumnDescriptor {Name = SatisfiedAnswerIds, InMemory = true},
+                            new ColumnDescriptor {Name = RecommendedAnswerIds, InMemory = true},
+                            new ColumnDescriptor {Name = RelatedQuestionIds, InMemory = true}
                         });
                 }
 
@@ -116,7 +143,7 @@ namespace HBASEDATASAVER
 
         static void SaveQuestion(FetchResult result)
         {
-            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.123", 9090));
+            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.41", 9090));
             try
             {
                 TBinaryProtocol protocol = new TBinaryProtocol(transport);
@@ -129,12 +156,21 @@ namespace HBASEDATASAVER
                     {
                         Row = Encoding.UTF8.GetBytes(result.Question.ReversedUrl),
                         Mutations = new List<Mutation> {
-                           new Mutation{Column = QuestionId, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Id)},
+                           new Mutation{Column = RawText, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.RawText)},
+                           new Mutation{Column = KnowedgeType, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.KnowedgeType.ToString())},
+                           new Mutation{Column = QuestionId, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.QuestionId)},
                            new Mutation{Column = Question, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Title)},
                            new Mutation{Column = Content, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Content)},
-                           new Mutation{Column = Anwsers, IsDelete = false, Value = Encoding.UTF8.GetBytes(string.Join("\r\n",result.Answers.Select(a=>a.ToString()).ToArray()))},
-                           new Mutation{Column = QuestionAndAnwsers, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.QuestionAnswer.ToString())},
-                           new Mutation{Column = Detail, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.ToString())}
+                           new Mutation{Column = Category, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Category)},
+                           new Mutation{Column = ViewCount, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.ViewCount.ToString())},
+                           new Mutation{Column = CreateTime, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))},
+                           new Mutation{Column = Tags, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Tags)},
+                           new Mutation{Column = Url, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Url)},
+                           new Mutation{Column = State, IsDelete = false, Value = Encoding.UTF8.GetBytes(result.Question.Status.ToString())},
+                           new Mutation{Column = Anwsers, IsDelete = false, Value = Encoding.UTF8.GetBytes(TOXml(result.Answers))},
+                           new Mutation{Column = SatisfiedAnswerIds, IsDelete = false, Value = Encoding.UTF8.GetBytes(string.Join(",",result.QuestionAnswer.SatisfiedAnswerIds.ToArray()))},
+                           new Mutation{Column = RecommendedAnswerIds, IsDelete = false, Value = Encoding.UTF8.GetBytes(string.Join(",",result.QuestionAnswer.RecommendedAnswerIds.ToArray()))},
+                           new Mutation{Column = RelatedQuestionIds, IsDelete = false, Value = Encoding.UTF8.GetBytes(string.Join(",",result.QuestionAnswer.RelatedQuestionIds.ToArray()))}
                          }
                         
                      }
@@ -149,9 +185,23 @@ namespace HBASEDATASAVER
             }
         }
 
+
+        static string TOXml<T>(T obj)
+        {
+            MemoryStream ms = new MemoryStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            serializer.Serialize(ms, obj);
+            var xmlReader = new StreamReader(ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            var result = xmlReader.ReadToEnd();
+            ms.Close();
+            xmlReader.Close();
+            return result;
+        }
+
         static void SaveUser(User user)
         {
-            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.123", 9090));
+            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.41", 9090));
             try
             {
                 TBinaryProtocol protocol = new TBinaryProtocol(transport);
@@ -162,12 +212,14 @@ namespace HBASEDATASAVER
                     {
                         Row = Encoding.UTF8.GetBytes(user.ReversedUrl),
                         Mutations = new List<Mutation> {
+                            new Mutation{Column = RawText, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.RawText)},
+                            new Mutation{Column = KnowedgeType, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.KnowedgeType.ToString())},
                             new Mutation{Column = UserName, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.UserName)},
-                             new Mutation{Column = AdoptionRate, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AdoptionRate.ToString())},
-                         new Mutation{Column = AnwserCount, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AnwserCount.ToString())},
-                              new Mutation{Column = AdoptionCount, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AdoptionCount.ToString())},
-                                   new Mutation{Column = ExpertArea, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.ExpertArea)},
-                                        new Mutation{Column = UserStage, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.UserStage)}
+                            new Mutation{Column = AdoptionRate, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AdoptionRate.ToString())},
+                            new Mutation{Column = AnwserCount, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AnwserCount.ToString())},
+                            new Mutation{Column = AdoptionCount, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.AdoptionCount.ToString())},
+                            new Mutation{Column = ExpertArea, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.ExpertArea)},
+                            new Mutation{Column = UserStage, IsDelete = false, Value = Encoding.UTF8.GetBytes(user.UserStage)}
                          }
                         
                      }
@@ -184,7 +236,7 @@ namespace HBASEDATASAVER
 
         static void Main(string[] args)
         {
-            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.123", 9090));
+            TBufferedTransport transport = new TBufferedTransport(new TSocket("192.168.86.41", 9090));
             try
             {
                 TBinaryProtocol protocol = new TBinaryProtocol(transport);

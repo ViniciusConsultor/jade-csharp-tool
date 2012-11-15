@@ -56,7 +56,7 @@
     <Compile Include="IllegalArgument.cs" />
     <Compile Include="IOError.cs" />
     <Compile Include="Mutation.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="HBASESaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCell.cs" />
     <Compile Include="TRegionInfo.cs" />
